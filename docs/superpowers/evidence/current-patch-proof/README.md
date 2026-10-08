@@ -1,14 +1,16 @@
 # Current 4.2 patch image proof
 
-Status: image captures and integrity audit recorded, 2026-10-07. Final repository review remains open. Assessment source is `654815d8`; all 13 ordered
+Status: original image captures and integrity audit recorded, 2026-10-07. Final repository review remains open. Original capture source is `654815d8`; all 13 ordered
 patch hashes are in [series.json](series.json). The main
-[patch reference](../../../UPSTREAM_PATCH_VALUE.md) covers only that current series.
+[patch reference](../../../UPSTREAM_PATCH_VALUE.md) now covers the locked 15-patch
+publication inventory at `120547f3`, recorded in [current-series.json](current-series.json).
 The [archived assessment](pre-rewrite-assessment.md) preserves earlier attribution.
 
 ## Current-main synchronization
 
-Main `41ec3fc1`/PR #57 adds patch0014 after this capture checkpoint. The
-[14-patch inventory](current14-series.json) and main report now include it.
+Historical main `41ec3fc1`/PR #57 added patch 0014 after this capture checkpoint.
+The [14-patch inventory](current14-series.json) preserves that intermediate endpoint;
+main `120547f3` subsequently added 0015 to the locked publication inventory.
 This folder's original `series.json`, workers, frames and verification receipts
 remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
 not relabeled certification of the expanded endpoint. The [Hurricane comparison](components/legacy14-hurricane/README.md) now provides
@@ -140,7 +142,9 @@ their own recorded runs. Resource/operation panels are measured diagnostics
 alongside real healthy library frames, not invented appearance improvements.
 The [23-row matrix](../../plans/2026-10-08-retained-component-proof.md) remains
 incomplete, including default-off/external/pressure/context pool controls and
-cache/batching/pass evidence. Final-head review and repository gates remain open.
+cache/batching/pass evidence. Deeper optimization and lifecycle comparisons are
+deferred to a follow-up under the locked publication scope below. Final-head
+review and repository gates remain open.
 
 ## MilkDrop 2 and limits
 

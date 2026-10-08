@@ -1,17 +1,21 @@
 <!-- Detailed working assessment retained when the main page was simplified, 2026-10-08. -->
 # Current patches against upstream projectM 4.2 master
 
-This reference covers the **14 current patches**, in build order, over upstream
+This preserved assessment covers the **14-patch snapshot**, in build order, over upstream
 [`6f64807467e312034883a4389e6aa80a675458bc`](https://github.com/projectM-visualizer/projectm/tree/6f64807467e312034883a4389e6aa80a675458bc).
 That pin reports CMake version 4.2.0 and is an **unreleased development snapshot**.
 The evaluator pin is `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`.
-Current series source: main `41ec3fc1` (PR #57), 2026-10-08. The
-[current manifest](current-series.json)
+Assessment source: main `41ec3fc1` (PR #57), 2026-10-08. The
+[14-patch manifest](current14-series.json)
 records all 14 patch hashes. Earlier GPU figures were produced from ProjectM TV
 `654815d8`, the 13-patch snapshot, with its immutable
 [capture manifest](series.json). Their
 identities remain unchanged; they do not certify the newly added 0014 or the full
-14-patch endpoint. The new 0014 Hurricane comparison uses that current snapshot; revalidation of affected earlier witnesses remains pending.
+14-patch endpoint. The 0014 Hurricane comparison uses that snapshot; revalidation of affected earlier witnesses remains pending.
+The active [patch reference](../../../UPSTREAM_PATCH_VALUE.md) covers the locked
+15-patch publication inventory at `120547f3` in [current-series.json](current-series.json).
+This assessment retains its earlier 14-patch conclusions and capture identities;
+deeper optimization and lifecycle comparisons are deferred to a follow-up.
 Observed upstream master is `e98fca85e57802d27a6d11499642de2a1d5e994e`. Its only
 change from the app pin is the GLES3.0 admission adjustment used in these captures;
 [byte-verified equivalence](upstream-master-equivalence.json)
@@ -22,17 +26,17 @@ This is a reference for libprojectM maintainers evaluating behavior, compatibili
 limits and possible contributions. A contribution candidate is not a submitted or
 accepted upstream change. The old migration assessment and attribution remain in a
 [separate archive](pre-rewrite-assessment.md).
-Patch numbers below always refer to the current series.
+Patch numbers below always refer to this preserved 14-patch series.
 
 ## Single-page comparison overview
 
-This page consolidates the current patch assessments, comparison images, visual
+This page consolidates the 14-patch assessments, comparison images, visual
 differences and code-level explanations. The linked evidence folders provide
 full-resolution frames and source/binary/payload verification; they are supporting
 records, not additional patch assessments that readers must assemble themselves.
 
-All 14 current patch sections are present. Patch0014 now has a matched upstream/control/current TV comparison; affected earlier witnesses still need current-endpoint revalidation. The retained-component expansion below
-is still in progress; an existing patch-level image does not prove every component
+All 14 patch sections from that snapshot are present. Patch 0014 has a matched upstream/control/current14 TV comparison; affected earlier witnesses still need 14-patch endpoint revalidation. The retained-component expansion below
+records incomplete coverage; an existing patch-level image does not prove every component
 inside consolidated 0001–0003. Status is recorded here rather than presenting
 pending components as completed contributions.
 

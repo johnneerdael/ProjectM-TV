@@ -26,6 +26,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         (self.root / 'ndk/source.properties').write_text('Pkg.Revision = 27.3.13750724\n')
         self.work = self.root / 'capture'
         self.work.mkdir()
+        self.signal = bytes(120 * 1470 * 4)
+        (self.work / 'audio.f32').write_bytes(self.signal)
         source = self.root / 'worker/engine'
         source.mkdir(parents=True)
         (source / 'renderer.cpp').write_text('observed compiled source\n')
@@ -40,11 +42,11 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
         self.frame_data = bytes([255, 0, 0, 0, 255, 0]) * 120
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
-               'frames': 120, 'width': 2, 'height': 1,
+               'frames': 120, 'width': 2, 'height': 1, 'fps': 30, 'seed': 12345,
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
                'frame_hashes': [VERIFY.sha(self.frame_data[i * 6:(i + 1) * 6]) for i in range(120)],
                'stream_sha256': VERIFY.sha(self.frame_data)}
-        self.result = {'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
+        self.result = {'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
             directory = self.work / 'patched' / str(repeat)
@@ -68,6 +70,31 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             self.source_validation = None
 
     def save(self):
+        for role, value in self.result['roles'].items():
+            for repeat, run in enumerate(value['runs']):
+                if run.get('status') != 'success':
+                    continue
+                directory = self.work / role / str(repeat)
+                directory.mkdir(parents=True, exist_ok=True)
+                manifest = run['manifest']
+                manifest.setdefault('identity', {'role': role, 'repeat': repeat})
+                (directory / 'manifest.json').write_text(json.dumps(manifest))
+                cfg = {'width': self.result['dimensions'][0], 'height': self.result['dimensions'][1],
+                       'fps': 30, 'seed': 12345, 'warmup_seconds': 0, 'measurement_seconds': 4,
+                       'line_reference_height': 0, 'line_antialiasing': False}
+                diagnostic = self.result.get('diagnostic_kind')
+                if diagnostic == 'shader-fragment-failure': cfg['shader_failure_probe'] = True
+                if diagnostic == 'texture-history': cfg['texture_history_probe'] = True
+                remote = '/owned/proof'
+                job = {'schema_version': 1, 'config': cfg, 'identity': {'role': role, 'repeat': repeat},
+                       'pcm_path': remote + '/audio.f32', 'preset_path': remote + '/witness.milk',
+                       'texture_root': remote + '/textures'}
+                if self.result['capture_kind'] == 'texture-journey':
+                    job['texture_root'] += '/a'
+                    job['events'] = [{'frame': 20, 'texture_root': remote + '/textures/b'},
+                        {'frame': 21, 'load_preset': remote + '/witness.milk', 'smooth': True},
+                        {'frame': 40, 'reset_textures': True}]
+                (directory / 'job.json').write_text(json.dumps(job))
         (self.work / 'results.json').write_text(json.dumps(self.result))
 
     def test_rejects_missing_ndk_for_binary_binding(self):
@@ -94,6 +121,59 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         series = Path(__file__).resolve().parents[2] / 'docs/superpowers/evidence/current-patch-proof/current-series.json'
         with self.assertRaisesRegex(ValueError, 'snapshot'):
             VERIFY.verify(self.work, self.root / 'ndk', series)
+
+    def test_rejects_wrong_manifest_role_and_repeat(self):
+        self.result['roles']['patched']['runs'][0]['manifest']['identity'] = {'role': 'upstream', 'repeat': 7}
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'run identity'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_wrong_frozen_seed_and_fps(self):
+        for field, value in [('seed', 999), ('fps', 60)]:
+            with self.subTest(field=field):
+                manifest = self.result['roles']['patched']['runs'][0]['manifest']
+                original = manifest[field]; manifest[field] = value; self.save()
+                with self.assertRaisesRegex(ValueError, 'run protocol'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+                manifest[field] = original
+
+    def test_rejects_retained_manifest_different_from_inline_record(self):
+        path = self.work / 'patched/0/manifest.json'
+        value = json.loads(path.read_text()); value['seed'] = 999; path.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'Retained manifest'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_retained_job_with_other_role(self):
+        path = self.work / 'patched/0/job.json'
+        value = json.loads(path.read_text()); value['identity']['role'] = 'upstream'; path.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'job identity'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_retained_job_with_other_seed_or_reference(self):
+        path = self.work / 'patched/0/job.json'; original = path.read_text()
+        for key, changed in [('seed', 999), ('line_reference_height', 1080)]:
+            with self.subTest(key=key):
+                value = json.loads(original); value['config'][key] = changed; path.write_text(json.dumps(value))
+                with self.assertRaisesRegex(ValueError, 'job protocol'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_unrecorded_host_events(self):
+        path = self.work / 'patched/0/job.json'; value = json.loads(path.read_text())
+        value['events'] = [{'frame': 21, 'reset_textures': True}]; path.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'host events'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_input_paths_changed_between_repeats(self):
+        path = self.work / 'patched/1/job.json'
+        value = json.loads(path.read_text()); value['preset_path'] = '/owned/different.milk'
+        path.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'jobs differ across'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_changed_frozen_audio(self):
+        (self.work / 'audio.f32').write_bytes(b'changed PCM')
+        with self.assertRaisesRegex(ValueError, 'PCM'):
+            VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])

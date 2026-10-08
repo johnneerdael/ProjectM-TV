@@ -17,6 +17,51 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manifest: dict) -> dict:
+    identity = {'role': role, 'repeat': repeat}
+    actual_identity = manifest.get('identity')
+    if (actual_identity != identity or not isinstance(actual_identity, dict) or
+            type(actual_identity.get('repeat')) is not int):
+        raise ValueError('Rendered run identity differs from its role/repeat')
+    if (type(manifest.get('seed')) is not int or manifest['seed'] != 12345 or
+            type(manifest.get('fps')) is not int or manifest['fps'] != 30):
+        raise ValueError('Rendered run protocol differs from frozen seed/FPS')
+    directory = work / role / str(repeat)
+    if json.loads((directory / 'manifest.json').read_text()) != manifest:
+        raise ValueError('Retained manifest differs from inline run record')
+    job = json.loads((directory / 'job.json').read_text())
+    if (job.get('identity') != identity or
+            type(job.get('identity', {}).get('repeat')) is not int):
+        raise ValueError('Retained job identity differs from its role/repeat')
+    controls = result.get('host_controls', {})
+    width, height = result['dimensions']
+    expected = {'width': width, 'height': height, 'fps': 30, 'seed': 12345,
+                'warmup_seconds': 0, 'measurement_seconds': 4,
+                'line_reference_height': controls.get('line_reference_height', 0),
+                'line_antialiasing': controls.get('line_antialiasing', False)}
+    cfg = job.get('config', {})
+    if (job.get('schema_version') != 1 or any(cfg.get(key) != value for key, value in expected.items()) or
+            type(cfg.get('seed')) is not int or type(cfg.get('fps')) is not int or
+            cfg.get('feedback_detail', -1) != controls.get('feedback_detail', -1) or
+            cfg.get('soft_cut_seconds', 2) != 2 or
+            cfg.get('shader_failure_probe', False) != (result.get('diagnostic_kind') == 'shader-fragment-failure') or
+            cfg.get('texture_history_probe', False) != (result.get('diagnostic_kind') == 'texture-history')):
+        raise ValueError('Retained job protocol differs from capture settings')
+    if 'line_reference_width' in cfg and cfg['line_reference_width'] != controls.get('line_reference_width', 0):
+        raise ValueError('Retained job protocol differs from reference width')
+    events = []
+    if result['capture_kind'] == 'texture-journey':
+        texture_root = job.get('texture_root', '')
+        if not texture_root.endswith('/a'):
+            raise ValueError('Retained host events have no initial pack-a root')
+        events = [{'frame': 20, 'texture_root': texture_root[:-1] + 'b'},
+                  {'frame': 21, 'load_preset': job.get('preset_path'), 'smooth': True},
+                  {'frame': 40, 'reset_textures': True}]
+    if job.get('events', []) != events:
+        raise ValueError('Retained host events differ from the capture sequence')
+    return {key: value for key, value in job.items() if key != 'identity'}
+
+
 def verify_shader_lifetime(role: str, runs: list[dict]) -> None:
     observations = [run['manifest'].get('diagnostics') for run in runs]
     if observations[0] != observations[1] or not isinstance(observations[0], dict):
@@ -66,8 +111,14 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
         raise ValueError('Missing capture kind; reproduce with the current capture tool')
+    audio = (work / 'audio.f32').read_bytes()
+    if len(audio) != 120 * 1470 * 4 or sha(audio) != result.get('pcm_sha256'):
+        raise ValueError('Retained PCM differs from frozen capture input')
+    if result.get('clock') != 'frame/30.0' or result.get('frames') != 120:
+        raise ValueError('Capture frame/clock protocol differs')
     verified, rejected, comparisons = [], [], {}
     previous = None
+    common_job = None
     for role, value in result['roles'].items():
         identity = value['worker']
         validate_prepared_source(role, identity, series, ndk)
@@ -125,6 +176,10 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
             verify_texture_history(role, runs)
         for repeat, run in enumerate(runs):
             manifest = run['manifest']
+            job = verify_run_protocol(work, result, role, repeat, manifest)
+            if common_job is not None and job != common_job:
+                raise ValueError('Retained jobs differ across roles/repeats')
+            common_job = job
             if manifest['frames'] != 120 or manifest['status'] != 'success' or manifest['gl_error_frames']:
                 raise ValueError('Incomplete or GL-failed render')
             if [manifest['width'], manifest['height']] != [width, height]:

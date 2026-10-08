@@ -292,7 +292,7 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | `docs/user-guide/**/*.md` + `mkdocs.yml` | User guide source: *Using ProjectM TV* pages, `authoring/` (source-level preset authoring, MilkDrop 2 semantics, no patch-specific claims), `engine/` (patch catalog, 4K rendering, pipeline, validation) and `predictor.md` (research direction, not a commitment); built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
 | `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
 | `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
-| `docs/UPSTREAM_PATCH_VALUE.md` | Current 14-patch assessment and GPU Android TV upstream/ablation image proof; linked archive preserves historical dispositions; update with pin/patch/evidence changes |
+| `docs/UPSTREAM_PATCH_VALUE.md` | Current locked 15-patch assessment and GPU Android TV upstream/ablation image proof; linked archive preserves historical dispositions; update with pin/patch/evidence changes |
 | `docs/THIRD_PARTY.md` | projectM pin, link to patch provenance, presets/textures sources and licences |
 | `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
 | `docs/DANCE-COLLECTION.md` | Pointer to the archived Dance article in Git history (Dance is retired; `docs/user-guide/dance*.md` are not-in-nav stubs) |
@@ -464,17 +464,18 @@ harness revisions require freshly prepared workers. Keep pooling opt-in and the
 API36 program-binary export limitation explicit. The 23-row component matrix in
 `docs/superpowers/plans/2026-10-08-retained-component-proof.md` remains incomplete.
 
-Main synchronization (2026-10-08): PR #57/main `41ec3fc1` adds current0014 legacy
-tint and mode-1 waveform compatibility. The report covers the 14-patch inventory,
-while existing image-proof workers/series.json retain the frozen13-patch source
-`654815d8`. `current-series.json` identifies the added current snapshot. Do not
-relabel old captures as 14-patch certification; matched upstream/current14 image
-proof and affected-witness revalidation remain pending.
+Historical 14-patch synchronization (2026-10-08): PR #57/main `41ec3fc1` adds
+current 0014 legacy tint and mode-1 waveform compatibility. `current14-series.json`
+preserves that inventory; original image-proof workers/series.json retain the
+frozen 13-patch source `654815d8`. The 0014 Hurricane, tint and mode-1 comparisons
+provide matched upstream/current14 proof. Do not relabel earlier captures as
+14-patch certification; affected-witness revalidation remains pending.
 
 Proof snapshot selection: `tools/patch-proof/{prepare,capture,verify}.py` accept
-`--series`; pass `current-series.json` consistently for the14-patch endpoint.
-Their default preserves frozen13-patch replay. Manifest digests bind new workers
-and captures to a selected source/inventory; old unbound receipts are restricted
+`--series`; pass `current-series.json` consistently for the locked 15-patch endpoint
+at `120547f3`, or `current14-series.json` for historical 14-patch replay at `41ec3fc1`.
+Their default `series.json` preserves frozen 13-patch replay. Manifest digests bind
+new workers and captures to a selected source/inventory; old unbound receipts are restricted
 to the original frozen manifest. Never relabel preserved workers as a newer
 endpoint merely because upstream pin/early patch bytes match.
 

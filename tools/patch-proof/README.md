@@ -73,6 +73,13 @@ artist-preset failure. Verification checks all readback bytes, the allocation
 control, state, counts and exact independent repeats. Context recreation,
 external ownership and pressure-release controls remain separate work.
 
+Successful image verification also binds each manifest to its outer role/repeat,
+seed12345/FPS30 and retained manifest.json/job.json. It checks the fixed clock,
+frame window, dimensions, reference/diagnostic settings and exact host-event
+sequence; jobs must agree across roles/repeats apart from identity. The retained
+PCM length and hash must match the frozen input. Run metadata cannot silently
+certify frames produced with a different protocol.
+
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.
