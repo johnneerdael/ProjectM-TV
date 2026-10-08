@@ -1,0 +1,9 @@
+{
+  "baseline_evaluator_CMake_sha256": "e37c655c0bf9254968666591fb85a4ea357cfb1c904808a5baf9ba76a5fdce90",
+  "current27_source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "v2_requires_CMake_unchanged": true,
+  "v2_requires_no_finite_only_override": true,
+  "boundary_test_comparator_unchanged": true,
+  "new_readme_sha256": "f28496728bce0f582a6a3fe8fae4888eec0888f2afc6b5ac0d7a4b3df9f3a2df",
+  "prepared_only": true
+}

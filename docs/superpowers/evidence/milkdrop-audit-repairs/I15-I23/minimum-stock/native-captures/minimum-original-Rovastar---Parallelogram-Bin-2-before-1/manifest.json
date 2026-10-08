@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 26100,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/audio.u8",
+    "preset": "Rovastar - Parallelogram Bin 2.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "2d71792cdc62b348f7cd71e1d52be36da752873ab086e611c4b900af47dcba39",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e10c18cfd342f81a4a3c9fe8a0bf86d4cb130721ffc79883667f017fda32accf",
+      "pngBytes": 4349083,
+      "pngSha256": "913a006d24e09e1b723dd4771e4a525b3f87f70fcda21155a1c7b10e2a5d141a",
+      "rgbMean": [
+        101.98758813175154,
+        108.60037169656636,
+        112.35447952835648
+      ],
+      "exactBlackFraction": 0.023126808449074075
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "816669a7f1548fa0bb8c616bb13a821890484e299b4bde4cb593b47e90ccc1ef",
+      "pngBytes": 3182110,
+      "pngSha256": "6185dc6e52a11bb8e3134f54e48b408988c0e58f8dd52be91b2fc7468b3d3c5a",
+      "rgbMean": [
+        99.2887567515432,
+        108.79857602719908,
+        113.42472644193673
+      ],
+      "exactBlackFraction": 0.019058400848765433
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "cd481d7cbd85c4f1916964c3b80f48fc01b66c18b57b9d02bbc1452ee071916f",
+      "pngBytes": 3337059,
+      "pngSha256": "313ed1b148a525c1ff4329978e1c888181f4d5a8524d72799e7d3459d769182c",
+      "rgbMean": [
+        96.88193335262346,
+        103.13359387056327,
+        105.20089916087963
+      ],
+      "exactBlackFraction": 0.01451147762345679
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "2e95bd9cbd480533ad224cdcd6fd5527d93ad596e63c500edfe6b2416f9ad6a7",
+      "pngBytes": 3925790,
+      "pngSha256": "40817e2b8345e42bbd811c6f04eddb99f609519aa34a5b87a57f885157edac69",
+      "rgbMean": [
+        106.60575098861882,
+        108.05073748553241,
+        109.00762936439043
+      ],
+      "exactBlackFraction": 0.014975043402777779
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "7afdcfa7dbedc1dc3f12560a894bcc5bbb969bc73a85131f428cf69b33768174",
+      "pngBytes": 4326311,
+      "pngSha256": "b864e000f2414d273e66ce74af6ddd6f5310633425fdcb3abe2cdc305bec4cfb",
+      "rgbMean": [
+        113.11378809799383,
+        111.76879822530864,
+        113.45934618537808
+      ],
+      "exactBlackFraction": 0.018315972222222223
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "d78891d64e3a852237f4b7aeb17d010aecc27d68614cacfe5264688140195524",
+      "pngBytes": 4158331,
+      "pngSha256": "ef865173cb17e53457dd9f4db79b3a708c9b5bb81551266dee46b70a1126809f",
+      "rgbMean": [
+        128.13303614486884,
+        134.36461926118827,
+        140.7839236111111
+      ],
+      "exactBlackFraction": 0.007270688657407407
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "022e220107f1ca9ebde7be0b4ad4558b287af56f0e973d9d8ec3478219b92eba",
+      "pngBytes": 3615238,
+      "pngSha256": "30dd158f7173c19bffede8c5a528a8e089a25086e589754eed2589d640bac0f5",
+      "rgbMean": [
+        95.6523199990355,
+        124.38573784722222,
+        123.65281503182871
+      ],
+      "exactBlackFraction": 0.018383969907407406
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/minimum-original-Rovastar---Parallelogram-Bin-2-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a85d26cedaa77a154f509ed4286283b09803eac4c00be438019f503727ade154",
+      "pngBytes": 3369425,
+      "pngSha256": "e5211e0dc79f14a819324db943c55cac0492669ea9ca060d98d62617ca92a053",
+      "rgbMean": [
+        102.01654345100309,
+        118.72109471450618,
+        119.84934666763117
+      ],
+      "exactBlackFraction": 0.01877411265432099
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 54259754,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 391,
+      "elapsedRealtimeMs": 54270731,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "f9d50349cd553c96ebfb395bcbd715246c63333a218057a6cf4ce746a252d86e",
+  "forcedPresetPrefix": "Rovastar - Parallelogram Bin 2.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 18,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43394,
+  "framesRendered": 480,
+  "renderWallDurationMs": 12523,
+  "pssAfterFramesKB": 71696,
+  "serializedFrameMeanMs": 4.9358226750000025,
+  "serializedFrameP90Ms": 5.328708,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Rovastar - Parallelogram Bin 2.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 12852
+}

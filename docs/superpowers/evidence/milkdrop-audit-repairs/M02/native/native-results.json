@@ -1,0 +1,1128 @@
+{
+  "status": "24 Native 4K runs and 12 repeat groups verified; source fan topology comparison; cost and integration qualification separate",
+  "runs": 24,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 12,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "border-topology-audit-border-half-after-0",
+      "preset": "audit border half.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-half-after-1",
+      "preset": "audit border half.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-half-before-0",
+      "preset": "audit border half.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-half-before-1",
+      "preset": "audit border half.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b",
+        "271ea09bb9c75c8838c94b77f24b483fb76db250ac61f0ea9b3e8906732ff42b"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inner-inverted-after-0",
+      "preset": "audit border inner-inverted.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inner-inverted-after-1",
+      "preset": "audit border inner-inverted.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e",
+        "e22cbd555aa6a97e53db1a143648fcb7e1aa1c823b97347e0f511bcc7f3aa94e"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inner-inverted-before-0",
+      "preset": "audit border inner-inverted.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inner-inverted-before-1",
+      "preset": "audit border inner-inverted.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31",
+        "5257e61d745e6ccfb13613ba21594bf5d1e20abe217b4116e528a87909598f31"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inverted-after-0",
+      "preset": "audit border inverted.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inverted-after-1",
+      "preset": "audit border inverted.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc",
+        "8dc40c07fd9bcb5ad264b3ee383455a476943045ea35ea841454129e9bca0ddc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inverted-before-0",
+      "preset": "audit border inverted.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-inverted-before-1",
+      "preset": "audit border inverted.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3",
+        "b64479d400b1ac0e66ebd65f7cfa2a90a3ab2549430639158562dc119b8d8ca3"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-invisible-after-0",
+      "preset": "audit border invisible.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-invisible-after-1",
+      "preset": "audit border invisible.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-invisible-before-0",
+      "preset": "audit border invisible.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-invisible-before-1",
+      "preset": "audit border invisible.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-opaque-after-0",
+      "preset": "audit border opaque.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-opaque-after-1",
+      "preset": "audit border opaque.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-opaque-before-0",
+      "preset": "audit border opaque.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-opaque-before-1",
+      "preset": "audit border opaque.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519",
+        "4f3f390a797469385e18ad1eee8b1852acd06a6b2dbc3a5047bcd1f1b40c7519"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-ordinary-after-0",
+      "preset": "audit border ordinary.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-ordinary-after-1",
+      "preset": "audit border ordinary.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-ordinary-before-0",
+      "preset": "audit border ordinary.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567"
+      ]
+    },
+    {
+      "directory": "border-topology-audit-border-ordinary-before-1",
+      "preset": "audit border ordinary.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567",
+        "fb7bc0b958752749cf53fbf1b7ed997bf1a250a703130a263c25472807b56567"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "fixture": "inverted",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 14.155956669560185,
+          "changed_pixels": 2082654,
+          "before_corner": [
+            199,
+            199,
+            199
+          ],
+          "after_corner": [
+            175,
+            175,
+            175
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": false
+    },
+    {
+      "fixture": "ordinary",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": true
+    },
+    {
+      "fixture": "half",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": true
+    },
+    {
+      "fixture": "opaque",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            255,
+            255,
+            255
+          ],
+          "after_corner": [
+            255,
+            255,
+            255
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": true
+    },
+    {
+      "fixture": "invisible",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0,
+          "before_corner": [
+            0,
+            0,
+            0
+          ],
+          "after_corner": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": true
+    },
+    {
+      "fixture": "inner-inverted",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 12.681047333140432,
+          "changed_pixels": 2248478,
+          "before_corner": [
+            128,
+            128,
+            128
+          ],
+          "after_corner": [
+            128,
+            128,
+            128
+          ]
+        }
+      ],
+      "all_selected_rgb_identical": false
+    }
+  ]
+}

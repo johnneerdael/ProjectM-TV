@@ -1,0 +1,11 @@
+--- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
++++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
+@@ -62,7 +62,7 @@
+     float const inverseWidth = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
+     float const inverseHeight = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
+     float const minimumLength = DiffusionMotionVectorMinimum(
+-        sqrtf(inverseWidth * inverseWidth + inverseHeight * inverseHeight),
++        1.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX),
+         LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
+                   m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight),
+         diffusionActive);

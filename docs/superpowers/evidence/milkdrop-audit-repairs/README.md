@@ -1,44 +1,44 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Six other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:29 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and6 complete deferred packets. Four remain open: I04,I14,I16,I24. Final combined integration/review/CI gates remain open; PR61 is a draft.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
 | ID | Finding | Lexical candidates | Current status |
 |---|---|---:|---|
-| I17 | Built-in opacity replacement and thresholds differ | 5300 | Implemented0017; source/final4K original proof; integration pending |
-| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Deferred source-cap proposal; final authored/Native comparison and +.158ms cost documented |
-| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Implemented0018; source/final4K original proof; integration pending |
-| I22 | Custom dot waves gain interpolated points | 1875 | Deferred complete proposal; source/finite/original4K proof; controlled mosaic+.105ms/+5.038% |
-| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Implemented0023; original/finite/custom and cost4K proof; integration pending |
-| I11 | Legacy warp physical triangle diagonal is reversed | 878 | Implemented0024; source49/sanitizer49, exact cache pixels, revised cost qualified; integration pending |
-| I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | Implemented0025; source50, original/finite/custom final4K repeats, isolated cost qualified; integration pending |
-| I14 | Motion reverse propagation uses different interpolation and storage | 794 | Source investigation recorded; execution/captures/disposition pending |
-| I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | Implemented0021; source/original/finite final4K proof; integration pending |
-| I16 | Disabling motion vectors leaves a stale target UV map | 435 | Source investigation recorded; execution/captures/disposition pending |
-| I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | Implemented0021; source/original/finite final4K proof; integration pending |
-| I24 | Shape live thick equations do not select target outline style | 14 | Source/cost screening; two stronger originals; execution/captures pending |
-| I23 | Thick custom-wave and shape-outline offsets differ | 4951 | Source investigation recorded; execution/captures/disposition pending |
-| I20 | Circle angular spacing and closure smoothing differ | 2736 | Deferred; source/GL/all finite styles/two original4K proof; +.058ms/+3.393% mean cost, mixed cycles |
-| I13 | Left-axis equation angle seam changes sign | 204 | Implemented0026; source/GL/sanitizer/original/finite/custom4K/cost proof; integration pending |
-| I18 | Wave brightening omits original preliminary clamp | 0 | Implemented0027 RGB-only; actual GL/sanitizer52, original/finite4K and cost proof; integration pending |
-| I03 | Small finite divisions and reciprocal powers collapse to zero | 0 | Source investigation recorded; execution/captures/disposition pending |
-| I04 | Signed remainder differs from original absolute-value remainder | 0 | Source investigation recorded; execution/captures/disposition pending |
-| M02 | Inverted-radius border topology differs from target library | 0 | Source investigation recorded; execution/captures/disposition pending |
-| M01 | Negative custom-wave enable executes in predictor but not library | 0 | Deferred shared proposal; source/Native4K proof; +.102ms/+7.503% negative-wave cost |
-| I25 | Shape/custom-wave colour fractions survive original byte truncation | 5347 | Source investigation recorded; execution/captures/disposition pending |
-| I30 | Display diffuse colours retain floats instead of original byte packing | 155 | Source investigation recorded; execution/captures/disposition pending |
-| I29 | Negative odd echo orientation omits original horizontal flip | 0 | Implemented0022; source/finite final4K proof; no confirmed stock trigger |
-| I15 | Minimum motion trails are larger and aspect-dependent | 794 | Source investigation recorded; execution/captures/disposition pending |
-| I09 | EEL named constants round to float before double evaluation | 0 | Implemented0020; source/finite final4K proof; no confirmed stock trigger |
-| I31 | Gamma-only pass-count epsilon differs | 68 | Implemented0019; source/final4K original proof; integration pending |
-| I01 | Preset keys are case-insensitive in library/predictor | 2 | Source investigation recorded; execution/captures/disposition pending |
-| I02 | Negative boolean settings use >0 rather than nonzero | 0 | Deferred shared proposal; actual sampler/Native4K proof; workload decision documented |
-| I07 | Stereo bands average channels rather than left only | 8985 | Source investigation recorded; execution/captures/disposition pending |
-| I21 | Extra waveform modes change original modulo aliases | 4 | Source investigation recorded; execution/captures/disposition pending |
-| I26 | Shader vol/vol_att differ from original comma expression | 97 | Source investigation recorded; execution/captures/disposition pending |
-| I27 | mip_y uses height rather than original repeated width | 0 | Source investigation recorded; execution/captures/disposition pending |
-| I28 | Near-equal blur bounds expand instead of collapsing | 8 | Source investigation recorded; execution/captures/disposition pending |
+| I17 | Built-in opacity replacement and thresholds differ | 5300 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I17/README.md) |
+| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | [deferred for owner: source-correct cap preserves authored/Native fidelity but clean4K mean cost +0.158ms /2.56%](I19/README.md) |
+| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I08/README.md) |
+| I22 | Custom dot waves gain interpolated points | 1875 | [deferred complete custom-dot proposal; source/original/finite final4K proof; fresh12ABBA mosaic+.105ms/+5.038%, all cycles increase; owner packet complete](I22/README.md) |
+| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | [implemented0023; focused source/original/finite/custom unchanged4K and12-run cost acceptance passed; final integration pending](I10/README.md) |
+| I11 | Legacy warp physical triangle diagonal is reversed | 878 | [implemented revised0024;49 normal/49 sanitizer, exact original/finite/custom Native4K cache equivalence and12-run cost acceptance passed; final integration pending](I11/README.md) |
+| I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | [implemented0025; production state-order and original/finite/custom final4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending](I12/README.md) |
+| I14 | Motion reverse propagation uses different interpolation and storage | 794 | [three-layer causal finite/source feasibility packet; actual1280x720 UV canvas cost distinguished; production GL/Native/cost/disposition pending](I14/README.md) |
+| I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I05/README.md) |
+| I16 | Disabling motion vectors leaves a stale target UV map | 435 | [source ordering confirms stale previous texture on re-enable; retained previous-state/UV-only-pass proposal; discard/ownership/Native/cost/disposition pending](I16/DESIGN.md) |
+| I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I06/README.md) |
+| I24 | Shape live thick equations do not select target outline style | 14 | [source/per-instance cost investigation recorded; two strong original candidates; execution/final screenshots and disposition pending](I24/README.md) |
+| I23 | Thick custom-wave and shape-outline offsets differ | 4951 | [retained Native thick-offset policy; complete owner packet with actual vertex/replay controls and matched Native4K style images](I15-I23/I23-OWNER-DECISION.md) |
+| I20 | Circle angular spacing and closure smoothing differ | 2736 | [deferred circle proposal; source/GL/sanitizer and two originals/all finite styles Native4K proof; isolated12-run mean+.058ms/+3.393%, mixed cycles; complete owner decision packet](I20/README.md) |
+| I13 | Left-axis equation angle seam changes sign | 204 | [implemented0026; actual CGL/normal51/sanitizer51 and original/finite/custom Native4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending](I13/README.md) |
+| I18 | Wave brightening omits original preliminary clamp | 0 | [implemented0027 RGB-only;52normal/52sanitizer, qualified original/finite Native4K palette/nonzero proof; isolated12-run cost no consistent slowdown; integration pending](I18/README.md) |
+| I03 | Small finite divisions and reciprocal powers collapse to zero | 0 | [deferred complete owner packet; combined finite recovery passes source/ARM/Native proof but runtime tiny-power cost +7.50%](I03-I04/I03-OWNER-DECISION.md) |
+| I04 | Signed remainder differs from original absolute-value remainder | 0 | [isolated bits-v2: unchanged flags;76 remainder+12 preservation host/ARM controls and20 baseline boundaries pass; guard IR reviewed; Native sign captured; cost pending](I04-bits-v2/ROOT-QUALIFICATION.md) |
+| M02 | Inverted-radius border topology differs from target library | 0 | [implemented0028; 46 fan profiles,51 normal/51 sanitizer,24 Native4K repeat runs and12 isolated cost qualification; final integration pending](M02/README.md) |
+| M01 | Negative custom-wave enable executes in predictor but not library | 0 | [deferred shared nonzero-boolean proposal; source/actual sampler/Native4K repeated proof complete; clean12-run negative-wave cost+.102ms/+7.503%; owner decision documented](I02-M01/README.md) |
+| I25 | Shape/custom-wave colour fractions survive original byte truncation | 5347 | [retained float precision; complete owner decision with actual production controls and repeated Native4K images](I25-I30/OWNER-DECISION.md) |
+| I30 | Display diffuse colours retain floats instead of original byte packing | 155 | [retained float precision; complete owner decision with actual production controls and repeated Native4K images](I25-I30/OWNER-DECISION.md) |
+| I29 | Negative odd echo orientation omits original horizontal flip | 0 | [implemented0022; focused source/finite final-output Native4K acceptance passed; final integration pending](I29/README.md) |
+| I15 | Minimum motion trails are larger and aspect-dependent | 794 | [retained aspect-aware visibility minimum; complete owner packet with actual endpoint controls and unchanged-original Native4K width-threshold reference](I15-I23/I15-OWNER-DECISION.md) |
+| I09 | EEL named constants round to float before double evaluation | 0 | [implemented0020; focused source/finite final-output Native4K acceptance passed; no confirmed stock trigger; final integration pending](I09/README.md) |
+| I31 | Gamma-only pass-count epsilon differs | 68 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I31/README.md) |
+| I01 | Preset keys are case-insensitive in library/predictor | 2 | [retained tolerant loading; completed owner policy packet with production parser controls and repeated Native4K/matched-resolution images](I01/README.md) |
+| I02 | Negative boolean settings use >0 rather than nonzero | 0 | [deferred shared nonzero-boolean proposal; source/actual sampler/Native4K repeated proof complete; clean12-run negative-wave cost+.102ms/+7.503%; owner decision documented](I02-M01/README.md) |
+| I07 | Stereo bands average channels rather than left only | 8985 | [retained upstream stereo averaging; complete owner packet with actual PCM controls and Native4K source-stage/preservation images](I07/README.md) |
+| I21 | Extra waveform modes change original modulo aliases | 4 | [retained 16-mode extension; complete owner packet with production GL, matched ARM64 input and repeated Native4K images](I21/README.md) |
+| I26 | Shader vol/vol_att differ from original comma expression | 97 | [retained upstream corrected shader input; complete owner packet with actual compile/uniform controls and repeated Native4K images](I26-I27/OWNER-DECISION.md) |
+| I27 | mip_y uses height rather than original repeated width | 0 | [retained upstream corrected shader input; complete owner packet with actual compile/uniform controls and repeated Native4K images](I26-I27/OWNER-DECISION.md) |
+| I28 | Near-equal blur bounds expand instead of collapsing | 8 | [retained TV blur safety correction; complete owner packet with production numeric/storage/decode tests and repeated Native4K images](I28/README.md) |
 
 ## Current validation
 
@@ -87,3 +87,7 @@ I26/I27 correctedinputpolicies qualified:actualcompileduniform/source/PCM/inject
 I23 retainedoffsetpolicy qualified: actualshaderpositions/pass/replay andNative live=current-offset siblings all8framesexact;originalreference offsets differ. I15 remainsseparate/open. Nine retainedpolicyIDs,5deferredIDs,12repairedIDs and7unfinishedIDs remain.
 
 I03 now has a complete deferred owner packet:198combined source/ARM controls,12Nativefinitejobs and36verifiedruntimeQcostjobs. Tiny-power+7.50%/allcyclesincrease failscostgate; compiler-scope effects explicit. I04remainsindependent/open. Twelve repairedIDs,nine retainedpolicyIDs,six deferredIDs andsix unfinishedIDs remain.
+
+I15 retainedvisibilityminimum qualified: actualendpoint/diffusion/ownershipcomponentcontrols plus4unchangedRovastarNative current/width-onlyoracle runs exactrepeats. Previousshared44Nativefinite/stock runs remainseparate. Twelve repairedIDs,ten retainedpolicyIDs,six deferredIDs andfive unfinishedIDs remain.
+
+Latest M02 check:51 normal and51 ASan/UBSan controls pass; all28 patches apply. [Border repair evidence](M02/README.md) includes repeated Native4K images and isolated cost. Earlier numbered checkpoints below retain historical source identities.

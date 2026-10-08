@@ -1,0 +1,38 @@
+{
+  "source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "current_patch_count": 27,
+  "base_TreeFunctions_sha256": "f886626367d03d6602a87a2ebf02ec7ca4636fa9560311ffa5461fa1201f817f",
+  "candidate_text_sha256": "6fab98928753f7393248993b95ff51aee15fb822136e6296ecebfedc0f823af2",
+  "patch_sha256": "9dd800abf251780e26718c8abdeab2dff4e62b2fff34447323edd136cf0693f8",
+  "unchanged_function_body_sha256": {
+    "div": "4dc8d5f1c0cca255bb202832c892a92c6b89c19be32d9adcf4f66ecc7e447364",
+    "div_op": "39d8d25a20f6923c6c68b18e1946a6a8b3f55ba0c6869f80b0040e4b1a075919",
+    "pow": "a36176da536da367ba041620978be72dc53f4bf8efc142e15fc171b6db11b77e",
+    "pow_op": "25b1de59de0a7241d281f32b7999595ed156fc3db3239582fe5b352b90178e48",
+    "invsqrt": "73fc86695ffe84aec009c65acde429e19359219a5e29d92d44e959a94d0c64ee"
+  },
+  "evaluator_CMake_untouched": true,
+  "historical_Apple_bits_runtime": "64/64 I04, not full current76; I03bits failed24/89 and is excluded",
+  "historical_NDK_IR": "input masks/range/MIN guards precede fptosi in both double/float formats; full new route still requires exact release IR/runtime proof",
+  "new_execution": false,
+  "new_integer_guard_scope": "finite/cast/original-domain predicates all integer magnitude/sign comparisons before fptosi; historical helper used floating range predicates, so new guard form needs its own exact IR/runtime proof",
+  "historical_IR_limit": "old denominator mask is followed by speculatively computed floating range comparisons before final rejection; masks still dominate casts, but that is not a no-FP-input-operation proof",
+  "revision": "v2 all-integer finite/cast/original-domain input predicates",
+  "frozen_paths": {
+    "i04-only-bit-guards.patch": "9dd800abf251780e26718c8abdeab2dff4e62b2fff34447323edd136cf0693f8",
+    "eel_i04_bits_test.cpp": "980376e59cfe3c85b19b91c3edd14b503915a5e4b1153e744ddab74d3df679cb",
+    "CMakeLists.txt": "d005ad42b3b610345d354f05ed4450e7c6dba28b1e43befe41cb953e553a8b4c",
+    "compare_boundaries.py": "5f80659e8b629b8641b8ac0169ed4025d0b5dd0585dae4d6c178f976559fbd14",
+    "capture_release_ir.py": "ee367116a7e2d8a6f2cb27b4d3a9fb39cae9ecdd53111d8b8ed5acc3e414ef32",
+    "qualification-history.json": "9882c263a4ffa1a363d89582df90e43d36db12d77a981d908ac35409bb937837"
+  },
+  "prior_bits_directory": "Do not infer v1 built source from mutable prior preparation path; use frozen engine/worker hash",
+  "test_and_boundary_comparator_unchanged_from_delivered_bits": true,
+  "frozen_v1_engine_reference": {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i04-bits-engine/vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+    "sha256": "5fa8431278690af12b8d83f221cd2cc3eebe9cdd2fdc20abe79a9ed237e6adcd",
+    "contains_integer_range_helper": false,
+    "contains_floating_range_predicates": true,
+    "read_only": true
+  }
+}

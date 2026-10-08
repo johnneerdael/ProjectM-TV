@@ -145,7 +145,7 @@ add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
 set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs wave-colour)
+foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs wave-colour border-topology)
     string(REPLACE "-" "_" source_name "${control}")
     add_executable(${control}-regressions ${source_name}_test.cpp)
     target_compile_features(${control}-regressions PRIVATE cxx_std_17)
@@ -164,6 +164,9 @@ foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility c
         target_link_libraries(${control}-regressions PRIVATE ${REGRESSION_GL_TARGET})
     endif()
 endforeach()
+add_test(NAME original-border-fan-topology COMMAND border-topology-regressions)
+set_tests_properties(original-border-fan-topology PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_test(NAME per-pixel-inverse-aspect COMMAND preset-inputs-regressions)
 set_tests_properties(per-pixel-inverse-aspect PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

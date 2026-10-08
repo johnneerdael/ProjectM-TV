@@ -1,0 +1,13 @@
+PASS remainder both argument effects once q=1 a=-5 b=2
+PASS remainder assignment RHS mutates lhs q=0 a=0 b=1
+PASS remainder RHS updates prior variable pointer q=0 a=-2 b=-2
+PASS remainder intrinsic assignment RHS effect once q=1 a=1 b=2
+PASS tiny division remains suppressed q=0 a=1 b=1e-06
+PASS tiny division assignment remains suppressed q=0 a=0 b=1e-06
+PASS tiny reciprocal remains suppressed q=0 a=1e-06 b=-1
+PASS tiny reciprocal assignment remains suppressed q=0 a=0 b=-1
+PASS literal tiny power remains suppressed q=0 a=0 b=0
+PASS ordinary division unchanged q=10 a=1 b=0.1
+PASS ordinary power unchanged q=8 a=2 b=3
+PASS wide signed remainder unchanged q=-1 a=-4.29497e+09 b=2
+aliases executed=12 failures=0

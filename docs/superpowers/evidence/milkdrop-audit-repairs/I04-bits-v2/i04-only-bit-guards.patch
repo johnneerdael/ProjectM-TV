@@ -1,0 +1,128 @@
+From: ProjectM TV contributors
+Subject: [SURGICAL PROPOSAL] Bound positive remainder using integer input guards
+
+I04 only: memcpy input representations, then use integer magnitude/sign
+checks for finite, cast and original32-bit domains. No floating input
+comparison, fabs or arithmetic precedes validated integer casts.
+Preserve widened signed results, argument order/aliases, zero divisors
+and signed minimum divided by negative-one protection.
+
+No evaluator CMake/compiler policy change or I03 finite recovery. Existing
+div/div_op/pow/pow_op/invsqrt bodies and outside NaN policy remain baseline.
+Historical Apple I04-bit64/64 and NDK guards justify new qualification,
+not acceptance of this revised integer-range form. Require exact Apple/
+NDK fast-math IR and full76cases/20baseline-policy comparison. Supported
+IEEE byte layout is explicit; MSVC/unverified platforms remain unqualified.
+Root numbers/applies after proof; old alternatives/results remain frozen.
+
+--- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
++++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
+@@ -10,6 +10,8 @@
+ #include <math.h>
+ #include <assert.h>
+ #include <stdint.h>
++#include <string.h>
++#include <float.h>
+-
++
+ #if PRJM_F_SIZE == 4
+ typedef int32_t PRJM_EVAL_I;
+@@ -586,6 +588,63 @@
+     assign_ret_val(*val1_ptr / *val2_ptr);
+ }
+-
++
++// IEEE representation checks are private to remainder input handling.
++// Supported targets require matching floating/integer byte layout.
++#if PRJM_F_SIZE == 4
++_Static_assert(sizeof(PRJM_EVAL_F) == sizeof(uint32_t) && FLT_RADIX == 2 &&
++               FLT_MANT_DIG == 24 && FLT_MAX_EXP == 128, "requires IEEE binary32");
++typedef uint32_t remainder_bits_t;
++#define REMAINDER_SIGN_BIT UINT32_C(0x80000000)
++#define REMAINDER_INFINITY_BITS UINT32_C(0x7f800000)
++#define REMAINDER_CAST_LIMIT_BITS UINT32_C(0x4f000000) // 2^31
++#define REMAINDER_ORIGINAL_LIMIT_BITS UINT32_C(0x4f000000) // 2^31
++#else
++_Static_assert(sizeof(PRJM_EVAL_F) == sizeof(uint64_t) && FLT_RADIX == 2 &&
++               DBL_MANT_DIG == 53 && DBL_MAX_EXP == 1024, "requires IEEE binary64");
++typedef uint64_t remainder_bits_t;
++#define REMAINDER_SIGN_BIT UINT64_C(0x8000000000000000)
++#define REMAINDER_INFINITY_BITS UINT64_C(0x7ff0000000000000)
++#define REMAINDER_CAST_LIMIT_BITS UINT64_C(0x43e0000000000000) // 2^63
++#define REMAINDER_ORIGINAL_LIMIT_BITS UINT64_C(0x41e0000000000000) // 2^31
++#endif
++static remainder_bits_t remainder_value_bits(PRJM_EVAL_F value)
++{
++    remainder_bits_t bits;
++    memcpy(&bits, &value, sizeof(bits));
++    return bits;
++}
++
++// Check finite/cast domains with integer representations before floating casts.
++// Preserve defined wide signed results, and never execute signed minimum/-1.
++static PRJM_EVAL_F bounded_milkdrop_remainder(PRJM_EVAL_F numerator, PRJM_EVAL_F denominator)
++{
++    const remainder_bits_t numeratorBits = remainder_value_bits(numerator);
++    const remainder_bits_t denominatorBits = remainder_value_bits(denominator);
++    const remainder_bits_t numeratorMagnitude = numeratorBits & ~REMAINDER_SIGN_BIT;
++    const remainder_bits_t denominatorMagnitude = denominatorBits & ~REMAINDER_SIGN_BIT;
++    if (numeratorMagnitude >= REMAINDER_INFINITY_BITS ||
++        denominatorMagnitude >= REMAINDER_INFINITY_BITS)
++        return 0.0;
++    // Positive limit is excluded; the exact negative signed minimum is allowed.
++    if (numeratorMagnitude > REMAINDER_CAST_LIMIT_BITS ||
++        (numeratorMagnitude == REMAINDER_CAST_LIMIT_BITS && !(numeratorBits & REMAINDER_SIGN_BIT)) ||
++        denominatorMagnitude > REMAINDER_CAST_LIMIT_BITS ||
++        (denominatorMagnitude == REMAINDER_CAST_LIMIT_BITS && !(denominatorBits & REMAINDER_SIGN_BIT)))
++        return 0.0;
++    const PRJM_EVAL_I dividend = (PRJM_EVAL_I) numerator;
++    const PRJM_EVAL_I divisor = (PRJM_EVAL_I) denominator;
++#if PRJM_F_SIZE == 4
++    const PRJM_EVAL_I minimum = INT32_MIN;
++#else
++    const PRJM_EVAL_I minimum = INT64_MIN;
++#endif
++    if (divisor == 0 || (dividend == minimum && divisor == -1))
++        return 0.0;
++    const PRJM_EVAL_F remainder = (PRJM_EVAL_F) (dividend % divisor);
++    return numeratorMagnitude < REMAINDER_ORIGINAL_LIMIT_BITS &&
++           denominatorMagnitude < REMAINDER_ORIGINAL_LIMIT_BITS ? fabs(remainder) : remainder;
++}
++
+ prjm_eval_function_decl(mod)
+ {
+     assert_valid_ctx();
+@@ -598,13 +657,7 @@
+     invoke_arg(0, &val1_ptr);
+     invoke_arg(1, &val2_ptr);
+-
++
+-    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
+-    if (divisor == 0)
+-    {
+-        assign_ret_val(0.0);
+-        return;
+-    }
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I) *val1_ptr % divisor));
++    assign_ret_val(bounded_milkdrop_remainder(*val1_ptr, *val2_ptr));
+ }
+-
++
+ prjm_eval_function_decl(boolean_and_op)
+@@ -829,13 +882,7 @@
+     invoke_arg(0, ret_val);
+     invoke_arg(1, &val2_ptr);
+-
++
+-    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
+-    if (divisor == 0)
+-    {
+-        assign_ret_val(0.0);
+-        return;
+-    }
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) % divisor));
++    assign_ret_val(bounded_milkdrop_remainder(**ret_val, *val2_ptr));
+ }
+-
++
+ prjm_eval_function_decl(pow_op)
