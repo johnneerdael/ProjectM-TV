@@ -9,6 +9,8 @@ Requirements: Python 3.12+, Pillow, CMake/Ninja, initialized projectM/evaluator 
 caches, NDK 27.3.13750724 and a booted ARM64 Android TV emulator using host GPU
 acceleration. The proof scope requires television/Leanback features and rejects
 reported software renderers. Select a task-owned serial and current Android user.
+Offline verification requires the recorded emulator serial, both TV features and
+a nonnegative integer Android user before issuing a verification receipt.
 Do not use another task's emulator. The scripts never launch or wake a device.
 
 Run from the repository root. `CACHE_REPO` is a checkout whose submodules are
@@ -152,6 +154,8 @@ to upstream's documented global texture-path reset behavior.
 New capture records identify their producer script; verification records identify
 the verifier. The capture tool removes only its own hashed remote scratch directory
 after pulling evidence, including on handled failures. Local records remain intact.
+Before staging a retry, it removes that same owned remote directory with checked
+cleanup, then recreates it; failed cleanup stops capture before any upload.
 Capture and verification rebuild the prepared source from the pinned engine/evaluator
 checkouts and patch inputs, then check the role-specific source tree and capture
 adjustments against that reconstruction. The role labels and removed-patch fields

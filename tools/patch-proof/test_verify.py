@@ -56,6 +56,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                'stream_sha256': VERIFY.sha(self.frame_data)}
         self.result = {'preset_sha256': VERIFY.sha(self.preset.read_bytes()),
             'textures': {'nested/texture.png': VERIFY.sha(b'original texture bytes')},
+            'device': 'emulator-5630', 'user': 0,
+            'features': ['feature:android.software.leanback', 'feature:android.hardware.type.television'],
             'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
@@ -114,6 +116,41 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_rejects_missing_ndk_for_binary_binding(self):
         with self.assertRaisesRegex(ValueError, 'NDK is required'):
             VERIFY.verify(self.work)
+
+    def test_rejects_missing_or_physical_device_receipt(self):
+        for device in (None, '192.168.1.2:5555', 'physical-device-serial', 5630):
+            with self.subTest(device=device):
+                if device is None: self.result.pop('device', None)
+                else: self.result['device'] = device
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'emulator serial'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_tv_features_or_phone_receipt(self):
+        for features in (None, [], ['feature:android.software.leanback'],
+                         ['feature:android.hardware.type.television'],
+                         ['feature:android.hardware.telephony'],
+                         'feature:android.software.leanback feature:android.hardware.type.television'):
+            with self.subTest(features=features):
+                if features is None: self.result.pop('features', None)
+                else: self.result['features'] = features
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Android TV features'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_or_invalid_captured_user(self):
+        for user in (None, -1, True, '0', 0.0):
+            with self.subTest(user=user):
+                if user is None: self.result.pop('user', None)
+                else: self.result['user'] = user
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'nonnegative integer Android user'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_nonzero_android_user_on_tv_emulator(self):
+        self.result['user'] = 10
+        self.save()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
 
     def test_rejects_capture_bound_to_other_snapshot(self):
         self.result['series_sha256'] = '0' * 64

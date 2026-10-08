@@ -45,6 +45,7 @@ def pcm() -> bytes:
 @contextmanager
 def remote_workspace(adb, path):
     """Remove only this capture's hashed directory; retain pulled local evidence."""
+    adb('shell', 'rm', '-rf', path)
     adb('shell', 'mkdir', '-p', path)
     try:
         yield

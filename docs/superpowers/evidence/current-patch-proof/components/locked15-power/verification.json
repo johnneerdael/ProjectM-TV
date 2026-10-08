@@ -16,7 +16,7 @@
     "textures": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/core/src/main/assets/textures"
   },
   "scope": "retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection; preset and texture bytes match recorded hashes; historical inputs supplied explicitly, original uploaded bytes were not retained",
-  "verifier_sha256": "ee6c3600054e6ffed1b117205fc3d94849967bc6489c23da2e8cf51b1a709297",
+  "verifier_sha256": "77a19ddb70ede61b29350215c5fb07cb4f3145a69010f515f216844913fe8564",
   "source_identity_sha256": "2e2b18f9d804cd18929cf75d3c38067d5737d0493976e58922159e1bde3d6a68",
   "rgb_payload_sha256": "64bce135589c41468b317aa1b37f455f036c905dbb7c4182720cd9f4e0508312"
 }

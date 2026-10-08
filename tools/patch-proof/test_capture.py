@@ -4,6 +4,7 @@ import importlib.util
 import gzip
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -18,6 +19,62 @@ SERIES = json.loads((Path(__file__).resolve().parents[2] /
 
 
 class FailedCaptureRetention(unittest.TestCase):
+    def test_retry_removes_stale_owned_workspace_before_mkdir_and_push(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            owned = root / 'owned'
+            (owned / 'textures').mkdir(parents=True)
+            (owned / 'textures/stale-extra.png').write_bytes(b'stale texture')
+            unrelated = root / 'unrelated'
+            unrelated.mkdir()
+            (unrelated / 'keep.png').write_bytes(b'unrelated texture')
+            staged = root / 'staged-textures'
+            staged.mkdir()
+            (staged / 'current.png').write_bytes(b'current texture')
+            remote = '/data/local/tmp/projectmtv-patch-proof-0123456789abcdef'
+            calls = []
+
+            def adb(*arguments, check=True):
+                calls.append(arguments)
+                if arguments[:3] == ('shell', 'rm', '-rf'):
+                    self.assertEqual(arguments[3], remote)
+                    if owned.exists(): shutil.rmtree(owned)
+                elif arguments[:3] == ('shell', 'mkdir', '-p'):
+                    self.assertEqual(arguments[3], remote)
+                    owned.mkdir(exist_ok=True)
+                elif arguments[0] == 'push':
+                    self.assertEqual(arguments[2], remote + '/textures')
+                    shutil.copytree(Path(arguments[1]), owned / 'textures', dirs_exist_ok=True)
+                else:
+                    self.fail('Unexpected remote operation: ' + repr(arguments))
+                return subprocess.CompletedProcess(arguments, 0, '', '')
+
+            with CAPTURE.remote_workspace(adb, remote):
+                adb('push', str(staged), remote + '/textures')
+                self.assertEqual({p.name for p in (owned / 'textures').iterdir()}, {'current.png'})
+                self.assertEqual((owned / 'textures/current.png').read_bytes(), b'current texture')
+            self.assertEqual(calls[:2], [('shell', 'rm', '-rf', remote), ('shell', 'mkdir', '-p', remote)])
+            self.assertEqual(calls[-1], ('shell', 'rm', '-rf', remote))
+            self.assertFalse(owned.exists())
+            self.assertEqual((unrelated / 'keep.png').read_bytes(), b'unrelated texture')
+
+    def test_failed_initial_remote_cleanup_prevents_staging(self):
+        remote = '/data/local/tmp/projectmtv-patch-proof-0123456789abcdef'
+        calls = []
+
+        def adb(*arguments, check=True):
+            calls.append(arguments)
+            if arguments[:3] == ('shell', 'rm', '-rf'):
+                if check:
+                    raise subprocess.CalledProcessError(1, arguments, stderr='permission denied')
+                return subprocess.CompletedProcess(arguments, 1, '', 'permission denied')
+            return subprocess.CompletedProcess(arguments, 0, '', '')
+
+        with self.assertRaises(subprocess.CalledProcessError):
+            with CAPTURE.remote_workspace(adb, remote):
+                self.fail('Capture staged despite failed initial cleanup')
+        self.assertEqual(calls, [('shell', 'rm', '-rf', remote)])
+
     def test_rejects_resource_diagnostic_combined_with_nonimage_control(self):
         for other in ('--evaluator-control', '--texture-journey'):
             argv = ['capture.py', '--workers', 'unused', '--preset', 'unused',

@@ -126,6 +126,16 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
     result = json.loads((work / 'results.json').read_text())
+    device = result.get('device')
+    if not isinstance(device, str) or not device.startswith('emulator-'):
+        raise ValueError('Capture device must identify an emulator serial')
+    if type(result.get('user')) is not int or result['user'] < 0:
+        raise ValueError('Capture requires a nonnegative integer Android user')
+    features = result.get('features')
+    if (not isinstance(features, list) or
+            'feature:android.software.leanback' not in features or
+            'feature:android.hardware.type.television' not in features):
+        raise ValueError('Capture does not record both required Android TV features')
     series = json.loads(series_path.read_text())
     snapshot = result.get('series_sha256')
     legacy = snapshot is None and series == json.loads(DEFAULT_SERIES.read_text())
