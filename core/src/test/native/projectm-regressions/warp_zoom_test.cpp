@@ -33,6 +33,7 @@ struct Vertex
     float x, y, radius, angle, zoom, exponent, rotation, warp;
     float cx, cy, dx, dy, sx, sy;
     float cosine{};
+    float negativeZoomPower{};
 };
 
 static std::array<float, 2> Reference(const Vertex& p)
@@ -110,18 +111,27 @@ int main(int argc, char** argv)
                         vertices.push_back({position[0],position[1],radius,0,zoom,exponent,0.31f,0.2f,0.4f,0.6f,0.02f,-0.03f,1.1f,0.9f});
                     }
             GLuint vao{}, input{}, output{};
+            // MilkDrop's CPU powf defines these cases despite the authored
+            // exponent not being one. The old GPU pow branch returns NaN.
+            vertices.push_back({.3f,.2f,.5f,0,-.09f,1.0001f,0,0,.5f,.5f,0,0,1,1});
+            vertices.push_back({.3f,.2f,1.f,0,-.09f,2.f,0,0,.5f,.5f,0,0,1,1});
+            vertices.push_back({.3f,.2f,1.f,0,-.09f,3.f,0,0,.5f,.5f,0,0,1,1});
             glGenVertexArrays(1,&vao);
             glBindVertexArray(vao);
             glGenBuffers(1,&input);
             glBindBuffer(GL_ARRAY_BUFFER,input);
             // Preserve raw angles for the independent reference; upload the CPU pair.
             auto uploaded = vertices;
-            for (auto& p : uploaded) { p.cosine = std::cos(p.rotation); p.rotation = std::sin(p.rotation); }
+            for (auto& p : uploaded)
+            {
+                p.cosine = std::cos(p.rotation); p.rotation = std::sin(p.rotation);
+                p.negativeZoomPower = std::pow(p.zoom, std::pow(p.exponent, p.radius * 2.f - 1.f));
+            }
             glBufferData(GL_ARRAY_BUFFER,uploaded.size()*sizeof(Vertex),uploaded.data(),GL_STATIC_DRAW);
-            const GLuint locations[]{0,3,4,5,6,7,8};
-            const int sizes[]{2,2,4,2,2,2,1};
-            const size_t offsets[]{0,2,4,8,10,12,14};
-            for (GLuint i=0;i<7;++i)
+            const GLuint locations[]{0,3,4,5,6,7,8,9};
+            const int sizes[]{2,2,4,2,2,2,1,1};
+            const size_t offsets[]{0,2,4,8,10,12,14,15};
+            for (GLuint i=0;i<8;++i)
             {
                 glEnableVertexAttribArray(locations[i]);
                 glVertexAttribPointer(locations[i],sizes[i],GL_FLOAT,GL_FALSE,sizeof(Vertex),reinterpret_cast<void*>(offsets[i]*sizeof(float)));

@@ -124,6 +124,83 @@ struct Control
     }
 };
 
+static PFNGLDRAWELEMENTSPROC powerDrawElements{};
+static bool powerObserved{};
+static std::vector<float> powerRadii, powerInputs, powerResults;
+static std::vector<float> AttributeData(GLuint index)
+{
+    GLint enabled{}, buffer{}, previous{}, bytes{};
+    glGetVertexAttribiv(index, GL_VERTEX_ATTRIB_ARRAY_ENABLED, &enabled);
+    glGetVertexAttribiv(index, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, &buffer);
+    Check(enabled && buffer, "negative power upload attribute is missing");
+    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &previous);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &bytes);
+    const float* mapped = static_cast<float*>(glMapBufferRange(GL_ARRAY_BUFFER, 0, bytes, GL_MAP_READ_BIT));
+    Check(mapped, "negative power upload readback failed");
+    std::vector<float> result(mapped, mapped + bytes / sizeof(float));
+    glUnmapBuffer(GL_ARRAY_BUFFER); glBindBuffer(GL_ARRAY_BUFFER, previous);
+    return result;
+}
+static void ObservePowerDraw(GLenum mode, GLsizei count, GLenum type, const void* indices)
+{
+    powerRadii = AttributeData(3); powerInputs = AttributeData(4); powerResults = AttributeData(9);
+    powerObserved = true;
+    powerDrawElements(mode, count, type, indices);
+}
+static void PowerUploadControls(TextureManager& textures)
+{
+    for (bool custom : {false, true})
+    for (bool perPixel : {false, true})
+    for (bool replay : {false, true})
+    {
+        Control control(textures, custom, perPixel);
+        control.preparedReplay = replay;
+        if (perPixel)
+        {
+            projectm_eval_code_destroy(control.pixel.perPixelCodeHandle);
+            control.pixel.perPixelCodeHandle = nullptr;
+            control.pixel.CompilePerPixelCode("rot=q1;zoom=q2;zoomexp=q3;reg22=reg22+1;");
+        }
+        // Reuse the instance across signs, exponents and grid reallocations.
+        for (int grid : {8, 12, 8})
+        for (float zoom : {-.09f, .91f})
+        for (float exponent : {1.f, 1.0001f, 2.f, 3.f})
+        {
+            control.state.renderContext.perPixelMeshX = grid;
+            control.state.renderContext.perPixelMeshY = 6;
+            *control.frame.zoom = perPixel ? 1.25 : zoom;
+            *control.frame.zoomexp = exponent;
+            *control.frame.q_vars[1] = zoom; *control.frame.q_vars[2] = exponent;
+            powerObserved = false;
+            powerDrawElements = glad_glDrawElements;
+            glad_glDrawElements = ObservePowerDraw;
+            try { control.Draw(0, perPixel); }
+            catch (...) { glad_glDrawElements = powerDrawElements; throw; }
+            glad_glDrawElements = powerDrawElements;
+            const size_t vertices = (grid + 1) * 7;
+            Check(powerObserved && powerRadii.size() == vertices * 2 &&
+                      powerInputs.size() == vertices * 4 && powerResults.size() == vertices,
+                  "negative power buffer size or draw binding changed");
+            for (size_t i = 0; i < vertices; ++i)
+            {
+                Check(powerInputs[i * 4] == zoom && powerInputs[i * 4 + 1] == exponent,
+                      "negative power preparation rewrote emitted equation values");
+                const float expected = zoom < 0 ? std::pow(zoom, std::pow(exponent, powerRadii[i * 2] * 2.f - 1.f)) : 0.f;
+                Check(std::isnan(expected) ? std::isnan(powerResults[i]) : powerResults[i] == expected,
+                      "negative power preparation changed CPU powf result or coerced NaN");
+            }
+            Check(*control.frame.zoom == (perPixel ? 1.25 : zoom), "negative power mutated frame zoom");
+            const auto equations = control.state.globalRegisters[22];
+            // DrawAgain consumes prepared values without another equation pass.
+            control.mesh.DrawAgain(control.state, control.frame);
+            Check(control.state.globalRegisters[22] == equations, "negative power replay repeated equations");
+            Check(glGetError() == GL_NO_ERROR, "negative power control GL error");
+        }
+    }
+    std::cout << "negative CPU power upload: equations, NaNs, signs, resize and replay pass\n";
+}
+
 static void Coordinates(const Pixels& pixels, double evaluated, bool custom)
 {
     // Independent CPU reference after the same MilkDrop float conversion. Never
@@ -210,6 +287,7 @@ int main()
     {
         GLContext gl;
         TextureManager textures(std::vector<std::string>{});
+        PowerUploadControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';
         for (bool preparedReplay : {false, true})
         for (bool custom : {false, true})
