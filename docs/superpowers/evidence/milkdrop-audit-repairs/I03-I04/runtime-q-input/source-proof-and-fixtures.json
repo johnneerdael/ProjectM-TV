@@ -1,0 +1,107 @@
+{
+  "compiler_source": "build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/vendor/projectm-eval/projectm-eval/CompilerFunctions.c",
+  "compiler_sha256": "bb480770eaee55141e31163cef70500b8150c02d160be97a97213fb84755768f",
+  "function_table_source": "build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+  "table_source_sha256": "f886626367d03d6602a87a2ebf02ec7ca4636fa9560311ffa5461fa1201f817f",
+  "source_proof": {
+    "function_table_const_eligible": [
+      "/*const*/",
+      "_neg",
+      "_div",
+      "_mod",
+      "pow"
+    ],
+    "function_table_not_const_eligible": [
+      "/*var*/",
+      "_set",
+      "_addop",
+      "_divop",
+      "_modop",
+      "_powop"
+    ],
+    "compiler_lines": "CompilerFunctions.c187-240 combines argument const flags, invokes eligible expr->func once and replaces node with /*const*/;264-277 marks all variable references non-constant",
+    "no_variable_constant_propagation": "The compiler preserves a variable reference even when another per-frame statement assigns it a literal."
+  },
+  "old_frozen_fixtures": [
+    {
+      "path": "build/audit/arithmetic-diagnostics-v2/after/worker/app/src/main/assets/presets/audit math constant-geometry-work.milk",
+      "sha256": "8f1681aa55434685a93dadd67dbbd1470f6af5ddc047f99091c5b98773d44b0a",
+      "per_pixel": [
+        "per_pixel_1=q1=q1+(-5.9%2.9);q2=1/.000001;zoom=1;dx=0;dy=0;warp=0;"
+      ],
+      "scope": "literal _div/_mod/pow inner trees are folded at compile; live add/store remains where applicable"
+    },
+    {
+      "path": "build/audit/arithmetic-diagnostics-v2/after/worker/app/src/main/assets/presets/audit math pow-geometry-work.milk",
+      "sha256": "8d1e72932b759a959f9018e5e157d189f1282b40f2202ba31503559e369da3e9",
+      "per_pixel": [
+        "per_pixel_1=q1=pow(.000001,-1);zoom=1;dx=0;dy=0;warp=0;"
+      ],
+      "scope": "literal _div/_mod/pow inner trees are folded at compile; live add/store remains where applicable"
+    },
+    {
+      "path": "build/audit/arithmetic-diagnostics-v2/after/worker/app/src/main/assets/presets/audit math ordinary-math-work.milk",
+      "sha256": "5086d1204490eba12a6752f4280d31d475432c71dc50531755e46a6b2ad6e1b0",
+      "per_pixel": [
+        "per_pixel_1=q1=pow(1.1,2.3);q2=1/.1;q3=5.9%2.9;zoom=1;dx=0;dy=0;warp=0;"
+      ],
+      "scope": "literal _div/_mod/pow inner trees are folded at compile; live add/store remains where applicable"
+    }
+  ],
+  "new_variants": [
+    {
+      "path": "build/audit/arithmetic-proposal/runtime-q-input/audit math runtime-Q-div-mod-work.milk",
+      "sha256": "d103fc6befedabce360eec2549e6da2014113c51455663c7b62a53ce4dbcfb06",
+      "frame_program": "per_frame_1=q10=-5.9;q11=2.9;q12=1;q13=.000001;",
+      "pixel_program": "per_pixel_1=q1=q1+(q10%q11);q2=q12/q13;zoom=1;dx=0;dy=0;warp=0;",
+      "expected_runtime_callbacks_per_node": {
+        "mod": 1,
+        "div": 1,
+        "pow": 0
+      },
+      "expected_runtime_callbacks_per_frame_mesh48x32": {
+        "mod": 1617,
+        "div": 1617,
+        "pow": 0
+      },
+      "qualification": "source-proven variable non-constant expressions; not compiled/instrumented/executed during preparation"
+    },
+    {
+      "path": "build/audit/arithmetic-proposal/runtime-q-input/audit math runtime-Q-pow-work.milk",
+      "sha256": "1972c88ef7b99aa316ad2c992ed552277de571e84e6aadd3dcd552be695528e6",
+      "frame_program": "per_frame_1=q10=.000001;q11=-1;",
+      "pixel_program": "per_pixel_1=q1=pow(q10,q11);zoom=1;dx=0;dy=0;warp=0;",
+      "expected_runtime_callbacks_per_node": {
+        "mod": 0,
+        "div": 0,
+        "pow": 1
+      },
+      "expected_runtime_callbacks_per_frame_mesh48x32": {
+        "mod": 0,
+        "div": 0,
+        "pow": 1617
+      },
+      "qualification": "source-proven variable non-constant expressions; not compiled/instrumented/executed during preparation"
+    },
+    {
+      "path": "build/audit/arithmetic-proposal/runtime-q-input/audit math runtime-Q-ordinary-work.milk",
+      "sha256": "21d72e489cde151ad3315e7972c5b252945d2c29319afbe864f8b68099666d5e",
+      "frame_program": "per_frame_1=q10=1.1;q11=2.3;q12=1;q13=.1;q14=5.9;q15=2.9;",
+      "pixel_program": "per_pixel_1=q1=pow(q10,q11);q2=q12/q13;q3=q14%q15;zoom=1;dx=0;dy=0;warp=0;",
+      "expected_runtime_callbacks_per_node": {
+        "mod": 1,
+        "div": 1,
+        "pow": 1
+      },
+      "expected_runtime_callbacks_per_frame_mesh48x32": {
+        "mod": 1617,
+        "div": 1617,
+        "pow": 1617
+      },
+      "qualification": "source-proven variable non-constant expressions; not compiled/instrumented/executed during preparation"
+    }
+  ],
+  "existing_ABBA_disposition": "retain unchanged; valid timing of exact compiled-constant workloads, not repeated restored runtime-callback cost. Startup aggregate may include one-time compilation/folding depending timer scope.",
+  "expected_geometry": "zoom1/dx0/dy0/warp0 retained; result Q1/Q2/Q3 are not consumed by geometry/shaders; require actual attribute/image checks before timing claims",
+  "root_owns_execution": true
+}
