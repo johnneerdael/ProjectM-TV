@@ -18,6 +18,19 @@ SERIES = json.loads((Path(__file__).resolve().parents[2] /
 
 
 class FailedCaptureRetention(unittest.TestCase):
+    def test_rejects_resource_diagnostic_combined_with_nonimage_control(self):
+        for other in ('--evaluator-control', '--texture-journey'):
+            argv = ['capture.py', '--workers', 'unused', '--preset', 'unused',
+                    '--textures', 'unused', '--device', 'emulator-5630', '--user', '0',
+                    '--ndk', 'unused', '--work', 'unused', '--texture-history-probe', other]
+            with self.subTest(other=other), patch.object(sys, 'argv', argv), \
+                    patch.object(CAPTURE.argparse.ArgumentParser, 'error', side_effect=ValueError) as error, \
+                    patch.object(CAPTURE.subprocess, 'run') as run:
+                with self.assertRaises(ValueError):
+                    CAPTURE.main()
+                error.assert_called_once_with('Resource diagnostics require a plain image capture')
+                run.assert_not_called()
+
     def test_rejects_roles_that_escape_the_capture_directory(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

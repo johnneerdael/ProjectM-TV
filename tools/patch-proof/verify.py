@@ -35,6 +35,24 @@ def verify_shader_lifetime(role: str, runs: list[dict]) -> None:
         raise ValueError('Shader lifetime diagnostic contradicts its observer/role contract')
 
 
+def verify_texture_history(role: str, runs: list[dict]) -> None:
+    values = [run['manifest'].get('diagnostics') for run in runs]
+    if values[0] != values[1] or not isinstance(values[0], dict):
+        raise ValueError('Texture history diagnostic does not repeat')
+    value = values[0]
+    upstream = role == 'upstream'
+    expected_pixels = ([0, 160, 80, 255] if upstream else [0, 0, 0, 0]) * (64 * 48)
+    if (value.get('kind') != 'texture-history' or [value.get('width'), value.get('height')] != [64, 48] or
+            value.get('controlled_poison_rgba') != [0, 160, 80, 255] or
+            value.get('poison_control_passed') is not True or
+            value.get('fresh_rgba') != expected_pixels or value.get('recreated_rgba') != expected_pixels or
+            value.get('driver_allocations') != (2 if upstream else 1) or
+            value.get('pool_available') is not (not upstream) or
+            value.get('pool_bytes_after_retire') != (0 if upstream else 64 * 48 * 4) or
+            value.get('caller_state_preserved') != [True, True] or value.get('observer_gl_error') != 0):
+        raise ValueError('Texture history diagnostic contradicts its pixel/state/allocation contract')
+
+
 def verify(work: Path, ndk: Path | None = None) -> dict:
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
@@ -100,6 +118,8 @@ def verify(work: Path, ndk: Path | None = None) -> dict:
             raise ValueError('Unstable repeats: ' + role)
         if result.get('diagnostic_kind') == 'shader-fragment-failure':
             verify_shader_lifetime(role, runs)
+        if result.get('diagnostic_kind') == 'texture-history':
+            verify_texture_history(role, runs)
         for repeat, run in enumerate(runs):
             manifest = run['manifest']
             if manifest['frames'] != 120 or manifest['status'] != 'success' or manifest['gl_error_frames']:

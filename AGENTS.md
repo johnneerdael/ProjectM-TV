@@ -448,3 +448,13 @@ Use fresh work directories and explicit serial/user arguments; keep failures and
 source identities separate from successful images. The new original lone-dot
 witness is Stahlregen's funky Blur base preset (plus an unrendered nz+ source
 match); isolated controls distinguish accepted code from tolerant omission.
+
+Retained-component proof maintenance (2026-10-08): the main patch reference embeds
+component comparisons on the same page. Resource-correctness and image-preserving
+optimizations need actual healthy render frames plus measured diagnostics; do not
+invent an appearance gain. `--shader-failure-probe` observes actual linked shader
+lifetimes; `--texture-history-probe` uses a shared, explicitly labeled allocation
+fixture and reads actual attachment pixels/state/storage counts. New native
+harness revisions require freshly prepared workers. Keep pooling opt-in and the
+API36 program-binary export limitation explicit. The 23-row component matrix in
+`docs/superpowers/plans/2026-10-08-retained-component-proof.md` remains incomplete.

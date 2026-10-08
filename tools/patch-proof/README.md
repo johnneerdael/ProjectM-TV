@@ -61,6 +61,18 @@ requires the upstream1–16 / corrected0 count sequence,34 creations, a linked r
 clean diagnostic cleanup, no GL API errors and matching observations across repeats.
 The shader errors are intentional diagnostics; the subsequent images are valid
 healthy-preset frames. A changed native harness requires freshly prepared workers.
+`--texture-history-probe` tests the actual linked `TextureAttachment` with a
+shared allocator fixture: null 64×48 RGBA8 allocations receive green bytes before
+library initialization. A raw allocation/readback proves the fixture works.
+The probe reads complete fresh and recreated attachment pixels, fills retired
+contents blue, counts real storage allocations, and records pool bytes plus
+caller framebuffer/clear-color/mask/scissor preservation. The patched role opts
+into a 32,768-byte pool only for this diagnostic and resets it before normal
+preset rendering. Green is controlled initial storage, not a naturally observed
+artist-preset failure. Verification checks all readback bytes, the allocation
+control, state, counts and exact independent repeats. Context recreation,
+external ownership and pressure-release controls remain separate work.
+
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.

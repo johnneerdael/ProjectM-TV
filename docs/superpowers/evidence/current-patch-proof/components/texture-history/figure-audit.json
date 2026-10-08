@@ -1,0 +1,108 @@
+{
+  "frame": 59,
+  "rendered_preset": "Geiss - 3D - Shockwaves.milk",
+  "preset_sha256": "fd442adc495d37058f7a92b3f6a58c23b212d194f93162c0e461f8c704800652",
+  "source_and_binary_checked": true,
+  "roles": {
+    "upstream": {
+      "frame_sha256": "b6cfbcef0b4f270931c17200da8f281e53ae1d258db8b45f8ca27f9d13d43a55",
+      "readbacks": {
+        "fresh_rgba": {
+          "rgba_sha256": "fcd4a2d59258f824ab4ad78f50904de65855ed73ab9b347262bce0f632b4027f",
+          "unique_rgba": [
+            [
+              0,
+              160,
+              80,
+              255
+            ]
+          ]
+        },
+        "recreated_rgba": {
+          "rgba_sha256": "fcd4a2d59258f824ab4ad78f50904de65855ed73ab9b347262bce0f632b4027f",
+          "unique_rgba": [
+            [
+              0,
+              160,
+              80,
+              255
+            ]
+          ]
+        }
+      },
+      "diagnostics": {
+        "caller_state_preserved": [
+          true,
+          true
+        ],
+        "controlled_poison_rgba": [
+          0,
+          160,
+          80,
+          255
+        ],
+        "driver_allocations": 2,
+        "height": 48,
+        "kind": "texture-history",
+        "observer_gl_error": 0,
+        "poison_control_passed": true,
+        "pool_available": false,
+        "pool_bytes_after_retire": 0,
+        "width": 64
+      },
+      "rgb_mae_to_other": null
+    },
+    "patched": {
+      "frame_sha256": "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+      "readbacks": {
+        "fresh_rgba": {
+          "rgba_sha256": "f3cc103136423a57975750907ebc1d367e2985ac6338976d4d5a439f50323f4a",
+          "unique_rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "recreated_rgba": {
+          "rgba_sha256": "f3cc103136423a57975750907ebc1d367e2985ac6338976d4d5a439f50323f4a",
+          "unique_rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "diagnostics": {
+        "caller_state_preserved": [
+          true,
+          true
+        ],
+        "controlled_poison_rgba": [
+          0,
+          160,
+          80,
+          255
+        ],
+        "driver_allocations": 1,
+        "height": 48,
+        "kind": "texture-history",
+        "observer_gl_error": 0,
+        "poison_control_passed": true,
+        "pool_available": true,
+        "pool_bytes_after_retire": 12288,
+        "width": 64
+      },
+      "rgb_mae_to_other": null
+    }
+  },
+  "frame_transform": "unmodified 512x288 RGB",
+  "diagnostic_transform": "actual 64x48 RGBA converted to RGB; nearest 4x; alpha separately labeled",
+  "scope": "Shared controlled-allocation diagnostic, not naturally green output from an artist preset",
+  "figure_sha256": "02fa01a268df4f726f884a62e098f73dfc3751fb4f37773de261efb8f381baf8"
+}

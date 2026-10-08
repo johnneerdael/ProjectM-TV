@@ -2,6 +2,7 @@
 #include "gl_capture.hpp"
 #include "analysis_hooks.hpp"
 #include "shader_failure_probe.hpp"
+#include "texture_history_probe.hpp"
 #include "ProjectM.hpp"
 #include "Logging.hpp"
 #include "Audio/AudioConstants.hpp"
@@ -98,6 +99,7 @@ int main(int argc, char** argv) {
         GlCapture capture(width, height);
         json diagnostics = json::object();
         if (cfg.value("shader_failure_probe", false)) diagnostics = proof::ShaderFailureProbe();
+        if (cfg.value("texture_history_probe", false)) diagnostics = proof::TextureHistoryProbe();
         lab::clock_seconds = 0;
         std::srand(lab::Seed(1));
         lab::ResetShaderRandom();

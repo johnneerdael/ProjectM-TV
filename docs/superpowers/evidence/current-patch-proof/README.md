@@ -114,6 +114,24 @@ and no 0002, with no such warning in the patched role; all 120 frame hashes matc
 the original images. It also records per-pixel code omission in the no 0003 witness.
 No universal active-program classification is claimed for every pictured preset.
 
+## Retained component expansion (2026-10-08)
+
+The [single-page patch reference](../../../UPSTREAM_PATCH_VALUE.md#single-page-comparison-overview)
+embeds the current component figures, plain-language differences and code causes.
+Supporting receipts now include actual4K [lines](components/lines/README.md),
+[shader lifetimes](components/shader-lifetime/README.md),
+[global arrays](components/arrays-quicksand/README.md),
+[local arrays](components/arrays-local/README.md),
+[uniform-bank initialization](components/uniform-bank/README.md),
+[compound time/helper state](components/uniform-time-helper/README.md), and
+[fresh/reused attachments with pool allocation counts](components/texture-history/README.md).
+These component-specific protocols supersede the first512×288 protocol only for
+their own recorded runs. Resource/operation panels are measured diagnostics
+alongside real healthy library frames, not invented appearance improvements.
+The [23-row matrix](../../plans/2026-10-08-retained-component-proof.md) remains
+incomplete, including default-off/external/pressure/context pool controls and
+cache/batching/pass evidence. Final-head review and repository gates remain open.
+
 ## MilkDrop 2 and limits
 
 Original source is available locally; it supports specific geometry, sampling and

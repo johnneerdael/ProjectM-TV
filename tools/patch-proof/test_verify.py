@@ -109,6 +109,54 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Shader lifetime diagnostic'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
+    def texture_history_fixture(self):
+        self.result['diagnostic_kind'] = 'texture-history'
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics'] = {
+                'kind': 'texture-history', 'width': 64, 'height': 48,
+                'controlled_poison_rgba': [0, 160, 80, 255], 'poison_control_passed': True,
+                'fresh_rgba': [0] * (64 * 48 * 4), 'recreated_rgba': [0] * (64 * 48 * 4),
+                'driver_allocations': 1, 'pool_available': True,
+                'pool_bytes_after_retire': 64 * 48 * 4,
+                'caller_state_preserved': [True, True], 'observer_gl_error': 0}
+
+    def test_accepts_texture_history_pixel_state_and_allocation_contract(self):
+        self.texture_history_fixture()
+        self.save()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_ineffective_texture_allocation_control(self):
+        self.texture_history_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['poison_control_passed'] = False
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Texture history diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_unobserved_pool_reuse(self):
+        self.texture_history_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['driver_allocations'] = 2
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Texture history diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_uncleared_feedback_pixels(self):
+        self.texture_history_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['fresh_rgba'] = [0, 160, 80, 255] * (64 * 48)
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Texture history diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_texture_clear_caller_state_damage(self):
+        self.texture_history_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['caller_state_preserved'] = [False, True]
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Texture history diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
     def test_accepts_complete_lossless_compressed_streams(self):
         for repeat in (0, 1):
             raw = self.work / 'patched' / str(repeat) / 'frames.rgb'

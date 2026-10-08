@@ -36,8 +36,8 @@ pending components as completed contributions.
 | [High-resolution reference lines (#682)](#retained-high-resolution-line-enhancement-upstream-682) | Published: actual 4K original, current classic control and source-pixel zoom. Low/reference/AA coverage is not yet complete. |
 | Reference sample/fade/blur/canvas policy | Visible in the combined reference-path example; independent subcomponent controls pending. |
 | [Fragment-failure shader cleanup](#fragment-failure-shader-cleanup) | Published: healthy library frames plus actual 16-versus-0 live shader counts. |
-| Fresh/reused feedback initialization and caller-state preservation | In progress: shared controlled-allocation GPU probe; no new outcome claimed yet. |
-| Texture pooling | In progress with initialization controls; allocation/reuse measurement not yet published. |
+| [Fresh/reused feedback initialization and caller-state preservation](#freshreused-feedback-initialization-and-pooling) | Published: actual controlled first-read pixels, transparent-black clear and preserved caller state. Context-recreation coverage pending. |
+| [Texture pooling](#freshreused-feedback-initialization-and-pooling) | Published: one-versus-two storage allocations and 12,288 retained bytes. Default-off/external/pressure/context controls pending. |
 | Qualified warp sampler unit-zero reservation | Component-specific comparison pending. |
 | Ordered batching and evaluate-once replay | Images and measured draw/evaluation counts pending. |
 | Translation/program caches and uniform/bind caches | Component-specific operation/resource comparisons pending; API36 binary-export limitation remains explicit. |
@@ -182,6 +182,33 @@ its leaked objects before rendering, restores the GL entry point, and records no
 GL API errors. All observations and120-frame images repeat; the current-minus0002
 control also has0 leaks, separating this0001 fix from translator changes.
 [Source/binary-bound GPU resource proof](superpowers/evidence/current-patch-proof/components/shader-lifetime/README.md).
+
+### Fresh/reused feedback initialization and pooling
+
+![Actual library frames, controlled attachment pixels and storage allocations](superpowers/evidence/current-patch-proof/components/texture-history/comparison.png)
+
+**What to look for:** the lower panels show actual 64×48 attachment readback,
+enlarged 4× without brightness changes. A shared allocation fixture fills fresh
+storage green. Upstream leaves those pixels unchanged; our library initializes
+both fresh and reused storage to transparent black. Retired storage was filled
+blue before reuse, and the complete readback confirms that none of it survives.
+Green is controlled initial storage, not a naturally observed artist-preset bug.
+
+**How current0001 changes it:** `TextureAttachment::ReplaceTexture` clears color
+attachments through `ClearPooledTexture`, including newly allocated storage. Its
+scratch FBO and temporary full-channel, unscissored clear preserve the caller's
+framebuffer and raster state. Both constructor observations preserve the probe's
+nondefault state. With pooling explicitly enabled, our same-size second attachment
+uses the retired storage: one measured allocation rather than upstream's two,
+with 12,288 bytes retained after retirement. Pooling is off by default and keeps
+storage resident; these counts do not establish a timing or GPU-memory benefit.
+
+The unchanged Geiss frames above the diagnostics are normal renders after the
+probe, with RGB MAE 0.001429. Two processes per role repeat all120 frames and all
+readbacks/counts exactly, with zero GL errors and no shader warnings/errors.
+[Source/binary-bound proof and full pixel records](superpowers/evidence/current-patch-proof/components/texture-history/README.md).
+Default-off, external ownership, pressure release and context recreation remain
+separate pending controls.
 
 Named candidates include `161.milk` and `430.milk` for rejected equations;
 `midgitstraights of majillaen - featy sweet.milk` for blur/texture paths; and

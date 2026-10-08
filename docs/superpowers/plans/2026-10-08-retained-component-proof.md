@@ -35,14 +35,14 @@ Every row needs upstream/current frame panels, a plain-language explanation and 
 
 | Component | Controlled trigger / expected evidence | Status |
 |---|---|---|
-| High-resolution quad lines and optional AA (#682) | Unchanged line-heavy preset at low/reference/high sizes; matched 4K frame and aligned crop; current classic/quad control for attribution. | Pending |
+| High-resolution quad lines and optional AA (#682) | Unchanged line-heavy preset at low/reference/high sizes; matched 4K frame and aligned crop; current classic/quad control for attribution. | Partial — verified actual 4K/current-classic proof published; low/reference/AA coverage remains |
 | Reference sample/fade/blur/canvas policy | Dense main wave and blur-reading original; freeze reference dimensions; show full frames plus sampled dimensions/LOD. | Pending |
-| Vertex-shader cleanup on fragment rejection | Repeated intentional fragment rejection followed by valid render; frame panels plus live shader-object counts. | Captured — verification/publication in progress |
-| Defined fresh/reused feedback history | Fresh allocation and pooled reuse with controlled initial bytes; actual first-read pixels, caller-state control and first-frame preset panels. | Pending |
+| Vertex-shader cleanup on fragment rejection | Repeated intentional fragment rejection followed by valid render; frame panels plus live shader-object counts. | Published — verified shader-object observations and healthy frames |
+| Defined fresh/reused feedback history | Fresh allocation and pooled reuse with controlled initial bytes; actual first-read pixels, caller-state control and first-frame preset panels. | Partial — verified complete controlled readbacks/caller state and healthy frames published; context recreation remains |
 | Explicit warp sampler unit-zero reservation | Original mixed qualified/main samplers; rendered alias lookup plus sampler/unit observations. | Pending |
 | Ordered custom-shape batching | Many shape instances, fixed draw/evaluation order; frame panels plus GL draw/upload counts. | Pending |
 | Evaluate-once geometry replay | Stateful equation/RNG geometry drawn on two targets; frame panels plus evaluation/RNG counts. | Pending |
-| Texture pooling | Load/retire/reload same-size targets; frame panels plus allocation/reuse/retained-byte counts; pooled clears verified separately. | Pending |
+| Texture pooling | Load/retire/reload same-size targets; frame panels plus allocation/reuse/retained-byte counts; pooled clears verified separately. | Partial — actual attachment reuse/allocation/bytes published; default-off/external/pressure/context controls remain |
 | Translated GLSL cache | Reload identical custom shaders across engine instances; frame panels plus translation/cache-hit counts. | Pending |
 | Program-binary cache | Cold/warm driver program load; frame panels plus compile/load/hit counts. Preserve the known API36 export limitation if it prevents the measurement. | Pending |
 | Uniform-location and program-bind caches | Identical repeated rendering; frame panels plus queried-location/bind counts. | Pending |
@@ -52,8 +52,8 @@ Every row needs upstream/current frame panels, a plain-language explanation and 
 | Final-orientation video echo | Unchanged classic echo preset and orientation control; pixels plus copy/draw counts. | Pending |
 | Discard preservation and authored blur-read timing | Clip/discard composite and blur-reading warp; actual preserved pixels, first-use/resize control. | Pending |
 | Direct composite output and switch history | Caller target, stored-output control, subsequent host switch; matched frames and pass/history counts. | Pending |
-| HLSL array initializer layout (0002) | Quicksand original for global layout; generated flat-local shader for local layout. | Captured — local publication in progress |
-| Writable uniform initialization (0002) | Original compound-time/helper shader plus nonzero uniform-bank diagnostic. | Captured — publication in progress; out/inout-specific control remains |
+| HLSL array initializer layout (0002) | Quicksand original for global layout; generated flat-local shader for local layout. | Published — verified global original and local diagnostic |
+| Writable uniform initialization (0002) | Original compound-time/helper shader plus nonzero uniform-bank diagnostic. | Partial — verified original/helper and nonzero bank proof published; out/inout-specific control remains |
 | Contextual identifiers/macros/postfix (0002) | Existing Madness/dimension-window evidence; add distinct activation control where a language component is not exercised. | Partial — existing original images |
 | Float emission and implicit globals (0002) | Existing coefficient/implicit-global controls, plus visible shader frame and emitted-value/uniform diagnostics. | Partial — existing controls |
 | Evaluator lone-dot compatibility (0003) | Existing unchanged Stahlregen and diagnostic frames. | Captured — audit retained evidence |
@@ -77,8 +77,8 @@ Files: extend `tools/patch-proof/native/worker.cpp` only as required by controll
 - [x] Select an unchanged original, inspect its active paths and freeze its hash: `Geiss - 3D - Shockwaves.milk`, a classic main-wave preset, from the separate11-candidate source screen. The33 named historical controls remain available for follow-up.
 - [ ] Capture upstream/current with identical inputs at low/reference/4K sizes. Retain a current-library classic/quad API control to separate the reference-scaling enhancement from other patch effects.
 - [ ] Verify complete frames/repeats/binary identity and GL status. Inspect full frames and identical nearest-neighbour crops; select a visible frame without brightness manipulation.
-- [ ] Add the #682 comparison and mechanism/limits to current0001, explicitly disclosing miter/flat ends and related reference-size policy.
-- [ ] Commit and push this independently reviewable milestone.
+- [x] Add the #682 comparison and mechanism/limits to current0001, explicitly disclosing miter/flat ends and related reference-size policy.
+- [x] Commit and push the actual4K milestone as f71cbe93; remaining low/reference/AA controls stay open.
 
 ### Task 3: Capture compatibility/correctness components
 

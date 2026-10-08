@@ -75,6 +75,8 @@ def main() -> None:
                         help='Retain complete lossless gzip RGB streams after checking decompressed hashes')
     parser.add_argument('--shader-failure-probe', action='store_true',
                         help='Observe sixteen intentional fragment rejections and a valid shader retry before rendering')
+    parser.add_argument('--texture-history-probe', action='store_true',
+                        help='Observe controlled fresh/recreated colour attachment pixels, caller state and pooling')
     parser.add_argument('--evaluator-control', action='store_true')
     parser.add_argument('--texture-journey', action='store_true',
                         help='Use texture roots a/b, switch at20, soft-cut at21, reset at40')
@@ -83,6 +85,10 @@ def main() -> None:
         parser.error('Select an emulator serial and a nonnegative Android user')
     if args.line_reference_height < 0:
         parser.error('--line-reference-height must be nonnegative')
+    if args.shader_failure_probe and args.texture_history_probe:
+        parser.error('Select one resource diagnostic per capture')
+    if (args.shader_failure_probe or args.texture_history_probe) and (args.evaluator_control or args.texture_journey):
+        parser.error('Resource diagnostics require a plain image capture')
     preset, textures = args.preset.resolve(), args.textures.resolve()
     if not preset.is_file() or not textures.is_dir():
         parser.error('Preset or texture directory is unavailable')
@@ -149,6 +155,8 @@ def main() -> None:
                       'dimensions': [width, height], 'alpha_excluded': True, 'roles': {}}
             if args.shader_failure_probe:
                 report['diagnostic_kind'] = 'shader-fragment-failure'
+            if args.texture_history_probe:
+                report['diagnostic_kind'] = 'texture-history'
             backend = None
             for role, identity in workers.items():
                 adb('push', identity['binary'], remote + '/worker')
@@ -176,6 +184,8 @@ def main() -> None:
                            'identity': {'role': role, 'repeat': repeat}}
                     if args.shader_failure_probe:
                         job['config']['shader_failure_probe'] = True
+                    if args.texture_history_probe:
+                        job['config']['texture_history_probe'] = True
                     if args.texture_journey:
                         job['events'] = [
                             {'frame': 20, 'texture_root': remote + '/textures/b'},
