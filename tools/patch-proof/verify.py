@@ -17,6 +17,24 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def verify_shader_lifetime(role: str, runs: list[dict]) -> None:
+    observations = [run['manifest'].get('diagnostics') for run in runs]
+    if observations[0] != observations[1] or not isinstance(observations[0], dict):
+        raise ValueError('Shader lifetime diagnostic does not repeat')
+    value = observations[0]
+    expected_live = list(range(1, 17)) if role == 'upstream' else [0] * 16
+    expected_final = 16 if role == 'upstream' else 0
+    messages = value.get('rejection_messages', [])
+    if (value.get('kind') != 'shader-fragment-failure' or value.get('attempts') != 16 or
+            value.get('created_shader_objects') != 34 or
+            value.get('live_vertex_after_each_failure') != expected_live or
+            value.get('live_vertex_before_cleanup') != expected_final or
+            value.get('retry_linked') is not True or value.get('observer_gl_error') != 0 or
+            value.get('diagnostic_cleanup_complete') is not True or len(messages) != 16 or
+            any(not isinstance(message, str) or 'fragment shader' not in message for message in messages)):
+        raise ValueError('Shader lifetime diagnostic contradicts its observer/role contract')
+
+
 def verify(work: Path, ndk: Path | None = None) -> dict:
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
@@ -80,6 +98,8 @@ def verify(work: Path, ndk: Path | None = None) -> dict:
             continue
         if not value['repeat_equal'] or runs[0]['frame_hashes'] != runs[1]['frame_hashes']:
             raise ValueError('Unstable repeats: ' + role)
+        if result.get('diagnostic_kind') == 'shader-fragment-failure':
+            verify_shader_lifetime(role, runs)
         for repeat, run in enumerate(runs):
             manifest = run['manifest']
             if manifest['frames'] != 120 or manifest['status'] != 'success' or manifest['gl_error_frames']:

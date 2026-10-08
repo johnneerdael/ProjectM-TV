@@ -73,6 +73,8 @@ def main() -> None:
     parser.add_argument('--line-antialiasing', action='store_true')
     parser.add_argument('--compress-streams', action='store_true',
                         help='Retain complete lossless gzip RGB streams after checking decompressed hashes')
+    parser.add_argument('--shader-failure-probe', action='store_true',
+                        help='Observe sixteen intentional fragment rejections and a valid shader retry before rendering')
     parser.add_argument('--evaluator-control', action='store_true')
     parser.add_argument('--texture-journey', action='store_true',
                         help='Use texture roots a/b, switch at20, soft-cut at21, reset at40')
@@ -145,6 +147,8 @@ def main() -> None:
                       'frame_payload': 'lossless-gzip' if args.compress_streams else 'raw-rgb',
                       'rgb_payload_sha256': sha(Path(__file__).with_name('rgb_payload.py').read_bytes()),
                       'dimensions': [width, height], 'alpha_excluded': True, 'roles': {}}
+            if args.shader_failure_probe:
+                report['diagnostic_kind'] = 'shader-fragment-failure'
             backend = None
             for role, identity in workers.items():
                 adb('push', identity['binary'], remote + '/worker')
@@ -170,6 +174,8 @@ def main() -> None:
                            'bands_path': remote + '/bands.jsonl',
                            'manifest_path': remote + '/manifest.json',
                            'identity': {'role': role, 'repeat': repeat}}
+                    if args.shader_failure_probe:
+                        job['config']['shader_failure_probe'] = True
                     if args.texture_journey:
                         job['events'] = [
                             {'frame': 20, 'texture_root': remote + '/textures/b'},

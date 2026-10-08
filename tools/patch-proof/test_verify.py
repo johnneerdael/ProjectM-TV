@@ -77,6 +77,38 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
 
+    def shader_probe_fixture(self):
+        self.result['diagnostic_kind'] = 'shader-fragment-failure'
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics'] = {
+                'kind': 'shader-fragment-failure', 'attempts': 16,
+                'created_shader_objects': 34, 'live_vertex_after_each_failure': [0] * 16,
+                'live_vertex_before_cleanup': 0, 'retry_linked': True,
+                'observer_gl_error': 0, 'diagnostic_cleanup_complete': True,
+                'rejection_messages': ['[Shader] Error compiling fragment shader: intentional syntax rejection'] * 16}
+
+    def test_accepts_valid_shader_lifetime_observations(self):
+        self.shader_probe_fixture()
+        self.save()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_ineffective_shader_lifetime_observer(self):
+        self.shader_probe_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['created_shader_objects'] = 0
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Shader lifetime diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_leaked_shaders_in_corrected_role(self):
+        self.shader_probe_fixture()
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['diagnostics']['live_vertex_before_cleanup'] = 16
+            run['manifest']['diagnostics']['live_vertex_after_each_failure'] = list(range(1, 17))
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Shader lifetime diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
     def test_accepts_complete_lossless_compressed_streams(self):
         for repeat in (0, 1):
             raw = self.work / 'patched' / str(repeat) / 'frames.rgb'

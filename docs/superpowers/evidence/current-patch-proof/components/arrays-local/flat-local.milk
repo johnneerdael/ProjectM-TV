@@ -1,0 +1,32 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION=2
+PSVERSION_WARP=2
+PSVERSION_COMP=2
+[preset00]
+fDecay=0.000000
+fGammaAdj=1.000000
+nWaveMode=0
+fWaveAlpha=0.000000
+shapecode_0_enabled=1
+shapecode_0_sides=4
+shapecode_0_additive=0
+shapecode_0_thickOutline=0
+shapecode_0_textured=0
+shapecode_0_x=0.500000
+shapecode_0_y=0.500000
+shapecode_0_rad=0.650000
+shapecode_0_ang=0.000000
+shapecode_0_r=1.000000
+shapecode_0_g=0.100000
+shapecode_0_b=0.050000
+shapecode_0_a=1.000000
+shapecode_0_r2=0.800000
+shapecode_0_g2=0.050000
+shapecode_0_b2=0.020000
+shapecode_0_a2=1.000000
+shapecode_0_border_a=0.000000
+warp_1=`shader_body { ret = tex2D(sampler_main, uv).rgb; }
+comp_1=`shader_body {
+comp_2=`float2 taps[2] = {0.25, 0.5, 0.75, 1.0};
+comp_3=`ret = float3(taps[0].x + uv.x*0.35, taps[0].y, taps[1].x - uv.y*0.35);
+comp_4=`}

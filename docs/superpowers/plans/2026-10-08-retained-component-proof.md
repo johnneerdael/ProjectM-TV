@@ -37,7 +37,7 @@ Every row needs upstream/current frame panels, a plain-language explanation and 
 |---|---|---|
 | High-resolution quad lines and optional AA (#682) | Unchanged line-heavy preset at low/reference/high sizes; matched 4K frame and aligned crop; current classic/quad control for attribution. | Pending |
 | Reference sample/fade/blur/canvas policy | Dense main wave and blur-reading original; freeze reference dimensions; show full frames plus sampled dimensions/LOD. | Pending |
-| Vertex-shader cleanup on fragment rejection | Repeated intentional fragment rejection followed by valid render; frame panels plus live shader-object counts. | Pending |
+| Vertex-shader cleanup on fragment rejection | Repeated intentional fragment rejection followed by valid render; frame panels plus live shader-object counts. | Captured — verification/publication in progress |
 | Defined fresh/reused feedback history | Fresh allocation and pooled reuse with controlled initial bytes; actual first-read pixels, caller-state control and first-frame preset panels. | Pending |
 | Explicit warp sampler unit-zero reservation | Original mixed qualified/main samplers; rendered alias lookup plus sampler/unit observations. | Pending |
 | Ordered custom-shape batching | Many shape instances, fixed draw/evaluation order; frame panels plus GL draw/upload counts. | Pending |
@@ -52,8 +52,8 @@ Every row needs upstream/current frame panels, a plain-language explanation and 
 | Final-orientation video echo | Unchanged classic echo preset and orientation control; pixels plus copy/draw counts. | Pending |
 | Discard preservation and authored blur-read timing | Clip/discard composite and blur-reading warp; actual preserved pixels, first-use/resize control. | Pending |
 | Direct composite output and switch history | Caller target, stored-output control, subsequent host switch; matched frames and pass/history counts. | Pending |
-| HLSL array initializer layout (0002) | Recover unchanged original with flat local/global array initializer; if no suitable original exists, explicitly labeled shader fixture; fallback status and visible authored output. | Pending |
-| Writable uniform initialization (0002) | Original shader writes to incoming globals, including helper/out/inout; code-level activation and visible authored output. | Pending |
+| HLSL array initializer layout (0002) | Quicksand original for global layout; generated flat-local shader for local layout. | Captured — local publication in progress |
+| Writable uniform initialization (0002) | Original compound-time/helper shader plus nonzero uniform-bank diagnostic. | Captured — publication in progress; out/inout-specific control remains |
 | Contextual identifiers/macros/postfix (0002) | Existing Madness/dimension-window evidence; add distinct activation control where a language component is not exercised. | Partial — existing original images |
 | Float emission and implicit globals (0002) | Existing coefficient/implicit-global controls, plus visible shader frame and emitted-value/uniform diagnostics. | Partial — existing controls |
 | Evaluator lone-dot compatibility (0003) | Existing unchanged Stahlregen and diagnostic frames. | Captured — audit retained evidence |

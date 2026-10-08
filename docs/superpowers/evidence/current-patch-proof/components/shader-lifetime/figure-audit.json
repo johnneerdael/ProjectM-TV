@@ -1,0 +1,113 @@
+{
+  "frame": 59,
+  "rendered_preset": "Geiss - 3D - Shockwaves.milk",
+  "source_and_binary_checked": true,
+  "roles": {
+    "upstream": {
+      "frame_sha256": "b6cfbcef0b4f270931c17200da8f281e53ae1d258db8b45f8ca27f9d13d43a55",
+      "diagnostics": {
+        "attempts": 16,
+        "created_shader_objects": 34,
+        "diagnostic_cleanup_complete": true,
+        "kind": "shader-fragment-failure",
+        "live_vertex_after_each_failure": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "live_vertex_before_cleanup": 16,
+        "observer_gl_error": 0,
+        "rejection_messages": [
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+        ],
+        "retry_linked": true
+      },
+      "gl_error_frames": [
+        0,
+        0
+      ]
+    },
+    "patched": {
+      "frame_sha256": "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+      "diagnostics": {
+        "attempts": 16,
+        "created_shader_objects": 34,
+        "diagnostic_cleanup_complete": true,
+        "kind": "shader-fragment-failure",
+        "live_vertex_after_each_failure": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_vertex_before_cleanup": 0,
+        "observer_gl_error": 0,
+        "rejection_messages": [
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+          "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+        ],
+        "retry_linked": true
+      },
+      "gl_error_frames": [
+        0,
+        0
+      ]
+    }
+  },
+  "diagnostic_panel": "actual driver glIsShader counts after intentional fragment rejection; not framebuffer pixels",
+  "figure_sha256": "529f30b8385855840d4bf94be14214a8386dde1e4ab2ba7b49af37912443e0c5"
+}

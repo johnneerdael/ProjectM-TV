@@ -52,6 +52,15 @@ Capture and verification require the same NDK directory and rebuild every worker
 from the reconstructed source and checked-in harness. They compare canonical ELF
 copies after stripping debug/symbol tables and the path-sensitive GNU build-id note;
 runtime sections, program headers and load permissions remain part of the match.
+
+`--shader-failure-probe` runs sixteen intentional fragment rejections through the
+actual linked `Renderer::Shader` before rendering, then tests a valid retry. Its
+shared GL observer counts live vertex shaders via `glIsShader`, records rejection
+messages, restores the entry point and releases diagnostic leaks. Verification
+requires the upstream1–16 / corrected0 count sequence,34 creations, a linked retry,
+clean diagnostic cleanup, no GL API errors and matching observations across repeats.
+The shader errors are intentional diagnostics; the subsequent images are valid
+healthy-preset frames. A changed native harness requires freshly prepared workers.
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.

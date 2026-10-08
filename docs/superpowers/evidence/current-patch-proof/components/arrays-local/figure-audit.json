@@ -1,0 +1,65 @@
+{
+  "frame": 59,
+  "roles": {
+    "upstream": {
+      "rgb_sha256": "79dc8ce7a05cad293c8a6fea86b020c5da84853194d60075ed302cea1e9b6183",
+      "centre_rgb": [
+        254,
+        25,
+        13
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        },
+        {
+          "message": "[Shader] Error compiling fragment shader: ERROR: 0:97: 'constructor' : Array constructor argument has an incorrect type\nERROR: 0:97: '=' : array size mismatch\nERROR: 0:97: '=' : cannot convert from 'const array[4] of 2-component vector of float' to 'highp array[2] of 2-component vector of float'\n",
+          "severity": 5
+        },
+        {
+          "message": "[FinalComposite] Error compiling composite warp shader code - Using fallback shader.",
+          "severity": 4
+        }
+      ]
+    },
+    "without-0002": {
+      "rgb_sha256": "41f022e25cd5c8fa2b1816df5d75d172bf29880c7559580c1adaa84ad7b3b4db",
+      "centre_rgb": [
+        255,
+        26,
+        13
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        },
+        {
+          "message": "[Shader] Error compiling fragment shader: ERROR: 0:97: 'constructor' : Array constructor argument has an incorrect type\nERROR: 0:97: '=' : array size mismatch\nERROR: 0:97: '=' : cannot convert from 'const array[4] of 2-component vector of float' to 'highp array[2] of 2-component vector of float'\n",
+          "severity": 5
+        },
+        {
+          "message": "[FinalComposite] Error compiling composite warp shader code - Using fallback shader.",
+          "severity": 4
+        }
+      ]
+    },
+    "patched": {
+      "rgb_sha256": "4af7ccfeb8f215bdeb70179b130446b622ece6ba0ca5f81c0d598ae32d1ca3dd",
+      "centre_rgb": [
+        108,
+        128,
+        146
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        }
+      ]
+    }
+  },
+  "pixels_unaltered": true,
+  "figure_sha256": "bad0b793e0e155f61d83a1d8277504f8541fa1937f769b8098522fab15246270"
+}

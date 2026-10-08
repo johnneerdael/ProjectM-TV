@@ -1,6 +1,7 @@
 #include "vendor/json.hpp"
 #include "gl_capture.hpp"
 #include "analysis_hooks.hpp"
+#include "shader_failure_probe.hpp"
 #include "ProjectM.hpp"
 #include "Logging.hpp"
 #include "Audio/AudioConstants.hpp"
@@ -95,6 +96,8 @@ int main(int argc, char** argv) {
             throw std::runtime_error("preset or texture path unavailable");
         libprojectM::Logging::SetGlobalCallback({CaptureLog,nullptr});
         GlCapture capture(width, height);
+        json diagnostics = json::object();
+        if (cfg.value("shader_failure_probe", false)) diagnostics = proof::ShaderFailureProbe();
         lab::clock_seconds = 0;
         std::srand(lab::Seed(1));
         lab::ResetShaderRandom();
@@ -162,6 +165,7 @@ int main(int argc, char** argv) {
                        {"gl_vendor", reinterpret_cast<const char*>(glGetString(GL_VENDOR))}, {"glsl_version", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))}, {"messages",capturedLogs}, {"gl_error_frames", error_frames}, {"gl_version", reinterpret_cast<const char*>(glGetString(GL_VERSION))},
                        {"gl_renderer", reinterpret_cast<const char*>(glGetString(GL_RENDERER))},
                        {"identity", job.at("identity")}, {"seed", cfg.at("seed")}};
+        if (!diagnostics.empty()) result["diagnostics"] = diagnostics;
         std::string target = job.at("manifest_path");
         std::ofstream manifest(target + ".tmp");
         manifest << result.dump();

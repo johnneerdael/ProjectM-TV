@@ -132,6 +132,21 @@ Historical provenance and the already-upstream/omitted dispositions remain in th
 archive. Only work still present in this current patch is assessed above; previous
 measurements keep their original source and backend identities.
 
+![Actual upstream/current frames plus measured fragment-rejection lifetime](superpowers/evidence/current-patch-proof/components/shader-lifetime/comparison.png)
+
+**What changed:** sixteen intentionally rejected fragment compilations leave16
+live unattached vertex shaders in upstream and0 in current. The shared observer
+uses the actual linked `Renderer::Shader` and driver `glIsShader` queries. Current
+catches the later fragment failure, deletes the successful vertex shader and
+preserves the original exception. A valid retry links in both roles.
+
+The healthy preset images above the counters remain almost visually identical;
+the lifetime fix is shown by the measured data below them. The diagnostic cleans
+its leaked objects before rendering, restores the GL entry point, and records no
+GL API errors. All observations and120-frame images repeat; the current-minus0002
+control also has0 leaks, separating this0001 fix from translator changes.
+[Source/binary-bound GPU resource proof](superpowers/evidence/current-patch-proof/components/shader-lifetime/README.md).
+
 Named candidates include `161.milk` and `430.milk` for rejected equations;
 `midgitstraights of majillaen - featy sweet.milk` for blur/texture paths; and
 `Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk` for feedback policy.
@@ -179,6 +194,30 @@ warnings. All three roles repeat all120 frames exactly with zero GL errors;
 source/binary and complete decoded-stream verification pass. This establishes
 global flat layout; local flat layout remains a separate control.
 [Original bytes, shader cause and capture receipts](superpowers/evidence/current-patch-proof/components/arrays-quicksand/README.md).
+
+![Separate local flat-array activation control](superpowers/evidence/current-patch-proof/components/arrays-local/comparison.png)
+
+The labeled [local-array diagnostic](superpowers/evidence/current-patch-proof/components/arrays-local/README.md)
+initializes two `float2` elements from four scalars inside the function. Baseline
+roles use a red-shape fallback after array-constructor rejection; current runs the
+authored gradient. It is a generated control, not an unchanged artist preset.
+
+![Initialized writable uniform-bank components](superpowers/evidence/current-patch-proof/components/uniform-bank/comparison.png)
+
+The [nonzero bank control](superpowers/evidence/current-patch-proof/components/uniform-bank/README.md)
+sets incoming `q19=0.8`, writes only `q18`, and outputs both. Baseline roles lose the
+green component, rendering `(255,0,64)`; current preserves it, rendering the expected
+`(255,204,64)`. This demonstrates initialization of the whole writable bank before
+a partial write; all roles compile without shader warnings.
+
+![An unchanged original's compound uniform write affects helper output](superpowers/evidence/current-patch-proof/components/uniform-time-helper/comparison.png)
+
+In unchanged `Martin - QBikal - Surface Turbulence IIeeeee hakanh mash-up k10.milk`,
+the shader scales `time` by0.6 before star helpers read it. The matched frame119
+shows a different star/ray pattern when the initialized copy is shared correctly.
+This is the authored state change, not an added effect. [Source operation and receipts](superpowers/evidence/current-patch-proof/components/uniform-time-helper/README.md).
+All three comparisons above have source/executable/full-stream checks, two exact
+120-frame repeats per role and zero GL errors.
 
 Modulo type, precedence and emission compatibility is supplied by upstream
 [PR #1031](https://github.com/projectM-visualizer/projectm/pull/1031), rather than a
