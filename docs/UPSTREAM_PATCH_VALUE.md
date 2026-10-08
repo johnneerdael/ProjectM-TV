@@ -324,3 +324,5 @@ Current0026 restores legacy physical per-pixel traversal;0027 restores nonzero p
 Candidate0028 restores the original unblended circle angular spacing and explicit closure before shared smoothing, without changing TV transition composition or Native replay/styles. Source/CGL55 controls pass; Native4K original/finite/cost qualification remains open.
 
 Latest disposition: shared I02/M01 nonzero file booleans measured+.102ms/+7.503% in the negative-enabled Native4K wave control and is deferred outside shipping patches with its source/capture/cost owner packet. Analyzer remains aligned with current positive-only semantics. Circle is now live0027 (historical0028); frozen evidence numbering/source hashes are unchanged.
+
+Latest circle disposition: isolated Native4K mean+.058ms/+3.393% with mixed cycles leaves cost acceptance unproven; I20 proposal is deferred outside shipping patches, preserving its complete before/source-corrected evidence. Shipping series returns to0017–0026.

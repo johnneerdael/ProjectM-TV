@@ -1,0 +1,221 @@
+{
+  "source_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+      "sha256": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp",
+      "sha256": "fd1c9582cd9dc5cb76a332c0b49496d7f64efb2fbe40ddbb60f254bab119c347"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "sha256": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp",
+      "sha256": "daf028940043d22d07816ef6d157a5a33ac302d8ca6bc165baf9f60f8c6a641c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert",
+      "sha256": "3d374d1f39a6e535d2fe42a49f4daabbde18f8fc517b5e6ad8377d2c3c5c446e"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert",
+      "sha256": "d237428a5fbe617df7fe3c2ad16741bdaeae98227c7ebc5d380ade53960e6232"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert",
+      "sha256": "d5d25153edc331b2bf80a2b27793c81eddbf5fe3b2a4b9e8758fafa48ebd4d39"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetWarpFragmentShaderGlsl330.frag",
+      "sha256": "919a63a9a697bfc6c45fe89c33341c4235d5460642a26e1b66dd100bb4667b36"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/plugin.cpp",
+      "sha256": "c768b9a3a2f434a1a29155eceea32ade812c7cd65f73bf05f63823b9f7dc7d65"
+    }
+  ],
+  "exact_original_candidates": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/Pithlit - Colourfall (Jelly).milk",
+      "sha256": "4128f114ed071efeec6876f0e71a431a7522f84eb3ed58c20460467fe4683dc7",
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "PSVERSION_WARP=0"
+        },
+        {
+          "line": 32,
+          "text": "fWarpScale=1.331"
+        },
+        {
+          "line": 33,
+          "text": "fZoomExponent=1.00000"
+        },
+        {
+          "line": 35,
+          "text": "zoom=1.00184"
+        },
+        {
+          "line": 41,
+          "text": "warp=0.01000"
+        },
+        {
+          "line": 59,
+          "text": "nMotionVectorsX=12.000"
+        },
+        {
+          "line": 60,
+          "text": "nMotionVectorsY=9.000"
+        },
+        {
+          "line": 61,
+          "text": "mv_dx=0.000"
+        },
+        {
+          "line": 62,
+          "text": "mv_dy=0.000"
+        },
+        {
+          "line": 63,
+          "text": "mv_l=0.900"
+        },
+        {
+          "line": 64,
+          "text": "mv_r=1.000"
+        },
+        {
+          "line": 65,
+          "text": "mv_g=1.000"
+        },
+        {
+          "line": 66,
+          "text": "mv_b=1.000"
+        },
+        {
+          "line": 67,
+          "text": "mv_a=0.010"
+        },
+        {
+          "line": 138,
+          "text": "shapecode_0_tex_zoom=1.00000"
+        },
+        {
+          "line": 162,
+          "text": "shapecode_1_tex_zoom=1.00000"
+        },
+        {
+          "line": 186,
+          "text": "shapecode_2_tex_zoom=1.00000"
+        },
+        {
+          "line": 210,
+          "text": "shapecode_3_tex_zoom=1.00000"
+        },
+        {
+          "line": 226,
+          "text": "per_pixel_1=zoom=(zoom-1.0)*rad+1.0;"
+        }
+      ],
+      "executed_or_rendered": false
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/fiShbRaiN - city slicker.milk",
+      "sha256": "382688e31a8e1ed82968f1a2be31d09ce37041d2f104b5171936e452dd7dbc05",
+      "relevant_lines": [
+        {
+          "line": 28,
+          "text": "fWarpScale=17.690186"
+        },
+        {
+          "line": 29,
+          "text": "fZoomExponent=1.001829"
+        },
+        {
+          "line": 31,
+          "text": "zoom=0.999513"
+        },
+        {
+          "line": 37,
+          "text": "warp=5.277905"
+        },
+        {
+          "line": 55,
+          "text": "nMotionVectorsX=64.000000"
+        },
+        {
+          "line": 56,
+          "text": "nMotionVectorsY=48.000000"
+        },
+        {
+          "line": 57,
+          "text": "mv_dx=0.000000"
+        },
+        {
+          "line": 58,
+          "text": "mv_dy=0.000000"
+        },
+        {
+          "line": 59,
+          "text": "mv_l=0.350000"
+        },
+        {
+          "line": 60,
+          "text": "mv_r=0.800000"
+        },
+        {
+          "line": 61,
+          "text": "mv_g=0.887329"
+        },
+        {
+          "line": 62,
+          "text": "mv_b=1.000000"
+        },
+        {
+          "line": 63,
+          "text": "mv_a=0.050000"
+        },
+        {
+          "line": 144,
+          "text": "shapecode_0_tex_zoom=0.671651"
+        },
+        {
+          "line": 167,
+          "text": "shapecode_1_tex_zoom=1.000000"
+        },
+        {
+          "line": 190,
+          "text": "shapecode_2_tex_zoom=1.000000"
+        },
+        {
+          "line": 213,
+          "text": "shapecode_3_tex_zoom=1.000000"
+        },
+        {
+          "line": 226,
+          "text": "per_frame_1=mv_r=bass*.75;"
+        },
+        {
+          "line": 227,
+          "text": "per_frame_2=mv_g=treb*.75;"
+        },
+        {
+          "line": 228,
+          "text": "per_frame_3=mv_dx=sin(time)*.1;"
+        },
+        {
+          "line": 229,
+          "text": "per_frame_4=mv_dy=cos(time)*.1;"
+        }
+      ],
+      "executed_or_rendered": false
+    }
+  ],
+  "candidate_inventory_is_not_an_affected_census": true
+}

@@ -1,0 +1,39 @@
+{
+  "qualification": "finite source scheduling/operation arithmetic only; no engine/GL execution",
+  "sequence": [
+    {
+      "frame": 0,
+      "active": true,
+      "computed": "A",
+      "published": 0
+    },
+    {
+      "frame": 1,
+      "active": true,
+      "computed": "A",
+      "published": 1
+    },
+    {
+      "frame": 2,
+      "active": false,
+      "computed": "B",
+      "published": 1
+    },
+    {
+      "frame": 3,
+      "active": true,
+      "current_mesh": "C",
+      "queried_before_warp": "A stale / B required",
+      "lazy_extra_passes": 1
+    }
+  ],
+  "mesh48x32": {
+    "vertices": 1617,
+    "indices": 9216,
+    "triangles": 3072
+  },
+  "nominal_rg16f_bytes": {
+    "256x144": 147456,
+    "3840x2160": 33177600
+  }
+}

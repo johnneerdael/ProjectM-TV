@@ -1,0 +1,44 @@
+[
+  {
+    "style": "dots",
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "style": "thick",
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "style": "thin",
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
+]

@@ -1,0 +1,285 @@
+{
+  "qualification": "Exact rational source models; no production evaluator/GL execution. No Windows rendering proof.",
+  "mesh": [
+    8,
+    8
+  ],
+  "target": [
+    256,
+    256
+  ],
+  "cell": [
+    2,
+    2
+  ],
+  "local": [
+    {
+      "rational": "1/4",
+      "float": 0.25
+    },
+    {
+      "rational": "3/8",
+      "float": 0.375
+    }
+  ],
+  "start": [
+    {
+      "rational": "9/32",
+      "float": 0.28125
+    },
+    {
+      "rational": "19/64",
+      "float": 0.296875
+    }
+  ],
+  "corners_raw_uv": [
+    [
+      {
+        "rational": "1/4",
+        "float": 0.25
+      },
+      {
+        "rational": "3/4",
+        "float": 0.75
+      }
+    ],
+    [
+      {
+        "rational": "3/8",
+        "float": 0.375
+      },
+      {
+        "rational": "3/4",
+        "float": 0.75
+      }
+    ],
+    [
+      {
+        "rational": "1/4",
+        "float": 0.25
+      },
+      {
+        "rational": "5/8",
+        "float": 0.625
+      }
+    ],
+    [
+      {
+        "rational": "5/8",
+        "float": 0.625
+      },
+      {
+        "rational": "7/8",
+        "float": 0.875
+      }
+    ]
+  ],
+  "bilinear_weights": [
+    {
+      "rational": "15/32",
+      "float": 0.46875
+    },
+    {
+      "rational": "5/32",
+      "float": 0.15625
+    },
+    {
+      "rational": "9/32",
+      "float": 0.28125
+    },
+    {
+      "rational": "3/32",
+      "float": 0.09375
+    }
+  ],
+  "original_raw_uv": [
+    {
+      "rational": "39/128",
+      "float": 0.3046875
+    },
+    {
+      "rational": "93/128",
+      "float": 0.7265625
+    }
+  ],
+  "original_endpoint": [
+    {
+      "rational": "39/128",
+      "float": 0.3046875
+    },
+    {
+      "rational": "35/128",
+      "float": 0.2734375
+    }
+  ],
+  "triangle_models_after_declared_coordinate_matching": {
+    "legacy_AD": {
+      "D_weight": {
+        "rational": "1/4",
+        "float": 0.25
+      },
+      "raw_uv": [
+        {
+          "rational": "11/32",
+          "float": 0.34375
+        },
+        {
+          "rational": "49/64",
+          "float": 0.765625
+        }
+      ],
+      "endpoint": [
+        {
+          "rational": "11/32",
+          "float": 0.34375
+        },
+        {
+          "rational": "15/64",
+          "float": 0.234375
+        }
+      ]
+    },
+    "old_BC": {
+      "D_weight": {
+        "rational": "0",
+        "float": 0.0
+      },
+      "raw_uv": [
+        {
+          "rational": "9/32",
+          "float": 0.28125
+        },
+        {
+          "rational": "45/64",
+          "float": 0.703125
+        }
+      ],
+      "endpoint": [
+        {
+          "rational": "9/32",
+          "float": 0.28125
+        },
+        {
+          "rational": "19/64",
+          "float": 0.296875
+        }
+      ]
+    }
+  },
+  "original_displacement_length_pixels_256": 8.48528137423857,
+  "storage_models": [
+    {
+      "decimal_input": 0.173,
+      "float32": 0.17299999296665192,
+      "half_nearest_model": 0.1729736328125,
+      "half_RTZ_model": 0.1729736328125,
+      "universal_GPU_result": false
+    },
+    {
+      "decimal_input": 0.17309,
+      "float32": 0.17308999598026276,
+      "half_nearest_model": 0.173095703125,
+      "half_RTZ_model": 0.1729736328125,
+      "universal_GPU_result": false
+    },
+    {
+      "decimal_input": 0.25,
+      "float32": 0.25,
+      "half_nearest_model": 0.25,
+      "half_RTZ_model": 0.25,
+      "universal_GPU_result": false
+    },
+    {
+      "decimal_input": 0.5,
+      "float32": 0.5,
+      "half_nearest_model": 0.5,
+      "half_RTZ_model": 0.5,
+      "universal_GPU_result": false
+    }
+  ],
+  "node_operation_storage_counts": [
+    {
+      "mesh": [
+        8,
+        8
+      ],
+      "N": 81,
+      "node_bytes": 648,
+      "two_cpu_generations_bytes": 1296,
+      "TF_plus_one_texture_bytes": 1296,
+      "TF_plus_two_textures_bytes": 1944,
+      "max_duplicate_pow_calls": 162,
+      "max_duplicate_oscillator_trig_calls": 324
+    },
+    {
+      "mesh": [
+        48,
+        32
+      ],
+      "N": 1617,
+      "node_bytes": 12936,
+      "two_cpu_generations_bytes": 25872,
+      "TF_plus_one_texture_bytes": 25872,
+      "TF_plus_two_textures_bytes": 38808,
+      "max_duplicate_pow_calls": 3234,
+      "max_duplicate_oscillator_trig_calls": 6468
+    },
+    {
+      "mesh": [
+        64,
+        48
+      ],
+      "N": 3185,
+      "node_bytes": 25480,
+      "two_cpu_generations_bytes": 50960,
+      "TF_plus_one_texture_bytes": 50960,
+      "TF_plus_two_textures_bytes": 76440,
+      "max_duplicate_pow_calls": 6370,
+      "max_duplicate_oscillator_trig_calls": 12740
+    },
+    {
+      "mesh": [
+        96,
+        72
+      ],
+      "N": 7081,
+      "node_bytes": 56648,
+      "two_cpu_generations_bytes": 113296,
+      "TF_plus_one_texture_bytes": 113296,
+      "TF_plus_two_textures_bytes": 169944,
+      "max_duplicate_pow_calls": 14162,
+      "max_duplicate_oscillator_trig_calls": 28324
+    },
+    {
+      "mesh": [
+        300,
+        300
+      ],
+      "N": 90601,
+      "node_bytes": 724808,
+      "two_cpu_generations_bytes": 1449616,
+      "TF_plus_one_texture_bytes": 1449616,
+      "TF_plus_two_textures_bytes": 2174424,
+      "max_duplicate_pow_calls": 181202,
+      "max_duplicate_oscillator_trig_calls": 362404
+    }
+  ],
+  "full_target_storage_upgrade_bytes": [
+    {
+      "target": [
+        1280,
+        720
+      ],
+      "extra_bytes": 3686400,
+      "extra_MiB": 3.515625
+    },
+    {
+      "target": [
+        3840,
+        2160
+      ],
+      "extra_bytes": 33177600,
+      "extra_MiB": 31.640625
+    }
+  ]
+}

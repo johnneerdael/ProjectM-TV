@@ -1,0 +1,16 @@
+{
+  "engine": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9",
+  "source_sha256": {
+    "MilkdropPreset.cpp": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82",
+    "MilkdropPreset.hpp": "2a516cfdeacb19a9dff7ca35bb04d185909ed2417692de4b8d713fe984d77069",
+    "PerPixelMesh.cpp": "14ed4fb04f5049c56bed3ffef8e716a7723d1079f7d424333e1b8ef99059733f",
+    "PerPixelMesh.hpp": "61a06eef48c9ee96fc7451ff17596c816906d5ca6a160769d6c792c85b1fb0d6",
+    "MilkdropShader.cpp": "3e658e0856ab36518b41ee59afebf82b5f5de136abfa3ddd713f338b5b71de9b",
+    "MotionVectors.cpp": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc",
+    "Shaders/PresetMotionVectorsVertexShaderGlsl330.vert": "3d374d1f39a6e535d2fe42a49f4daabbde18f8fc517b5e6ad8377d2c3c5c446e",
+    "Shaders/PresetWarpFragmentShaderGlsl330.frag": "919a63a9a697bfc6c45fe89c33341c4235d5460642a26e1b66dd100bb4667b36"
+  },
+  "original": "/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/milkdropfs.cpp",
+  "original_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+  "qualification": "source only; no build/GL/device"
+}

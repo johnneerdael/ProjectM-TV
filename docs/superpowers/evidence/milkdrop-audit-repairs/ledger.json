@@ -205,10 +205,11 @@
       "sha256": "409a27bbf5eb1e4c98127de59d7ac07e74793969e8e8ab413c4d2533670ce578",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I14-motion-reverse-propagation-uses-different-interpolation-and-storage/HANDOFF.md",
       "numeric_witness": "A=B=C=(0,0),D=(1,1), local(.25,.25): original CPU bilinear(.0625,.0625); target first-triangle field(0,0) away from diagonal/filter boundaries. Target RTZ half maps float32.173 to.1729736328125; original mesh has no half-storage boundary.\n\nIdealized interpolation witness; finite-resolution/filter effects remain explicit.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "three-layer causal finite/source feasibility packet; actual1280x720 UV canvas cost distinguished; production GL/Native/cost/disposition pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "defer/research original bilinear node/float32 motion producer and costs"
+      "recommendation": "defer/research original bilinear node/float32 motion producer and costs",
+      "evidence": "I14/README.md"
     },
     {
       "id": "I05",
@@ -237,10 +238,11 @@
       "sha256": "83d1846370061e2c983a0a32e6e7baafb555e79aa435552010877d0bbd5750e4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I16-disabling-motion-vectors-leaves-a-stale-target-uv-map/HANDOFF.md",
       "numeric_witness": "Valid previous map A=(.5,.5); disabled frame computes B=(.6,.5); re-enable at start(.5,.5): target reads A/minimum fallback; original reads latest B/.1 horizontal displacement.\n\nExcludes startup/uninitialized maps; requires a previously valid stored map.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "source ordering confirms stale previous texture on re-enable; retained previous-state/UV-only-pass proposal; discard/ownership/Native/cost/disposition pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "research cached prior-mesh UV-only re-enable replay; continuous writes cost bandwidth"
+      "recommendation": "research cached prior-mesh UV-only re-enable replay; continuous writes cost bandwidth",
+      "evidence": "I16/DESIGN.md"
     },
     {
       "id": "I06",
@@ -291,13 +293,13 @@
       "sha256": "714f188a6119fa9432b9ea5d6103ceb77edcdd909f0a9d5984aabf7ee6c2e871",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I20-circle-angular-spacing-and-closure-smoothing-differ/HANDOFF.md",
       "numeric_witness": "Raw point120, zero PCM/mystery/time, radius.5: target angle3.14 and roughly(-.4999994,.0007963); original angle3.1531382 and(-.4999667,-.0057726). Target smooths240 to479 then closes; original includes duplicated endpoint241 then smooths to481.",
-      "status": "candidate0027;51 normal+51 sanitizer; two unchanged Native4K originals repeat exactly; finite seam/styles/cost/integration pending",
+      "status": "deferred circle proposal; source/GL/sanitizer and two originals/all finite styles Native4K proof; isolated12-run mean+.058ms/+3.393%, mixed cycles; complete owner decision packet",
       "confirmed_affected_originals": [
         "$$$ Royal - Mashup (137).milk",
         "$$$ Royal - Mashup (11).milk"
       ],
-      "current_patch_number": 27,
-      "evidence": "I20/README.md"
+      "evidence": "I20/README.md",
+      "proposal_patch": "I20/proposed-circle-source-closure.patch"
     },
     {
       "id": "I13",
@@ -307,10 +309,11 @@
       "sha256": "c93eaabefddd9d689db167dfd5ae00f5240cd389d4c69647e0ff6f50ddfbd98d",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I13-left-axis-equation-angle-seam-changes-sign/HANDOFF.md",
       "numeric_witness": "Exact left-middle axis: original atan2(+0,negative)=+pi; target negated angle=-pi. dx=above(ang,0) gives1 vs0. Periodic sin/cos unaffected.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "isolated exact legacy-axis proposal; real CPU/attribute controls RED136+stock1\u2192GREEN0; source-traced visible candidates; Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "narrow exact-left-axis positive-pi seam"
+      "recommendation": "narrow exact-left-axis positive-pi seam",
+      "evidence": "I13/README.md"
     },
     {
       "id": "I18",
@@ -592,7 +595,6 @@
     "tools/projectm-patches/0023-negative-odd-echo-orientation.patch": "5ab654be6d7008c9fc83af736690243d915a9e2b5fe08e3a990620a4818490f4",
     "tools/projectm-patches/0024-legacy-warp-oscillator-y.patch": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff",
     "tools/projectm-patches/0025-legacy-warp-physical-diagonal.patch": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546",
-    "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc",
-    "tools/projectm-patches/0027-circle-source-closure.patch": "9d1813de0f85a9f039a10bf94f31a8be574c8418bd1250b0ed014cf60fe797b9"
+    "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc"
   }
 }
