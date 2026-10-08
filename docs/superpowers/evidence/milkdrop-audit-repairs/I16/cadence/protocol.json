@@ -1,0 +1,19 @@
+{
+  "scope": "New finite cadence witness; not relabelled five-frame source fixture or original preset",
+  "period": 8,
+  "phase5": "A enabled producer .5625 centerU",
+  "phase6": "B disabled producer .625 centerU",
+  "phase7": "C red re-enabled producer .6875; source consumer uses B .625; current stale A .5625",
+  "phase0": "D enabled producer .75; both consume C .6875",
+  "selected_C_frames": [
+    239,
+    479
+  ],
+  "fDecay": 0,
+  "limits": "Native images compare shared bounded fixture; no generic custom discard/output-write parity, no original stock affected census",
+  "fixture_sha256": {
+    "audit uv cadence default.milk": "4128f2e0bb49a33af22dbc03dd270624ffdbd552e4c2ab1104b3f7f0a02df26f",
+    "audit uv cadence bounded-custom.milk": "3abe9952c54ba55f41a4c47fc159ebc9eb50e289f14210bef67663c80116ca71",
+    "audit uv all-disabled.milk": "1621500db3b6eca37a9a623939a43c7b7b64f7b867704580e9e4a7de62b024a3"
+  }
+}

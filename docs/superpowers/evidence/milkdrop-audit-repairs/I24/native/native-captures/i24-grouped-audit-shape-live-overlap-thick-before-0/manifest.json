@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditshapebefore",
+  "pid": 31431,
+  "job": {
+    "expectedPresetCount": 9609,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/audio.u8",
+    "preset": "audit shape live overlap-thick.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "85ef115902f3ee6b2606f0a56160c9311158d41f502eef51a27cce2af338e375",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshapebefore\/files\/native-trails\/i24-grouped-audit-shape-live-overlap-thick-before-0\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+      "pngBytes": 37782,
+      "pngSha256": "5f7a651b515e4d22bbf1713aa2b399dc00a05006165e9c3c4f90e8360a36959f",
+      "rgbMean": [
+        0.010652488425925926,
+        0.021359712577160492,
+        0.04263587480709877
+      ],
+      "exactBlackFraction": 0.9995548804012345
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 57279001,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9609,
+  "indexSha256": "f282d5baa75e8dd513dcaf1bff8250a3a02812487603245d7e882d7fca4ff389",
+  "presetAssetSha256": "e4ef3471f92a7fe73d50d8a3e368bc627552ea98c1e1d572810ee7222ded9bba",
+  "forcedPresetPrefix": "audit shape live overlap-thick.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 17,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43307,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4753,
+  "pssAfterFramesKB": 71406,
+  "serializedFrameMeanMs": 2.662469922222222,
+  "serializedFrameP90Ms": 4.586042,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit shape live overlap-thick.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 5092
+}

@@ -205,11 +205,12 @@
       "sha256": "409a27bbf5eb1e4c98127de59d7ac07e74793969e8e8ab413c4d2533670ce578",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I14-motion-reverse-propagation-uses-different-interpolation-and-storage/HANDOFF.md",
       "numeric_witness": "A=B=C=(0,0),D=(1,1), local(.25,.25): original CPU bilinear(.0625,.0625); target first-triangle field(0,0) away from diagonal/filter boundaries. Target RTZ half maps float32.173 to.1729736328125; original mesh has no half-storage boundary.\n\nIdealized interpolation witness; finite-resolution/filter effects remain explicit.",
-      "status": "three-layer causal finite/source feasibility packet; actual1280x720 UV canvas cost distinguished; production GL/Native/cost/disposition pending",
+      "status": "deferred complete owner packet; actual production layered GL controls and corrected-grid Native4K bilerp-oracle repeats; no general producer/cost-qualified repair",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
       "recommendation": "defer/research original bilinear node/float32 motion producer and costs",
-      "evidence": "I14/README.md"
+      "evidence": "I14/OWNER-DECISION.md",
+      "policy": "keep current field reconstruction pending original-node/bilerp ownership/resource qualification"
     },
     {
       "id": "I05",
@@ -238,11 +239,12 @@
       "sha256": "83d1846370061e2c983a0a32e6e7baafb555e79aa435552010877d0bbd5750e4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I16-disabling-motion-vectors-leaves-a-stale-target-uv-map/HANDOFF.md",
       "numeric_witness": "Valid previous map A=(.5,.5); disabled frame computes B=(.6,.5); re-enable at start(.5,.5): target reads A/minimum fallback; original reads latest B/.1 horizontal displacement.\n\nExcludes startup/uninitialized maps; requires a previously valid stored map.",
-      "status": "source ordering confirms stale previous texture on re-enable; retained previous-state/UV-only-pass proposal; discard/ownership/Native/cost/disposition pending",
+      "status": "deferred complete owner packet; actual temporal/publication GL controls,12 Native cadence jobs and12 all-disabled ABBA; preserve conditional-write optimization pending eager/lazy policy",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
       "recommendation": "research cached prior-mesh UV-only re-enable replay; continuous writes cost bandwidth",
-      "evidence": "I16/DESIGN.md"
+      "evidence": "I16/OWNER-DECISION.md",
+      "policy": "retain conditional publication; known stale re-enable deviation explicit; eager oracle outside shipping"
     },
     {
       "id": "I06",

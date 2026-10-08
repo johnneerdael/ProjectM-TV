@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:29 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and6 complete deferred packets. Four remain open: I04,I14,I16,I24. Final combined integration/review/CI gates remain open; PR61 is a draft.
+Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:31 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and8 complete deferred packets. Two remain open: I04,I24. Final combined integration/review/CI gates remain open; PR61 is a draft.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -13,9 +13,9 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | [implemented0023; focused source/original/finite/custom unchanged4K and12-run cost acceptance passed; final integration pending](I10/README.md) |
 | I11 | Legacy warp physical triangle diagonal is reversed | 878 | [implemented revised0024;49 normal/49 sanitizer, exact original/finite/custom Native4K cache equivalence and12-run cost acceptance passed; final integration pending](I11/README.md) |
 | I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | [implemented0025; production state-order and original/finite/custom final4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending](I12/README.md) |
-| I14 | Motion reverse propagation uses different interpolation and storage | 794 | [three-layer causal finite/source feasibility packet; actual1280x720 UV canvas cost distinguished; production GL/Native/cost/disposition pending](I14/README.md) |
+| I14 | Motion reverse propagation uses different interpolation and storage | 794 | [Deferred: layered production GL and corrected-grid Native4K bilerp oracle; general producer/cost unqualified](I14/OWNER-DECISION.md) |
 | I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I05/README.md) |
-| I16 | Disabling motion vectors leaves a stale target UV map | 435 | [source ordering confirms stale previous texture on re-enable; retained previous-state/UV-only-pass proposal; discard/ownership/Native/cost/disposition pending](I16/DESIGN.md) |
+| I16 | Disabling motion vectors leaves a stale target UV map | 435 | [Deferred: temporal source/Native proof and isolated cost; conditional-write versus eager/lazy policy](I16/OWNER-DECISION.md) |
 | I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I06/README.md) |
 | I24 | Shape live thick equations do not select target outline style | 14 | [source/per-instance cost investigation recorded; two strong original candidates; execution/final screenshots and disposition pending](I24/README.md) |
 | I23 | Thick custom-wave and shape-outline offsets differ | 4951 | [retained Native thick-offset policy; complete owner packet with actual vertex/replay controls and matched Native4K style images](I15-I23/I23-OWNER-DECISION.md) |

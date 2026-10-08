@@ -1,0 +1,119 @@
+{
+  "scope": "Native4K finite/original fixtures as named; source-instrumented workers, not published shipping or Windows bytes",
+  "runs": 4,
+  "exact_repeat_groups": 2,
+  "selected_pngs_verified": 32,
+  "rows": [
+    {
+      "directory": "i04-bits-v2-audit-i04-sign-after-0",
+      "preset": "audit i04 sign.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "072ef042b8647b323255f78ee75bd0724d05e20310615ca1452654ec06665226",
+        "4ee13918d22f7460de60b798d99b771d821e7a218b64c64575f342600f1c5534",
+        "81b89534085eeab68d9b43115c153ce9288cf95abab5d05df2dec33c19442831",
+        "9f0a51a668f02f8352fd3f847a397ba8f35566fdb845f5d122e837ba7b0fe692",
+        "64151177c0ce6d1e64f4d7ab7961afc3a59d62aa8e52851eaa17aee2a81c19a8",
+        "0adc461b90196222621aea18ec57cae4afbe2a9869e350655c899f4e008c1ebf",
+        "10f70d77fa6728fb6a06dfc7932a1f087e1fb29d10acc008751ad2cdb54dba1d",
+        "932cf9069ce94ff6992ebe6e72b85f5c506181400ba5e228c2d48a05940acb04"
+      ]
+    },
+    {
+      "directory": "i04-bits-v2-audit-i04-sign-after-1",
+      "preset": "audit i04 sign.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "072ef042b8647b323255f78ee75bd0724d05e20310615ca1452654ec06665226",
+        "4ee13918d22f7460de60b798d99b771d821e7a218b64c64575f342600f1c5534",
+        "81b89534085eeab68d9b43115c153ce9288cf95abab5d05df2dec33c19442831",
+        "9f0a51a668f02f8352fd3f847a397ba8f35566fdb845f5d122e837ba7b0fe692",
+        "64151177c0ce6d1e64f4d7ab7961afc3a59d62aa8e52851eaa17aee2a81c19a8",
+        "0adc461b90196222621aea18ec57cae4afbe2a9869e350655c899f4e008c1ebf",
+        "10f70d77fa6728fb6a06dfc7932a1f087e1fb29d10acc008751ad2cdb54dba1d",
+        "932cf9069ce94ff6992ebe6e72b85f5c506181400ba5e228c2d48a05940acb04"
+      ]
+    },
+    {
+      "directory": "i04-bits-v2-audit-i04-sign-before-0",
+      "preset": "audit i04 sign.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "6f985b5a5c1ec1cd33d173749e4dd6f194683923fa62a4b3ea352eba3b9b8599",
+        "b9263d37e39257680577fe10697932095693efadb6fce341860dd0d4d2ec3709",
+        "1b28e0d168ca8889e3f44f3565cc1d5e568393661210f72ba480b2f7eb40caf7",
+        "9d27b6e6554c28a7c9d20bb9ab6ded3b17ca401bb12eb8c933309a28c1f168c6",
+        "12ff91c5f7cf5636a5e10511dde089163a29c5cb50dbfc66ddd2231ce33d0e53",
+        "bcf38e69494407e94f2c4acd3e9834d3f3962255bc619354f28808e18ba4faf2",
+        "7c88cc3e1e30bdfca13b317153caf2132c6191ba8d35d841e1ceef4b237dbcce",
+        "49a2b5f67f4b276558c32d45b6f3d0cdbee2e8c5e0722b61e670b851385ad359"
+      ]
+    },
+    {
+      "directory": "i04-bits-v2-audit-i04-sign-before-1",
+      "preset": "audit i04 sign.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "6f985b5a5c1ec1cd33d173749e4dd6f194683923fa62a4b3ea352eba3b9b8599",
+        "b9263d37e39257680577fe10697932095693efadb6fce341860dd0d4d2ec3709",
+        "1b28e0d168ca8889e3f44f3565cc1d5e568393661210f72ba480b2f7eb40caf7",
+        "9d27b6e6554c28a7c9d20bb9ab6ded3b17ca401bb12eb8c933309a28c1f168c6",
+        "12ff91c5f7cf5636a5e10511dde089163a29c5cb50dbfc66ddd2231ce33d0e53",
+        "bcf38e69494407e94f2c4acd3e9834d3f3962255bc619354f28808e18ba4faf2",
+        "7c88cc3e1e30bdfca13b317153caf2132c6191ba8d35d841e1ceef4b237dbcce",
+        "49a2b5f67f4b276558c32d45b6f3d0cdbee2e8c5e0722b61e670b851385ad359"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "preset": "audit i04 sign.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 74.99149900334362,
+          "changed_pixels": 3970926
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 92.59014716756687,
+          "changed_pixels": 4898214
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 86.02520889596194,
+          "changed_pixels": 4826033
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 90.64577224794239,
+          "changed_pixels": 5303747
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 90.90356883359054,
+          "changed_pixels": 5322271
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 92.93076171875,
+          "changed_pixels": 5469645
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 98.40293467078189,
+          "changed_pixels": 6095381
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 107.48935169110082,
+          "changed_pixels": 7007586
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "runs": 12,
+  "means": {
+    "before": 1.4030562768518517,
+    "after": 1.4014404300925927
+  },
+  "delta_percent": -0.11516621149970652,
+  "cycles": [
+    {
+      "cycle": 0,
+      "before": 1.3264486680555554,
+      "after": 1.3678136486111117,
+      "delta_percent": 3.118475788150432
+    },
+    {
+      "cycle": 1,
+      "before": 1.3701854263888893,
+      "after": 1.371184194444444,
+      "delta_percent": 0.07289291188763425
+    },
+    {
+      "cycle": 2,
+      "before": 1.5125347361111103,
+      "after": 1.465323447222222,
+      "delta_percent": -3.1213358451703144
+    }
+  ],
+  "rows": [
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-0-0-before",
+      "role": "before",
+      "cycle": 0,
+      "step": 0,
+      "mean_ms": 1.3285556555555553,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-0-1-after",
+      "role": "after",
+      "cycle": 0,
+      "step": 1,
+      "mean_ms": 1.3496592472222229,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-0-2-after",
+      "role": "after",
+      "cycle": 0,
+      "step": 2,
+      "mean_ms": 1.3859680500000005,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-0-3-before",
+      "role": "before",
+      "cycle": 0,
+      "step": 3,
+      "mean_ms": 1.3243416805555557,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-1-0-before",
+      "role": "before",
+      "cycle": 1,
+      "step": 0,
+      "mean_ms": 1.3167094027777773,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-1-1-after",
+      "role": "after",
+      "cycle": 1,
+      "step": 1,
+      "mean_ms": 1.3870488277777766,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-1-2-after",
+      "role": "after",
+      "cycle": 1,
+      "step": 2,
+      "mean_ms": 1.3553195611111115,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-1-3-before",
+      "role": "before",
+      "cycle": 1,
+      "step": 3,
+      "mean_ms": 1.423661450000001,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-2-0-before",
+      "role": "before",
+      "cycle": 2,
+      "step": 0,
+      "mean_ms": 1.4407489500000004,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-2-1-after",
+      "role": "after",
+      "cycle": 2,
+      "step": 1,
+      "mean_ms": 1.4581555527777772,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-2-2-after",
+      "role": "after",
+      "cycle": 2,
+      "step": 2,
+      "mean_ms": 1.4724913416666667,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "build/audit/captures/warp-clean-I16-all-disabled-2-3-before",
+      "role": "before",
+      "cycle": 2,
+      "step": 3,
+      "mean_ms": 1.5843205222222205,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    }
+  ]
+}

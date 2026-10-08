@@ -1,0 +1,555 @@
+{
+  "scope": "Native4K finite/original fixtures as named; source-instrumented workers, not published shipping or Windows bytes",
+  "runs": 20,
+  "exact_repeat_groups": 10,
+  "selected_pngs_verified": 160,
+  "rows": [
+    {
+      "directory": "i24-grouped-audit-shape-live-alternating-after-0",
+      "preset": "audit shape live alternating.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-alternating-after-1",
+      "preset": "audit shape live alternating.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7",
+        "db146b2b7ab9f9bfbaa24bf9b5db5be1008dea9edf6bc475dbe6f9d8b43fbcb7"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-alternating-before-0",
+      "preset": "audit shape live alternating.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-alternating-before-1",
+      "preset": "audit shape live alternating.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-disjoint-thick-after-0",
+      "preset": "audit shape live disjoint-thick.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-disjoint-thick-after-1",
+      "preset": "audit shape live disjoint-thick.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44",
+        "9ed2d3581997b3a849f5506bf0e41de64405acad6cd7c6a0e8f008f1f505de44"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-disjoint-thick-before-0",
+      "preset": "audit shape live disjoint-thick.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-disjoint-thick-before-1",
+      "preset": "audit shape live disjoint-thick.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975",
+        "661a6bcec77a917f2537538ddc93b924fda4a53841a6f65d99049472d9965975"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-overlap-thick-after-0",
+      "preset": "audit shape live overlap-thick.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-overlap-thick-after-1",
+      "preset": "audit shape live overlap-thick.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a",
+        "f6d970abbc52ec3580c37fe689a13317462d134275073b28b4661da289ea647a"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-overlap-thick-before-0",
+      "preset": "audit shape live overlap-thick.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a"
+      ]
+    },
+    {
+      "directory": "i24-grouped-audit-shape-live-overlap-thick-before-1",
+      "preset": "audit shape live overlap-thick.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a",
+        "39cfc63334c41399051ba5e1ecf786ff86db73ec95d95c882686f182a6bea83a"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2(1)-after-0",
+      "preset": "martin - city lights v2(1).milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2(1)-after-1",
+      "preset": "martin - city lights v2(1).milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2(1)-before-0",
+      "preset": "martin - city lights v2(1).milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2(1)-before-1",
+      "preset": "martin - city lights v2(1).milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2-c-after-0",
+      "preset": "martin - city lights v2 c.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2-c-after-1",
+      "preset": "martin - city lights v2 c.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2-c-before-0",
+      "preset": "martin - city lights v2 c.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "directory": "i24-grouped-martin---city-lights-v2-c-before-1",
+      "preset": "martin - city lights v2 c.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "preset": "audit shape live alternating.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.020154642489711935,
+          "changed_pixels": 5045
+        }
+      ]
+    },
+    {
+      "preset": "audit shape live disjoint-thick.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.060473009902263376,
+          "changed_pixels": 15135
+        }
+      ]
+    },
+    {
+      "preset": "audit shape live overlap-thick.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.029681431648662552,
+          "changed_pixels": 5062
+        }
+      ]
+    },
+    {
+      "preset": "martin - city lights v2 c.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.004279835390946502,
+          "changed_pixels": 8114
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.02166015625,
+          "changed_pixels": 19115
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.02749899530606996,
+          "changed_pixels": 19999
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.03905884291409465,
+          "changed_pixels": 26470
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.052939774627057616,
+          "changed_pixels": 32372
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.021952361432613168,
+          "changed_pixels": 18382
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.028650414737654322,
+          "changed_pixels": 17303
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        }
+      ]
+    },
+    {
+      "preset": "martin - city lights v2(1).milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.14996853298611112,
+          "changed_pixels": 101742
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.155590719843107,
+          "changed_pixels": 96729
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.07207686310442386,
+          "changed_pixels": 46603
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.08057641300154321,
+          "changed_pixels": 51230
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.010750827867798353,
+          "changed_pixels": 8969
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.015996375064300412,
+          "changed_pixels": 8134
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.002331251607510288,
+          "changed_pixels": 4599
+        }
+      ]
+    }
+  ]
+}

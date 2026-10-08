@@ -1,0 +1,9 @@
+{
+  "policy_id": "motion-uv-conditional-publication-2026-10-08",
+  "current_published_map": "last enabled compatible frame",
+  "known_deviation": "re-enable can consume older enabled A rather than latest previous disabled B",
+  "decision": "keep current optimization pending owner choice; eager diagnostic is not adopted",
+  "eager_cost_scope": "12 Native4K all-disabled default-warp ABBA, no consistent slowdown observed; extra logical MRT writes remain",
+  "generic_lazy_contract": "unqualified for custom discard/output-write/prior resources/generations",
+  "shipping_engine_changed": false
+}
