@@ -1,0 +1,17 @@
+{
+  "before": "ffaa7f2c",
+  "after": "0ddce89e",
+  "main_preserved": "af164a97",
+  "logical_patch_map": "0016\u20130024 historical audit \u21920017\u20130025 current audit after releasedmain0016",
+  "probes": [
+    {
+      "preset": "07.milk",
+      "all8_selected_original_custom_before_after_and_repeat_rgb_identical": true
+    },
+    {
+      "preset": "163.milk",
+      "all8_selected_original_custom_before_after_and_repeat_rgb_identical": true
+    }
+  ],
+  "limits": "Source-instrumented Native4K selected frames only; final combined head gates remain open"
+}

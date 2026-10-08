@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0025 for ten finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-two other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0026 for eleven finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-one other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -12,7 +12,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I22 | Custom dot waves gain interpolated points | 1875 | Candidate0019; source/original/finite final4K proof; timing disposition pending |
 | I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Implemented0024; original/finite/custom and cost4K proof; integration pending |
 | I11 | Legacy warp physical triangle diagonal is reversed | 878 | Implemented0025; source49/sanitizer49, exact cache pixels, revised cost qualified; integration pending |
-| I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | Source investigation recorded; execution/captures/disposition pending |
+| I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | Candidate0026;50 source controls; Native4K/cost pending |
 | I14 | Motion reverse propagation uses different interpolation and storage | 794 | Source investigation recorded; execution/captures/disposition pending |
 | I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | Implemented0022; source/original/finite final4K proof; integration pending |
 | I16 | Disabling motion vectors leaves a stale target UV map | 435 | Source investigation recorded; execution/captures/disposition pending |
@@ -42,10 +42,12 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 
 ## Current validation
 
-The normal renderer suite passes49/49. The capture/helper suite passes60 tests and24 subtests. Final-output replay completed32 unchanged-original runs,28 finite diagnostic runs (including four echo runs), and24 additional I19 resolution-band runs, each480 frames. Every role's eight selected RGB captures repeats exactly; this is not an all-frame hash or whole-corpus certification. Source-instrumented engine AARs and private capture APKs are identified separately from shipping binaries. Physical-TV performance remains unmeasured.
+The normal renderer suite passes50/50. The capture/helper suite passes60 tests and24 subtests. Final-output replay completed32 unchanged-original runs,28 finite diagnostic runs (including four echo runs), and24 additional I19 resolution-band runs, each480 frames. Every role's eight selected RGB captures repeats exactly; this is not an all-frame hash or whole-corpus certification. Source-instrumented engine AARs and private capture APKs are identified separately from shipping binaries. Physical-TV performance remains unmeasured.
 
 Native direct rendering can leave an internal read FBO bound after restoring draw framebuffer0. Historical audit PNGs therefore show intermediate feedback; fresh workers explicitly read framebuffer0 and restore the previous read binding. Preserve original artifacts/helpers and use the new final-output records for appearance claims. The guard test rejects missing/nonzero read-target evidence even with valid PNG/RGB hashes. See [capture correction](capture-correction/README.md).
 
 Source reports under `research/` refine remaining repair boundaries and candidate lists. They are not execution, screenshot or completion evidence. Final combined sanitizer/Android/host/JVM/docs/review/CI/integration gates remain separate from these focused results. See [per-ID identities and state](ledger.json).
 
 Live patch numbering was shifted once to preserve released main0016. Frozen evidence/helpers retain their historical names, source hashes and rendered bytes. Latest-main focused validation remains pending.
+
+Draft [PR61](https://github.com/johnneerdael/ProjectM-TV/pull/61) is open. Main synchronization preserves the released0016 efficiency patch; [original/custom Native4K probes](main-synchronization/results.json) are selected-RGB identical before/after. CandidateI12 is source-qualified only; Native proof/cost remains pending.

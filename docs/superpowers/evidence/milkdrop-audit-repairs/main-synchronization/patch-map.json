@@ -1,0 +1,11 @@
+{
+  "0024-legacy-warp-physical-diagonal.patch": "0025-legacy-warp-physical-diagonal.patch",
+  "0023-legacy-warp-oscillator-y.patch": "0024-legacy-warp-oscillator-y.patch",
+  "0022-negative-odd-echo-orientation.patch": "0023-negative-odd-echo-orientation.patch",
+  "0021-original-equation-inputs.patch": "0022-original-equation-inputs.patch",
+  "0020-eel-named-constant-precision.patch": "0021-eel-named-constant-precision.patch",
+  "0019-gamma-only-pass-epsilon.patch": "0020-gamma-only-pass-epsilon.patch",
+  "0018-custom-wave-discrete-dots.patch": "0019-custom-wave-discrete-dots.patch",
+  "0017-custom-wave-input-windows.patch": "0018-custom-wave-input-windows.patch",
+  "0016-builtin-wave-opacity.patch": "0017-builtin-wave-opacity.patch"
+}
