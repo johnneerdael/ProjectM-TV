@@ -7,3 +7,13 @@ Original `ns-eel2/nseel-compiler.c:1077` expands those same decimals without int
 Full static9606 scan found no named-constant EEL references, so no stock original is claimed affected. A derived finite visual witness should amplify `($pi-3.141592653589793)*10000000` into a red border width; before approximately.107423, source-compatible after.02. This remains a declared synthetic diagnostic, not an invented affected-original census or Windows screenshot. Native4K diagnostic capture and final integration remain pending.
 
 No new evaluation, allocation, pass, vertex or per-frame operation is added. This correction belongs upstream in projectm-eval, while the TV ordered patch preserves thread-local RNG, lone-dot handling and the exact original decimal contract.
+
+## Actual amplified4K diagnostic
+
+Four480-frame source-bound private-overlay runs complete with Native Standard1280×720 canvas and exact selected RGB repeats. Both preserve all stock AAR/native/asset bytes except the declared appended index row and one test preset in the worker APK (9607 entries). No shipping preset is modified. The same normalized outer-border formula amplifies only the original named-pi rounding error.
+
+![Intermediate float pi, amplified border](before-4k.png)
+
+![Original double decimal pi, expected border](after-4k.png)
+
+The candidate removes the amplified excess border width, as the scalar compiler oracle predicts. This is a finite synthetic demonstration, not a stock affected-original claim or a Windows screenshot. Strict GL/preset/frame/cleanup checks and repeated output identities pass. Source correction adds no evaluation, allocation or pass. Final integration checks remain pending.

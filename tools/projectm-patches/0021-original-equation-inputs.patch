@@ -1,0 +1,113 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Restore original aspect and fresh wave point input contracts
+
+Follow MilkDrop2 milkdropfs.cpp:655-656: per-pixel equations receive
+inverse aspect factors, matching main-frame inputs. Preserve the TV
+shader-canvas pixels/mesh inputs and all original geometry fields.
+Follow milkdropfs.cpp:2526-2545,2613-2624: wave points receive fresh
+wave-frame time/FPS/frame/progress/audio inputs before wave-frame code.
+Do not inherit main-equation writes or subsequent wave-frame writes.
+Keep Q/T propagation after wave-frame code and one-evaluation replay.
+Only input provenance changes; no pass, vertex, allocation or additional
+equation evaluation is introduced.
+
+Original source: milkdrop2 f05b0d8, milkdropfs.cpp SHA256
+68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+index 7e4508ffa..1076f346e 100644
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -375,7 +375,7 @@ void CustomWaveform::DrawPrepared(std::vector<Renderer::Point> points, std::vect
+ void CustomWaveform::LoadPerFrameEvaluationVariables(const PerFrameContext& presetPerFrameContext)
+ {
+     m_perFrameContext.LoadStateVariables(m_presetState, presetPerFrameContext, *this);
+-    m_perPointContext.LoadReadOnlyStateVariables(presetPerFrameContext);
++    m_perPointContext.LoadReadOnlyStateVariables(m_perFrameContext);
+ }
+
+ void CustomWaveform::InitPerPointEvaluationVariables()
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelContext.cpp b/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
+index 6946be93f..7522dbcd8 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
+@@ -91,8 +91,8 @@ void PerPixelContext::LoadStateReadOnlyVariables(PresetState& state, PerFrameCon
+                                          state.renderContext.lineReferenceWidth, state.renderContext.lineReferenceHeight);
+     *pixelsx = static_cast<PRJM_EVAL_F>(canvas.width);
+     *pixelsy = static_cast<PRJM_EVAL_F>(canvas.height);
+-    *aspectx = static_cast<PRJM_EVAL_F>(state.renderContext.aspectX);
+-    *aspecty = static_cast<PRJM_EVAL_F>(state.renderContext.aspectY);
++    *aspectx = static_cast<PRJM_EVAL_F>(state.renderContext.invAspectX);
++    *aspecty = static_cast<PRJM_EVAL_F>(state.renderContext.invAspectY);
+ }
+
+ void PerPixelContext::LoadPerFrameQVariables(PresetState& state, PerFrameContext& perFrameState)
+diff --git a/src/libprojectM/MilkdropPreset/WaveformPerPointContext.cpp b/src/libprojectM/MilkdropPreset/WaveformPerPointContext.cpp
+index dbcc65eee..38d752ca2 100644
+--- a/src/libprojectM/MilkdropPreset/WaveformPerPointContext.cpp
++++ b/src/libprojectM/MilkdropPreset/WaveformPerPointContext.cpp
+@@ -3,7 +3,7 @@
+ #include "CustomWaveform.hpp"
+ #include "LegacyEquationCode.hpp"
+ #include "MilkdropPresetExceptions.hpp"
+-#include "PerFrameContext.hpp"
++#include "WaveformPerFrameContext.hpp"
+
+ #include <Logging.hpp>
+
+@@ -69,18 +69,18 @@ void WaveformPerPointContext::RegisterBuiltinVariables()
+     REG_VAR(a);
+ }
+
+-void WaveformPerPointContext::LoadReadOnlyStateVariables(const PerFrameContext& presetPerFrameContext)
++void WaveformPerPointContext::LoadReadOnlyStateVariables(const WaveformPerFrameContext& wavePerFrameContext)
+ {
+-    *time = *presetPerFrameContext.time;
+-    *frame = *presetPerFrameContext.frame;
+-    *fps = *presetPerFrameContext.fps;
+-    *progress = *presetPerFrameContext.progress;
+-    *bass = *presetPerFrameContext.bass;
+-    *mid = *presetPerFrameContext.mid;
+-    *treb = *presetPerFrameContext.treb;
+-    *bass_att = *presetPerFrameContext.bass_att;
+-    *mid_att = *presetPerFrameContext.mid_att;
+-    *treb_att = *presetPerFrameContext.treb_att;
++    *time = *wavePerFrameContext.time;
++    *frame = *wavePerFrameContext.frame;
++    *fps = *wavePerFrameContext.fps;
++    *progress = *wavePerFrameContext.progress;
++    *bass = *wavePerFrameContext.bass;
++    *mid = *wavePerFrameContext.mid;
++    *treb = *wavePerFrameContext.treb;
++    *bass_att = *wavePerFrameContext.bass_att;
++    *mid_att = *wavePerFrameContext.mid_att;
++    *treb_att = *wavePerFrameContext.treb_att;
+ }
+
+ void WaveformPerPointContext::CompilePerPointCode(const std::string& perPointCode,
+diff --git a/src/libprojectM/MilkdropPreset/WaveformPerPointContext.hpp b/src/libprojectM/MilkdropPreset/WaveformPerPointContext.hpp
+index 7f28ef88b..fb9a8a48b 100644
+--- a/src/libprojectM/MilkdropPreset/WaveformPerPointContext.hpp
++++ b/src/libprojectM/MilkdropPreset/WaveformPerPointContext.hpp
+@@ -6,7 +6,7 @@ namespace libprojectM {
+ namespace MilkdropPreset {
+
+ class CustomWaveform;
+-class PerFrameContext;
++class WaveformPerFrameContext;
+
+ class WaveformPerPointContext
+ {
+@@ -29,9 +29,9 @@ public:
+      * @brief Loads the current read-only state values into the expression evaluator variables.
+      * This is done once per frame/waveform for a subset of the per-point variables, specifically
+      * those marked as "read-only". All other variables are assigned/reset for each rendered point.
+-     * @param presetPerFrameContext The preset per-frame context.
++     * @param wavePerFrameContext Fresh wave-frame inputs, before wave-frame code executes.
+      */
+-    void LoadReadOnlyStateVariables(const PerFrameContext& presetPerFrameContext);
++    void LoadReadOnlyStateVariables(const WaveformPerFrameContext& wavePerFrameContext);
+
+     /**
+      * @brief Compiles the per-point code and stores the code handle in the class.

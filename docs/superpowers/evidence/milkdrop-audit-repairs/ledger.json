@@ -167,10 +167,11 @@
       "sha256": "2e21b780ffb8dd3e17b2c04a3d5a0780e5ab6ad95fed0b24d25a341c3509bfcb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I05-per-pixel-aspect-inputs-use-factors-instead-of-inverse-factors/HANDOFF.md",
       "numeric_witness": "16:9 aspecty: library/predictor.5625; original1.7777778. dx=aspecty/10 gives.05625 vs.17777778. Main-frame aspect inputs agree.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0021; source45 controls pass; Native4K pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "inverse per-pixel aspect assignments; square/unaffected tests"
+      "recommendation": "inverse per-pixel aspect assignments; square/unaffected tests",
+      "evidence": "I05/README.md"
     },
     {
       "id": "I16",
@@ -193,8 +194,9 @@
       "sha256": "a1d379c4c50406ae24ee004196c34e439baee60b8adf131836d465b8d84413b5",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I06-custom-wave-points-inherit-modified-main-frame-read-only-inputs/HANDOFF.md",
       "numeric_witness": "Host bass1, main bass=.25, wave point x=bass: library/predictor x=.25; original x=1 from fresh wave inputs copied before wave-frame execution.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate0021; source45 controls pass; Native4K pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I06/README.md"
     },
     {
       "id": "I24",
@@ -361,11 +363,12 @@
       "sha256": "9b8257b6666b330799b883c9fa056e241d47a3ea511f3ea0a5b7f1d1147945cb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I09-eel-named-constants-round-to-float-before-double-evaluation/HANDOFF.md",
       "numeric_witness": "$pi: library/predictor3.1415927410125732; original3.141592653589793; difference about8.74228e-8.",
-      "status": "candidate0020; exact original constants and43 controls pass; Native4K synthetic diagnostic pending",
+      "status": "implemented0020; scalar43 controls and repeated4K amplified diagnostic pass; integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "remove float suffixes from exact original decimal constants in both scanners",
-      "evidence": "I09/README.md"
+      "evidence": "I09/README.md",
+      "native_4k_evidence": "I09/README.md"
     },
     {
       "id": "I31",

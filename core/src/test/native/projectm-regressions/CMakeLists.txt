@@ -137,7 +137,7 @@ add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
 set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs)
+foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs)
     string(REPLACE "-" "_" source_name "${control}")
     add_executable(${control}-regressions ${source_name}_test.cpp)
     target_compile_features(${control}-regressions PRIVATE cxx_std_17)
@@ -156,7 +156,13 @@ foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility c
         target_link_libraries(${control}-regressions PRIVATE ${REGRESSION_GL_TARGET})
     endif()
 endforeach()
+add_test(NAME per-pixel-inverse-aspect COMMAND preset-inputs-regressions)
+set_tests_properties(per-pixel-inverse-aspect PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_test(NAME custom-wave-input-windows COMMAND custom-wave-inputs-regressions)
+add_test(NAME custom-wave-readonly-inputs COMMAND custom-wave-inputs-regressions readonly)
+set_tests_properties(custom-wave-readonly-inputs PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_test(NAME custom-wave-discrete-dots COMMAND custom-wave-inputs-regressions dots)
 add_test(NAME custom-wave-single-dot COMMAND custom-wave-inputs-regressions single)
 set_tests_properties(custom-wave-single-dot PROPERTIES TIMEOUT 30

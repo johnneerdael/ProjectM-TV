@@ -1,0 +1,15 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 6: per-pixel-inverse-aspect
+1/2 Test #6: per-pixel-inverse-aspect .........   Passed    0.27 sec
+    Start 8: custom-wave-readonly-inputs
+2/2 Test #8: custom-wave-readonly-inputs ......***Failed    0.26 sec
+wave readonly input or Q/T/replay boundary differs at reg0
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   0.54 sec
+
+The following tests FAILED:
+	  8 - custom-wave-readonly-inputs (Failed)
+Errors while running CTest

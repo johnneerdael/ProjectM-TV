@@ -150,10 +150,52 @@ static void Dots(ShaderCache& cache, bool singleOnly = false)
     }
     glad_glDrawElements = realElements; glad_glDrawArraysInstanced = realInstanced;
 }
+static void ReadOnlyInputs(ShaderCache& cache)
+{
+    PresetState state; auto& context = state.renderContext;
+    context.shaderCache = &cache; state.LoadShaders();
+    context.viewportSizeX = context.viewportSizeY = 128;
+    context.lineReferenceWidth = context.lineReferenceHeight = 64;
+    context.aspectX = context.aspectY = context.invAspectX = context.invAspectY = 1;
+    context.time = 1.25f; context.fps = 30; context.frame = 8; context.progress = .125f;
+    state.audioData.bass = 1; state.audioData.mid = 2; state.audioData.treb = 3;
+    state.audioData.bassAtt = .5f; state.audioData.midAtt = .75f; state.audioData.trebAtt = .25f;
+    PerFrameContext frame(state.globalMemory, &state.globalRegisters);
+    frame.RegisterBuiltinVariables(); frame.LoadStateVariables(state);
+    // Main equations may write these values. Original wave inputs are fresh
+    // before wave-frame code; Q/T still propagate through their own boundary.
+    *frame.bass = .25; *frame.mid = .5; *frame.treb = .75;
+    *frame.bass_att = 9; *frame.mid_att = 9; *frame.treb_att = 9;
+    *frame.time = 9; *frame.fps = 9; *frame.frame = 9; *frame.progress = 9; *frame.q_vars[0] = .25;
+    std::istringstream source("wavecode_0_enabled=1\nwavecode_0_samples=2\n"
+        "wave_0_init1=t1=.5;\nwave_0_per_frame1=bass=99;time=99;q1+=2;t1+=.25;\n"
+        "wave_0_per_point1=reg00=bass;reg01=mid;reg02=treb;reg03=bass_att;reg04=mid_att;reg05=treb_att;"
+        "reg06=time;reg07=fps;reg08=frame;reg09=progress;reg10=q1;reg11=t1;reg12+=1;x=.5;y=.5;\n");
+    PresetFileParser parser; Check(parser.Read(source), "readonly fixture failed parsing");
+    state.customWaveInitCode[0] = parser.GetCode("wave_0_init");
+    state.customWavePerFrameCode[0] = parser.GetCode("wave_0_per_frame");
+    state.customWavePerPointCode[0] = parser.GetCode("wave_0_per_point");
+    CustomWaveform wave(state); wave.Initialize(parser, 0);
+    std::vector<std::string> warnings; wave.CompileCodeAndRunInitExpressions(frame, warnings);
+    Check(warnings.empty(), "readonly fixture failed compilation");
+    Framebuffer canvas(1), native(1);
+    canvas.CreateColorAttachment(0,0,GL_RGBA8,GL_RGBA,GL_UNSIGNED_BYTE);
+    native.CreateColorAttachment(0,0,GL_RGBA8,GL_RGBA,GL_UNSIGNED_BYTE);
+    canvas.SetSize(64,64); native.SetSize(128,128);
+    GeometryTargets targets(state,canvas,0,64,64,{},native,0);
+    targets.Authored(); wave.Draw(frame,&targets);
+    Check(glGetError() == GL_NO_ERROR, "readonly fixture GL error");
+    const double expected[] = {1,2,3,.5,.75,.25,1.25,30,8,.125,2.25,.75,2};
+    for (int i=0;i<13;++i) Check(state.globalRegisters[i] == expected[i],
+        "wave readonly input or Q/T/replay boundary differs at reg"+std::to_string(i));
+}
 int main(int argc, char** argv)
 {
     try {
         GLContext gl; ShaderCache cache;
+        if (argc == 2 && std::string(argv[1]) == "readonly") {
+            ReadOnlyInputs(cache); std::cout << "Fresh wave point inputs and retained Q/T/replay pass\n"; return 0;
+        }
         if (argc == 2 && (std::string(argv[1]) == "dots" || std::string(argv[1]) == "single")) {
             Dots(cache, std::string(argv[1]) == "single");
             std::cout << "Custom dots retain authored points and line smoothing\n"; return 0;

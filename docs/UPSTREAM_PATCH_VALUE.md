@@ -279,3 +279,11 @@ lexer constants in both checked-in scanner and lexer source. Preserve the
 original e/phi decimals, thread-local RNG and lone-dot handling. Scalar
 regression fails before and passes after;43 normal controls pass. No
 per-frame work is added. See [I09](superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
+
+## Original input contracts (candidate0021)
+
+Restore per-pixel inverse aspect and wave-point fresh host snapshots before
+wave-frame code, retaining TV canvas, Q/T and prepared replay. Both direct
+source regressions fail before and pass after;45 normal controls pass.
+No evaluation, vertex, pass or allocation is added. Native4K acceptance
+remains pending in the per-ID audit evidence.

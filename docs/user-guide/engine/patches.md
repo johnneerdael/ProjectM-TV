@@ -33,6 +33,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0018](#0018-discrete-custom-dots) | Authored custom dot counts; finite single-dot programs | source controls; Native4K acceptance pending |
 | [0019](#0019-gamma-only-pass-count) | Original gamma-only epsilon; echo unchanged | boundary controls; Native4K acceptance pending |
 | [0020](#0020-named-eel-constants) | Original double decimal precision of named constants | scalar controls; synthetic4K proof pending |
+| [0021](#0021-original-equation-inputs) | Inverse per-pixel aspect; fresh wave-point host input snapshot | source controls; Native4K acceptance pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -232,6 +233,10 @@ MilkDrop’s gamma-only output uses a `.001` epsilon, while echo redraws use `.0
 
 The original named pi/e/phi decimal expansions now enter the double evaluator without intermediate float rounding. Both lexer source and the checked-in scanner are updated; e/phi retain the original abbreviated decimals. Later geometry/shader casts, RNG and lone-dot handling remain unchanged. No stock named-constant reference was found; a synthetic4K diagnostic is pending. [I09 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
 
+## 0021 — Original equation inputs
+
+Per-pixel equations receive inverse aspect factors, matching the original input contract while keeping the TV shader canvas. Custom-wave points receive fresh wave-frame time/audio inputs before wave-frame code; main-equation writes remain local to that main context. Q/T propagation and Native one-evaluation replay are preserved. Source controls and45 normal checks pass; Native4K qualification is pending in [I05](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I05/README.md) and [I06](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I06/README.md).
+
 ## Known remaining differences from MilkDrop 2
 
 - `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode (as in MilkDrop).
@@ -249,7 +254,7 @@ The original named pi/e/phi decimal expansions now enter the double evaluator wi
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
 - `echo_orient` of −1 or −3 flips horizontally in MilkDrop 2 (`n % 2` is nonzero); projectM does not flip.
 - `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.
-- Per-pixel code visits mesh rows in the opposite vertical order, so stateful per-pixel code can differ; the animated warp sine pattern is vertically mirrored, and per-pixel `aspectx`/`aspecty` are not inverted as in MilkDrop 2.
+- Per-pixel code visits mesh rows in the opposite vertical order, so stateful per-pixel code can differ; the animated warp sine pattern is vertically mirrored.
 - No Windows reference renders exist in this project's evidence, so identical Windows appearance is never claimed.
 
 These differences were found by auditing the [source predictor](../predictor.md) against MilkDrop 2's code; they are candidates for future engine patches.
