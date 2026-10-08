@@ -30,6 +30,14 @@ overrides are supported without depending on a child-directory imported target. 
 
 ## Core rendering policies
 
+Warp UV controls also check CPU-defined negative nested powers, including a
+nonunit authored exponent that produces nested exponent one, squares and cubes.
+Real-mesh controls verify attribute9 uploads, unchanged equation parameters,
+nonfinite preservation, resize and prepared replay. Invalid fractional-domain
+sampling observations remain backend-bound; the source predictor must not gain
+portable appearance credit from them. See the
+[power-domain evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md).
+
 Legacy compatibility controls check constant-colour output with disabled and
 fractional `fShader`, mode-1 waveform opacity and open-strip topology against
 MilkDrop 2.25c source expectations. They run in the native suite above. The

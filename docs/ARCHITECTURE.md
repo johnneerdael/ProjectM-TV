@@ -333,9 +333,11 @@ range, including angles for which a double remainder with a rounded `2*pi`
 constant is inaccurate. Equations and their original rotation state are unchanged.
 
 The 4.2 mesh reuses `transforms.z` for sine and adds an instance-owned four-byte
-cosine VertexBuffer at attribute8. The warp shader consumes seven attributes.
+cosine VertexBuffer at attribute8. The rotation-only patch used seven active input attributes.
 Resize/upload cosine with the existing buffers; the 4.1.7 interleaved 56→60-byte
-layout remains historical evidence. With no per-pixel code the
+layout remains historical evidence. Patch0015 adds the negative-power buffer at
+attribute9, bringing the current warp shader to eight active input attributes.
+With no per-pixel code the
 pair is cached once per frame; otherwise it uses each vertex's final evaluated
 rotation. Legacy/custom warp programs share this vertex interface, and prepared
 meshes reuse the pair for authored/native draws without reevaluating equations.
@@ -344,6 +346,20 @@ nonfinite rotation is still unsupported, with no finite identity substitution.
 See [4.2 rotation synchronization](superpowers/evidence/upstream-master-4-2/rotation51-synchronization/README.md)
 and the [original repair evidence](superpowers/evidence/large-rotation-trig/README.md)
 for their separate observed scopes and remaining validation.
+
+## Negative warp powers
+
+Patch0015 computes negative effective zoom with the original nested CPU `powf`
+expression after the emitted-float conversion. This restores defined integer
+nested powers that GLSL does not define for a negative base. PerPixelMesh owns
+the four-byte-per-vertex attribute9 buffer, resizes/uploads it with the existing
+mesh buffers and reuses it for prepared replay. Raw zoom/exponent equations are
+unchanged. The exact authored unit-exponent case retains its direct signed value;
+other negative vertices require two CPU power calls. Positive zoom stays on the
+existing GPU path. Fractional-domain NaN/Inf are retained, with no forced magnitude,
+epsilon or texture-sampling fallback. Invalid-coordinate appearance and TV
+performance remain outside these numerical controls. See the
+[Tulip investigation](superpowers/evidence/tulip-negative-zoom-power/README.md).
 
 ## Evaluated waveform and legacy display controls
 

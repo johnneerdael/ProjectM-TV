@@ -75,8 +75,10 @@ Main-textured shapes now select repeat wrapping and linear filtering for every
 instance, so earlier blur draws cannot change their sampler. Equal or narrow blur
 bounds are separated instead of producing a zero normalization interval; nonfinite
 or unrepresentable float32 ranges use the default 0–1 range at all three levels.
-Negative motion zoom retains its signed reflection when the zoom exponent is
-exactly 1. Other negative-base power domains remain unsupported. These engine
+Negative motion zoom now follows MilkDrop 2's CPU power calculation. A valid
+integer nested exponent retains its signed or squared transform; fractional
+negative powers still produce nonfinite coordinates with no portable appearance
+guarantee. These engine
 corrections preserve preset files and do not certify identical Windows appearance.
 
 Per-frame equations now drive built-in waveform mode, dots, thickness and additive
@@ -111,3 +113,9 @@ boiling-mix2(redi jedi full carb mix)** can still look sparse and dark: its echo
 displays only a zoomed crop and its darken filter squares the displayed colours.
 A black first frame can occur even when the underlying waveform is bright.
 Include the audio context and time since preset loading in reports of dark output.
+
+**Great Tulip Majesty (txtr wrap)** contains fractional negative powers under the
+tested audio. Its original source has the same invalid power domain, and its
+30-frame emulator replay is unchanged by the valid-power correction. A source
+predictor can legitimately decline to forecast that case even while the app
+renders a picture. Include the device and render settings when reporting it.

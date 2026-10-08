@@ -1,0 +1,1635 @@
+{
+  "original_preset_sha256": "c897d68693aab8c505d7cf4ea93047ca160b296691936ef712314364e3cc4879",
+  "source_reference": {
+    "milkdrop2_commit": "f05b0d811a87a17c4624170c26c93bac39b05bde",
+    "milkdropfs_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+    "pow_and_uv_lines": [
+      1877,
+      1938
+    ],
+    "unmodified_triangle_submission_lines": [
+      2045,
+      2086
+    ]
+  },
+  "input_freeze": {
+    "scene_sha256": "b49a1381c6cc480f23cb44b55792be588f0ec33ddee32466ab09477db01164ef",
+    "vertices_sha256": "1ee3ed1e8a67759993d5aeaf9e24c1dbbd912d674706fea78820241d9676b006",
+    "reader_sha256": "c953cee23683a9bc0a9f3ad262727962d21ab7e8406ac6e1238347b14d4796a1",
+    "source_reader_engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+    },
+    "note": "EEL inputs from the frozen 13-patch source context; patch0014 does not alter equation execution or warp inputs. Current full-AAR capture is a separate check.",
+    "predictions": [
+      {
+        "case": "negative-unit",
+        "cpu_expected": "finite signed",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "positive",
+        "cpu_expected": "finite positive",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "zero",
+        "cpu_expected": "zero effective zoom, nonfinite UV transport",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "negative-fractional",
+        "cpu_expected": "NaN effective zoom",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "negative-nested-unit",
+        "cpu_expected": "finite signed",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "negative-square",
+        "cpu_expected": "finite positive",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      },
+      {
+        "case": "negative-cube",
+        "cpu_expected": "finite signed",
+        "gpu_expected": "Matches signed reference for existing negative-unit branch and finite positive controls; remaining negative GLSL pow/nonfinite transport has no portable result."
+      }
+    ],
+    "production_shader_sha256": "59edc3bf032d299903ec38cb5439f9787454796808ab98d419f6f3708e912bad",
+    "probe_source_sha256": "60f16d5c1c9e062f98041f0b782df5bbae7cf8a19c36b4c70562830726752fe0",
+    "probe_binary_sha256": "1dee92dcd43bdcd562ee06d71e7c26a06ec495ee8d3951dce998fe8f26981059",
+    "uv_transport_context": {
+      "aspect": [
+        1,
+        0.5625,
+        1,
+        1.7777777777777777
+      ],
+      "neutral_overrides": {
+        "rotation": 0,
+        "warp": 0,
+        "center": [
+          0.5,
+          0.5
+        ],
+        "distance": [
+          0,
+          0
+        ],
+        "stretch": [
+          1,
+          1
+        ],
+        "texel_offset": [
+          0,
+          0
+        ]
+      },
+      "scope": "Original source zoom/zoomexp/radii/positions with neutral remaining UV operations; scalar result is isolated separately. Full preset is a separate unchanged-AAR replay."
+    },
+    "cpu_backend": "Android ARM64 Bionic powf, -O0 -ffp-contract=off -fno-builtin-powf; source expression, not original Windows CRT bit certification"
+  },
+  "baseline_probe": {
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "vendor": "Google (Apple)",
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "count": 48517,
+    "mediump_precision_bits": 23,
+    "mediump_range": [
+      127,
+      127
+    ]
+  },
+  "fixed_probe": {
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "vendor": "Google (Apple)",
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "count": 48517,
+    "mediump_precision_bits": 23,
+    "mediump_range": [
+      127,
+      127
+    ]
+  },
+  "controls": [
+    {
+      "case": "negative-unit",
+      "cpu": {
+        "values": [
+          "1.0",
+          "-0.09",
+          "-1.1666666",
+          "-0.61111116"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "bdb851ec",
+          "bf955555",
+          "bf1c71c8"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "-1.1666666",
+          "-0.611111",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "bf955555",
+          "bf1c71c5",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "-1.1666666",
+          "-0.611111",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "bf955555",
+          "bf1c71c5",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "1.0",
+          "nan",
+          "0.3",
+          "-0.09"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "7fc00000",
+          "3e99999a",
+          "bdb851ec"
+        ]
+      }
+    },
+    {
+      "case": "positive",
+      "cpu": {
+        "values": [
+          "0.99996",
+          "0.9100035",
+          "0.6648345",
+          "0.6098897"
+        ],
+        "ieee754_hex": [
+          "3f7ffd61",
+          "3f68f5fd",
+          "3f2a3298",
+          "3f1c21bb"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "0.6648345",
+          "0.6098897",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "3f2a3298",
+          "3f1c21bb",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "0.6648345",
+          "0.6098897",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "3f2a3298",
+          "3f1c21bb",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "0.99995995",
+          "0.9100035",
+          "0.3",
+          "0.91"
+        ],
+        "ieee754_hex": [
+          "3f7ffd60",
+          "3f68f5fd",
+          "3e99999a",
+          "3f68f5c3"
+        ]
+      }
+    },
+    {
+      "case": "zero",
+      "cpu": {
+        "values": [
+          "1.0",
+          "0.0",
+          "nan",
+          "nan"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "00000000",
+          "7fc00000",
+          "7fc00000"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "1.0",
+          "0.0",
+          "0.3",
+          "0.0"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "00000000",
+          "3e99999a",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "case": "negative-fractional",
+      "cpu": {
+        "values": [
+          "0.99996",
+          "nan",
+          "nan",
+          "nan"
+        ],
+        "ieee754_hex": [
+          "3f7ffd61",
+          "7fc00000",
+          "7fc00000",
+          "7fc00000"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "0.99995995",
+          "nan",
+          "0.3",
+          "-0.09"
+        ],
+        "ieee754_hex": [
+          "3f7ffd60",
+          "7fc00000",
+          "3e99999a",
+          "bdb851ec"
+        ]
+      }
+    },
+    {
+      "case": "negative-nested-unit",
+      "cpu": {
+        "values": [
+          "1.0",
+          "-0.09",
+          "-1.1666666",
+          "-0.61111116"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "bdb851ec",
+          "bf955555",
+          "bf1c71c8"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "-1.1666666",
+          "-0.611111",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "bf955555",
+          "bf1c71c5",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "1.0",
+          "nan",
+          "0.5",
+          "-0.09"
+        ],
+        "ieee754_hex": [
+          "3f800000",
+          "7fc00000",
+          "3f000000",
+          "bdb851ec"
+        ]
+      }
+    },
+    {
+      "case": "negative-square",
+      "cpu": {
+        "values": [
+          "2.0",
+          "0.0081",
+          "19.018518",
+          "12.845679"
+        ],
+        "ieee754_hex": [
+          "40000000",
+          "3c04b5dd",
+          "419825ed",
+          "414d87e7"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "19.018518",
+          "12.845679",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "419825ed",
+          "414d87e7",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "2.0",
+          "nan",
+          "1.0",
+          "-0.09"
+        ],
+        "ieee754_hex": [
+          "40000000",
+          "7fc00000",
+          "3f800000",
+          "bdb851ec"
+        ]
+      }
+    },
+    {
+      "case": "negative-cube",
+      "cpu": {
+        "values": [
+          "3.0",
+          "-0.0007290001",
+          "-205.2613",
+          "-136.6742"
+        ],
+        "ieee754_hex": [
+          "40400000",
+          "ba3f1a5e",
+          "c34d42e5",
+          "c308ac98"
+        ]
+      },
+      "baseline_uv": {
+        "values": [
+          "nan",
+          "nan",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "7fc00000",
+          "7fc00000",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "fixed_uv": {
+        "values": [
+          "-205.2613",
+          "-136.6742",
+          "0.65",
+          "0.6"
+        ],
+        "ieee754_hex": [
+          "c34d42e5",
+          "c308ac98",
+          "3f266666",
+          "3f19999a"
+        ]
+      },
+      "baseline_scalar": {
+        "values": [
+          "3.0",
+          "nan",
+          "1.0",
+          "-0.09"
+        ],
+        "ieee754_hex": [
+          "40400000",
+          "7fc00000",
+          "3f800000",
+          "bdb851ec"
+        ]
+      }
+    }
+  ],
+  "original_frame_counts": [
+    {
+      "frame": 0,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 1,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 2,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 3,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 4,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 5,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 6,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 7,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 8,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 9,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 10,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 11,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 12,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 13,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 14,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 15,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 16,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 17,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 18,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 19,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 20,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 21,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 22,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 23,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 24,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 25,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 26,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 27,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 28,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    },
+    {
+      "frame": 29,
+      "cpu_nonfinite_effective_zoom": 33,
+      "baseline_nonfinite_uv_pairs": 33,
+      "fixed_nonfinite_uv_pairs": 33
+    }
+  ],
+  "probe_output_hashes": {
+    "fixed0.cpu.f32": "5f9fb3eab41de06c83a706919bdf5df54015f0df1055f1e3511701880cc0d889",
+    "fixed0.highp-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "fixed0.mediump-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "fixed0.production-uv.f32": "980f16a4d012807dfa1a5b755d494c56a0bf07a65bcbbc1b1926ee271899cc47",
+    "fixed1.cpu.f32": "5f9fb3eab41de06c83a706919bdf5df54015f0df1055f1e3511701880cc0d889",
+    "fixed1.highp-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "fixed1.mediump-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "fixed1.production-uv.f32": "980f16a4d012807dfa1a5b755d494c56a0bf07a65bcbbc1b1926ee271899cc47",
+    "repeat0.cpu.f32": "5f9fb3eab41de06c83a706919bdf5df54015f0df1055f1e3511701880cc0d889",
+    "repeat0.highp-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "repeat0.mediump-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "repeat0.production-uv.f32": "b2246bb59a221c2218327792023c343154bc3fe79fcbab7fff01eadcc6b5567a",
+    "repeat1.cpu.f32": "5f9fb3eab41de06c83a706919bdf5df54015f0df1055f1e3511701880cc0d889",
+    "repeat1.highp-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "repeat1.mediump-scalar.f32": "fb7690e1a8cd6c9ce57fa779d4bfe4810f450f49162d577934df1925e910f9bb",
+    "repeat1.production-uv.f32": "b2246bb59a221c2218327792023c343154bc3fe79fcbab7fff01eadcc6b5567a",
+    "vertices.f32": "1ee3ed1e8a67759993d5aeaf9e24c1dbbd912d674706fea78820241d9676b006"
+  },
+  "sampling": {
+    "metadata": {
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "scope": "backend-bound invalid UV transport, interpolation and sampling observations"
+    },
+    "repeat_identical": true,
+    "rows": [
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "finite",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "nan-both",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "nan-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "inf-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "negative-inf-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "one-nan-vertex",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "repeat",
+        "case": "two-nan-vertices",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "finite",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "nan-both",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "nan-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "inf-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "negative-inf-u",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "one-nan-vertex",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "flags",
+        "sampler": "clamp",
+        "case": "two-nan-vertices",
+        "rgba_values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "finite",
+        "rgba_values": [
+          [
+            60,
+            60,
+            37,
+            255
+          ]
+        ],
+        "sha256": "e6b2cc18bca7c8b2a3694b46731a05ad1527ba0e6012ffe1049cb3dfae9a3fe7"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "nan-both",
+        "rgba_values": [
+          [
+            70,
+            85,
+            47,
+            255
+          ]
+        ],
+        "sha256": "e5a9ad3e22d4f6b1ca1b8273d0187bfebbca29c5a0ee98ed3ce47cf5f5f18e12"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "nan-u",
+        "rgba_values": [
+          [
+            70,
+            60,
+            44,
+            255
+          ]
+        ],
+        "sha256": "5f4c9a11576ce6819d7c290a67c998adb2b73f9085222836e7dc07f173849ece"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "inf-u",
+        "rgba_values": [
+          [
+            70,
+            60,
+            44,
+            255
+          ]
+        ],
+        "sha256": "5f4c9a11576ce6819d7c290a67c998adb2b73f9085222836e7dc07f173849ece"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "negative-inf-u",
+        "rgba_values": [
+          [
+            70,
+            60,
+            44,
+            255
+          ]
+        ],
+        "sha256": "5f4c9a11576ce6819d7c290a67c998adb2b73f9085222836e7dc07f173849ece"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "one-nan-vertex",
+        "rgba_values": [
+          [
+            70,
+            85,
+            47,
+            255
+          ]
+        ],
+        "sha256": "e5a9ad3e22d4f6b1ca1b8273d0187bfebbca29c5a0ee98ed3ce47cf5f5f18e12"
+      },
+      {
+        "mode": "texture",
+        "sampler": "repeat",
+        "case": "two-nan-vertices",
+        "rgba_values": [
+          [
+            70,
+            85,
+            47,
+            255
+          ]
+        ],
+        "sha256": "e5a9ad3e22d4f6b1ca1b8273d0187bfebbca29c5a0ee98ed3ce47cf5f5f18e12"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "finite",
+        "rgba_values": [
+          [
+            60,
+            60,
+            37,
+            255
+          ]
+        ],
+        "sha256": "e6b2cc18bca7c8b2a3694b46731a05ad1527ba0e6012ffe1049cb3dfae9a3fe7"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "nan-both",
+        "rgba_values": [
+          [
+            100,
+            160,
+            77,
+            255
+          ]
+        ],
+        "sha256": "f5e8b475e33c5a40eafc73469ac3d339219a2088b74ebaca9a956f6440d1f08d"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "nan-u",
+        "rgba_values": [
+          [
+            100,
+            60,
+            63,
+            255
+          ]
+        ],
+        "sha256": "6d8d66eadb7e2d774de7724ce1f47895d8cbc64db7dde417c9f2336d589956a8"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "inf-u",
+        "rgba_values": [
+          [
+            100,
+            60,
+            63,
+            255
+          ]
+        ],
+        "sha256": "6d8d66eadb7e2d774de7724ce1f47895d8cbc64db7dde417c9f2336d589956a8"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "negative-inf-u",
+        "rgba_values": [
+          [
+            40,
+            60,
+            24,
+            255
+          ]
+        ],
+        "sha256": "72562cd61320628890aa1d76732096bffbdb4cf7c1d395fe6166bf3311fae96b"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "one-nan-vertex",
+        "rgba_values": [
+          [
+            100,
+            160,
+            77,
+            255
+          ]
+        ],
+        "sha256": "f5e8b475e33c5a40eafc73469ac3d339219a2088b74ebaca9a956f6440d1f08d"
+      },
+      {
+        "mode": "texture",
+        "sampler": "clamp",
+        "case": "two-nan-vertices",
+        "rgba_values": [
+          [
+            100,
+            160,
+            77,
+            255
+          ]
+        ],
+        "sha256": "f5e8b475e33c5a40eafc73469ac3d339219a2088b74ebaca9a956f6440d1f08d"
+      }
+    ]
+  },
+  "baseline_aar_replay": {
+    "core_sha256": "f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3",
+    "clock_sha256": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+    "pcm_sha256": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
+    "cases": [
+      {
+        "name": "original",
+        "source_sha256": "c897d68693aab8c505d7cf4ea93047ca160b296691936ef712314364e3cc4879",
+        "rgb_sha256": "6470e6683ab028ad24261588b76f3f59f77b1b07e3c65fe3e6bdd4e726a9b723",
+        "mean_rgb8": 28.062083453896605,
+        "max_rgb8": 255,
+        "nonzero_pixel_fraction": 0.39295518663194445,
+        "frame_max": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "idiot - Great Tulip Majesty (txtr wrap).milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "name": "repeat",
+        "source_sha256": "c897d68693aab8c505d7cf4ea93047ca160b296691936ef712314364e3cc4879",
+        "rgb_sha256": "6470e6683ab028ad24261588b76f3f59f77b1b07e3c65fe3e6bdd4e726a9b723",
+        "mean_rgb8": 28.062083453896605,
+        "max_rgb8": 255,
+        "nonzero_pixel_fraction": 0.39295518663194445,
+        "frame_max": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "idiot - Great Tulip Majesty (txtr wrap).milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    ]
+  },
+  "candidate_aar_replay": {
+    "core_sha256": "ba0c04ac1a6330810559f179aa68b97b5bcc628cb1b85cd6826abae3f278829e",
+    "clock_sha256": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+    "pcm_sha256": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
+    "cases": [
+      {
+        "name": "original",
+        "source_sha256": "c897d68693aab8c505d7cf4ea93047ca160b296691936ef712314364e3cc4879",
+        "rgb_sha256": "6470e6683ab028ad24261588b76f3f59f77b1b07e3c65fe3e6bdd4e726a9b723",
+        "mean_rgb8": 28.062083453896605,
+        "max_rgb8": 255,
+        "nonzero_pixel_fraction": 0.39295518663194445,
+        "frame_max": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "idiot - Great Tulip Majesty (txtr wrap).milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "name": "repeat",
+        "source_sha256": "c897d68693aab8c505d7cf4ea93047ca160b296691936ef712314364e3cc4879",
+        "rgb_sha256": "6470e6683ab028ad24261588b76f3f59f77b1b07e3c65fe3e6bdd4e726a9b723",
+        "mean_rgb8": 28.062083453896605,
+        "max_rgb8": 255,
+        "nonzero_pixel_fraction": 0.39295518663194445,
+        "frame_max": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "idiot - Great Tulip Majesty (txtr wrap).milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    ]
+  },
+  "render_controls": {
+    "scope": "Declared finite CPU power controls through full unmodified/candidate AAR JNI; diagnostic copies, not edits to Tulip.",
+    "cases": [
+      {
+        "label": "baseline",
+        "case": "nested-unit",
+        "source_sha256": "db724959e0ae320902de2cf750830b6ce5c7f2e00ea2b8af37bda66659f3df2d",
+        "rgb_sha256": "8d5ee6d4d3c3309c4a81c5b9fa1a63d92c08a69e128365723a7eee1ab0610c26",
+        "mean_rgb8": 106.02761501736111,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-nested-unit.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "label": "baseline",
+        "case": "square",
+        "source_sha256": "68ba3e37379c055a135d0f9db47d90d2380f1e70e1fefa6a9d01c7dc60ba6714",
+        "rgb_sha256": "d5ff717bac4543c1201b35401f63e0c26422cfdb3338e1fca21ecb464ecc5e42",
+        "mean_rgb8": 106.17473234953704,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-square.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "label": "baseline",
+        "case": "cube",
+        "source_sha256": "ed51cf5660a1f690f7b47b4d639b73a459e02e471abd933c69063c5359153e3c",
+        "rgb_sha256": "d5ff717bac4543c1201b35401f63e0c26422cfdb3338e1fca21ecb464ecc5e42",
+        "mean_rgb8": 106.17473234953704,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-cube.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "label": "candidate",
+        "case": "nested-unit",
+        "source_sha256": "db724959e0ae320902de2cf750830b6ce5c7f2e00ea2b8af37bda66659f3df2d",
+        "rgb_sha256": "c6ae3860c1632bc9e67760c02df1db31df0009cabfbf2b675f5ed27e780e44e2",
+        "mean_rgb8": 106.33333333333333,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-nested-unit.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "label": "candidate",
+        "case": "square",
+        "source_sha256": "68ba3e37379c055a135d0f9db47d90d2380f1e70e1fefa6a9d01c7dc60ba6714",
+        "rgb_sha256": "defeacd0cf8f6c78e00d2842a67766f30495a4c9578afd16368f4544acd2217b",
+        "mean_rgb8": 106.33333333333333,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-square.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "label": "candidate",
+        "case": "cube",
+        "source_sha256": "ed51cf5660a1f690f7b47b4d639b73a459e02e471abd933c69063c5359153e3c",
+        "rgb_sha256": "8f16942a703625900958bfc79f84cd9c533019b524f4b08f4a168c933f5c13af",
+        "mean_rgb8": 106.33333333333333,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "diagnostic-negative-cube.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    ]
+  },
+  "limits": [
+    "CPU measurements use Android ARM64 Bionic with original source expression, not original Windows CRT bit certification.",
+    "UV probes preserve original emitted zoom/zoomexp/radii/positions but neutralize rotation, warp, stretch, translation and texel offsets. Full-AAR original captures exercise the complete preset separately.",
+    "Interpolation and invalid texture samples are backend-bound observations, not portable source-only maths.",
+    "Frozen source EEL reader/model uses13patchcontext;current publishedAARuses14;these renderer-only changes do not alterEEL inputs.",
+    "Tulip fractional negative powers retain an unresolved appearance domain; no forecast or random streak credit is assigned.",
+    "No original Windows/D3DX GPU or physical-TV performance result."
+  ],
+  "unchanged_asset_entries": 9691
+}
