@@ -1,0 +1,54 @@
+{
+  "device": "emulator-5640",
+  "source_baseline": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "source_candidate": "e5dd1b09adb6a44725f45ff894bd41e2d64f95f0",
+  "full_output": [
+    3840,
+    2160
+  ],
+  "authored_canvas": [
+    1280,
+    720
+  ],
+  "native_trails": "Standard",
+  "preset": "Happening.milk",
+  "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "repeat_scope": "each of eight selected full-resolution RGB8 frames repeats exactly within its source role",
+  "frame210_rgb_byte_mae": 15.301318881815844,
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "manifest_sha256": "e3c8e327df38a342d55f102d0e77d06da3a35e19352aefe08f14b8190bbb6007",
+      "mean_ms": 6.309013925000003,
+      "p90_ms": 7.112375
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "manifest_sha256": "f8cea97360bf7070e6c390a3343b03e1d6fa29feb28d583180985fe3669dd74a",
+      "mean_ms": 5.040429488888889,
+      "p90_ms": 6.1875
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "manifest_sha256": "720b7867af8410d3e1211feecba5b81d98bc5e0546f798fd26d5879072cf08db",
+      "mean_ms": 4.643416769444449,
+      "p90_ms": 4.919167
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "manifest_sha256": "39aec56530e0647198fe1e3948ab6e686553c6448b7f34d55eb9be2263ab5e16",
+      "mean_ms": 4.65289625833333,
+      "p90_ms": 4.806875
+    }
+  ],
+  "limits": [
+    "instrumented source-bound JNI AARs; not unchanged published release AARs",
+    "no original Windows/D3D replay",
+    "serialized emulator engine timings include glFinish; not physical TV FPS",
+    "remaining 32 findings are unresolved or under investigation"
+  ]
+}

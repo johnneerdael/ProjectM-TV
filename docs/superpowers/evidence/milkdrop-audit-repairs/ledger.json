@@ -34,14 +34,20 @@
       "sha256": "708646e515606a96a3b45f227a75c032ba4e7dc78946a93475ca60f117513c25",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I17-built-in-opacity-replacement-and-thresholds-differ/HANDOFF.md",
       "numeric_witness": "Mode2 alpha.8, canvas256, common vol.85/bounds .75 to .95: target.4; original.028. Mode0 alpha.1/vol2.2: target.1; original.725. Mode3 alpha.5/treble1/no modulation/canvas256: target.04875; original.0975. Mode1 alpha.003 final.00375 is skipped by original threshold.004 but drawn by target.\n\nUses the same supplied modulation scalar; does not confuse shader vol, raw audio vol and mutable EEL vol.",
-      "status": "candidate patch0016; Native 4K captures and timings pending",
-      "confirmed_affected_originals": [],
+      "status": "implemented patch0016; focused Native 4K acceptance passed; external integration pending",
+      "confirmed_affected_originals": [
+        {
+          "name": "Happening.milk",
+          "sha256": "3de52c0ec9e113f409e39329836cfc5030d02cd60ca33512fd7d322866a509b5"
+        }
+      ],
       "evidence": "I17/README.md",
       "source_stage_regression": {
         "baseline": "alpha .4 versus expected .028; fails",
         "candidate": "38/38 normal renderer tests pass",
         "limits": "Native 4K configuration attribute checks; full Native 4K output replay remains pending"
-      }
+      },
+      "native_4k_evidence": "I17/results.json"
     },
     {
       "id": "I19",
@@ -51,8 +57,10 @@
       "sha256": "ac2bca4c32f314d76499d7110b313e93f5acb3d1810239c26f9b6a5d296c6597",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I19-line-mode-raw-sample-counts-differ-at-matched-canvases/HANDOFF.md",
       "numeric_witness": "Width256: original mode4 raw85; target160. Original modes6/7 raw85; target80. Width1024 mode4 original341; target160.\n\nRaw vertices before smoothing, matched authored canvas; not a criticism of intentional4K policy.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate patch0017; source counts pass; Native 4K tradeoff measurement pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I19/README.md",
+      "protected_prior_fix": "reference-equivalent sample decisions and documented Royal103 brightness parity"
     },
     {
       "id": "I08",

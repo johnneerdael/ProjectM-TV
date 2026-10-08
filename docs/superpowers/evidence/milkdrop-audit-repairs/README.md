@@ -6,8 +6,8 @@ Baseline: `120547f3fafe475c86ffc3392fb94389841d08f0` (15 TV patches). Both MilkD
 
 | ID | Finding | Lexical candidates | Status |
 |---|---|---:|---|
-| I17 | Built-in opacity replacement and thresholds differ | 5300 | Candidate 0016; 4K acceptance pending |
-| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Pending investigation |
+| I17 | Built-in opacity replacement and thresholds differ | 5300 | Implemented 0016; focused 4K acceptance passed; review pending |
+| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Source investigated; 4K tradeoff measurement pending |
 | I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Pending investigation |
 | I22 | Custom dot waves gain interpolated points | 1875 | Pending investigation |
 | I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Pending investigation |
@@ -40,4 +40,4 @@ Baseline: `120547f3fafe475c86ffc3392fb94389841d08f0` (15 TV patches). Both MilkD
 | I27 | mip_y uses height rather than original repeated width | 0 | Pending investigation |
 | I28 | Near-equal blur bounds expand instead of collapsing | 8 | Pending investigation |
 
-No affected-original census, Native 4K acceptance or no-performance-regression claim is established yet. See `ledger.json` for source and handoff identities.
+I17 confirms one affected original with repeatable Native 4K captures and no observed slowdown in that witness. No full affected census or universal performance claim is established. See `ledger.json` for source and handoff identities.
