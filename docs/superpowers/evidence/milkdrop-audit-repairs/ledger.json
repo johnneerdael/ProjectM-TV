@@ -371,11 +371,12 @@
       "sha256": "8708d10a53f0b2454132b5836b9ae4d629e7684bcf23ac5c2842cdf38d5470e8",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I04-signed-remainder-differs-from-original-absolute-value-remainder/HANDOFF.md",
       "numeric_witness": "-5%2: library/predictor-1; original+1. Exact integer operands avoid FPU rounding assumptions.",
-      "status": "isolated bits-v2: unchanged flags;76 remainder+12 preservation host/ARM controls and20 baseline boundaries pass; guard IR reviewed; Native sign captured; cost pending",
+      "status": "deferred complete owner packet; v2/v3 guarded source/ARM/Native proof,92 extended controls and96 independent cost jobs; no-loss gate unproven",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "defined-domain absolute integer remainder; width limits explicit",
-      "evidence": "I04-bits-v2/ROOT-QUALIFICATION.md"
+      "evidence": "I04-bits-v3/OWNER-DECISION.md",
+      "policy": "retain signed native remainder pending bounded-source repair cost/platform decision; flags and other math unchanged"
     },
     {
       "id": "M02",

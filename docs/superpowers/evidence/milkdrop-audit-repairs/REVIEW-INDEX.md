@@ -1,6 +1,6 @@
 # Native4K audit review
 
-Current checkpoint:32/33 findings classified,13 repaired IDs in12 new shipping patches,10 retained policies and9 complete deferred packets. I04 remains in independent cost qualification. [Draft PR61](https://github.com/johnneerdael/ProjectM-TV/pull/61) is open; final combined integration/CI/review gates remain separate.
+Current checkpoint:33/33 findings classified,13 repaired IDs in12 new shipping patches,10 retained policies and10 complete deferred packets. Every finding has a repair or completed owner packet. [Draft PR61](https://github.com/johnneerdael/ProjectM-TV/pull/61) is open; final combined integration/CI/review gates remain separate.
 
 The priority images below are verified final presented output (read framebuffer0), not the historical intermediate captures. They use matched frozen audio/seed/preset bytes and source-instrumented GLES builds. They show expected source-derived TV behavior, not original Windows recordings. Open the PNGs at full resolution for small line/dot details.
 

@@ -1,0 +1,11 @@
+{
+  "binary_sha256": "2ef8a4b1664123d6d74612bc131cad8f56b22e4693cf7cd0c75e3d68c5acb4b3",
+  "source_test_sha256": "31e0092e2b0fc90dddd11d25aae4956f21fa57f9cf8bc03ca2e291a72a8d423e",
+  "engine_source_sha256": "41e33e9a8492c8ae3908c2007362a82e04da53d0d01d12c897384cb11b37435a",
+  "device": "emulator-5640",
+  "user": 0,
+  "new_cases": 16,
+  "total_remainder_cases": 92,
+  "engine_flags_unchanged": true,
+  "original76_controls_preserved_separately": true
+}

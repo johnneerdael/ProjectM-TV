@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:32 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and9 complete deferred packets. I04 remains open. Final combined integration/review/CI gates remain open; PR61 is a draft.
+Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:33 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and10 complete deferred packets. Every finding is repaired or documented for owner followup. Final combined integration/review/CI gates remain open; PR61 is a draft. [Priority final-output review index](REVIEW-INDEX.md).
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -23,7 +23,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I13 | Left-axis equation angle seam changes sign | 204 | [implemented0026; actual CGL/normal51/sanitizer51 and original/finite/custom Native4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending](I13/README.md) |
 | I18 | Wave brightening omits original preliminary clamp | 0 | [implemented0027 RGB-only;52normal/52sanitizer, qualified original/finite Native4K palette/nonzero proof; isolated12-run cost no consistent slowdown; integration pending](I18/README.md) |
 | I03 | Small finite divisions and reciprocal powers collapse to zero | 0 | [deferred complete owner packet; combined finite recovery passes source/ARM/Native proof but runtime tiny-power cost +7.50%](I03-I04/I03-OWNER-DECISION.md) |
-| I04 | Signed remainder differs from original absolute-value remainder | 0 | [isolated bits-v2: unchanged flags;76 remainder+12 preservation host/ARM controls and20 baseline boundaries pass; guard IR reviewed; Native sign captured; cost pending](I04-bits-v2/ROOT-QUALIFICATION.md) |
+| I04 | Signed remainder differs from original absolute-value remainder | 0 | [Deferred: guarded source/ARM/Native proof and96 cost jobs; no-loss gate remains unproven](I04-bits-v3/OWNER-DECISION.md) |
 | M02 | Inverted-radius border topology differs from target library | 0 | [implemented0028; 46 fan profiles,51 normal/51 sanitizer,24 Native4K repeat runs and12 isolated cost qualification; final integration pending](M02/README.md) |
 | M01 | Negative custom-wave enable executes in predictor but not library | 0 | [deferred shared nonzero-boolean proposal; source/actual sampler/Native4K repeated proof complete; clean12-run negative-wave cost+.102ms/+7.503%; owner decision documented](I02-M01/README.md) |
 | I25 | Shape/custom-wave colour fractions survive original byte truncation | 5347 | [retained float precision; complete owner decision with actual production controls and repeated Native4K images](I25-I30/OWNER-DECISION.md) |
@@ -91,3 +91,7 @@ I03 now has a complete deferred owner packet:198combined source/ARM controls,12N
 I15 retainedvisibilityminimum qualified: actualendpoint/diffusion/ownershipcomponentcontrols plus4unchangedRovastarNative current/width-onlyoracle runs exactrepeats. Previousshared44Nativefinite/stock runs remainseparate. Twelve repairedIDs,ten retainedpolicyIDs,six deferredIDs andfive unfinishedIDs remain.
 
 Latest M02 check:51 normal and51 ASan/UBSan controls pass; all28 patches apply. [Border repair evidence](M02/README.md) includes repeated Native4K images and isolated cost. Earlier numbered checkpoints below retain historical source identities.
+
+## Completed audit disposition checkpoint
+
+All33 findings now have a repair or complete owner-followup packet:13 repaired IDs in12 new patches,10 retained policies,10 deferred proposals. [Priority review images](REVIEW-INDEX.md) use verified final output. Fresh combined shipping checks pass329host,51sanitizer renderer,137JVM and53capture/helper tests plus24subtests; both-ABI release core/debug APK builds,28-patch application and strict docs pass. [Exact logs/limits](final-shipping-checks/README.md) retain the skipped macOS EGL transition and unavailable Linux/Mesa/explicit-linkage route. Final CI/external review remains separate; draftPR61 is not a merge/release claim.

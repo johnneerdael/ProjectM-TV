@@ -1,0 +1,22 @@
+{
+  "device": "emulator-5640",
+  "user": 0,
+  "binary_sha256": "1592dd622c2cf17642a5d56a2ddf3dadb2a47497c47bf511d6cf826f948f392d",
+  "binary": "build/audit/arithmetic-proposal/i04-only/bits-v3/arm64/eel-i04-bits-controls",
+  "source_sha256": "41e33e9a8492c8ae3908c2007362a82e04da53d0d01d12c897384cb11b37435a",
+  "rows": [
+    {
+      "case": "I04",
+      "log": "build/audit/i04-v3-arm64-I04.txt"
+    },
+    {
+      "case": "aliases",
+      "log": "build/audit/i04-v3-arm64-aliases.txt"
+    },
+    {
+      "case": "boundaries",
+      "log": "build/audit/i04-v3-arm64-boundaries.txt"
+    }
+  ],
+  "scope": "actual ARM64 full-engine evaluator controls, no GL work"
+}
