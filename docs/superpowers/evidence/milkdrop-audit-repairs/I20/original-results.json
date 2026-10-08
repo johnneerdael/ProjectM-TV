@@ -1,0 +1,30 @@
+[
+  {
+    "original": "137",
+    "eight_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "original": "11",
+    "eight_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
+]

@@ -53,3 +53,5 @@ Live patch numbering was shifted once to preserve released main0016. Frozen evid
 Draft [PR61](https://github.com/johnneerdael/ProjectM-TV/pull/61) is open. Main synchronization preserves the released0016 efficiency patch; [original/custom Native4K probes](main-synchronization/results.json) are selected-RGB identical before/after. I12 has original/finite/custom Native proof and isolated12-run cost qualification. I02/M01 now has source/sampler/Native proof and a complete cost-bearing owner decision report; its proposal is outside shipping patches.
 
 The full33 goal remains active. Source-only I18/I24 and compiler-sensitive I03/I04 proposals are isolated, outside the patch series. Android fast-math removes raw arithmetic finite guards; integration requires a verified compiler/implementation disposition.
+
+Current integrated shipping-series ASan/UBSan renderer controls pass51/51, matching normal51/51. ARM64 source-instrumented circle artifact5d721fba builds; original Native4K capture and cost qualification remain active.

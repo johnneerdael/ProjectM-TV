@@ -1,0 +1,98 @@
+[
+  {
+    "original": "137",
+    "frame": 120,
+    "mae": 10.206303369341564,
+    "changed_pixels": 8219489
+  },
+  {
+    "original": "137",
+    "frame": 150,
+    "mae": 11.761741978523663,
+    "changed_pixels": 8284192
+  },
+  {
+    "original": "137",
+    "frame": 180,
+    "mae": 9.637939211998457,
+    "changed_pixels": 8283282
+  },
+  {
+    "original": "137",
+    "frame": 210,
+    "mae": 12.953767401298869,
+    "changed_pixels": 8259999
+  },
+  {
+    "original": "137",
+    "frame": 239,
+    "mae": 12.715889355066873,
+    "changed_pixels": 8199536
+  },
+  {
+    "original": "137",
+    "frame": 300,
+    "mae": 9.54322683577675,
+    "changed_pixels": 8182294
+  },
+  {
+    "original": "137",
+    "frame": 390,
+    "mae": 7.451781322337963,
+    "changed_pixels": 8261711
+  },
+  {
+    "original": "137",
+    "frame": 479,
+    "mae": 11.08250200938786,
+    "changed_pixels": 8230818
+  },
+  {
+    "original": "11",
+    "frame": 120,
+    "mae": 18.94071172518004,
+    "changed_pixels": 7918637
+  },
+  {
+    "original": "11",
+    "frame": 150,
+    "mae": 20.03419720936214,
+    "changed_pixels": 8127957
+  },
+  {
+    "original": "11",
+    "frame": 180,
+    "mae": 16.14407540027006,
+    "changed_pixels": 8163883
+  },
+  {
+    "original": "11",
+    "frame": 210,
+    "mae": 20.536527536651235,
+    "changed_pixels": 8151331
+  },
+  {
+    "original": "11",
+    "frame": 239,
+    "mae": 21.666726867926954,
+    "changed_pixels": 7930477
+  },
+  {
+    "original": "11",
+    "frame": 300,
+    "mae": 22.313464425797324,
+    "changed_pixels": 7895018
+  },
+  {
+    "original": "11",
+    "frame": 390,
+    "mae": 13.91946735146605,
+    "changed_pixels": 7945627
+  },
+  {
+    "original": "11",
+    "frame": 479,
+    "mae": 19.509125313464505,
+    "changed_pixels": 5492669
+  }
+]

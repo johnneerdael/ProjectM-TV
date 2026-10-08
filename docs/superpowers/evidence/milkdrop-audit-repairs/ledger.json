@@ -291,8 +291,11 @@
       "sha256": "714f188a6119fa9432b9ea5d6103ceb77edcdd909f0a9d5984aabf7ee6c2e871",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I20-circle-angular-spacing-and-closure-smoothing-differ/HANDOFF.md",
       "numeric_witness": "Raw point120, zero PCM/mystery/time, radius.5: target angle3.14 and roughly(-.4999994,.0007963); original angle3.1531382 and(-.4999667,-.0057726). Target smooths240 to479 then closes; original includes duplicated endpoint241 then smooths to481.",
-      "status": "candidate0027 (historical0028); production geometry/replay RED167\u2192GREEN; current51 normal and27-patch application pass; Native4K/cost/integration pending",
-      "confirmed_affected_originals": [],
+      "status": "candidate0027;51 normal+51 sanitizer; two unchanged Native4K originals repeat exactly; finite seam/styles/cost/integration pending",
+      "confirmed_affected_originals": [
+        "$$$ Royal - Mashup (137).milk",
+        "$$$ Royal - Mashup (11).milk"
+      ],
       "current_patch_number": 27,
       "evidence": "I20/README.md"
     },
