@@ -5,7 +5,8 @@
 The unchanged witness is **Stahlregen – funky Blur (lotus mix) the genius in me
 lies right at the heart of the flacc**. Its per-pixel zoom code contains
 `zoom=zoom+.10*sin(rad+.+15.15);`. Upstream rejects the lone dot at L9 C23 and
-exits1 in both runs. The left tile is an explicit rejection panel; no upstream
+exits1 in both runs ([actual log](upstream/0/render.log),
+[execution receipt](upstream/0/execution.json)). The left tile is an explicit rejection panel; no upstream
 framebuffer is claimed.
 
 The tolerant loader without0003 omits that equation. Current0003 accepts the dot

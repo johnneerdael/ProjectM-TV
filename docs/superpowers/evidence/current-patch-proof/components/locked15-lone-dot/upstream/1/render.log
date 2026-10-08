@@ -1,0 +1,4 @@
+projectM[3] [GladLoader] GLInfo  api="GLES" ver="3.0" profile="n/a" flags="fwd" glsl="OpenGL ES GLSL ES 3.00" vendor="Google (Apple)" renderer="Android Emulator OpenGL ES Translator (Apple M4 Pro)" backend="EGL" user_resolver="no"
+GPU Google (Apple) / Android Emulator OpenGL ES Translator (Apple M4 Pro) / OpenGL ES 3.0 (4.1 Metal - 89.4)
+projectM[5] [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)
+preset-lab-worker: /data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/witness.milk: [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)
