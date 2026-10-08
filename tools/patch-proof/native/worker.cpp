@@ -1,6 +1,62 @@
-#include "vendor/json.hpp"
-#include "gl_capture.hpp"
 #include "analysis_hooks.hpp"
+#include "vendor/json.hpp"
+#include <cstdint>
+#include <cstdlib>
+#include <limits>
+#include <stdexcept>
+#include <string>
+#include <iostream>
+
+using json = nlohmann::json;
+
+namespace {
+constexpr uint32_t kEvaluatorControlSeed = 12345u;
+
+uint32_t ReadSeed(const json& config) {
+    const json& value = config.at("seed");
+    if (value.is_number_unsigned()) {
+        const uint64_t seed = value.get<uint64_t>();
+        if (seed <= std::numeric_limits<uint32_t>::max()) return static_cast<uint32_t>(seed);
+    } else if (value.is_number_integer()) {
+        const int64_t seed = value.get<int64_t>();
+        if (seed >= 0 && static_cast<uint64_t>(seed) <= std::numeric_limits<uint32_t>::max())
+            return static_cast<uint32_t>(seed);
+    }
+    throw std::runtime_error("config.seed must be an integer from 0 through 4294967295");
+}
+
+uint32_t ConfigureSeed(uint32_t seed) {
+    const std::string value = std::to_string(seed);
+    if (::setenv("PRESET_LAB_SEED", value.c_str(), 1) != 0)
+        throw std::runtime_error("cannot set PRESET_LAB_SEED from the selected seed");
+    std::srand(lab::Seed(1));
+    lab::ResetShaderRandom();
+    return seed;
+}
+}
+
+#ifdef PATCH_PROOF_SEED_TEST
+int main(int argc, char** argv) {
+    try {
+        uint32_t seed;
+        if (argc == 3 && std::string(argv[1]) == "job") {
+            seed = ConfigureSeed(ReadSeed(json::parse(argv[2])));
+        } else if (argc == 2 && std::string(argv[1]) == "evaluator-control") {
+            seed = ConfigureSeed(kEvaluatorControlSeed);
+        } else {
+            throw std::runtime_error("usage: worker-seed-control job <config-json> | evaluator-control");
+        }
+        json result = {{"seed", seed}, {"environment_seed", std::getenv("PRESET_LAB_SEED")},
+                       {"libc_random", std::rand()}, {"shader_random", lab::ShaderRandom()}};
+        std::cout << result.dump() << std::endl;
+        return 0;
+    } catch (const std::exception& error) {
+        std::cerr << error.what() << '\n';
+        return 1;
+    }
+}
+#else
+#include "gl_capture.hpp"
 #include "shader_failure_probe.hpp"
 #include "texture_history_probe.hpp"
 #include "ProjectM.hpp"
@@ -8,14 +64,10 @@
 #include "Audio/AudioConstants.hpp"
 #include <cmath>
 #include <fstream>
-#include <iostream>
 #include <filesystem>
-#include <stdexcept>
 #include <array>
 #include <thread>
 #include <projectm-eval.h>
-
-using json = nlohmann::json;
 
 std::vector<json> capturedLogs;
 void CaptureLog(const char* message,int severity,void*) { capturedLogs.push_back({{"severity",severity},{"message",message}}); std::cerr << "projectM[" << severity << "] " << message << std::endl; }
@@ -36,6 +88,7 @@ public:
 int main(int argc, char** argv) {
     try {
         if (argc == 2 && std::string(argv[1]) == "--evaluator-control") {
+            const uint32_t seed = ConfigureSeed(kEvaluatorControlSeed);
             std::array<std::array<double, 128>, 2> streams{};
             std::array<bool, 2> compiled{};
             for (size_t i = 0; i < streams.size(); ++i) {
@@ -65,7 +118,7 @@ int main(int argc, char** argv) {
                 projectm_eval_code_destroy(code);
             }
             projectm_eval_context_destroy(context);
-            json result = {{"compiled", compiled}, {"streams", streams},
+            json result = {{"seed", seed}, {"compiled", compiled}, {"streams", streams},
                            {"fresh_thread_streams_equal", streams[0] == streams[1]},
                            {"lone_dot_is_zero", loneDot}};
             std::cout << result.dump() << std::endl;
@@ -78,6 +131,7 @@ int main(int argc, char** argv) {
         json job = json::parse(request);
         if (job.at("schema_version") != 1) throw std::runtime_error("unsupported job schema");
         auto cfg = job.at("config");
+        const uint32_t seed = ConfigureSeed(ReadSeed(cfg));
         int width = cfg.at("width"), height = cfg.at("height"), fps = cfg.at("fps");
         double warmup = cfg.at("warmup_seconds"), measurement = cfg.at("measurement_seconds");
         double duration = warmup + measurement;
@@ -101,8 +155,6 @@ int main(int argc, char** argv) {
         if (cfg.value("shader_failure_probe", false)) diagnostics = proof::ShaderFailureProbe();
         if (cfg.value("texture_history_probe", false)) diagnostics = proof::TextureHistoryProbe();
         lab::clock_seconds = 0;
-        std::srand(lab::Seed(1));
-        lab::ResetShaderRandom();
         LabProjectM engine;
 #ifdef PRESET_LAB_HAS_FRAME_TIME
         engine.SetFrameTime(0);
@@ -166,7 +218,7 @@ int main(int argc, char** argv) {
                        {"width", width}, {"height", height}, {"fps", fps},
                        {"gl_vendor", reinterpret_cast<const char*>(glGetString(GL_VENDOR))}, {"glsl_version", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))}, {"messages",capturedLogs}, {"gl_error_frames", error_frames}, {"gl_version", reinterpret_cast<const char*>(glGetString(GL_VERSION))},
                        {"gl_renderer", reinterpret_cast<const char*>(glGetString(GL_RENDERER))},
-                       {"identity", job.at("identity")}, {"seed", cfg.at("seed")}};
+                       {"identity", job.at("identity")}, {"seed", seed}};
         if (!diagnostics.empty()) result["diagnostics"] = diagnostics;
         std::string target = job.at("manifest_path");
         std::ofstream manifest(target + ".tmp");
@@ -180,3 +232,4 @@ int main(int argc, char** argv) {
         return 1;
     }
 }
+#endif

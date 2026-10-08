@@ -267,6 +267,9 @@ class FailedCaptureRetention(unittest.TestCase):
                 CAPTURE.main()
 
             result = json.loads((work / 'results.json').read_text())
+            self.assertIn('remote_workspace', result)
+            self.assertEqual(result['remote_workspace'], '/data/local/tmp/projectmtv-patch-proof-' +
+                             CAPTURE.sha(str(work.resolve()).encode())[:16])
             self.assertEqual((work / 'inputs/witness.milk').read_bytes(), b'[preset00]\n')
             self.assertEqual(result['preset_sha256'], CAPTURE.sha(b'[preset00]\n'))
             self.assertEqual(result['textures'], {'nested/texture.png': CAPTURE.sha(b'original texture bytes')})

@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import re
 
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source, DEFAULT_SERIES, digest
@@ -17,7 +18,8 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manifest: dict) -> dict:
+def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manifest: dict,
+                        remote_workspace: str) -> dict:
     identity = {'role': role, 'repeat': repeat}
     actual_identity = manifest.get('identity')
     if (actual_identity != identity or not isinstance(actual_identity, dict) or
@@ -33,6 +35,14 @@ def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manife
     if (job.get('identity') != identity or
             type(job.get('identity', {}).get('repeat')) is not int):
         raise ValueError('Retained job identity differs from its role/repeat')
+    journey = result['capture_kind'] == 'texture-journey'
+    paths = {'pcm_path': remote_workspace + '/audio.f32',
+             'preset_path': remote_workspace + '/witness.milk',
+             'texture_root': remote_workspace + ('/textures/a' if journey else '/textures'),
+             'bands_path': remote_workspace + '/bands.jsonl',
+             'manifest_path': remote_workspace + '/manifest.json'}
+    if any(job.get(key) != path for key, path in paths.items()):
+        raise ValueError('Retained job input/output paths differ from the capture workspace')
     controls = result.get('host_controls', {})
     width, height = result['dimensions']
     expected = {'width': width, 'height': height, 'fps': 30, 'seed': 12345,
@@ -50,12 +60,9 @@ def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manife
     if 'line_reference_width' in cfg and cfg['line_reference_width'] != controls.get('line_reference_width', 0):
         raise ValueError('Retained job protocol differs from reference width')
     events = []
-    if result['capture_kind'] == 'texture-journey':
-        texture_root = job.get('texture_root', '')
-        if not texture_root.endswith('/a'):
-            raise ValueError('Retained host events have no initial pack-a root')
-        events = [{'frame': 20, 'texture_root': texture_root[:-1] + 'b'},
-                  {'frame': 21, 'load_preset': job.get('preset_path'), 'smooth': True},
+    if journey:
+        events = [{'frame': 20, 'texture_root': remote_workspace + '/textures/b'},
+                  {'frame': 21, 'load_preset': remote_workspace + '/witness.milk', 'smooth': True},
                   {'frame': 40, 'reset_textures': True}]
     if job.get('events', []) != events:
         raise ValueError('Retained host events differ from the capture sequence')
@@ -121,8 +128,23 @@ def verify_inputs(work: Path, result: dict, preset: Path | None, textures: Path 
     return {'source': source, 'preset': str(preset.resolve()), 'textures': str(textures.resolve())}
 
 
+def verify_remote_workspace(result: dict, historical_remote_workspace: str | None) -> dict:
+    if 'remote_workspace' in result:
+        remote, source = result['remote_workspace'], 'recorded'
+    else:
+        if historical_remote_workspace is None:
+            raise ValueError('Historical capture has no recorded remote workspace; explicitly supply '
+                             '--historical-remote-workspace (verify(..., historical_remote_workspace=...))')
+        remote, source = historical_remote_workspace, 'explicit-historical'
+    if not isinstance(remote, str) or re.fullmatch(
+            r'/data/local/tmp/projectmtv-patch-proof-[0-9a-f]{16}', remote) is None:
+        raise ValueError('Capture requires an owned hashed remote workspace')
+    return {'source': source, 'path': remote}
+
+
 def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES, *,
-           preset: Path | None = None, textures: Path | None = None) -> dict:
+           preset: Path | None = None, textures: Path | None = None,
+           historical_remote_workspace: str | None = None) -> dict:
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
     result = json.loads((work / 'results.json').read_text())
@@ -151,6 +173,8 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     if result.get('clock') != 'frame/30.0' or result.get('frames') != 120:
         raise ValueError('Capture frame/clock protocol differs')
     input_verification = verify_inputs(work, result, preset, textures)
+    remote_workspace_verification = verify_remote_workspace(result, historical_remote_workspace)
+    remote_workspace = remote_workspace_verification['path']
     verified, rejected, comparisons = [], [], {}
     previous = None
     common_job = None
@@ -170,6 +194,8 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
         if len(runs) != 2:
             raise ValueError('Expected exactly two repeats')
         if kind == 'evaluator':
+            if any(type(r['control'].get('seed')) is not int or r['control']['seed'] != 12345 for r in runs):
+                raise ValueError('Evaluator seed differs from frozen capture seed')
             if any(r['exit'] != 0 or r['control']['compiled'] != [True, True] for r in runs):
                 raise ValueError('Evaluator control failed to compile')
             if runs[0]['control'] != runs[1]['control'] or not value['repeat_equal']:
@@ -220,7 +246,7 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
             verify_texture_history(role, runs)
         for repeat, run in enumerate(runs):
             manifest = run['manifest']
-            job = verify_run_protocol(work, result, role, repeat, manifest)
+            job = verify_run_protocol(work, result, role, repeat, manifest, remote_workspace)
             if common_job is not None and job != common_job:
                 raise ValueError('Retained jobs differ across roles/repeats')
             common_job = job
@@ -274,9 +300,14 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     scope += '; preset and texture bytes match recorded hashes'
     if input_verification['source'] == 'explicit-external':
         scope += '; historical inputs supplied explicitly, original uploaded bytes were not retained'
+    if kind != 'evaluator':
+        scope += '; job input/output and event paths bound to the selected remote workspace'
+    if remote_workspace_verification['source'] == 'explicit-historical':
+        scope += '; historical workspace supplied explicitly, original remote workspace was not recorded'
     return {'status': 'verified', 'successful_roles': verified, 'rejected_roles': rejected,
             'different_frames_between_adjacent_successful_roles': comparisons,
-            'input_verification': input_verification, 'scope': scope}
+            'input_verification': input_verification,
+            'remote_workspace_verification': remote_workspace_verification, 'scope': scope}
 
 
 if __name__ == '__main__':
@@ -290,9 +321,12 @@ if __name__ == '__main__':
                         help='Exact preset for historical captures without retained inputs')
     parser.add_argument('--textures', type=Path,
                         help='Exact texture inventory for historical captures without retained inputs')
+    parser.add_argument('--historical-remote-workspace',
+                        help='Explicit original owned workspace for historical captures lacking that record')
     args = parser.parse_args()
     report = verify(args.work.resolve(), args.ndk.resolve(), args.series.resolve(),
-                    preset=args.preset, textures=args.textures)
+                    preset=args.preset, textures=args.textures,
+                    historical_remote_workspace=args.historical_remote_workspace)
     report['verifier_sha256'] = sha(Path(__file__).read_bytes())
     report['source_identity_sha256'] = sha(Path(__file__).with_name('source_identity.py').read_bytes())
     report['rgb_payload_sha256'] = sha(Path(__file__).with_name('rgb_payload.py').read_bytes())

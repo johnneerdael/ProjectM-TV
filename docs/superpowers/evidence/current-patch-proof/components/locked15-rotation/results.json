@@ -1,6 +1,6 @@
 {
   "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
-  "capture_sha256": "b8fb5bbfe84c96ae5818464986963a2a72ddbc577aa1b6bccd397ada954b8e5e",
+  "capture_sha256": "94a5e9c36866caea9680e1871ae333b40bb886108079fe1e3c4c225475cafad3",
   "capture_kind": "image",
   "device": "emulator-5630",
   "user": 0,
@@ -67,6 +67,7 @@
     "feature:com.google.android.software.cast_receiver",
     "feature:com.google.android.tv.installed"
   ],
+  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-e467279693b9cb83",
   "fingerprint": "google/sdk_google_atv64_arm64/emu64a:16/BT2A.260319.001/15058170:user/dev-keys",
   "preset": "large-rotation-uv.milk",
   "preset_sha256": "66d6398c53544eea179250ff8fe93122f181f48bdcc9282976e0ad27f3f4207f",
@@ -175,9 +176,9 @@
         },
         "patch_removed": null,
         "ordered_patches": [],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/upstream/ndk-build/patch-proof-worker",
-        "binary_sha256": "340cbd0d15da7b1de16dd151aabb7eeb4e69f0c1f2d80126a3edaf24ff07f6e3",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/upstream/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/ndk-build/patch-proof-worker",
+        "binary_sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -186,9 +187,9 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5249fb8d1a7d1688b7f7ee8a011814dcf4c1742d240bb9165955696250c42296"
+          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
         },
-        "adjustments_sha256": "549258562be88f0e17b8a99130a07f6e5b50dbcaa6101cc15c5cebe2f4310042",
+        "adjustments_sha256": "77637d8a9bb981e9d100298ea3bdec9e7fcf8af865974cf1ef2c7bbcea5d29f1",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },
@@ -584,9 +585,9 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/without-0015/ndk-build/patch-proof-worker",
-        "binary_sha256": "f870ab43675889e9288e9b2e32733788c78bd1c2ee645960cb3f6f32a2c4a9cc",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/without-0015/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/without-0015/ndk-build/patch-proof-worker",
+        "binary_sha256": "e4212b12da4c2d630aa130299d7462ffff1e79726fd682f462112a5c5c4c55f4",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/without-0015/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -595,9 +596,9 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5249fb8d1a7d1688b7f7ee8a011814dcf4c1742d240bb9165955696250c42296"
+          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
         },
-        "adjustments_sha256": "bb4c471ac1de5bbc33823b516a9523dc26d5e5881f490ba77ff4c98c21c81854",
+        "adjustments_sha256": "7c4cb1f6841d4a3503e4e0c901c0dedfc559cf70d595138a0e97787f5c4d05fd",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },
@@ -993,9 +994,9 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/patched/ndk-build/patch-proof-worker",
-        "binary_sha256": "196fe3e15eb6ad25f35e8354df856877013d79ffce56bfffefff2617fbd16941",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-final-proof-workers-v1/patched/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/ndk-build/patch-proof-worker",
+        "binary_sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -1004,9 +1005,9 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5249fb8d1a7d1688b7f7ee8a011814dcf4c1742d240bb9165955696250c42296"
+          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
         },
-        "adjustments_sha256": "6f89b288a23aa6a1e117f07e1abd719fb8da3fc9b6551f715f9cf0f08785cc74",
+        "adjustments_sha256": "d947af27e0bdad586447cbb6116ab08160e71531693911e9bc09f90c12daab4f",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },

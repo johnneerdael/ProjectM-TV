@@ -159,6 +159,7 @@ def main() -> None:
             report = {'series_sha256': digest(series),
                       'capture_sha256': sha(Path(__file__).read_bytes()), 'capture_kind': 'evaluator' if args.evaluator_control else
                       'texture-journey' if args.texture_journey else 'image', 'device': args.device, 'user': args.user, 'features': features,
+                      'remote_workspace': remote,
                       'fingerprint': adb('shell', 'getprop', 'ro.build.fingerprint').stdout.strip(),
                       'preset': preset_name, 'preset_sha256': preset_hash,
                       'textures': texture_hashes,

@@ -502,3 +502,10 @@ that set and publish; deeper optimization/lifecycle comparisons move to a follow
 Do not add engine patches or reopen this scope for later work. Preserve immutable
 13/14-patch capture identities; current14-series.json retains the14-patch manifest
 while current-series.json identifies the locked15-patch publication source.
+
+Proof review maintenance (2026-10-08): new captures retain uploaded inputs and
+record their owned remote workspace; verification binds job/event paths to that
+workspace. Native workers validate and install the job seed before RNG setup.
+Fresh locked15 power/rotation replays match all prior RGB frames and pass full
+source/binary/input/pixel verification. Historical records remain unchanged and
+require the explicit input/workspace options documented in tools/patch-proof/README.md.

@@ -28,7 +28,7 @@ build/patch-proof-env/bin/python tools/patch-proof/verify.py --work build/patch-
 
 Use `--adb /path/to/adb` if it is not on PATH. Capture supports 512×288 (default),
 256×144, 1280×720, 1920×1080, 2560×1440 and 3840×2160 through `--width`. It renders 120
-frames at 30Hz, fixed seed 12345 and identical generated mono float32 PCM. Each role
+frames at 30Hz, fixed seed 12345 and identical generated mono float32 PCM. The worker validates the job seed and installs it before libc, shader and evaluator RNG initialization; a conflicting PRESET_LAB_SEED cannot change the render. Evaluator controls explicitly use seed12345. Each role
 runs twice; every RGB frame is hashed, alpha excluded, with lossless PNGs retained
 at 29/59/119. The comparison adds labels above unchanged framebuffer pixels. Failed
 or unstable roles have an explicit panel rather than a fabricated render.
@@ -48,6 +48,14 @@ receipt distinguishes these supplied historical inputs from retained capture
 bytes: they match the recorded hashes, but the original uploaded bytes were not
 retained. Existing streams and workers remain unchanged. Incomplete retained
 inputs fail verification even when external paths are supplied.
+
+New reports record the exact owned remote workspace. Every job must reference
+its audio.f32, witness.milk and textures directory; texture journeys use its
+textures/a and textures/b roots and reload the same witness. Bands/manifest output
+paths also stay within that workspace. Historical reports without this field
+require explicit --historical-remote-workspace ORIGINAL_OWNED_PATH (Python API:
+historical_remote_workspace=...). Receipts distinguish this supplied historical
+workspace from a recorded one. Do not rewrite preserved reports to add it.
 
 Use `--line-reference-height 1080` to request the patched library's 1920×1080
 reference-size line path. Upstream keeps its existing GL-line implementation;

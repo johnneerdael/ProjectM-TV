@@ -28,4 +28,10 @@ RGB frames verify: [results](results.json), [verification](verification.json),
 [figure audit](figure-audit.json). [Diagnostic source](large-rotation-uv.milk).
 Capture adjustments and original snapshots remain distinct; no Windows or
 universal driver-failure claim is made. Complete streams/workers remain under
-ignored build/patch-proof/locked15-large-rotation-v1 and current15-final-proof-workers-v1.
+ignored build/patch-proof/locked15-large-rotation-v2 and current15-job-bound-workers-v2.
+
+This replay uses the job-bound seed/input harness: inputs are retained, job paths
+bind to the recorded owned workspace, and the validated job seed initializes
+the worker RNGs. All720 RGB frames match the preserved v1 capture; published
+images and figure hashes remain unchanged. Original v1 streams/workers remain
+available separately under their prior ignored build paths.

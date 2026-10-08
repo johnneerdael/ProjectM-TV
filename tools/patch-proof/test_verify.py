@@ -48,6 +48,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                     'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
                     'source_hashes': str(manifest)}
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
+        self.remote = '/data/local/tmp/projectmtv-patch-proof-0123456789abcdef'
         self.frame_data = bytes([255, 0, 0, 0, 255, 0]) * 120
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
                'frames': 120, 'width': 2, 'height': 1, 'fps': 30, 'seed': 12345,
@@ -57,6 +58,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.result = {'preset_sha256': VERIFY.sha(self.preset.read_bytes()),
             'textures': {'nested/texture.png': VERIFY.sha(b'original texture bytes')},
             'device': 'emulator-5630', 'user': 0,
+            'remote_workspace': self.remote,
             'features': ['feature:android.software.leanback', 'feature:android.hardware.type.television'],
             'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
@@ -101,10 +103,11 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                 diagnostic = self.result.get('diagnostic_kind')
                 if diagnostic == 'shader-fragment-failure': cfg['shader_failure_probe'] = True
                 if diagnostic == 'texture-history': cfg['texture_history_probe'] = True
-                remote = '/owned/proof'
+                remote = self.remote
                 job = {'schema_version': 1, 'config': cfg, 'identity': {'role': role, 'repeat': repeat},
                        'pcm_path': remote + '/audio.f32', 'preset_path': remote + '/witness.milk',
-                       'texture_root': remote + '/textures'}
+                       'texture_root': remote + '/textures', 'bands_path': remote + '/bands.jsonl',
+                       'manifest_path': remote + '/manifest.json'}
                 if self.result['capture_kind'] == 'texture-journey':
                     job['texture_root'] += '/a'
                     job['events'] = [{'frame': 20, 'texture_root': remote + '/textures/b'},
@@ -218,8 +221,123 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         path = self.work / 'patched/1/job.json'
         value = json.loads(path.read_text()); value['preset_path'] = '/owned/different.milk'
         path.write_text(json.dumps(value))
-        with self.assertRaisesRegex(ValueError, 'jobs differ across'):
+        with self.assertRaisesRegex(ValueError, 'job input/output paths'):
             VERIFY.verify(self.work, self.root / 'ndk')
+
+    def add_successful_role(self):
+        value = json.loads(json.dumps(self.result['roles']['patched']))
+        value['worker']['role'] = 'upstream'
+        value['worker']['ordered_patches'] = []
+        for repeat, run in enumerate(value['runs']):
+            run['manifest']['identity'] = {'role': 'upstream', 'repeat': repeat}
+        self.result['roles']['upstream'] = value
+        shutil.copytree(self.work / 'patched', self.work / 'upstream')
+        self.save()
+        image = Image.new('RGB', (4, 33), '#171717')
+        draw = ImageDraw.Draw(image)
+        for col, role in enumerate(('patched', 'upstream')):
+            draw.text((col * 2 + 4, 8), role, fill='white')
+            image.paste(Image.open(self.work / role / '0/119.png'), (col * 2, 32))
+        image.save(self.work / 'comparison.png')
+
+    def rewrite_all_jobs(self, edit):
+        for role in self.result['roles']:
+            for repeat in (0, 1):
+                path = self.work / role / str(repeat) / 'job.json'
+                job = json.loads(path.read_text())
+                edit(job)
+                path.write_text(json.dumps(job))
+
+    def test_rejects_consistent_job_path_substitutions_across_all_roles_and_repeats(self):
+        self.add_successful_role()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched', 'upstream'])
+        for key, path in (('pcm_path', self.remote + '/different.f32'),
+                          ('preset_path', self.remote + '/different.milk'),
+                          ('texture_root', self.remote + '/other-textures'),
+                          ('texture_root', self.remote + '/textures/../textures'),
+                          ('texture_root', '/unowned/textures'),
+                          ('bands_path', self.remote + '/other-bands.jsonl'),
+                          ('manifest_path', self.remote + '/other-manifest.json')):
+            with self.subTest(key=key, path=path):
+                self.save()
+                self.rewrite_all_jobs(lambda job: job.__setitem__(key, path))
+                with self.assertRaisesRegex(ValueError, 'job input/output paths'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def journey_fixture(self):
+        self.result['capture_kind'] = 'texture-journey'
+        for repeat in (0, 1):
+            Image.frombytes('RGB', (2, 1), self.frame_data[40 * 6:41 * 6]).save(
+                self.work / 'patched' / str(repeat) / '40.png')
+        self.save()
+
+    def test_accepts_workspace_bound_texture_journey(self):
+        self.journey_fixture()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_consistent_journey_root_and_preset_substitutions(self):
+        self.journey_fixture()
+        self.add_successful_role()
+        def edit_roots(job):
+            job['texture_root'] = '/unowned/textures/a'
+            job['events'][0]['texture_root'] = '/unowned/textures/b'
+        def edit_preset(job):
+            job['preset_path'] = '/unowned/other.milk'
+            job['events'][1]['load_preset'] = '/unowned/other.milk'
+        for edit in (edit_roots, edit_preset):
+            with self.subTest(edit=edit.__name__):
+                self.save()
+                self.rewrite_all_jobs(edit)
+                with self.assertRaisesRegex(ValueError, 'job input/output paths'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_consistent_journey_event_path_substitutions(self):
+        self.journey_fixture()
+        self.add_successful_role()
+        for event, key, path in ((0, 'texture_root', '/unowned/textures/b'),
+                                  (1, 'load_preset', '/unowned/other.milk'),
+                                  (1, 'load_preset', self.remote + '/subdir/../witness.milk')):
+            with self.subTest(event=event, key=key):
+                self.save()
+                self.rewrite_all_jobs(lambda job: job['events'][event].__setitem__(key, path))
+                with self.assertRaisesRegex(ValueError, 'host events'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_requires_explicit_remote_workspace_for_historical_capture(self):
+        self.result.pop('remote_workspace')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Historical capture.*--historical-remote-workspace'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_explicit_historical_workspace_with_limited_scope(self):
+        self.result.pop('remote_workspace')
+        self.save()
+        report = VERIFY.verify(self.work, self.root / 'ndk', historical_remote_workspace=self.remote)
+        self.assertEqual(report['remote_workspace_verification']['source'], 'explicit-historical')
+        self.assertIn('original remote workspace was not recorded', report['scope'])
+        self.assertNotIn('remote_workspace', json.loads((self.work / 'results.json').read_text()))
+
+    def test_rejects_unowned_or_traversing_remote_workspace(self):
+        for remote in ('/data/local/tmp', '/unowned/proof', self.remote + '/..',
+                       '/data/local/tmp/../tmp/projectmtv-patch-proof-0123456789abcdef',
+                       '/data/local/tmp/projectmtv-patch-proof-not-a-hash'):
+            with self.subTest(remote=remote):
+                self.result['remote_workspace'] = remote
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'owned hashed remote workspace'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_unowned_explicit_historical_workspace(self):
+        self.result.pop('remote_workspace')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'owned hashed remote workspace'):
+            VERIFY.verify(self.work, self.root / 'ndk', historical_remote_workspace='/unowned/proof')
+
+    def test_historical_workspace_cannot_override_recorded_workspace(self):
+        self.result['remote_workspace'] = '/unowned/proof'
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'owned hashed remote workspace'):
+            VERIFY.verify(self.work, self.root / 'ndk', historical_remote_workspace=self.remote)
 
     def test_rejects_changed_frozen_audio(self):
         (self.work / 'audio.f32').write_bytes(b'changed PCM')
@@ -529,7 +647,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_rejects_broken_evaluator_thread_contract(self):
         self.result['capture_kind'] = 'evaluator'
-        control = {'compiled': [True, True], 'streams': [list(range(128)), list(range(1, 129))],
+        control = {'seed': 12345, 'compiled': [True, True], 'streams': [list(range(128)), list(range(1, 129))],
                    'fresh_thread_streams_equal': False, 'lone_dot_is_zero': True}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
         self.save()
@@ -538,7 +656,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_rejects_broken_evaluator_lone_dot_contract(self):
         self.result['capture_kind'] = 'evaluator'
-        control = {'compiled': [True, True], 'streams': [list(range(128))] * 2,
+        control = {'seed': 12345, 'compiled': [True, True], 'streams': [list(range(128))] * 2,
                    'fresh_thread_streams_equal': True, 'lone_dot_is_zero': False}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
         self.save()
@@ -561,7 +679,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def evaluator_fixture(self, stream):
         self.result['capture_kind'] = 'evaluator'
-        control = {'compiled': [True, True], 'streams': [stream, stream],
+        control = {'seed': 12345, 'compiled': [True, True], 'streams': [stream, stream],
                    'fresh_thread_streams_equal': True, 'lone_dot_is_zero': True}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
         self.save()
@@ -569,6 +687,17 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_accepts_valid_retained_evaluator_contract(self):
         self.evaluator_fixture(list(range(128)))
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_missing_or_changed_retained_evaluator_seed(self):
+        for seed in (None, 0, 999, True, 12345.0):
+            with self.subTest(seed=seed):
+                self.evaluator_fixture(list(range(128)))
+                for run in self.result['roles']['patched']['runs']:
+                    if seed is None: run['control'].pop('seed', None)
+                    else: run['control']['seed'] = seed
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Evaluator seed differs from frozen capture seed'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_accepts_retained_evaluator_stdout_with_stderr(self):
         self.evaluator_fixture(list(range(128)))
