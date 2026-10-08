@@ -58,6 +58,40 @@ extractor CLI option. It requires GLES300 at source entry points; strict remains
 the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
 nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
 
+## Latest source migration: published 2.3.27
+
+`profiles/published-core-v2.3.27.json` pins the full published AAR, both native
+libraries, Java classes and exact 15-patch source. Its negative zoom path executes
+nested CPU float powers after input narrowing; positive bases retain the shader
+path. Defined negative integer powers are modeled. Fractional-domain NaNs and
+other unresolved UV consumers remain guarded. The forecast records the host
+`powf` producer and does not claim Android bit parity from source inspection.
+Earlier profiles and frozen grades retain their original identities.
+
+The live-wave, cold-JNI audio and raw-noise adapters admit this exact patch set.
+The first 14 patches and all audio/wave/noise producer sources are unchanged;
+three guard rejections were reproduced before the narrow admission. Prepared
+controls preserve the open mode-1 spiral, FPS35 cold start, three duration draws
+and six byte-identical noise banks under the declared seed. Source controls
+are separate from published-AAR numerical qualification.
+
+An explicit experimental `authored_canvas_policy=projectmtv-authored-native-detail-v1`
+connects the full forecaster to the two-target coordinator for identified 2.3.25
+or 2.3.27 source contexts. Declare `physical_size`, `native_trails_level` (0/1/2),
+`feedback_detail_resource_status=allocated`, GLES300 normalized storage and the
+native quad-line profile. An optional `feedback_detail_alpha` must match the JNI
+level. The resource declaration is a premise, not an allocation measurement.
+Unallocated/unknown contexts, noninteger canvases and unsupported high-resolution
+ordinary/diffusion paths retain their guards. Reports leave appearance unverified.
+
+Equations and prepared wave/shape state execute once at the authored canvas.
+Both warp raster targets share those inputs and the same shader-random bank;
+Standard omits the native warp. Composite executes at native dimensions and an
+optional physical-surface blit follows. The complete prepared suite passes
+1,577 tests and 92 subtests, including the 1280×720 initialization versus 960×540
+frame-input witness with a 1920×1080 native target and 3840×2160 output. Runtime
+blit precision and full-AAR high-resolution qualification remain pending.
+
 ## Current source target: published2.3.15
 
 `profiles/published-core-v2.3.15.json` pins the exact published AAR, ARM64/ARMv7
@@ -116,8 +150,8 @@ reference selects the authored canonical path.
 render dimensions: physical height gates trails, while integer canvas selection
 and initial shader dimensions use the render extent. A selected integer canvas
 does not prove resource allocation; the returned qualification flag stays false. Numerical controls cover these
-building blocks; the high-resolution guard in `forecast_source` remains until
-complete entry-point integration and published-AAR qualification.
+building blocks; the default high-resolution guard remains, with an explicit experimental
+allocated-context route documented above. Published-AAR qualification is pending.
 
 The prepared analyzer suite passes 1,565 tests and 92 subtests; strict MkDocs passes.
 These results validate source controls, not high-resolution GPU parity or mood

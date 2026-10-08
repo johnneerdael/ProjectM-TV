@@ -1,0 +1,24 @@
+{
+  "repository": "johnneerdael/ProjectM-TV",
+  "release": "v2.3.27",
+  "release_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "asset": "projectM-TV-core-2.3.27.aar",
+  "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+  "native_arm64_sha256": "5fc881b3b74756dc9597a4ba8ce6850ed1318880eca985888a85d9495c5b1218",
+  "native_armv7_sha256": "ddbff01ad4166e7feec7f6b6e2e52f8a7e82fdc779f3f63bf0349d281f037b21",
+  "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+  "rendering_policy": "native",
+  "source_engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "65313919430bd6d1531292b405463d8ec400a44bcfddfb1eb808fbaba16b5ad0"
+  },
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.27",
+  "qualification": {
+    "published_bytes_verified": true,
+    "jni_declarations_checked": true,
+    "source_policy_controls_passed": true,
+    "published_runtime_numerical_controls_passed": false,
+    "appearance_certified": false,
+    "runtime_scope": "Pending frozen authored/native canvas controls; source and runtime proofs are separate"
+  }
+}

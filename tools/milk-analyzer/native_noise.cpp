@@ -65,7 +65,7 @@ int main(int argc,char** argv) {
             "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8";
 #ifdef MILK_RAW_NOISE_ADAPTER
         const bool rawNoise=identity.value("commit","")=="6f64807467e312034883a4389e6aa80a675458bc" &&
-            (identity.value("patches_sha256","")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb" || identity.value("patches_sha256","")=="3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381" || identity.value("patches_sha256","")=="6e27be9d314e464c6ed67925c65092164e35e8a1b5273f81b1bf0b6786beefae");
+            (identity.value("patches_sha256","")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb" || identity.value("patches_sha256","")=="3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381" || identity.value("patches_sha256","")=="6e27be9d314e464c6ed67925c65092164e35e8a1b5273f81b1bf0b6786beefae" || identity.value("patches_sha256","")=="65313919430bd6d1531292b405463d8ec400a44bcfddfb1eb808fbaba16b5ad0");
         if(!rawNoise || policy!="production-clock-seed-v1")
             throw std::runtime_error("raw native noise requires exact 4.2 identity and production-clock seed policy");
 #else

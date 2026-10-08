@@ -29,6 +29,35 @@ def _float_trig():
     return functions
 
 
+@lru_cache(maxsize=1)
+def _float_pow():
+    try:function=ctypes.CDLL(None).powf
+    except AttributeError as error:raise ValueError('CPU zoom power requires available powf') from error
+    function.argtypes=[ctypes.c_float,ctypes.c_float]
+    function.restype=ctypes.c_float
+    return function
+
+
+def cpu_float_power(base,exponent):
+    """Host float power after narrowing, retaining IEEE domain failures."""
+    a,b=np.broadcast_arrays(np.asarray(base,np.float32),np.asarray(exponent,np.float32))
+    function=_float_pow()
+    return np.asarray([function(float(x),float(y)) for x,y in zip(a.flat,b.flat)],np.float32).reshape(a.shape)
+
+
+def zoom_power_producer(policy):
+    from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM
+    if policy not in {LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM}:
+        raise ValueError('unsupported warp zoom policy')
+    result={'policy':policy,'positive_base_producer':'NumPy float32 power',
+            'numpy_version':np.__version__,'android_bit_parity_verified':False}
+    if policy==CORE_2327_ZOOM:
+        _float_pow()
+        result.update(negative_base_producer='ctypes.CDLL(None) host powf after float32 narrowing',
+                      platform=platform.platform(),python_version=platform.python_version())
+    return result
+
+
 def rotation_pair(angle,policy=LEGACY_ROTATION):
     values=_finite(angle,'rotation')
     if policy==LEGACY_ROTATION:return np.sin(values),np.cos(values)
@@ -88,8 +117,8 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     for interpolation; it rejects infinity and unrelated numeric failures.
     """
     _runtime_profile(numeric_profile)
-    from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM
-    if zoom_policy not in {LEGACY_ZOOM,CORE_2315_ZOOM}:raise ValueError('unsupported warp zoom policy')
+    from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM
+    if zoom_policy not in {LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM}:raise ValueError('unsupported warp zoom policy')
     if rotation_policy not in (LEGACY_ROTATION,CPU_ROTATION):raise ValueError('unsupported warp rotation policy')
     p=_finite(position,'position')
     if p.shape[-1:]!=(2,):raise ValueError('position requires two components')
@@ -111,16 +140,19 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     with np.errstate(all='ignore'):
         radius=np.hypot(x*a['aspect_x'],y*a['aspect_y'])
         radial_exponent=radius*2-1
-        # The handwritten native vertex shader uses GLSL pow directly. Its
-        # negative-base domain is undefined even for integral exponents;
-        # NumPy's signed integer-power result cannot establish GPU behavior.
-        if np.any(a['zoomexp']<0) or np.any((a['zoomexp']==0)&(radial_exponent<=0)):
+        negative_cpu=(a['zoom']<0)&(zoom_policy==CORE_2327_ZOOM)
+        if np.any(((a['zoomexp']<0)|((a['zoomexp']==0)&(radial_exponent<=0)))&~negative_cpu):
             raise ValueError('unresolved warp power domain')
         zoom_exponent=np.power(a['zoomexp'],radial_exponent)
-        signed=(a['zoom']<0)&(a['zoomexp']==1)&(zoom_policy==CORE_2315_ZOOM)
-        if np.any((a['zoom']<0)&~signed) or np.any((a['zoom']==0)&(zoom_exponent<=0)):
+        signed=(a['zoom']<0)&(a['zoomexp']==1)&(zoom_policy in {CORE_2315_ZOOM,CORE_2327_ZOOM})
+        if np.any((a['zoom']<0)&~signed&~negative_cpu) or np.any((a['zoom']==0)&(zoom_exponent<=0)):
             raise ValueError('unresolved warp power domain')
-        effective_zoom=np.where(signed,a['zoom'],np.power(np.where(signed,1,a['zoom']),zoom_exponent))
+        effective_zoom=np.where(signed|negative_cpu,1,np.power(np.where(signed|negative_cpu,1,a['zoom']),zoom_exponent))
+        if np.any(negative_cpu):
+            cpu_exponent=cpu_float_power(a['zoomexp'],radial_exponent)
+            negative_result=cpu_float_power(a['zoom'],cpu_exponent)
+            effective_zoom=np.where(negative_cpu,negative_result,effective_zoom)
+        effective_zoom=np.where(signed,a['zoom'],effective_zoom)
         inverse_zoom=np.float32(1)/effective_zoom
         u=x*a['aspect_x']*.5*inverse_zoom+.5
         v=y*a['aspect_y']*.5*inverse_zoom+.5

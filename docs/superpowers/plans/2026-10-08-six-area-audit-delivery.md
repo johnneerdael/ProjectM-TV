@@ -54,3 +54,13 @@ selects an authored 960×540 frame canvas while initialization reports 1280×720
 Standard/Medium/High map to gains 0/0.5/1 and share the selected dimensions.
 Noninteger selection remains an explicit fallback candidate; allocation is never
 credited from dimensions alone. The entry-point guard is still retained.
+
+
+Full entry-point integration checkpoint: 1,577 prepared tests and 92 subtests
+pass. The explicit allocated-context route now runs separate authored/native
+warps, shared prepared geometry/random inputs, native composite and optional
+physical blit. Default/uncertain high-resolution contexts remain guarded.
+Exact 2.3.27 source and adapter guards are prepared and probed; the published
+AAR is remotely staged with matching Java/Dex/native/clock/PCM hashes. Independent
+source review finds no blocking issue; full-AAR qualification and physical blit
+precision remain open. U01 is not resolved yet.

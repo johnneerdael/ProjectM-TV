@@ -25,7 +25,7 @@ from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
 from materials import material_input_identity
 from source_features import forecast_feature_record, SIMULATED
-from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
+from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2327_ZOOM,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
     CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
@@ -58,6 +58,7 @@ CORE_2317_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.17-cold-thread-v1'
 CORE_2321_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.21-cold-thread-v1'
 CORE_2322_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.22-cold-thread-v1'
 CORE_2325_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.25-cold-thread-v1'
+CORE_2327_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.27-cold-thread-v1'
 # Patch0044 changes literal formatting; equation RNG and sampler ownership
 # retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
@@ -73,13 +74,14 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_2321_EQUATION_RNG_POLICY: CORE_2321_ENGINE,
     CORE_2322_EQUATION_RNG_POLICY: CORE_2322_ENGINE,
     CORE_2325_EQUATION_RNG_POLICY: CORE_2325_ENGINE,
+    CORE_2327_EQUATION_RNG_POLICY: CORE_2327_ENGINE,
 }
 
 
 def source_centre_policies(engine,domain):
     from composite_mesh import LEGACY_CENTRES,CORE_2322_CENTRES
     from primitives import LEGACY_SHAPE_CENTRES,CORE_2322_SHAPE_CENTRES
-    corrected=matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE)
+    corrected=matches(engine,CORE_2322_ENGINE) or (matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE))
     composite=domain.get('composite_centre_policy',CORE_2322_CENTRES if corrected else LEGACY_CENTRES)
     shape=domain.get('shape_centre_policy',CORE_2322_SHAPE_CENTRES if corrected else LEGACY_SHAPE_CENTRES)
     if composite not in (LEGACY_CENTRES,CORE_2322_CENTRES) or shape not in (LEGACY_SHAPE_CENTRES,CORE_2322_SHAPE_CENTRES):
@@ -92,7 +94,7 @@ def source_centre_policies(engine,domain):
 def source_builtin_viewport_policy(engine,domain):
     from quad_lines import PROFILE,LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT
     bits=domain.get('triangle_subpixel_bits')
-    qualified=(matches(engine,CORE_2325_ENGINE) and domain.get('profile')=='gles300' and
+    qualified=((matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE)) and domain.get('profile')=='gles300' and
                domain.get('line_rendering_profile')==PROFILE and type(bits) is int and 4<=bits<=16)
     selected=domain.get('builtin_wave_viewport_policy',RETAINED_CLIP_VIEWPORT if qualified else LEGACY_VIEWPORT)
     if selected not in (LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT):
@@ -133,6 +135,32 @@ def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
     return policy
 
 
+DETAIL_POLICY='projectmtv-authored-native-detail-v1'
+
+
+def forecast_detail_context(engine,domain):
+    """Condition source math on a declared successful native detail allocation."""
+    policy=domain.get('authored_canvas_policy')
+    if policy is None:return None
+    if policy!=DETAIL_POLICY:raise ValueError('unknown authored canvas policy')
+    if not any(matches(engine,target) for target in (CORE_2325_ENGINE,CORE_2327_ENGINE)):
+        raise ValueError('authored detail engine identity mismatch')
+    if domain.get('profile')!='gles300' or domain.get('quantize') is not True:
+        raise ValueError('authored detail requires GLES300 normalized storage')
+    if domain.get('feedback_detail_resource_status')!='allocated':
+        raise ValueError('authored detail allocation is not declared successful')
+    from authored_canvas import detail_configuration
+    context=detail_configuration(native_size=(domain['width'],domain['height']),
+        physical_size=domain.get('physical_size'),trails_level=domain.get('native_trails_level'))
+    if context['authored_size'] is None:raise ValueError('authored detail has no active integer canvas')
+    if domain.get('feedback_detail_alpha',context['alpha'])!=context['alpha']:
+        raise ValueError('declared detail gain contradicts JNI trails setting')
+    if domain.get('line_rendering_profile')!='projectmtv-gles-quad-lines-v1':
+        raise ValueError('authored detail requires explicit native quad-line profile')
+    context['declared_resource_status']='allocated'
+    return context
+
+
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
 
@@ -165,7 +193,7 @@ def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
         raise ValueError('source parser execution failed: '+process.stderr.strip())
     result=json.loads(process.stdout)
     engine=result.get('parser_inputs',{}).get('engine',{})
-    if matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE):
+    if matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE) or (matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE)):
         result['parser_inputs']['setting_lookup_policy']='native-case-insensitive-v1'
         result['values']=source_settings(result)
     result.update(preset=path.name,preset_sha256=hashlib.sha256(raw).hexdigest(),reader_sha256=binary_sha)
@@ -208,7 +236,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('Apple numeric profile requires glsl330 shader backend')
     if type(domain['quantize']) is not bool or type(retain_surfaces) is not bool:
         raise ValueError('explicit boolean quantization/retention settings required')
-    if domain.get('feedback_detail_alpha',-1.0)!=-1.0:
+    if domain.get('authored_canvas_policy') is None and domain.get('feedback_detail_alpha',-1.0)!=-1.0:
         raise ValueError('feedback detail alpha passes are not implemented in source forecasts')
     if type(domain['equation_seed']) is not int or not 0<=domain['equation_seed']<2**32:
         raise ValueError('explicit uint32 equation seed required')
@@ -222,7 +250,10 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     main_binding_policy=source_main_binding_policy(engine,domain.get('main_binding_policy'))
     shape_sampler_policy=source_shape_sampler_policy(engine,domain.get('shape_sampler_policy'))
     blur_range_policy=select_policy(engine,domain.get('blur_range_policy'),current=CORE_2315_BLUR,legacy=LEGACY_BLUR)
-    warp_zoom_policy=select_policy(engine,domain.get('warp_zoom_policy'),current=CORE_2315_ZOOM,legacy=LEGACY_ZOOM)
+    if matches(engine,CORE_2327_ENGINE) and domain.get('warp_zoom_policy',CORE_2327_ZOOM)==CORE_2327_ZOOM:
+        warp_zoom_policy=CORE_2327_ZOOM
+    else:
+        warp_zoom_policy=select_policy(engine,domain.get('warp_zoom_policy'),current=CORE_2315_ZOOM,legacy=LEGACY_ZOOM)
     legacy_control_policy=select_policy(engine,domain.get('legacy_control_policy'),current=CORE_2315_DISPLAY,legacy=LEGACY_DISPLAY)
     wave_control_policy=select_policy(engine,domain.get('wave_control_policy'),current=CORE_2315_WAVE,legacy=LEGACY_WAVE)
     if production_engine is not None:
@@ -230,12 +261,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             raise ValueError('production equation RNG engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
+    detail_context=forecast_detail_context(engine,domain)
     for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
-                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE),('2.3.17',CORE_2317_ENGINE),('2.3.21',CORE_2321_ENGINE),('2.3.22',CORE_2322_ENGINE),('2.3.25',CORE_2325_ENGINE)]:
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE),('2.3.17',CORE_2317_ENGINE),('2.3.21',CORE_2321_ENGINE),('2.3.22',CORE_2322_ENGINE),('2.3.25',CORE_2325_ENGINE),('2.3.27',CORE_2327_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and
-                (domain['height']>1330 or domain['width']*domain['height']>1024*768)):
+                (domain['height']>1330 or domain['width']*domain['height']>1024*768) and detail_context is None):
             raise ValueError(version+' higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
     from field_math import SEPARATE_ARITHMETIC as separate_shader,APPLE_MIX_FMA
@@ -249,11 +281,11 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if blur_arithmetic_profile not in ARITHMETIC_PROFILES:
         raise ValueError('unsupported blur arithmetic profile')
     qualified_blur=(matches(engine,CORE_2317_ENGINE) or
-                    (matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE)) and blur_arithmetic_profile==APPLE_FORWARD_FMA)
+                    (matches(engine,CORE_2322_ENGINE) or (matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE))) and blur_arithmetic_profile==APPLE_FORWARD_FMA)
     if blur_arithmetic_profile!=SEPARATE_ARITHMETIC and (domain['profile']!='gles300' or not qualified_blur):
         raise ValueError('blur FMA requires declared GLES300 and a qualified engine context')
-    from spatial import LEGACY_ROTATION,CPU_ROTATION,rotation_producer
-    current_rotation=matches(engine,CORE_2317_ENGINE)
+    from spatial import LEGACY_ROTATION,CPU_ROTATION,rotation_producer,zoom_power_producer
+    current_rotation=matches(engine,CORE_2317_ENGINE) or matches(engine,CORE_2327_ENGINE)
     rotation_policy=domain.get('warp_rotation_policy',CPU_ROTATION if current_rotation else LEGACY_ROTATION)
     if rotation_policy not in (LEGACY_ROTATION,CPU_ROTATION):raise ValueError('unknown warp rotation policy')
     if rotation_policy==CPU_ROTATION and not current_rotation:
@@ -273,7 +305,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     motion_storage_profile=domain.get('motion_uv_storage_profile',PORTABLE_STORAGE)
     if motion_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
         raise ValueError('unknown motion UV storage profile')
-    qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2325_ENGINE))
+    qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE))
     if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or not qualified_float_engine):
         raise ValueError('half motion storage requires declared GLES300 and a qualified engine context')
     composite_centre_policy,shape_centre_policy=source_centre_policies(engine,domain)
@@ -282,7 +314,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
         raise ValueError('unknown line rendering profile')
     if line_profile==quad_profile:
-        if domain['profile']!='gles300' or domain['width']*domain['height']>1024*768:
+        if domain['profile']!='gles300' or (domain['width']*domain['height']>1024*768 and detail_context is None):
             raise ValueError('quad-line profile requires GLES within reference area')
         if not any(all(engine.get(key)==value for key,value in expected.items())
                        for expected in PRODUCTION_EQUATION_ENGINES.values()):
@@ -290,7 +322,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     smoothing_profile=domain.get('custom_wave_smoothing_profile',DEFAULT_SMOOTHING)
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
-    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not (qualified_float_engine or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE))):
+    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not (qualified_float_engine or matches(engine,CORE_2322_ENGINE) or (matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE)))):
         raise ValueError('fused custom-wave smoothing requires declared GLES and a qualified engine context')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)
@@ -320,7 +352,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     warp_code = source.get('sections',{}).get('warp_',{}).get('source','')
     # Native MilkdropPreset uses this literal substring test, including comments.
     warp_reads_blur = 'blur' in warp_code.lower()
-    pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
+    pipeline_arguments=dict(
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
         main_binding_policy=main_binding_policy,
         blur_range_policy=blur_range_policy,legacy_control_policy=legacy_control_policy,
@@ -333,7 +365,20 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         motion_uv_storage_profile=motion_storage_profile,blur_arithmetic_profile=blur_arithmetic_profile,
         shader_arithmetic_profile=shader_arithmetic_profile,
         motion_uv_sampling_profile=motion_sampling_profile,motion_uv_sampler=motion_uv_sampler,
-        composite_centre_policy=composite_centre_policy)
+        composite_centre_policy=composite_centre_policy,
+        shader_canvas_size=None if detail_context is None else detail_context['authored_size'],
+        line_reference_size=None if detail_context is None else detail_context['authored_size'])
+    pipeline=SourcePipeline.from_source(source,profile=domain['profile'],compatibility=compatibility,**pipeline_arguments)
+    authored_pipeline=None;detail_pipeline=None
+    scene_width,scene_height=width,height
+    if detail_context is not None:
+        from detail_pipeline import DetailPipeline
+        scene_width,scene_height=detail_context['authored_size']
+        low_arguments={**pipeline_arguments,
+            'initial_feedback':np.broadcast_to(colour,(scene_height,scene_width,4)).copy(),
+            'line_rendering_profile':'canonical-gl-lines-v1','line_reference_size':(0,0)}
+        authored_pipeline=SourcePipeline.from_source(source,profile=domain['profile'],compatibility=compatibility,**low_arguments)
+        detail_pipeline=DetailPipeline(authored_pipeline,pipeline,alpha=detail_context['alpha'])
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -369,14 +414,15 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     field=texture_bank.textures[texture]
                     h,w=field.shape[-3:-1]
                     material_uniforms[name]=[w,h,1/w,1/h]
-    scene = execute_scene(source,audio['frames'],reader=reader,expected_reader_sha256=reader_sha,width=width,height=height,
+    scene = execute_scene(source,audio['frames'],reader=reader,expected_reader_sha256=reader_sha,width=scene_width,height=scene_height,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
         timeout_seconds=domain.get('equation_timeout_seconds',60),
-        equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
+        equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
+        initial_shader_canvas=None if detail_context is None else detail_context['initial_shader_canvas'])
     geometry_features = scene_geometry_features(scene,
         max_derivative_samples=domain.get('geometry_derivative_sample_budget',1_000_000))
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',
-                                  line_rendering_profile=line_profile,control_policy=wave_control_policy)
+                                  line_rendering_profile=line_profile if detail_context is None else 'canonical-gl-lines-v1',control_policy=wave_control_policy)
     if builtin['engine_archive_sha256']!=archive:
         raise ValueError('builtin-wave source engine identity mismatch')
     custom = source_custom_waves(source,scene,smoothing_profile=smoothing_profile)
@@ -395,10 +441,18 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                                raster_subpixel_bits=domain.get('warp_subpixel_bits'),zoom_policy=warp_zoom_policy,rotation_policy=rotation_policy)
         except ValueError as error:
             if str(error) not in {'unresolved warp numeric domain','unresolved warp power domain','zero spatial divisor'}:raise
-            if pipeline.requires_warp_uv(frame_wrap=main['wrap'],motion_state=main):raise
+            consumed_pipeline=pipeline if authored_pipeline is None else authored_pipeline
+            if consumed_pipeline.requires_warp_uv(frame_wrap=main['wrap'],motion_state=main):raise
             unused_warp_uv_domain=str(error)
             mesh=warp_fields(source,scene,index,raster_subpixel_bits=domain.get('warp_subpixel_bits'),
                              omit_transformed_uv=True,zoom_policy=warp_zoom_policy,rotation_policy=rotation_policy)
+        native_mesh=mesh
+        if detail_context is not None:
+            native_mesh=warp_fields(source,scene,index,output_size=(width,height),
+                raster_subpixel_bits=domain.get('warp_subpixel_bits'),
+                omit_transformed_uv=detail_context['alpha']==0 or mesh['uv'] is None,
+                numeric_profile=domain.get('numeric_profile','portable'),
+                zoom_policy=warp_zoom_policy,rotation_policy=rotation_policy)
         common = source_uniforms(scene,index)
         if texture_bank is not None:
             common.update(material_uniforms)
@@ -409,13 +463,19 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 raise ValueError('random binding stage must be warp/composite')
             for stage, binding in bindings.items():
                 cache_context = ({'frame':int(frame['render_inputs']['frame']),
-                                  'feedback_detail_alpha':-1.0}
+                                  'feedback_detail_alpha':-1.0 if detail_context is None else detail_context['alpha']}
                                  if 'frame_cache_policy' in random_inputs['ledger'] else {})
                 random_banks[stage] = bind_random_uniforms(random_inputs['ledger'],
                     event_index=binding['event_index'],shader_id=binding['shader_id'],
                     time=render_time,profile=random_inputs['profile'],**cache_context)
 
         def draw(destination, frame_index, previous_main):
+            reference=None
+            draw_profile=line_profile
+            if detail_context is not None:
+                native_target=destination.shape[:2]==(height,width)
+                reference=detail_context['authored_size'] if native_target else (0,0)
+                if not native_target:draw_profile='canonical-gl-lines-v1'
             textures = {}; texture_aspects = {}
             images={shape['index']:source['values'].get(f"shapecode_{shape['index']}_image",'') for shape in frame['shapes']}
             modes=shape_sampling_modes(frame['shapes'],image_names=images,policy=shape_sampler_policy,
@@ -441,20 +501,36 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     textures[binding_key]=lambda uv, mode=modes[ordinal]:sample_texture_2d(previous_main,uv,wrap=mode['wrap'],linear=mode['linear'],origin='top')
             return draw_source_scene(destination,source,frame,builtin['frames'][index],custom['frames'][index],
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
-                motion_vectors_prewarped=True,line_rendering_profile=line_profile,
+                motion_vectors_prewarped=True,line_rendering_profile=draw_profile,
                 point_subpixel_bits=domain.get('point_subpixel_bits'),
                 triangle_subpixel_bits=domain.get('triangle_subpixel_bits'),shape_centre_policy=shape_centre_policy,
-                builtin_wave_viewport_policy=builtin_wave_viewport_policy)
+                builtin_wave_viewport_policy=builtin_wave_viewport_policy,line_reference_size=reference)
 
-        result = pipeline.step(warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
+        step_arguments=dict(uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],
             minimum=[main[f'blur{i}_min'] for i in range(1,4)],
             maximum=[main[f'blur{i}_max'] for i in range(1,4)],edge_darken=main['blur1_edge_darken'],
-            motion_state=main,draw_scene=draw,render_time=render_time,
+            motion_state=main,render_time=render_time,
             hue_offsets=hue.tolist(),external_sample=None if texture_bank is None else sample_external)
+        if detail_pipeline is None:
+            result=pipeline.step(warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],
+                warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],draw_scene=draw,**step_arguments)
+        else:
+            result=detail_pipeline.step(
+                authored_warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],
+                native_warp_uv=native_mesh['original_uv'] if native_mesh['uv'] is None else native_mesh['uv'],
+                authored_original_uv=mesh['original_uv'],native_original_uv=native_mesh['original_uv'],
+                authored_polar=mesh['polar'],native_polar=native_mesh['polar'],
+                draw_authored=draw,draw_native=draw,**step_arguments)
+        display=result.display
+        if detail_context is not None and detail_context['physical_size']!=(width,height):
+            from authored_canvas import _upsample
+            from feedback_field import unorm8
+            display=unorm8(_upsample(display,*detail_context['physical_size'],texture_sampling_profile))
+            result.history['physical_surface_size']=list(detail_context['physical_size'])
         predicted = dict(frame=frame['render_inputs']['frame'],time=render_time,
-                         display=result.display,feedback=result.feedback,warp_uv=mesh['uv'],history=result.history,
-                         visibility=display_visibility(result.display))
+                         display=display,feedback=result.feedback,warp_uv=native_mesh['uv'],history=result.history,
+                         visibility=display_visibility(display))
         if unused_warp_uv_domain is not None:
             predicted['history']['unused_warp_uv_domain']=unused_warp_uv_domain
         descriptors.add(predicted)
@@ -495,12 +571,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,
+                        warp_zoom_power_producer=zoom_power_producer(warp_zoom_policy),
                         blur_arithmetic_profile=blur_arithmetic_profile,
                         warp_rotation_policy=rotation_policy,
                         warp_rotation_producer=rotation_producer(rotation_policy),
                         legacy_control_policy=legacy_control_policy,wave_control_policy=wave_control_policy,
                         legacy_tint_amount=None if pipeline.legacy_tint_amount is None else float(pipeline.legacy_tint_amount),
-                        mode1_alpha_boost=matches(engine,CORE_2325_ENGINE),
+                        mode1_alpha_boost=(matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE)),
                         builtin_wave_viewport_policy=builtin_wave_viewport_policy,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],
@@ -511,6 +588,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         limitations=['GPU rasterization, sampling and arithmetic precision not validated',
                      'Target shader compilation/linking and fallback remain profile conditions',
                      'Initial state and RNG/resource lifecycle are declared inputs, not inferred engine startup'])
+    report['provenance']['authored_detail_context']=copy.deepcopy(detail_context)
     report['provenance']['motion_uv_sampling_profile']=motion_sampling_profile
     report['prediction_basis']='independent-source-math'
     if motion_uv_sampler is not None:

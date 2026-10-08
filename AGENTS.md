@@ -664,3 +664,17 @@ and positive-versus-zero gain-class resets. Exact prepared suite: 1,565 tests an
 92 subtests pass; strict MkDocs passes. See the analyzer README and
 `docs/superpowers/plans/2026-10-08-six-area-audit-delivery.md`. v2.3.27 is the latest
 downloaded full AAR; no runtime qualification of it is claimed at this checkpoint.
+
+
+U01/core2.3.27 integration checkpoint (2026-10-08): source-pr59 prepares the exact
+15-patch engine (`65313919430bd6d1531292b405463d8ec400a44bcfddfb1eb808fbaba16b5ad0`).
+Three producer guard rejections were reproduced, then exact live-wave/cold-audio/raw-noise
+admission controls pass. Full prepared suite: 1,577 tests and 92 subtests pass.
+The full forecast has an explicit experimental authored/native route conditioned
+on declared successful allocation; default high-resolution ordinary/diffusion
+and uncertain allocation remain guarded. Preserve one equation/geometry execution,
+shared shader random banks, native composite and physical display blit. Negative
+CPU zoom powers use a separately versioned policy with host producer attribution;
+source inspection does not certify Android bit parity. Full published 2.3.27 AAR
+numerical/high-resolution qualification remains open. See the analyzer README
+and `profiles/published-core-v2.3.27.json`. Do not clear U01 from tests alone.
