@@ -33,3 +33,5 @@ This project distributes the bundled presets (`core/src/main/assets/presets`) an
 `Nivush - Spiking Mandelbrot.milk` was removed: it was the only preset whose texture (`colors3`) could not be found. Every remaining preset now has all the textures it references.
 
 Removed in 1.9 because they show text, logos or people: `Suff5`, `prayerwheel`, `winamp_woofer`, `VITRIOL`, `kaite`, `portal1`, `portal2`. The presets that used them were removed as well. `tools/check-presets.py` (run by CI) keeps them out.
+
+The active MilkDrop audit additionally carries current0026 legacy traversal and candidate0027 nonzero file booleans. Original MilkDrop2 source provenance and limited execution/capture qualification are recorded in the [audit ledger](superpowers/evidence/milkdrop-audit-repairs/README.md); these source-derived GLES comparisons are not Windows/D3D recordings.

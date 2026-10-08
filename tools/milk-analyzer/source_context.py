@@ -35,7 +35,7 @@ def scalar(values, key, default, kind):
         value = _LIBC.strtol(text, ctypes.byref(end), 10)
         if end.value == ctypes.addressof(text) or ctypes.get_errno() == errno.ERANGE or not -(2**31) <= value < 2**31:
             value = int(default)
-        return int(value > 0) if kind == 'bool' else value
+        return int(value != 0) if kind == 'bool' else value
     value = _LIBC.strtof(text, ctypes.byref(end))
     if end.value == ctypes.addressof(text) or ctypes.get_errno() == errno.ERANGE:
         value = float(np.float32(default))

@@ -54,7 +54,7 @@ def test_case_insensitive_lookup_preserves_native_scalar_conversion_and_defaults
     values = read_control('fWaRpScAlE=2.5suffix\nbTeXwRaP=-1')['values']
     assert scalar(values, 'fWarpScale', 1.0, 'float') == 2.5
     assert scalar(values, 'FWARPSCALE', 1.0, 'float') == 2.5
-    assert scalar(values, 'bTexWrap', 1, 'bool') == 0
+    assert scalar(values, 'bTexWrap', 1, 'bool') == 1
     assert scalar(values, 'MISSING_SETTING', 7, 'int') == 7
 
 

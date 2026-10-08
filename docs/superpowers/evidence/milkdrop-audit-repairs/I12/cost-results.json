@@ -1,0 +1,34 @@
+[
+  {
+    "batch": "i12-clean-timings",
+    "accepted_for_cost": false,
+    "limitation": "Overlapped host compiler preparation; exploratory only",
+    "means_ms": {
+      "before": 5.41929585787037,
+      "after": 5.5831302273148165
+    },
+    "delta_pct": 3.023167100325619,
+    "cycle_delta_pct": [
+      -3.6562280271781766,
+      17.554389082577426,
+      -4.485341877118543
+    ],
+    "selected_rgb_matches_original_witness": true
+  },
+  {
+    "batch": "i12-isolated-timings",
+    "accepted_for_cost": true,
+    "limitation": null,
+    "means_ms": {
+      "before": 4.902315293981481,
+      "after": 4.776063687037038
+    },
+    "delta_pct": -2.5753465326769365,
+    "cycle_delta_pct": [
+      1.10484500558099,
+      -5.573484978265442,
+      -3.2942493929798644
+    ],
+    "selected_rgb_matches_original_witness": true
+  }
+]
