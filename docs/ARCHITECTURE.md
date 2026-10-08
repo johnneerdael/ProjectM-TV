@@ -193,7 +193,7 @@ listener, so enabling trails or blending can become a net reduction after a heig
 Hosts do not recalculate both old and new topologies at the already-lowered height.
 
 ### Frame pacing
-Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.
+Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM's `time` follows the wall clock, so time-driven motion keeps its speed; feedback motion (zoom, rotation, decay) is applied once per frame and does depend on the frame rate.
 
 ### Threads
 | Thread | Priority | Work |

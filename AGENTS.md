@@ -94,7 +94,7 @@ Follow the project's established design system and platform conventions. Reuse e
   - Panel open: Up/Down move focus between rows, Left/Right change a value, Center cycles or runs an action; Back closes (from *Advanced* or *Track display* it returns to the main panel); Menu closes; it hides after 10 s without input, and every key event restarts that timer.
 - **Layout:** landscape, fullscreen, immersive sticky. The GL surface renders at its own size (`SurfaceHolder.setFixedSize`) and is scaled by the display; the overlay UI uses the UI resolution.
 - **Accessibility:** no documented requirements and no TalkBack verification found; the layout has only three `contentDescription` attributes. Keep every new control reachable by D-pad focus and give icon-only controls a `contentDescription`.
-- **Visual references:** user-guide setup screenshots (`docs/user-guide/images/setup/`) come from the `-PsetupScreenshotTest` build on an Ugoos AM6. Rendering changes need before/after captures (PR template).
+- **Visual references:** user-guide app screenshots (`docs/user-guide/images/setup/`, `images/gallery/`) were refreshed 2026-10-08 from released v2.3.23 on a task-owned API36 Android TV emulator at 1080p, with music from Milkbeat; the Android 9 settings-path captures (`android-apps.png`, `special-app-access.png`, `notification-confirmation.png`, `track-display.png`) predate them and are labelled. Patch proof images in `images/patches/` are compressed copies of the current-patch-proof captures. Rendering changes need before/after captures (PR template).
 
 ## Use existing platform and dependency APIs
 
@@ -119,7 +119,7 @@ Prefer configuration, composition, or a small wrapper to copied library source o
 | Auto-update | `HttpURLConnection` + `Updater` + custom `UpdateFileProvider` (no AndroidX `FileProvider`) | framework | off by default; separate from the temporary LAN upload listener |
 | Engine fixes | new patch in `tools/projectm-patches/` | patch series | never edit committed submodule files |
 | Preset analysis | `tools/preset-lab` (numpy, opencv-python-headless) | `tools/preset-lab/pyproject.toml`, `requirements.lock` | offline only; does not change the Android renderer |
-| Docs site | MkDocs | `docs/site-requirements.txt` (`mkdocs==1.6.1`) | |
+| Docs site | MkDocs with the Material theme (static GitHub Pages build) | `docs/site-requirements.txt` (`mkdocs==1.6.1`, `mkdocs-material==9.7.7`) | Keep MkDocs on 1.6.x: Material warns that MkDocs 2.0 removes plugins/theme overrides; dark slate palette and overrides live in `docs/user-guide/stylesheets/projectm.css` |
 | Build toolchain | AGP 8.12.0, Gradle 8.14.2, NDK 27.3.13750724, CMake 3.22.1 | `build.gradle`, `gradle/wrapper/gradle-wrapper.properties`, `app/build.gradle`, `core/build.gradle` | no version catalog |
 
 Adding AndroidX or another runtime dependency departs from the documented small-APK policy (`app/build.gradle`) and affects F-Droid reproducibility; justify it in the PR.
@@ -289,13 +289,13 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | Source | Role |
 |---|---|
 | `README.md` | Product overview, settings tables, permissions, install (canonical Downloader blockquote), troubleshooting, developer build/test |
-| `docs/user-guide/*.md` + `mkdocs.yml` | User guide source, built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
+| `docs/user-guide/**/*.md` + `mkdocs.yml` | User guide source: *Using ProjectM TV* pages, `authoring/` (source-level preset authoring, MilkDrop 2 semantics, no patch-specific claims), `engine/` (patch catalog, 4K rendering, pipeline, validation) and `predictor.md` (research direction, not a commitment); built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
 | `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
 | `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
 | `docs/UPSTREAM_PATCH_VALUE.md` | Historical44-patch applicability/value assessment against the pinned unreleased 4.2 master; update with pin/patch/evidence changes |
 | `docs/THIRD_PARTY.md` | projectM pin, link to patch provenance, presets/textures sources and licences |
 | `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
-| `docs/DANCE-COLLECTION.md` | Pointer to `docs/user-guide/dance-measurement.md` |
+| `docs/DANCE-COLLECTION.md` | Pointer to the archived Dance article in Git history (Dance is retired; `docs/user-guide/dance*.md` are not-in-nav stubs) |
 | `tools/preset-lab/README.md` | Preset Lab installation and commands |
 | `docs/superpowers/` | Design specs, plans and evidence for engine work |
 | `.github/pull_request_template.md` | Required PR sections and checklists |
@@ -303,8 +303,9 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 
 Known documentation drift: `docs/ARCHITECTURE.md` §5 still describes embedding
 `core/` as a Gradle module, while `docs/RELEASING.md` describes Milkbeat consuming
-released AARs. Historical Dance research is retained; current collection behaviour
-is documented in `docs/user-guide/predictive-collections.md`. The beta exporter
+released AARs. The historical Dance article is archived at commit `f5e16be1`; current collection behaviour
+is documented in `docs/user-guide/predictive-collections.md`. Keep the user guide's engine and authoring pages
+consistent with `docs/ARCHITECTURE.md`, `docs/UPSTREAM_PATCH_VALUE.md` and the patch headers when patches change. The beta exporter
 and numerical scoring commands are documented in `tools/milk-analyzer/README.md`.
 
 ## Mandatory workflow — scope and completion
