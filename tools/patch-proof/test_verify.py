@@ -3,6 +3,7 @@ import importlib.util
 import gzip
 import json
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -26,6 +27,13 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         (self.root / 'ndk/source.properties').write_text('Pkg.Revision = 27.3.13750724\n')
         self.work = self.root / 'capture'
         self.work.mkdir()
+        inputs = self.work / 'inputs'
+        inputs.mkdir()
+        self.preset = inputs / 'witness.milk'
+        self.preset.write_bytes(b'[preset00]\nfDecay=0.9\n')
+        self.textures = inputs / 'textures'
+        (self.textures / 'nested').mkdir(parents=True)
+        (self.textures / 'nested/texture.png').write_bytes(b'original texture bytes')
         self.signal = bytes(120 * 1470 * 4)
         (self.work / 'audio.f32').write_bytes(self.signal)
         source = self.root / 'worker/engine'
@@ -46,7 +54,9 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
                'frame_hashes': [VERIFY.sha(self.frame_data[i * 6:(i + 1) * 6]) for i in range(120)],
                'stream_sha256': VERIFY.sha(self.frame_data)}
-        self.result = {'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
+        self.result = {'preset_sha256': VERIFY.sha(self.preset.read_bytes()),
+            'textures': {'nested/texture.png': VERIFY.sha(b'original texture bytes')},
+            'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
             directory = self.work / 'patched' / str(repeat)
@@ -72,6 +82,10 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def save(self):
         for role, value in self.result['roles'].items():
             for repeat, run in enumerate(value['runs']):
+                if 'control' in run:
+                    directory = self.work / role / str(repeat)
+                    directory.mkdir(parents=True, exist_ok=True)
+                    (directory / 'output.txt').write_text(json.dumps(run['control']) + '\n')
                 if run.get('status') != 'success':
                     continue
                 directory = self.work / role / str(repeat)
@@ -177,6 +191,68 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_changed_retained_preset(self):
+        self.preset.write_bytes(b'[preset00]\nfDecay=0.1\n')
+        with self.assertRaisesRegex(ValueError, 'Preset input hash differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_changed_retained_texture_inventory(self):
+        path = self.textures / 'nested/texture.png'
+        for change in ('changed', 'added', 'removed'):
+            with self.subTest(change=change):
+                path.write_bytes(b'original texture bytes')
+                extra = self.textures / 'extra.png'
+                if extra.exists(): extra.unlink()
+                if change == 'changed': path.write_bytes(b'changed texture bytes')
+                if change == 'added': extra.write_bytes(b'unrecorded texture')
+                if change == 'removed': path.unlink()
+                with self.assertRaisesRegex(ValueError, 'Texture input inventory differs'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def historical_inputs(self):
+        external = self.root / 'historical-inputs'
+        (self.work / 'inputs').rename(external)
+        return external / 'witness.milk', external / 'textures'
+
+    def test_requires_explicit_inputs_for_historical_capture(self):
+        self.historical_inputs()
+        with self.assertRaisesRegex(ValueError, 'Historical capture.*--preset.*--textures'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_incomplete_explicit_historical_inputs(self):
+        preset, textures = self.historical_inputs()
+        for arguments in ({'preset': preset}, {'textures': textures}):
+            with self.subTest(arguments=arguments):
+                with self.assertRaisesRegex(ValueError, 'Historical capture.*--preset.*--textures'):
+                    VERIFY.verify(self.work, self.root / 'ndk', **arguments)
+
+    def test_accepts_exact_explicit_historical_inputs_with_limited_scope(self):
+        preset, textures = self.historical_inputs()
+        report = VERIFY.verify(self.work, self.root / 'ndk', preset=preset, textures=textures)
+        self.assertEqual(report['successful_roles'], ['patched'])
+        self.assertEqual(report['input_verification']['source'], 'explicit-external')
+        self.assertIn('original uploaded bytes were not retained', report['scope'])
+
+    def test_rejects_wrong_explicit_historical_inputs(self):
+        preset, textures = self.historical_inputs()
+        preset.write_bytes(b'different preset')
+        with self.assertRaisesRegex(ValueError, 'Preset input hash differs'):
+            VERIFY.verify(self.work, self.root / 'ndk', preset=preset, textures=textures)
+
+    def test_rejects_wrong_explicit_historical_textures(self):
+        preset, textures = self.historical_inputs()
+        (textures / 'nested/texture.png').write_bytes(b'different texture')
+        with self.assertRaisesRegex(ValueError, 'Texture input inventory differs'):
+            VERIFY.verify(self.work, self.root / 'ndk', preset=preset, textures=textures)
+
+    def test_external_inputs_cannot_override_incomplete_retained_inputs(self):
+        external = self.root / 'external-inputs'
+        shutil.copytree(self.work / 'inputs', external)
+        self.preset.unlink()
+        with self.assertRaisesRegex(ValueError, 'Retained capture inputs are incomplete'):
+            VERIFY.verify(self.work, self.root / 'ndk', preset=external / 'witness.milk',
+                          textures=external / 'textures')
 
     def shader_probe_fixture(self):
         self.result['diagnostic_kind'] = 'shader-fragment-failure'
@@ -393,6 +469,16 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Backend'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
+    def test_rejects_consistently_edited_software_backend(self):
+        for renderer in ('SwiftShader', 'LLVMpipe', 'softpipe', 'lavapipe', 'Software Rasterizer'):
+            with self.subTest(renderer=renderer):
+                self.result['backend'][1] = renderer
+                for run in self.result['roles']['patched']['runs']:
+                    run['manifest']['gl_renderer'] = renderer
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Software renderer is outside GPU proof scope'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
     def test_rejects_missing_comparison(self):
         (self.work / 'comparison.png').unlink()
         with self.assertRaisesRegex(ValueError, 'Missing comparison'):
@@ -443,9 +529,34 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
         self.save()
 
-    def test_accepts_valid_evaluator_contract(self):
+    def test_accepts_valid_retained_evaluator_contract(self):
         self.evaluator_fixture(list(range(128)))
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_accepts_retained_evaluator_stdout_with_stderr(self):
+        self.evaluator_fixture(list(range(128)))
+        for repeat in (0, 1):
+            path = self.work / 'patched' / str(repeat) / 'output.txt'
+            path.write_text(path.read_text() + 'worker diagnostic on stderr\n')
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_both_inline_evaluator_controls_tampered_together(self):
+        self.evaluator_fixture(list(range(128)))
+        for run in self.result['roles']['patched']['runs']:
+            run['control']['streams'] = [list(range(1, 129))] * 2
+        (self.work / 'results.json').write_text(json.dumps(self.result))
+        with self.assertRaisesRegex(ValueError, 'Retained evaluator output differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_or_malformed_retained_evaluator_output(self):
+        for malformed in (None, 'not worker JSON\n'):
+            with self.subTest(malformed=malformed):
+                self.evaluator_fixture(list(range(128)))
+                path = self.work / 'patched/1/output.txt'
+                if malformed is None: path.unlink()
+                else: path.write_text(malformed)
+                with self.assertRaisesRegex(ValueError, 'Retained evaluator output is unavailable or invalid'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_constant_random_stream(self):
         self.evaluator_fixture([0] * 128)

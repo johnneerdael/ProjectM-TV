@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 import shlex
+import shutil
 import struct
 import subprocess
 import sys
@@ -119,6 +120,15 @@ def main() -> None:
             raise ValueError('Worker binary identity changed')
     work = args.work.resolve()
     work.mkdir(parents=True, exist_ok=False)
+    preset_name = preset.name
+    inputs = work / 'inputs'
+    inputs.mkdir()
+    shutil.copyfile(preset, inputs / 'witness.milk')
+    shutil.copytree(textures, inputs / 'textures')
+    preset, textures = inputs / 'witness.milk', inputs / 'textures'
+    preset_hash = sha(preset.read_bytes())
+    texture_hashes = {p.relative_to(textures).as_posix(): sha(p.read_bytes())
+                      for p in sorted(textures.rglob('*')) if p.is_file()}
 
     def adb(*arguments: str, check: bool = True) -> subprocess.CompletedProcess:
         return subprocess.run([args.adb, '-s', args.device, *arguments],
@@ -149,9 +159,8 @@ def main() -> None:
                       'capture_sha256': sha(Path(__file__).read_bytes()), 'capture_kind': 'evaluator' if args.evaluator_control else
                       'texture-journey' if args.texture_journey else 'image', 'device': args.device, 'user': args.user, 'features': features,
                       'fingerprint': adb('shell', 'getprop', 'ro.build.fingerprint').stdout.strip(),
-                      'preset': preset.name, 'preset_sha256': sha(preset.read_bytes()),
-                      'textures': {p.relative_to(textures).as_posix(): sha(p.read_bytes())
-                                   for p in sorted(textures.rglob('*')) if p.is_file()},
+                      'preset': preset_name, 'preset_sha256': preset_hash,
+                      'textures': texture_hashes,
                       'pcm_sha256': sha(signal), 'clock': 'frame/30.0', 'frames': 120,
                       'host_controls': {'line_reference_height': args.line_reference_height,
                                         'line_antialiasing': args.line_antialiasing},

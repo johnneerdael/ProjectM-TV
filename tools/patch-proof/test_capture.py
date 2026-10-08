@@ -143,7 +143,7 @@ class FailedCaptureRetention(unittest.TestCase):
         except SystemExit:
             self.fail('Capture must accept the specified 4K/reference-line controls')
 
-    def successful_capture(self, compressed=False):
+    def successful_capture(self, compressed=False, mutate_external_inputs=False):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             binary = root / 'worker'
@@ -155,7 +155,8 @@ class FailedCaptureRetention(unittest.TestCase):
             preset = root / 'preset.milk'
             preset.write_text('[preset00]\n')
             textures = root / 'textures'
-            textures.mkdir()
+            (textures / 'nested').mkdir(parents=True)
+            (textures / 'nested/texture.png').write_bytes(b'original texture bytes')
             work = root / 'capture'
             width, height = 256, 144
             frame_size = width * height * 3
@@ -164,7 +165,18 @@ class FailedCaptureRetention(unittest.TestCase):
             def fake_run(command, **kwargs):
                 args = command[3:]
                 if args == ['shell', 'am', 'get-current-user']:
+                    if mutate_external_inputs:
+                        preset.write_bytes(b'changed external preset')
+                        (textures / 'nested/texture.png').write_bytes(b'changed external texture')
                     return subprocess.CompletedProcess(command, 0, '0\n', '')
+                if args[0] == 'push' and args[2].endswith('/witness.milk'):
+                    pushed = Path(args[1])
+                    self.assertEqual(pushed, (work / 'inputs/witness.milk').resolve())
+                    self.assertEqual(pushed.read_bytes(), b'[preset00]\n')
+                if args[0] == 'push' and args[2].endswith('/textures'):
+                    pushed = Path(args[1])
+                    self.assertEqual(pushed, (work / 'inputs/textures').resolve())
+                    self.assertEqual((pushed / 'nested/texture.png').read_bytes(), b'original texture bytes')
                 if args == ['shell', 'getprop', 'ro.kernel.qemu']:
                     return subprocess.CompletedProcess(command, 0, '1\n', '')
                 if args == ['shell', 'pm', 'list', 'features']:
@@ -198,6 +210,9 @@ class FailedCaptureRetention(unittest.TestCase):
                 CAPTURE.main()
 
             result = json.loads((work / 'results.json').read_text())
+            self.assertEqual((work / 'inputs/witness.milk').read_bytes(), b'[preset00]\n')
+            self.assertEqual(result['preset_sha256'], CAPTURE.sha(b'[preset00]\n'))
+            self.assertEqual(result['textures'], {'nested/texture.png': CAPTURE.sha(b'original texture bytes')})
             for repeat, run in enumerate(result['roles']['patched']['runs']):
                 stream = work / 'patched' / str(repeat) / 'frames.rgb'
                 if compressed:
@@ -215,6 +230,9 @@ class FailedCaptureRetention(unittest.TestCase):
 
     def test_retains_successful_lossless_compressed_rgb_streams(self):
         self.successful_capture(compressed=True)
+
+    def test_hashes_and_pushes_retained_inputs_despite_external_mutation(self):
+        self.successful_capture(mutate_external_inputs=True)
 
     def test_retains_gl_failed_manifest_and_stream(self):
         self.run_failed_worker()

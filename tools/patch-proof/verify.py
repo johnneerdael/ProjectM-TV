@@ -98,7 +98,31 @@ def verify_texture_history(role: str, runs: list[dict]) -> None:
         raise ValueError('Texture history diagnostic contradicts its pixel/state/allocation contract')
 
 
-def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES) -> dict:
+def verify_inputs(work: Path, result: dict, preset: Path | None, textures: Path | None) -> dict:
+    inputs = work / 'inputs'
+    if inputs.exists():
+        preset, textures = inputs / 'witness.milk', inputs / 'textures'
+        if not preset.is_file() or not textures.is_dir():
+            raise ValueError('Retained capture inputs are incomplete')
+        source = 'retained'
+    else:
+        if preset is None or textures is None:
+            raise ValueError('Historical capture has no retained inputs; supply both --preset and --textures '
+                             '(verify(..., preset=..., textures=...))')
+        if not preset.is_file() or not textures.is_dir():
+            raise ValueError('Explicit historical preset or texture directory is unavailable')
+        source = 'explicit-external'
+    if sha(preset.read_bytes()) != result.get('preset_sha256'):
+        raise ValueError('Preset input hash differs')
+    actual = {p.relative_to(textures).as_posix(): sha(p.read_bytes())
+              for p in sorted(textures.rglob('*')) if p.is_file()}
+    if actual != result.get('textures'):
+        raise ValueError('Texture input inventory differs')
+    return {'source': source, 'preset': str(preset.resolve()), 'textures': str(textures.resolve())}
+
+
+def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES, *,
+           preset: Path | None = None, textures: Path | None = None) -> dict:
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
     result = json.loads((work / 'results.json').read_text())
@@ -116,6 +140,7 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
         raise ValueError('Retained PCM differs from frozen capture input')
     if result.get('clock') != 'frame/30.0' or result.get('frames') != 120:
         raise ValueError('Capture frame/clock protocol differs')
+    input_verification = verify_inputs(work, result, preset, textures)
     verified, rejected, comparisons = [], [], {}
     previous = None
     common_job = None
@@ -156,6 +181,15 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
                 raise ValueError('Evaluator thread-isolation contract failed: ' + role)
             if control['lone_dot_is_zero'] != expected_contract:
                 raise ValueError('Evaluator lone-dot contract failed: ' + role)
+            for repeat, run in enumerate(runs):
+                try:
+                    output = (work / role / str(repeat) / 'output.txt').read_text()
+                    # Capture appends stderr after the single stdout JSON value.
+                    retained, _ = json.JSONDecoder().raw_decode(output.lstrip())
+                except (OSError, ValueError) as error:
+                    raise ValueError('Retained evaluator output is unavailable or invalid') from error
+                if retained != run['control']:
+                    raise ValueError('Retained evaluator output differs from inline control')
             verified.append(role)
             continue
         if any(r.get('status') != 'success' for r in runs):
@@ -185,6 +219,9 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
             if [manifest['width'], manifest['height']] != [width, height]:
                 raise ValueError('Manifest dimensions differ')
             backend = [manifest[k] for k in ('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version')]
+            if any(value in manifest['gl_renderer'].lower() for value in
+                   ('swiftshader', 'llvmpipe', 'softpipe', 'lavapipe', 'software rasterizer')):
+                raise ValueError('Software renderer is outside GPU proof scope')
             if backend != result['backend'] or len(run['frame_hashes']) != 120:
                 raise ValueError('Backend or frame count differs')
             payload = inspect_rgb(payload_path(work / role / str(repeat)), width, height)
@@ -221,9 +258,15 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
                 draw.text((col * width + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
         if image.tobytes() != expected_image.tobytes():
             raise ValueError('Comparison changed framebuffer pixels, labels or rejection panels')
+    scope = ('retained evaluator output/repeats/reconstructed source/binary identities' if kind == 'evaluator'
+             else 'retained full RGB streams/images/repeats/reconstructed source/binary identities; '
+                  'load rejection remains a rejection')
+    scope += '; preset and texture bytes match recorded hashes'
+    if input_verification['source'] == 'explicit-external':
+        scope += '; historical inputs supplied explicitly, original uploaded bytes were not retained'
     return {'status': 'verified', 'successful_roles': verified, 'rejected_roles': rejected,
             'different_frames_between_adjacent_successful_roles': comparisons,
-            'scope': 'retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection'}
+            'input_verification': input_verification, 'scope': scope}
 
 
 if __name__ == '__main__':
@@ -233,8 +276,13 @@ if __name__ == '__main__':
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--ndk', type=Path, required=True,
                         help='Android NDK 27.3.13750724 for independent worker rebuilds')
+    parser.add_argument('--preset', type=Path,
+                        help='Exact preset for historical captures without retained inputs')
+    parser.add_argument('--textures', type=Path,
+                        help='Exact texture inventory for historical captures without retained inputs')
     args = parser.parse_args()
-    report = verify(args.work.resolve(), args.ndk.resolve(), args.series.resolve())
+    report = verify(args.work.resolve(), args.ndk.resolve(), args.series.resolve(),
+                    preset=args.preset, textures=args.textures)
     report['verifier_sha256'] = sha(Path(__file__).read_bytes())
     report['source_identity_sha256'] = sha(Path(__file__).with_name('source_identity.py').read_bytes())
     report['rgb_payload_sha256'] = sha(Path(__file__).with_name('rgb_payload.py').read_bytes())

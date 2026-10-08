@@ -36,6 +36,17 @@ hashes, retained image payloads, counts, backend and comparison pixels. Successf
 runs retain the complete `frames.rgb` stream locally; verification recomputes its
 SHA256 and all 120 frame hashes. At 512×288 this adds about 50 MB per successful run.
 
+New captures copy the preset to `inputs/witness.milk` and the complete texture
+tree to `inputs/textures/` before hashing or uploading. Verification recomputes
+both input hashes/inventories from these retained bytes. For an older capture
+without `inputs/`, explicitly supply `verify.py --preset EXACT_PRESET --textures
+EXACT_TEXTURE_DIRECTORY` (Python API: `verify(work, ndk, series_path,
+preset=Path(...), textures=Path(...))`). Missing either path is an error. The
+receipt distinguishes these supplied historical inputs from retained capture
+bytes: they match the recorded hashes, but the original uploaded bytes were not
+retained. Existing streams and workers remain unchanged. Incomplete retained
+inputs fail verification even when external paths are supplied.
+
 Use `--line-reference-height 1080` to request the patched library's 1920×1080
 reference-size line path. Upstream keeps its existing GL-line implementation;
 the same preset/audio/clock/render size is used in both roles. A separate current
@@ -119,6 +130,10 @@ does not create a GL context. Upstream and the no 0003 role should reject the do
 and retain shared random-stream progression; patched threads begin independent
 identical streams and dot evaluates to zero. Verify both repeats with `verify.py`.
 Pass the same `--ndk NDK_DIRECTORY` used for preparation to both capture and verify.
+Verification parses each retained `output.txt` and checks its stdout JSON against
+the inline control, allowing capture's appended stderr diagnostics. Image
+verification independently rejects reported software renderers even when all
+backend records agree.
 
 [The frozen evidence](../../docs/superpowers/evidence/current-patch-proof/README.md)
 also includes the duplicate-name texture-root fade/reset journey and specific
