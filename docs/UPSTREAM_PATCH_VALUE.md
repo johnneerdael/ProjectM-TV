@@ -218,3 +218,13 @@ interpolation/texture observations do not establish portable source-only pixels
 or original D3D9 appearance. See [focused source/UV/render evidence](superpowers/evidence/tulip-negative-zoom-power/README.md).
 This is a general defined-power compatibility candidate, not a preset brightness
 repair or authorization to clear predictor guards for invalid domains.
+
+## Mesh initialization cache (0016)
+
+`0016-cache-mesh-init-per-viewport.patch` fixes a per-frame cost in the pinned upstream
+code: `PerPixelMesh` and `FinalComposite` compared the viewport with `m_viewportWidth/Height`
+to skip rebuilding their static mesh data, but nothing stored those members, so both meshes
+were rebuilt every frame (per-vertex `hypotf`/`atan2f`, the complete index list, and the
+warp mesh's vertex and index uploads). The patch records the size when the data is built;
+the warp mesh uploads its static vertices and indices only after a rebuild. The values
+written are unchanged. See [AM6 profile evidence](superpowers/evidence/mesh-init-cache/README.md).
