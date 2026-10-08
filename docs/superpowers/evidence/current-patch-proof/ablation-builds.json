@@ -1,0 +1,146 @@
+{
+  "without-0002": {
+    "production_patch_removed": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "tests/libprojectM/PresetShaderTranslationTest.cpp": null,
+      "vendor/hlslparser/src/Engine.cpp": "82989ff5b9adc512782539ddf1ec0179643458b14fe994ff2782525555de6dd3",
+      "vendor/hlslparser/src/GLSLGenerator.cpp": "5c7c9d85b342c4a571f605802682a5969f13f4522160aa60ce7fe75366d4af64",
+      "vendor/hlslparser/src/GLSLGenerator.h": "81df14e659afc4b740d4951593eeb58f15fef678abe8d88ebbb807b090da633c",
+      "vendor/hlslparser/src/HLSLParser.cpp": "4a88f5b2f94a9ae114d94d1c033784392a99eff39f51154f7ab8cd6a69c8bf70",
+      "vendor/hlslparser/src/HLSLTree.cpp": "485d1df8799a5a276fa32af8a21106424a5787481af86637c2ff679240f47d09",
+      "vendor/hlslparser/src/HLSLTree.h": "1ab8d20e31145c1c4e7fc18920c6d7cdd3a232fb9b46a0a273fbe91e751928a1"
+    },
+    "source_inventory_sha256": "f9c31f1dd821ad7596e0b1a983fd4da31697619ad2f0c436a9145f82911297d2",
+    "binary_sha256": "abfc19f2beaf4fde3fcb034e8350f5f879411c7c389feb1f33f76a8262cc8eb7",
+    "status": "built"
+  },
+  "without-0003": {
+    "production_patch_removed": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "tests/libprojectM/EvaluatorLoneDotTest.cpp": null,
+      "vendor/projectm-eval/projectm-eval/Scanner.c": "36d62c20f817eca1191180829d29f04bd4cddd572e025d9b496b15413882d926",
+      "vendor/projectm-eval/projectm-eval/Scanner.l": "4770a3d26b90aa2fa962c278c7b432f8ba50bfafb7ffc6a3762b89880c314313",
+      "vendor/projectm-eval/projectm-eval/TreeFunctions.c": "cc5919d9ea8ab45f67c6b344907195c88be2d115c16e19ea94e3aeb34cdd9766"
+    },
+    "source_inventory_sha256": "d2e886f4491b2bf552d31ecd5b4744c85f3427786082f5936defae3df4a1450f",
+    "binary_sha256": "21f9322c56ea8c1b03645d92e8edcfc950fbd2cdf4b342fb37da1bdd8f3db485",
+    "status": "built"
+  },
+  "without-0004": {
+    "production_patch_removed": "0004-textured-shape-sampler.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/CustomShape.cpp": "a5ecbcbbc9e78014b9568893c1e08f24d2f4bd5edc013132dbfe695738faa303",
+      "src/libprojectM/MilkdropPreset/CustomShape.hpp": "a70ffbf45ce4ae2d35263c7596ec2acc7e9f4f2696a08e2777d5d16ddad99013"
+    },
+    "source_inventory_sha256": "331968f2869d1683931dc381da97414ab6cd3192e0b28455571cc3e3e91d5fe7",
+    "binary_sha256": "9cd9e5cc46f13975512c257d588a3fad75a2501a63026bf5d21b5bcdb454fcbb",
+    "status": "built"
+  },
+  "without-0005": {
+    "production_patch_removed": "0005-blur-range-interval.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/BlurTexture.cpp": "cf8f84f0a5701be6eb6c700a2997deb7d4269806db4ed04d3c8fe5fc72b6df74",
+      "src/libprojectM/MilkdropPreset/BlurTexture.hpp": "19d0fe335d89c862e9054cde5d3d48c989e5e1d4eb04a3a6f643645c6d33db6b"
+    },
+    "source_inventory_sha256": "8bc640205cd78096cb1c8324b2da1ea60147b572f625a2f83e1ba5b305b7d897",
+    "binary_sha256": "c770f26f76e287dbbd5ed2ed02544df3e52ca84a07088df068eedadcd5d758c8",
+    "status": "built"
+  },
+  "without-0006": {
+    "production_patch_removed": "0006-fixed-warp-signed-unit-zoom.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert": "566e1851e72037925885071eef0a454c029344eb2c12fab33368480fbb5551da"
+    },
+    "source_inventory_sha256": "a228ded725dd0b34faf4e73ba6ed93b4a5e5b5ace8459bdd8aecfe01a3ff4bfc",
+    "binary_sha256": "abc462ef985ad5df552ebba98d4a66ea801d89d2c1c6b212c70e7ebe8217dacc",
+    "status": "built"
+  },
+  "without-0007": {
+    "production_patch_removed": "0007-live-builtin-wave-controls.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/Waveform.cpp": "39d1de766260463189dd4a2b3ea1a94c42a661fda62ef2178e4917bbf94bccbc"
+    },
+    "source_inventory_sha256": "2e1f0e3cab0b9b38ca0de8b4b980fdabffb0f52fc8d83e3aebbac816879d132a",
+    "binary_sha256": "4a81d8e98f7bc5060979ec859ec11b781cfe8c45832d1742a29c5f1f03ceebd4",
+    "status": "built"
+  },
+  "without-0008": {
+    "production_patch_removed": "0008-live-legacy-display-controls.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/Filters.cpp": "3df4e0d1157505b921c3110a9a863d1be81bc39f3e99ce90f139b2453e2026e8",
+      "src/libprojectM/MilkdropPreset/Filters.hpp": "ab0c27579b26dd3c726eab964cd01ea06e782be8371b2b8ab972dbab368230b6",
+      "src/libprojectM/MilkdropPreset/FinalComposite.cpp": "c753b65b635255c88dfa2596dcc59d5fe8255cfa1b5d97abfe39eea31fc416fb",
+      "src/libprojectM/MilkdropPreset/VideoEcho.cpp": "8d4a2c8ad4c3b8b998ce9344be5491e2da9410afda14073e0aba7a55a9425e3b",
+      "src/libprojectM/MilkdropPreset/VideoEcho.hpp": "7d562dbdb259e4914dd1ec77356a11f445b6d9d075f47d94bce3593e4d4e66cb"
+    },
+    "source_inventory_sha256": "1f3abd5b6af42aa5ff56f4702d33e2164907d62c8006f20e536b37d4185c7039",
+    "binary_sha256": "913d553e0aceb54f114da49ce4295a5f45a6f5819ffad98a948dd97941f43073",
+    "status": "built"
+  },
+  "without-0009": {
+    "production_patch_removed": "0009-user-texture-premultiplication.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/Renderer/TextureManager.cpp": "bcdd1fe9c2a9fc5f28069a658639c328c15d4d01cfe8449b3f6ac86d85f73438"
+    },
+    "source_inventory_sha256": "a018c4f80f4b52f66b990b90a7cafee1d57d5e02099a688ee1901d66373e47dd",
+    "binary_sha256": "82a60e5fd6e94c60d6227bd768e5d76b36123c31ee4ae8811088c7524fefed61",
+    "status": "built"
+  },
+  "without-0010": {
+    "production_patch_removed": "0010-preset-texture-search-path-ownership.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/api/include/projectM-4/core.h": "58709477ac0309b97294232b68fc967260717f7826fd91670b72a89e5ab3e3ab",
+      "src/api/include/projectM-4/parameters.h": "13196b6debc22b1850b47a1c737298bf14e4fb4efce5fda9b4cd15506c93578b",
+      "src/libprojectM/ProjectM.cpp": "a5a3cee16096acbf5fe253d52ee41d2ef9274fca4ebf7427fa18071b5477c08a",
+      "src/libprojectM/ProjectM.hpp": "da1252e31cd14198dce1e548c18b585360dde74f6a0b23999772a4cfaa37b151",
+      "src/libprojectM/ProjectMCWrapper.cpp": "31a6b7162de6ee00e607750891f5a562425bd49e4b9748036e2f9f1b5352e637",
+      "src/libprojectM/Renderer/TextureManager.cpp": "f3e7f4daffbd6057eb40a9852ac5b069535db9c06583d6833be34e2c421dfed8",
+      "src/libprojectM/Renderer/TextureManager.hpp": "d6822e2c3fa9e2e584108596c2ccfe04469965b905372313c9253f683bcb38b3"
+    },
+    "source_inventory_sha256": "9938035c3b2dc1ab3dac998d86982a0a3fcaa64e2a6949d9edec888a4da57013",
+    "binary_sha256": "3fe94020098ce44349cd302bbb336f8fc8b6ac9d0d086d7ef8938e7a3d30b96e",
+    "status": "built"
+  },
+  "without-0011": {
+    "production_patch_removed": "0011-cpu-warp-rotation-trig.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/PerPixelMesh.cpp": "a3f3bdd42574139dd85c5a1010f883e9fe54c3f94d5d8391673d4520d9c53673",
+      "src/libprojectM/MilkdropPreset/PerPixelMesh.hpp": "3e638ff71a801f6825667cf04ee7052acc8e704699436d0dba0453aa52b6bf75",
+      "src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert": "28b59eda0688e5b59978eade4d852ea2677448780451093ca9e2c8171a283e5a"
+    },
+    "source_inventory_sha256": "48438a439c06a5fb905ae39839b960468b5343b4a4a88d4dba0baeddfe5042b2",
+    "binary_sha256": "96957ba0fea84c62b36f19bda306d6fc6b09b2ae2726a64880a44009f717000f",
+    "status": "built"
+  },
+  "without-0012": {
+    "production_patch_removed": "0012-shape-pixel-centers.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/CustomShape.cpp": "8210f2b4d3c5d173bfc37da4631797100a79afa4f5456895c3a965d880656859"
+    },
+    "source_inventory_sha256": "3e1f3e807c168406ea8a2b4678cd8f5dbfccd3696025c90bc1379b0de293af35",
+    "binary_sha256": "d2fed562d5caffd24e019d320f4b4e5ada04a4151c62a818ee47969eb9c23776",
+    "status": "built"
+  },
+  "without-0013": {
+    "production_patch_removed": "0013-composite-texel-centers.patch",
+    "parent": "patched-source-hashes.json",
+    "changes_from_parent": {
+      "src/libprojectM/MilkdropPreset/FinalComposite.cpp": "0d71012794adcbac40a265418e311021f43af9d16bcfa4479bd0af3e9ac49548",
+      "tests/libprojectM/FeedbackDiffusionRenderTest.cpp": "69eda56b0d8d51ed68c107f80c510213a16a457c4367ed842483528b96c61c2d"
+    },
+    "source_inventory_sha256": "2d70e6fdc76aa6887045d2d9079264b0680cb705baf6760c49ec048d7c336b26",
+    "binary_sha256": "b3307828c69f1c9ed3fedc43622cc83a5eb24de1494e98a9adf57b8bf147386b",
+    "status": "built"
+  }
+}

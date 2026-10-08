@@ -1,0 +1,17 @@
+{
+  "frame": 119,
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "preset_sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+  "transform": "unchanged upstream rejection panel and patched framebuffer from verified comparison; labels outside frame",
+  "patched_frame_sha256": "5124e56a18d889d94292cd21d580e21444019bca5bc9a5bda727ac137a1c4f1c",
+  "figure_sha256": "b4a982b97f7f1ee3e272cbbcd93da0c187f4f4f9fe644e805e3c0a3252378903",
+  "label_font": {
+    "format": "Pillow legacy PIL bitmap font",
+    "pillow_version": "12.3.0",
+    "renderer_sha256": "bf317a8aea49c721b4534f80f1d10ca25452867c4a7523218a8971c4857e7bc9",
+    "glyph_data_sha256": "db9b6323940efe8f5c792485c41a174a12aaedda84ed48567018ccc2d11ab045",
+    "font_sha256": "de1aef4ed29bb451c6a5cc24fdd05a5243df6de0203e8fa1ac88821cecf5c508",
+    "atlas_sha256": "82fbf1376459e9034d1ad15b96e5acf5fa98b26194fb60d00f355efb945dbaa4"
+  },
+  "annotation_transform": "fixed-font labels only; captured framebuffer pixels unchanged"
+}

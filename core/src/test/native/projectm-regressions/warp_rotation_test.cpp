@@ -519,6 +519,47 @@ static void CacheControls(TextureManager& textures)
     std::cout << "static mesh aspect/grid/viewport invalidation controls pass\n";
 }
 
+// The mesh keeps its static vertices and indices between frames. A reused instance must still
+// match a fresh one after viewport (aspect) and grid changes: stale radius/angle or indices fail.
+static void MeshCacheControls(TextureManager& textures)
+{
+    struct Layout { int x, y, gridX, gridY; };
+    const std::array<Layout, 5> layouts{{{64, 48, 8, 6}, {64, 48, 8, 6}, {48, 64, 8, 6}, {48, 64, 12, 6}, {64, 48, 8, 6}}};
+    for (bool custom : {false, true})
+    for (bool perPixel : {false, true})
+    {
+        Control reused(textures, custom, perPixel);
+        for (const Layout& layout : layouts)
+        {
+            Control fresh(textures, custom, perPixel);
+            Pixels expected, actual;
+            std::vector<float> expectedAngles, actualAngles;
+            for (Control* control : {&fresh, &reused})
+            {
+                auto& context = control->state.renderContext;
+                context.viewportSizeX = layout.x; context.viewportSizeY = layout.y;
+                context.aspectX = layout.y > layout.x ? float(layout.x) / layout.y : 1.f;
+                context.aspectY = layout.x > layout.y ? float(layout.y) / layout.x : 1.f;
+                context.invAspectX = 1.f / context.aspectX; context.invAspectY = 1.f / context.aspectY;
+                context.perPixelMeshX = layout.gridX; context.perPixelMeshY = layout.gridY;
+                powerObserved = false;
+                powerDrawElements = glad_glDrawElements;
+                glad_glDrawElements = ObservePowerDraw;
+                Pixels pixels;
+                try { pixels = control->Draw(0.4, perPixel); }
+                catch (...) { glad_glDrawElements = powerDrawElements; throw; }
+                glad_glDrawElements = powerDrawElements;
+                Check(powerObserved, "mesh cache control did not draw");
+                (control == &fresh ? expected : actual) = pixels;
+                (control == &fresh ? expectedAngles : actualAngles) = powerRadii;
+            }
+            Check(expectedAngles == actualAngles, "reused mesh kept stale radius/angle after a viewport or grid change");
+            Check(expected == actual, "reused mesh drew differently from a fresh mesh");
+        }
+    }
+    std::cout << "mesh cache: reused mesh matches fresh mesh across viewport and grid changes\n";
+}
+
 int main(int argc, char** argv)
 {
     try
@@ -529,6 +570,7 @@ int main(int argc, char** argv)
         if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "cache") { CacheControls(textures); return 0; }
         PowerUploadControls(textures);
+        MeshCacheControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';
         for (bool preparedReplay : {false, true})
         for (bool custom : {false, true})

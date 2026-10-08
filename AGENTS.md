@@ -54,7 +54,7 @@ ProjectM TV is a music visualizer for Android TV, powered by **ProjectM TV Engin
 - **Devices:** Android TV only. The manifest requires `android.software.leanback`, OpenGL ES 3.0 and audio output; touchscreen, gamepad and microphone are optional. README: Android 5.0+ (API 21), at least 2 GB RAM highly recommended, no touch/phone support.
 - **Build types (no product flavors):** `debug`; `release` (R8 minify + resource shrinking, release key when `SIGNING_KEYSTORE_PATH` is set, otherwise the local debug key); `profile` (`initWith release`, debug key, `.profile` suffix, `profileable` via `app/src/profile/AndroidManifest.xml`). Gradle properties `-PpresetLabDeviceTest` / `-PsetupScreenshotTest` give the debug build the `.presettest` / `.setuptest` suffix and a distinct app name.
 - **Entry points:** `ProjectMApplication` (one-time preference migrations, `ProjectMCore.init`); `MainActivity` (single `singleTask` landscape activity: UI, remote keys, audio capture, settings panels); `TrackListenerService` (notification listener used only for media sessions); `Updater` + `UpdateFileProvider` (opt-in GitHub auto-update). Engine: `ProjectMCore`, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo`; native `core/src/main/cpp/native-lib.cpp` plus `snapshot_fade.cpp` and `preset_prewarm.cpp`.
-- **projectM relationship:** submodule `third_party/projectm` tracks upstream `https://github.com/projectM-visualizer/projectm.git`, pinned to unreleased projectM 4.2 master commit `6f64807467e312034883a4389e6aa80a675458bc` (CMake numeric version `4.2.0`, not an upstream release). All retained engine changes are the ordered patch series `tools/projectm-patches/NNNN-*.patch`, applied at CMake configure time by `core/src/main/cpp/CMakeLists.txt` and linked statically into `libprojectmtv.so`. The first 44 historical patches are consolidated into `0001-tv-rendering-and-preset-compatibility.patch`, `0002-hlsl-compatibility-and-float-roundtrip.patch` and `0003-evaluator-thread-local-rand-and-lone-dot.patch`; consult [docs/UPSTREAM_PATCH_VALUE.md](docs/UPSTREAM_PATCH_VALUE.md) and the current patch filenames for its retained/upstream/obsolete mapping. Historical 0045–0049 are ported as current 0004–0008 (shape sampling, blur bounds, signed zoom and live wave/display controls). Current 0009 preserves the released SOIL2 user-texture premultiplication bytes in the 4.2 stbi upload; Current 0010 ports historical 0050 for per-preset texture lookup across custom-pack switches; Current 0011 ports historical 0051 for CPU warp rotation trig through 4.2 separate vertex buffers. Current 0012 aligns custom shape fills/outlines with D3D9 pixel centres per actual authored/native target; restore both shared shader matrices after each batch and preserve evaluated positions, radii, colours and UVs. Current 0013 removes the redundant composite UV half-texel bias; same-size pass-through must copy feedback texels without extra blur. Validate patch application and focused rotation controls after synchronization. The personal fork `johnneerdael/projectm` is not referenced by the build; it is used for upstream PRs.
+- **projectM relationship:** submodule `third_party/projectm` tracks upstream `https://github.com/projectM-visualizer/projectm.git`, pinned to unreleased projectM 4.2 master commit `6f64807467e312034883a4389e6aa80a675458bc` (CMake numeric version `4.2.0`, not an upstream release). All retained engine changes are the ordered patch series `tools/projectm-patches/NNNN-*.patch`, applied at CMake configure time by `core/src/main/cpp/CMakeLists.txt` and linked statically into `libprojectmtv.so`. The first 44 historical patches are consolidated into `0001-tv-rendering-and-preset-compatibility.patch`, `0002-hlsl-compatibility-and-float-roundtrip.patch` and `0003-evaluator-thread-local-rand-and-lone-dot.patch`; consult [docs/UPSTREAM_PATCH_VALUE.md](docs/UPSTREAM_PATCH_VALUE.md) for the current-series assessment and image evidence; the linked archived assessment preserves the historical retained/upstream/obsolete mapping. Historical 0045–0049 are ported as current 0004–0008 (shape sampling, blur bounds, signed zoom and live wave/display controls). Current 0009 preserves the released SOIL2 user-texture premultiplication bytes in the 4.2 stbi upload; Current 0010 ports historical 0050 for per-preset texture lookup across custom-pack switches; Current 0011 ports historical 0051 for CPU warp rotation trig through 4.2 separate vertex buffers. Current 0012 aligns custom shape fills/outlines with D3D9 pixel centres per actual authored/native target; restore both shared shader matrices after each batch and preserve evaluated positions, radii, colours and UVs. Current 0013 removes the redundant composite UV half-texel bias; same-size pass-through must copy feedback texels without extra blur. Validate patch application and focused rotation controls after synchronization. The personal fork `johnneerdael/projectm` is not referenced by the build; it is used for upstream PRs.
 - **App/core boundary and Milkbeat:** `:app` holds UI, audio capture, track titles and the updater; `:core` holds the engine, JNI, presets, textures and preset indexes. [Milkbeat](https://github.com/johnneerdael/Milkbeat) consumes the released core AAR: CI publishes the single Native `projectM-TV-core-<version>.aar` and canonical alias, then dispatches `projectm-core-release` to Milkbeat (see *Generated artifacts*). Milkbeat consumes canonical artifact names and uses QualityController; managed hosts acknowledge context/configuration generations and publish a coherent size/trails/transition tuple after live RAM review. Retired fixed-resolution and static-RAM methods normalize to Auto.
 - **Build tasks:** `./gradlew assembleRelease` (APK at `app/build/outputs/apk/release/app-release.apk` and AAR at `core/build/outputs/aar/core-release.aar`), `./gradlew :core:assembleRelease`, `./gradlew assembleDebug`, `./gradlew assembleProfile`.
 - **Single Native core:** `:core` and the APK use Native rendering; canonical `projectM-TV-core[-<version>].aar` names contain Native bytes. The separate capped/core-native artifacts are retired for new releases; preserve historical releases. Deprecated `-PprojectmCoreRenderingPolicy=native` remains accepted; `capped` is rejected. QualityController defaults to Auto up to the physical panel and uses live FPS/memory headroom. Its fixed-mode/static-RAM compatibility methods normalize to Auto. The additive resolution selector leaves legacy `setMode` Auto-normalizing for existing consumers. JNI defaults Standard trails; settings are additive (`setNativeTrails`, `getNativeTrailsStatus`). The underlying projectM C API retains explicit-off compatibility controls. See `docs/RELEASING.md`.
@@ -73,6 +73,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 ## Codebase navigation and knowledge tools
 
 - I11 candidate0024 (2026-10-08): actual legacy/default mesh uses the original physical AD diagonal; compiled custom keeps BC and failed custom uses legacy. Select six offsets once, keep one existing index buffer, winding/quadrant/count/replay contracts, and include compiled-path identity in cached topology. Real corner-field GL/indices/affine/path-change control RED→GREEN. Initial Native4K/custom-path proof passes but initial cost+4.337% is not accepted. Revised complete viewport/aspect/path static mesh cache passes49 controls and fresh24-patch application; missing-aspect ablation fails. Revised native equivalence/cost and integration pending. See [I11](docs/superpowers/evidence/milkdrop-audit-repairs/I11/README.md).
+- Negative warp powers (2026-10-08): patch0015 supplies original CPU negative effective zoom through instance-owned attribute9, after per-pixel/per-frame float conversion. Preserve raw equation values, positive GPU arithmetic, nonfinite fractional results and prepared replay; no epsilon, absolute value or NaN-to-zero policy. Exact Tulip source `c897d686…` retains 33 NaNs/frame and its 30-frame published/candidate replay is byte-identical. Defined nested exponents1/2/3 fail baseline UV controls and pass after correction. See [bounded evidence](docs/superpowers/evidence/tulip-negative-zoom-power/README.md). Current warp uses eight active attributes and four extra bytes/vertex. Normal/sanitizer renderer37/37 and JVM137 pass; 329 host controls, fresh recursive both-ABI debug core and strict MkDocs also pass. External review/CI/merge/publication gates remain separate until recorded. Do not clear the source predictor's unresolved fractional-power guard or resume its shared random run from this evidence.
+- Mesh initialization cache (2026-10-08): patch 0016 stores the viewport size in `PerPixelMesh`/`FinalComposite`, so their static mesh data (and the warp mesh's vertex/index upload) is built once per size or grid change instead of every frame. Image output is unchanged; on the AM6 (Android 9, 32-bit) the pinned `$$$ Royal - Mashup (102).milk` run at 1080p/30 fps used about 12% less process CPU (two runs per side, silence; GPU time unmeasured). Evidence: `docs/superpowers/evidence/mesh-init-cache/README.md`. Profile APKs: the installable file is `app/build/outputs/apk/profile/app-profile.apk` (`app/build/intermediates/apk/profile/` can be stale); install with `adb install -t`.
 
 - I10 candidate0023 (2026-10-08): compile-time legacy/default warp VS variant changes only the four oscillator-Y signs, with the same arithmetic/trig/pass counts. Custom warp keeps its current producer; actual failed-custom compilation uses the corrected default. Preserve CPU trig, negative-power attributes, equations, topology/traversal and prepared replay. Production vertex transform-feedback regression RED→GREEN and47 normal controls pass;23 patches apply. Native4K original/finite/cost qualification and integration remain pending. See [I10](docs/superpowers/evidence/milkdrop-audit-repairs/I10/README.md).
 
@@ -295,7 +297,7 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | `docs/user-guide/**/*.md` + `mkdocs.yml` | User guide source: *Using ProjectM TV* pages, `authoring/` (source-level preset authoring, MilkDrop 2 semantics, no patch-specific claims), `engine/` (patch catalog, 4K rendering, pipeline, validation) and `predictor.md` (research direction, not a commitment); built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
 | `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
 | `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
-| `docs/UPSTREAM_PATCH_VALUE.md` | Historical44-patch applicability/value assessment against the pinned unreleased 4.2 master; update with pin/patch/evidence changes |
+| `docs/UPSTREAM_PATCH_VALUE.md` | Current locked 15-patch assessment and GPU Android TV upstream/ablation image proof; linked archive preserves historical dispositions; update with pin/patch/evidence changes |
 | `docs/THIRD_PARTY.md` | projectM pin, link to patch provenance, presets/textures sources and licences |
 | `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
 | `docs/DANCE-COLLECTION.md` | Pointer to the archived Dance article in Git history (Dance is retired; `docs/user-guide/dance*.md` are not-in-nav stubs) |
@@ -440,3 +442,105 @@ If the repository requires a merge queue, enqueue the eligible PR and monitor un
 - Run `python -m pytest tools/native-trails tools/core-corpus -q` (CI): current combined run passes 75 tests plus 35 subtests. Run `python -m pytest tools/preset-lab/tests -q` with the standard native worker and its build identity: recorded full run is 164/164; the later focused Android-header guard suite is 7/7. The private GL hook includes desktop GLAD outside Android/GLES builds and omits the optional discard hint when its declarations lack GL4.3 (also on Apple OpenGL4.1). Twelve worker controls and the full 170-test Preset Lab suite pass; compiled desktop GL3.3/GL4.3 branches and real NDK GLES API guards cover both the analysis hook and separate host-control shim. All 329 host engine controls pass. Rebuild into a fresh role directory after an instrumentation identity changes.
 - Keep copied native CPU shader bodies and their source hashes intact; include production logging declarations rather than stubbing copied calls. Both source adapters build and the recorded milk-analyzer suite passes 199 tests.
 - Treat AM6's reported GLES 3.2 runtime as that driver's coverage, not proof for a GLES 3.0-only driver. The completed 1080p single-preset pilot repeats its eight selected captures within each role, but cross-role RGB byte MAE reaches 2.66 at frame 479 with localized differences. It does not establish a coordinate-change cause, full-corpus equivalence or a speedup. The historical TV matrix is superseded for fidelity readiness by the completed release-bound API34 GPU validation under the user’s TV waiver. Preserve its original captures/timings; final CI/review/release gates remain separate.
+
+## Current-patch image proof maintenance
+
+The current-series reference is `docs/UPSTREAM_PATCH_VALUE.md`; historical
+dispositions remain in its linked archive. `tools/patch-proof/README.md` documents
+fresh source-bound preparation, repeated direct-libprojectM EGL captures and an
+offline source/binary/image verifier. The verified 2026-10-07 checkpoint uses the
+task-owned API36 Android TV `emulator-5630` (host GPU/HVF, M4 Pro/GLES3.0), not
+the API34 phone image used for historical migration fidelity. Baseline source
+matches observed upstream master e98fca85 before common deterministic hooks.
+Patched image workers disable binary-cache export due to the API36 guest error;
+do not infer cache validation, production RNG parity or app/Windows appearance.
+Use fresh work directories and explicit serial/user arguments; keep failures and
+source identities separate from successful images. The new original lone-dot
+witness is Stahlregen's funky Blur base preset (plus an unrendered nz+ source
+match); isolated controls distinguish accepted code from tolerant omission.
+
+Retained-component proof maintenance (2026-10-08): the main patch reference embeds
+component comparisons on the same page. Resource-correctness and image-preserving
+optimizations need actual healthy render frames plus measured diagnostics; do not
+invent an appearance gain. `--shader-failure-probe` observes actual linked shader
+lifetimes; `--texture-history-probe` uses a shared, explicitly labeled allocation
+fixture and reads actual attachment pixels/state/storage counts. New native
+harness revisions require freshly prepared workers. Keep pooling opt-in and the
+API36 program-binary export limitation explicit. The 23-row component matrix in
+`docs/superpowers/plans/2026-10-08-retained-component-proof.md` remains incomplete.
+
+Historical 14-patch synchronization (2026-10-08): PR #57/main `41ec3fc1` adds
+current 0014 legacy tint and mode-1 waveform compatibility. `current14-series.json`
+preserves that inventory; original image-proof workers/series.json retain the
+frozen 13-patch source `654815d8`. The 0014 Hurricane, tint and mode-1 comparisons
+provide matched upstream/current14 proof. Do not relabel earlier captures as
+14-patch certification; affected-witness revalidation remains pending.
+
+Proof snapshot selection: `tools/patch-proof/{prepare,capture,verify}.py` accept
+`--series`; pass `current-series.json` consistently for the locked 15-patch endpoint
+at `120547f3`, or `current14-series.json` for historical 14-patch replay at `41ec3fc1`.
+Their default `series.json` preserves frozen 13-patch replay. Manifest digests bind
+new workers and captures to a selected source/inventory; old unbound receipts are restricted
+to the original frozen manifest. Never relabel preserved workers as a newer
+endpoint merely because upstream pin/early patch bytes match.
+
+Original proof inputs: before remaining component captures, read
+`docs/superpowers/evidence/current-patch-proof/original-evidence-inputs/README.md`
+and its machine map. It joins original PR/commit evidence to preset types, exact
+verified assets and activation profiles. PR14 reference1024×768 must not silently
+become a16:9 reference; PR34 needs first-use/resize/distinct FBO controls, and
+PR40 needs explicit authored/native-off/Standard/Medium/High sequences. Historical
+screenshots/timings remain provenance, not current4.2 certification. Early
+optimization commits omit some benchmark names; preserve that uncertainty.
+
+Patch review-page presentation: keep `docs/UPSTREAM_PATCH_VALUE.md` as one readable
+Markdown page with upstream/our-library images, optional matching zooms and short
+natural-language explanations of the difference and cause. Move audit tables,
+hashes, repeated validation/caveats and the expanded working assessment to linked
+evidence. Preserve real upstream versus single-patch-removal labels; never relabel
+an ablation as upstream. Human-review figures must match retained raw frame hashes
+and pixel crops without brightness changes.
+
+Publication scope lock (user instruction2026-10-08): PR55's engine inventory is
+main120547f3,15patches ending0015. Finish the readable single-page comparisons for
+that set and publish; deeper optimization/lifecycle comparisons move to a follow-up.
+Do not add engine patches or reopen this scope for later work. Preserve immutable
+13/14-patch capture identities; current14-series.json retains the14-patch manifest
+while current-series.json identifies the locked15-patch publication source.
+
+Proof review maintenance (2026-10-08): new captures retain uploaded inputs and
+record their owned remote workspace; verification binds job/event paths to that
+workspace. Native workers validate and install the job seed before RNG setup. Capture retains
+and uploads the validated worker bytes, checks the remote hash, and points
+receipt identities at that retained executable. Offline verification also
+requires the trusted deterministic PCM digest and supported 16:9 dimensions.
+Fresh locked15 power/rotation replays match all prior RGB frames and pass full
+source/binary/input/pixel verification. Historical records remain unchanged; non-staged workers require a fresh replay
+for current certification. See tools/patch-proof/README.md for input/workspace
+options and retained worker requirements.
+
+Execution evidence maintenance (2026-10-08): new proof runs retain execution.json
+exit receipts. Verifier checks rejected jobs and retained diagnostics, rejecting
+contradictory success artifacts. Evaluator proof requires the complete upstream,
+without-0003 and patched role set; historical subsets are not current certification.
+
+Applied-control proof maintenance (2026-10-08): rendered manifests record normalized
+line-reference dimensions, AA and feedback override from the setter helper.
+Verification binds these fields, including upstream’s ignored TV requests.
+Locked15 4K Geiss classic/reference captures replace the active line figure;
+original13-patch line images/receipts remain under components/lines.
+
+Proof label portability (2026-10-08): capture/verifier use the committed bitmap
+font under tools/patch-proof/assets, without default-font/FreeType selection.
+Label-only comparison reconstruction records its font/image identity separately
+from the original producer; framebuffer payloads remain unchanged.
+
+PR55 main60 synchronization (2026-10-08): main eb1e7c16 adds0016; preserve the
+15-patch image checkpoint at120547f3 and link the separate AM6 performance
+evidence, as selected by the user. All16 patches apply in an isolated export.
+137 proof controls, native engine/JNI checks,37 ASan/UBSan regression cases on
+macOS OpenGL and strict MkDocs pass. The separate EGL transition-overlay check
+was not run on macOS. These checks do not turn the frozen images into16-patch
+GPU certification.
+
+Latest audit integration (2026-10-08): synchronize main af164a97 including released0016-cache-mesh-init-per-viewport, retaining its static upload policy and FinalComposite cache. Audit patches renumber to0017–0025;0025 only extends static key with aspect/compiled path and selects the legacy diagonal. Frozen source/artifact/PNG evidence still uses historical numbers and is not relabeled. Source, Native and final PR gates must be checked on this integrated head.

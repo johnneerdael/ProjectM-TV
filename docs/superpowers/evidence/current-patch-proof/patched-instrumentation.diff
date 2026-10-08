@@ -1,0 +1,124 @@
+--- a/preset-lab-identity.json
++++ b/preset-lab-identity.json
+@@ -0,0 +1 @@
++{"commit":"6f64807467e312034883a4389e6aa80a675458bc","instrumentation_sha256":"2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e","patches_sha256":"3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"}--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -0,0 +1 @@
++#include "../analysis_hooks.hpp"
+@@ -30 +31 @@
+-static auto floatRand = []() { return static_cast<float>(rand() % 7381) / 7380.0f; };
++static auto floatRand = []() { return static_cast<float>(lab::ShaderRandom() % 7381) / 7380.0f; };
+--- a/src/libprojectM/MilkdropPreset/PresetState.cpp
++++ b/src/libprojectM/MilkdropPreset/PresetState.cpp
+@@ -0,0 +1 @@
++#include "../analysis_hooks.hpp"
+@@ -21,2 +22 @@
+-    std::random_device randomDevice;
+-    std::mt19937 randomGenerator(randomDevice());
++    std::mt19937 randomGenerator(lab::Seed(104));
+--- a/src/libprojectM/Renderer/MilkdropNoise.cpp
++++ b/src/libprojectM/Renderer/MilkdropNoise.cpp
+@@ -0,0 +1 @@
++#include "../analysis_hooks.hpp"
+@@ -56 +57 @@
+-    uint32_t randomSeed = static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count());
++    uint32_t randomSeed = lab::Seed(101) ^ static_cast<uint32_t>(size * 31 + zoomFactor);
+@@ -143 +144 @@
+-    uint32_t randomSeed = static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count());
++    uint32_t randomSeed = lab::Seed(101) ^ static_cast<uint32_t>(size * 31 + zoomFactor);
+--- a/src/libprojectM/Renderer/Shader.cpp
++++ b/src/libprojectM/Renderer/Shader.cpp
+@@ -212 +212 @@
+-        ProgramCache::Instance().Store(m_shaderProgram, cacheKey);
++        // Image-proof harness: guest binary metadata export is broken; do not cache.
+--- a/src/libprojectM/Renderer/TextureManager.cpp
++++ b/src/libprojectM/Renderer/TextureManager.cpp
+@@ -0,0 +1,2 @@
++#include <tuple>
++#include "../analysis_hooks.hpp"
+@@ -309,2 +311 @@
+-    std::random_device rndDevice;
+-    std::default_random_engine rndEngine(rndDevice());
++    std::mt19937 rndEngine(lab::Seed(103) ^ lab::StringSeed(randomName));
+@@ -436,0 +438,4 @@
++        std::sort(m_scannedTextureFiles.begin(), m_scannedTextureFiles.end(),
++            [](const auto& a, const auto& b) {
++                return std::tie(a.lowerCaseBaseName, a.filePath) < std::tie(b.lowerCaseBaseName, b.filePath);
++            });
+--- a/src/libprojectM/Renderer/TransitionShaderManager.cpp
++++ b/src/libprojectM/Renderer/TransitionShaderManager.cpp
+@@ -0,0 +1 @@
++#include "../analysis_hooks.hpp"
+@@ -15 +16 @@
+-    , m_mersenneTwister(m_randomDevice())
++    , m_mersenneTwister(lab::Seed(105))
+--- a/src/libprojectM/TimeKeeper.cpp
++++ b/src/libprojectM/TimeKeeper.cpp
+@@ -0,0 +1 @@
++#include "analysis_hooks.hpp"
+@@ -33,2 +34 @@
+-        auto currentTime = std::chrono::high_resolution_clock::now();
+-        currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();
++        currentFrameTime = lab::clock_seconds;
+--- a/src/libprojectM/TimeKeeper.hpp
++++ b/src/libprojectM/TimeKeeper.hpp
+@@ -0,0 +1 @@
++#include "analysis_hooks.hpp"
+@@ -113 +114 @@
+-    std::mt19937 m_randomGenerator{m_randomDevice()};
++    std::mt19937 m_randomGenerator{lab::Seed(11)};
+--- a/src/libprojectM/analysis_hooks.hpp
++++ b/src/libprojectM/analysis_hooks.hpp
+@@ -0,0 +1,45 @@
++#ifndef PRESET_LAB_ANALYSIS_HOOKS_HPP
++#define PRESET_LAB_ANALYSIS_HOOKS_HPP
++// Select desktop declarations before applying the optional discard shim.
++// Android and configured GLES builds keep their GLES headers and real discard API.
++#if !defined(__ANDROID__) && !defined(USE_GLES) && __has_include(<glad/gl.h>)
++#include <glad/gl.h>
++#endif
++#include <cstdint>
++#include <cstdlib>
++#include <string>
++
++// Apple OpenGL 4.1 and the pinned desktop GLAD 3.3 API lack this optional hint.
++// Keeping attachment contents is equivalent for rendering correctness; host
++// timings from these private workers do not establish Android GPU performance.
++#if defined(__APPLE__) || (!defined(__ANDROID__) && !defined(USE_GLES) && !defined(GL_VERSION_4_3))
++#undef glInvalidateFramebuffer
++#define glInvalidateFramebuffer(target, count, attachments) ((void)0)
++#endif
++
++// Present only in the analyzer's private projectM source copy.
++namespace lab {
++inline double clock_seconds = 0.0;
++inline uint32_t Seed(uint32_t subsystem) {
++    const char* configured = std::getenv("PRESET_LAB_SEED");
++    uint32_t value = configured ? static_cast<uint32_t>(std::strtoul(configured, nullptr, 10)) : 12345u;
++    return value ^ (subsystem * 0x9e3779b9u);
++}
++// Keep shader random values private: linked GL/SDL code may consume libc rand().
++// Park-Miller matches this lab's original macOS rand sequence. All platforms use
++// this explicit algorithm now; a new instrumentation identity defines the oracle.
++inline uint32_t shader_random_state = 0;
++inline void ResetShaderRandom() { shader_random_state = Seed(1); }
++inline uint32_t ShaderRandom() {
++    if (shader_random_state == 0) shader_random_state = 123459876u;
++    shader_random_state = static_cast<uint32_t>(
++        (static_cast<uint64_t>(shader_random_state) * 16807u) % 2147483647u);
++    return shader_random_state;
++}
++inline uint32_t StringSeed(const std::string& text) {
++    uint32_t result = 2166136261u;
++    for (unsigned char value : text) result = (result ^ value) * 16777619u;
++    return result;
++}
++}
++#endif
+--- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
++++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
+@@ -0,0 +1 @@
++#include <stdlib.h>
+@@ -169 +170 @@
+-        uint32_t s = 0x4141f00d; // Initial Mersenne Twister seed
++        uint32_t s = getenv("PRESET_LAB_SEED") ? (uint32_t)strtoul(getenv("PRESET_LAB_SEED"), NULL, 10) : 0x4141f00d;

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "config": {
+    "width": 512,
+    "height": 288,
+    "fps": 30,
+    "warmup_seconds": 0,
+    "measurement_seconds": 4,
+    "seed": 12345,
+    "line_reference_height": 0,
+    "soft_cut_seconds": 2
+  },
+  "pcm_path": "/data/local/tmp/aurora-owner-proof-553cb669c81a/audio.f32",
+  "preset_path": "/data/local/tmp/aurora-owner-proof-553cb669c81a/pack-a/presets/Aurora Ownership - SOL.milk",
+  "texture_root": "/data/local/tmp/aurora-owner-proof-553cb669c81a/pack-a/textures",
+  "bands_path": "/data/local/tmp/aurora-owner-proof-553cb669c81a/bands.jsonl",
+  "manifest_path": "/data/local/tmp/aurora-owner-proof-553cb669c81a/manifest.json",
+  "identity": {
+    "role": "patched",
+    "repeat": 0,
+    "experiment": "AuroraSOL-LUNA"
+  },
+  "events": [
+    {
+      "frame": 20,
+      "texture_root": "/data/local/tmp/aurora-owner-proof-553cb669c81a/pack-b/textures"
+    },
+    {
+      "frame": 21,
+      "load_preset": "/data/local/tmp/aurora-owner-proof-553cb669c81a/pack-b/presets/Aurora Ownership - LUNA.milk",
+      "smooth": true
+    },
+    {
+      "frame": 40,
+      "reset_textures": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "verified",
+  "successful_roles": [
+    "upstream",
+    "without-0003",
+    "patched"
+  ],
+  "rejected_roles": [],
+  "different_frames_between_adjacent_successful_roles": {},
+  "input_verification": {
+    "source": "retained",
+    "preset": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-evaluator-v2/inputs/witness.milk",
+    "textures": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-evaluator-v2/inputs/textures"
+  },
+  "remote_workspace_verification": {
+    "source": "recorded",
+    "path": "/data/local/tmp/projectmtv-patch-proof-88818c74ce3f0949"
+  },
+  "comparison_label_font": null,
+  "scope": "retained evaluator output/repeats/reconstructed source/binary identities; preset and texture bytes match recorded hashes; retained execution/artifact consistency checked",
+  "verifier_sha256": "0a02a4374f866e2ca3d19639409b2acbb48711da924755a736089f4f02038e67",
+  "source_identity_sha256": "2e2b18f9d804cd18929cf75d3c38067d5737d0493976e58922159e1bde3d6a68",
+  "rgb_payload_sha256": "64bce135589c41468b317aa1b37f455f036c905dbb7c4182720cd9f4e0508312"
+}

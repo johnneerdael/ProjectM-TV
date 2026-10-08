@@ -1,0 +1,8 @@
+{
+  "source": "task-owned emulator-5630 logcat emuglGLESv2_enc:E",
+  "observed_error": "GL_INVALID_OPERATION (0x502)",
+  "condition": "bufSize < programBinaryInfoBytes.size()",
+  "driver_call": "s_glGetProgramBinary",
+  "occurrences": 9,
+  "scope": "initial cache-enabled capture attempts; raw log retained only in private work directory"
+}

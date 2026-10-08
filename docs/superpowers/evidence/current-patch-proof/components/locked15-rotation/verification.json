@@ -1,0 +1,34 @@
+{
+  "status": "verified",
+  "successful_roles": [
+    "upstream",
+    "without-0015",
+    "patched"
+  ],
+  "rejected_roles": [],
+  "different_frames_between_adjacent_successful_roles": {
+    "upstream:without-0015": 120,
+    "without-0015:patched": 0
+  },
+  "input_verification": {
+    "source": "retained",
+    "preset": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-large-rotation-v5/inputs/witness.milk",
+    "textures": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-large-rotation-v5/inputs/textures"
+  },
+  "remote_workspace_verification": {
+    "source": "recorded",
+    "path": "/data/local/tmp/projectmtv-patch-proof-3c2b9b0cb649bde8"
+  },
+  "comparison_label_font": {
+    "format": "Pillow legacy PIL bitmap font",
+    "pillow_version": "12.3.0",
+    "renderer_sha256": "bf317a8aea49c721b4534f80f1d10ca25452867c4a7523218a8971c4857e7bc9",
+    "glyph_data_sha256": "db9b6323940efe8f5c792485c41a174a12aaedda84ed48567018ccc2d11ab045",
+    "font_sha256": "de1aef4ed29bb451c6a5cc24fdd05a5243df6de0203e8fa1ac88821cecf5c508",
+    "atlas_sha256": "82fbf1376459e9034d1ad15b96e5acf5fa98b26194fb60d00f355efb945dbaa4"
+  },
+  "scope": "retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection; preset and texture bytes match recorded hashes; retained execution/artifact consistency checked; job input/output and event paths bound to the selected remote workspace",
+  "verifier_sha256": "0a02a4374f866e2ca3d19639409b2acbb48711da924755a736089f4f02038e67",
+  "source_identity_sha256": "2e2b18f9d804cd18929cf75d3c38067d5737d0493976e58922159e1bde3d6a68",
+  "rgb_payload_sha256": "64bce135589c41468b317aa1b37f455f036c905dbb7c4182720cd9f4e0508312"
+}

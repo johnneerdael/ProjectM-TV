@@ -49,7 +49,8 @@
       },
       "native_4k_evidence": "I17/results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I17/final-I17-results.json"
+      "final_output_evidence": "I17/final-I17-results.json",
+      "current_patch_number": 17
     },
     {
       "id": "I19",
@@ -93,7 +94,8 @@
       "evidence": "I08/README.md",
       "native_4k_evidence": "I08/results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I08/final-I08-results.json"
+      "final_output_evidence": "I08/final-I08-results.json",
+      "current_patch_number": 18
     },
     {
       "id": "I22",
@@ -113,7 +115,8 @@
       "evidence": "I22/README.md",
       "native_4k_evidence": "I22/results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I22/final-I22-stars-results.json"
+      "final_output_evidence": "I22/final-I22-stars-results.json",
+      "current_patch_number": 19
     },
     {
       "id": "I10",
@@ -142,7 +145,8 @@
         "sha256": "b3ebf1ab3f1132d2215e493fe9942693b0e70361c5c269cf86cff890520e2ef5"
       },
       "native_4k_evidence": "I10/chemlock-results.json",
-      "cost_evidence": "I10/initial-clean-timings.json"
+      "cost_evidence": "I10/initial-clean-timings.json",
+      "current_patch_number": 24
     },
     {
       "id": "I11",
@@ -168,7 +172,8 @@
       },
       "native_4k_evidence": "I11/original-results.json",
       "initial_cost_evidence": "I11/initial-clean-timings.json",
-      "cost_evidence": "I11/revised-clean-timings.json"
+      "cost_evidence": "I11/revised-clean-timings.json",
+      "current_patch_number": 25
     },
     {
       "id": "I12",
@@ -212,7 +217,8 @@
       "native_4k_evidence": "I05/verified-results.json",
       "diagnostic_evidence": "I05/final-diagnostic-aspect-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I05/final-I05-results.json"
+      "final_output_evidence": "I05/final-I05-results.json",
+      "current_patch_number": 22
     },
     {
       "id": "I16",
@@ -241,7 +247,8 @@
       "native_4k_evidence": "I06/verified-results.json",
       "diagnostic_evidence": "I06/final-diagnostic-wave-time-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I06/final-I06-results.json"
+      "final_output_evidence": "I06/final-I06-results.json",
+      "current_patch_number": 22
     },
     {
       "id": "I24",
@@ -390,7 +397,8 @@
       "confirmed_affected_originals": [],
       "evidence": "I29/README.md",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "native_4k_evidence": "I29/final-results.json"
+      "native_4k_evidence": "I29/final-results.json",
+      "current_patch_number": 23
     },
     {
       "id": "I15",
@@ -420,7 +428,8 @@
       "evidence": "I09/README.md",
       "native_4k_evidence": "I09/README.md",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I09/final-diagnostic-pi-results.json"
+      "final_output_evidence": "I09/final-diagnostic-pi-results.json",
+      "current_patch_number": 21
     },
     {
       "id": "I31",
@@ -437,7 +446,8 @@
       "evidence": "I31/README.md",
       "native_4k_evidence": "I31/verified-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
-      "final_output_evidence": "I31/final-I31-results.json"
+      "final_output_evidence": "I31/final-I31-results.json",
+      "current_patch_number": 20
     },
     {
       "id": "I01",
@@ -531,5 +541,7 @@
       "recommendation": "retain blur domain repair; do not invent original NaN appearance"
     }
   ],
-  "full_preset_inventory_bytes_verified": 9606
+  "full_preset_inventory_bytes_verified": 9606,
+  "integration_base": "af164a97896646427f971ecbed8161f8d35c2fec",
+  "frozen_evidence_baseline_unchanged": true
 }

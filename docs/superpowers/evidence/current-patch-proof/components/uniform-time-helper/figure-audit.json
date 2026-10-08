@@ -1,0 +1,49 @@
+{
+  "frame": 119,
+  "roles": {
+    "upstream": {
+      "rgb_sha256": "822d5cb47ad13750a42dec7764c9108e57866e822ba52d831d711e54b52171dd",
+      "centre_rgb": [
+        44,
+        40,
+        38
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        }
+      ]
+    },
+    "without-0002": {
+      "rgb_sha256": "73f786eba861db6febc9de091584443c1e2c198b913a760249f67f3e1791485e",
+      "centre_rgb": [
+        43,
+        39,
+        37
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        }
+      ]
+    },
+    "patched": {
+      "rgb_sha256": "bfff3823b89e1ddd52b40cf5d97191b73f6cc1eda6272907a91314c86681eb10",
+      "centre_rgb": [
+        34,
+        29,
+        27
+      ],
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        }
+      ]
+    }
+  },
+  "pixels_unaltered": true,
+  "figure_sha256": "7c98d42abc8580023eec86a6af45f3c1649ac2ba0c4fb8efa5d624e7ed0cf328"
+}

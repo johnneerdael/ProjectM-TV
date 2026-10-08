@@ -1,22 +1,22 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Baseline120547f3 contains15 TV patches; the source repair series now adds0016–0024 for ten finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-two other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0025 for ten finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-two other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
 | ID | Finding | Lexical candidates | Current status |
 |---|---|---:|---|
-| I17 | Built-in opacity replacement and thresholds differ | 5300 | Implemented0016; source/final4K original proof; integration pending |
+| I17 | Built-in opacity replacement and thresholds differ | 5300 | Implemented0017; source/final4K original proof; integration pending |
 | I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Deferred source-cap proposal; final authored/Native comparison and +.158ms cost documented |
-| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Implemented0017; source/final4K original proof; integration pending |
-| I22 | Custom dot waves gain interpolated points | 1875 | Candidate0018; source/original/finite final4K proof; timing disposition pending |
-| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Implemented0023; original/finite/custom and cost4K proof; integration pending |
-| I11 | Legacy warp physical triangle diagonal is reversed | 878 | Implemented0024; source49/sanitizer49, exact cache pixels, revised cost qualified; integration pending |
+| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Implemented0018; source/final4K original proof; integration pending |
+| I22 | Custom dot waves gain interpolated points | 1875 | Candidate0019; source/original/finite final4K proof; timing disposition pending |
+| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Implemented0024; original/finite/custom and cost4K proof; integration pending |
+| I11 | Legacy warp physical triangle diagonal is reversed | 878 | Implemented0025; source49/sanitizer49, exact cache pixels, revised cost qualified; integration pending |
 | I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | Source investigation recorded; execution/captures/disposition pending |
 | I14 | Motion reverse propagation uses different interpolation and storage | 794 | Source investigation recorded; execution/captures/disposition pending |
-| I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | Implemented0021; source/original/finite final4K proof; integration pending |
+| I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | Implemented0022; source/original/finite final4K proof; integration pending |
 | I16 | Disabling motion vectors leaves a stale target UV map | 435 | Source investigation recorded; execution/captures/disposition pending |
-| I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | Implemented0021; source/original/finite final4K proof; integration pending |
+| I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | Implemented0022; source/original/finite final4K proof; integration pending |
 | I24 | Shape live thick equations do not select target outline style | 14 | Source/cost screening; two stronger originals; execution/captures pending |
 | I23 | Thick custom-wave and shape-outline offsets differ | 4951 | Source investigation recorded; execution/captures/disposition pending |
 | I20 | Circle angular spacing and closure smoothing differ | 2736 | Source investigation recorded; execution/captures/disposition pending |
@@ -28,10 +28,10 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | M01 | Negative custom-wave enable executes in predictor but not library | 0 | Source investigation recorded; execution/captures/disposition pending |
 | I25 | Shape/custom-wave colour fractions survive original byte truncation | 5347 | Source investigation recorded; execution/captures/disposition pending |
 | I30 | Display diffuse colours retain floats instead of original byte packing | 155 | Source investigation recorded; execution/captures/disposition pending |
-| I29 | Negative odd echo orientation omits original horizontal flip | 0 | Implemented0022; source/finite final4K proof; no confirmed stock trigger |
+| I29 | Negative odd echo orientation omits original horizontal flip | 0 | Implemented0023; source/finite final4K proof; no confirmed stock trigger |
 | I15 | Minimum motion trails are larger and aspect-dependent | 794 | Source investigation recorded; execution/captures/disposition pending |
-| I09 | EEL named constants round to float before double evaluation | 0 | Implemented0020; source/finite final4K proof; no confirmed stock trigger |
-| I31 | Gamma-only pass-count epsilon differs | 68 | Implemented0019; source/final4K original proof; integration pending |
+| I09 | EEL named constants round to float before double evaluation | 0 | Implemented0021; source/finite final4K proof; no confirmed stock trigger |
+| I31 | Gamma-only pass-count epsilon differs | 68 | Implemented0020; source/final4K original proof; integration pending |
 | I01 | Preset keys are case-insensitive in library/predictor | 2 | Source investigation recorded; execution/captures/disposition pending |
 | I02 | Negative boolean settings use >0 rather than nonzero | 0 | Source investigation recorded; execution/captures/disposition pending |
 | I07 | Stereo bands average channels rather than left only | 8985 | Source investigation recorded; execution/captures/disposition pending |
@@ -47,3 +47,5 @@ The normal renderer suite passes49/49. The capture/helper suite passes60 tests a
 Native direct rendering can leave an internal read FBO bound after restoring draw framebuffer0. Historical audit PNGs therefore show intermediate feedback; fresh workers explicitly read framebuffer0 and restore the previous read binding. Preserve original artifacts/helpers and use the new final-output records for appearance claims. The guard test rejects missing/nonzero read-target evidence even with valid PNG/RGB hashes. See [capture correction](capture-correction/README.md).
 
 Source reports under `research/` refine remaining repair boundaries and candidate lists. They are not execution, screenshot or completion evidence. Final combined sanitizer/Android/host/JVM/docs/review/CI/integration gates remain separate from these focused results. See [per-ID identities and state](ledger.json).
+
+Live patch numbering was shifted once to preserve released main0016. Frozen evidence/helpers retain their historical names, source hashes and rendered bytes. Latest-main focused validation remains pending.

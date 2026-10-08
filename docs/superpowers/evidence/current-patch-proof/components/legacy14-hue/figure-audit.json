@@ -1,0 +1,99 @@
+{
+  "frame": 119,
+  "series_sha256": "6c929468f36637304eba1f819ac9d72cbd89550077232eac486d24465e30a3a7",
+  "expected_input_rgb": [
+    64,
+    128,
+    192
+  ],
+  "rows": {
+    "zero": {
+      "preset_sha256": "6e767b60fa421bb8f4f40439e91b86961f71379f97ea867e330244155814f691",
+      "roles": {
+        "upstream": {
+          "frame_sha256": "4cc9d7b382916c4483dc2a85dcc3951a148594a9dfa0d182951b48fbdfddf428",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "without-0014": {
+          "frame_sha256": "e2ddda764c7664b81011dc2f3a17f1cf83d237271ebb07b27067ed59770448c6",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "patched": {
+          "frame_sha256": "3b1f3946153d754a918aaa8cdf39ab3519a9f6a2fc8231897d10074bb3d4fc1f",
+          "center_rgb": [
+            64,
+            128,
+            192
+          ]
+        }
+      }
+    },
+    "half": {
+      "preset_sha256": "89dc32e08f262e74b2f868afe25d343575d69ffde191923e804af06300d9fc04",
+      "roles": {
+        "upstream": {
+          "frame_sha256": "4cc9d7b382916c4483dc2a85dcc3951a148594a9dfa0d182951b48fbdfddf428",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "without-0014": {
+          "frame_sha256": "e2ddda764c7664b81011dc2f3a17f1cf83d237271ebb07b27067ed59770448c6",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "patched": {
+          "frame_sha256": "f9b81ac4033471dd1d314e1d023d6d66b46d1deb62b71b5d58216baaf909cc26",
+          "center_rgb": [
+            56,
+            128,
+            174
+          ]
+        }
+      }
+    },
+    "full": {
+      "preset_sha256": "7478043803aaa00fc9488416c72e73e759d8abf40c1fc698edba31a4da439e26",
+      "roles": {
+        "upstream": {
+          "frame_sha256": "4cc9d7b382916c4483dc2a85dcc3951a148594a9dfa0d182951b48fbdfddf428",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "without-0014": {
+          "frame_sha256": "e2ddda764c7664b81011dc2f3a17f1cf83d237271ebb07b27067ed59770448c6",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        },
+        "patched": {
+          "frame_sha256": "e2ddda764c7664b81011dc2f3a17f1cf83d237271ebb07b27067ed59770448c6",
+          "center_rgb": [
+            49,
+            128,
+            156
+          ]
+        }
+      }
+    }
+  },
+  "figure_sha256": "4fe2b8515f000693b39098391bc732b7e677510357fb7a1a158c77433febe72b"
+}

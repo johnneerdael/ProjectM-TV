@@ -1,0 +1,64 @@
+{
+  "frame": 119,
+  "fixture": "large-rotation-uv.milk",
+  "preset_sha256": "66d6398c53544eea179250ff8fe93122f181f48bdcc9282976e0ad27f3f4207f",
+  "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "roles": {
+    "upstream": {
+      "frame_sha256": "2e7260d553f312201d691abc3f2f6647065926c9987bf80e0c2290de58e4212e",
+      "center_rgb": [
+        128,
+        128,
+        64
+      ],
+      "channel_extrema": [
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    },
+    "patched": {
+      "frame_sha256": "33a4e1d973c20fd338e0db2b8dd22070114ab192a99280048ebd1a1448fbe06e",
+      "center_rgb": [
+        127,
+        127,
+        64
+      ],
+      "channel_extrema": [
+        [
+          0,
+          255
+        ],
+        [
+          0,
+          255
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    }
+  },
+  "transform": "raw512x288RGB unchanged; labels outside payload",
+  "figure_sha256": "cec34c957e81fac6478ff5a93c1c85e54ca39fe489f3adb60e5bd4b2cfcd748b",
+  "label_font": {
+    "format": "Pillow legacy PIL bitmap font",
+    "pillow_version": "12.3.0",
+    "renderer_sha256": "bf317a8aea49c721b4534f80f1d10ca25452867c4a7523218a8971c4857e7bc9",
+    "glyph_data_sha256": "db9b6323940efe8f5c792485c41a174a12aaedda84ed48567018ccc2d11ab045",
+    "font_sha256": "de1aef4ed29bb451c6a5cc24fdd05a5243df6de0203e8fa1ac88821cecf5c508",
+    "atlas_sha256": "82fbf1376459e9034d1ad15b96e5acf5fa98b26194fb60d00f355efb945dbaa4"
+  },
+  "annotation_transform": "fixed-font labels only; captured framebuffer pixels unchanged"
+}

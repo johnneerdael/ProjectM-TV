@@ -1,16 +1,11 @@
 From: ProjectM TV maintainers
-Subject: [PATCH] Select the original physical diagonal in legacy warp
+Subject: [PATCH] Select original physical diagonal for actual legacy warp
 
-I11: the original fixed-function projection reverses physical Y relative
- to the current grid. Connect legacy cells across AD instead of BC.
-Select offsets once for the actual compiled/default path; preserve custom
-warp, failed-custom fallback, triangle winding/quadrant order and replay.
-Keep one existing index buffer, identical vertex/index/triangle/draw counts,
-and invalidate cached topology if the compiled path changes at fixed size.
-
-Complete the existing static mesh cache key (viewport, aspect, mesh and
-compiled path), and record its viewport fields so unchanged geometry is
-not rebuilt per frame. Dynamic equations and attribute uploads still run.
+I11: preserve released0016 mesh caching/static upload efficiency and extend
+its cache key with aspect and compiled-path identity. Select AD only in
+legacy/default/fallback, retaining custom BC, winding/quadrant order,
+existing buffers, vertex/index/triangle counts and prepared replay.
+Dynamic equations and uploads retain the released policy.
 
 diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
@@ -49,27 +44,24 @@ diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/M
      {
          // Nothing changed, just go on to the dynamic calculation.
          return;
-@@ -157,6 +162,10 @@
+@@ -157,6 +162,8 @@
 -
 +
      const float aspectX = presetState.renderContext.aspectX;
      const float aspectY = presetState.renderContext.aspectY;
-+    m_viewportWidth = presetState.renderContext.viewportSizeX;
-+    m_viewportHeight = presetState.renderContext.viewportSizeY;
 +    m_meshAspectX = aspectX;
 +    m_meshAspectY = aspectY;
 -
 +
-     // Either viewport size or mesh size changed, reinitialize the vertices.
-     auto& vertices = m_warpMesh.Vertices();
-@@ -183,6 +192,15 @@
+     // Remember what the static mesh data is built for, so it is only rebuilt and uploaded again
+     // when the viewport or the grid changes, not every frame.
+@@ -189,6 +196,14 @@
              vertexIndex++;
          }
      }
 +
-+    // The legacy projection flips physical Y relative to the original mesh.
-+    // Select its opposite diagonal once, retaining triangle order and winding.
-+    // A failed custom program uses this same legacy path.
++    // Match original physical legacy diagonal, preserving custom topology.
++    // Released0016 marks this rebuilt static mesh dirty for the next upload.
 +    m_legacyIndices = !m_warpShader;
 +    const uint32_t stride = m_gridSizeX + 1;
 +    const std::array<uint32_t, 6> offsets = m_legacyIndices
@@ -79,7 +71,7 @@ diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/M
 +
      // Generate triangle lists for drawing the main warp mesh
      int vertexListIndex{0};
-@@ -206,15 +224,12 @@
+@@ -212,15 +227,12 @@
 -
 +
                  int const vertex = xReference + yReference * (m_gridSizeX + 1);
