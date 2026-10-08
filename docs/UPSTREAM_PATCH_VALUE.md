@@ -88,10 +88,29 @@ must be reviewed separately from the quad primitive itself.
 
 The [historical quad-line experiments](superpowers/evidence/quad-follow-up-verification/README.md)
 provide prior geometry and device evidence with their original 4.1.7 identities.
-They are not current 4.2 certification. The 512×288 equation image below has
-reference-scaled lines disabled and does not demonstrate the high-resolution
-enhancement. Current-source `LineGeometryTest` controls remain part of 0001;
-no present-driver performance gain or complete #682 implementation is claimed.
+They are not current 4.2 certification. Current-source `LineGeometryTest` controls
+remain part of 0001; no present-driver performance gain or complete #682
+implementation is claimed.
+
+![Actual4K upstream/current comparison and classic-line control](superpowers/evidence/current-patch-proof/components/lines/comparison-4k.png)
+
+**What to look for:** unchanged `Geiss - 3D - Shockwaves.milk` renders dimmer thin
+loops and trails in upstream at3840×2160. Our classic-line control is almost
+visually identical to upstream. Enabling our1920×1080 reference-size path keeps
+the loops and trails broader and brighter at4K. The source crop makes the stroke
+difference legible without changing brightness. The top overview is identically
+BOX-reduced4×; full4K PNGs are linked in the [capture and verification record](superpowers/evidence/current-patch-proof/components/lines/README.md).
+
+**Why the enhancement changes it:** fixed1px lines occupy less of a high-resolution
+image. The enabled path uses2× line scale for these dimensions, together with its
+reference-size sampling/feedback policy. This is an optional host capability,
+not a new unconditional appearance default. AA is off in this comparison; the
+panels do not separately prove the AA or individual reference-policy components.
+
+All three configurations repeat all120 frames exactly with zero GL errors and
+no shader warnings/errors. At frame119, upstream versus our classic control has
+RGB8 MAE0.005962, while our classic control versus the enabled path has MAE19.675516.
+The earlier512×288 equation panel is separate evidence for equation compatibility.
 
 ### Other retained components with separate upstream value
 

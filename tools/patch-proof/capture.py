@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / 'tools/core-corpus'))
 from run_corpus import session_lock
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source
+from rgb_payload import inspect_rgb, compress_rgb
 
 
 def sha(data: bytes) -> str:
@@ -66,13 +67,20 @@ def main() -> None:
                         help='Android NDK 27.3.13750724 used to reproduce worker binaries')
     parser.add_argument('--adb', default='adb')
     parser.add_argument('--work', type=Path, required=True)
-    parser.add_argument('--width', type=int, choices=(256, 512), default=512)
+    parser.add_argument('--width', type=int, choices=(256, 512, 1280, 1920, 2560, 3840), default=512)
+    parser.add_argument('--line-reference-height', type=int, default=0,
+                        help='16:9 quad-line reference height for the patched library; 0 uses classic lines')
+    parser.add_argument('--line-antialiasing', action='store_true')
+    parser.add_argument('--compress-streams', action='store_true',
+                        help='Retain complete lossless gzip RGB streams after checking decompressed hashes')
     parser.add_argument('--evaluator-control', action='store_true')
     parser.add_argument('--texture-journey', action='store_true',
                         help='Use texture roots a/b, switch at20, soft-cut at21, reset at40')
     args = parser.parse_args()
     if not args.device.startswith('emulator-') or args.user < 0:
         parser.error('Select an emulator serial and a nonnegative Android user')
+    if args.line_reference_height < 0:
+        parser.error('--line-reference-height must be nonnegative')
     preset, textures = args.preset.resolve(), args.textures.resolve()
     if not preset.is_file() or not textures.is_dir():
         parser.error('Preset or texture directory is unavailable')
@@ -132,6 +140,10 @@ def main() -> None:
                       'textures': {p.relative_to(textures).as_posix(): sha(p.read_bytes())
                                    for p in sorted(textures.rglob('*')) if p.is_file()},
                       'pcm_sha256': sha(signal), 'clock': 'frame/30.0', 'frames': 120,
+                      'host_controls': {'line_reference_height': args.line_reference_height,
+                                        'line_antialiasing': args.line_antialiasing},
+                      'frame_payload': 'lossless-gzip' if args.compress_streams else 'raw-rgb',
+                      'rgb_payload_sha256': sha(Path(__file__).with_name('rgb_payload.py').read_bytes()),
                       'dimensions': [width, height], 'alpha_excluded': True, 'roles': {}}
             backend = None
             for role, identity in workers.items():
@@ -151,7 +163,8 @@ def main() -> None:
                         continue
                     job = {'schema_version': 1, 'config': {'width': width, 'height': height,
                            'fps': 30, 'warmup_seconds': 0, 'measurement_seconds': 4,
-                           'seed': 12345, 'line_reference_height': 0},
+                           'seed': 12345, 'line_reference_height': args.line_reference_height,
+                           'line_antialiasing': args.line_antialiasing},
                            'pcm_path': remote + '/audio.f32', 'preset_path': remote + '/witness.milk',
                            'texture_root': remote + ('/textures/a' if args.texture_journey else '/textures'),
                            'bands_path': remote + '/bands.jsonl',
@@ -209,16 +222,15 @@ def main() -> None:
                     if manifest['status'] != 'success' or manifest['gl_error_frames'] != 0:
                         raise ValueError('Worker did not complete strict GL validation')
                     adb('pull', remote + '/frames.rgb', str(directory / 'frames.rgb'))
-                    data = (directory / 'frames.rgb').read_bytes()
-                    size = width * height * 3
-                    if len(data) != size * 120:
-                        raise ValueError('RGB stream length is not the declared frame count')
-                    hashes = [sha(data[i * size:(i + 1) * size]) for i in range(120)]
-                    for frame in ([29, 40, 59, 119] if args.texture_journey else [29, 59, 119]):
+                    snapshots = (29, 40, 59, 119) if args.texture_journey else (29, 59, 119)
+                    payload = inspect_rgb(directory / 'frames.rgb', width, height, snapshots=snapshots)
+                    for frame in snapshots:
                         Image.frombytes('RGB', (width, height),
-                                        data[frame * size:(frame + 1) * size]).save(directory / f'{frame}.png')
-                    runs.append({'status': 'success', 'manifest': manifest, 'frame_hashes': hashes,
-                                 'stream_sha256': sha(data)})
+                                        payload['snapshots'][frame]).save(directory / f'{frame}.png')
+                    if args.compress_streams:
+                        compress_rgb(directory, width, height, payload)
+                    runs.append({'status': 'success', 'manifest': manifest, 'frame_hashes': payload['frame_hashes'],
+                                 'stream_sha256': payload['stream_sha256']})
                 if args.evaluator_control:
                     repeat_equal = runs[0]['control'] == runs[1]['control']
                 else:

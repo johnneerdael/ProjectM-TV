@@ -1,5 +1,6 @@
 """Integrity controls reject tampered or incomplete records using a small RGB fixture."""
 import importlib.util
+import gzip
 import json
 from pathlib import Path
 import tempfile
@@ -75,6 +76,33 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_accepts_complete_lossless_compressed_streams(self):
+        for repeat in (0, 1):
+            raw = self.work / 'patched' / str(repeat) / 'frames.rgb'
+            raw.with_suffix('.rgb.gz').write_bytes(gzip.compress(raw.read_bytes(), mtime=0))
+            raw.unlink()
+        try:
+            report = VERIFY.verify(self.work, self.root / 'ndk')
+        except FileNotFoundError:
+            self.fail('Lossless compressed complete-frame payload must remain verifiable')
+        self.assertEqual(report['successful_roles'], ['patched'])
+
+    def test_rejects_changed_frame_in_compressed_stream(self):
+        raw = self.work / 'patched/0/frames.rgb'
+        data = bytearray(raw.read_bytes())
+        data[6 * 17] ^= 1
+        raw.with_suffix('.rgb.gz').write_bytes(gzip.compress(data, mtime=0))
+        raw.unlink()
+        with self.assertRaisesRegex(ValueError, 'RGB stream hash differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_extra_frame_bytes_in_compressed_stream(self):
+        raw = self.work / 'patched/0/frames.rgb'
+        raw.with_suffix('.rgb.gz').write_bytes(gzip.compress(raw.read_bytes() + b'x', mtime=0))
+        raw.unlink()
+        with self.assertRaisesRegex(ValueError, 'RGB stream length differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_changed_png_despite_unchanged_manifest(self):
         Image.new('RGB', (2, 1), 'black').save(self.work / 'patched/0/119.png')

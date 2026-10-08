@@ -67,14 +67,14 @@ Files: `tools/patch-proof/{source_identity,prepare,capture,verify}.py` and their
 
 - [x] Reconstruct each claimed source role from pinned git inputs and canonical patch bytes.
 - [x] Retain full RGB streams and recompute every frame hash.
-- [ ] Rebuild and canonical-check the executable using the exact pinned NDK and checked-in harness; exercise all upstream/current/ablation roles.
-- [ ] Run the tool tests and fresh GPU replay, commit, reply and resolve the corresponding PR thread.
+- [x] Rebuild and canonical-check the executable using the exact pinned NDK and checked-in harness; exercise upstream/current/without0010 control roles.
+- [x] Run the tool tests and fresh GPU replay, commit, reply and resolve the corresponding PR thread. Source/binary-bound replay verifies720 frames;33 controls pass at this milestone; fix a54d0e9f and threadPRRT_kwDOPcunRM6qIf5s are recorded.
 
 ### Task 2: Capture the high-resolution line enhancement first
 
 Files: extend `tools/patch-proof/native/worker.cpp` only as required by controlled jobs; add new receipts/images under `docs/superpowers/evidence/current-patch-proof/components/`.
 
-- [ ] Select a named unchanged original from the retained quad-line issue inventory, inspect its active wave/shape paths, and freeze its hash.
+- [x] Select an unchanged original, inspect its active paths and freeze its hash: `Geiss - 3D - Shockwaves.milk`, a classic main-wave preset, from the separate11-candidate source screen. The33 named historical controls remain available for follow-up.
 - [ ] Capture upstream/current with identical inputs at low/reference/4K sizes. Retain a current-library classic/quad API control to separate the reference-scaling enhancement from other patch effects.
 - [ ] Verify complete frames/repeats/binary identity and GL status. Inspect full frames and identical nearest-neighbour crops; select a visible frame without brightness manipulation.
 - [ ] Add the #682 comparison and mechanism/limits to current0001, explicitly disclosing miter/flat ends and related reference-size policy.

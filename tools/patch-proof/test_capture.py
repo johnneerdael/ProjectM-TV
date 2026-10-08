@@ -1,6 +1,7 @@
 """Failed workers retain structured diagnostics before the owned remote cleanup."""
 from contextlib import nullcontext
 import importlib.util
+import gzip
 import json
 from pathlib import Path
 import subprocess
@@ -52,7 +53,7 @@ class FailedCaptureRetention(unittest.TestCase):
                     self.assertFalse((root / 'escaped').exists())
                     self.assertFalse((root / 'absolute').exists())
 
-    def run_failed_worker(self, missing_manifest=False):
+    def run_failed_worker(self, missing_manifest=False, extra_arguments=()):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             binary = root / 'worker'
@@ -98,6 +99,7 @@ class FailedCaptureRetention(unittest.TestCase):
             argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                     '--textures', str(textures), '--device', 'emulator-5630',
                     '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work)]
+            argv.extend(extra_arguments)
             with patch.object(sys, 'argv', argv), patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
                     patch.object(CAPTURE, 'validate_prepared_source'), \
                     patch.object(CAPTURE.subprocess, 'run', side_effect=fake_run):
@@ -116,8 +118,19 @@ class FailedCaptureRetention(unittest.TestCase):
                     self.assertTrue((directory / 'manifest.json').is_file())
                 self.assertFalse(result['roles']['patched']['repeat_equal'])
             self.assertEqual(calls[-1][:3], ['shell', 'rm', '-rf'])
+            if extra_arguments:
+                job = json.loads((work / 'patched/0/job.json').read_text())
+                self.assertEqual(job['config']['width'], 3840)
+                self.assertEqual(job['config']['height'], 2160)
+                self.assertEqual(job['config']['line_reference_height'], 1080)
 
-    def test_retains_successful_full_rgb_streams(self):
+    def test_passes_high_resolution_line_controls_to_the_worker(self):
+        try:
+            self.run_failed_worker(extra_arguments=('--width', '3840', '--line-reference-height', '1080'))
+        except SystemExit:
+            self.fail('Capture must accept the specified 4K/reference-line controls')
+
+    def successful_capture(self, compressed=False):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             binary = root / 'worker'
@@ -163,6 +176,8 @@ class FailedCaptureRetention(unittest.TestCase):
                     '--textures', str(textures), '--device', 'emulator-5630',
                     '--user', '0', '--width', str(width), '--ndk', str(root / 'ndk'),
                     '--work', str(work)]
+            if compressed:
+                argv.append('--compress-streams')
             with patch.object(sys, 'argv', argv), \
                     patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
                     patch.object(CAPTURE, 'validate_prepared_source'), \
@@ -172,9 +187,21 @@ class FailedCaptureRetention(unittest.TestCase):
             result = json.loads((work / 'results.json').read_text())
             for repeat, run in enumerate(result['roles']['patched']['runs']):
                 stream = work / 'patched' / str(repeat) / 'frames.rgb'
-                self.assertEqual(stream.stat().st_size, len(rgb))
-                self.assertEqual(CAPTURE.sha(stream.read_bytes()), run['stream_sha256'])
+                if compressed:
+                    self.assertFalse(stream.exists())
+                    with gzip.open(stream.with_suffix('.rgb.gz'), 'rb') as archive:
+                        observed = archive.read()
+                else:
+                    observed = stream.read_bytes()
+                self.assertEqual(observed, rgb)
+                self.assertEqual(CAPTURE.sha(observed), run['stream_sha256'])
                 self.assertEqual(len(run['frame_hashes']), 120)
+
+    def test_retains_successful_full_rgb_streams(self):
+        self.successful_capture()
+
+    def test_retains_successful_lossless_compressed_rgb_streams(self):
+        self.successful_capture(compressed=True)
 
     def test_retains_gl_failed_manifest_and_stream(self):
         self.run_failed_worker()

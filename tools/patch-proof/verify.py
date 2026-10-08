@@ -10,6 +10,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source
+from rgb_payload import inspect_rgb, payload_path
 
 
 def sha(data: bytes) -> str:
@@ -88,15 +89,10 @@ def verify(work: Path, ndk: Path | None = None) -> dict:
             backend = [manifest[k] for k in ('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version')]
             if backend != result['backend'] or len(run['frame_hashes']) != 120:
                 raise ValueError('Backend or frame count differs')
-            stream = (work / role / str(repeat) / 'frames.rgb').read_bytes()
-            frame_size = width * height * 3
-            if len(stream) != frame_size * 120:
-                raise ValueError('RGB stream length differs')
-            if sha(stream) != run['stream_sha256']:
+            payload = inspect_rgb(payload_path(work / role / str(repeat)), width, height)
+            if payload['stream_sha256'] != run['stream_sha256']:
                 raise ValueError('RGB stream hash differs')
-            actual_hashes = [sha(stream[index * frame_size:(index + 1) * frame_size])
-                             for index in range(120)]
-            if actual_hashes != run['frame_hashes']:
+            if payload['frame_hashes'] != run['frame_hashes']:
                 raise ValueError('RGB stream frame hashes differ')
             frames = [29, 40, 59, 119] if kind == 'texture-journey' else [29, 59, 119]
             for frame in frames:
@@ -141,5 +137,6 @@ if __name__ == '__main__':
     report = verify(args.work.resolve(), args.ndk.resolve())
     report['verifier_sha256'] = sha(Path(__file__).read_bytes())
     report['source_identity_sha256'] = sha(Path(__file__).with_name('source_identity.py').read_bytes())
+    report['rgb_payload_sha256'] = sha(Path(__file__).with_name('rgb_payload.py').read_bytes())
     (args.work / 'verification.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report))

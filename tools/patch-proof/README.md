@@ -24,8 +24,8 @@ build/patch-proof-env/bin/python tools/patch-proof/capture.py --workers build/pa
 build/patch-proof-env/bin/python tools/patch-proof/verify.py --work build/patch-proof-zoom --ndk NDK_DIRECTORY
 ```
 
-Use `--adb /path/to/adb` if it is not on PATH. Capture supports 512×288 (default)
-or 256×144 with `--width 256`, matching the measured checkpoint. It renders 120
+Use `--adb /path/to/adb` if it is not on PATH. Capture supports 512×288 (default),
+256×144, 1280×720, 1920×1080, 2560×1440 and 3840×2160 through `--width`. It renders 120
 frames at 30Hz, fixed seed 12345 and identical generated mono float32 PCM. Each role
 runs twice; every RGB frame is hashed, alpha excluded, with lossless PNGs retained
 at 29/59/119. The comparison adds labels above unchanged framebuffer pixels. Failed
@@ -35,6 +35,19 @@ load failure is still a failure. `verify.py` checks source/binary identities, re
 hashes, retained image payloads, counts, backend and comparison pixels. Successful
 runs retain the complete `frames.rgb` stream locally; verification recomputes its
 SHA256 and all 120 frame hashes. At 512×288 this adds about 50 MB per successful run.
+
+Use `--line-reference-height 1080` to request the patched library's 1920×1080
+reference-size line path. Upstream keeps its existing GL-line implementation;
+the same preset/audio/clock/render size is used in both roles. A separate current
+capture with height0 supplies a classic-line control. `--line-antialiasing` enables
+the patched API's optional AA. These host settings and the job bytes are retained.
+
+For high-resolution runs, add `--compress-streams`. The tool streams complete
+RGB frames through lossless gzip and verifies the decompressed frame/stream hashes
+before removing that run's raw copy. Verification accepts either `frames.rgb` or
+`frames.rgb.gz` and reads one frame at a time. No frames are dropped, no pixels
+are changed, and older frozen raw streams are untouched.
+
 Capture and verification require the same NDK directory and rebuild every worker
 from the reconstructed source and checked-in harness. They compare canonical ELF
 copies after stripping debug/symbol tables and the path-sensitive GNU build-id note;
