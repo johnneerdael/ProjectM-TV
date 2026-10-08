@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.22)
+project(disabled_uv_controls VERSION 4.2.0 LANGUAGES C CXX)
+if(NOT APPLE)
+    message(FATAL_ERROR "This source proposal qualifies CGL only; GLES TF/cache/discard needs separate admission")
+endif()
+if(NOT PROJECTM_SOURCE)
+    message(FATAL_ERROR "PROJECTM_SOURCE must identify the current or test-only eager production-engine copy")
+endif()
+set(REGRESSION_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../core/src/test/native/projectm-regressions")
+option(SANITIZERS "Use repository sanitizer policy" ON)
+add_subdirectory("${REGRESSION_ROOT}" existing-controls EXCLUDE_FROM_ALL)
+add_executable(disabled-uv-controls disabled_uv_pipeline_controls.cpp)
+target_compile_features(disabled-uv-controls PRIVATE cxx_std_17)
+target_compile_definitions(disabled-uv-controls PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(disabled-uv-controls PRIVATE "${REGRESSION_ROOT}"
+    "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/glad/include"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_compile_options(disabled-uv-controls PRIVATE "-include${REGRESSION_ROOT}/macos_gl.hpp")
+target_link_libraries(disabled-uv-controls PRIVATE libprojectM::projectM)
+find_library(DISABLED_UV_OPENGL_FRAMEWORK OpenGL REQUIRED)
+target_link_libraries(disabled-uv-controls PRIVATE "${DISABLED_UV_OPENGL_FRAMEWORK}")
+if(SANITIZERS)
+    target_compile_options(disabled-uv-controls PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(disabled-uv-controls PRIVATE -fsanitize=address,undefined)
+endif()
+# Parent chooses role explicitly. Never infer eager semantics from a successful build.

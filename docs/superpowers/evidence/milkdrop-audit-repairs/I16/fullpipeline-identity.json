@@ -1,0 +1,107 @@
+{
+  "source_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "sha256": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp",
+      "sha256": "65e37fe3316f3b186ea01e14039115f37990625a8513e1c3c0ed60bca736190b"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp",
+      "sha256": "61a06eef48c9ee96fc7451ff17596c816906d5ca6a160769d6c792c85b1fb0d6"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.cpp",
+      "sha256": "a24e0453a69e849360524bcde8659a732e00b9a617d5f2c1f0a3df1d9c406774"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+      "sha256": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert",
+      "sha256": "3d374d1f39a6e535d2fe42a49f4daabbde18f8fc517b5e6ad8377d2c3c5c446e"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert",
+      "sha256": "d237428a5fbe617df7fe3c2ad16741bdaeae98227c7ebc5d380ade53960e6232"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/ProjectM.cpp",
+      "sha256": "5555cff459e56382cf30ff3d23c00edc19ffbf72453b207869c7ad1fb6b5161e"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9"
+    }
+  ],
+  "original_candidate": {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/101.milk",
+    "sha256": "a901944f8f1d668e38fac317dff5e596b3f4d80e837a6083695bc58b3278154c",
+    "executed_or_rendered": false,
+    "relevant_lines": [
+      {
+        "line": 3,
+        "text": "PSVERSION_WARP=0"
+      },
+      {
+        "line": 41,
+        "text": "warp=0.00000"
+      },
+      {
+        "line": 67,
+        "text": "mv_a=0.000"
+      },
+      {
+        "line": 229,
+        "text": "per_frame_7=q1 = 0.5*(pow(1+1.2*bass+0.4*bass_att+0.1*treb+0.1*treb_att+0.1*mid+0.1*mid_att,6)/fps);"
+      },
+      {
+        "line": 231,
+        "text": "per_frame_9=mv_a = if(above(bass-1.2,1),1,bass-1.2);"
+      },
+      {
+        "line": 232,
+        "text": "per_pixel_1=zoom = 1.01 + rad*0.15*q1;"
+      }
+    ]
+  },
+  "TF_support_dependency": {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/motion_style_controls.cpp",
+    "sha256": "2c94d3a10fe1d980b011200d82ca895eeb61ca5ff8f4a43bb4229921d077255a"
+  },
+  "new_artifacts": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/disabled_uv_pipeline_controls.cpp",
+      "sha256": "e81b7391053072f8ba723293b2e3a6b42774185dd6278f24ff6feac1be6f9560"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/CMakeLists.txt",
+      "sha256": "c0470f641a3176f9a2a268a9fd4a1198baba41236d342f67147de128dbdb5ada"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/TEST-ONLY-eager-publication-oracle.patch",
+      "sha256": "4b046c913c299de09c48c26cf2e31f38db92d718b9f2a4623843ae4c3761f806"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/FULLPIPELINE-PROPOSAL.md",
+      "sha256": "938e46f1a178479fc00427e7c33e0afb17c931b2cf4a097a292dca8669b7a5ad"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/fullpipeline-protocol.json",
+      "sha256": "4c3ced31910020b566e4e8a0620ec0a291254e55e263e680e643636bd67cf7df"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/diagnostic-biased-default.milk",
+      "sha256": "7c06a9674a0d4aaa18aa250db08f65e1f1107dfb030b835d7ba40ab57b8c3311"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/disabled-uv-proposal/diagnostic-biased-bounded-custom.milk",
+      "sha256": "63aa250ff16df1aa91226c93b6657f8e1afc465e295ef434eeb1fea2ce03a7f5"
+    }
+  ],
+  "compiled_or_executed": false,
+  "qualified_completion": false
+}

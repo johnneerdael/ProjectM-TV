@@ -1,0 +1,5 @@
+Uncompiled design interface only:
+PreviousWarpSnapshot: completed frame/context/target/path/topology generation; actual publication dimensions; warpTime,warpScaleInverse,warpFactors,aspect,texelOffsets; boundedNoDiscardProducer.
+CaptureAfterActualWarp: metadata only, retain existing mesh buffers until next current mesh calculation.
+DrawPreviousMotionUV: GL thread; reject mismatched generation/domain; no InitializeMesh/CalculateMesh/equation evaluation; UV-only FBO/shader, previous uniforms, no color invalidation, restore bindings/viewport.
+MilkdropPreset: compare publishedUV generation vs retained previous completed warp; catch up before first active motion consumer; first-frame suppression remains authoritative.
