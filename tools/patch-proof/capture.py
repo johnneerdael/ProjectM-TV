@@ -101,6 +101,7 @@ def main() -> None:
     workers = json.loads(args.workers.read_text())
     series = json.loads(args.series.read_text())
     supported_roles = _supported_roles(series)
+    worker_payloads = {}
     for role in workers:
         if role not in supported_roles:
             raise ValueError('Unsupported worker role: ' + role)
@@ -116,9 +117,10 @@ def main() -> None:
         if identity.get('ordered_patches') != ([] if role == 'upstream' else series['patches']):
             raise ValueError('Worker patch inventory differs: ' + role)
         validate_prepared_source(role, identity, series, args.ndk.resolve())
-    for identity in workers.values():
-        if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
+        worker_payload = Path(identity['binary']).read_bytes()
+        if sha(worker_payload) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')
+        worker_payloads[role] = worker_payload
     work = args.work.resolve()
     work.mkdir(parents=True, exist_ok=False)
     preset_name = preset.name
@@ -127,6 +129,14 @@ def main() -> None:
     shutil.copyfile(preset, inputs / 'witness.milk')
     shutil.copytree(textures, inputs / 'textures')
     preset, textures = inputs / 'witness.milk', inputs / 'textures'
+    staged_workers = {}
+    for role, worker_payload in worker_payloads.items():
+        staged_worker = inputs / 'workers' / role / 'worker'
+        staged_worker.parent.mkdir(parents=True)
+        staged_worker.write_bytes(worker_payload)
+        if sha(staged_worker.read_bytes()) != workers[role]['binary_sha256']:
+            raise ValueError('Staged worker identity changed: ' + role)
+        staged_workers[role] = staged_worker
     preset_hash = sha(preset.read_bytes())
     texture_hashes = {p.relative_to(textures).as_posix(): sha(p.read_bytes())
                       for p in sorted(textures.rglob('*')) if p.is_file()}
@@ -175,7 +185,11 @@ def main() -> None:
                 report['diagnostic_kind'] = 'texture-history'
             backend = None
             for role, identity in workers.items():
-                adb('push', identity['binary'], remote + '/worker')
+                staged_worker = staged_workers[role]
+                adb('push', str(staged_worker), remote + '/worker')
+                remote_hash = adb('shell', 'sha256sum', remote + '/worker').stdout.split()
+                if not remote_hash or remote_hash[0] != identity['binary_sha256']:
+                    raise ValueError('Uploaded worker identity differs from validated bytes: ' + role)
                 adb('shell', 'chmod', '755', remote + '/worker')
                 runs = []
                 for repeat in range(2):
@@ -268,7 +282,15 @@ def main() -> None:
                 else:
                     repeat_equal = all(r['status'] == 'success' for r in runs) and (
                         runs[0]['frame_hashes'] == runs[1]['frame_hashes'])
-                report['roles'][role] = {'worker': identity, 'runs': runs, 'repeat_equal': repeat_equal}
+                captured_identity = dict(identity)
+                captured_identity['binary'] = str(staged_worker)
+                report['roles'][role] = {
+                    'worker': captured_identity,
+                    'retained_worker': {
+                        'path': staged_worker.relative_to(work).as_posix(),
+                        'sha256': identity['binary_sha256'],
+                        'bytes': len(worker_payloads[role])},
+                    'runs': runs, 'repeat_equal': repeat_equal}
                 write(work / 'results.json', report)
                 print(role, 'repeat_equal=' + str(repeat_equal), flush=True)
             report['backend'] = backend

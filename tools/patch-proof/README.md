@@ -98,13 +98,19 @@ Successful image verification also binds each manifest to its outer role/repeat,
 seed12345/FPS30 and retained manifest.json/job.json. It checks the fixed clock,
 frame window, dimensions, reference/diagnostic settings and exact host-event
 sequence; jobs must agree across roles/repeats apart from identity. The retained
-PCM length and hash must match the frozen input. Run metadata cannot silently
+PCM length and hash must match the trusted deterministic waveform digest, and
+dimensions must use the six capture widths with their derived 16:9 heights. Run metadata cannot silently
 certify frames produced with a different protocol.
 
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.
-Both also check the prepared patch inventory against the recorded series. In the
+Both also check the prepared patch inventory against the recorded series. Capture
+retains each validated worker under inputs/workers/ and uploads that copy, then
+checks its remote SHA256 before execution. Verification rebuilds and checks this
+retained executable; the original prepared-worker file is not the execution
+payload. Captures without retained workers need a fresh replay for a current
+certificate; preserve their earlier receipts rather than rewriting them. In the
 identity, `ordered_patches` lists the complete input series for patched/ablation
 roles; `patch_removed` names the omitted patch. Upstream has an empty inventory.
 

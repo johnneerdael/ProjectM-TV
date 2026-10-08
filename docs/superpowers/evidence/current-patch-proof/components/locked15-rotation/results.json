@@ -1,6 +1,6 @@
 {
   "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
-  "capture_sha256": "94a5e9c36866caea9680e1871ae333b40bb886108079fe1e3c4c225475cafad3",
+  "capture_sha256": "be444b75fa06cf783ca3a4879d08564d844def3d74164116bceac0da93f7e86a",
   "capture_kind": "image",
   "device": "emulator-5630",
   "user": 0,
@@ -67,7 +67,7 @@
     "feature:com.google.android.software.cast_receiver",
     "feature:com.google.android.tv.installed"
   ],
-  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-e467279693b9cb83",
+  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-664bef6402a38892",
   "fingerprint": "google/sdk_google_atv64_arm64/emu64a:16/BT2A.260319.001/15058170:user/dev-keys",
   "preset": "large-rotation-uv.milk",
   "preset_sha256": "66d6398c53544eea179250ff8fe93122f181f48bdcc9282976e0ad27f3f4207f",
@@ -176,7 +176,7 @@
         },
         "patch_removed": null,
         "ordered_patches": [],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/ndk-build/patch-proof-worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-large-rotation-v3/inputs/workers/upstream/worker",
         "binary_sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/source-hashes.json",
         "harness_sha256": {
@@ -192,6 +192,11 @@
         "adjustments_sha256": "77637d8a9bb981e9d100298ea3bdec9e7fcf8af865974cf1ef2c7bbcea5d29f1",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
+      },
+      "retained_worker": {
+        "path": "inputs/workers/upstream/worker",
+        "sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
+        "bytes": 18093280
       },
       "runs": [
         {
@@ -585,7 +590,7 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/without-0015/ndk-build/patch-proof-worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-large-rotation-v3/inputs/workers/without-0015/worker",
         "binary_sha256": "e4212b12da4c2d630aa130299d7462ffff1e79726fd682f462112a5c5c4c55f4",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/without-0015/source-hashes.json",
         "harness_sha256": {
@@ -601,6 +606,11 @@
         "adjustments_sha256": "7c4cb1f6841d4a3503e4e0c901c0dedfc559cf70d595138a0e97787f5c4d05fd",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
+      },
+      "retained_worker": {
+        "path": "inputs/workers/without-0015/worker",
+        "sha256": "e4212b12da4c2d630aa130299d7462ffff1e79726fd682f462112a5c5c4c55f4",
+        "bytes": 19817232
       },
       "runs": [
         {
@@ -994,7 +1004,7 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/ndk-build/patch-proof-worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-large-rotation-v3/inputs/workers/patched/worker",
         "binary_sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/source-hashes.json",
         "harness_sha256": {
@@ -1010,6 +1020,11 @@
         "adjustments_sha256": "d947af27e0bdad586447cbb6116ab08160e71531693911e9bc09f90c12daab4f",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
+      },
+      "retained_worker": {
+        "path": "inputs/workers/patched/worker",
+        "sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
+        "bytes": 19874432
       },
       "runs": [
         {

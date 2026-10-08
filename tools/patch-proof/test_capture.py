@@ -150,6 +150,8 @@ class FailedCaptureRetention(unittest.TestCase):
                     output = '1\n'
                 elif args == ['shell', 'pm', 'list', 'features']:
                     output = 'feature:android.software.leanback\nfeature:android.hardware.type.television\n'
+                elif args[:2] == ['shell', 'sha256sum'] and args[2].endswith('/worker'):
+                    output = CAPTURE.sha(binary.read_bytes()) + '  ' + args[2] + '\n'
                 elif args[0] == 'shell' and '--job' in args[-1]:
                     code = 2
                 elif args[0] == 'pull':
@@ -200,7 +202,8 @@ class FailedCaptureRetention(unittest.TestCase):
         except SystemExit:
             self.fail('Capture must accept the specified 4K/reference-line controls')
 
-    def successful_capture(self, compressed=False, mutate_external_inputs=False):
+    def successful_capture(self, compressed=False, mutate_external_inputs=False,
+                           mutate_worker_after_validation_before_upload=False):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             binary = root / 'worker'
@@ -218,13 +221,19 @@ class FailedCaptureRetention(unittest.TestCase):
             width, height = 256, 144
             frame_size = width * height * 3
             rgb = bytes([9, 11, 13]) * width * height * 120
+            worker_bytes = binary.read_bytes()
+            mutated_worker = False
 
             def fake_run(command, **kwargs):
+                nonlocal mutated_worker
                 args = command[3:]
                 if args == ['shell', 'am', 'get-current-user']:
                     if mutate_external_inputs:
                         preset.write_bytes(b'changed external preset')
                         (textures / 'nested/texture.png').write_bytes(b'changed external texture')
+                    if mutate_worker_after_validation_before_upload and not mutated_worker:
+                        binary.write_bytes(b'replaced after worker validation')
+                        mutated_worker = True
                     return subprocess.CompletedProcess(command, 0, '0\n', '')
                 if args[0] == 'push' and args[2].endswith('/witness.milk'):
                     pushed = Path(args[1])
@@ -234,6 +243,13 @@ class FailedCaptureRetention(unittest.TestCase):
                     pushed = Path(args[1])
                     self.assertEqual(pushed, (work / 'inputs/textures').resolve())
                     self.assertEqual((pushed / 'nested/texture.png').read_bytes(), b'original texture bytes')
+                if args[0] == 'push' and args[2].endswith('/worker'):
+                    pushed = Path(args[1])
+                    self.assertEqual(pushed.resolve(), (work / 'inputs/workers/patched/worker').resolve())
+                    self.assertEqual(pushed.read_bytes(), worker_bytes)
+                if args[:2] == ['shell', 'sha256sum'] and args[2].endswith('/worker'):
+                    return subprocess.CompletedProcess(command, 0,
+                        CAPTURE.sha(worker_bytes) + '  ' + args[2] + '\n', '')
                 if args == ['shell', 'getprop', 'ro.kernel.qemu']:
                     return subprocess.CompletedProcess(command, 0, '1\n', '')
                 if args == ['shell', 'pm', 'list', 'features']:
@@ -273,6 +289,11 @@ class FailedCaptureRetention(unittest.TestCase):
             self.assertEqual((work / 'inputs/witness.milk').read_bytes(), b'[preset00]\n')
             self.assertEqual(result['preset_sha256'], CAPTURE.sha(b'[preset00]\n'))
             self.assertEqual(result['textures'], {'nested/texture.png': CAPTURE.sha(b'original texture bytes')})
+            retained_worker = result['roles']['patched']['retained_worker']
+            self.assertEqual(retained_worker['path'], 'inputs/workers/patched/worker')
+            self.assertEqual(retained_worker['sha256'], CAPTURE.sha(worker_bytes))
+            self.assertEqual(retained_worker['bytes'], len(worker_bytes))
+            self.assertEqual((work / retained_worker['path']).read_bytes(), worker_bytes)
             for repeat, run in enumerate(result['roles']['patched']['runs']):
                 stream = work / 'patched' / str(repeat) / 'frames.rgb'
                 if compressed:
@@ -293,6 +314,9 @@ class FailedCaptureRetention(unittest.TestCase):
 
     def test_hashes_and_pushes_retained_inputs_despite_external_mutation(self):
         self.successful_capture(mutate_external_inputs=True)
+
+    def test_uploads_and_retains_validated_worker_bytes_after_original_is_replaced(self):
+        self.successful_capture(mutate_worker_after_validation_before_upload=True)
 
     def test_retains_gl_failed_manifest_and_stream(self):
         self.run_failed_worker()

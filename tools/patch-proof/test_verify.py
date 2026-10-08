@@ -9,12 +9,18 @@ import unittest
 from unittest.mock import patch
 
 from PIL import Image, ImageDraw
+from capture import pcm
 
 SPEC = importlib.util.spec_from_file_location('patch_proof_verify', Path(__file__).with_name('verify.py'))
 VERIFY = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(VERIFY)
 SERIES = json.loads((Path(__file__).resolve().parents[2] /
                     'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
+SIGNAL = pcm()
+WIDTH, HEIGHT = 256, 144
+FRAME_SIZE = WIDTH * HEIGHT * 3
+FRAME = bytes([255, 0, 0, 0, 255, 0]) * (WIDTH * HEIGHT // 2)
+FRAME_DATA = FRAME * 120
 
 
 class RetainedEvidenceIntegrity(unittest.TestCase):
@@ -34,7 +40,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.textures = inputs / 'textures'
         (self.textures / 'nested').mkdir(parents=True)
         (self.textures / 'nested/texture.png').write_bytes(b'original texture bytes')
-        self.signal = bytes(120 * 1470 * 4)
+        self.signal = SIGNAL
         (self.work / 'audio.f32').write_bytes(self.signal)
         source = self.root / 'worker/engine'
         source.mkdir(parents=True)
@@ -47,28 +53,30 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                     'ordered_patches': SERIES,
                     'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
                     'source_hashes': str(manifest)}
+        retained_worker = self.stage_worker('patched', identity)
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
         self.remote = '/data/local/tmp/projectmtv-patch-proof-0123456789abcdef'
-        self.frame_data = bytes([255, 0, 0, 0, 255, 0]) * 120
+        self.frame_data = FRAME_DATA
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
-               'frames': 120, 'width': 2, 'height': 1, 'fps': 30, 'seed': 12345,
+               'frames': 120, 'width': WIDTH, 'height': HEIGHT, 'fps': 30, 'seed': 12345,
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
-               'frame_hashes': [VERIFY.sha(self.frame_data[i * 6:(i + 1) * 6]) for i in range(120)],
+               'frame_hashes': [VERIFY.sha(FRAME)] * 120,
                'stream_sha256': VERIFY.sha(self.frame_data)}
         self.result = {'preset_sha256': VERIFY.sha(self.preset.read_bytes()),
             'textures': {'nested/texture.png': VERIFY.sha(b'original texture bytes')},
             'device': 'emulator-5630', 'user': 0,
             'remote_workspace': self.remote,
             'features': ['feature:android.software.leanback', 'feature:android.hardware.type.television'],
-            'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
-            'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
+            'clock': 'frame/30.0', 'frames': 120, 'pcm_sha256': VERIFY.sha(self.signal), 'capture_kind': 'image', 'dimensions': [WIDTH, HEIGHT], 'backend': backend, 'roles': {
+            'patched': {'worker': identity, 'retained_worker': retained_worker,
+                        'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
             directory = self.work / 'patched' / str(repeat)
             directory.mkdir(parents=True)
             (directory / 'frames.rgb').write_bytes(self.frame_data)
             for frame in (29, 59, 119):
-                Image.frombytes('RGB', (2, 1), self.frame_data[frame * 6:(frame + 1) * 6]).save(directory / f'{frame}.png')
-        image = Image.new('RGB', (2, 33), '#171717')
+                Image.frombytes('RGB', (WIDTH, HEIGHT), FRAME).save(directory / f'{frame}.png')
+        image = Image.new('RGB', (WIDTH, HEIGHT + 32), '#171717')
         ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
         image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
         image.save(self.work / 'comparison.png')
@@ -82,6 +90,15 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         if self.source_validation is not None:
             self.source_validation.stop()
             self.source_validation = None
+
+    def stage_worker(self, role, identity):
+        data = Path(identity['binary']).read_bytes()
+        path = self.work / 'inputs/workers' / role / 'worker'
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        identity['binary'] = str(path.resolve())
+        return {'path': path.relative_to(self.work).as_posix(),
+                'sha256': identity['binary_sha256'], 'bytes': len(data)}
 
     def save(self):
         for role, value in self.result['roles'].items():
@@ -228,16 +245,17 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         value = json.loads(json.dumps(self.result['roles']['patched']))
         value['worker']['role'] = 'upstream'
         value['worker']['ordered_patches'] = []
+        value['retained_worker'] = self.stage_worker('upstream', value['worker'])
         for repeat, run in enumerate(value['runs']):
             run['manifest']['identity'] = {'role': 'upstream', 'repeat': repeat}
         self.result['roles']['upstream'] = value
         shutil.copytree(self.work / 'patched', self.work / 'upstream')
         self.save()
-        image = Image.new('RGB', (4, 33), '#171717')
+        image = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(image)
         for col, role in enumerate(('patched', 'upstream')):
-            draw.text((col * 2 + 4, 8), role, fill='white')
-            image.paste(Image.open(self.work / role / '0/119.png'), (col * 2, 32))
+            draw.text((col * WIDTH + 4, 8), role, fill='white')
+            image.paste(Image.open(self.work / role / '0/119.png'), (col * WIDTH, 32))
         image.save(self.work / 'comparison.png')
 
     def rewrite_all_jobs(self, edit):
@@ -267,7 +285,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def journey_fixture(self):
         self.result['capture_kind'] = 'texture-journey'
         for repeat in (0, 1):
-            Image.frombytes('RGB', (2, 1), self.frame_data[40 * 6:41 * 6]).save(
+            Image.frombytes('RGB', (WIDTH, HEIGHT), FRAME).save(
                 self.work / 'patched' / str(repeat) / '40.png')
         self.save()
 
@@ -344,6 +362,53 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'PCM'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
+    def test_rejects_jointly_changed_pcm_and_inline_hash(self):
+        changed = bytearray(self.signal)
+        changed[0] ^= 1
+        (self.work / 'audio.f32').write_bytes(changed)
+        self.result['pcm_sha256'] = VERIFY.sha(changed)
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'PCM differs from frozen capture input'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_agreeingly_changed_unsupported_dimensions(self):
+        self.result['dimensions'] = [2, 1]
+        frame = bytes([255, 0, 0, 0, 255, 0])
+        stream = frame * 120
+        for repeat, run in enumerate(self.result['roles']['patched']['runs']):
+            run['manifest']['width'], run['manifest']['height'] = 2, 1
+            run['frame_hashes'] = [VERIFY.sha(frame)] * 120
+            run['stream_sha256'] = VERIFY.sha(stream)
+            directory = self.work / 'patched' / str(repeat)
+            (directory / 'frames.rgb').write_bytes(stream)
+            for snapshot in (29, 59, 119):
+                Image.frombytes('RGB', (2, 1), frame).save(directory / f'{snapshot}.png')
+        comparison = Image.new('RGB', (2, 33), '#171717')
+        ImageDraw.Draw(comparison).text((4, 8), 'patched', fill='white')
+        comparison.paste(Image.frombytes('RGB', (2, 1), frame), (0, 32))
+        comparison.save(self.work / 'comparison.png')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Capture dimensions differ from supported 16:9 sizes'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_malformed_or_wrong_aspect_dimensions(self):
+        for dimensions in (None, [], [256], [256, 144, 0], ['256', 144], [256.0, 144],
+                           [256, 144.0], [True, 144], [256, True], [256, 145], [257, 144]):
+            with self.subTest(dimensions=dimensions):
+                if dimensions is None: self.result.pop('dimensions', None)
+                else: self.result['dimensions'] = dimensions
+                (self.work / 'results.json').write_text(json.dumps(self.result))
+                with self.assertRaisesRegex(ValueError, 'Capture dimensions differ from supported 16:9 sizes'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_all_six_supported_dimensions_in_nonimage_control(self):
+        self.evaluator_fixture(list(range(128)))
+        for dimensions in ([256, 144], [512, 288], [1280, 720], [1920, 1080], [2560, 1440], [3840, 2160]):
+            with self.subTest(dimensions=dimensions):
+                self.result['dimensions'] = dimensions
+                self.save()
+                self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
 
@@ -382,12 +447,18 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Historical capture.*--preset.*--textures'):
                     VERIFY.verify(self.work, self.root / 'ndk', **arguments)
 
-    def test_accepts_exact_explicit_historical_inputs_with_limited_scope(self):
+    def test_checks_exact_explicit_historical_input_hashes(self):
         preset, textures = self.historical_inputs()
-        report = VERIFY.verify(self.work, self.root / 'ndk', preset=preset, textures=textures)
-        self.assertEqual(report['successful_roles'], ['patched'])
-        self.assertEqual(report['input_verification']['source'], 'explicit-external')
-        self.assertIn('original uploaded bytes were not retained', report['scope'])
+        report = VERIFY.verify_inputs(self.work, self.result, preset, textures)
+        self.assertEqual(report['source'], 'explicit-external')
+
+    def test_explicit_historical_inputs_cannot_bypass_unretained_worker(self):
+        preset, textures = self.historical_inputs()
+        self.result.pop('remote_workspace')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Retained worker is unavailable'):
+            VERIFY.verify(self.work, self.root / 'ndk', preset=preset, textures=textures,
+                          historical_remote_workspace=self.remote)
 
     def test_rejects_wrong_explicit_historical_inputs(self):
         preset, textures = self.historical_inputs()
@@ -503,7 +574,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_rejects_changed_frame_in_compressed_stream(self):
         raw = self.work / 'patched/0/frames.rgb'
         data = bytearray(raw.read_bytes())
-        data[6 * 17] ^= 1
+        data[FRAME_SIZE * 17] ^= 1
         raw.with_suffix('.rgb.gz').write_bytes(gzip.compress(data, mtime=0))
         raw.unlink()
         with self.assertRaisesRegex(ValueError, 'RGB stream hash differs'):
@@ -517,13 +588,44 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_changed_png_despite_unchanged_manifest(self):
-        Image.new('RGB', (2, 1), 'black').save(self.work / 'patched/0/119.png')
+        Image.new('RGB', (WIDTH, HEIGHT), 'black').save(self.work / 'patched/0/119.png')
         with self.assertRaisesRegex(ValueError, 'PNG payload'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_changed_worker_binary(self):
         Path(self.result['roles']['patched']['worker']['binary']).write_bytes(b'new binary')
         with self.assertRaisesRegex(ValueError, 'binary changed'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_requires_retained_worker_record(self):
+        self.result['roles']['patched'].pop('retained_worker')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Retained worker record differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_changed_retained_worker_metadata(self):
+        original = dict(self.result['roles']['patched']['retained_worker'])
+        for key, value in (('path', '../worker'), ('path', 'inputs/workers/upstream/worker'),
+                           ('sha256', '0' * 64), ('bytes', original['bytes'] + 1),
+                           ('bytes', float(original['bytes']))):
+            with self.subTest(key=key, value=value):
+                self.result['roles']['patched']['retained_worker'] = {**original, key: value}
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Retained worker record differs'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_retained_worker_bytes(self):
+        Path(self.result['roles']['patched']['worker']['binary']).unlink()
+        with self.assertRaisesRegex(ValueError, 'Retained worker is unavailable'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_external_worker_identity_despite_identical_bytes(self):
+        identity = self.result['roles']['patched']['worker']
+        external = self.root / 'external-worker'
+        external.write_bytes(Path(identity['binary']).read_bytes())
+        identity['binary'] = str(external)
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Worker identity does not name its retained binary'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_changed_compiled_source(self):
@@ -541,13 +643,15 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.result['roles']['upstream'] = {
             'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream', 'ordered_patches': []},
             'repeat_equal': repeat_equal, 'runs': [row, dict(row)]}
+        self.result['roles']['upstream']['retained_worker'] = self.stage_worker(
+            'upstream', self.result['roles']['upstream']['worker'])
         self.save()
-        image = Image.new('RGB', (4, 33), '#171717')
+        image = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(image)
         draw.text((4, 8), 'patched', fill='white')
-        draw.text((6, 8), 'upstream', fill='white')
+        draw.text((WIDTH + 4, 8), 'upstream', fill='white')
         image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
-        draw.text((10, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+        draw.text((WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
         image.save(self.work / 'comparison.png')
 
     def test_accepts_explicit_failed_repeats_as_rejected(self):
@@ -598,7 +702,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_rejects_changed_unretained_rgb_frame(self):
         stream = bytearray(self.frame_data)
-        stream[50 * 6] ^= 1
+        stream[50 * FRAME_SIZE] ^= 1
         (self.work / 'patched/0/frames.rgb').write_bytes(stream)
         with self.assertRaisesRegex(ValueError, 'frame hashes|stream hash'):
             VERIFY.verify(self.work, self.root / 'ndk')
@@ -611,7 +715,9 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_matching_tampered_unretained_frame_hashes(self):
-        changed_hash = VERIFY.sha(bytes([254, 0, 0, 0, 255, 0]))
+        changed_frame = bytearray(FRAME)
+        changed_frame[0] ^= 1
+        changed_hash = VERIFY.sha(changed_frame)
         for row in self.result['roles']['patched']['runs']:
             row['frame_hashes'][50] = changed_hash
         self.save()
@@ -664,14 +770,9 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_altered_rejection_panel(self):
-        self.result['roles']['upstream'] = {
-            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream', 'ordered_patches': []},
-            'repeat_equal': False, 'runs': [{'status': 'failed', 'exit': 1}] * 2}
-        self.save()
-        image = Image.new('RGB', (4, 33), '#171717')
-        ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
-        image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
-        image.putpixel((2, 32), (255, 255, 255))
+        self.add_rejected_role({'status': 'failed', 'exit': 1})
+        image = Image.open(self.work / 'comparison.png')
+        image.putpixel((WIDTH, 32), (255, 255, 255))
         image.save(self.work / 'comparison.png')
         with self.assertRaisesRegex(ValueError, 'rejection panels'):
             VERIFY.verify(self.work, self.root / 'ndk')

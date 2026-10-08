@@ -10,8 +10,10 @@ from pathlib import Path
 import re
 
 from PIL import Image, ImageDraw
-from source_identity import validate_prepared_source, DEFAULT_SERIES, digest
+from source_identity import validate_prepared_source, DEFAULT_SERIES, digest, _supported_roles
 from rgb_payload import inspect_rgb, payload_path
+
+FROZEN_PCM_SHA256 = 'd585212c3738bdfe6869427b01538b76698209d9f90c8c52b0d602989e5e0f84'
 
 
 def sha(data: bytes) -> str:
@@ -142,6 +144,26 @@ def verify_remote_workspace(result: dict, historical_remote_workspace: str | Non
     return {'source': source, 'path': remote}
 
 
+def verify_retained_worker(work: Path, role: str, value: dict) -> None:
+    identity = value['worker']
+    record = value.get('retained_worker')
+    relative = 'inputs/workers/' + role + '/worker'
+    if (not isinstance(record, dict) or record.get('path') != relative or
+            record.get('sha256') != identity['binary_sha256'] or type(record.get('bytes')) is not int):
+        raise ValueError('Retained worker record differs: ' + role)
+    path = work / relative
+    if Path(identity['binary']).resolve() != path.resolve():
+        raise ValueError('Worker identity does not name its retained binary: ' + role)
+    try:
+        data = path.read_bytes()
+    except OSError as error:
+        raise ValueError('Retained worker is unavailable: ' + role) from error
+    if sha(data) != identity['binary_sha256']:
+        raise ValueError('Worker binary changed: ' + role)
+    if len(data) != record['bytes']:
+        raise ValueError('Retained worker record differs: ' + role)
+
+
 def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES, *,
            preset: Path | None = None, textures: Path | None = None,
            historical_remote_workspace: str | None = None) -> dict:
@@ -163,12 +185,19 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     legacy = snapshot is None and series == json.loads(DEFAULT_SERIES.read_text())
     if not legacy and snapshot != digest(series):
         raise ValueError('Capture snapshot differs from the selected series')
-    width, height = result['dimensions']
+    dimensions = result.get('dimensions')
+    if (not isinstance(dimensions, list) or len(dimensions) != 2 or
+            any(type(value) is not int for value in dimensions) or
+            dimensions[0] not in (256, 512, 1280, 1920, 2560, 3840) or
+            dimensions[1] != dimensions[0] * 9 // 16):
+        raise ValueError('Capture dimensions differ from supported 16:9 sizes')
+    width, height = dimensions
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
         raise ValueError('Missing capture kind; reproduce with the current capture tool')
     audio = (work / 'audio.f32').read_bytes()
-    if len(audio) != 120 * 1470 * 4 or sha(audio) != result.get('pcm_sha256'):
+    if (len(audio) != 120 * 1470 * 4 or sha(audio) != FROZEN_PCM_SHA256 or
+            result.get('pcm_sha256') != FROZEN_PCM_SHA256):
         raise ValueError('Retained PCM differs from frozen capture input')
     if result.get('clock') != 'frame/30.0' or result.get('frames') != 120:
         raise ValueError('Capture frame/clock protocol differs')
@@ -179,10 +208,11 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     previous = None
     common_job = None
     for role, value in result['roles'].items():
+        if role not in _supported_roles(series):
+            raise ValueError('Unsupported worker role: ' + role)
         identity = value['worker']
+        verify_retained_worker(work, role, value)
         validate_prepared_source(role, identity, series, ndk)
-        if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
-            raise ValueError('Worker binary changed: ' + role)
         source_manifest = Path(identity['source_hashes'])
         source = source_manifest.parent / 'engine'
         expected = json.loads(source_manifest.read_text())

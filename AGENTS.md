@@ -505,7 +505,11 @@ while current-series.json identifies the locked15-patch publication source.
 
 Proof review maintenance (2026-10-08): new captures retain uploaded inputs and
 record their owned remote workspace; verification binds job/event paths to that
-workspace. Native workers validate and install the job seed before RNG setup.
+workspace. Native workers validate and install the job seed before RNG setup. Capture retains
+and uploads the validated worker bytes, checks the remote hash, and points
+receipt identities at that retained executable. Offline verification also
+requires the trusted deterministic PCM digest and supported 16:9 dimensions.
 Fresh locked15 power/rotation replays match all prior RGB frames and pass full
-source/binary/input/pixel verification. Historical records remain unchanged and
-require the explicit input/workspace options documented in tools/patch-proof/README.md.
+source/binary/input/pixel verification. Historical records remain unchanged; non-staged workers require a fresh replay
+for current certification. See tools/patch-proof/README.md for input/workspace
+options and retained worker requirements.
