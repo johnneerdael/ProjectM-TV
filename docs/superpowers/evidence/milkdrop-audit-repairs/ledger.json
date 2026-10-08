@@ -291,8 +291,10 @@
       "sha256": "714f188a6119fa9432b9ea5d6103ceb77edcdd909f0a9d5984aabf7ee6c2e871",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I20-circle-angular-spacing-and-closure-smoothing-differ/HANDOFF.md",
       "numeric_witness": "Raw point120, zero PCM/mystery/time, radius.5: target angle3.14 and roughly(-.4999994,.0007963); original angle3.1531382 and(-.4999667,-.0057726). Target smooths240 to479 then closes; original includes duplicated endpoint241 then smooths to481.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate0027 (historical0028); production geometry/replay RED167\u2192GREEN; current51 normal and27-patch application pass; Native4K/cost/integration pending",
+      "confirmed_affected_originals": [],
+      "current_patch_number": 27,
+      "evidence": "I20/README.md"
     },
     {
       "id": "I13",
@@ -326,10 +328,11 @@
       "sha256": "6a7d52e02ee8041644c9bc603ce4f4f6cfff6928ba8b8583a12b10136c7320b4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I03-small-finite-divisions-and-reciprocal-powers-collapse-to-zero/HANDOFF.md",
       "numeric_witness": "1/0.000001 and pow(0.000001,-1): library/predictor0; original1000000. No zero division or negative fractional domain involved.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "isolated source proposal; raw Android fast-math guards unsafe; scoped finite-only override scalar ARM64 runtime passes; additional restored NaN behavior and Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
-      "recommendation": "bounded finite reciprocal repair; preserve protective domains"
+      "recommendation": "bounded finite reciprocal repair; preserve protective domains",
+      "evidence": "I03-I04/README.md"
     },
     {
       "id": "I04",
@@ -339,10 +342,11 @@
       "sha256": "8708d10a53f0b2454132b5836b9ae4d629e7684bcf23ac5c2842cdf38d5470e8",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I04-signed-remainder-differs-from-original-absolute-value-remainder/HANDOFF.md",
       "numeric_witness": "-5%2: library/predictor-1; original+1. Exact integer operands avoid FPU rounding assumptions.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "isolated source proposal; raw Android fast-math guards unsafe; scoped finite-only override scalar ARM64 runtime passes; additional restored NaN behavior and Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
-      "recommendation": "defined-domain absolute integer remainder; width limits explicit"
+      "recommendation": "defined-domain absolute integer remainder; width limits explicit",
+      "evidence": "I03-I04/README.md"
     },
     {
       "id": "M02",
@@ -363,13 +367,13 @@
       "sha256": "119e5f08271fdca9f0d9ab5e59b489c95463cac52a99a6dcaf6ea24a484128c3",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/M01-negative-custom-wave-enable-executes-in-predictor-but-not-library/HANDOFF.md",
       "numeric_witness": "enabled=-1; wave per_frame reg00+=1: predictor/original increment to1; library remains0. Initializers still execute.",
-      "status": "candidate0027 implemented; production parser/wave/replay RED\u2192GREEN;53 normal and21 focused analyzer controls; Native4K/sampler/cost/integration pending",
+      "status": "deferred shared nonzero-boolean proposal; source/actual sampler/Native4K repeated proof complete; clean12-run negative-wave cost+.102ms/+7.503%; owner decision documented",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "coordinate negative enable repair with I02; preserve unconditional init",
-      "current_patch_number": 27,
       "evidence": "I02-M01/README.md",
-      "recognized_negative_stock_flags": 0
+      "recognized_negative_stock_flags": 0,
+      "proposal_patch": "I02-M01/proposed-nonzero-file-booleans.patch"
     },
     {
       "id": "I25",
@@ -482,13 +486,13 @@
       "sha256": "e5a3707044df079d368cdfcc4fd4f4f79fc3afc6e5c98b6a9e2dc8ba9326f544",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I02-negative-boolean-settings-use-0-rather-than-nonzero/HANDOFF.md",
       "numeric_witness": "bTexWrap=-1: library/predictor wrapping0; original wrapping1.",
-      "status": "candidate0027 implemented; production parser/wave/replay RED\u2192GREEN;53 normal and21 focused analyzer controls; Native4K/sampler/cost/integration pending",
+      "status": "deferred shared nonzero-boolean proposal; source/actual sampler/Native4K repeated proof complete; clean12-run negative-wave cost+.102ms/+7.503%; owner decision documented",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "coordinate nonzero boolean repair with M01",
-      "current_patch_number": 27,
       "evidence": "I02-M01/README.md",
-      "recognized_negative_stock_flags": 0
+      "recognized_negative_stock_flags": 0,
+      "proposal_patch": "I02-M01/proposed-nonzero-file-booleans.patch"
     },
     {
       "id": "I07",
@@ -586,6 +590,6 @@
     "tools/projectm-patches/0024-legacy-warp-oscillator-y.patch": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff",
     "tools/projectm-patches/0025-legacy-warp-physical-diagonal.patch": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546",
     "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc",
-    "tools/projectm-patches/0027-nonzero-file-booleans.patch": "15a184eadd22687958298c7fc56e2a49670554449b736290d79638a2f6a1df47"
+    "tools/projectm-patches/0027-circle-source-closure.patch": "9d1813de0f85a9f039a10bf94f31a8be574c8418bd1250b0ed014cf60fe797b9"
   }
 }

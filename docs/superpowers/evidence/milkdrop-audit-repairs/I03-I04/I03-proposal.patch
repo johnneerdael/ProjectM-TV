@@ -1,0 +1,50 @@
+--- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
++++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
+@@ -578,7 +578,10 @@
+ 
+     if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
+     {
+-        assign_ret_val(0.0);
++        // Recover only finite, nonzero-divisor results in the suppressed region.
++        PRJM_EVAL_F result = *val2_ptr != 0.0 && isfinite(*val1_ptr)
++            ? *val1_ptr / *val2_ptr : 0.0;
++        assign_ret_val(isfinite(result) ? result : 0.0);
+         return;
+     }
+ 
+@@ -755,7 +758,10 @@
+ 
+     if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
+     {
+-        assign_ret_val(0.0);
++        // Recover only finite, nonzero-divisor results in the suppressed region.
++        PRJM_EVAL_F result = *val2_ptr != 0.0 && isfinite(**ret_val)
++            ? **ret_val / *val2_ptr : 0.0;
++        assign_ret_val(isfinite(result) ? result : 0.0);
+         return;
+     }
+ 
+@@ -849,7 +855,10 @@
+ 
+     if(fabs(**ret_val) < COMPARE_CLOSEFACTOR && *val2_ptr < 0)
+     {
+-        assign_ret_val(.0);
++        // Keep zero, invalid and overflow suppression; recover finite powers only.
++        PRJM_EVAL_F result = **ret_val != 0.0 && isfinite(*val2_ptr)
++            ? pow(**ret_val, *val2_ptr) : 0.0;
++        assign_ret_val(isfinite(result) ? result : 0.0);
+         return;
+     }
+ 
+@@ -985,7 +994,10 @@
+ 
+     if (fabs(*math_arg1_ptr) < COMPARE_CLOSEFACTOR && *math_arg2_ptr < 0)
+     {
+-        assign_ret_val(.0);
++        // Keep zero, invalid and overflow suppression; recover finite powers only.
++        PRJM_EVAL_F result = *math_arg1_ptr != 0.0 && isfinite(*math_arg2_ptr)
++            ? pow(*math_arg1_ptr, *math_arg2_ptr) : 0.0;
++        assign_ret_val(isfinite(result) ? result : 0.0);
+         return;
+     }
+ 

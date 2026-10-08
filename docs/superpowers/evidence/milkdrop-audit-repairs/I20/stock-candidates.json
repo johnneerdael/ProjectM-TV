@@ -1,0 +1,218 @@
+[
+  {
+    "name": "$$$ Royal - Mashup (11).milk",
+    "sha256": "7e2b38e65cf23a8f59743266eb293b01152742dd8bfe934e01905a3e17686f94",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=1"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=100.000"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-1.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (127).milk",
+    "sha256": "2baab5f2d17a57536de1f2a85bd0ced45a03ee0a681138b264a954d42b50b425",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=1"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=100.000"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-1.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (129).milk",
+    "sha256": "1e358d1214efc01cbbe66e4a00b35af9a28685d30329760badce32d92b6a9422",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=1"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=100.000"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-1.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (13).milk",
+    "sha256": "27b2cb71a1c71c21425ec48fac371bff8bb84449f206fb823be217ad234ffe10",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=0.004"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-0.440"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (130).milk",
+    "sha256": "e68335464cab7a6efd1cdbceabc1767bcbf1d448ca937a2d040ae3328f3eb943",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=1"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=100.000"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-1.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (131).milk",
+    "sha256": "c6e498c08dde46f9a7af8090a63496011ce077c0f12467a640e6c11b741ed809",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=1"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=100.000"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=-1.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (137).milk",
+    "sha256": "39c7b6e9b6b7c2a3afcb1dd0c1935101a32c297f1bbb1d88d3232441a38d566f",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=0.321"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=0.000"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  },
+  {
+    "name": "$$$ Royal - Mashup (157).milk",
+    "sha256": "5cf7a7453b9d8a21ce5b7afe38c83edab53b2ce6e014641c7919f0bb84baacf5",
+    "static_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=0.207"
+      },
+      {
+        "line": 28,
+        "text": "fWaveParam=0.240"
+      }
+    ],
+    "runtime_impact": "unconfirmed"
+  }
+]

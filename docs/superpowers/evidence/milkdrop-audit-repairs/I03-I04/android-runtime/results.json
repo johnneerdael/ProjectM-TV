@@ -1,0 +1,146 @@
+[
+  {
+    "family": "android-finite",
+    "role": "baseline",
+    "args": [
+      "I03",
+      "baseline"
+    ],
+    "returncode": 1,
+    "binary_sha256": "4b8f0ffc408f427e6f691d1c633fe0fae2d9ffb0c1460947c5d9c7064cc69d1a",
+    "last_lines": [
+      "PASS power RHS assignment alias q=0.99998618458487576 a=0.99998618458487576 b=0 expected=0.99998618458487576",
+      "FAIL division argument side effect q=0 a=1 b=1.9999999999999999e-06 expected=500000",
+      "I03 executed=89 failures=28 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "baseline",
+    "args": [
+      "I04",
+      "baseline"
+    ],
+    "returncode": 1,
+    "binary_sha256": "4b8f0ffc408f427e6f691d1c633fe0fae2d9ffb0c1460947c5d9c7064cc69d1a",
+    "last_lines": [
+      "PASS remainder assignment alias q=0 a=0 b=0 expected=0",
+      "FAIL remainder argument side effect q=-1 a=-5 b=2 expected=1",
+      "I04 executed=52 failures=19 unsafe_baseline_skips=24"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "baseline",
+    "args": [
+      "boundaries"
+    ],
+    "returncode": 0,
+    "binary_sha256": "4b8f0ffc408f427e6f691d1c633fe0fae2d9ffb0c1460947c5d9c7064cc69d1a",
+    "last_lines": [
+      "PASS invsqrt NaN guard restored q=0 a=nan b=0 expected=0",
+      "PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434",
+      "boundaries executed=20 failures=0 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "I03",
+    "args": [
+      "I03"
+    ],
+    "returncode": 0,
+    "binary_sha256": "f1efb8de77d2c2fff1c69d1e08eee780928ced6a94bd709baa28c382b90497c0",
+    "last_lines": [
+      "PASS power RHS assignment alias q=0.99998618458487576 a=0.99998618458487576 b=0 expected=0.99998618458487576",
+      "PASS division argument side effect q=500000 a=1 b=1.9999999999999999e-06 expected=500000",
+      "I03 executed=89 failures=0 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "I03",
+    "args": [
+      "boundaries"
+    ],
+    "returncode": 0,
+    "binary_sha256": "f1efb8de77d2c2fff1c69d1e08eee780928ced6a94bd709baa28c382b90497c0",
+    "last_lines": [
+      "PASS invsqrt NaN guard restored q=0 a=nan b=0 expected=0",
+      "PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434",
+      "boundaries executed=20 failures=0 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "I04",
+    "args": [
+      "I04"
+    ],
+    "returncode": 0,
+    "binary_sha256": "2fec2448481c875e47d269c9fec6e04982054b36882898e3c3d2f929f3cad3b4",
+    "last_lines": [
+      "PASS remainder assignment alias q=0 a=0 b=0 expected=0",
+      "PASS remainder argument side effect q=1 a=-5 b=2 expected=1",
+      "I04 executed=76 failures=0 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android-finite",
+    "role": "I04",
+    "args": [
+      "boundaries"
+    ],
+    "returncode": 0,
+    "binary_sha256": "2fec2448481c875e47d269c9fec6e04982054b36882898e3c3d2f929f3cad3b4",
+    "last_lines": [
+      "PASS invsqrt NaN guard restored q=0 a=nan b=0 expected=0",
+      "PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434",
+      "boundaries executed=20 failures=0 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android",
+    "role": "baseline",
+    "args": [
+      "I03",
+      "baseline"
+    ],
+    "returncode": 1,
+    "binary_sha256": "755fdd5963c256fae38632a7c918a56550a8d3465b5f9ede76d277cfbdfdbfb2",
+    "last_lines": [
+      "PASS power RHS assignment alias q=0.99998618458487576 a=0.99998618458487576 b=0 expected=0.99998618458487576",
+      "FAIL division argument side effect q=0 a=1 b=1.9999999999999999e-06 expected=500000",
+      "I03 executed=89 failures=28 unsafe_baseline_skips=0"
+    ]
+  },
+  {
+    "family": "android",
+    "role": "baseline",
+    "args": [
+      "I04",
+      "baseline"
+    ],
+    "returncode": 1,
+    "binary_sha256": "755fdd5963c256fae38632a7c918a56550a8d3465b5f9ede76d277cfbdfdbfb2",
+    "last_lines": [
+      "PASS remainder assignment alias q=0 a=0 b=0 expected=0",
+      "FAIL remainder argument side effect q=-1 a=-5 b=2 expected=1",
+      "I04 executed=52 failures=19 unsafe_baseline_skips=24"
+    ]
+  },
+  {
+    "family": "android",
+    "role": "baseline",
+    "args": [
+      "boundaries"
+    ],
+    "returncode": 1,
+    "binary_sha256": "755fdd5963c256fae38632a7c918a56550a8d3465b5f9ede76d277cfbdfdbfb2",
+    "last_lines": [
+      "FAIL invsqrt NaN guard restored q=nan a=nan b=0 expected=0",
+      "PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434",
+      "boundaries executed=20 failures=9 unsafe_baseline_skips=0"
+    ]
+  }
+]

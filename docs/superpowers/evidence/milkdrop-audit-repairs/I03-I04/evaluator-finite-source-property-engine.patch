@@ -1,0 +1,30 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Preserve evaluator finite guards under Clang and GNU fast-math
+
+Append -fno-finite-math-only only to TreeFunctions.c after the evaluator's
+existing fast-math options. Keep reassociation, reciprocal transforms,
+contraction, approximate function permissions and every other source's flags.
+Place the policy in vendored evaluator CMake so engine and host consumers
+share it, rather than relying on Android application's build configuration.
+
+This restores existing pow/pow_op and invsqrt NaN-to-zero guards on Android
+in addition to protecting the proposed small-finite/remainder repairs.
+That additional invalid-input behavior requires explicit disposition.
+MSVC fast-math policy remains unqualified; no /fp policy is changed here.
+
+---
+--- a/vendor/projectm-eval/projectm-eval/CMakeLists.txt
++++ b/vendor/projectm-eval/projectm-eval/CMakeLists.txt
+@@ -79,6 +79,12 @@
+     PRJM_F_SIZE=${PROJECTM_EVAL_FLOAT_SIZE}
+ )
+ 
++# Keep explicit NaN/Inf guards in TreeFunctions.c under evaluator fast-math.
++# Source options follow directory/target options, overriding finite-only assumptions.
++if(CMAKE_C_COMPILER_ID MATCHES "^(Clang|AppleClang|GNU)$")
++    set_property(SOURCE TreeFunctions.c APPEND PROPERTY COMPILE_OPTIONS -fno-finite-math-only)
++endif()
++
+ set_target_properties(projectM_eval PROPERTIES
+                       EXPORT_NAME Eval
+                       )

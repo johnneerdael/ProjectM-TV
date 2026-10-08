@@ -1,0 +1,9 @@
+# I03/I04 — arithmetic source candidates, not integrated
+
+Raw finite-result/divisor guards are unsafe under the exact Android NDK27.3 clang18 release flags: `-O3 -ffast-math` removes their finite checks. Host Apple clang controls had passed; emitted Android IR exposed the difference. The raw proposals remain outside shipping patches. Bit classification retained pinned NDK guards but Apple fast-math still failed24/89 I03 cases; scoped precise pragmas also failed. No unportable shortcut is accepted.
+
+A source-property alternative appends `-fno-finite-math-only` only to TreeFunctions.c after fast-math; other optimization permissions remain. Parent ran actual ARM64/API21 scalar binaries on the owned API34 emulator under the device session lock. I03 proposal89/89, I04 proposal76/76 and20/20 boundary controls pass. Baseline intentionally fails28/89 and19/52;24 unsafe baseline modulo casts are skipped. Original-flags baseline fails9/20 outside-boundary checks because existing pow/pow_op/invsqrt NaN→0 guards are optimized away; the override restores them. [Runtime identities/results](android-runtime/results.json) · [flag/IR evidence](android-finite/README.md).
+
+This restores additional nonfinite behavior outside I03's tiny-input region and can affect compiler optimization across one evaluator file. Neither its Native4K cost nor source-derived finite screenshots have been validated. The evaluator-CMake adaptation is read-only and unbuilt. The app/core GPU nonfinite transport/trig/power patches are unchanged. Existing protective guards, wider signed remainder policy, signed-minimum safety and original x87 limitations are described in [the report](REPORT.md).
+
+These are source-stage candidates with open integration/visual/cost gates. No original stock trigger is confirmed and no whole-corpus or Windows bit-exact arithmetic claim is made.

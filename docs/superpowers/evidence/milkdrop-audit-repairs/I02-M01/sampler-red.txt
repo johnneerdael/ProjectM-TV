@@ -1,0 +1,1 @@
+nonzero file wrap did not select repeat at displaced UV

@@ -1,0 +1,15 @@
+{
+  "means_ms": {
+    "before": 1.3597821796296299,
+    "after": 1.4618014824074075
+  },
+  "delta_ms": 0.1020193027777776,
+  "delta_pct": 7.5026209569510005,
+  "cycle_delta_pct": [
+    9.884103701053682,
+    4.665742956358887,
+    8.016301370837041
+  ],
+  "selected_rgb_matches_diagnostic_by_role": true,
+  "scope": "Native4K source-instrumented emulator, negative-enabled two-point wave; no physical-TV FPS claim"
+}
