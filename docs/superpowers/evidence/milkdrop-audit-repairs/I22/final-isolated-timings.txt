@@ -1,0 +1,12 @@
+{"issue": "I22-final-isolated", "cycle": 0, "step": 0, "role": "before", "mean_ms": 2.633691216666667, "p90_ms": 3.624041, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 0, "step": 1, "role": "after", "mean_ms": 2.5229994166666647, "p90_ms": 3.203458, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 0, "step": 2, "role": "after", "mean_ms": 2.546074527777778, "p90_ms": 3.401375, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 0, "step": 3, "role": "before", "mean_ms": 2.0776459527777793, "p90_ms": 2.468375, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 1, "step": 0, "role": "before", "mean_ms": 1.9561640388888883, "p90_ms": 2.376708, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 1, "step": 1, "role": "after", "mean_ms": 2.0986336527777785, "p90_ms": 2.540708, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 1, "step": 2, "role": "after", "mean_ms": 1.985812933333333, "p90_ms": 2.402291, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 1, "step": 3, "role": "before", "mean_ms": 1.9228065805555552, "p90_ms": 2.330209, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 2, "step": 0, "role": "before", "mean_ms": 1.952784799999999, "p90_ms": 2.27525, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 2, "step": 1, "role": "after", "mean_ms": 2.012364002777778, "p90_ms": 2.456, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 2, "step": 2, "role": "after", "mean_ms": 1.954528683333332, "p90_ms": 2.41, "status": "ok"}
+{"issue": "I22-final-isolated", "cycle": 2, "step": 3, "role": "before", "mean_ms": 1.9480736083333348, "p90_ms": 2.274541, "status": "ok"}

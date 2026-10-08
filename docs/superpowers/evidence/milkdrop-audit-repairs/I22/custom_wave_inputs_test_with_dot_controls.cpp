@@ -68,6 +68,88 @@ static void Window(ShaderCache& cache, int samples, int separation, bool spectru
     Check(state.globalRegisters[4] == samples, label + " reevaluated point code during Native replay");
     Check(context.viewportSizeX == 64 && context.lineReferenceWidth == 0, label + " lost authored context");
 }
+static PFNGLDRAWELEMENTSPROC realElements{};
+static PFNGLDRAWARRAYSINSTANCEDPROC realInstanced{};
+static std::vector<std::pair<GLenum, int>> submissions;
+static std::vector<std::array<float, 4>> endpoints;
+static void ObserveElements(GLenum primitive, GLsizei count, GLenum type, const void* indices)
+{
+    submissions.emplace_back(primitive, count);
+    GLint buffer{}, previous{};
+    glGetVertexAttribiv(0, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, &buffer);
+    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &previous); glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    const auto* points = static_cast<const Point*>(glMapBufferRange(
+        GL_ARRAY_BUFFER, 0, count * sizeof(Point), GL_MAP_READ_BIT));
+    Check(points != nullptr, "dot geometry readback failed");
+    endpoints.push_back({points[0].X(), points[0].Y(), points[count - 1].X(), points[count - 1].Y()});
+    glUnmapBuffer(GL_ARRAY_BUFFER); glBindBuffer(GL_ARRAY_BUFFER, previous);
+    realElements(primitive, count, type, indices);
+}
+static void ObserveInstanced(GLenum primitive, GLint first, GLsizei count, GLsizei instances)
+{
+    submissions.emplace_back(primitive, instances);
+    realInstanced(primitive, first, count, instances);
+}
+static void Dots(ShaderCache& cache, bool singleOnly = false)
+{
+    realElements = glad_glDrawElements; glad_glDrawElements = ObserveElements;
+    realInstanced = glad_glDrawArraysInstanced; glad_glDrawArraysInstanced = ObserveInstanced;
+    for (bool dots : {true, false}) for (bool thick : {false, true}) for (int samples : {2, 1, 0})
+    {
+        if (singleOnly && samples != 1) continue;
+        PresetState state; auto& context = state.renderContext;
+        context.shaderCache = &cache; state.LoadShaders();
+        context.viewportSizeX = context.viewportSizeY = 128;
+        context.lineReferenceWidth = context.lineReferenceHeight = 64;
+        context.aspectX = context.aspectY = context.invAspectX = context.invAspectY = 1;
+        std::istringstream source("wavecode_0_enabled=1\nwavecode_0_samples=" + std::to_string(samples) +
+            "\nwavecode_0_bUseDots=" + std::to_string(dots) + "\nwavecode_0_bDrawThick=" +
+            std::to_string(thick) + "\nwavecode_0_smoothing=0\n"
+            "wave_0_per_point1=" + (samples == 1 ? std::string("x=.25;") : std::string("x=.25+.5*sample;")) +
+            "y=.5;r=1;g=0;b=0;a=1;reg00+=1;reg01=sample;\n");
+        PresetFileParser parser; Check(parser.Read(source), "could not parse finite dot control");
+        state.customWavePerPointCode[0] = parser.GetCode("wave_0_per_point");
+        PerFrameContext frame(state.globalMemory, &state.globalRegisters);
+        frame.RegisterBuiltinVariables(); frame.LoadStateVariables(state);
+        CustomWaveform wave(state); wave.Initialize(parser, 0);
+        std::vector<std::string> warnings; wave.CompileCodeAndRunInitExpressions(frame, warnings);
+        Check(warnings.empty(), "finite dot code failed to compile");
+        Framebuffer canvas(1), native(1);
+        canvas.CreateColorAttachment(0, 0, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
+        native.CreateColorAttachment(0, 0, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
+        canvas.SetSize(64, 64); native.SetSize(128, 128);
+        GeometryTargets targets(state, canvas, 0, 64, 64, {}, native, 0);
+        submissions.clear(); endpoints.clear(); targets.Authored(); wave.Draw(frame, &targets);
+        Check(glGetError() == GL_NO_ERROR, "finite dot draw GL error");
+        const int evaluated = dots ? samples : samples >= 2 ? samples : 0;
+        Check(state.globalRegisters[0] == evaluated, "wrong point count or Native replay evaluated code twice");
+        if (evaluated == 0) {
+            Check(submissions.empty(), "empty or single-line wave submitted geometry"); continue;
+        }
+        if (samples == 1)
+            Check(std::isnan(state.globalRegisters[1]), "single-dot sample input invented a finite value");
+        if (dots)
+        {
+            Check(submissions.size() == 2, "dot replay changed pass count");
+            for (const auto& draw : submissions)
+                Check(draw.first == GL_POINTS && draw.second == samples,
+                      "finite two-point dot wave acquired an interpolated midpoint");
+        }
+        else
+        {
+            // Authored strips retain their 2N-1 smoothed points; Native quads
+            // retain two smoothed segments per pass, including all thick passes.
+            for (const auto& draw : submissions)
+                Check((draw.first == GL_LINE_STRIP && draw.second == 3) ||
+                      (draw.first == GL_TRIANGLE_STRIP && draw.second == 2), "line smoothing changed");
+        }
+        if (dots) for (const auto& point : endpoints)
+            Check(std::abs(point[0] + .5f) < 1e-6f && std::abs(point[1]) < 1e-6f &&
+                  std::abs(point[2] - (samples == 1 ? -.5f : .5f)) < 1e-6f && std::abs(point[3]) < 1e-6f,
+                  "wave endpoint positions changed");
+    }
+    glad_glDrawElements = realElements; glad_glDrawArraysInstanced = realInstanced;
+}
 static void ReadOnlyInputs(ShaderCache& cache)
 {
     PresetState state; auto& context = state.renderContext;
@@ -114,7 +196,10 @@ int main(int argc, char** argv)
         if (argc == 2 && std::string(argv[1]) == "readonly") {
             ReadOnlyInputs(cache); std::cout << "Fresh wave point inputs and retained Q/T/replay pass\n"; return 0;
         }
-
+        if (argc == 2 && (std::string(argv[1]) == "dots" || std::string(argv[1]) == "single")) {
+            Dots(cache, std::string(argv[1]) == "single");
+            std::cout << "Custom dots retain authored points and line smoothing\n"; return 0;
+        }
         for (bool replay : {false, true}) {
             Window(cache, 2, 0, false, 239, 239, 240, 240, replay);
             Window(cache, 4, 2, false, 237, 239, 240, 242, replay);

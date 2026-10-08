@@ -95,3 +95,11 @@ Four480-frame runs explicitly capture read framebuffer0 and verify the installed
 ![Final diagnostic before](final-diagnostic-ring-before-4k.png)
 
 ![Source-derived expected final diagnostic](final-diagnostic-ring-after-4k.png)
+
+## Final controlled cost and owner disposition
+
+The fresh final-read0 batch retains exact original p17/p18 engine bytes and validates the installed role APK before every run. Twelve isolated ABBA mosaic runs give mean2.081861ms before versus2.186736ms after (+.104875ms/+5.038%). All three cycle changes increase: +7.593%,+5.297%,+1.693%. This establishes a cost-bearing witness beyond the earlier16.46ms outlier, which remains preserved. [Complete cost evidence](final-isolated-cost-results.json) · [full log](final-isolated-timings.txt). Physical-TV FPS is unmeasured.
+
+**Disposition: defer the complete custom-dot/single-dot proposal and withdraw it from shipping patches.** Original nebula and finite single/two/ring before/source-corrected final-output images remain the fidelity evidence. [Proposed patch](proposed-custom-dots.patch). Owner can accept authored discrete dots/single-dot restoration with the observed mosaic cost, or retain the current interpolation until a fidelity-equivalent implementation is cost-qualified. No source/point-count correctness claim is withdrawn; performance acceptance is withheld.
+
+Live later patches renumber0020–0028→0019–0027; all frozen source/artifact/helper/image identities retain historical numbers.

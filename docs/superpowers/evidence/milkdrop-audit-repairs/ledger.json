@@ -105,7 +105,7 @@
       "sha256": "346dfa27d9195f08f6cc30668100f86bcb18142a1856a35471c4f17006973147",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I22-custom-dot-waves-gain-interpolated-points/HANDOFF.md",
       "numeric_witness": "Two points(.25,.5),(.75,.5): original custom dots draw2; target smooths and draws3 including(.5,.5). Target samples1 is suppressed; original permits1 if the point program overwrites finite position/colour and never consumes the nonfinite sample input.\n\nStrong witness is the finite two-point case. Single-sample boundary remains conditional; no undefined sample is credited.",
-      "status": "candidate0018; source/final-output original and finite diagnostic proof complete; mosaic timing uncertainty retained; final disposition/integration pending",
+      "status": "deferred complete custom-dot proposal; source/original/finite final4K proof; fresh12ABBA mosaic+.105ms/+5.038%, all cycles increase; owner packet complete",
       "confirmed_affected_originals": [
         {
           "name": "shifter - mosaic mitosis.milk",
@@ -116,7 +116,7 @@
       "native_4k_evidence": "I22/results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "final_output_evidence": "I22/final-I22-stars-results.json",
-      "current_patch_number": 19
+      "proposal_patch": "I22/proposed-custom-dots.patch"
     },
     {
       "id": "I10",
@@ -146,7 +146,7 @@
       },
       "native_4k_evidence": "I10/chemlock-results.json",
       "cost_evidence": "I10/initial-clean-timings.json",
-      "current_patch_number": 24
+      "current_patch_number": 23
     },
     {
       "id": "I11",
@@ -173,7 +173,7 @@
       "native_4k_evidence": "I11/original-results.json",
       "initial_cost_evidence": "I11/initial-clean-timings.json",
       "cost_evidence": "I11/revised-clean-timings.json",
-      "current_patch_number": 25
+      "current_patch_number": 24
     },
     {
       "id": "I12",
@@ -189,7 +189,7 @@
       ],
       "source_report": "research/warp-motion.md",
       "recommendation": "legacy-only evaluation row order; preserve one execution and raw state",
-      "current_patch_number": 26,
+      "current_patch_number": 25,
       "evidence": "I12/README.md",
       "original_candidate": {
         "name": "shifter - neon pulse.milk",
@@ -228,7 +228,7 @@
       "diagnostic_evidence": "I05/final-diagnostic-aspect-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "final_output_evidence": "I05/final-I05-results.json",
-      "current_patch_number": 22
+      "current_patch_number": 21
     },
     {
       "id": "I16",
@@ -259,7 +259,7 @@
       "diagnostic_evidence": "I06/final-diagnostic-wave-time-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "final_output_evidence": "I06/final-I06-results.json",
-      "current_patch_number": 22
+      "current_patch_number": 21
     },
     {
       "id": "I24",
@@ -317,7 +317,7 @@
       "source_report": "research/warp-motion.md",
       "recommendation": "narrow exact-left-axis positive-pi seam",
       "evidence": "I13/README.md",
-      "current_patch_number": 27
+      "current_patch_number": 26
     },
     {
       "id": "I18",
@@ -332,7 +332,7 @@
         "Geiss - Blur Mix 3.milk",
         "Geiss - Skin Dots 10b.milk"
       ],
-      "current_patch_number": 28,
+      "current_patch_number": 27,
       "evidence": "I18/README.md"
     },
     {
@@ -429,7 +429,7 @@
       "evidence": "I29/README.md",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "native_4k_evidence": "I29/final-results.json",
-      "current_patch_number": 23
+      "current_patch_number": 22
     },
     {
       "id": "I15",
@@ -460,7 +460,7 @@
       "native_4k_evidence": "I09/README.md",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "final_output_evidence": "I09/final-diagnostic-pi-results.json",
-      "current_patch_number": 21
+      "current_patch_number": 20
     },
     {
       "id": "I31",
@@ -478,7 +478,7 @@
       "native_4k_evidence": "I31/verified-results.json",
       "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
       "final_output_evidence": "I31/final-I31-results.json",
-      "current_patch_number": 20
+      "current_patch_number": 19
     },
     {
       "id": "I01",
@@ -597,15 +597,14 @@
     "tools/projectm-patches/0016-cache-mesh-init-per-viewport.patch": "5ab17fdd496d2771f9a835c8716e0298b57320e44d3ae829e1430b18b1934d31",
     "tools/projectm-patches/0017-builtin-wave-opacity.patch": "3b898d63a7ef0baafb4862a8a37044dd3fe4df3a6d0bc1e4562287d9a7197652",
     "tools/projectm-patches/0018-custom-wave-input-windows.patch": "68d3b8307f172575b6d35eded5ed9e0d3d2213033e12e040f623221844e6b187",
-    "tools/projectm-patches/0019-custom-wave-discrete-dots.patch": "115fe3238acf5d91117ad98d215a809d9981873c7db0d8327fa3fd41df1bdd6b",
-    "tools/projectm-patches/0020-gamma-only-pass-epsilon.patch": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a",
-    "tools/projectm-patches/0021-eel-named-constant-precision.patch": "dd152e9036a7e07a8aae22db1827fd3148505a243724a8c938f5a34c6f05d29a",
-    "tools/projectm-patches/0022-original-equation-inputs.patch": "02d1a76b832a76f86f2f7612adcb0669d0e9e91351f0e8222daeabe522bc8d92",
-    "tools/projectm-patches/0023-negative-odd-echo-orientation.patch": "5ab654be6d7008c9fc83af736690243d915a9e2b5fe08e3a990620a4818490f4",
-    "tools/projectm-patches/0024-legacy-warp-oscillator-y.patch": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff",
-    "tools/projectm-patches/0025-legacy-warp-physical-diagonal.patch": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546",
-    "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc",
-    "tools/projectm-patches/0027-legacy-angle-seam.patch": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a",
-    "tools/projectm-patches/0028-wave-rgb-clamp.patch": "2af590bc0a9e9519cc6a3fc2bc3486a9bf048537849077a6cd85b3c44e8bde55"
+    "tools/projectm-patches/0019-gamma-only-pass-epsilon.patch": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a",
+    "tools/projectm-patches/0020-eel-named-constant-precision.patch": "dd152e9036a7e07a8aae22db1827fd3148505a243724a8c938f5a34c6f05d29a",
+    "tools/projectm-patches/0021-original-equation-inputs.patch": "02d1a76b832a76f86f2f7612adcb0669d0e9e91351f0e8222daeabe522bc8d92",
+    "tools/projectm-patches/0022-negative-odd-echo-orientation.patch": "5ab654be6d7008c9fc83af736690243d915a9e2b5fe08e3a990620a4818490f4",
+    "tools/projectm-patches/0023-legacy-warp-oscillator-y.patch": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff",
+    "tools/projectm-patches/0024-legacy-warp-physical-diagonal.patch": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546",
+    "tools/projectm-patches/0025-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc",
+    "tools/projectm-patches/0026-legacy-angle-seam.patch": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a",
+    "tools/projectm-patches/0027-wave-rgb-clamp.patch": "2af590bc0a9e9519cc6a3fc2bc3486a9bf048537849077a6cd85b3c44e8bde55"
   }
 }

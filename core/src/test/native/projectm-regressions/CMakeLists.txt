@@ -171,12 +171,6 @@ add_test(NAME custom-wave-input-windows COMMAND custom-wave-inputs-regressions)
 add_test(NAME custom-wave-readonly-inputs COMMAND custom-wave-inputs-regressions readonly)
 set_tests_properties(custom-wave-readonly-inputs PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-add_test(NAME custom-wave-discrete-dots COMMAND custom-wave-inputs-regressions dots)
-add_test(NAME custom-wave-single-dot COMMAND custom-wave-inputs-regressions single)
-set_tests_properties(custom-wave-single-dot PROPERTIES TIMEOUT 30
-    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-set_tests_properties(custom-wave-discrete-dots PROPERTIES TIMEOUT 30
-    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(custom-wave-input-windows PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 foreach(control hue wave-alpha wave-topology opacity gamma echo-orientation)
