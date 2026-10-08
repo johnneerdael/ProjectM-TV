@@ -13,7 +13,7 @@ add_executable(disabled-uv-controls disabled_uv_pipeline_controls.cpp)
 target_compile_features(disabled-uv-controls PRIVATE cxx_std_17)
 target_compile_definitions(disabled-uv-controls PRIVATE GL_SILENCE_DEPRECATION)
 target_include_directories(disabled-uv-controls PRIVATE "${REGRESSION_ROOT}"
-    "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset" "${PROJECTM_SOURCE}/vendor"
     "${PROJECTM_SOURCE}/vendor/glad/include"
     "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
 target_compile_options(disabled-uv-controls PRIVATE "-include${REGRESSION_ROOT}/macos_gl.hpp")

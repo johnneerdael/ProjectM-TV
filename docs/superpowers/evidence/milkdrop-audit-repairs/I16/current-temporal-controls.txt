@@ -1,0 +1,125 @@
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=256x144 sampled_texture=13 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=256x144 sampled_texture=13 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=2 alpha=1 prior=0.562255859,0.49987793 published=0.624755859,0.49987793 observed_publication_generation=2 mesh_evaluations=4851 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=256x144 sampled_texture=13 sampled_publication_generation=2 endpoint=0.625,0.5
+field frame=3 alpha=1 prior=0.624755859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=256x144 sampled_texture=13 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=256x144 custom=0 detail=0 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=256x144 sampled_texture=13 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=256x144 custom=0 detail=0 eager_oracle=0
+field frame=2 alpha=0 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=4851 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=256x144 sampled_texture=13 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=3 alpha=1 prior=0.562255859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=256x144 sampled_texture=13 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=256x144 custom=0 detail=0 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=1280x720 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=1280x720 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=2 alpha=1 prior=0.562255859,0.49987793 published=0.624755859,0.49987793 observed_publication_generation=2 mesh_evaluations=4851 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=2 endpoint=0.625,0.5
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=1280x720 sampled_texture=16 sampled_publication_generation=2 endpoint=0.625,0.5
+field frame=3 alpha=1 prior=0.624755859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=1280x720 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=1280x720 custom=0 detail=1 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=1280x720 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=1280x720 custom=0 detail=1 eager_oracle=0
+field frame=2 alpha=0 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=4851 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=1280x720 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=3 alpha=1 prior=0.562255859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=1280x720 custom=0 detail=1 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=1280x720 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=1280x720 custom=0 detail=1 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=256x144 sampled_texture=13 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=256x144 sampled_texture=13 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=2 alpha=1 prior=0.562255859,0.49987793 published=0.624755859,0.49987793 observed_publication_generation=2 mesh_evaluations=4851 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=256x144 sampled_texture=13 sampled_publication_generation=2 endpoint=0.625,0.5
+field frame=3 alpha=1 prior=0.624755859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=256x144 sampled_texture=13 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=256x144 custom=1 detail=0 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=256x144 sampled_texture=13 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=256x144 custom=1 detail=0 eager_oracle=0
+field frame=2 alpha=0 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=4851 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=256x144 sampled_texture=13 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=3 alpha=1 prior=0.562255859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=256x144 custom=1 detail=0 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=256x144 sampled_texture=13 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=256x144 custom=1 detail=0 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=1280x720 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+frame=2 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=2 viewport=1280x720 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=2 alpha=1 prior=0.562255859,0.49987793 published=0.624755859,0.49987793 observed_publication_generation=2 mesh_evaluations=4851 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=2 endpoint=0.625,0.5
+frame=3 endpoint=0.625,0.5 storedPrevious=0.624756,0.499878 mv_l=1
+consumer frame=3 viewport=1280x720 sampled_texture=16 sampled_publication_generation=2 endpoint=0.625,0.5
+field frame=3 alpha=1 prior=0.624755859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=1280x720 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=1280x720 custom=1 detail=1 eager_oracle=0
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=1 viewport=1280x720 sampled_texture=16 sampled_publication_generation=0 endpoint=0.5625,0.5
+field frame=1 alpha=1 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=3234 UV=1280x720 custom=1 detail=1 eager_oracle=0
+field frame=2 alpha=0 prior=0.562255859,0.49987793 published=0.562255859,0.49987793 observed_publication_generation=1 mesh_evaluations=4851 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+frame=3 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+consumer frame=3 viewport=1280x720 sampled_texture=16 sampled_publication_generation=1 endpoint=0.5625,0.5
+field frame=3 alpha=1 prior=0.562255859,0.49987793 published=0.687255859,0.49987793 observed_publication_generation=3 mesh_evaluations=6468 UV=1280x720 custom=1 detail=1 eager_oracle=0
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=3840x2160 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+frame=4 endpoint=0.6875,0.5 storedPrevious=0.687256,0.499878 mv_l=1
+consumer frame=4 viewport=1280x720 sampled_texture=16 sampled_publication_generation=3 endpoint=0.6875,0.5
+field frame=4 alpha=1 prior=0.687255859,0.49987793 published=0.749755859,0.49987793 observed_publication_generation=4 mesh_evaluations=8085 UV=1280x720 custom=1 detail=1 eager_oracle=0
+Fullpipeline temporal controls pass for declared role; generic lazy repair/Native gates remain open

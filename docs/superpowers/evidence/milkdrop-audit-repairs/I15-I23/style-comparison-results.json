@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "wave",
+    "frames": [
+      {
+        "frame": 120,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 150,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 180,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 210,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 239,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 300,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 390,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      },
+      {
+        "frame": 479,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.11874867380401234
+      }
+    ]
+  },
+  {
+    "kind": "shape",
+    "frames": [
+      {
+        "frame": 120,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 150,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 180,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 210,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 239,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 300,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 390,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      },
+      {
+        "frame": 479,
+        "current_equal_explicit_current_offsets": true,
+        "reference_pixel_oracle_RGB_MAE": 0.056780116705246915
+      }
+    ]
+  }
+]

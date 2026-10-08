@@ -1,0 +1,202 @@
+PASS literal division witness q=1000000 a=0 b=0 expected=1000000
+PASS literal power witness q=1000000 a=0 b=0 expected=1000000
+PASS q=a/b; tiny positive q=1000000 a=1 b=9.9999999999999995e-07 expected=1000000
+PASS q=a/b; tiny negative q=-1000000 a=1 b=-9.9999999999999995e-07 expected=-1000000
+PASS q=a/b; zero q=0 a=1 b=0 expected=0
+PASS q=a/b; negative zero q=0 a=1 b=-0 expected=0
+PASS q=a/b; boundary q=99999.999999999985 a=1 b=1.0000000000000001e-05 expected=99999.999999999985
+PASS q=a/b; ordinary q=10000 a=1 b=0.0001 expected=10000
+PASS q=a/b; suppressed overflow q=0 a=1e+308 b=9.9999999999999995e-07 expected=0
+PASS q=a/b; outside overflow q=inf a=1e+308 b=0.0001 expected=inf
+PASS q=a/b; invalid numerator q=0 a=inf b=9.9999999999999995e-07 expected=0
+PASS q=a/b; nan numerator q=0 a=nan b=9.9999999999999995e-07 expected=0
+PASS q=a/b; tiny/tiny q=1 a=1e-300 b=1e-300 expected=1
+PASS q=_div(a,b); tiny positive q=1000000 a=1 b=9.9999999999999995e-07 expected=1000000
+PASS q=_div(a,b); tiny negative q=-1000000 a=1 b=-9.9999999999999995e-07 expected=-1000000
+PASS q=_div(a,b); zero q=0 a=1 b=0 expected=0
+PASS q=_div(a,b); negative zero q=0 a=1 b=-0 expected=0
+PASS q=_div(a,b); boundary q=99999.999999999985 a=1 b=1.0000000000000001e-05 expected=99999.999999999985
+PASS q=_div(a,b); ordinary q=10000 a=1 b=0.0001 expected=10000
+PASS q=_div(a,b); suppressed overflow q=0 a=1e+308 b=9.9999999999999995e-07 expected=0
+PASS q=_div(a,b); outside overflow q=inf a=1e+308 b=0.0001 expected=inf
+PASS q=_div(a,b); invalid numerator q=0 a=inf b=9.9999999999999995e-07 expected=0
+PASS q=_div(a,b); nan numerator q=0 a=nan b=9.9999999999999995e-07 expected=0
+PASS q=_div(a,b); tiny/tiny q=1 a=1e-300 b=1e-300 expected=1
+PASS q=(a/=b); tiny positive q=1000000 a=1000000 b=9.9999999999999995e-07 expected=1000000
+PASS q=(a/=b); tiny negative q=-1000000 a=-1000000 b=-9.9999999999999995e-07 expected=-1000000
+PASS q=(a/=b); zero q=0 a=0 b=0 expected=0
+PASS q=(a/=b); negative zero q=0 a=0 b=-0 expected=0
+PASS q=(a/=b); boundary q=99999.999999999985 a=99999.999999999985 b=1.0000000000000001e-05 expected=99999.999999999985
+PASS q=(a/=b); ordinary q=10000 a=10000 b=0.0001 expected=10000
+PASS q=(a/=b); suppressed overflow q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=(a/=b); outside overflow q=inf a=inf b=0.0001 expected=inf
+PASS q=(a/=b); invalid numerator q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=(a/=b); nan numerator q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=(a/=b); tiny/tiny q=1 a=1 b=1e-300 expected=1
+PASS q=_divop(a,b); tiny positive q=1000000 a=1000000 b=9.9999999999999995e-07 expected=1000000
+PASS q=_divop(a,b); tiny negative q=-1000000 a=-1000000 b=-9.9999999999999995e-07 expected=-1000000
+PASS q=_divop(a,b); zero q=0 a=0 b=0 expected=0
+PASS q=_divop(a,b); negative zero q=0 a=0 b=-0 expected=0
+PASS q=_divop(a,b); boundary q=99999.999999999985 a=99999.999999999985 b=1.0000000000000001e-05 expected=99999.999999999985
+PASS q=_divop(a,b); ordinary q=10000 a=10000 b=0.0001 expected=10000
+PASS q=_divop(a,b); suppressed overflow q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=_divop(a,b); outside overflow q=inf a=inf b=0.0001 expected=inf
+PASS q=_divop(a,b); invalid numerator q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=_divop(a,b); nan numerator q=0 a=0 b=9.9999999999999995e-07 expected=0
+PASS q=_divop(a,b); tiny/tiny q=1 a=1 b=1e-300 expected=1
+PASS q=pow(a,b); reciprocal q=1000000 a=9.9999999999999995e-07 b=-1 expected=1000000
+PASS q=pow(a,b); negative reciprocal q=-1000000 a=-9.9999999999999995e-07 b=-1 expected=-1000000
+PASS q=pow(a,b); negative square q=1000000000000.0001 a=-9.9999999999999995e-07 b=-2 expected=1000000000000
+PASS q=pow(a,b); positive exponent q=9.9999999999999995e-07 a=9.9999999999999995e-07 b=1 expected=9.9999999999999995e-07
+PASS q=pow(a,b); zero q=0 a=0 b=-1 expected=0
+PASS q=pow(a,b); invalid fraction q=0 a=-9.9999999999999995e-07 b=-0.5 expected=0
+PASS q=pow(a,b); suppressed overflow q=0 a=1e-300 b=-2 expected=0
+PASS q=pow(a,b); outside overflow q=inf a=0.0001 b=-100 expected=inf
+PASS q=pow(a,b); negative infinity exponent q=0 a=9.9999999999999995e-07 b=-inf expected=0
+PASS q=pow(a,b); boundary q=99999.999999999985 a=1.0000000000000001e-05 b=-1 expected=99999.999999999985
+PASS q=a^b; reciprocal q=1000000 a=9.9999999999999995e-07 b=-1 expected=1000000
+PASS q=a^b; negative reciprocal q=-1000000 a=-9.9999999999999995e-07 b=-1 expected=-1000000
+PASS q=a^b; negative square q=1000000000000.0001 a=-9.9999999999999995e-07 b=-2 expected=1000000000000
+PASS q=a^b; positive exponent q=9.9999999999999995e-07 a=9.9999999999999995e-07 b=1 expected=9.9999999999999995e-07
+PASS q=a^b; zero q=0 a=0 b=-1 expected=0
+PASS q=a^b; invalid fraction q=0 a=-9.9999999999999995e-07 b=-0.5 expected=0
+PASS q=a^b; suppressed overflow q=0 a=1e-300 b=-2 expected=0
+PASS q=a^b; outside overflow q=inf a=0.0001 b=-100 expected=inf
+PASS q=a^b; negative infinity exponent q=0 a=9.9999999999999995e-07 b=-inf expected=0
+PASS q=a^b; boundary q=99999.999999999985 a=1.0000000000000001e-05 b=-1 expected=99999.999999999985
+PASS q=(a^=b); reciprocal q=1000000 a=1000000 b=-1 expected=1000000
+PASS q=(a^=b); negative reciprocal q=-1000000 a=-1000000 b=-1 expected=-1000000
+PASS q=(a^=b); negative square q=1000000000000.0001 a=1000000000000.0001 b=-2 expected=1000000000000
+PASS q=(a^=b); positive exponent q=9.9999999999999995e-07 a=9.9999999999999995e-07 b=1 expected=9.9999999999999995e-07
+PASS q=(a^=b); zero q=0 a=0 b=-1 expected=0
+PASS q=(a^=b); invalid fraction q=0 a=0 b=-0.5 expected=0
+PASS q=(a^=b); suppressed overflow q=0 a=0 b=-2 expected=0
+PASS q=(a^=b); outside overflow q=inf a=inf b=-100 expected=inf
+PASS q=(a^=b); negative infinity exponent q=0 a=0 b=-inf expected=0
+PASS q=(a^=b); boundary q=99999.999999999985 a=99999.999999999985 b=-1 expected=99999.999999999985
+PASS q=_powop(a,b); reciprocal q=1000000 a=1000000 b=-1 expected=1000000
+PASS q=_powop(a,b); negative reciprocal q=-1000000 a=-1000000 b=-1 expected=-1000000
+PASS q=_powop(a,b); negative square q=1000000000000.0001 a=1000000000000.0001 b=-2 expected=1000000000000
+PASS q=_powop(a,b); positive exponent q=9.9999999999999995e-07 a=9.9999999999999995e-07 b=1 expected=9.9999999999999995e-07
+PASS q=_powop(a,b); zero q=0 a=0 b=-1 expected=0
+PASS q=_powop(a,b); invalid fraction q=0 a=0 b=-0.5 expected=0
+PASS q=_powop(a,b); suppressed overflow q=0 a=0 b=-2 expected=0
+PASS q=_powop(a,b); outside overflow q=inf a=inf b=-100 expected=inf
+PASS q=_powop(a,b); negative infinity exponent q=0 a=0 b=-inf expected=0
+PASS q=_powop(a,b); boundary q=99999.999999999985 a=99999.999999999985 b=-1 expected=99999.999999999985
+PASS division RHS assignment alias q=1 a=1 b=0 expected=1
+PASS power RHS assignment alias q=0.99998618458487576 a=0.99998618458487576 b=0 expected=0.99998618458487576
+PASS division argument side effect q=500000 a=1 b=1.9999999999999999e-06 expected=500000
+I03 executed=89 failures=0 unsafe_baseline_skips=0
+PASS literal remainder witness q=1 a=0 b=0 expected=1
+PASS literal assignment witness q=1 a=1 b=0 expected=1
+PASS q=a%b; signs q=1 a=-5 b=-2 expected=1
+PASS q=a%b; signs q=1 a=-5 b=2 expected=1
+PASS q=a%b; signs q=1 a=5 b=-2 expected=1
+PASS q=a%b; signs q=1 a=5 b=2 expected=1
+PASS q=a%b; exact multiple q=0 a=-4 b=2 expected=0
+PASS q=a%b; fraction truncation q=1 a=-5.9000000000000004 b=2.8999999999999999 expected=1
+PASS q=a%b; fraction divisor zero q=0 a=-5 b=0.90000000000000002 expected=0
+PASS q=a%b; upper original boundary q=1 a=-2147483647.9000001 b=2 expected=1
+PASS q=a%b; excluded original boundary q=-2 a=-2147483648 b=3 expected=-2
+PASS q=a%b; wide unchanged q=-1 a=-4294967297 b=2 expected=-1
+PASS q=a%b; wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=a%b; signed minimum safe q=-2 a=-9.2233720368547758e+18 b=3 expected=-2
+PASS q=a%b; signed minimum/-1 q=0 a=-9.2233720368547758e+18 b=-1 expected=0
+PASS q=a%b; out of range q=0 a=9.2233720368547758e+18 b=2 expected=0
+PASS q=a%b; infinite q=0 a=inf b=2 expected=0
+PASS q=a%b; nan q=0 a=nan b=2 expected=0
+PASS q=a%b; infinite divisor q=0 a=5 b=inf expected=0
+PASS q=a%b; nan divisor q=0 a=5 b=nan expected=0
+PASS q=_mod(a,b); signs q=1 a=-5 b=-2 expected=1
+PASS q=_mod(a,b); signs q=1 a=-5 b=2 expected=1
+PASS q=_mod(a,b); signs q=1 a=5 b=-2 expected=1
+PASS q=_mod(a,b); signs q=1 a=5 b=2 expected=1
+PASS q=_mod(a,b); exact multiple q=0 a=-4 b=2 expected=0
+PASS q=_mod(a,b); fraction truncation q=1 a=-5.9000000000000004 b=2.8999999999999999 expected=1
+PASS q=_mod(a,b); fraction divisor zero q=0 a=-5 b=0.90000000000000002 expected=0
+PASS q=_mod(a,b); upper original boundary q=1 a=-2147483647.9000001 b=2 expected=1
+PASS q=_mod(a,b); excluded original boundary q=-2 a=-2147483648 b=3 expected=-2
+PASS q=_mod(a,b); wide unchanged q=-1 a=-4294967297 b=2 expected=-1
+PASS q=_mod(a,b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=_mod(a,b); signed minimum safe q=-2 a=-9.2233720368547758e+18 b=3 expected=-2
+PASS q=_mod(a,b); signed minimum/-1 q=0 a=-9.2233720368547758e+18 b=-1 expected=0
+PASS q=_mod(a,b); out of range q=0 a=9.2233720368547758e+18 b=2 expected=0
+PASS q=_mod(a,b); infinite q=0 a=inf b=2 expected=0
+PASS q=_mod(a,b); nan q=0 a=nan b=2 expected=0
+PASS q=_mod(a,b); infinite divisor q=0 a=5 b=inf expected=0
+PASS q=_mod(a,b); nan divisor q=0 a=5 b=nan expected=0
+PASS q=(a%=b); signs q=1 a=1 b=-2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=-2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=2 expected=1
+PASS q=(a%=b); exact multiple q=0 a=0 b=2 expected=0
+PASS q=(a%=b); fraction truncation q=1 a=1 b=2.8999999999999999 expected=1
+PASS q=(a%=b); fraction divisor zero q=0 a=0 b=0.90000000000000002 expected=0
+PASS q=(a%=b); upper original boundary q=1 a=1 b=2 expected=1
+PASS q=(a%=b); excluded original boundary q=-2 a=-2 b=3 expected=-2
+PASS q=(a%=b); wide unchanged q=-1 a=-1 b=2 expected=-1
+PASS q=(a%=b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=(a%=b); signed minimum safe q=-2 a=-2 b=3 expected=-2
+PASS q=(a%=b); signed minimum/-1 q=0 a=0 b=-1 expected=0
+PASS q=(a%=b); out of range q=0 a=0 b=2 expected=0
+PASS q=(a%=b); infinite q=0 a=0 b=2 expected=0
+PASS q=(a%=b); nan q=0 a=0 b=2 expected=0
+PASS q=(a%=b); infinite divisor q=0 a=0 b=inf expected=0
+PASS q=(a%=b); nan divisor q=0 a=0 b=nan expected=0
+PASS q=_modop(a,b); signs q=1 a=1 b=-2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=-2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); exact multiple q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); fraction truncation q=1 a=1 b=2.8999999999999999 expected=1
+PASS q=_modop(a,b); fraction divisor zero q=0 a=0 b=0.90000000000000002 expected=0
+PASS q=_modop(a,b); upper original boundary q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); excluded original boundary q=-2 a=-2 b=3 expected=-2
+PASS q=_modop(a,b); wide unchanged q=-1 a=-1 b=2 expected=-1
+PASS q=_modop(a,b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=_modop(a,b); signed minimum safe q=-2 a=-2 b=3 expected=-2
+PASS q=_modop(a,b); signed minimum/-1 q=0 a=0 b=-1 expected=0
+PASS q=_modop(a,b); out of range q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); infinite q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); nan q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); infinite divisor q=0 a=0 b=inf expected=0
+PASS q=_modop(a,b); nan divisor q=0 a=0 b=nan expected=0
+PASS remainder assignment alias q=0 a=0 b=0 expected=0
+PASS remainder argument side effect q=1 a=-5 b=2 expected=1
+I04 executed=76 failures=0 unsafe_baseline_skips=0
+PASS q=pow(a,b); outside invalid fraction restored q=0 a=-1 b=0.5 expected=0
+PASS q=pow(a,b); outside NaN exponent restored q=0 a=2 b=nan expected=0
+PASS q=pow(a,b); outside overflow retained q=inf a=2 b=1024 expected=inf
+PASS q=pow(a,b); outside finite unchanged q=8 a=2 b=3 expected=8
+PASS q=a^b; outside invalid fraction restored q=0 a=-1 b=0.5 expected=0
+PASS q=a^b; outside NaN exponent restored q=0 a=2 b=nan expected=0
+PASS q=a^b; outside overflow retained q=inf a=2 b=1024 expected=inf
+PASS q=a^b; outside finite unchanged q=8 a=2 b=3 expected=8
+PASS q=(a^=b); outside invalid fraction restored q=0 a=0 b=0.5 expected=0
+PASS q=(a^=b); outside NaN exponent restored q=0 a=0 b=nan expected=0
+PASS q=(a^=b); outside overflow retained q=inf a=inf b=1024 expected=inf
+PASS q=(a^=b); outside finite unchanged q=8 a=8 b=3 expected=8
+PASS q=_powop(a,b); outside invalid fraction restored q=0 a=0 b=0.5 expected=0
+PASS q=_powop(a,b); outside NaN exponent restored q=0 a=0 b=nan expected=0
+PASS q=_powop(a,b); outside overflow retained q=inf a=inf b=1024 expected=inf
+PASS q=_powop(a,b); outside finite unchanged q=8 a=8 b=3 expected=8
+PASS outside division NaN retained q=nan a=nan b=2 expected=nan
+PASS outside division Infinity retained q=inf a=inf b=2 expected=inf
+PASS invsqrt NaN guard restored q=0 a=nan b=0 expected=0
+PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434
+boundaries executed=20 failures=0 unsafe_baseline_skips=0
+PASS division both argument effects once q=500000 a=1 b=1.9999999999999999e-06
+PASS division RHS updates prior variable pointer q=1 a=1.9999999999999999e-06 b=1.9999999999999999e-06
+PASS division assignment RHS mutates lhs q=1 a=1 b=0
+PASS power argument effect once q=1000000 a=9.9999999999999995e-07 b=-1
+PASS power assignment argument effect once q=1000000 a=1000000 b=-1
+PASS power RHS mutates lhs alias q=-1 a=-1 b=0
+PASS remainder both argument effects once q=1 a=-5 b=2
+PASS remainder assignment RHS mutates lhs q=0 a=0 b=1
+PASS remainder RHS updates prior variable pointer q=0 a=-2 b=-2
+PASS combined divide assignment then remainder q=0 a=1000000 b=0
+PASS combined reciprocal then remainder q=1 a=0 b=0
+PASS combined signed remainder then division q=1000000 a=0 b=0
+PASS combined remainder assignment effect then division q=1000000 a=1 b=2
+aliases executed=13 failures=0

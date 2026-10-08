@@ -282,8 +282,12 @@
       "sha256": "cacef31387ff885f5fbb06d93089d7b37dbc32a4cc18ccee894d87241c92a3c8",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I23-thick-custom-wave-and-shape-outline-offsets-differ/HANDOFF.md",
       "numeric_witness": "Matched256x144: target custom vertical extra pass moves.28125 pixels versus original1; target shape-outline shifts.5 pixels per axis versus original1.\n\nAbove-reference4K/detail scaling is deliberately excluded from this witness.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "retained Native thick-offset policy; complete owner packet with actual vertex/replay controls and matched Native4K style images",
+      "confirmed_affected_originals": [],
+      "evidence": "I15-I23/I23-OWNER-DECISION.md",
+      "native_evidence": "I15-I23/style-comparison-results.json",
+      "policy": "retain current half-pixel/reference-scaled custom wave/shape offsets; no main-wave change",
+      "limits": "Original-reference-pixel surrogate is not Windows physical4K behavior; stock flags are not an affected census."
     },
     {
       "id": "I20",
