@@ -113,9 +113,12 @@ int main(int argc, char** argv)
             GLuint vao{}, input{}, output{};
             // MilkDrop's CPU powf defines these cases despite the authored
             // exponent not being one. The old GPU pow branch returns NaN.
-            vertices.push_back({.3f,.2f,.5f,0,-.09f,1.0001f,0,0,.5f,.5f,0,0,1,1});
-            vertices.push_back({.3f,.2f,1.f,0,-.09f,2.f,0,0,.5f,.5f,0,0,1,1});
-            vertices.push_back({.3f,.2f,1.f,0,-.09f,3.f,0,0,.5f,.5f,0,0,1,1});
+            // Dyadic inputs/powers/UVs are exact even with GLES mediump transport.
+            // This isolates the domain repair from half-precision rounding of
+            // large coordinates (the separate -.09 research probes retain that).
+            vertices.push_back({.25f,.125f,.5f,0,-.5f,1.0001f,0,0,.5f,.5f,0,0,1,1});
+            vertices.push_back({.25f,.125f,1.f,0,-.5f,2.f,0,0,.5f,.5f,0,0,1,1});
+            vertices.push_back({.25f,.125f,1.f,0,-.5f,3.f,0,0,.5f,.5f,0,0,1,1});
             glGenVertexArrays(1,&vao);
             glBindVertexArray(vao);
             glGenBuffers(1,&input);

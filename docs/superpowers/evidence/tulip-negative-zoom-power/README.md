@@ -87,6 +87,15 @@ The additional buffer costs four bytes per vertex; nonunit negative vertices
 require two CPU power calls. No frame-time or TV performance claim is made.
 
 Three independently defined shader UV controls fail before and pass afterward.
+The portable regression uses binary-exact zoom −.5 and positions .25/.125;
+its nested-unit/square/cube UVs remain exact through binary16 transport. The
+separate ARM research probes above retain zoom −.09 and their full IEEE records.
+Linux CI exposed the original fixture's unsuitable fixed absolute tolerance for
+UV magnitudes near205: mediump results19.0156/−205.375/−136.625 differed from
+32-bit references19.0185/−205.261/−136.674. The tolerance remains .002; test
+inputs now isolate domain correctness from precision loss at large coordinates.
+Local Linux Mesa and macOS pass, and the old shader still fails all three cases.
+No production precision or arithmetic change was made for this fixture repair.
 Integrated real-mesh controls check emitted values, NaN preservation, per-frame
 and per-pixel equations, legacy/custom programs, resize and prepared replay.
 Separately named diagnostic presets make every vertex a valid negative-power
