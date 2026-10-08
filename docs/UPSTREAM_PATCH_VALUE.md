@@ -218,3 +218,16 @@ interpolation/texture observations do not establish portable source-only pixels
 or original D3D9 appearance. See [focused source/UV/render evidence](superpowers/evidence/tulip-negative-zoom-power/README.md).
 This is a general defined-power compatibility candidate, not a preset brightness
 repair or authorization to clear predictor guards for invalid domains.
+
+## Built-in waveform opacity (0016)
+
+Patch `0016-builtin-wave-opacity.patch` follows MilkDrop 2.25c
+`milkdropfs.cpp:2882–2995,3315–3317`: preserve mode-adjusted alpha through
+unbounded volume multiplication, use mode 3’s replacement coefficient and
+skip final alpha below .004. Preserve patch0014’s mode-1 boost, current
+TV canvas/reference coefficients, Native dot styles and prepared replay.
+No texture, pass, sample or equation evaluation is added. The independent
+mode-2 control fails baseline (.4 versus .028) and passes with the patch;
+38 normal renderer controls pass. Native 4K captures and timings remain
+pending; no physical-TV or whole-corpus claim follows from these controls.
+See [audit evidence](superpowers/evidence/milkdrop-audit-repairs/I17/README.md).

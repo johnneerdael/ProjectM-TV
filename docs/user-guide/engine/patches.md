@@ -28,6 +28,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0013](#0013-composite-reads-the-exact-feedback-texel) | Exact texel reads in custom composites | `DemonLD_-_Toxic_water_diffusion …` |
 | [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
 | [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) | CPU-defined negative nested powers beyond authored exponent one | synthetic nested-unit, square and cube controls |
+| [0016](#0016-built-in-wave-opacity) | Mode opacity, volume amplification and faint-wave threshold | mode-specific source controls; Native 4K capture pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -205,6 +206,10 @@ These separate proof images use full published v2.3.25 and candidate AARs at 256
 
 The exact **Great Tulip Majesty (txtr wrap)** witness has 33 fractional-domain NaNs per frame in both the original CPU expression and GPU path. Its30-frame original/repeat AAR replay is byte-identical after this correction. NaN/Inf are retained, with no epsilon or absolute-value substitution. Invalid interpolation and sampling observations are backend-bound, so the source predictor's unresolved guard remains appropriate. [Source, IEEE bits and capture evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md).
 
+## 0016 — Built-in wave opacity
+
+MilkDrop multiplies the mode-adjusted alpha by an unbounded volume ramp, then clamps the result. Mode 3 replaces its starting alpha with the canvas coefficient times `1.3 × treb²`; mode 1 retains its `1.25` multiplier. ProjectM TV now preserves these operations and skips built-in waves below final alpha `0.004`, including the Native quad path. Existing reference-size buckets, above-reference line/dot sizing and Native geometry replay remain in use. A matched mode-2 control changes alpha from `0.4` to `0.028`. Native 4K appearance and timing qualification is still pending in the [audit evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
+
 ## Known remaining differences from MilkDrop 2
 
 - `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode (as in MilkDrop).
@@ -218,7 +223,7 @@ The exact **Great Tulip Majesty (txtr wrap)** witness has 33 fractional-domain N
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
 - HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing. Evaluator: float-width `$pi`, `$e` and `$phi` (unused in the bundled presets).
 - Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
-- Line waveforms: MilkDrop 2 caps the point count at a third of the canvas width; projectM divides the sample count by three. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table, and mode 3 multiplies `wave_a` where MilkDrop replaces it.
+- Line waveforms: MilkDrop 2 caps the point count at a third of the canvas width; projectM divides the sample count by three. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
 - `echo_orient` of −1 or −3 flips horizontally in MilkDrop 2 (`n % 2` is nonzero); projectM does not flip.
 - `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.

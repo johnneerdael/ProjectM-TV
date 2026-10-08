@@ -150,7 +150,7 @@ foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility)
         target_link_libraries(${control}-regressions PRIVATE ${REGRESSION_GL_TARGET})
     endif()
 endforeach()
-foreach(control hue wave-alpha wave-topology)
+foreach(control hue wave-alpha wave-topology opacity)
     add_test(NAME legacy-${control} COMMAND legacy-compatibility-regressions ${control})
     set_tests_properties(legacy-${control} PROPERTIES TIMEOUT 30
         ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

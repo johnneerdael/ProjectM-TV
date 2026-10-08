@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 8: legacy-opacity
+1/1 Test #8: legacy-opacity ...................***Failed    0.23 sec
+mode 2 matched canvas expected alpha 0.028000 got 0.400000
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.24 sec
+
+The following tests FAILED:
+	  8 - legacy-opacity (Failed)
+Errors while running CTest
