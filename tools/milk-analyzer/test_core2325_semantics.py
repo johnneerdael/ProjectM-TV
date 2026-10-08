@@ -36,6 +36,20 @@ def test_2325_exact_identity_inherits_centres_and_has_distinct_rng():
     assert not profiles.matches({**ENGINE, 'patches_sha256': '0'*64})
 
 
+def test_2325_retained_builtin_viewport_requires_qualified_context_and_grid():
+    from forecast import source_builtin_viewport_policy
+    from quad_lines import LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT,PROFILE
+    from engine_profiles import CORE_2322_ENGINE
+    context={'profile':'gles300','line_rendering_profile':PROFILE,'triangle_subpixel_bits':8}
+    assert source_builtin_viewport_policy(ENGINE,context)==RETAINED_CLIP_VIEWPORT
+    assert source_builtin_viewport_policy(CORE_2322_ENGINE,context)==LEGACY_VIEWPORT
+    assert source_builtin_viewport_policy(ENGINE,{})==LEGACY_VIEWPORT
+    for engine,domain in [(CORE_2322_ENGINE,context),(ENGINE,{**context,'profile':'glsl330'}),
+                          (ENGINE,{**context,'triangle_subpixel_bits':None})]:
+        with pytest.raises(ValueError,match='viewport'):
+            source_builtin_viewport_policy(engine,{**domain,'builtin_wave_viewport_policy':RETAINED_CLIP_VIEWPORT})
+
+
 @pytest.mark.parametrize('amount', [0, .001, .25, 1, 1.5])
 def test_2325_source_tint_uses_authored_amount_without_changing_old_profiles(amount):
     from legacy_composite import source_tint_amount, legacy_display, corner_shades

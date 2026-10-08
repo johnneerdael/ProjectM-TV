@@ -8,10 +8,10 @@ import numpy as np
 from primitives import draw_shape,shape_fan,draw_triangles,draw_borders,_finite,shape_centre_shift,LEGACY_SHAPE_CENTRES
 from line_points import draw_lines,draw_points
 from scene_equations import source_settings,_scalar
-from quad_lines import PROFILE,draw_quad_lines
+from quad_lines import PROFILE,draw_quad_lines,LEGACY_VIEWPORT
 
 
-def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None):
+def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,viewport_policy=LEGACY_VIEWPORT):
     if builtin:
         groups=wave['positions'];colours=wave['rgba']
     else:groups=[wave['positions']];colours=wave['colours']
@@ -30,13 +30,13 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
                     if clip is not None:
                         clip=clip+np.asarray(offset,dtype=np.float32)*np.array([2,-2],np.float32)
                     target=draw_quad_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],
-                                           quantize=quantize,clip_positions=clip,raster_subpixel_bits=triangle_subpixel_bits)
+                                           quantize=quantize,clip_positions=clip,raster_subpixel_bits=triangle_subpixel_bits,viewport_policy=viewport_policy)
                 else:
                     target=draw_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
     return target
 
 
-def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,shape_centre_policy=LEGACY_SHAPE_CENTRES):
+def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,shape_centre_policy=LEGACY_SHAPE_CENTRES,builtin_wave_viewport_policy=LEGACY_VIEWPORT):
     target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source_settings(source)
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown line rendering profile')
@@ -61,7 +61,7 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
                 target=draw(target,positions+np.asarray(offset,dtype=np.float32),colour,closed=True,
                                   additive=int(attributes.get('additive',0))!=0,quantize=quantize,**raster)
     for wave in custom_waves:target=_wave(target,wave,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits,triangle_subpixel_bits=triangle_subpixel_bits)
-    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits,triangle_subpixel_bits=triangle_subpixel_bits)
+    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits,triangle_subpixel_bits=triangle_subpixel_bits,viewport_policy=builtin_wave_viewport_policy)
     if main.get('darken_center',0)>0:
         half=np.float32(.025)
         points=np.array([[.5,.5],[.5-half*aspect_y,.5],[.5,.5-half],[.5+half*aspect_y,.5],

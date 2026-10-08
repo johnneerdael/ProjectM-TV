@@ -621,3 +621,17 @@ qualification with zero random acceptance credit. Do not broaden GPU arithmetic
 profiles without controls or resolve negative nonunit zoom powers by guessing.
 See `tools/milk-analyzer/fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.
 The current target remains20perfect3preset/30frame rounds and no main merge.
+
+
+Predictor viewport follow-up (2026-10-08): the four-pixel spiral mismatch is
+source coordinate loss, not an AAR defect. Preserve projected clip precision
+through float64 viewport coordinates before the unchanged fixed-grid ties-to-even
+snap. `retained-clip-window-v1` is scoped to built-in waves with exact2.3.25/GLES
+quad/grid admission; historical defaults and other draws retain their original
+path. Reject a missing grid even for degenerate strips. Six repaired30-frame
+controls match all RGB8 samples in two fresh unchanged-AAR repeats; original
+failures remain immutable, with zero random acceptance credit. See
+`tools/milk-analyzer/fixtures/core2325-line-viewport-coordinate-repair-2026-10-08.json`.
+
+Final viewport-repair validation:1,510 prepared analyzer tests and78subtests pass;
+strict MkDocs passes. Repairs remain separate from randomized acceptance.

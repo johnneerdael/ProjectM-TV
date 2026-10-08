@@ -56,3 +56,46 @@ def test_quad_line_rejects_bad_triangle_grid_even_when_no_segment_draws(bits):
     from quad_lines import draw_quad_lines
     with pytest.raises(ValueError,match='raster subpixel bits'):
         draw_quad_lines(np.zeros((4,4,4)),[[.5,.5],[.5,.5]],[1]*4,additive=False,raster_subpixel_bits=bits)
+def test_retained_clip_viewport_does_not_manufacture_subpixel_tie():
+    import numpy as np
+    from quad_lines import quad_line_vertices
+    clip=np.array([[-.12099417299032211,.5047906041145325],
+                   [-.12073306739330292,.5052019953727722],
+                   [-.12051361054182053,.5055466890335083],
+                   [-.12031729519367218,.5058546662330627]],np.float32)
+    screen=clip*np.array([.5,-.5],np.float32)+np.float32(.5)
+    old=quad_line_vertices(screen,[1,1,1,.625],width=256,height=144,clip_positions=clip)
+    retained=quad_line_vertices(screen,[1,1,1,.625],width=256,height=144,
+        clip_positions=clip,viewport_policy='retained-clip-window-v1')
+    assert float(old[1]['positions'][2,0])*256==112.822265625
+    assert retained[1]['window_positions'][2,0]==112.82226943969727
+    assert np.rint(retained[1]['window_positions'][2,0]*256)/256==112.82421875
+    np.testing.assert_array_equal(old[1]['positions'],retained[1]['positions'])
+
+
+def test_explicit_window_vertices_drive_grid_coverage_and_require_finite_matching_coordinates():
+    import numpy as np
+    import pytest
+    from primitives import draw_triangles
+    field=np.zeros((2,2,4),np.float32)
+    points=np.zeros((3,2),np.float32)
+    colour=np.ones((3,4),np.float32)
+    window=np.array([[.1,.1],[1.9,.1],[.1,1.9]],np.float64)
+    result=draw_triangles(field,points,colour,[[0,1,2]],additive=False,
+        raster_subpixel_bits=8,window_positions=window)
+    np.testing.assert_array_equal(result[0,0],[1,1,1,1])
+    with pytest.raises(ValueError,match='window'):
+        draw_triangles(field,points,colour,[[0,1,2]],additive=False,
+            raster_subpixel_bits=8,window_positions=np.full((3,2),np.nan))
+    with pytest.raises(ValueError,match='window'):
+        draw_triangles(field,points,colour,[[0,1,2]],additive=False,window_positions=window)
+
+
+def test_retained_viewport_requires_grid_even_when_strip_is_degenerate():
+    import numpy as np
+    import pytest
+    from quad_lines import draw_quad_lines
+    with pytest.raises(ValueError,match='grid'):
+        draw_quad_lines(np.zeros((2,2,4),np.float32),[[.5,.5],[.5,.5]],
+            [1,1,1,1],additive=False,clip_positions=[[0,0],[0,0]],
+            viewport_policy='retained-clip-window-v1')

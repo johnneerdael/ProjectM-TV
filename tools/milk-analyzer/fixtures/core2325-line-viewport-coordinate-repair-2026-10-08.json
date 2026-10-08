@@ -1,6 +1,7 @@
 {
   "date": "2026-10-08",
-  "scope": "PR57/v2.3.25 source predictor migration; bounded controls, zero fresh random streak credit",
+  "status": "predictor coordinate-loss repaired and regression suite verified",
+  "scope": "Retrospective repair and fresh bounded release controls; zero randomized streak credit",
   "release": {
     "release": "v2.3.25",
     "release_commit": "41ec3fc16786b325a7a8cb013a77969073aa7a5c",
@@ -11,55 +12,32 @@
       "jni/armeabi-v7a/libprojectmtv.so": "ba75e7455a40bfdfa841212ef403b2d66d6702dfaeb2135528c2576734302b58"
     }
   },
-  "source": {
-    "release": {
-      "release": "v2.3.25",
-      "release_commit": "41ec3fc16786b325a7a8cb013a77969073aa7a5c",
-      "aar_sha256": "f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3",
-      "components": {
-        "classes.jar": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
-        "jni/arm64-v8a/libprojectmtv.so": "45fc44f5d3bbb57af04ea46e0b25ab5f38d175219f751f76c75e653ec026b227",
-        "jni/armeabi-v7a/libprojectmtv.so": "ba75e7455a40bfdfa841212ef403b2d66d6702dfaeb2135528c2576734302b58"
-      }
-    },
-    "engine": {
-      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
-      "patches_sha256": "6e27be9d314e464c6ed67925c65092164e35e8a1b5273f81b1bf0b6786beefae"
-    },
-    "archive_sha256": "240cd0bc01b0b853027d486477cdcc3e360585382568f8dddba4b075cb2ef90a",
-    "scope": "Source math adapters; published full AAR is the comparison renderer",
-    "failed_preparation": "Initial source copy had no applied0014; new topology test caught this. Corrected before any predictions/captures. No credit for mismatched preparation.",
-    "changed_files": {
-      "src/libprojectM/MilkdropPreset/VideoEcho.cpp": {
-        "old_sha256": "b6b1cb22e866b0d491c5755a91f92f7b632325cf142c195af93686299ce82b13",
-        "new_sha256": "aab697adc7be14d2d7ede8cb9ffbbe3d6f12f5709815128e41c88872c59ce180"
-      },
-      "src/libprojectM/MilkdropPreset/Waveform.cpp": {
-        "old_sha256": "348dc3ae0b4ae1dd6618ae83666098b5e00fb24e2c6fbba435b4d570a116583f",
-        "new_sha256": "827a9f8197b099cd14505cf24b04ae4831a7cd3f6a780eb433a094d14c8e8cb0"
-      },
-      "src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp": {
-        "old_sha256": "68fa914ed1c69cda21fccf1cf017c33327f90581fde08b2ae57b1048b1afe111",
-        "new_sha256": "e5932144b3dcd454d92b88d8b1020c388faa2dde941025e1f7cba6716a1234fb"
-      }
-    }
+  "native_renderer": "unchanged full published AAR via reproduced Java classes and JNI",
+  "root_cause": {
+    "description": "Intermediate float32 normalized screen storage creates a false fixed8 tie before viewport snapping",
+    "frame": 24,
+    "segment": 265,
+    "corner": 2,
+    "clip_x": -0.11857602000236511,
+    "old_window_x": 112.822265625,
+    "retained_window_x": 112.82226943969727,
+    "old_grid_x": 28882.5,
+    "retained_grid_x": 28882.5009765625,
+    "unchanged_rounding": "nearest, ties-to-even np.rint",
+    "native_wave_points_and_rgba": "exact at affected frame; observer RGB identical to original unobserved captures"
   },
-  "java_binding": {
-    "policy": "published-aar-reproduced-dex-v1",
-    "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
-    "aar_sha256": "f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3",
-    "dex_sha256": "4e423bb9ed3be946a9aaf47450ce54672c0c307d46532d9a01f2512bfea98035",
-    "reconstructed_dex_sha256": "4e423bb9ed3be946a9aaf47450ce54672c0c307d46532d9a01f2512bfea98035",
-    "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
-    "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
-    "helper_classes_sha256": {
-      "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "a77ffaf53aa1712e4e1e393c85a13e93cd84b48b2b3d1bf29f3f3d4ed5b59fba"
-    },
-    "min_api": 21,
-    "proof_sha256": "548e04c9cd3c73f1fd073a9f46483f04e635e337c0f303369316a3c0e297b3ae"
+  "fix": {
+    "primitive": "explicit finite float64 window_positions; explicit grid required",
+    "quad": "retain float32 projected clip through viewport conversion, then snap in window coordinates",
+    "scope": "only builtin wave path under exact CORE2325/GLES quad/grid forecast context; historical defaults unchanged",
+    "policy": "retained-clip-window-v1"
   },
-  "control_seal_sha256": "8e5e57c4fc78d4ad325e7e3421d4551302f981e350e43e0cdd8decdb077e4a60",
-  "controls": [
+  "independent_diagnostic": {
+    "file": "build/visual-loop/runtime2325/spiral-buffer-diagnostic/independent-viewport-rounding-candidate.json",
+    "sha256": "0df177ad83efd67b553852fa53547c18820526626a04b57ec84c4e2ffa8537f4"
+  },
+  "controls_seal_sha256": "77ae5ab3a91fc3021ae4a0340b4309036125b53285bbd5de09d85bc0104cc369",
+  "fresh_bounded_controls": [
     {
       "case": "tint-zero",
       "repeat": 0,
@@ -97,13 +75,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16269
+        "pid": 16673
       },
-      "nonzero_rgb8_pixels": 23040,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "c06bd0efd7eac384461f5241c5dd20e14316e942e64949421a24074acf610b85",
-      "result": "exact"
+      "prediction_pixels_sha256": "1c4dbe1d52b76c21ae61803bfc93c1ab277e91c928ae0b6786f5b59bd671f8a9",
+      "freeze_sha256": "c90f9c09bab83c274c933e876e6cb9db03990a68b965894ee6065a1d6c692197"
     },
     {
       "case": "tint-zero",
@@ -142,13 +117,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16293
+        "pid": 16697
       },
-      "nonzero_rgb8_pixels": 23040,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "c06bd0efd7eac384461f5241c5dd20e14316e942e64949421a24074acf610b85",
-      "result": "exact"
+      "prediction_pixels_sha256": "1c4dbe1d52b76c21ae61803bfc93c1ab277e91c928ae0b6786f5b59bd671f8a9",
+      "freeze_sha256": "c90f9c09bab83c274c933e876e6cb9db03990a68b965894ee6065a1d6c692197"
     },
     {
       "case": "tint-quarter",
@@ -187,13 +159,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16317
+        "pid": 16721
       },
-      "nonzero_rgb8_pixels": 15360,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "b1fbe496acc70231b347da2c7cfc4c76986595ce46f5920917c6e182b91c631c",
-      "result": "exact"
+      "prediction_pixels_sha256": "8177e72deb2f3f9dbb935beab1021f1aa1eca684d861822afef8a1847f1a2bc4",
+      "freeze_sha256": "e14429191ea6cbd19d1dbcff86f265920ef27e635c17fa1c3130cd2fa92b4a64"
     },
     {
       "case": "tint-quarter",
@@ -232,13 +201,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16341
+        "pid": 16745
       },
-      "nonzero_rgb8_pixels": 15360,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "b1fbe496acc70231b347da2c7cfc4c76986595ce46f5920917c6e182b91c631c",
-      "result": "exact"
+      "prediction_pixels_sha256": "8177e72deb2f3f9dbb935beab1021f1aa1eca684d861822afef8a1847f1a2bc4",
+      "freeze_sha256": "e14429191ea6cbd19d1dbcff86f265920ef27e635c17fa1c3130cd2fa92b4a64"
     },
     {
       "case": "tint-full",
@@ -277,13 +243,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16365
+        "pid": 16769
       },
-      "nonzero_rgb8_pixels": 15360,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "3c712640a6580b64954665990464d9d073cc7ea3bc38c66475043289ebe522fd",
-      "result": "exact"
+      "prediction_pixels_sha256": "f6380991b6b9d83d5b597589a036e4c761b0c8a59bc29ecde12d36275da81aa0",
+      "freeze_sha256": "16cd4b06c9cb858bf3fe09418b8436055c272e8954c6087687e524308eb1da47"
     },
     {
       "case": "tint-full",
@@ -322,18 +285,15 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16389
+        "pid": 16793
       },
-      "nonzero_rgb8_pixels": 15360,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "3c712640a6580b64954665990464d9d073cc7ea3bc38c66475043289ebe522fd",
-      "result": "exact"
+      "prediction_pixels_sha256": "f6380991b6b9d83d5b597589a036e4c761b0c8a59bc29ecde12d36275da81aa0",
+      "freeze_sha256": "16cd4b06c9cb858bf3fe09418b8436055c272e8954c6087687e524308eb1da47"
     },
     {
       "case": "spiral",
       "repeat": 0,
-      "max_rgb8_error": 42,
+      "max_rgb8_error": 0,
       "metadata": {
         "backend": "published-core-jni",
         "core_version": "4.2.0",
@@ -367,20 +327,15 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16413
+        "pid": 16817
       },
-      "nonzero_rgb8_pixels": 973,
-      "different_rgb8_pixels": 4,
-      "different_frames": [
-        24
-      ],
-      "freeze_sha256": "2c7e0ec118c8fb68941d5fad65ed4d896e0f169a73271fbe21ebb380fe97a1d5",
-      "result": "unresolved-numerical-discrepancy"
+      "prediction_pixels_sha256": "b93fd9539279529592ba166ee38389fbba8b92fb1622335bf7e102fcfb5781ed",
+      "freeze_sha256": "9f45a9e155f6a5ae54c3b41486936d6b909418323fc0e155211c9ff215238064"
     },
     {
       "case": "spiral",
       "repeat": 1,
-      "max_rgb8_error": 42,
+      "max_rgb8_error": 0,
       "metadata": {
         "backend": "published-core-jni",
         "core_version": "4.2.0",
@@ -414,15 +369,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16437
+        "pid": 16841
       },
-      "nonzero_rgb8_pixels": 973,
-      "different_rgb8_pixels": 4,
-      "different_frames": [
-        24
-      ],
-      "freeze_sha256": "2c7e0ec118c8fb68941d5fad65ed4d896e0f169a73271fbe21ebb380fe97a1d5",
-      "result": "unresolved-numerical-discrepancy"
+      "prediction_pixels_sha256": "b93fd9539279529592ba166ee38389fbba8b92fb1622335bf7e102fcfb5781ed",
+      "freeze_sha256": "9f45a9e155f6a5ae54c3b41486936d6b909418323fc0e155211c9ff215238064"
     },
     {
       "case": "spiral-volume",
@@ -461,13 +411,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16463
+        "pid": 16865
       },
-      "nonzero_rgb8_pixels": 815,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "b866a6477f03f0cdc94029a4c880ddc753f41a55a2aef73f1a074e3561620f51",
-      "result": "exact"
+      "prediction_pixels_sha256": "3d3e56e08adb7ba32875e90a4cee58994cd1f5dbdf151c03e538f62b8b43ab61",
+      "freeze_sha256": "d88aa429a4bbd550e3475a51ea3539c9d2d03e1de6e54b708c3b600d6bf36340"
     },
     {
       "case": "spiral-volume",
@@ -506,13 +453,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16487
+        "pid": 16889
       },
-      "nonzero_rgb8_pixels": 815,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "b866a6477f03f0cdc94029a4c880ddc753f41a55a2aef73f1a074e3561620f51",
-      "result": "exact"
+      "prediction_pixels_sha256": "3d3e56e08adb7ba32875e90a4cee58994cd1f5dbdf151c03e538f62b8b43ab61",
+      "freeze_sha256": "d88aa429a4bbd550e3475a51ea3539c9d2d03e1de6e54b708c3b600d6bf36340"
     },
     {
       "case": "spiral-dots",
@@ -551,13 +495,10 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16511
+        "pid": 16913
       },
-      "nonzero_rgb8_pixels": 1530,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "5923e36245832cd7572fef5cdb9994475cf8f1f0980676dec28f494f46cc6c21",
-      "result": "exact"
+      "prediction_pixels_sha256": "c1a38139213d5c416066597df35c3ec224dcce5e45d320fca36a2ead6422ea3f",
+      "freeze_sha256": "ac894e05b69b6d192599c59b48a4fd89e07cec8457cb7b2c3a77e8ae9b680505"
     },
     {
       "case": "spiral-dots",
@@ -596,56 +537,30 @@
         "height": 144,
         "frames": 30,
         "fps": 30,
-        "pid": 16535
+        "pid": 16937
       },
-      "nonzero_rgb8_pixels": 1530,
-      "different_rgb8_pixels": 0,
-      "different_frames": [],
-      "freeze_sha256": "5923e36245832cd7572fef5cdb9994475cf8f1f0980676dec28f494f46cc6c21",
-      "result": "exact"
+      "prediction_pixels_sha256": "c1a38139213d5c416066597df35c3ec224dcce5e45d320fca36a2ead6422ea3f",
+      "freeze_sha256": "ac894e05b69b6d192599c59b48a4fd89e07cec8457cb7b2c3a77e8ae9b680505"
     }
+  ],
+  "original_failure_preserved": "core2325-legacy-tint-mode1-controls-2026-10-08.json and qualification-visible/spiral",
+  "new_library_bug": false,
+  "limits": [
+    "No new randomized batch or streak credit",
+    "Tulip negative nonunit pow investigation remains open",
+    "No full authored BrainStain appearance claim",
+    "No broadened FMA/half/measured-UV qualifications"
   ],
   "tests": {
     "prepared_full_suite": {
-      "passed": 1506,
+      "passed": 1510,
       "subtests_passed": 78,
-      "log_sha256": "cd831bc8fcb9276446176b35af0dbf93b55e7b104808af663280760de13af222"
+      "log_sha256": "1acc204195e886027953418e88616361f68508620389bc401b8564235d96debb"
     },
-    "subsequent_portability_review_fix": {
-      "focused_passed": 11,
-      "explicit_prepared_adapters": true,
-      "cold_audio_distribution_guard": true
-    }
-  },
-  "open_predictor_investigation": {
-    "case": "normal spiral",
-    "different_frames": [
-      24
-    ],
-    "different_pixels": 4,
-    "max_rgb8_error": 42,
-    "same_observed_nonzero_support": true,
-    "frame24_native_uploaded_xy_rgba_match_source_exactly": true,
-    "observer_rgb_identical_to_unobserved_both_repeats": true,
-    "attribution": "Quad shader arithmetic/raster/blending remains to be isolated; no new library bug established",
-    "diagnostic": "build/visual-loop/runtime2325/spiral-buffer-diagnostic",
-    "point_comparison_sha256": "4d825a9e262f2f5c465aa745d1467467aa7158c2d44841c9f67452c2a45e4836"
-  },
-  "preserved_attempts": [
-    "qualification-overlay-preparation-failed",
-    "qualification (duplicate fWaveAlpha made waveform controls black; not credited)"
-  ],
-  "limits": [
-    "No new randomized batch scored; goal remains0/20perfect batches",
-    "Negative nonunit zoom power remains unresolved and separately handed off",
-    "GPU FMA/half-storage/measured-UV policies not broadened",
-    "Full authored BrainStain retest pending",
-    "One visible control numerical discrepancy retained; not claimed perfect"
-  ],
-  "subsequent_disposition": {
-    "status": "superseded investigation: predictor coordinate-loss repaired",
-    "evidence": "core2325-line-viewport-coordinate-repair-2026-10-08.json",
-    "original_control_failure_and_grades": "unchanged",
-    "random_streak_credit": 0
+    "focused": {
+      "passed": 24,
+      "includes_degenerate_strip_guard": true
+    },
+    "strict_mkdocs": "passed"
   }
 }

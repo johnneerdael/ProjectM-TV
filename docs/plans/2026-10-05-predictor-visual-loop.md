@@ -15,7 +15,9 @@ Java runtime, original assets and JNI library as the comparison renderer. Prepar
 separate exact-source adapters for mathematical predictions. Latest migration:
 v2.3.25/PR57 adds the fShader tint amount, mode1 opacity boost and open spiral.
 Five of six frozen30-frame controls repeat twice with exact RGB8 agreement; the
-normal spiral retains four differing pixels in frame24. This is
+normal spiral originally retained four differing pixels in frame24. The subsequent
+retained-clip viewport repair clears all six controls across fresh paired captures.
+Both attempts remain archived with zero random credit. This is
 bounded release qualification, not randomized acceptance. See
 `tools/milk-analyzer/fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.
 The negative-zoom/nonunit-power Tulip case remains unresolved; do not silently

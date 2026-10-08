@@ -89,6 +89,19 @@ def source_centre_policies(engine,domain):
     return composite,shape
 
 
+def source_builtin_viewport_policy(engine,domain):
+    from quad_lines import PROFILE,LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT
+    bits=domain.get('triangle_subpixel_bits')
+    qualified=(matches(engine,CORE_2325_ENGINE) and domain.get('profile')=='gles300' and
+               domain.get('line_rendering_profile')==PROFILE and type(bits) is int and 4<=bits<=16)
+    selected=domain.get('builtin_wave_viewport_policy',RETAINED_CLIP_VIEWPORT if qualified else LEGACY_VIEWPORT)
+    if selected not in (LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT):
+        raise ValueError('unknown builtin wave viewport policy')
+    if selected==RETAINED_CLIP_VIEWPORT and not qualified:
+        raise ValueError('retained builtin viewport requires exact engine, GLES quad lines and explicit grid')
+    return selected
+
+
 def source_main_binding_policy(engine: dict, requested: str | None) -> str:
     """Use the verified engine's unit-zero contract unless explicitly overridden.
 
@@ -265,6 +278,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16/2.3.17engine')
     composite_centre_policy,shape_centre_policy=source_centre_policies(engine,domain)
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
+    builtin_wave_viewport_policy=source_builtin_viewport_policy(engine,domain)
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
         raise ValueError('unknown line rendering profile')
     if line_profile==quad_profile:
@@ -429,7 +443,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
                 motion_vectors_prewarped=True,line_rendering_profile=line_profile,
                 point_subpixel_bits=domain.get('point_subpixel_bits'),
-                triangle_subpixel_bits=domain.get('triangle_subpixel_bits'),shape_centre_policy=shape_centre_policy)
+                triangle_subpixel_bits=domain.get('triangle_subpixel_bits'),shape_centre_policy=shape_centre_policy,
+                builtin_wave_viewport_policy=builtin_wave_viewport_policy)
 
         result = pipeline.step(warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],
@@ -486,6 +501,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                         legacy_control_policy=legacy_control_policy,wave_control_policy=wave_control_policy,
                         legacy_tint_amount=None if pipeline.legacy_tint_amount is None else float(pipeline.legacy_tint_amount),
                         mode1_alpha_boost=matches(engine,CORE_2325_ENGINE),
+                        builtin_wave_viewport_policy=builtin_wave_viewport_policy,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],
                         engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes,

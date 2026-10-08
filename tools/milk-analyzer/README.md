@@ -1496,3 +1496,15 @@ The prepared analyzer suite passes1,506 tests and78subtests. These are bounded
 release checks with zero random streak credit; full authored-preset appearance
 and previously qualified GPU arithmetic operators require separate evidence.
 See `fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.
+
+
+The remaining PR57 spiral control discrepancy was a predictor viewport-storage
+bug: rounding projected clip coordinates into normalized float32 first created a
+false fixed8 tie. The new `retained-clip-window-v1` path carries float32 clip output
+directly into float64 window coordinates before the existing ties-to-even snap.
+It applies only to built-in waves under the exact2.3.25 GLES quad/grid context;
+historical defaults and other drawing paths remain unchanged. Finite matching
+window arrays and an explicit grid are required, including degenerate strips.
+All six repaired30-frame controls match a fresh pair of unchanged-AAR repeats
+exactly. Original failures stay archived and repairs earn zero streak credit.
+See `fixtures/core2325-line-viewport-coordinate-repair-2026-10-08.json`.

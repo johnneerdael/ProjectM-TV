@@ -9,9 +9,15 @@ import numpy as np
 from primitives import _finite, draw_triangles
 
 PROFILE='projectmtv-gles-quad-lines-v1'
+LEGACY_VIEWPORT='normalized-float32-v1'
+RETAINED_CLIP_VIEWPORT='retained-clip-window-v1'
 
 
-def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positions=None):
+def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positions=None,viewport_policy=LEGACY_VIEWPORT):
+    if viewport_policy not in (LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT):
+        raise ValueError('unknown quad-line viewport policy')
+    if viewport_policy==RETAINED_CLIP_VIEWPORT and clip_positions is None:
+        raise ValueError('retained viewport requires explicit clip positions')
     if width<=0 or height<=0 or width*height>1024*768:
         raise ValueError('quad-line profile requires viewport within 1024x768 reference area')
     points=_finite(positions,'line positions')
@@ -47,7 +53,7 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positi
         extent=np.float32(.5)*major
         previous=pixels[(first-1)%len(points)] if closed or first else a
         following=pixels[(last+1)%len(points)] if closed or last<len(points)-1 else b
-        corners=[]
+        corners=[];window_corners=[]
         for endpoint,neighbour in [(a,a-previous),(b,following-b)]:
             offset=normal
             neighbour_length=np.float32(np.sqrt(np.dot(neighbour,neighbour)))
@@ -69,18 +75,25 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positi
                     # conversion, retaining its float32 operation boundaries.
                     projected=corner/(np.float32(.5)*size)
                     corners.append(projected*np.float32(.5)+np.float32(.5))
-        result.append({'positions':np.array(corners,np.float32),
-                       'colours':np.array([colour[first],colour[first],colour[last],colour[last]],np.float32)})
+                    window_corners.append((projected.astype(np.float64)*.5+.5)*size.astype(np.float64))
+        segment={'positions':np.array(corners,np.float32),
+                 'colours':np.array([colour[first],colour[first],colour[last],colour[last]],np.float32)}
+        if viewport_policy==RETAINED_CLIP_VIEWPORT:
+            segment['window_positions']=np.array(window_corners,np.float64)
+        result.append(segment)
     return result
 
 
-def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None,raster_subpixel_bits=None):
+def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None,raster_subpixel_bits=None,viewport_policy=LEGACY_VIEWPORT):
+    if viewport_policy==RETAINED_CLIP_VIEWPORT and raster_subpixel_bits is None:
+        raise ValueError('retained viewport requires explicit raster grid')
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
         raise ValueError('raster subpixel bits must be an integer within 4..16')
     target=_finite(destination,'framebuffer').copy()
     height,width=target.shape[:2]
     triangles=np.array([[0,1,2],[2,1,3]],np.int64)
-    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions):
+    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions,viewport_policy=viewport_policy):
         target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
-                              additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits)
+                              additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,
+                              window_positions=segment.get('window_positions'))
     return target

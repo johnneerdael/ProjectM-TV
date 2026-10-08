@@ -46,7 +46,7 @@ def shape_fan(values:dict,*,aspect_y:float)->dict:
 
 
 def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
-                   quantize:bool=True,texture_uv=None,texture_sample=None,raster_subpixel_bits=None):
+                   quantize:bool=True,texture_uv=None,texture_sample=None,raster_subpixel_bits=None,window_positions=None):
     """Optionally snap window vertices to a declared grid, leaving attributes intact.
 
     Keep snapped coordinates in pixel space for coverage and interpolation;
@@ -67,9 +67,14 @@ def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
         raise ValueError('raster subpixel bits must be an integer within 4..16')
     pixel_space=raster_subpixel_bits is not None
+    if window_positions is not None:
+        window=np.asarray(window_positions,dtype=np.float64)
+        if not pixel_space or window.shape!=points.shape or not np.all(np.isfinite(window)):
+            raise ValueError('finite matching window positions and explicit raster grid required')
     if pixel_space:
         scale=2**raster_subpixel_bits
-        points=np.rint(points.astype(np.float64)*np.array([width,height])*scale)/scale
+        window=points.astype(np.float64)*np.array([width,height]) if window_positions is None else window
+        points=np.rint(window*scale)/scale
     coordinate_width,coordinate_height=(1,1) if pixel_space else (width,height)
     query_dtype=np.float64 if pixel_space else np.float32
     def edge(a,b,x,y):return (b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0])
