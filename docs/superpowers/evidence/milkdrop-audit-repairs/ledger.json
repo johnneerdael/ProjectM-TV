@@ -374,10 +374,11 @@
       "sha256": "9696fd6e7c47744a75fae2cc56ae27baa3a23b322dcac50b92f94e661a221bec",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I31-gamma-only-pass-count-epsilon-differs/HANDOFF.md",
       "numeric_witness": "Gamma1.0005: original int(gamma-.001)+1\u2192one pass; target epsilon.0001\u2192two passes weighted1 andapproximately.0005.\n\nSeparate from diffuse byte packing; no measured whole-preset impact claimed.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0019; independent gamma-only/echo controls pass; Native4K pending",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon"
+      "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon",
+      "evidence": "I31/README.md"
     },
     {
       "id": "I01",

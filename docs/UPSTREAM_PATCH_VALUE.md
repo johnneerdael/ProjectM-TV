@@ -264,3 +264,10 @@ maximum buffer storage, line smoothing, Native dot styles and prepared replay.
 Independent real-EEL/GL point-count/endpoint/replay controls fail before and
 pass after;40 normal renderer controls pass. Native4K acceptance remains
 pending. See [I22](superpowers/evidence/milkdrop-audit-repairs/I22/README.md).
+
+## Gamma-only pass epsilon (candidate0019)
+
+Restore the gamma-only .001f epsilon while retaining echo .0001f and float
+diffuse policy. Independent real-GL count/weight controls fail before and
+pass after;42 normal controls pass. No pass or allocation is added; Native4K
+acceptance is pending. See [I31](superpowers/evidence/milkdrop-audit-repairs/I31/README.md).

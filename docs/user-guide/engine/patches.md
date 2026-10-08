@@ -31,6 +31,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0016](#0016-built-in-wave-opacity) | Mode opacity, volume amplification and faint-wave threshold | `Happening.milk`, source controls and repeated Native 4K captures |
 | [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | `Mig_304 - geiss remix 2.milk`, input controls and repeated Native4K captures |
 | [0018](#0018-discrete-custom-dots) | Authored custom dot counts; finite single-dot programs | source controls; Native4K acceptance pending |
+| [0019](#0019-gamma-only-pass-count) | Original gamma-only epsilon; echo unchanged | boundary controls; Native4K acceptance pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -221,6 +222,10 @@ The separate I19 source sample-cap proposal is preserved with real 4K before/exp
 ## 0018 — Discrete custom dots
 
 Custom dots retain their authored point/color count, following MilkDrop’s distinction between points and smoothed lines. The old library inserted smoothing midpoints into point waves. A finite two-point control now submits two points in both authored and Native draws; ordinary lines retain their smoothing. One-dot programs may emit finite positions/colors while the undefined normalized sample input remains NaN. Invalid appearance derived from that NaN is not promised. Source controls and40 normal renderer checks pass; Native4K acceptance remains pending in [I22](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I22/README.md).
+
+## 0019 — Gamma-only pass count
+
+MilkDrop’s gamma-only output uses a `.001` epsilon, while echo redraws use `.0001`. Candidate0019 restores that distinction and can remove one redundant fullscreen pass near integer gamma. Per-pass weight/count controls and42 normal renderer checks pass; actual Native4K output may remain visually identical. Float diffuse precision and echo/tint behavior remain unchanged. [I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
 
 ## Known remaining differences from MilkDrop 2
 

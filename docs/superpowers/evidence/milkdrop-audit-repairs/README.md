@@ -31,7 +31,7 @@ Baseline: `120547f3fafe475c86ffc3392fb94389841d08f0` (15 TV patches). Both MilkD
 | I29 | Negative odd echo orientation omits original horizontal flip | 0 | Source report; execution/captures pending |
 | I15 | Minimum motion trails are larger and aspect-dependent | 794 | Source report; execution/captures pending |
 | I09 | EEL named constants round to float before double evaluation | 0 | Pending investigation |
-| I31 | Gamma-only pass-count epsilon differs | 68 | Source report; execution/captures pending |
+| I31 | Gamma-only pass-count epsilon differs | 68 | Candidate0019;42 normal controls;4K pending |
 | I01 | Preset keys are case-insensitive in library/predictor | 2 | Source report; execution/captures pending |
 | I02 | Negative boolean settings use >0 rather than nonzero | 0 | Pending investigation |
 | I07 | Stereo bands average channels rather than left only | 8985 | Source report; execution/captures pending |
