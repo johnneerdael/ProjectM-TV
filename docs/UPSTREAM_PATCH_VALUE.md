@@ -19,6 +19,40 @@ accepted upstream change. The old migration assessment and attribution remain in
 [separate archive](superpowers/evidence/current-patch-proof/pre-rewrite-assessment.md).
 Patch numbers below always refer to the current series.
 
+## Single-page comparison overview
+
+This page consolidates the current patch assessments, comparison images, visual
+differences and code-level explanations. The linked evidence folders provide
+full-resolution frames and source/binary/payload verification; they are supporting
+records, not additional patch assessments that readers must assemble themselves.
+
+All 13 current patch sections are present. The retained-component expansion below
+is still in progress; an existing patch-level image does not prove every component
+inside consolidated 0001–0003. Status is recorded here rather than presenting
+pending components as completed contributions.
+
+| Retained component | Upstream/current comparison status |
+|---|---|
+| [High-resolution reference lines (#682)](#retained-high-resolution-line-enhancement-upstream-682) | Published: actual 4K original, current classic control and source-pixel zoom. Low/reference/AA coverage is not yet complete. |
+| Reference sample/fade/blur/canvas policy | Visible in the combined reference-path example; independent subcomponent controls pending. |
+| [Fragment-failure shader cleanup](#fragment-failure-shader-cleanup) | Published: healthy library frames plus actual 16-versus-0 live shader counts. |
+| Fresh/reused feedback initialization and caller-state preservation | In progress: shared controlled-allocation GPU probe; no new outcome claimed yet. |
+| Texture pooling | In progress with initialization controls; allocation/reuse measurement not yet published. |
+| Qualified warp sampler unit-zero reservation | Component-specific comparison pending. |
+| Ordered batching and evaluate-once replay | Images and measured draw/evaluation counts pending. |
+| Translation/program caches and uniform/bind caches | Component-specific operation/resource comparisons pending; API36 binary-export limitation remains explicit. |
+| Flip reuse, direct blur, vector UV gating and final-orientation echo | Component-specific pass/preservation comparisons pending. |
+| Discard/blur-read timing and direct-output switch history | Component-specific pixel/state controls pending. |
+| [Global flat-array layout and whole-array assignment](#global-flat-array-layout) | Published: unchanged Quicksand original with logged baseline fallback and restored authored filter. |
+| [Local flat-array layout](#local-flat-array-layout) | Published: labeled diagnostic, red fallback versus authored gradient. |
+| [Initialized writable uniform-bank copies](#initialized-writable-uniform-bank-copies) | Published: nonzero-component control, actual RGB `(255,0,64)` versus expected `(255,204,64)`. |
+| [Compound uniform writes shared with helpers](#compound-uniform-writes-shared-with-helpers) | Published: unchanged Martin original's star/ray pattern at matched source time. |
+| Other 0002 language/numeric components and 0003 thread isolation | Existing patch-level images/numerical controls are retained; the expanded component matrix tracks remaining activation coverage. |
+
+The [component capture matrix](superpowers/plans/2026-10-08-retained-component-proof.md)
+tracks the remaining work. No whole-corpus, universal appearance or current-driver
+performance claim follows from these scoped comparisons.
+
 ## Reading the image evidence
 
 The requested comparison is **the pinned upstream renderer versus the current
@@ -132,6 +166,8 @@ Historical provenance and the already-upstream/omitted dispositions remain in th
 archive. Only work still present in this current patch is assessed above; previous
 measurements keep their original source and backend identities.
 
+### Fragment-failure shader cleanup
+
 ![Actual upstream/current frames plus measured fragment-rejection lifetime](superpowers/evidence/current-patch-proof/components/shader-lifetime/comparison.png)
 
 **What changed:** sixteen intentionally rejected fragment compilations leave16
@@ -178,6 +214,8 @@ layouts instead of guessing. `ArrayInitializerTest` and the real-GL
 `FlatLocalArrayInitializerKeepsTheAuthoredShader` controls identify this component;
 the reserved-identifier screenshot below does not independently prove array layout.
 
+### Global flat-array layout
+
 ![Global flat-array compatibility in an unchanged original preset](superpowers/evidence/current-patch-proof/components/arrays-quicksand/comparison.png)
 
 **What to look for:** in unchanged `ORB - Quicksand Lab.milk`, upstream and
@@ -195,12 +233,16 @@ source/binary and complete decoded-stream verification pass. This establishes
 global flat layout; local flat layout remains a separate control.
 [Original bytes, shader cause and capture receipts](superpowers/evidence/current-patch-proof/components/arrays-quicksand/README.md).
 
+### Local flat-array layout
+
 ![Separate local flat-array activation control](superpowers/evidence/current-patch-proof/components/arrays-local/comparison.png)
 
 The labeled [local-array diagnostic](superpowers/evidence/current-patch-proof/components/arrays-local/README.md)
 initializes two `float2` elements from four scalars inside the function. Baseline
 roles use a red-shape fallback after array-constructor rejection; current runs the
 authored gradient. It is a generated control, not an unchanged artist preset.
+
+### Initialized writable uniform-bank copies
 
 ![Initialized writable uniform-bank components](superpowers/evidence/current-patch-proof/components/uniform-bank/comparison.png)
 
@@ -209,6 +251,8 @@ sets incoming `q19=0.8`, writes only `q18`, and outputs both. Baseline roles los
 green component, rendering `(255,0,64)`; current preserves it, rendering the expected
 `(255,204,64)`. This demonstrates initialization of the whole writable bank before
 a partial write; all roles compile without shader warnings.
+
+### Compound uniform writes shared with helpers
 
 ![An unchanged original's compound uniform write affects helper output](superpowers/evidence/current-patch-proof/components/uniform-time-helper/comparison.png)
 
