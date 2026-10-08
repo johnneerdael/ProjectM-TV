@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Baseline120547f3 contains15 TV patches; the source repair series now adds0016–0022 for eight finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-four other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Baseline120547f3 contains15 TV patches; the source repair series now adds0016–0024 for ten finding IDs. I19 is a separate deferred proposal, and I22 retains a performance-disposition question. Twenty-two other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -10,8 +10,8 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Deferred source-cap proposal; final authored/Native comparison and +.158ms cost documented |
 | I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Implemented0017; source/final4K original proof; integration pending |
 | I22 | Custom dot waves gain interpolated points | 1875 | Candidate0018; source/original/finite final4K proof; timing disposition pending |
-| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Source investigation recorded; execution/captures/disposition pending |
-| I11 | Legacy warp physical triangle diagonal is reversed | 878 | Source investigation recorded; execution/captures/disposition pending |
+| I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Implemented0023; original/finite/custom and cost4K proof; integration pending |
+| I11 | Legacy warp physical triangle diagonal is reversed | 878 | Implemented0024; source49/sanitizer49, exact cache pixels, revised cost qualified; integration pending |
 | I12 | Stateful per-pixel equations traverse opposite physical rows | 10 | Source investigation recorded; execution/captures/disposition pending |
 | I14 | Motion reverse propagation uses different interpolation and storage | 794 | Source investigation recorded; execution/captures/disposition pending |
 | I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | Implemented0021; source/original/finite final4K proof; integration pending |
@@ -42,7 +42,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 
 ## Current validation
 
-The normal renderer suite passes46/46. The capture/helper suite passes57 tests and20 subtests. Final-output replay completed32 unchanged-original runs,28 finite diagnostic runs (including four echo runs), and24 additional I19 resolution-band runs, each480 frames. Every role's eight selected RGB captures repeats exactly; this is not an all-frame hash or whole-corpus certification. Source-instrumented engine AARs and private capture APKs are identified separately from shipping binaries. Physical-TV performance remains unmeasured.
+The normal renderer suite passes49/49. The capture/helper suite passes60 tests and24 subtests. Final-output replay completed32 unchanged-original runs,28 finite diagnostic runs (including four echo runs), and24 additional I19 resolution-band runs, each480 frames. Every role's eight selected RGB captures repeats exactly; this is not an all-frame hash or whole-corpus certification. Source-instrumented engine AARs and private capture APKs are identified separately from shipping binaries. Physical-TV performance remains unmeasured.
 
 Native direct rendering can leave an internal read FBO bound after restoring draw framebuffer0. Historical audit PNGs therefore show intermediate feedback; fresh workers explicitly read framebuffer0 and restore the previous read binding. Preserve original artifacts/helpers and use the new final-output records for appearance claims. The guard test rejects missing/nonzero read-target evidence even with valid PNG/RGB hashes. See [capture correction](capture-correction/README.md).
 

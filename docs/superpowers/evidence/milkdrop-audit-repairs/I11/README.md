@@ -45,3 +45,11 @@ Original support.cpp:180 sets D3DXMatrixOrthoLH width2/height−2, with identity
 The original diagonal-only candidate63ed4ef4 measured before3.24687ms and after3.38769ms: +.14082ms/+4.337%, with all three cycles slower (6.84%,3.12%,3.07%). It is not accepted as performance-safe. [Preserved timing records](initial-clean-timings.json).
 
 The existing viewport cache fields were never updated, so unchanged radius/angle/grid/index data rebuilt every frame. The revised0024 records viewport, aspect and actual compiled-path keys, while retaining dynamic equations/uploads each frame. A cache aspect/grid/viewport invalidation test passes; omitting the aspect key fails with a stale radius. Full49 controls pass. Native equivalence against the original diagonal candidate, refreshed cost and final integration remain pending; no performance claim is made for the revision yet.
+
+The revised cache now passes [49/49 ASan/UBSan controls](cache-asan49.txt). Four480-frame exact-original Native4K runs verify all eight selected RGB frames identical to the original diagonal candidate and within-role repeats. [Equivalence records](cache-equivalence-results.json). Finite/custom-field and refreshed cost qualification remain pending.
+
+## Revised candidate acceptance
+
+The complete cache revision preserves all eight selected RGB frames and repeats for original07.milk and the finite legacy/custom fields, exactly matching the original diagonal-corrected candidate. Twelve refreshed ABBA runs measure before3.24552ms and after3.22514ms (−.02038ms/−.628%); cycle differences−.005%,−4.142%,+2.261% show variability and no consistent slowdown in this witness. Preserve the initial+.1408ms/+4.337% result as an unresolved historical candidate cost, not current acceptance. [Revised timing records](revised-clean-timings.json).
+
+49 normal and49 ASan/UBSan controls pass, with complete cache input keys and dynamic equations/uploads preserved. Focused source/original/finite/custom and cost acceptance is supported; no universal speed or physical-TV claim follows. Final combined integration remains pending.

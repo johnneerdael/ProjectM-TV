@@ -136,6 +136,76 @@ class SummaryTests(unittest.TestCase):
         data.update(value)
         summary.runner.write(path, data)
 
+    def make_historical_matrix(self):
+        legacy = Path(__file__).with_name("fixtures") / "run_validation_a8a75f44.py"
+        self.assertEqual(summary.file_digest(legacy), summary.LEGACY_RUNNER_SHA256)
+        self.protocol.update(schema=1, runner_sha256=summary.LEGACY_RUNNER_SHA256)
+        del self.protocol["user_id"]
+        summary.runner.write(self.work / "protocol.json", self.protocol)
+        for (name, profile), old_directory in list(self.jobs.items()):
+            key = summary.digest({"protocol": summary.digest(self.protocol),
+                                  "preset": self.protocol["presets"][name], "profile": profile})
+            directory = old_directory.with_name(key)
+            old_directory.rename(directory)
+            self.jobs[name, profile] = directory
+            manifest = json.loads((directory / "manifest.json").read_text())
+            request = manifest["job"]
+            private = summary.runner.private_directory(manifest["applicationId"], key, 0)
+            request.update(pcmPath=private + "/audio.u8", outputDir=private + "/output")
+            manifest["requestSha256"] = hashlib.sha256((summary.canonical_json(request) + "\n").encode()).hexdigest()
+            for capture in manifest["captures"]:
+                del capture["captureReadFramebufferBinding"]
+                del capture["previousReadFramebufferBinding"]
+            summary.runner.write(directory / "request.json", request)
+            summary.runner.write(directory / "manifest.json", manifest)
+            row = json.loads((directory / "row.json").read_text())
+            row["key"] = key
+            summary.runner.write(directory / "row.json", row)
+        # An arbitrary recovered-source location must not affect verification.
+        recovered = self.base / "recovered-original.py"
+        shutil.copyfile(legacy, recovered)
+        return recovered
+
+    def test_historical_matrix_uses_frozen_verifier_for_all_136_jobs(self):
+        legacy = self.make_historical_matrix()
+        with patch.object(summary.runner, "verify", side_effect=AssertionError("current verifier used")):
+            result = summary.summarize(self.work, self.base / "historical-summary",
+                                       preset_root=self.presets, names=self.names, legacy_runner=legacy)
+        self.assertIn("unrecorded", (self.base / "historical-summary/index.html").read_text())
+        self.assertEqual(result["verified_jobs"], 136)
+        self.assertTrue(result["complete"])
+        self.assertIn("unrecorded", result["user_scope"]["capture_read_target"])
+
+    def test_historical_verifier_rejects_png_and_rgb_corruption(self):
+        legacy = self.make_historical_matrix()
+        directory = self.jobs[self.names[0], "authored"]
+        manifest_path = directory / "manifest.json"
+        original = json.loads(manifest_path.read_text())
+        for field, error in (("pngSha256", "PNG checksum"), ("rgbSha256", "RGB checksum")):
+            with self.subTest(field=field):
+                manifest = json.loads(json.dumps(original))
+                manifest["captures"][0][field] = "corrupt"
+                summary.runner.write(manifest_path, manifest)
+                with self.assertRaisesRegex(ValueError, error):
+                    summary.collect_matrix(self.work, self.presets, self.names, legacy_runner=legacy)
+        summary.runner.write(manifest_path, original)
+
+    def test_current_matrix_rejects_missing_or_nonzero_read_target(self):
+        directory = self.jobs[self.names[0], "authored"]
+        path = directory / "manifest.json"
+        original = json.loads(path.read_text())
+        for binding in (None, 7):
+            with self.subTest(binding=binding):
+                manifest = json.loads(json.dumps(original))
+                capture = manifest["captures"][0]
+                if binding is None:
+                    del capture["captureReadFramebufferBinding"]
+                else:
+                    capture["captureReadFramebufferBinding"] = binding
+                summary.runner.write(path, manifest)
+                with self.assertRaisesRegex(ValueError, "final-output read framebuffer"):
+                    self.collect()
+
     def test_complete_matrix_has_136_verified_jobs(self):
         result = self.collect()
         self.assertEqual(result["verified_jobs"], 136)

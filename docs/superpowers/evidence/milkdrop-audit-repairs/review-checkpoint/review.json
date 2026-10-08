@@ -1,0 +1,37 @@
+{
+  "base": "120547f3",
+  "scope": "Tracked source patches0016\u20130024, focused regression tests and final-output tooling; partial33-finding draft scope",
+  "reviewers": [
+    "correctness",
+    "testing",
+    "maintainability",
+    "project-standards",
+    "agent-native",
+    "learnings",
+    "performance",
+    "python",
+    "adversarial"
+  ],
+  "findings": [
+    {
+      "severity": "P2",
+      "subject": "Historical summary verifier path",
+      "resolution": "Checksum-pinned historical verify function extracted without module/device initialization; full136-job export and corruption/current-read-target tests pass."
+    },
+    {
+      "severity": "P3",
+      "subject": "Third-party provenance and active ledger drift",
+      "resolution": "0023/0024 provenance and ten-ID/nine-patch/22-pending ledger updated."
+    }
+  ],
+  "residuals": [
+    "I22 timing disposition",
+    "22 unfinished findings",
+    "Final combined latest-main integration gates",
+    "Static cache skip count is not unit-instrumented; numerical invalidation, pixel equivalence and clean timing are independently tested."
+  ],
+  "normal_renderer_tests": 49,
+  "sanitizer_renderer_tests": 49,
+  "host_capture_helper_tests": 60,
+  "host_subtests": 24
+}

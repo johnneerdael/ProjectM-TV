@@ -1,0 +1,7 @@
+{
+  "preset": "07.milk",
+  "before_source": "63ed4ef4",
+  "after_source": "ffaa7f2c",
+  "all8_selected_rgb_identical_between_versions_and_repeats": true,
+  "scope": "Final-output Native4K source-instrumented engine; same exact preset/audio inputs; not every-frame hash or Windows pixel identity"
+}

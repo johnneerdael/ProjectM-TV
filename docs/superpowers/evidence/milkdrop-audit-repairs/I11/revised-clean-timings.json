@@ -1,0 +1,137 @@
+{
+  "runs": [
+    {
+      "issue": "I11-cache",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.1795180500000035,
+      "p90_ms": 3.421458,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.149484869444446,
+      "p90_ms": 3.309417,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.2406030250000004,
+      "p90_ms": 3.547625,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.2109146000000024,
+      "p90_ms": 3.355875,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.2384045222222215,
+      "p90_ms": 3.51925,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.123557041666667,
+      "p90_ms": 3.173083,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.1304597388888884,
+      "p90_ms": 3.174667,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.2858274333333344,
+      "p90_ms": 3.557208,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.42230258611111,
+      "p90_ms": 3.739875,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.5474525805555532,
+      "p90_ms": 3.91575,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.1592576333333335,
+      "p90_ms": 3.291333,
+      "status": "ok"
+    },
+    {
+      "issue": "I11-cache",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.1361492083333347,
+      "p90_ms": 3.20675,
+      "status": "ok"
+    }
+  ],
+  "before_mean_ms": 3.245519400000001,
+  "after_mean_ms": 3.2251358148148146,
+  "delta_ms": -0.020383585185186348,
+  "delta_percent": -0.6280530994572486,
+  "scope": "12 ABBA Native4K runs,360 onDrawFrame+glFinish samples each; no other task-owned build/analysis/GPU jobs during measurement; other host activity uncontrolled; not physical-TV FPS",
+  "cycles": [
+    {
+      "cycle": 0,
+      "before_mean_ms": 3.195216325000003,
+      "after_mean_ms": 3.1950439472222234,
+      "delta_percent": -0.005394870338859548
+    },
+    {
+      "cycle": 1,
+      "before_mean_ms": 3.262115977777778,
+      "after_mean_ms": 3.1270083902777777,
+      "delta_percent": -4.141716248606175
+    },
+    {
+      "cycle": 2,
+      "before_mean_ms": 3.279225897222222,
+      "after_mean_ms": 3.353355106944443,
+      "delta_percent": 2.260570392085959
+    }
+  ]
+}

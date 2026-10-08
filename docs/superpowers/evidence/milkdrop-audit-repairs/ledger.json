@@ -152,8 +152,13 @@
       "sha256": "259f01f9d09fdc0f4656c7db73b7cbbcecaff66be31f9fdb5abe0e2b76884415",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I11-legacy-warp-physical-triangle-diagonal-is-reversed/HANDOFF.md",
       "numeric_witness": "Common screen-cell corners A=B=C=0,D=1 at local(.25,.25): target interpolation0; original legacy triangle interpolation.25. Affine fields unaffected.\n\nLegacy/no-custom-warp physical mapping only; no extension to missing original custom VS.",
-      "status": "revised candidate0024 with complete static mesh cache; original candidate+4.337% cost preserved;49 source controls; revised native equivalence/cost pending",
-      "confirmed_affected_originals": [],
+      "status": "implemented revised0024;49 normal/49 sanitizer, exact original/finite/custom Native4K cache equivalence and12-run cost acceptance passed; final integration pending",
+      "confirmed_affected_originals": [
+        {
+          "name": "07.milk",
+          "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849"
+        }
+      ],
       "source_report": "research/warp-motion.md",
       "recommendation": "legacy-only physical diagonal correction; custom topology unchanged",
       "evidence": "I11/README.md",
@@ -162,7 +167,8 @@
         "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849"
       },
       "native_4k_evidence": "I11/original-results.json",
-      "initial_cost_evidence": "I11/initial-clean-timings.json"
+      "initial_cost_evidence": "I11/initial-clean-timings.json",
+      "cost_evidence": "I11/revised-clean-timings.json"
     },
     {
       "id": "I12",
