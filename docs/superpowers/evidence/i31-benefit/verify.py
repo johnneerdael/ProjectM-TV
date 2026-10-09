@@ -105,11 +105,28 @@ VISUAL_IDENTITIES = {
                      "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393"),
 }
 SELECTED_FRAMES = (119, 239, 479)
+HISTORICAL_OBSERVER = {
+    "commit": "d872e591e317b889602120ec5b106aabe18c7cce",
+    "visual-jobs.json_sha256": "33e558b6b22b2e5086c722649fa81d2c8b7b523662036d81db33a6ce675e17d8",
+    "visual-results.json_sha256": "ba572499e8d0478ec4ca7745eb2230ed232422b60945a08df967ebe9d5709e23",
+}
+# Both canonical digests were independently established from git-show of the
+# initial published checkpoint, then compared with the archived original files.
 
-def verify_visual(root, workers, inputs, records, observers, results, replay):
+def verify_visual(root, workers, inputs, records, observers, results, replay, *,
+                  historical_jobs=None, historical_results=None, history_anchor=None):
+    historical_jobs = (load(root, "historical-observer/visual-jobs.json")
+                       if historical_jobs is None else historical_jobs)
+    historical_results = (load(root, "historical-observer/visual-results.json")
+                          if historical_results is None else historical_results)
+    history_anchor = (load(root, "custody.json")["historical_observer"]
+                      if history_anchor is None else history_anchor)
+    assert history_anchor == HISTORICAL_OBSERVER, "initial Git observer checkpoint anchor"
+    assert digest(historical_jobs) == HISTORICAL_OBSERVER["visual-jobs.json_sha256"], "frozen historical visual requests"
+    assert digest(historical_results) == HISTORICAL_OBSERVER["visual-results.json_sha256"], "frozen historical RGB sequences"
     expected_names = {f"{profile}-{role}-{repeat}" for profile in ("classic", "standard")
                       for role in VISUAL_IDENTITIES for repeat in (0, 1)}
-    assert set(records) == expected_names and set(observers) == set(VISUAL_IDENTITIES), "visual job/role set"
+    assert set(records) == set(historical_jobs) == expected_names and set(observers) == set(VISUAL_IDENTITIES), "visual job/role set"
     assert set(results) == {"classic", "standard"}, "visual profile set"
     canonical_harness = None
     for role, observer in observers.items():
@@ -134,6 +151,7 @@ def verify_visual(root, workers, inputs, records, observers, results, replay):
     rebuilt = {}
     output_roots = set()
     capture_states = 0
+    historical_hashes_equal = True
     for profile in ("classic", "standard"):
         rebuilt[profile] = {}
         for role in VISUAL_IDENTITIES:
@@ -181,6 +199,23 @@ def verify_visual(root, workers, inputs, records, observers, results, replay):
                     capture_states += 1
                 frames = record["frame_sha256"]
                 assert len(frames) == 3 and all(len(value) == 64 and all(c in "0123456789abcdef" for c in value) for value in frames), "selected RGB hashes"
+                historical = historical_jobs[name]
+                historical_job, historical_manifest = historical["job"], historical["manifest"]
+                assert canonical(historical_job["config"]) == canonical(job["config"]), "historical profile/config binding"
+                assert historical_job["schema_version"] == job["schema_version"]
+                for path in ("pcm_path", "preset_path", "texture_root"):
+                    assert historical_job[path] == job[path], f"historical {path} binding"
+                assert historical_job["manifest_path"] == str(work / "visual" / name / "manifest.json"), "historical output name"
+                assert historical_job["identity"] == historical_manifest["identity"] == {
+                    "role": role, "kind": "selected-frame verification, outside timedjobs"}, "historical role binding"
+                for field in ("fps", "frames", "gl_error_frames", "gl_renderer", "gl_version", "height", "seed", "status", "width"):
+                    assert historical_manifest[field] == manifest[field], f"historical manifest {field}"
+                assert historical["linked_engine_library_sha256"] == record["linked_engine_library_sha256"], "unchanged historical engine library"
+                historical_role = historical_results[profile][role]
+                assert len(historical_role["hashes"]) == 2 and all(len(sequence) == 3 for sequence in historical_role["hashes"])
+                assert historical_role["repeat_equal"] is (historical_role["hashes"][0] == historical_role["hashes"][1]), "historical repeat flag"
+                historical_hashes_equal = historical_hashes_equal and frames == historical_role["hashes"][repeat]
+                assert record["selected_pngs"] == historical["selected_pngs"], "preserved historical selected PNGs"
                 pngs = record["selected_pngs"]
                 assert set(pngs) == ({f"frame-{frame:03d}.png" for frame in SELECTED_FRAMES} if repeat == 0 else set()), "selected PNG set"
                 assert all(len(value) == 64 and all(c in "0123456789abcdef" for c in value) for value in pngs.values())
@@ -194,6 +229,9 @@ def verify_visual(root, workers, inputs, records, observers, results, replay):
                                                   for frame in SELECTED_FRAMES}
     assert len(output_roots) == 1, "single selected-frame replay output"
     assert canonical(results) == canonical(rebuilt), "visual results regenerated from independent job hashes"
+    assert replay["replaces"] == "historical-observer/visual-jobs.json"
+    assert replay["selected_hashes_equal_historical"] is historical_hashes_equal, "computed historical RGB preservation flag"
+    assert historical_hashes_equal, "all eight original RGB sequences preserved"
     assert replay["timed_benchmark_replayed"] is False and replay["runs"] == len(records) == 8
     assert replay["capture_states"] == capture_states == 24
     return capture_states
@@ -268,7 +306,10 @@ def verify(root=ROOT, repo=REPO, *, data=None, visuals=True):
     assert canonical(get("analysis.json")) == canonical(analyze(schedule, runs)), "all published analysis statistics"
     if visuals:
         verify_visual(root, workers, inputs, get("visual-jobs.json"), get("visual-workers.json"),
-                      get("visual-results.json"), get("observer-replay.json"))
+                      get("visual-results.json"), get("observer-replay.json"),
+                      historical_jobs=get("historical-observer/visual-jobs.json"),
+                      historical_results=get("historical-observer/visual-results.json"),
+                      history_anchor=custody["historical_observer"])
     return measured_frames
 
 if __name__ == "__main__":

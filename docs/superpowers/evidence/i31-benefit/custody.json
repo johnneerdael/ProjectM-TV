@@ -15,5 +15,10 @@
     "engine-base.cpp": "56d7ab07f064c3addd5d71a6e7dac07d1d51f51f8af50bc02bf42379c106403b"
   },
   "timed_corpus_sha256": "2f5263bb1a3e52d4b434050ebc225d528f3b88fab6e906119b5a3c20157446a1",
-  "timed_corpus_provenance": "Canonical SHA256 (sorted keys, compact JSON, allow_nan=false) established from all 80 independently preserved original runs/<schedule-name>/result.json files. Every original object exactly equals its decoded timed-runs.json.gz record. No timings or analysis were regenerated or edited."
+  "timed_corpus_provenance": "Canonical SHA256 (sorted keys, compact JSON, allow_nan=false) established from all 80 independently preserved original runs/<schedule-name>/result.json files. Every original object exactly equals its decoded timed-runs.json.gz record. No timings or analysis were regenerated or edited.",
+  "historical_observer": {
+    "commit": "d872e591e317b889602120ec5b106aabe18c7cce",
+    "visual-jobs.json_sha256": "33e558b6b22b2e5086c722649fa81d2c8b7b523662036d81db33a6ce675e17d8",
+    "visual-results.json_sha256": "ba572499e8d0478ec4ca7745eb2230ed232422b60945a08df967ebe9d5709e23"
+  }
 }

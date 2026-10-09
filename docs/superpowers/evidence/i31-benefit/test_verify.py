@@ -162,7 +162,8 @@ class VisualCustodyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.base = {name: json.loads((ROOT / name).read_text()) for name in
-                    ("workers.json", "inputs.json", "visual-jobs.json", "visual-workers.json", "visual-results.json", "observer-replay.json")}
+                    ("workers.json", "inputs.json", "visual-jobs.json", "visual-workers.json", "visual-results.json", "observer-replay.json",
+                     "historical-observer/visual-jobs.json", "historical-observer/visual-results.json", "custody.json")}
 
     def setUp(self):
         self.data = copy.deepcopy(self.base)
@@ -171,7 +172,10 @@ class VisualCustodyTests(unittest.TestCase):
     def check(self):
         return verify_visual(ROOT, self.data["workers.json"], self.data["inputs.json"],
                              self.data["visual-jobs.json"], self.data["visual-workers.json"],
-                             self.data["visual-results.json"], self.data["observer-replay.json"])
+                             self.data["visual-results.json"], self.data["observer-replay.json"],
+                             historical_jobs=self.data["historical-observer/visual-jobs.json"],
+                             historical_results=self.data["historical-observer/visual-results.json"],
+                             history_anchor=self.data["custody.json"]["historical_observer"])
 
     def reject(self):
         with self.assertRaises((AssertionError, KeyError)):
@@ -179,6 +183,32 @@ class VisualCustodyTests(unittest.TestCase):
 
     def test_valid_independent_selected_frame_receipts(self):
         self.assertEqual(self.check(), 24)
+
+    def change_current_rgb_and_summary(self):
+        for role in ("with-0019", "without-0019"):
+            for repeat in (0, 1):
+                self.data["visual-jobs.json"][f"classic-{role}-{repeat}"]["frame_sha256"][0] = "0" * 64
+                self.data["visual-results.json"]["classic"][role]["hashes"][repeat][0] = "0" * 64
+
+    def test_false_historical_preservation_flag(self):
+        self.data["observer-replay.json"]["selected_hashes_equal_historical"] = False
+        self.reject()
+
+    def test_correlated_current_rgb_and_summary_edit(self):
+        self.change_current_rgb_and_summary()
+        self.reject()
+
+    def test_changed_historical_receipt(self):
+        self.data["historical-observer/visual-jobs.json"][self.name]["selected_pngs"]["frame-119.png"] = "0" * 64
+        self.reject()
+
+    def test_coordinated_current_history_and_anchor_edit(self):
+        self.change_current_rgb_and_summary()
+        for role in ("with-0019", "without-0019"):
+            for repeat in (0, 1):
+                self.data["historical-observer/visual-results.json"]["classic"][role]["hashes"][repeat][0] = "0" * 64
+        self.data["custody.json"]["historical_observer"]["visual-results.json_sha256"] = digest(self.data["historical-observer/visual-results.json"])
+        self.reject()
 
     def test_missing_visual_job(self):
         del self.data["visual-jobs.json"][self.name]
