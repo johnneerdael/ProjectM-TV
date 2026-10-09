@@ -85,6 +85,9 @@ public class MainActivity extends Activity {
     // it on for everyone (new key) with two strikes before a preset is skipped for good.
     private static final String PREF_BLANK_DETECTION = "blank_detection_v3";
     private static final String PREF_TRANSITION_MODE = "transition_mode";
+    // Troubleshooting switches for GPU drivers that crash at preset switches (on by default).
+    private static final String PREF_BACKGROUND_COMPILE = "background_compile";
+    private static final String PREF_SHADER_BINARY_CACHE = "shader_binary_cache";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int[] TRACK_SECONDS = {10, 20, 30, 60, 0};  // 0 = always
@@ -136,6 +139,8 @@ public class MainActivity extends Activity {
     private AudioMeterView audioMeter;
     private TextView audioStatus;
     private OptionRow skippedRow;
+    private OptionRow lastExitRow;
+    private List<ExitDiagnostics.Exit> recentExits;
     private OptionRow musicCategoryRow;
     private OptionRow nativeTrailsRow;
     private String requestedMusicCategory = "all";
@@ -214,6 +219,8 @@ public class MainActivity extends Activity {
         ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
         ProjectMJNI.setTransitionMode(prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO),
                 profile.lowerBlendResolutionByDefault());
+        ProjectMJNI.setBackgroundCompile(prefs.getBoolean(PREF_BACKGROUND_COMPILE, true));
+        ProjectMJNI.setShaderBinaryCache(prefs.getBoolean(PREF_SHADER_BINARY_CACHE, true));
 
         visualizerView = findViewById(R.id.visualizer_view);
         renderer = new VisualizerRenderer(new VisualizerRenderer.BudgetStatsListener() {
@@ -584,6 +591,25 @@ public class MainActivity extends Activity {
             refreshStatus();
         });
 
+        OptionRow backgroundCompile = findViewById(R.id.row_background_compile);
+        backgroundCompile.setup("Background compile", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_BACKGROUND_COMPILE, true) ? 1 : 0, true, index -> {
+                    ProjectMJNI.setBackgroundCompile(index == 1);
+                    prefs.edit().putBoolean(PREF_BACKGROUND_COMPILE, index == 1).apply();
+                });
+
+        OptionRow shaderBinaryCache = findViewById(R.id.row_shader_binary_cache);
+        shaderBinaryCache.setup("Shader binary cache", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_SHADER_BINARY_CACHE, true) ? 1 : 0, true, index -> {
+                    ProjectMJNI.setShaderBinaryCache(index == 1);
+                    prefs.edit().putBoolean(PREF_SHADER_BINARY_CACHE, index == 1).apply();
+                });
+
+        // Exit records of earlier processes do not change while this one runs: read them once.
+        recentExits = ExitDiagnostics.recentExits(this);
+        lastExitRow = findViewById(R.id.row_last_exit);
+        lastExitRow.setupAction("Last exit", lastExitSummary(), () -> showExitReport(recentExits));
+
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
         trackMenu.setVisibility(View.GONE);
@@ -791,6 +817,32 @@ public class MainActivity extends Activity {
         if (resumed && menu != Menu.NONE) handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
     }
 
+    private String lastExitSummary() {
+        return ExitDiagnostics.summary(recentExits, Build.VERSION.SDK_INT, System.currentTimeMillis());
+    }
+
+    /** Settings › Advanced › Last exit: the latest exits and what the engine was doing then. */
+    private void showExitReport(List<ExitDiagnostics.Exit> exits) {
+        String header = String.format(Locale.US, "%s %s, Android %s (API %d)%nGPU: %s%nNow: background compile %s, shader binary cache %s%n",
+                Build.MANUFACTURER, Build.MODEL, Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
+                renderer.getGlRenderer().isEmpty() ? "unknown" : renderer.getGlRenderer(),
+                prefs.getBoolean(PREF_BACKGROUND_COMPILE, true) ? "on" : "off",
+                prefs.getBoolean(PREF_SHADER_BINARY_CACHE, true) ? "on" : "off");
+        String report = ExitDiagnostics.report(exits, Build.VERSION.SDK_INT,
+                ExitDiagnostics.previousTrail(), System.currentTimeMillis(), header);
+        Log.i(TAG, "Exit report:\n" + report);
+        handler.removeCallbacks(hideMenu);
+        AlertDialog dialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                .setTitle("Recent exits")
+                .setMessage(report)
+                .setNegativeButton("Close", (d, which) -> {})
+                .create();
+        dialog.setOnDismissListener(d -> {
+            if (resumed && menu != Menu.NONE) handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
+        });
+        dialog.show();
+    }
+
     private void refreshStatus() {
         CustomPresetPack.retryPendingCleanups(directory -> ProjectMJNI.isCustomPresetPackInUse(directory.getAbsolutePath()));
         refreshMusicCategory();
@@ -816,14 +868,16 @@ public class MainActivity extends Activity {
             refreshTrackInfoRow();  // access may have been granted meanwhile
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
+            lastExitRow.setActionValue(lastExitSummary());  // keeps its age current
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s)%nRAM     %s%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nTrails  %s%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s)%nRAM     %s%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nTrails  %s%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM%nGPU     %s",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
                     quality.isMemoryConstrained() ? "resolution reduced for memory headroom" : "automatic headroom budget",
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
                     renderer.getCurrentFps(), frameRateTarget, ProjectMJNI.getNativeTrailsStatus(), transitionLabel(), audioLabel(), trackLabel(), updater.statusLabel(),
-                    profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
+                    profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb,
+                    renderer.getGlRenderer().isEmpty() ? "unknown" : renderer.getGlRenderer()));
         }
     }
 

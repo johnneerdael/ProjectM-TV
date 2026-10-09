@@ -57,6 +57,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0032](#0032-live-shape-thickness) | Evaluated style captured per instance and replay | `martin - city lights v2(1).milk` |
 | [0033](#0033-latest-previous-motion-field) | Refresh actual warp UV while vectors are hidden | `Seizure Salad` |
 | [0034](#0034-gles-motion-field-storage) | Compatible continuous UV on GLES without float render targets | capability, integer storage and decoder controls |
+| [0035](#0035-program-cache-switch) | Optional switch-off for the shared program binary cache | `program-cache-switch` control |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -608,3 +609,7 @@ The full assessment, including upstream contribution notes, is [`docs/UPSTREAM_P
 ## 0034 — GLES motion-field storage
 
 Before allocating a float motion map, the engine checks core/extension capability and the actual mixed framebuffer. Contexts without compatible float rendering use required RG16UI storage containing half-float words. Both consumers decode before bilinear interpolation; primary color, dithering and actual fragment clipping remain. Capable RG16F shader paths are unchanged. The correction adds no per-frame capability query or new render exception.
+
+## 0035 — Program cache switch
+
+A TV-only troubleshooting control, not a rendering change. `projectm_opengl_set_program_cache_enabled(false)` makes every shader program compile and link from source in the context that uses it: no binary-retrievable hint, no `glGetProgramBinary` export, no `glProgramBinary` load, and cached entries are dropped. Turning it off waits for binary calls already running on the background compile thread, so none runs afterwards. Enabled again, the cache starts empty. The default stays enabled, so pictures and timings are unchanged unless **Advanced › Shader binary cache** is turned off. The real-GL `program-cache-switch` control checks the hint and the cache counters on GLES; desktop OpenGL builds have no binary cache.

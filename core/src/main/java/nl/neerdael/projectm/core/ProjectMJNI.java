@@ -95,6 +95,29 @@ public final class ProjectMJNI {
     public static native void setBeatCuts(boolean enabled);
     /** Memory runs low: pauses compiling upcoming presets in the background for 20 s. */
     public static native void onMemoryPressure();
+    /**
+     * Compiles the upcoming presets on a background thread with its own EGL context (on, the
+     * default), or only on the render thread when they are shown (off: longer stalls at switches).
+     * A troubleshooting switch for GPU drivers that fail with a second context; applied on the GL
+     * thread.
+     */
+    public static native void setBackgroundCompile(boolean enabled);
+    /**
+     * Reuses linked shader programs as binaries across projectM instances and contexts (on, the
+     * default), or always compiles them from source (off). A troubleshooting switch for GPU
+     * drivers whose program binaries fail when moved between contexts. Applied on the GL thread,
+     * which waits there for binary calls already under way; the caller never blocks.
+     */
+    public static native void setShaderBinaryCache(boolean enabled);
+    /**
+     * File in which the engine keeps one line per thread about what it was last doing (loading,
+     * blending, compiling), overwritten in place, so it survives a crash of the process. Each line
+     * reads {@code <thread> pid=<pid> ms=<wall clock ms> session=<session> cache=on|off
+     * compile=on|off <message>}, with the Shader binary cache and Background compile states as
+     * applied when it was written. {@code session} (letters and digits, up to 23) identifies this
+     * process, e.g. matching what the app stores with {@code ActivityManager.setProcessStateSummary}. Read it before calling this.
+     */
+    public static native void setDiagnosticsFile(String path, String session);
     public static native void setMeshSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */
     public static native void skipCurrentPreset();
