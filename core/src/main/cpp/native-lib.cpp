@@ -2009,8 +2009,7 @@ void ApplyProgramCache() {
 
 void StartPrewarmer() {
     g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
-    g_engine.prewarmerStarted = true;
-    projectmtv::TrailCompileOn() = true;  // the trail's compile= says whether the worker runs
+    g_engine.prewarmerStarted = true;  // the trail's compile= follows the worker itself (preset_prewarm.cpp)
 }
 
 // GL thread, once presets are showing: starts or stops the background compile thread (and with it

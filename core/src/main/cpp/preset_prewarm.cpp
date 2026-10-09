@@ -67,6 +67,7 @@ void PresetPrewarmer::Start(Reader reader) {
     if (thread_.joinable()) return;
     stop_ = false;
     reader_ = std::move(reader);
+    projectmtv::TrailCompileOn() = true;  // before the thread runs: its exit clears it
     thread_ = std::thread(&PresetPrewarmer::Run, this);
 }
 
@@ -101,6 +102,11 @@ void PresetPrewarmer::Request(const std::vector<std::string>& names) {
 }
 
 void PresetPrewarmer::Run() {
+    // However the worker ends (stopped, no EGL context, projectm_create failed), the trail must not
+    // claim a background compiler is running.
+    struct RunningState {
+        ~RunningState() { projectmtv::TrailCompileOn() = false; }
+    } runningState;
     // Below the render thread: compiling must not cost it frames.
     setpriority(PRIO_PROCESS, gettid(), 10);
     projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "creating its EGL context");

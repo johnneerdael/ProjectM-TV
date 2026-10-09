@@ -97,11 +97,13 @@ void SnapshotFade::Forget() { Stop(); }
 void SnapshotFade::Release() { Stop(); }
 // ---- fake shader prewarmer (the real one needs EGL) ----
 #include "preset_prewarm.h"
+#include "diagnostics_trail.h"
 std::vector<std::string> g_prewarmRequests; int g_prewarmStarts = 0, g_prewarmStops = 0;
 PresetPrewarmer::Reader g_prewarmReader;
 std::string g_prewarmActive;
-void PresetPrewarmer::Start(Reader reader) { ++g_prewarmStarts; g_prewarmReader = std::move(reader); }
-void PresetPrewarmer::Stop() { ++g_prewarmStops; g_prewarmActive.clear(); }
+// Like the real worker: the trail's compile= is on while it runs.
+void PresetPrewarmer::Start(Reader reader) { ++g_prewarmStarts; g_prewarmReader = std::move(reader); projectmtv::TrailCompileOn() = true; }
+void PresetPrewarmer::Stop() { ++g_prewarmStops; g_prewarmActive.clear(); projectmtv::TrailCompileOn() = false; }
 bool PresetPrewarmer::UsesPresetPrefix(const std::string& prefix) { return g_prewarmActive.compare(0, prefix.size(), prefix) == 0; }
 std::vector<std::vector<std::string>> g_prewarmLists;
 void PresetPrewarmer::Request(const std::vector<std::string>& names) {
