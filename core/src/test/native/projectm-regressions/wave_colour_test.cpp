@@ -113,7 +113,8 @@ static void WaveColors(ShaderCache& cache)
         for(size_t pass=0;pass<submissions.size();++pass){
             const bool native=pass>=size_t(authoredPasses);const auto& row=submissions[pass];
             Check(row.mode==(dots?GL_POINTS:native?GL_TRIANGLE_STRIP:GL_LINE_STRIP),"wave primitive changed");
-            Check(row.count==(native&&!dots?4:159)&&row.instances==(native&&!dots?158:1),"wave point/segment count changed");
+            // Authored width64: approved I19 cap is21 raw /41 smoothed points.
+            Check(row.count==(native&&!dots?4:41)&&row.instances==(native&&!dots?40:1),"wave point/segment count changed");
             for(const auto& rgba:row.rgba)Check(rgba[3]==alpha,"wave submitted opacity changed");
         }
         const auto signature=submissions;

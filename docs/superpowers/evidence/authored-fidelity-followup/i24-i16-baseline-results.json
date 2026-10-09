@@ -1,0 +1,49 @@
+[
+  {
+    "name": "I24-style",
+    "command": [
+      "build/authored-followup/normal/shape-thickness-regressions",
+      "style"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I24-style-baseline.txt"
+  },
+  {
+    "name": "I24-domain",
+    "command": [
+      "build/authored-followup/normal/shape-thickness-regressions",
+      "domain"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I24-domain-baseline.txt"
+  },
+  {
+    "name": "I24-original",
+    "command": [
+      "build/authored-followup/normal/shape-thickness-regressions",
+      "original",
+      "core/src/main/assets/presets/martin - city lights v2(1).milk",
+      "core/src/main/assets/presets/martin - city lights v2 c.milk"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I24-original-baseline.txt"
+  },
+  {
+    "name": "I16-temporal",
+    "command": [
+      "build/authored-followup/i16-qualified-controls/motion-uv-freshness",
+      "temporal"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I16-temporal-baseline.txt"
+  },
+  {
+    "name": "I16-producer",
+    "command": [
+      "build/authored-followup/i16-qualified-controls/motion-uv-freshness",
+      "producer"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I16-producer-baseline.txt"
+  }
+]

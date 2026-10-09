@@ -1,0 +1,48 @@
+{
+  "baseline": "960eed2c6cf3badf0dccb97f02d64bdecc851ed5",
+  "branch": "fix/milkdrop-authored-fidelity",
+  "tasks": {
+    "I19": "RED->GREEN; current63hostsuite includes counts/styles",
+    "I22": "RED->GREEN authoreddots/singleNaN/replay; Nativepending",
+    "I20": "RED167->GREEN sourceclosure; zero-audio fixture initialized, Nativepending",
+    "I24": "REDstyle/domain/original ->production32; oracle replayprojectionfixed, hostcurrenttestpending/Nativepending",
+    "I16": "REDtemporal/MRT ->5/5 productionownercontrols; publicmeshcounterfixed; Native/contextfailuregatespending"
+  },
+  "rulings": [
+    {
+      "ruling": "Execute already authorized plan without repeat approval",
+      "reason": "user explicitly requested five fixes through newmerge-readyPR",
+      "cost_if_wrong": "scope correction before publication"
+    },
+    {
+      "ruling": "I24 first uses simple per-instance selection, not grouped VBO optimization",
+      "reason": "user wants qualified production correction, grouping adds independent memory/raster complexity",
+      "cost_if_wrong": "potential additional draw cost, measured in combinedNativeacceptance"
+    },
+    {
+      "ruling": "Circle control line-density expectation159->169 at256width",
+      "reason": "approvedI19caps line at85raw, hence169smoothed; standaloneoldI20packetassumed80raw",
+      "cost_if_wrong": "densityregression caught by independentI19factorycontrols"
+    },
+    {
+      "ruling": "I18 wave-colour submission expectations159/158->41/40",
+      "reason": "its64px mode6 authored control nowusesI19cap21raw; retainallcolor/style/alpha comparisons",
+      "cost_if_wrong": "sample-capandreal submission controls fail independently"
+    },
+    {
+      "ruling": "I24 projection oracle includes unchanged replay fallback per-pass correction",
+      "reason": "baseline28andcandidate preserve correction; test omitted it",
+      "cost_if_wrong": "directNative/noReplayandper-passvertex tests detect projection mismatch"
+    },
+    {
+      "ruling": "I16 grid counter uses publicaccepted8x8,81evals",
+      "reason": "SetMeshSize clamps requested8x6 to8x8; no duplicateproducer found",
+      "cost_if_wrong": "countertestwouldfail acceptedgrid contract"
+    },
+    {
+      "ruling": "Parentharness invokes explicitOpenGLmoduleoverride",
+      "reason": "engine GL_LIBS path bypassesfind_package, leaving parent targetundefined",
+      "cost_if_wrong": "Linuxdiscovery/explicitlink controls catch scope/regression"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+positive-zero-saved0 actual renderer control passed
+negative-zero-saved0 actual renderer control passed
+positive-subnormal-saved0 actual renderer control passed
+negative-subnormal-saved0 actual renderer control passed
+positive-half-saved0 actual renderer control passed
+negative-half-saved0 actual renderer control passed
+positive-below-one-saved0 actual renderer control passed
+negative-below-one-saved0 actual renderer control passed
+FAIL own outline blend/style before next fill

@@ -30,6 +30,9 @@ if(NOT APPLE)
         # projectM also calls find_package(OpenGL COMPONENTS GLES3). Use the same
         # supplied EGL/GLES flags for both consumers instead of system discovery.
         list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/gl-overrides")
+        # projectM accepts supplied GL_LIBS without invoking discovery itself.
+        # Instantiate the global override here for this parent harness too.
+        find_package(OpenGL MODULE REQUIRED COMPONENTS GLES3)
         set(REGRESSION_GL_TARGET OpenGL::GLES3)
     else()
         find_package(PkgConfig REQUIRED)
@@ -145,7 +148,7 @@ add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
 set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs wave-colour border-topology)
+foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs wave-colour border-topology sample-cap circle-geometry motion-uv-freshness)
     string(REPLACE "-" "_" source_name "${control}")
     add_executable(${control}-regressions ${source_name}_test.cpp)
     target_compile_features(${control}-regressions PRIVATE cxx_std_17)
@@ -167,6 +170,12 @@ endforeach()
 add_test(NAME original-border-fan-topology COMMAND border-topology-regressions)
 set_tests_properties(original-border-fan-topology PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+add_test(NAME source-wave-sample-caps COMMAND sample-cap-regressions)
+add_test(NAME source-circle-closure COMMAND circle-geometry-regressions)
+add_test(NAME authored-custom-dots COMMAND custom-wave-inputs-regressions dots)
+add_test(NAME authored-single-custom-dot COMMAND custom-wave-inputs-regressions single)
+set_tests_properties(source-wave-sample-caps source-circle-closure authored-custom-dots authored-single-custom-dot
+    PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_test(NAME per-pixel-inverse-aspect COMMAND preset-inputs-regressions)
 set_tests_properties(per-pixel-inverse-aspect PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
@@ -381,3 +390,48 @@ set_tests_properties(legacy-angle-seam PROPERTIES TIMEOUT 30
 add_test(NAME wave-colour-submission COMMAND wave-colour-regressions)
 set_tests_properties(wave-colour-submission PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+# Integrate in the existing production-regression CMakeLists.txt.
+# This explicit target avoids depending on concurrent changes to the shared foreach.
+add_executable(shape-thickness-regressions shape_thickness_test.cpp)
+target_compile_features(shape-thickness-regressions PRIVATE cxx_std_17)
+target_compile_definitions(shape-thickness-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(shape-thickness-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset"
+    "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(shape-thickness-regressions PRIVATE libprojectM::projectM ${CMAKE_DL_LIBS})
+if(APPLE)
+    target_link_libraries(shape-thickness-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+else()
+    target_compile_definitions(shape-thickness-regressions PRIVATE USE_GLES)
+    target_link_libraries(shape-thickness-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME shape-thickness-style COMMAND shape-thickness-regressions style)
+add_test(NAME shape-thickness-domain COMMAND shape-thickness-regressions domain)
+set(SHAPE_THICKNESS_PRESETS
+    "martin - city lights v2(1).milk"
+    "martin - city lights v2 c.milk")
+set(SHAPE_THICKNESS_HASHES
+    ac990a2a323950ca4213a763451e6b95835848bbb4569c401a614e6fc26423d5
+    685868904bb3194d0d3fb9ea30c180dad0af46068d66bcce55828f46024ce8f1)
+foreach(index RANGE 0 1)
+    list(GET SHAPE_THICKNESS_PRESETS ${index} name)
+    list(GET SHAPE_THICKNESS_HASHES ${index} expected)
+    file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/${name}" actual)
+    if(NOT actual STREQUAL expected)
+        message(FATAL_ERROR "Shape thickness witness changed: ${name}")
+    endif()
+endforeach()
+add_test(NAME shape-thickness-original COMMAND shape-thickness-regressions original
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/martin - city lights v2(1).milk"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/martin - city lights v2 c.milk")
+set_tests_properties(shape-thickness-style shape-thickness-domain shape-thickness-original PROPERTIES
+    TIMEOUT 120 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+foreach(uv_mode temporal producer lifecycle transition context)
+    add_test(NAME motion-uv-${uv_mode} COMMAND motion-uv-freshness-regressions ${uv_mode})
+    set_tests_properties(motion-uv-${uv_mode} PROPERTIES TIMEOUT 120
+        ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+endforeach()

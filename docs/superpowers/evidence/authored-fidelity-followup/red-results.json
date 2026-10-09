@@ -1,0 +1,36 @@
+[
+  {
+    "id": "I19",
+    "command": [
+      "build/authored-followup/normal/sample-cap-regressions"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I19-red.txt"
+  },
+  {
+    "id": "I22",
+    "command": [
+      "build/authored-followup/normal/custom-wave-inputs-regressions",
+      "dots"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I22-red.txt"
+  },
+  {
+    "id": "I22-single",
+    "command": [
+      "build/authored-followup/normal/custom-wave-inputs-regressions",
+      "single"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I22-single-red.txt"
+  },
+  {
+    "id": "I20",
+    "command": [
+      "build/authored-followup/normal/circle-geometry-regressions"
+    ],
+    "exit": 1,
+    "log": "build/authored-followup/I20-red.txt"
+  }
+]

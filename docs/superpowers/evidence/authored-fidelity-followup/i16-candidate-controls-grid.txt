@@ -1,0 +1,15 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/i16-qualified-controls
+    Start 1: motion-uv-temporal
+1/5 Test #1: motion-uv-temporal ...............   Passed    3.17 sec
+    Start 2: motion-uv-producer
+2/5 Test #2: motion-uv-producer ...............   Passed    0.22 sec
+    Start 3: motion-uv-lifecycle
+3/5 Test #3: motion-uv-lifecycle ..............   Passed    0.31 sec
+    Start 4: motion-uv-transition
+4/5 Test #4: motion-uv-transition .............   Passed    0.23 sec
+    Start 5: motion-uv-context
+5/5 Test #5: motion-uv-context ................   Passed    0.23 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   4.18 sec

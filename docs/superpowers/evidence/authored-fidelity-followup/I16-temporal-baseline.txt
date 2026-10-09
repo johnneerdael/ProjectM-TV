@@ -1,0 +1,8 @@
+temporal frame=0 shader=default detail=0 off=0 uv=256x144 published=0.562256,0.499878 consumers=0
+temporal frame=1 shader=default detail=0 off=0 uv=256x144 published=0.562256,0.499878 consumers=1
+temporal frame=2 shader=default detail=0 off=0 uv=256x144 published=0.624756,0.499878 consumers=1
+temporal frame=3 shader=default detail=0 off=0 uv=256x144 published=0.687256,0.499878 consumers=1
+temporal frame=4 shader=default detail=0 off=0 uv=256x144 published=0.749756,0.499878 consumers=1
+temporal frame=5 shader=default detail=0 off=0 uv=256x144 published=0.749756,0.499878 consumers=1
+temporal frame=6 shader=default detail=0 off=0 uv=256x144 published=0.749756,0.499878 consumers=1
+latest completed frame did not publish exactly one real UV producer

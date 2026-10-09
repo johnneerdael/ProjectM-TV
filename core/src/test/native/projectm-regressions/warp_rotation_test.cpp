@@ -418,7 +418,9 @@ static void DeformationControls(TextureManager& textures)
                 v += warp * .0035f * sinf(time * .825f + x*f0 + sourceY*f3);
                 const std::string label = "path=" + std::to_string(path) + " warp=" + std::to_string(warp) + " time=" + std::to_string(time);
                 Check(std::abs(deformationUV[i*4] - u) < 2e-5f && std::abs(deformationUV[i*4+1] - v) < 2e-5f,
-                      label + " wrong physical oscillator-Y at node " + std::to_string(vertex));
+                      label + " wrong physical oscillator-Y at node " + std::to_string(vertex) +
+                      " got=" + std::to_string(deformationUV[i*4]) + "," + std::to_string(deformationUV[i*4+1]) +
+                      " expected=" + std::to_string(u) + "," + std::to_string(v));
                 Check(deformationUV[i*4+2] == x*.5f+.5f && deformationUV[i*4+3] == y*.5f+.5f,
                       label + " changed original-UV varying");
             }
@@ -671,7 +673,9 @@ static void AngleSeamControls(TextureManager& textures)
                 const float u=px*.5f*cosf(r)-py*.5f*sinf(r)+.5f-static_cast<float>(ang*.01);
                 const float v=px*.5f*sinf(r)+py*.5f*cosf(r)+.5f;
                 Check(std::abs(deformationUV[i*4]-u)<2e-6f&&std::abs(deformationUV[i*4+1]-v)<2e-6f,
-                      "seam equation did not reach actual warp vertex output");
+                      "seam equation did not reach actual warp vertex output node="+std::to_string(node)+
+                      " got="+std::to_string(deformationUV[i*4])+","+std::to_string(deformationUV[i*4+1])+
+                      " expected="+std::to_string(u)+","+std::to_string(v));
                 Check(deformationUV[i*4+2]==px*.5f+.5f&&deformationUV[i*4+3]==py*.5f+.5f,
                       "seam changed original UV varying");
             }
