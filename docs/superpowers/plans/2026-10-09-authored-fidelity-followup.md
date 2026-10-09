@@ -34,8 +34,8 @@ Files: patch0029; core/src/test/native/projectm-regressions/sample_cap_test.cpp;
 Approach/pattern: restore I19/sample_cap_control.cpp realFactory controls and proposed-width-cap.patch against current28.
 Execution note: test-first; root owns canonical mutation.
 Verification: finite boundary/count/geometry controls fail current then pass; unaffected extended modes/replay; unchangedRoyal103 finalNative captures.
-- [ ] Restore test and verify RED.
-- [ ] Add ordered patch, verify GREEN/current suite, commit unit.
+- [x] Restore test and verify RED.
+- [x] Add ordered patch, verify GREEN/current suite, commit unit.
 
 ### 2. I22 custom dots
 
@@ -44,8 +44,8 @@ Files: patch0030; custom_wave_inputs_test.cpp; CMakeLists.txt.
 Approach/pattern: archived with-dot-controls test and proposed-custom-dots.patch; retain currentI08/I06 tests.
 Execution note: test-first.
 Verification: 0/1/2/thick/thin/ring/line/alias/replay and independent NaN/guard ablations; originalnebula/mosaicNative repeats.
-- [ ] Restore source tests and verify RED.
-- [ ] Patch, verify GREEN/current tests and commit unit.
+- [x] Restore source tests and verify RED.
+- [x] Patch, verify GREEN/current tests and commit unit.
 
 ### 3. I20 circle
 
@@ -54,8 +54,8 @@ Files: patch0031; circle_geometry_test.cpp; CMakeLists.txt.
 Approach/pattern: archived actualgeometry/draw control and sourceclosure patch.
 Execution note: test-first.
 Verification: raw/smoothed/sourceformula/counts, aspect/time/mystery, Native thin/thick/dots/replay; unchangedRoyal137/11 captures.
-- [ ] Restore controls and verify RED.
-- [ ] Patch, verify GREEN and commit unit.
+- [x] Restore controls and verify RED.
+- [x] Patch, verify GREEN and commit unit.
 
 ### 4. I24 evaluated instance style
 
@@ -64,7 +64,7 @@ Files: patch0032; shape_thickness_test.cpp; CMakeLists.txt; archived simplepropo
 Approach/pattern: InstanceDraw captures flag; derive LineStyle per draw; existing LineRenderer APIs/VBOs untouched. Source preparation may be delegated in isolated ignored dir; root integrates.
 Execution note: test-first.
 Verification: alternating/static/dynamic/fractional/negative/no-assignment/invalid fallback, borderalpha/textures/overlap/batchflush/linefallback/AA/aspects, once-only equations/replay, actualtwo city-lights originals.
-- [ ] Prepare bounded production repair and independent tests.
+- [x] Prepare bounded production repair and independent tests.
 - [ ] Verify RED/GREEN, sanitizers/resources/Native/cost; integrate after qualification.
 
 ### 5. I16 field freshness
@@ -74,7 +74,7 @@ Files: patch0033; motion_uv_freshness_test.cpp; CMakeLists.txt; MilkdropPreset-r
 Approach/pattern: actual real-fragment publication/lifecycle and existing owner first-frame/texture rules. Source preparation may be delegated; no generic lazy shortcut.
 Execution note: characterization plus failing temporal controls.
 Verification: on/off/on, multiple disabled, count/alpha off, A=B, default/custom/fallback/discard/output-write, native/authored consumers, resize/context/detail/presets/transition, GLstate/equation/RNG counts, visibleNative fixture with valid feedback.
-- [ ] Trace current lifecycle and choose qualified production policy.
+- [x] Trace current lifecycle and choose qualified production policy.
 - [ ] Verify RED/GREEN/full ownership controls and integrate.
 
 ### 6. Combined acceptance/newPR
@@ -86,3 +86,7 @@ Interfaces: all five source patches and controls; frozenbaseline960eed2c plusfin
 - [ ] Fresh normal/sanitizer/host/JVM/bothABI/recursive/docs/helpers/analyzer and Linux/Mesa bothlinkroutes; shaderlink when required.
 - [ ] Fullce:review/autofix, resolvefindings, finalhead checks; newPRrelease notes and monitoring/rollback plan.
 - [ ] RequiredGitHubCI/review green; PRnon-draft/merge-ready, without merging/releasing.
+
+## Next focus after this PR
+
+User steering on 2026-10-09: prioritize repeatable PC performance benchmarks and integration/merging of the fixes after this qualification is complete. Keep the current PR scoped to focused combined Native4K acceptance. PC benchmark results must identify the backend, preset/audio/seed, resolution and CPU/GPU timing scope; they do not establish real-TV headroom. This followup does not authorize merging or releasing the current PR before its review and CI gates.

@@ -1,0 +1,6 @@
+projectM authored feedback fallback at 512x288
+projectM authored feedback disabled: incomplete authored feedback framebuffer
+projectM authored feedback fallback at 512x288
+projectM authored feedback disabled: incomplete native detail framebuffer
+projectM authored feedback fallback at 512x288
+actual motion UV lifecycle controls pass; Native pixels/cost remain separate

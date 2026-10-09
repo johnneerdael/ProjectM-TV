@@ -1,0 +1,186 @@
+{
+  "aar": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/workers/candidate-native/candidate-native.aar",
+  "aar_sha256": "faf81cc64de9c2edc1b9ececa76c410c80a8579ff4e6de8516e582b64139eb7b",
+  "androidUser": 0,
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/android-lifecycle-prep/android-worker/app/build/outputs/apk/debug/app-debug.apk",
+  "apk_index_sha256": "59414c0c3a7623e77096f976babb5df1392d0baf791dd1e98cee950fd4b6565d",
+  "apk_native_sha256": "4a925675ff8e5d71f927fbcc84bd44c27e6ef4de177b69876777ff91a5c20474",
+  "apk_preset_count": 9616,
+  "apk_sha256": "27336cb29668c12f04974cee2cd4fe456a02629cb4d4b2f7f2b5cab432b54122",
+  "binder_sha256": "082f84ee612f7afd9e9464104300170a824781461c81b0e58df6f79f87cfca28",
+  "controller_sha256": "27e00f3824a387709f46021f529aaf5d917f8140a6ca29d01c65849f24174ef3",
+  "core_identity_sha256": "76b5b5b76cfde66f14da8b640c6b035483c9917af5eb97be6168f3bdaf822696",
+  "driver_identity_sha256": "76292ac4eb43c2018adc1ab370567f66943e33c9b5a5cd5ea2319ad8ee232ad6",
+  "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys",
+  "fixtures_sha256": {
+    "audit followup audit shape live alternating.milk": "fc4848880088a114bc82dfb76ac3226e4950aaeb0bf30e8ce4955588dded6b9a",
+    "audit followup audit shape live disjoint-thick.milk": "b2da1a89c7e3fe847fcf8ad8b0334d2cdb250c50e384c46340681ea6527333df",
+    "audit followup audit shape live overlap-thick.milk": "e4ef3471f92a7fe73d50d8a3e368bc627552ea98c1e1d572810ee7222ded9bba",
+    "audit followup dot audit dot ring.milk": "2ff17eebe97c077d6b10c5f0ab2433219ba3f3814adeace25080a4babbd8b7c3",
+    "audit followup dot audit single dot.milk": "b9adf6ebfddbc1d7b6f22cf6685561d6fca6ce319528e98c7651780e8ba5938e",
+    "audit followup dot audit two dots.milk": "892d1279ec31b00d81c9967a77a2809bd0c63a84848b1b13eaac98966974f73c",
+    "audit followup uv all-disabled.milk": "3badefc05eb47e0f5d5b18e56e7f973b0dac8135badb8166538945f48237c5f1",
+    "audit followup uv all-enabled.milk": "09c4ed67f97f1e6cd1ecfa43211b7d1d0d934390cacecccbb32fdccfd2d38e00",
+    "audit followup uv custom-feedback.milk": "7e0a53e1c0f0d040c55fc6b88deddcc24f0f6adb3863b4a4e71d8c82ad56f71c",
+    "audit followup uv default-feedback.milk": "cb39f6414351a6642b8ab3f6feffc16a3ad3214aaaf91552f7f99ca5505a8fe2"
+  },
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "glVendor": "Google (Apple)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "ordered_patches": [
+    {
+      "name": "0001-tv-rendering-and-preset-compatibility.patch",
+      "sha256": "65900645b989f653d697bdce5cdc265ab9cbf5b5f0ac699d737fb09488033dd7"
+    },
+    {
+      "name": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+      "sha256": "eb210256beb15ba61b3989b072e0a245e02baf8b7b983550de1e6773249e6571"
+    },
+    {
+      "name": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+      "sha256": "dc9ba43e32b9894e01a897f0f5727cae1cbb1b6cd9643f85b4dcd240cabc1419"
+    },
+    {
+      "name": "0004-textured-shape-sampler.patch",
+      "sha256": "3601f673c62f48f44757c8956910a6930e37eb0bb5116fc6a3d90ab6964690d9"
+    },
+    {
+      "name": "0005-blur-range-interval.patch",
+      "sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a"
+    },
+    {
+      "name": "0006-fixed-warp-signed-unit-zoom.patch",
+      "sha256": "44703476e7ebdc189c053b31a23b14a4beb45e17304def8c53adf52f0b68f90d"
+    },
+    {
+      "name": "0007-live-builtin-wave-controls.patch",
+      "sha256": "1c2bb9ac7328fec193c7b60a84df980afe4ac872e74dc8e8b6984ac7e83fc700"
+    },
+    {
+      "name": "0008-live-legacy-display-controls.patch",
+      "sha256": "322335d4638e3513bf8a00d6bd2d9d39436647cc368cc32a79ea28cb420c93b6"
+    },
+    {
+      "name": "0009-user-texture-premultiplication.patch",
+      "sha256": "2f62c09e83b45ac25a4161be1f71f941a3e9852fa5401a930e00fc19836be6d0"
+    },
+    {
+      "name": "0010-preset-texture-search-path-ownership.patch",
+      "sha256": "62740719eacde9bfd12f8d3caf83413d2e3a744d0f4b713693f8eade4e049296"
+    },
+    {
+      "name": "0011-cpu-warp-rotation-trig.patch",
+      "sha256": "c99a6221174a33a7d87381e055ee3187a91edea403fe0d5ea9a9efb9a502488b"
+    },
+    {
+      "name": "0012-shape-pixel-centers.patch",
+      "sha256": "9e4614734be2eced389433bcdef2afd3292afaebac3330fee55222a25c9fa7be"
+    },
+    {
+      "name": "0013-composite-texel-centers.patch",
+      "sha256": "85edc00b4adcc725c6b824673ec24dd756bded652511b170b62f91912e8dd2d2"
+    },
+    {
+      "name": "0014-legacy-tint-and-mode1-waveform.patch",
+      "sha256": "6f5f5d7ebebc7600f96f2fcae0a24be9d77f98a0b5402e486c207d16cbe2b689"
+    },
+    {
+      "name": "0015-warp-negative-zoom-cpu-power.patch",
+      "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
+    },
+    {
+      "name": "0016-cache-mesh-init-per-viewport.patch",
+      "sha256": "5ab17fdd496d2771f9a835c8716e0298b57320e44d3ae829e1430b18b1934d31"
+    },
+    {
+      "name": "0017-builtin-wave-opacity.patch",
+      "sha256": "3b898d63a7ef0baafb4862a8a37044dd3fe4df3a6d0bc1e4562287d9a7197652"
+    },
+    {
+      "name": "0018-custom-wave-input-windows.patch",
+      "sha256": "68d3b8307f172575b6d35eded5ed9e0d3d2213033e12e040f623221844e6b187"
+    },
+    {
+      "name": "0019-gamma-only-pass-epsilon.patch",
+      "sha256": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a"
+    },
+    {
+      "name": "0020-eel-named-constant-precision.patch",
+      "sha256": "dd152e9036a7e07a8aae22db1827fd3148505a243724a8c938f5a34c6f05d29a"
+    },
+    {
+      "name": "0021-original-equation-inputs.patch",
+      "sha256": "02d1a76b832a76f86f2f7612adcb0669d0e9e91351f0e8222daeabe522bc8d92"
+    },
+    {
+      "name": "0022-negative-odd-echo-orientation.patch",
+      "sha256": "5ab654be6d7008c9fc83af736690243d915a9e2b5fe08e3a990620a4818490f4"
+    },
+    {
+      "name": "0023-legacy-warp-oscillator-y.patch",
+      "sha256": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff"
+    },
+    {
+      "name": "0024-legacy-warp-physical-diagonal.patch",
+      "sha256": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546"
+    },
+    {
+      "name": "0025-legacy-per-pixel-traversal.patch",
+      "sha256": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc"
+    },
+    {
+      "name": "0026-legacy-angle-seam.patch",
+      "sha256": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a"
+    },
+    {
+      "name": "0027-wave-rgb-clamp.patch",
+      "sha256": "2af590bc0a9e9519cc6a3fc2bc3486a9bf048537849077a6cd85b3c44e8bde55"
+    },
+    {
+      "name": "0028-original-border-fan-topology.patch",
+      "sha256": "1cbbd2ba3c93eea3647e586e37d0c1bfd749e3c93ae3256b4c4c636741bc00d6"
+    },
+    {
+      "name": "0029-original-line-sample-caps.patch",
+      "sha256": "275277d85db16912e93c7225ef2feae15e38076e1d21fccdbbcfe0a3e87225ff"
+    },
+    {
+      "name": "0030-authored-custom-dots.patch",
+      "sha256": "303f3cc60ec2cda45de1c280c94dda05da4798e63ddde439153782fda9e35b3c"
+    },
+    {
+      "name": "0031-original-circle-closure.patch",
+      "sha256": "7bdb26d64f82c43c27f9f39f31ea6d3cf5073d1479c876cd185747eedaa4535b"
+    },
+    {
+      "name": "0032-live-shape-instance-thickness.patch",
+      "sha256": "a1c0dae19663d9f28513071da462e50dfdbd9bd7468660ca9905287ccdbdd0ae"
+    },
+    {
+      "name": "0033-latest-previous-motion-field.patch",
+      "sha256": "326077fc447f5941e607f40e871413863d704a2954aefd0e77305b3145bab496"
+    }
+  ],
+  "ownedSerial": "emulator-5640",
+  "package": "nl.neerdael.projectmtv.corpuslifecycle",
+  "pcm": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/dot-diagnostics-audio.u8",
+  "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "protocol": "projectmtv-core-lifecycle-v1",
+  "sdk": 34,
+  "source_commit": "cd3f0e44aa09afa72b7b729a0d75574154973b0d",
+  "verifier_sha256": "483e7222ff72292bd3e400f4711103dd823570ae61ae64861cccc4870713a768",
+  "worker_source_sha256": {
+    "android-worker/.gradle/8.14.2/gc.properties": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "android-worker/.gradle/buildOutputCleanup/cache.properties": "44ede2d80d29d7536c6fd3716b37ff1c0b4329d58b4937a4e830fe86dadbeac8",
+    "android-worker/.gradle/vcs-1/gc.properties": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "android-worker/app/build.gradle": "e8e40f2982d3074c61374a201b4bf673703214ad637ccecc25a5e3d099a5f660",
+    "android-worker/app/src/main/AndroidManifest.xml": "621467443a923ecc1cccf8c5f06a2dca07906a821376e73c290809f2eed778ca",
+    "android-worker/app/src/main/java/nl/neerdael/projectmtv/corpus/CorpusInstrumentation.java": "af795441131bc99aa7933b753e318d8be79ed45bcb3b3b3ae00628cc2b2b5521",
+    "android-worker/app/src/main/java/nl/neerdael/projectmtv/corpus/EglSurface.java": "e74cb1d5c5354f4d2b1ac0c8aa9b02be30afdae2bbb0dba3bd38a428e48fde1c",
+    "android-worker/app/src/main/java/nl/neerdael/projectmtv/corpus/LabBridge.java": "4f06c7ef472ce3c539f2fbe17901ceffc170eed830aa4914a5ae55c516ffdd0c",
+    "android-worker/build.gradle": "fb639e5e628deb129f5c804ad8cc664b3b56fce1b0ce6880ac02f54515ba59da",
+    "android-worker/gradle.properties": "ce2baad862b1d7af30ceeff7ffdb609d590d341e4bd2f4c91c07e54b6fa2b56d",
+    "android-worker/settings.gradle": "125ddb7df06c325193ea78a27193838432fc7287f565311c91be7001ece41e67"
+  }
+}

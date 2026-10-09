@@ -1,0 +1,18 @@
+{
+  "aar": {
+    "path": "core/build/outputs/aar/core-release.aar",
+    "sha256": "e3437df6b9805fbe427a351674c58fa06c631d170f51ed291990c45df49222c9",
+    "native": {
+      "jni/arm64-v8a/libprojectmtv.so": "f273ae63d769a056466b34d9c0b4027cf3c99d00a2e61323478b653f7893116e",
+      "jni/armeabi-v7a/libprojectmtv.so": "6b03f22377e16b27f01228175867e7c8b8916dbada712ba05a9944b59df2e16f"
+    }
+  },
+  "apk": {
+    "path": "app/build/outputs/apk/debug/app-debug.apk",
+    "sha256": "2031b4e69dd30958f38a07a614f0196c961a0d5fcfccacd355fbec8050f72757",
+    "native": {
+      "lib/arm64-v8a/libprojectmtv.so": "f1351665f4a63c062d1ad26a9a90e4d991a693e41b659b44635435fc5231cb52",
+      "lib/armeabi-v7a/libprojectmtv.so": "6e1fee5c743da9874d8f146b35860ac3f179a6767414c96ae092ea26a3d797fd"
+    }
+  }
+}

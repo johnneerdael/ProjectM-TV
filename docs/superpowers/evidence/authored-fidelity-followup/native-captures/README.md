@@ -1,0 +1,5 @@
+# Focused final-output Native captures
+
+The baseline28 and candidate33 workers rendered76 jobs:19 unchanged originals or finite fixtures, before/after with two independent repeats,480 frames per job. All608 selected PNG/RGB frames were decoded/hash-verified; each role repeats exactly at its eight selected frame ordinals. The full608 PNGs remain in the original ignored producer directories. This archive contains every request/manifest and the38 frame239 PNGs from repeat0 for review; it does not claim the unarchived images are present in Git. Exact original artifact/asset/PCM/driver identities are recorded in each manifest and the adjacent identity records.
+
+Native final output is3840x2160 with Standard1280x720 feedback reference, seed12345, frame/30 clock and frozen unsigned mono PCM. Explicit read framebuffer0 is checked. Correctness-run timing fields were collected alongside other work and are excluded from isolated combined-cost acceptance. These source-derived GLES comparisons do not establish Windows/D3D pixel equivalence, whole-corpus fidelity or physical-TV performance. No affected-preset count follows from lexical candidates.

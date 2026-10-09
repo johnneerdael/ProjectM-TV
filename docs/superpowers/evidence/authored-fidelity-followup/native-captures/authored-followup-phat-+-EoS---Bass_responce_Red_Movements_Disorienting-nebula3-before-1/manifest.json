@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.authoredfollowupbefore",
+  "pid": 6358,
+  "job": {
+    "expectedPresetCount": 9616,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/audio.u8",
+    "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "e72328519f4742e5c105cfae7e6003e2aaf488bf53f417067f6eb1b1b7af9ef0",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains the tail bounded by projectm_pcm_get_max_samples()",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ab04838e659b3be5f07ee88e9198f31e1078e9e14f7026c08ca9697183c1cffc",
+      "pngBytes": 5067371,
+      "pngSha256": "d67c22a8cd7e0755e74b98016dc4105e3b5648dcb67c70ac3f3f79648ff0c2d9",
+      "rgbMean": [
+        55.447326027199075,
+        76.1931967351466,
+        90.65981589988426
+      ],
+      "exactBlackFraction": 0.08712191358024692
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b42d1a9e1fc31bae35322d44e2d4ac69789c1046a44ee4d3037729717a883790",
+      "pngBytes": 5496616,
+      "pngSha256": "d63542ee9c334118be7e6dc878d2011b9218c81efed7bd2f319676d2afc8f697",
+      "rgbMean": [
+        60.14939670138889,
+        82.06284071180555,
+        98.25742320119599
+      ],
+      "exactBlackFraction": 0.03184341242283951
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0b431694cc8398d3acc028e342c46c8b8b611f429e67ee7abf6c0a71f13c5707",
+      "pngBytes": 5876107,
+      "pngSha256": "a0f47fae63220195c8a44d07b9ade7836201ffebd58ead8a072430744f0700fd",
+      "rgbMean": [
+        75.38318166473765,
+        96.15809220679013,
+        117.0356428433642
+      ],
+      "exactBlackFraction": 7.548466435185185E-4
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6c4f27cad202235f4b12465b2185413bc7a11b03b7776c470508c68488f2fbea",
+      "pngBytes": 5968740,
+      "pngSha256": "e9333ac9fd23cf4c32268cb2ef2ec8be91ec46d6996006cb0724581d10d7669d",
+      "rgbMean": [
+        89.5944871238426,
+        104.93574411651234,
+        136.47957380883489
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "c4fdac6a253d42e959d5ccc52198a14dd5a615edf0a1d23f55d297021b9aaf10",
+      "pngBytes": 5668185,
+      "pngSha256": "d01a3e0125bb3e20c4c978ea703a5563072aa4e9c4c26892d6a782ac5a77b7e0",
+      "rgbMean": [
+        86.3532587046682,
+        92.58315441743827,
+        133.87253134645061
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ba55929985dbca81b35e5546ece93ebec3c7969e80af432b228e4456dd588f36",
+      "pngBytes": 5987077,
+      "pngSha256": "bf8b2723c1079570d9755b24e96e8dcd5b5afdb926234265ab56cc74e1f61e2b",
+      "rgbMean": [
+        103.78364571277007,
+        89.10721969039352,
+        153.07630654417437
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "fbecee3875aca4d9a5582ce684d7ca6f6a46ea239c136d2a97d8e23f6dd24edf",
+      "pngBytes": 5774625,
+      "pngSha256": "bff087274da549b1fd198179f9c5220190e36190c6bafd7787c2eebd1c2088c6",
+      "rgbMean": [
+        106.5468236400463,
+        72.97545862268518,
+        158.59629135320216
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "5c02bcc33fffa4cdd6c1cf44d47816c9e6868f1022e393c860e402416c6902f7",
+      "pngBytes": 6317167,
+      "pngSha256": "be84c8bdffdff38fa173edee8546fdd1923a1bbd647b944e23af2624845fc68a",
+      "rgbMean": [
+        100.39136501736111,
+        82.91917631172839,
+        159.63502350983796
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 578167,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 301,
+      "elapsedRealtimeMs": 589688,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9616,
+  "indexSha256": "59414c0c3a7623e77096f976babb5df1392d0baf791dd1e98cee950fd4b6565d",
+  "presetAssetSha256": "f1e64ac13a832aa173667fe1aef8d67ce2bb3b38a333cfba1c673200adb186f5",
+  "forcedPresetPrefix": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 19,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 44155,
+  "framesRendered": 480,
+  "renderWallDurationMs": 15856,
+  "pssAfterFramesKB": 72463,
+  "serializedFrameMeanMs": 4.906228108333334,
+  "serializedFrameP90Ms": 5.782041,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 16233
+}

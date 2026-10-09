@@ -2,11 +2,11 @@
   "baseline": "960eed2c6cf3badf0dccb97f02d64bdecc851ed5",
   "branch": "fix/milkdrop-authored-fidelity",
   "tasks": {
-    "I19": "RED->GREEN; current63hostsuite includes counts/styles",
-    "I22": "RED->GREEN authoreddots/singleNaN/replay; Nativepending",
-    "I20": "RED167->GREEN sourceclosure; zero-audio fixture initialized, Nativepending",
-    "I24": "REDstyle/domain/original ->production32; oracle replayprojectionfixed, hostcurrenttestpending/Nativepending",
-    "I16": "REDtemporal/MRT ->5/5 productionownercontrols; publicmeshcounterfixed; Native/contextfailuregatespending"
+    "I19": "implemented29; 63 host/sanitizer controls; Native Royal103 repeated before/after captured, verification in progress",
+    "I22": "implemented30; authored dots/singleNaN/replay controls pass; Native76jobrun in progress",
+    "I20": "implemented31; sourceclosure geometry controls pass; repeated Royal137/11 captured, verification in progress",
+    "I24": "production32 simple per-instance style; host/style/domain/original controls and NDKarm64 O3fast guard verified; Native/context/cost gates in progress",
+    "I16": "production33 continuous real-warp MRT; five ownership/lifecycle hostgroups pass; Nativefeedback captured, private JNIcontext qualification next"
   },
   "rulings": [
     {
@@ -43,6 +43,31 @@
       "ruling": "Parentharness invokes explicitOpenGLmoduleoverride",
       "reason": "engine GL_LIBS path bypassesfind_package, leaving parent targetundefined",
       "cost_if_wrong": "Linuxdiscovery/explicitlink controls catch scope/regression"
+    },
+    {
+      "ruling": "GLES actualRG16F probe usesRGBA/FLOAT insteadRG/FLOAT",
+      "reason": "GLES rejectsRG read format; RGBAreads actualsameattachmentchannels, GLerrorsstillstrict",
+      "cost_if_wrong": "pixel/storageidentityandactualTFendpointprobes fail"
+    },
+    {
+      "ruling": "GLES reference keeps unchanged mediump production shader and independent same-backend reference",
+      "reason": "CPU-trig equality cannot establish mediump GPU outputs; strict producer and counterfactual discrimination retained",
+      "cost_if_wrong": "wrong-Y/source-seam mutants and positive reference assertions fail; universal GPU trig accuracy notclaimed"
     }
-  ]
+  ],
+  "checks": {
+    "mac_normal": 63,
+    "mac_sanitizer": 63,
+    "fresh_native_runner_renderer_sanitizer": 63,
+    "host": 329,
+    "jvm": 137,
+    "capture_helpers": 60,
+    "capture_helper_subtests": 24,
+    "linux_normal": 63,
+    "linux_explicit": 63,
+    "linux_sanitizer": "initial30s timeouts isolated to built-innoise setup; diagnostic in progress",
+    "shipping_build": "bothARM ABIs core release and app debug pass",
+    "combined_cost": "seven-workload84jobABBA prepared notstarted",
+    "new_pr": "notcreated"
+  }
 }

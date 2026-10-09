@@ -1,0 +1,7 @@
+{
+  "source": "unchanged33 copy; only declared mutant modified",
+  "shader_original_sha256": "d5d25153edc331b2bf80a2b27793c81eddbf5fe3b2a4b9e8758fafa48ebd4d39",
+  "wrong_y_shader_sha256": "4f78de9dff41018a839e745d0705091627f0a9ccaf2a2ebcfd28f2ed8b1af46b",
+  "seam_original_sha256": "65e37fe3316f3b186ea01e14039115f37990625a8513e1c3c0ed60bca736190b",
+  "wrong_seam_sha256": "793c0b9f3718ed909a9daeb0e3b4a9dc46c597a4a811552e05a62011766f4af4"
+}

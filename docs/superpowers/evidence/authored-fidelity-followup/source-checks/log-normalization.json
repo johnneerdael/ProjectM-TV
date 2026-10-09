@@ -1,0 +1,38 @@
+[
+  {
+    "path": "source-checks/linux-wrong-y.txt",
+    "raw_sha256": "186f858d86cc72338ef0bb26b6a62805647f4d37d647b5ca8524f75da8f6644f",
+    "archive_sha256": "6068d87d8f8e72a9e25eee8191a962498d0cba2bf980198d168db5e20d9054ff",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  },
+  {
+    "path": "source-checks/linux-normal-routing.txt",
+    "raw_sha256": "7b44ac83c8a4b8ac2772918ee42a629ecf1325b71acad9255002e1814c7996d1",
+    "archive_sha256": "f05b54aea98cd983377acbb29f83da3b17e72b9bf6d5751bc060909f27542419",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  },
+  {
+    "path": "source-checks/linux-explicit-routing.txt",
+    "raw_sha256": "639860d592120685f0d2566fa6ac1f8e7d01b4277b0c6be5e3ace6bc2050527f",
+    "archive_sha256": "42964061caf6085a539658a18a3bec53b6dfe189ec765df228e2343b6cd0e728",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  },
+  {
+    "path": "source-checks/linux-final-normal.txt",
+    "raw_sha256": "15cfa3d1720de5064f4b06de101f461664d8e67e7da711d752fc5ca33bc88747",
+    "archive_sha256": "b886ee5c6a308dd211b508a5e9fa2dff6ac3158c836c133c07a4f03a1f38d749",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  },
+  {
+    "path": "source-checks/linux-wrong-seam.txt",
+    "raw_sha256": "552641a5d764dbcfdfa7b77dd0684a85978bdd577f2c9ef5c1d8803c334097a6",
+    "archive_sha256": "4a4850030ef83131f9a497014e1802c8274efd4396e9dfc5be052276f99422ae",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  },
+  {
+    "path": "source-checks/linux-sanitizer-deformation-diagnostic.txt",
+    "raw_sha256": "bf3369fdfe3a182d14ed8a87a1e95aa71c2abc473ef1a1f58f6e871f558de694",
+    "archive_sha256": "efcef68b4c2e27295897449e8cf468b6d5d419e6caa1f989e65a4f4751c7e639",
+    "normalization": "strip trailing ASCII spaces/tabs/CR only; raw producer logs remain unchanged"
+  }
+]

@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.authoredfollowupbefore",
+  "pid": 6732,
+  "job": {
+    "expectedPresetCount": 9616,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/audio.u8",
+    "preset": "shifter - mosaic mitosis.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "a2c9b1f8020ee6697f7f8fbe95da1b81420777f5a3f3ea7899963ea73b740e8d",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains the tail bounded by projectm_pcm_get_max_samples()",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "1a587ea7395660b43d2ae97f7bd3bb7a02c526a4a4c28bb60c6be3ed731bbf23",
+      "pngBytes": 2860725,
+      "pngSha256": "f4ef26864f61b38cfa8159d68e768588d5f205584f0827a2db732075f617dce6",
+      "rgbMean": [
+        116.67445806809414,
+        117.11124071662809,
+        0
+      ],
+      "exactBlackFraction": 1.0199652777777778E-4
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9dc8683512952d00aa832af52a4243a9bf671568cf4f624e1e937f46a5338521",
+      "pngBytes": 3087400,
+      "pngSha256": "5eb329c9238586e9ae62c861389b85a6de1e10918a781f93ffa356badc212b1c",
+      "rgbMean": [
+        116.93054952739197,
+        117.03093593267747,
+        0
+      ],
+      "exactBlackFraction": 7.92824074074074E-4
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "16dce9279848adf100afe834e8b518fa87727028f82aa4738e084496bd152f58",
+      "pngBytes": 2997225,
+      "pngSha256": "d56c9dbe30bd89d99b2f732b3e306563485713b84ad0a0be3b01ac2edaf74dd6",
+      "rgbMean": [
+        117.75451521508488,
+        117.7413735773534,
+        0
+      ],
+      "exactBlackFraction": 6.860050154320988E-5
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "46316f36e137237c17792711ae14b6d47b300c7a17ab6b0a5ab6024756d227b3",
+      "pngBytes": 2883938,
+      "pngSha256": "0c5f9bbb4498eab7fe00c1d516080ec67e399186a8e93f4fdf06c52b2a87f680",
+      "rgbMean": [
+        117.50519507137345,
+        118.2130256558642,
+        0
+      ],
+      "exactBlackFraction": 2.0109953703703704E-4
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "d80e679c5ed195a9f6a057ae027e85089aa91a5d9569219af3cb2f3cdfdcce18",
+      "pngBytes": 2767358,
+      "pngSha256": "39596afd96c4a7cfced4290b5c5237a26bd627a48c6005c5c1f439ea65a72425",
+      "rgbMean": [
+        118.20294138213734,
+        118.25616705246914,
+        0
+      ],
+      "exactBlackFraction": 1.398533950617284E-5
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "cf7e5ebfef9ca4cb0323c183afea54160b34d4a4f7b024294cc2674db1f22da3",
+      "pngBytes": 3535414,
+      "pngSha256": "84f1115dc25280a4e8e401237217d20c9ace488c8301055965d839cf102aed24",
+      "rgbMean": [
+        117.24749011381172,
+        115.88455415702161,
+        0
+      ],
+      "exactBlackFraction": 0.0025162760416666667
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3f5dc48527144464f1dd719709299a1a494e2b20a1f6bc635e8e7f85fad5113e",
+      "pngBytes": 2948755,
+      "pngSha256": "f84fb50f55428007e695e4255a2fccf234c7dc2d570d269791f9af182bfacbea",
+      "rgbMean": [
+        117.12398847415123,
+        117.38863727334105,
+        0
+      ],
+      "exactBlackFraction": 2.955005787037037E-4
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.authoredfollowupbefore\/files\/native-trails\/authored-followup-shifter---mosaic-mitosis-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9bcf489b8ee3cdd70e489e50574e22bf7e1d91069ded47aadfb00afd9ad0eaa1",
+      "pngBytes": 2881608,
+      "pngSha256": "bbc46ab36fff8fc16ccbe2ce98deec3deddbe3aa81604c5a435546c44cbebd24",
+      "rgbMean": [
+        117.33047646604938,
+        117.54217930169753,
+        0
+      ],
+      "exactBlackFraction": 1.4347029320987655E-4
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 660682,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9616,
+  "indexSha256": "59414c0c3a7623e77096f976babb5df1392d0baf791dd1e98cee950fd4b6565d",
+  "presetAssetSha256": "8a9c95567882bf3fd2644e28cb2e0067b62f52b38cb9d10cc4ada34c90710419",
+  "forcedPresetPrefix": "shifter - mosaic mitosis.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 17,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 44038,
+  "framesRendered": 480,
+  "renderWallDurationMs": 8950,
+  "pssAfterFramesKB": 72280,
+  "serializedFrameMeanMs": 3.2267101083333323,
+  "serializedFrameP90Ms": 4.436958,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "shifter - mosaic mitosis.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 9290
+}

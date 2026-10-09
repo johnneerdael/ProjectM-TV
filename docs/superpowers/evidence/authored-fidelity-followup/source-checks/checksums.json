@@ -1,0 +1,30 @@
+{
+  "raw_producer_log_sha256": {
+    "full33-canonical-final-controls.txt": "2711e0fcc60b2592c162afe2d9de02e6b8deecc9bc1f073ac1bb335a8cbde606",
+    "full33-sanitizer-final-controls.txt": "a4c23ce77c494eb2a2e607c6c7ec5a43022b1ec0f1d376280919192b9f77125b",
+    "linux-normal-routing.txt": "7b44ac83c8a4b8ac2772918ee42a629ecf1325b71acad9255002e1814c7996d1",
+    "linux-explicit-routing.txt": "639860d592120685f0d2566fa6ac1f8e7d01b4277b0c6be5e3ace6bc2050527f",
+    "linux-wrong-y.txt": "186f858d86cc72338ef0bb26b6a62805647f4d37d647b5ca8524f75da8f6644f",
+    "linux-wrong-seam.txt": "552641a5d764dbcfdfa7b77dd0684a85978bdd577f2c9ef5c1d8803c334097a6",
+    "native-engine-sanitizer.txt": "90fab1d016c32384546944b2a84403b363228c1ce584af3436e5c4c14d378a64",
+    "host-controls.txt": "a61db0869ebfbc92b1b41326a57bdfe56a33791e554fbac98d64e64353e89564",
+    "jvm-tests-fresh.txt": "a1f2fd8797ac67351e3528ceeaf5f2b99cc7d54023b1dcb7ba23ef9b13fa9f34",
+    "capture-helper-tests.txt": "10433291dc528d72add8f679e7de8a3d05f98cf697d86eaebab30c056bf11cb3",
+    "mutant-identity.json": "8725ae683ae19d6b78756c0404438ea4c79496ba5bb5f856aefe6675f064b7ef",
+    "shape-ndk-O3-fast-identity.json": "647e7564df5a18f8db00d90eb874674dae6aa9ecdd72167358b4857dd97a0a7b"
+  },
+  "archive_file_sha256": {
+    "full33-canonical-final-controls.txt": "2711e0fcc60b2592c162afe2d9de02e6b8deecc9bc1f073ac1bb335a8cbde606",
+    "full33-sanitizer-final-controls.txt": "a4c23ce77c494eb2a2e607c6c7ec5a43022b1ec0f1d376280919192b9f77125b",
+    "linux-normal-routing.txt": "f05b54aea98cd983377acbb29f83da3b17e72b9bf6d5751bc060909f27542419",
+    "linux-explicit-routing.txt": "42964061caf6085a539658a18a3bec53b6dfe189ec765df228e2343b6cd0e728",
+    "linux-wrong-y.txt": "6068d87d8f8e72a9e25eee8191a962498d0cba2bf980198d168db5e20d9054ff",
+    "linux-wrong-seam.txt": "4a4850030ef83131f9a497014e1802c8274efd4396e9dfc5be052276f99422ae",
+    "native-engine-sanitizer.txt": "90fab1d016c32384546944b2a84403b363228c1ce584af3436e5c4c14d378a64",
+    "host-controls.txt": "a61db0869ebfbc92b1b41326a57bdfe56a33791e554fbac98d64e64353e89564",
+    "jvm-tests-fresh.txt": "a1f2fd8797ac67351e3528ceeaf5f2b99cc7d54023b1dcb7ba23ef9b13fa9f34",
+    "capture-helper-tests.txt": "10433291dc528d72add8f679e7de8a3d05f98cf697d86eaebab30c056bf11cb3",
+    "mutant-identity.json": "8725ae683ae19d6b78756c0404438ea4c79496ba5bb5f856aefe6675f064b7ef",
+    "shape-ndk-O3-fast-identity.json": "647e7564df5a18f8db00d90eb874674dae6aa9ecdd72167358b4857dd97a0a7b"
+  }
+}

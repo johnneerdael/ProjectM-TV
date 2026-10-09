@@ -1,7 +1,13 @@
-# Authored fidelity followup — active
+# Authored fidelity followup
 
-User authorizes I19,I22,I20 authored-work cost, and production qualification of I24/I16 through a new merge-readyPR. Baseline960eed2c/28patches remains frozen; mainaf164a97 and olddraft61 unmerged. Newbranchfix/milkdrop-authored-fidelity includes prior13repairs and five newsourcefixes29–33.
+The user approved necessary authored-work cost for I19 sample counts, I22 custom dots and I20 circle closure, and production qualification of I24 live shape thickness and I16 motion-field freshness. This candidate adds patches0029–0033 to the unchanged28-patch baseline and includes the earlier13 repairs:18 repaired audit IDs in total. Ten retained policies and five other deferred proposals remain. The old draftPR61 and its frozen evidence remain unmerged and unchanged.
 
-Current candidates pass63macOS controls after realRED. I24 uses per-instance style without grouping; typed guard preserves rawinvalid values and savedfallback. I16 publishes through actual warp/MRT without a synthetic UV-only pass. NewNative/combinedcost/sanitizer/platform/review/CI gates remainopen.
+I24 captures style per instance without experimental grouping. I16 publishes through the actual warp/MRT, preserving fragment discard/output writes, previous-frame order and per-preset ownership. Single-dot NaN inputs, raw nonfinite equation values, once-only equations/RNG, prepared replay and prior Native4K fixes remain. There is no API, dependency, version or bundled-preset change.
 
-Archived old33finding audit is an immutablecompletedcheckpoint; newacceptance replaces decisions only in the activeledger with userauthorization, not by relabelling oldimages or timings. No versionbump/presetmutation/corpusrestart. See currentplan/spec and the tracked taskledger.
+[Source/build checks](source-checks/README.md) pass329 host,63 normal/sanitizer renderer,137 JVM and60 capture/helper tests plus24 subtests, with both ARM architectures built. Linux Mesa normal and explicit-link routes pass63 controls; focused GLES deformation/seam sanitizer controls pass with the documented startup-time limit. NDK O3/fast-math guard proof covers both ARM architectures.
+
+[Before/after review](REVIEW-INDEX.md) contains38 fresh frame239 images. The full focused run completed76 jobs across19 presets/fixtures, and all608 selected final-output RGB captures verify and repeat within each role. Native final output is3840x2160 with Standard1280x720 reference. These are selected-frame/source-derived GLES observations, not whole-corpus or Windows/D3D certification. Affected-preset counts remain unconfirmed.
+
+[Active-canvas JNI lifecycle](lifecycle/README.md) passes four Native4K jobs with120 verified boundary captures and matching repeats. Context recreation, resizing, pressure requests, mesh/trails changes and preserved-context resume retain the required active canvas. The older zero-reference jobs remain fallback-only evidence. Activity Home/real-audio attachment, true memory exhaustion and physical-TV headroom are not established by this pbuffer protocol.
+
+The isolated seven-workload combined-cost run, fresh recursive/analyzer/docs checks, final integration with current main, new PR release notes and required GitHub review/CI remain open. The goal is a new non-draft merge-ready PR; no merge or release is performed in this task. Afterward the user wants repeatable PC performance benchmarks and integration of the fixes.

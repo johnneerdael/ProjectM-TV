@@ -315,20 +315,20 @@ The15 patch sections now have matched comparison evidence. Deeper optimization/l
 The upstream capture admits GLES 3.0; our image workers disable the emulator's broken
 program-binary export. No original Windows/MilkDrop GPU screenshot was produced.
 
-## MilkDrop audit repairs in progress
+## Current MilkDrop audit candidate
 
-The new audit series follows released mesh-cache patch0016. Current0017–0025 cover ten finding IDs: opacity, valid custom-wave windows, discrete dots, gamma-only epsilon, named constant decimals, inverse aspect/fresh wave inputs, negative odd echo, legacy oscillator Y and physical legacy diagonal. Preserve current0016's static upload behavior and earlier CPU trig/negative-power/prepared replay. [Active audit ledger](superpowers/evidence/milkdrop-audit-repairs/README.md) links source/final-output/cost evidence and22 unfinished findings. I19 remains a separate cost-bearing proposal; I22 timing disposition remains open. Frozen evidence still uses its original source revision and historical patch numbers. Final integration against this main baseline remains pending.
+The candidate series retains released patches0001–0016 and audit repairs0017–0028 unchanged, then adds five independently revertible authored-fidelity fixes:
 
-Current0026 restores legacy physical per-pixel traversal;0027 restores nonzero parsed file booleans, coordinated with the local analyzer. Both preserve authored state and replay contracts. Their focused source/Native acceptance limits are recorded in the active ledger; no whole-audit completion or final-head certification is implied.
+| Patch | Finding | Behavior |
+|---|---|---|
+| 0029 | I19 | Restore original line-wave sample budgets, capped by the reference-equivalent width, with a two-point floor. |
+| 0030 | I22 | Submit authored discrete custom dots without interpolated midpoints; preserve a single-dot NaN sample input. |
+| 0031 | I20 | Restore circle angular spacing and explicit closure before shared smoothing. |
+| 0032 | I24 | Capture evaluated outline thickness per shape instance for authored and Native replay; preserve saved style outside the defined int32 truncation domain. |
+| 0033 | I16 | Publish the actual previous completed warp field while vectors are hidden, preserving real fragment discard/output writes and per-preset ownership. |
 
-Candidate0028 restores the original unblended circle angular spacing and explicit closure before shared smoothing, without changing TV transition composition or Native replay/styles. Source/CGL55 controls pass; Native4K original/finite/cost qualification remains open.
+The user accepts necessary authored work instead of the historical zero-added-cost gate for these five. I24 uses the small per-instance repair rather than experimental grouped geometry; I16 uses the actual warp producer rather than a synthetic UV-only shortcut. Earlier CPU warp trig, negative power, cached mesh uploads, prepared replay, float values, textures and Native/reference policies remain intact. No new API, dependency, asset or version change is introduced.
 
-Latest disposition: shared I02/M01 nonzero file booleans measured+.102ms/+7.503% in the negative-enabled Native4K wave control and is deferred outside shipping patches with its source/capture/cost owner packet. Analyzer remains aligned with current positive-only semantics. Circle is now live0027 (historical0028); frozen evidence numbering/source hashes are unchanged.
+The candidate repairs18 audit IDs. Ten retained policies and five other deferred proposals remain as recorded in the immutable [historical audit](superpowers/evidence/milkdrop-audit-repairs/README.md). Its original patch numbers, zero-cost decisions and captures are not relabelled as new acceptance.
 
-Latest circle disposition: isolated Native4K mean+.058ms/+3.393% with mixed cycles leaves cost acceptance unproven; I20 proposal is deferred outside shipping patches, preserving its complete before/source-corrected evidence. Shipping series returns to0017–0026.
-
-Current0027 is the I13 exact legacy angle-seam candidate, replacing the withdrawn circle numbering. Source/CGL normal51 and27-patch application pass; Native4K and cost remain open. Frozen Boolean/Circle/I13 proposal evidence keeps its original numbering and source hashes.
-
-Candidate0028 restores built-in local RGB clamp before nonzero brightening; actual production GL52 proof preserves frame bits and submission/style contracts. Separate negative-darken activation remains outside shipping patches. Native/cost/final integration gates remain open.
-
-I22 final-read0 controlled mosaic cost+.105ms/+5.038% causes owner deferral of the complete dot proposal. Live0019 is now gamma; later patches shift down one through0027RGB. Frozen evidence is unchanged. The retained series has11 new repair patches covering12 finding IDs;5 IDs have completed deferred owner packets and16 others remain unfinished.
+[Current qualification](superpowers/evidence/authored-fidelity-followup/README.md) binds the baseline28 and candidate33 source/artifact identities. Source checks pass329 host,63 normal and sanitizer renderer controls,137 JVM and60 capture/helper tests plus24 subtests. Both ARM core-release/debug-APK builds pass. The focused Native run completed76 jobs across19 presets/fixtures;608 selected final-output RGB captures verify and repeat exactly within each role. This is source-derived GLES qualification, not Windows/D3D pixel equivalence, whole-corpus certification or measured physical-TV headroom. Active-canvas lifecycle and isolated combined cost are being completed before final PR review/CI.
