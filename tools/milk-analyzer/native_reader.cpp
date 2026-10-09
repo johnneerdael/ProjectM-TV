@@ -25,6 +25,7 @@ extern "C" {
 #include <cmath>
 #include <unistd.h>
 #include <memory>
+#include <limits>
 
 using json=nlohmann::json;
 using namespace M4;
@@ -80,6 +81,9 @@ struct EquationProgram {
 
 json executeEquations(const json& request) {
     ParserDiagnostics diagnostics;
+    const auto engine=json::parse(kEngineIdentity);
+    const bool originalCustomWave = engine.at("commit")=="6f64807467e312034883a4389e6aa80a675458bc" &&
+        engine.at("patches_sha256")=="78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321";
     PRJM_EVAL_F registers[100]{};
     std::map<std::string,std::shared_ptr<EquationContext>> scopes;
     std::map<std::string,std::unique_ptr<EquationProgram>> programs;
@@ -117,35 +121,45 @@ json executeEquations(const json& request) {
             bool spectrum=wave.at("spectrum").get<bool>();int maximum=spectrum?512:480;
             int count=std::min(512,std::max(0,static_cast<int>(requested)));
             json group={{"sample_count",count},{"points",json::array()}};
-            if(count<2){result["steps"].push_back(group);continue;}
+            const bool dots=originalCustomWave && wave.value("dots",false);
+            if(count<(dots?1:2)){result["steps"].push_back(group);continue;}
             auto left=wave.at("left").get<std::vector<float>>(),right=wave.at("right").get<std::vector<float>>();
             if(left.size()!=maximum||right.size()!=maximum)throw std::runtime_error("custom wave native audio array size mismatch");
             for(float value:left)if(!std::isfinite(value))throw std::runtime_error("nonfinite custom wave audio");
             for(float value:right)if(!std::isfinite(value))throw std::runtime_error("nonfinite custom wave audio");
-            // ProjectM-TV current CustomWaveform::Draw uses up to512 points,
-            // independent of its480-waveform/512-spectrum input length. It
-            // clamps separation for spectrum trimming; oscilloscope mode
-            // ignores separation and upsamples when more than480 are requested.
+            // Preserve spectrum trimming and >480 waveform resampling. Exact
+            // release31 also centers valid waveform channel windows using the
+            // authored signed separation, with native truncation toward zero.
             int separation=std::min(count-1,std::max(0,wave.at("separation").get<int>()));
+            int offsetL=0,offsetR=0;
+            if(originalCustomWave && !spectrum && count<=maximum) {
+                const int center=(maximum-count)/2;
+                const int halfSeparation=wave.at("separation").get<int>()/2;
+                const int candidateL=center-halfSeparation,candidateR=center+halfSeparation;
+                if(candidateL>=0&&candidateL<=maximum-count&&candidateR>=0&&candidateR<=maximum-count) {
+                    offsetL=candidateL;offsetR=candidateR;
+                }
+            }
             float stride=spectrum?static_cast<float>(maximum-separation)/count:
                 count>maximum?static_cast<float>(maximum)/count:1.f;
             float mix1=std::pow(wave.at("smoothing").get<float>()*.98f,.5f),mix2=1.f-mix1;
             float multiplier=wave.at("scaling").get<float>()*wave.at("preset_wave_scale").get<float>()*(spectrum?.15f:.004f);
             if(!std::isfinite(stride)||!std::isfinite(mix1)||!std::isfinite(multiplier))throw std::runtime_error("custom wave audio domain unresolved");
             auto read=[&](const std::vector<float>& data,int index){if(index<0||index>=maximum)throw std::runtime_error("custom wave audio index out of bounds");return data[index];};
-            std::vector<float> smoothL(count),smoothR(count);smoothL[0]=read(left,0);smoothR[0]=read(right,0);
+            std::vector<float> smoothL(count),smoothR(count);smoothL[0]=read(left,offsetL);smoothR[0]=read(right,offsetR);
             for(int i=1;i<count;++i) {
                 float coordinate=static_cast<float>(i)*stride;
                 if(!std::isfinite(coordinate)||static_cast<double>(coordinate)<INT32_MIN||static_cast<double>(coordinate)>INT32_MAX)throw std::runtime_error("custom wave audio index domain unresolved");
-                smoothL[i]=read(left,static_cast<int>(coordinate))*mix2+smoothL[i-1]*mix1;
-                smoothR[i]=read(right,static_cast<int>(coordinate))*mix2+smoothR[i-1]*mix1;
+                smoothL[i]=read(left,static_cast<int>(coordinate)+offsetL)*mix2+smoothL[i-1]*mix1;
+                smoothR[i]=read(right,static_cast<int>(coordinate)+offsetR)*mix2+smoothR[i-1]*mix1;
             }
             for(int i=count-2;i>=0;--i){smoothL[i]=smoothL[i]*mix2+smoothL[i+1]*mix1;smoothR[i]=smoothR[i]*mix2+smoothR[i+1]*mix1;}
-            float sampleScale=1.f/static_cast<float>(count-1);
+            float sampleScale=count>1?1.f/static_cast<float>(count-1):0.f;
             for(int i=0;i<count;++i) {
                 float value1=smoothL[i]*multiplier,value2=smoothR[i]*multiplier;
                 if(!std::isfinite(value1)||!std::isfinite(value2))throw std::runtime_error("nonfinite smoothed custom wave input");
-                for(auto entry:std::initializer_list<std::pair<const char*,double>>{{"sample",static_cast<float>(i)*sampleScale},{"value1",value1},{"value2",value2},{"x",.5f+value1},{"y",.5f+value2}})
+                const float sample=count==1?std::numeric_limits<float>::quiet_NaN():static_cast<float>(i)*sampleScale;
+                for(auto entry:std::initializer_list<std::pair<const char*,double>>{{"sample",sample},{"value1",value1},{"value2",value2},{"x",.5f+value1},{"y",.5f+value2}})
                     *prjm_eval_register_variable(selected.context,entry.first)=entry.second;
                 for(auto name:{"r","g","b","a"})*prjm_eval_register_variable(selected.context,name)=frameValue(name);
                 PRJM_EVAL_F value=0,*returned=&value;if(selected.program->program)selected.program->program->func(selected.program->program,&returned);

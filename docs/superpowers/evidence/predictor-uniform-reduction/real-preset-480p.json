@@ -1,0 +1,15 @@
+{
+  "preset": "Geiss - Confetti (Kaleidoscope Mix).milk",
+  "preset_sha256": "319d04bf16ff3d00bd06840d32256f5652163031575646001df0b2fea24d8392",
+  "frames": 2,
+  "width": 854,
+  "height": 480,
+  "seconds": {
+    "full-grid-v1": 1.8241162080012145,
+    "uniform-proof-v1": 1.722117999997863
+  },
+  "ratio": 1.059228350207987,
+  "pixel_bits_equal": true,
+  "all47_feature_objects_equal": true,
+  "scope": "one short source-model pair; no native capture orwhole-corpus speedup"
+}

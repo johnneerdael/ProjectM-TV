@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "purpose": "Exact published31 source migration checkpoint",
+  "published": {
+    "release": "v2.3.31",
+    "release_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+    "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+    "native_libraries": {
+      "jni/arm64-v8a/libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+      "jni/armeabi-v7a/libprojectmtv.so": "c438a47d224868f7bc5e38000e97cf61ccf25c8e4e1383d3dc651a6d167439b8"
+    },
+    "engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+    }
+  },
+  "assets": {
+    "release": {
+      "release": "v2.3.31",
+      "release_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+      "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+      "native_libraries": {
+        "jni/arm64-v8a/libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+        "jni/armeabi-v7a/libprojectmtv.so": "c438a47d224868f7bc5e38000e97cf61ccf25c8e4e1383d3dc651a6d167439b8"
+      },
+      "engine": {
+        "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+      }
+    },
+    "assets_count": 9680,
+    "preset_count": 9606,
+    "assets_sha256": "7bce5d57a89ffe3e01d3a009e695fe248587deeb77daa0d469a2a1893a048395",
+    "repository_assets_equal": true,
+    "runtime_rendered": false
+  },
+  "source_adapter_archive_sha256": "997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8",
+  "adapter_sha256": {
+    "milk-audio-inputs": "3848ca7726d9fa683db675100569ef08046a3f3a826df088b2e959a667a7216b",
+    "milk-composite-inputs": "3304698a256ecc6a3dbc9cb3ba8d7744f24f56a3c11de5b5419621855ed8f567",
+    "milk-image-inputs": "2f8392fed3e2a718cda7faf961e6d57738e1b676c0ee0d2dc0c808046e6bd59b",
+    "milk-native-reader": "a208ef1581e5655bfc44b2e9857b4429f8f321ef7d67f79abbe7bbd22fd61f0c",
+    "milk-noise-inputs": "6e6d84943969ae50ea700e88672a4cf8a8d069719ef35b6d5cabfb1e491590b7",
+    "milk-shader-random": "e55fe473547716a710f4fc9df4a2d1f3312fef0b75b2e7e987ed8ec961bb7e6f",
+    "milk-shader-translate": "3e794d63dc1af84da906533ebb15a3e9dfbd2750c929296418e9b81cf61ea794",
+    "milk-wave-inputs": "e1a6af7329ccbeb9db75c85f2c5739d2da9b3efed996973de2040d864a1c313f"
+  },
+  "validation": {
+    "prepared_suite": {
+      "passed": 1834,
+      "subtests": 92,
+      "log_sha256": "4b7f1e99b44e5370aa29fd1dacb9214db3a8423323d33da5e6b02cecb3b1e890"
+    },
+    "authored_motion_history_followup": {
+      "focused_passed": 35
+    },
+    "reference_frames_consumed": false,
+    "published_aar_executed": false,
+    "appearance_certified": false
+  },
+  "scope": "Host source-policy math plus published byte identity; no Android whole-preset certificate. Corpus launcher still uses29."
+}

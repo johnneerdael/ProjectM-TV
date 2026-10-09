@@ -1,0 +1,51 @@
+{
+  "owner": {
+    "serial": "emulator-5670",
+    "pid": 42490,
+    "avd": "projectmtv-source31-controls"
+  },
+  "remote": "/data/local/tmp/projectmtv-source31-controls-e3a75fb05de04453b612a14ebf371cd4",
+  "published": {
+    "release": "v2.3.31",
+    "release_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+    "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+    "native_libraries": {
+      "jni/arm64-v8a/libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+      "jni/armeabi-v7a/libprojectmtv.so": "c438a47d224868f7bc5e38000e97cf61ccf25c8e4e1383d3dc651a6d167439b8"
+    },
+    "engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+    }
+  },
+  "sha256": {
+    "published-core.aar": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+    "libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+    "classes.dex": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311",
+    "libbackendclock.so": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+    "transport.f32": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc",
+    "config.json": "de65e6a43db3a39aa8107f90c488f56fcb7883bb74ad13757d35b1edf9f211a8"
+  },
+  "java": {
+    "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+    "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+    "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+    "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+    "dex_sha256": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311",
+    "helper_classes_sha256": {
+      "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "5ea3b58e6741d892cc7c72d574a31e436501ae84f9d85cd0e3a02c888d9b25f6"
+    },
+    "min_api": 21,
+    "policy": "published-aar-reproduced-dex-v1",
+    "proof_sha256": "42aaba87e08c816abdd47d251482e249361cedefaf09ae34ba40bc7af47823ed",
+    "reconstructed_dex_sha256": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311"
+  },
+  "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys",
+  "failure": {
+    "stage": "frame-header",
+    "root_cause": "Sized-stream Java helper paired with older clock transport adapter instead of configurable sized adapter",
+    "old_adapter_sha256": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+    "native_frames_received": 0,
+    "aar_defect_evidence": false
+  }
+}

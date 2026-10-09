@@ -16,6 +16,12 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
     vertex aspect, parameters and equation outputs remain those of the scene.
     """
     width,height=scene['viewport'];grid_x,grid_y=scene['mesh_size']
+    from engine_profiles import LEGACY_WARP,CORE_2331_LEGACY_WARP,CORE_2331_ENGINE,matches
+    legacy_policy=scene.get('legacy_warp_policy',LEGACY_WARP)
+    if legacy_policy not in {LEGACY_WARP,CORE_2331_LEGACY_WARP}:raise ValueError('unsupported legacy warp policy')
+    legacy=legacy_policy==CORE_2331_LEGACY_WARP
+    if legacy and not matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):
+        raise ValueError('legacy warp engine identity mismatch')
     if output_size is not None and (
             not isinstance(output_size,(tuple,list)) or len(output_size)!=2 or
             any(type(n) is not int or not 0<n<2**31 for n in output_size)):
@@ -39,7 +45,8 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
         vertex_uv=warp_vertex_uv(mesh['position'],aspect_x=aspect_x,aspect_y=aspect_y,
                                  **parameters,time=frame['render_inputs']['time'],
                                  warp_anim_speed=_scalar(values,'fWarpAnimSpeed',1,'float'),
-                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile,zoom_policy=zoom_policy,rotation_policy=rotation_policy)
+                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile,zoom_policy=zoom_policy,rotation_policy=rotation_policy,
+                                 legacy_warp_policy=legacy_policy)
     if query_uv is None:
         x,y=np.meshgrid((np.arange(output_width,dtype=np.float32)+.5)/np.float32(output_width),
                         (np.arange(output_height,dtype=np.float32)+.5)/np.float32(output_height))
@@ -50,13 +57,14 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
             raise ValueError('1..128 isolated warp query points required')
         if not np.all(np.isfinite(original_uv)) or np.any((original_uv<0)|(original_uv>1)):
             raise ValueError('finite warp query points within viewport required')
-    raster=dict(raster_subpixel_bits=raster_subpixel_bits,viewport=(output_width,output_height))
+    raster=dict(raster_subpixel_bits=raster_subpixel_bits,viewport=(output_width,output_height),diagonal='ad' if legacy else 'bc')
     uv=None if omit_transformed_uv else interpolate_mesh(vertex_uv,original_uv,numeric_profile=numeric_profile,**raster)
     polar=interpolate_mesh(np.stack((mesh['radius'],mesh['angle']),axis=-1),original_uv,**raster)
     interpolated_original=(original_uv if raster_subpixel_bits is None else
         interpolate_mesh(mesh['position']*.5+.5,original_uv,**raster))
     return {'uv':uv,'original_uv':interpolated_original,'polar':polar,'vertex_uv':vertex_uv,'numeric_profile':numeric_profile,
             'raster_subpixel_bits':raster_subpixel_bits,'rotation_policy':rotation_policy,
+            'legacy_warp_policy':legacy_policy,'mesh_diagonal':raster['diagonal'],
             'query_kind':'isolated mesh queries' if query_uv is not None else 'viewport mesh field',
             'basis':'native source equations, float32 vertex storage and warp mesh interpolation',
             'appearance_prediction_complete':False}

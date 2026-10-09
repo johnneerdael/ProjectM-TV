@@ -60,14 +60,17 @@ int main(int argc,char** argv) {
         const bool cold2325=progressPolicy=="projectmtv-core-2.3.25-cold-jni-v1";
         const bool cold2327=progressPolicy=="projectmtv-core-2.3.27-cold-jni-v1";
         const bool cold2329=progressPolicy=="projectmtv-core-2.3.29-cold-jni-v1";
-        const bool coldProgress=cold2316||cold2317||cold2321||cold2322||cold2325||cold2327||cold2329;
+        const bool cold2331=progressPolicy=="projectmtv-core-2.3.31-cold-jni-v1";
+        const bool coldProgress=cold2331||cold2316||cold2317||cold2321||cold2322||cold2325||cold2327||cold2329;
         double presetDuration=0.0;
         uint32_t entropySeed=0;
         if(coldProgress) {
             if(!kQualifiedDurationDistribution)
                 throw std::runtime_error("cold JNI progress requires qualified libcxx-200100 duration distribution");
             const auto identity=json::parse(kEngineIdentity);
-            const char* expectedPatches=cold2329
+            const char* expectedPatches=cold2331
+                ?"78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+                :cold2329
                 ?"01d259c40d364f8d55b9ee43ab29dcf39fd85f107908969c23671b3cea064457"
                 :cold2327
                 ?"65313919430bd6d1531292b405463d8ec400a44bcfddfb1eb808fbaba16b5ad0"
@@ -82,10 +85,10 @@ int main(int argc,char** argv) {
                 :"cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded";
             if(!roundedClock||frames>30||channels!=1||
                identity.value("patches_sha256","")!=expectedPatches||
-               identity.value("commit","")!=((cold2321||cold2322||cold2325||cold2327||cold2329)?"6f64807467e312034883a4389e6aa80a675458bc":"e0b0a967f0ffd7d332106c366668ed271718472b")||
+               identity.value("commit","")!=((cold2321||cold2322||cold2325||cold2327||cold2329||cold2331)?"6f64807467e312034883a4389e6aa80a675458bc":"e0b0a967f0ffd7d332106c366668ed271718472b")||
                !request.contains("entropy_seed")||!request.at("entropy_seed").is_number_integer()||
                request.at("entropy_seed").get<double>()<0||request.at("entropy_seed").get<double>()>UINT32_MAX)
-                throw std::runtime_error(std::string("cold JNI progress requires pinned ")+(cold2329?"2.3.29":cold2327?"2.3.27":cold2325?"2.3.25":cold2322?"2.3.22":cold2321?"2.3.21":cold2317?"2.3.17":"2.3.16")+", mono rounded-clock <=30 frames and uint32 entropy seed");
+                throw std::runtime_error(std::string("cold JNI progress requires pinned ")+(cold2331?"2.3.31":cold2329?"2.3.29":cold2327?"2.3.27":cold2325?"2.3.25":cold2322?"2.3.22":cold2321?"2.3.21":cold2317?"2.3.17":"2.3.16")+", mono rounded-clock <=30 frames and uint32 entropy seed");
             entropySeed=request.at("entropy_seed").get<uint32_t>();
             std::mt19937 generator(entropySeed);
             // Initialize: idle hard load, explicit StartPreset; first JNI draw: authored hard load.

@@ -38,7 +38,9 @@ def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False,allow_infinit
     return result
 
 
-def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC):
+def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC,work_policy='full-grid-v1',work=None,sample_detail=None):
+    if work_policy not in {'full-grid-v1','uniform-proof-v1'}:raise UnresolvedMath('unsupported shader work policy')
+    if work is not None and not isinstance(work,dict):raise ValueError('shader work dictionary required')
     if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_MIX_FMA):raise UnresolvedMath('unsupported shader arithmetic profile')
     if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise UnresolvedMath('unsupported shader numeric policy')
     highp=numeric_policy==GLES_HIGHP_INFINITY
@@ -48,6 +50,10 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
     if not batch_shape or any(type(n) is not int or n<=0 for n in batch_shape):
         raise UnresolvedMath('positive explicit grid dimensions required')
     inputs=inputs or {};size=int(np.prod(batch_shape));cache={};bound={}
+    from shader_uniformity import UniformityProof,sampler_coordinate_roots
+    blocked=sampler_coordinate_roots(field) if work_policy=='uniform-proof-v1' else None
+    uniform=UniformityProof(inputs,batch_shape,blocked=blocked) if work_policy=='uniform-proof-v1' and blocked is not None else None
+    uniform_values={};work_counts={'uniform_subgraphs':0,'math_lanes_avoided':0}
     contexts=[np.arange(size,dtype=np.int64)]
     states=[{}];loop_cache={};stored_cache={};loop_steps=0;context_keys={}
     nan_coordinates=False
@@ -192,6 +198,27 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
         key=(id(node),ctx,nan_coordinates)
         if key in cache:return cache[key]
         lanes=contexts[ctx];count=len(lanes);op=node.op
+        if uniform is not None and count>1 and uniform.is_uniform(node):
+            # The proof excludes pixels, samples, evolving loop state and
+            # effects. Use the same numerical interpreter on one lane; do not
+            # replace arithmetic with a different scalar implementation.
+            identity=(id(node),nan_coordinates)
+            if identity not in uniform_values:
+                # The observed NaN-coordinate policy is enabled only inside a
+                # sample call. Retain its existing domain handling there.
+                if not nan_coordinates:
+                    value=evaluate_grid(node,batch_shape=(1,),inputs=inputs,
+                        coordinate_profile=coordinate_profile,numeric_policy=numeric_policy,
+                        arithmetic_profile=arithmetic_profile,work_policy='full-grid-v1')[0]
+                    uniform_values[identity]=value
+                    work_counts['uniform_subgraphs']+=1
+            if identity in uniform_values:
+                value=uniform_values[identity]
+                # Cached values retain the original writable lane ownership,
+                # including sampler callbacks that wrap coordinates in place.
+                result=np.broadcast_to(value,(count,)+np.asarray(value).shape).copy()
+                cache[key]=result;work_counts['math_lanes_avoided']+=count-1
+                return result
         if op=='unknown':raise UnresolvedMath(node.detail['reason'])
         if op=='constant':
             value=typed(node.detail['value'],node.dtype)
@@ -228,10 +255,12 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if right.shape!=(int(needed.sum()),):raise UnresolvedMath('vector logical grid RHS not implemented')
                 raw[needed]=right.astype(bool)
         elif op=='sample':
-            if sample is None:raise UnresolvedMath('texture function not supplied: '+node.detail['sampler'])
-            if len(node.args)!=1 and not (len(node.args)==2 and node.detail.get('lod_effect')=='base level only'
-                    and node.detail.get('sampling_policy',{}).get('mipmapped') is False
-                    and node.detail.get('sampling_policy',{}).get('base_level')==0):
+            detail=node.detail if sample_detail is None else sample_detail(node.detail)
+            if not isinstance(detail,dict):raise ValueError('sample detail binding must return a dictionary')
+            if sample is None:raise UnresolvedMath('texture function not supplied: '+detail['sampler'])
+            if len(node.args)!=1 and not (len(node.args)==2 and detail.get('lod_effect')=='base level only'
+                    and detail.get('sampling_policy',{}).get('mipmapped') is False
+                    and detail.get('sampling_policy',{}).get('base_level')==0):
                 raise UnresolvedMath('texture grid overload not implemented')
             prior=nan_coordinates
             try:
@@ -242,13 +271,13 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if not np.all(np.isfinite(visit(argument,ctx))):raise UnresolvedMath('nonfinite texture argument')
             if np.any(np.isinf(coordinates)):raise UnresolvedMath('nonfinite texture coordinates')
             if np.any(np.isnan(coordinates)):
-                policy=node.detail.get('sampling_policy',{})
+                policy=detail.get('sampling_policy',{})
                 if coordinates.shape[-1]!=2 or type(policy.get('wrap')) is not bool:
                     raise UnresolvedMath('NaN sampler addressing policy unresolved')
                 # Observed Apple addressing, not a change to shader arithmetic.
                 coordinates=np.where(np.isnan(coordinates),0 if policy['wrap'] else 1,coordinates)
-            if on_sample is not None:on_sample(node.detail,coordinates.copy(),lanes.copy())
-            raw=np.asarray(sample(node.detail,coordinates))
+            if on_sample is not None:on_sample(detail,coordinates.copy(),lanes.copy())
+            raw=np.asarray(sample(detail,coordinates))
             _,shape=_layout(node.dtype)
             if raw.shape==shape:raw=np.broadcast_to(raw,(count,)+shape)
         elif op=='multiply' and node.detail.get('zero_guard') and not nan_coordinates and all(maskable_math(a,inputs) for a in node.args):
@@ -370,7 +399,10 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
     try:
         with np.errstate(all='ignore'):
             result=visit(field,0)
-        return result.reshape(batch_shape+result.shape[1:])
+        output=result.reshape(batch_shape+result.shape[1:])
+        # Keep the existing writable return contract; the one-lane proof only
+        # removes intermediate math arrays, not the caller's output ownership.
+        return output if output.flags.writeable else output.copy()
     except UnresolvedMath:raise
     except (KeyError,IndexError,TypeError,ValueError) as error:
         raise UnresolvedMath('unsupported grid expression: '+str(error)) from error
@@ -381,4 +413,10 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
         # their own NumPy storage references; caller dictionaries are not mutated.
         cache.clear();bound.clear();stored_cache.clear();loop_cache.clear()
         contexts.clear();states.clear();context_keys.clear()
-        inputs=None;sample=None;on_sample=None
+        uniform_values.clear()
+        if uniform is not None:
+            if work is not None:
+                work.update(work_counts,uniform_proof_nodes=uniform.nodes,
+                            uniform_proof_budget_exceeded=uniform.budget_exceeded)
+            uniform.release()
+        inputs=None;sample=None;on_sample=None;sample_detail=None

@@ -148,9 +148,9 @@ def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
 def draw_borders(destination,values:dict,*,quantize:bool=True,raster_subpixel_bits=None):
     """MilkDrop 2 rotated border fans, outer then inner, with alpha blending.
 
-    Current projectM 4.2 uses an eight-triangle mesh instead. Its coverage can
-    differ when authored border sizes invert the inner radius (audit M02);
-    this helper retains the fan model rather than claiming native parity there.
+    Historical projectM 4.2 index coverage differs for inverted inner radii.
+    Released2.3.31 restores the same ordered fan triangles in its indexed mesh;
+    focused source controls compare alpha coverage against those exact indices.
     """
     target=_finite(destination,'framebuffer').copy()
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):

@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 
 from sampling_policy import texture_settings
+from engine_profiles import CORE_2331_ENGINE
 
 
 POLICY = 'projectmtv-random-slot-inputs-v1'
@@ -45,6 +46,26 @@ SOURCE_FILES = {
     'Renderer/Sampler.hpp': '2e99730e688f6b74568871ab364e34b35c57bb55094164bcd881369896084678',
 }
 
+# All nineteen guarded methods match prepared source29. The five differences
+# from the archived pre43 contract concern entropy, texture upload, shader
+# initialization and frame-random replay; selected images remain runtime inputs.
+# Keep the archived pins unchanged and qualify only this exact release31 tuple.
+CORE_2331_BODY_HASHES = {**BODY_HASHES,
+    'TextureManager.GetRandomTexture': '427f40c9a0bf6c45bd74d6a433936a57b45a7999394e541a4859e9eb0f495025',
+    'TextureManager.LoadTexture': 'f41c1a0bd50d17d784067bdba0700c2dea7aa4a09aa058ea71ee80ed9e36c20e',
+    'MilkdropPreset.Initialize': 'e9b09519fa583dd0263f2657eab74a1cbc9701c043b1235064e2889153f16bad',
+    'TextureManager.Preload': '99f526cb3a5aa80fa788687170ff3d053a6201be2fa9b8de1c26b626363b6e58',
+    'MilkdropShader.LoadVariables': 'fc5acc978feafffa6d65df74970d40d69209984d024fcc7cea4509393e5b52d3',
+}
+CORE_2331_SOURCE_FILES = {**SOURCE_FILES,
+    'MilkdropPreset/PerPixelMesh.hpp': '61a06eef48c9ee96fc7451ff17596c816906d5ca6a160769d6c792c85b1fb0d6',
+    'MilkdropPreset/MilkdropShader.hpp': 'c777e79ffc90368418c786f04a08613410ff1803b61d18a4f7f8bbdf6dbc10de',
+    'MilkdropPreset/PresetState.hpp': '7c0bbf2c7baad0aa8f6d257820745bd376022bc57b602b45f1267a79ea86cf89',
+    'Renderer/TextureManager.hpp': '021e053984546581fa80ea085b5beca1d66f1a09e9294cd0de296f0fbae87a15',
+    'Renderer/Texture.hpp': 'b8c1b2d2b188470522e39f4f0153637dc2c9460f079e12f7befed09c4e07efde',
+    'Renderer/Sampler.hpp': '7c3a547080e5677ee1584fa04ef0b6a5709402e75fb47cd29a5f24f99af78302',
+}
+
 
 def native_contract(engine: Path):
     """Stamp recognized source bodies; older/changed implementations fail closed."""
@@ -59,14 +80,22 @@ def native_contract(engine: Path):
             hashes[name] = hashlib.sha256(body.encode()).hexdigest()
     except (OSError, ValueError, UnicodeError):
         return None
-    if hashes != BODY_HASHES or files != SOURCE_FILES:
-        return None
-    return {'policy': POLICY, 'body_sha256': hashes, 'file_sha256': files}
+    if hashes == BODY_HASHES and files == SOURCE_FILES:
+        return {'policy': POLICY, 'body_sha256': hashes, 'file_sha256': files}
+    if hashes == CORE_2331_BODY_HASHES and files == CORE_2331_SOURCE_FILES:
+        return {'policy': POLICY, 'engine': dict(CORE_2331_ENGINE),
+                'body_sha256': hashes, 'file_sha256': files}
+    return None
 
 
 def recognized(value):
-    return (isinstance(value, dict) and value.get('policy') == POLICY and
-            value.get('body_sha256') == BODY_HASHES and value.get('file_sha256') == SOURCE_FILES)
+    if not isinstance(value, dict) or value.get('policy') != POLICY:
+        return False
+    if value.get('engine') == CORE_2331_ENGINE:
+        return (value.get('body_sha256') == CORE_2331_BODY_HASHES and
+                value.get('file_sha256') == CORE_2331_SOURCE_FILES)
+    return ('engine' not in value and value.get('body_sha256') == BODY_HASHES and
+            value.get('file_sha256') == SOURCE_FILES)
 
 
 def verified_contract(source, *, stage, profile, compatibility):
@@ -94,6 +123,11 @@ def verified_contract(source, *, stage, profile, compatibility):
             not isinstance(archive, str) or re.fullmatch('[0-9a-f]{64}', archive) is None or
             translation.get('engine_archive_sha256') != archive or
             translation.get('sampler_reference_body_sha256') != BODY_HASHES['MilkdropShader.GetReferencedSamplers']):
+        return None
+    if contract.get('engine') == CORE_2331_ENGINE:
+        if parser.get('engine') != CORE_2331_ENGINE or translation.get('engine') != CORE_2331_ENGINE:
+            return None
+    elif parser.get('engine') == CORE_2331_ENGINE or translation.get('engine') == CORE_2331_ENGINE:
         return None
     request = compatibility.get('request', {})
     if not isinstance(request, dict):
@@ -147,7 +181,7 @@ def verified_contract(source, *, stage, profile, compatibility):
             any(re.match(r'texsize_(?:[A-Za-z]{2}_)?rand[0-9]', name, re.I) and name not in size_inputs
                 for name in sizes)):
         return None
-    return {'policy': POLICY, 'basis': 'native source contract; conditional runtime inputs',
+    result = {'policy': POLICY, 'basis': 'native source contract; conditional runtime inputs',
         'profile': profile, 'samplers': dict(requested), 'random_inputs': inputs,
         'main_binding_policy': 'projectmtv-core-2.2.6-v1',
         'texsize_inputs': size_inputs,
@@ -158,7 +192,11 @@ def verified_contract(source, *, stage, profile, compatibility):
             'Honor alias modes and filtered-first lexical selection; an existing slot wins over later filters.',
             'Missing/prefix-miss/failed loads, target mismatches and native fallback remain unresolved.',
             'Source typing supplies no actual GL unit, asset hash or appearance certification.'],
-        'engine_archive_sha256': archive, 'body_sha256': dict(BODY_HASHES), 'file_sha256': dict(SOURCE_FILES)}
+        'engine_archive_sha256': archive, 'body_sha256': dict(contract['body_sha256']),
+        'file_sha256': dict(contract['file_sha256'])}
+    if 'engine' in contract:
+        result['engine'] = dict(contract['engine'])
+    return result
 
 
 if __name__ == '__main__':

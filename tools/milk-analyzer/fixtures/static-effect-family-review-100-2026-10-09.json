@@ -1,0 +1,30 @@
+{
+  "count": 100,
+  "computed": 100,
+  "with_mechanisms": 99,
+  "with_explicit_unknowns": 91,
+  "mechanism_rows": {
+    "builtin_wave_primitive": 45,
+    "polygon_shape_primitive": 125,
+    "point_cloud_primitive": 42,
+    "procedural_point_motion": 17,
+    "custom_wave_primitive": 62,
+    "image_driven_advection": 75,
+    "polar_radial_sampling": 11,
+    "cartesian_mirror_fold": 5,
+    "radial_feedback_transform": 128,
+    "procedural_shape_instances": 35,
+    "noise_driven_advection": 10,
+    "circular_wave_primitive": 21,
+    "nonlinear_feedback_map": 2,
+    "angular_periodic_warp": 23,
+    "radial_twist": 7,
+    "parametric_radial_curve": 14,
+    "spatial_rotation": 7,
+    "uv_advection": 6,
+    "mandelbox_recurrence": 1
+  },
+  "zip_sha256": "fcfeb84a41de6bdd6fd5b0d1d64fe28f721a6e68cf9cffad5eabe79a11598c7b",
+  "simulation": false,
+  "classification_accuracy_measured": false
+}

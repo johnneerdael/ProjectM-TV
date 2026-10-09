@@ -88,7 +88,8 @@ def _finite(value, name):
     return result
 
 
-def mesh_inputs(grid_x:int,grid_y:int,*,aspect_x:float,aspect_y:float)->dict:
+def mesh_inputs(grid_x:int,grid_y:int,*,aspect_x:float,aspect_y:float,legacy_angle_seam=False)->dict:
+    if type(legacy_angle_seam) is not bool:raise ValueError('boolean legacy angle seam required')
     if any(type(n) is not int or n<8 or n>400 or n%2 for n in (grid_x,grid_y)):
         raise ValueError('native mesh requires even grid dimensions from8to400')
     if not np.isfinite(aspect_x) or not np.isfinite(aspect_y) or min(aspect_x,aspect_y)<=0:
@@ -98,15 +99,17 @@ def mesh_inputs(grid_x:int,grid_y:int,*,aspect_x:float,aspect_y:float)->dict:
     x,y=np.meshgrid(px,py)
     ax=x*np.float32(aspect_x);ay=y*np.float32(aspect_y)
     angle=np.arctan2(ay,ax);angle[grid_y//2,grid_x//2]=0
+    equation_ang=np.where((x<0)&(y==0),angle,-angle) if legacy_angle_seam else -angle
     return {'position':np.stack((x,y),axis=-1),'radius':np.hypot(ax,ay),
-            'angle':angle,'equation_ang':-angle,'equation_x':ax*.5+.5,
+            'angle':angle,'equation_ang':equation_ang,'equation_x':ax*.5+.5,
             'equation_y':ay*.5+.5}
 
 
 def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
                    sx=1,sy=1,cx=.5,cy=.5,rot=0,dx=0,dy=0,warp=0,
                    time=0,warp_anim_speed=1,warp_scale=1,numeric_profile=PORTABLE_PROFILE,
-                   zoom_policy='legacy-glsl-pow-v1',rotation_policy=LEGACY_ROTATION):
+                   zoom_policy='legacy-glsl-pow-v1',rotation_policy=LEGACY_ROTATION,
+                   legacy_warp_policy='legacy-custom-shared-warp-v1'):
     """Evaluate PresetWarpVertexShader in its original float32 operation order.
 
     Parameters can be scalar or per-vertex fields matching position's leading
@@ -117,6 +120,8 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     for interpolation; it rejects infinity and unrelated numeric failures.
     """
     _runtime_profile(numeric_profile)
+    from engine_profiles import LEGACY_WARP,CORE_2331_LEGACY_WARP
+    if legacy_warp_policy not in {LEGACY_WARP,CORE_2331_LEGACY_WARP}:raise ValueError('unsupported legacy warp policy')
     from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM
     if zoom_policy not in {LEGACY_ZOOM,CORE_2315_ZOOM,CORE_2327_ZOOM}:raise ValueError('unsupported warp zoom policy')
     if rotation_policy not in (LEGACY_ROTATION,CPU_ROTATION):raise ValueError('unsupported warp rotation policy')
@@ -135,7 +140,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         # observed profile does not authorize unrelated invalid arithmetic.
         safe={key:value for key,value in a.items()}
         safe['sx']=np.where(a['sx']==0,1,a['sx']);safe['sy']=np.where(a['sy']==0,1,a['sy'])
-        warp_vertex_uv(p,**safe,zoom_policy=zoom_policy,rotation_policy=rotation_policy)
+        warp_vertex_uv(p,**safe,zoom_policy=zoom_policy,rotation_policy=rotation_policy,legacy_warp_policy=legacy_warp_policy)
     x,y=p[...,0],p[...,1]
     with np.errstate(all='ignore'):
         radius=np.hypot(x*a['aspect_x'],y*a['aspect_y'])
@@ -162,10 +167,11 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         f1=np.float32(8.77)+3*np.cos(wt*np.float32(1.113)+7)
         f2=np.float32(10.54)+3*np.cos(wt*np.float32(1.233)+3)
         f3=np.float32(11.49)+4*np.cos(wt*np.float32(.933)+5)
-        u+=a['warp']*np.float32(.0035)*np.sin(wt*np.float32(.333)+ws*(x*f0-y*f3))
-        v+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.375)-ws*(x*f2+y*f1))
-        u+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.753)-ws*(x*f1-y*f2))
-        v+=a['warp']*np.float32(.0035)*np.sin(wt*np.float32(.825)+ws*(x*f0+y*f3))
+        oscillator_y=-y if legacy_warp_policy==CORE_2331_LEGACY_WARP else y
+        u+=a['warp']*np.float32(.0035)*np.sin(wt*np.float32(.333)+ws*(x*f0-oscillator_y*f3))
+        v+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.375)-ws*(x*f2+oscillator_y*f1))
+        u+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.753)-ws*(x*f1-oscillator_y*f2))
+        v+=a['warp']*np.float32(.0035)*np.sin(wt*np.float32(.825)+ws*(x*f0+oscillator_y*f3))
         u2=u-a['cx'];v2=v-a['cy'];sin,cos=rotation_pair(a['rot'],rotation_policy)
         u=u2*cos-v2*sin+a['cx'];v=u2*sin+v2*cos+a['cy']
         u-=a['dx'];v-=a['dy']
@@ -180,7 +186,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     return result
 
 
-def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,viewport=None):
+def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,viewport=None,diagonal='bc'):
     """Interpolate native triangles with clip w=1.
 
     The opt-in Apple NaN rule is supported by direct float readback of the
@@ -188,6 +194,7 @@ def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFIL
     It does not establish portable or Android nonfinite interpolation behavior.
     """
     _runtime_profile(numeric_profile)
+    if diagonal not in {'bc','ad'}:raise ValueError('unsupported mesh diagonal')
     if raster_subpixel_bits is not None:
         if type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16:
             raise ValueError('supported explicit raster subpixel bits required (4..16)')
@@ -198,8 +205,8 @@ def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFIL
         if values.ndim!=3 or values.shape[-1]!=2 or np.any(np.isinf(values)):
             raise ValueError('observed NaN profile requires two-component UV mesh without infinity')
         missing=np.isnan(values)
-        finite=interpolate_mesh(np.where(missing,0,values),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport)
-        support=interpolate_mesh(missing.astype(np.float32),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport)>0
+        finite=interpolate_mesh(np.where(missing,0,values),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport,diagonal=diagonal)
+        support=interpolate_mesh(missing.astype(np.float32),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport,diagonal=diagonal)>0
         return np.where(support,np.finfo(np.float32).max,finite)
     values=_finite(vertex_values,'mesh values');uv=_finite(original_uv,'original UV')
     if values.ndim<2 or min(values.shape[:2])<2 or uv.shape[-1:]!=(2,):
@@ -228,6 +235,10 @@ def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFIL
     a,b,c,d=values[y,x],values[y,x+1],values[y+1,x],values[y+1,x+1]
     extra=(None,)*(values.ndim-2)
     fx=fx[(...,)+extra];fy=fy[(...,)+extra]
+    if diagonal=='ad':
+        first=a+(b-a)*fx+(d-b)*fy
+        second=a+(d-c)*fx+(c-a)*fy
+        return np.where(fx>=fy,first,second)
     first=a+(b-a)*fx+(c-a)*fy
     second=d+(c-d)*(1-fx)+(b-d)*(1-fy)
     return np.where(fx+fy<=1,first,second)

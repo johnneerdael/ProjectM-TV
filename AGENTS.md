@@ -96,6 +96,32 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 
 ## Codebase navigation and knowledge tools
 
+Canonical source31 corpus admission requires the exact qualified host CPU
+archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;
+a well-formed self-reported hash is insufficient. See the corpus export guide
+and `docs/superpowers/evidence/pr67-review-fixes/README.md`. Static shader
+mechanisms follow the typed native RGB sink; discarded fourth lanes cannot
+preserve visible families or upstream contribution, while cross-lane/effect
+dependencies retain their original qualifications.
+
+`SourcePipeline` has opt-in `shader_lowering_policy='cached-program-v1'`,
+forwarded from the forecast domain; default is `per-frame-v1`. Reuse only static
+lowered programs with complete tree/context/type identity, one entry per stage.
+Do not retain runtime tensors or loop state. Preserve update-specific sample
+history and per-invocation shared sampler-policy aliases before grid domain
+checks and callbacks. See `docs/superpowers/evidence/predictor-program-reuse/README.md`.
+Mixed short-forecast timings do not justify automatic corpus enablement.
+
+Experimental uniform final-expression reduction lives in
+`tools/milk-analyzer/uniform_source_descriptors.py` and `uniform_descriptors.py`.
+It is opt-in and not an automatic corpus route. Require selected final-stage,
+binding/storage and later-blit premises separately; reject unsupported spatial,
+texture, loop and effect dependencies. The current descriptor shortcut requires
+qualified OpenCV5.0.0 optimized ARM64/NEON and retains optical-flow nulls. See
+`docs/superpowers/evidence/predictor-uniform-descriptors/README.md` for controls
+and the fixed100 zero-candidate coverage limit. Do not extrapolate synthetic
+kernel speedups to the whole pack.
+
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
 - projectM sources: `third_party/projectm` shows patched code only after a CMake configure or a manual apply; the committed source of truth is `tools/projectm-patches/`. Search both the submodule and the patches.
@@ -740,3 +766,44 @@ plus swap; ps queries have a2s timeout. Corpus memory budget failures retain nul
 features and explicit errors. Fatal diagnostics use unique timestamp/PID JSON
 files. These are sampled resource safeguards, not a universal memory/performance
 bound. No unchanged failing full-corpus retry is required to verify the fix.
+
+Source31 migration checkpoint (2026-10-09): remain in `predictor-memory-repair`
+on `feat/predictor-static-effect-families` (based on `bug/predictor-grid-memory`);
+do not create another worktree or merge the
+experimental predictor to main. The complete published2.3.31 AAR, both libraries
+and 9,606 preset/74 texture bytes are hash-verified; source31 adapters live under
+`build/preset-corpus/source31/adapters`, separate from immutable historical
+adapters. New `test_core2331_*.py` controls cover the18 release patches using
+versioned actual-path policies. Full published-AAR runtime/appearance qualification
+remains separate. Explicit conditional/packed motion backends must not inherit
+Apple float-path evidence. The old corpus configuration stays source29 until
+integration is qualified. See the analyzer README, published-core-v2.3.31 profile
+and `docs/superpowers/plans/2026-10-09-source31-static-families.md`. Source-based
+effect-family research is available with its separately versioned detector/export.
+
+Static family maintenance (2026-10-09): `effect_families.py` detects contributing
+typed shader/EEL constructions without numerical execution or frames. Keep live
+lane/loop/output masks, exact profile conditions, unknowns and finite work budgets.
+`effect_family_export.py` provides an AI-free cached parser/detector CLI and paired
+100-preset ZIPs; parent import hashes require fresh-process operation after edits,
+not arbitrary hot reload. The100-preset cold/cache benchmark is25.61s/.704s;
+it is timing evidence, not corpus classification accuracy. Read
+`tools/milk-analyzer/EFFECT_FAMILIES.md` and the guide's `predictor-effects.md`.
+
+The numerical corpus now defaults to source31 with a separate full published-AAR
+and profile identity. New output suffix `-core2331` prevents mixing old rows.
+`corpus_worker.py` keeps47 numeric fields and separately exports `effect_analysis`,
+including explicit failures. Exact source31 noise admission retains all six
+byte-identical source29 generators. No full numerical corpus rerun was started.
+Three full published-AAR/public-JNI30frame128×72 controls pass at RGB8errors0/1/0;
+see `docs/superpowers/evidence/predictor-source31`. Do not claim whole-preset or
+whole-corpus appearance certification from those controls.
+
+Uniform reduction experiment (2026-10-09): forecast domain
+`shader_work_policy=uniform-proof-v1` hoists statically uniform pure shader DAGs
+using the same one-lane numerical interpreter; default remains `full-grid-v1`.
+Do not hoist sampler coordinate roots/consumers, loop state, effects or unknown
+operations. Keep mutable callback/cache ownership and selected domains intact.
+The next metric-routing work must preserve47field meanings and nulls; geometry
+speed must never stand in for optical-flow speed. Read the static-metric-routes
+research and `docs/superpowers/evidence/predictor-uniform-reduction/README.md`.

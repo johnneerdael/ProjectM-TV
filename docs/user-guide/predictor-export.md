@@ -11,7 +11,16 @@ The 47 simulated features provide a useful behavioral brief. A faithful adaptati
 of a particular preset also needs semantic element/effect descriptors; it does
 not require exporting the original shader program or pixel-identical geometry.
 
+!!! note "Research contract, separately published documentation"
+    This page documents the predictor branch's **2026-10-08 checkpoint**. Publishing the reference and downloadable examples does not merge the experimental predictor into the app or change the shipped mood collections. Reproduction commands require the [predictor implementation branch](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-visual-loop), its prepared source adapters and declared inputs.
+
+    For the meaning of an accuracy score, see [how behavioural accuracy is measured](authoring/testing.md#how-are-you-measuring-97-accurate). The feature-export contract and reference-render validation answer different questions.
+
 ## 1. Choose the export
+
+The newer [static effect-mechanism export](predictor-effects.md) is a separate
+versioned record. It adds causal construction evidence without simulating display
+frames; it does not replace or change this47-field checkpoint contract.
 
 | Producer | Result | Schema/version | Current contents |
 |---|---|---|---|

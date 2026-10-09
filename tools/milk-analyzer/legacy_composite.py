@@ -4,16 +4,16 @@ from field_math import UnresolvedMath
 from feedback_field import unorm8
 from spatial import sample2d,interpolate_mesh
 from scene_equations import _scalar
-from engine_profiles import CORE_2315_DISPLAY,LEGACY_DISPLAY
+from engine_profiles import CORE_2315_DISPLAY,CORE_2331_DISPLAY,LEGACY_DISPLAY
 from native_values import native_scalar
 
 
 def source_tint_amount(source):
     """PR57's static PresetState fShader; historical engines keep full tint."""
-    from engine_profiles import CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,matches
+    from engine_profiles import CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE,matches
     from scene_equations import source_settings
     engine=source.get('parser_inputs',{}).get('engine',{})
-    if not (matches(engine,CORE_2325_ENGINE) or (matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE))):
+    if not any(matches(engine,identity) for identity in (CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
         return None
     return _scalar(source_settings(source),'fShader',0,'float')
 
@@ -31,10 +31,13 @@ def store(values,quantize):
     return unorm8(data) if quantize else np.clip(data,0,1)
 
 
-def gamma_weights(gamma,*,echo):
+def gamma_weights(gamma,*,echo,control_policy=LEGACY_DISPLAY):
+    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY,CORE_2331_DISPLAY}:raise ValueError('unsupported legacy display policy')
     value=np.float32(gamma)
     if not np.isfinite(value):raise UnresolvedMath('legacy gamma is nonfinite')
-    count_value=np.float32(value-np.float32(.0001))
+    # Release0019 follows MilkDrop's distinct gamma-only count epsilon.
+    epsilon=.001 if control_policy==CORE_2331_DISPLAY and not echo else .0001
+    count_value=np.float32(value-np.float32(epsilon))
     if not -(2**31)<=float(count_value)<2**31:raise UnresolvedMath('legacy gamma integer domain')
     count=int(count_value)
     if not echo:count+=1
@@ -68,9 +71,9 @@ def corner_shades(time,hue_offsets,*,shader_amount=None):
 
 
 def apply_filters(field,values,*,quantize,main=None,control_policy=LEGACY_DISPLAY):
-    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy display policy')
+    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY,CORE_2331_DISPLAY}:raise ValueError('unsupported legacy display policy')
     def enabled(name,key):
-        return _live(main,name,finite=False)!=0 if control_policy==CORE_2315_DISPLAY else bool(_scalar(values,key,0,'bool'))
+        return _live(main,name,finite=False)!=0 if control_policy!=LEGACY_DISPLAY else bool(_scalar(values,key,0,'bool'))
     result=np.asarray(field,dtype=np.float32)
     if enabled('brighten','bBrighten'):
         result=store(1-result,quantize);result=store(result*result,quantize);result=store(1-result,quantize)
@@ -86,8 +89,8 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,co
     sample=sampler_2d(sampling_profile)
     if sampling_profile!='portable' and not quantize:
         raise ValueError('texture profile requires actual unorm feedback storage')
-    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy display policy')
-    live=control_policy==CORE_2315_DISPLAY
+    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY,CORE_2331_DISPLAY}:raise ValueError('unsupported legacy display policy')
+    live=control_policy!=LEGACY_DISPLAY
     source=np.asarray(feedback,dtype=np.float32)
     if source.ndim!=3 or source.shape[-1]!=4 or min(source.shape[:2])<=0 or not np.all(np.isfinite(source)):
         raise UnresolvedMath('finite RGBA legacy feedback required')
@@ -103,7 +106,7 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,co
         if not np.isfinite(truncated) or not -(2**31)<=truncated<=2**31-1:
             echo=False
         else:orientation=int(truncated)
-    weights=gamma_weights(gamma,echo=echo)
+    weights=gamma_weights(gamma,echo=echo,control_policy=control_policy)
     inverse_aspect_y=np.float32(1)/np.float32(min(1,height/width))
     aspect=np.float32(width)/np.float32(np.float32(height)*inverse_aspect_y)
     ax=np.float32(1) if aspect>1 else np.float32(1)/aspect
@@ -125,7 +128,8 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,co
         high=np.float32(.5)+np.float32(.5)/np.float32(zoom)
         uv=low+local_uv*(high-low)
         if pass_index==1:
-            if orientation%2==1 and orientation>0:uv[...,0]=1-uv[...,0]
+            flip_u=orientation%2!=0 if control_policy==CORE_2331_DISPLAY else orientation%2==1 and orientation>0
+            if flip_u:uv[...,0]=1-uv[...,0]
             if orientation>=2:uv[...,1]=1-uv[...,1]
         sampled=sample(source,uv,wrap=False,linear=True,origin='top')
         for weight in weights:

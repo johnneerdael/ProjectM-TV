@@ -58,6 +58,18 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
     return target
 
 
+def source_shape_thickness(source,index,attributes):
+    """Resolve the evaluated binary64 flag without modifying authored values."""
+    from engine_profiles import CORE_2331_ENGINE,matches
+    from native_values import native_scalar
+    saved=bool(_scalar(source_settings(source),f'shapecode_{index}_thickOutline',0,'bool'))
+    if not matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):return saved
+    if 'thick' not in attributes:return saved
+    value=native_scalar(attributes['thick'],allow_ieee=True)
+    if not np.isfinite(value) or not -2147483649<value<2147483648:return saved
+    return abs(value)>=1
+
+
 def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,shape_centre_policy=LEGACY_SHAPE_CENTRES,builtin_wave_viewport_policy=LEGACY_VIEWPORT,line_reference_size=None):
     target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source_settings(source)
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
@@ -78,7 +90,7 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
         if attributes.get('border_a',0)>.0001:
             fan=shape_fan(attributes,aspect_y=aspect_y);positions=fan['positions'][1:-1]+shift
             colour=np.array([attributes.get('border_'+c,1 if c!='a' else 0) for c in 'rgba'],dtype=np.float32)
-            thick=_scalar(values,f'shapecode_{index}_thickOutline',0,'bool')
+            thick=source_shape_thickness(source,index,attributes)
             offset_scale=scale if line_reference_size is not None and scale>0 else 1
             offsets=[[0,0],[.5*offset_scale/width,0],[.5*offset_scale/width,.5*offset_scale/height],[0,.5*offset_scale/height]] if thick else [[0,0]]
             for offset in offsets:

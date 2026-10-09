@@ -8,6 +8,13 @@ motion, pulses, feedback and structure data is obtained algorithmically and pin 
 beta guide plus original MilkDrop2 source. Unsupported paths stay unknown while the
 interpreter is expanded; they do not trigger hidden visual analysis.
 
+[Static effect families](EFFECT_FAMILIES.md) are a separate schema1 symbolic
+export. `effect_family_export.py` follows parsed typed dependencies without
+executing equations, audio, shader fields or frames. It caches source/model-bound
+results and reuses the paired100-preset ZIP writer. Supported mechanisms remain
+conditional on active stages/resources/visibility; unrecognized forms are unknown,
+not proof of absence. These are not new mood indexes.
+
 This analyzer began with the inductive main-Q domain and shader selector proof
 from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25). It now includes
 an experimental numerical source forecaster and separate collection tools that
@@ -58,7 +65,49 @@ extractor CLI option. It requires GLES300 at source entry points; strict remains
 the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
 nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
 
-## Latest source migration: published 2.3.27
+## Source target: published 2.3.31
+
+An additional opt-in forecast domain `shader_work_policy=uniform-proof-v1`
+statically identifies pure uniform shader subgraphs and computes them once with
+the same interpreter rather than per pixel. `full-grid-v1` stays the default.
+Work counters/provenance remain explicit; sample coordinate mutation, selected
+domains and loop state retain their original contracts. Source-model pixel bits
+and all47feature objects match in focused authored controls. Synthetic shader
+speedups are not complete-preset or corpus claims. Uniform-output metric routing
+is further work; see the static-metric-routes research and uniform-reduction
+evidence under `docs/superpowers/`.
+
+`profiles/published-core-v2.3.31.json` identifies the full published Native AAR,
+both native libraries, Java classes, all 9,606 presets and 74 textures, and the
+separate 34-patch source engine. Repository preset/texture bytes match the AAR.
+Host source adapters are numerical producers; they do not execute the AAR or
+establish Android appearance parity. Keep those qualification fields separate.
+
+The new exact identity selects authored waveform opacity/RGB, custom input
+windows/dot counts, line caps/circle closure, fresh point inputs and inverse
+per-pixel aspects. Legacy gamma pass counts and negative odd echo orientation
+have a distinct display policy. Actual default/fallback warp alone selects
+reversed oscillator Y, AD triangles, descending equation rows and the exact
+left-axis angle seam. Accepted custom warp retains its existing path. Shape
+outlines consume the captured instance flag in the defined int32 domain.
+
+Continuous motion coordinates are published on successful producer frames even
+while vectors are hidden. Vectors consume the previous completed map. The new
+`motion_uv_backend` domain value is `conditional`, `rg16f`, or
+`rg16ui-half-words`; conditional/packed use portable numerical profiles only.
+Packed-half decoding precedes interpolation. Source modeling does not establish
+the actual GLES capability probe, wrapper compilation, fallback selection or
+hardware rounding. An observed float-path operator cannot certify the packed path.
+
+`test_core2331_*.py` preserves historical controls alongside new behavior.
+The corpus launcher now defaults to source31 and verifies the complete AAR and
+profile separately from its source archive. It preserves the47-field contract
+and appends static effect metadata, with a new output directory. Earlier
+source29 rows remain immutable and must not be relabeled. Common source-family
+detection is implemented separately from these migration policies. See the [implementation plan](../../docs/superpowers/plans/2026-10-09-source31-static-families.md)
+and [source research](../../docs/superpowers/research/2026-10-09-static-effect-families.md).
+
+## Historical source migration: published 2.3.27
 
 `profiles/published-core-v2.3.27.json` pins the full published AAR, both native
 libraries, Java classes and exact 15-patch source. Its negative zoom path executes
