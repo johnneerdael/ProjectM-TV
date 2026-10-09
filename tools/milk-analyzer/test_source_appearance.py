@@ -862,6 +862,49 @@ def test_known_coordinate_feedback_dependency_survives_another_unknown_coordinat
     assert feedback['coordinate_feedback_dependency'] is True
 
 
+def test_colour_processing_preserves_power_then_inversion_order():
+    result=appearance(shader('shader_body {ret=1-pow(GetPixel(uv),.5);}'))
+    record=result['colour_processing']['stages']['composite']
+    assert record['channels'][0]['base']['kind']=='sample_channel'
+    assert [s['operation'] for s in record['channels'][0]['steps_from_base']]==['abs','power','domain_guard','one_minus']
+    assert record['channels'][0]['steps_from_base'][1]['value']==pytest.approx(.5)
+    assert record['final_palette_verified'] is False
+
+
+def test_rgb_tint_bias_and_clamp_are_recorded_per_channel():
+    result=appearance(shader('shader_body {ret=saturate(GetPixel(uv)*float3(.5,1,2)+float3(.1,0,-.1));}'))
+    channels=result['colour_processing']['stages']['composite']['channels']
+    assert [s['operation'] for s in channels[0]['steps_from_base']]==['multiply_constant','add_constant','saturate']
+    assert channels[0]['steps_from_base'][0]['value']==pytest.approx(.5)
+    assert channels[2]['steps_from_base'][0]['value']==2
+
+
+def test_swizzled_sample_colour_channels_are_explicit():
+    result=appearance(shader('shader_body {ret=GetPixel(uv).bgr;}'))
+    channels=result['colour_processing']['stages']['composite']['channels']
+    assert [c['base']['sample_channel'] for c in channels]==[2,1,0]
+
+
+def test_dynamic_power_is_not_exported_as_a_constant_gamma():
+    result=appearance(shader('shader_body {ret=pow(GetPixel(uv),bass);}'))
+    channels=result['colour_processing']['stages']['composite']['channels']
+    assert not any(s['operation']=='power' for c in channels for s in c['steps_from_base'])
+    assert channels[0]['base']['kind']=='source_expression'
+
+
+def test_alpha_only_colour_operations_do_not_enter_rgb_processing():
+    result=appearance(shader('shader_body {ret=float4(.2,.3,.4,pow(GetPixel(uv).a,2));}'))
+    channels=result['colour_processing']['stages']['composite']['channels']
+    assert all(c['base']['kind']=='constant' and not c['steps_from_base'] for c in channels)
+
+
+def test_missing_custom_stage_has_unknown_processing_not_fabricated_shader_chain():
+    result=appearance(read('fWaveAlpha=0\nPSVERSION_COMP=2\ncomp_1=`shader_body {ret=bad_unknown_name;}\n'))
+    stage=result['colour_processing']['stages']['composite']
+    assert stage['channels'] is None
+    assert stage['unknown_reasons']
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

@@ -95,6 +95,9 @@ contract documentation and review. The numerical47-field export stays unchanged.
   fixed/custom source coefficients,10have idealfloating-perturbation half-lives.
   Stored/closed-loop persistence remains unresolved; coordinates/injection/detail
   and finalpalette interactions are not reduced to a wholeeffect certificate.
+- Ordered perRGB shader tone suffixes are implemented;47/100sample presets
+  have known gain/bias/inversion/power/guard operations. Bases/resources and
+  finalpalette/recognizable wholelook remain unresolved.
 - Spatial/image motion, full feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 

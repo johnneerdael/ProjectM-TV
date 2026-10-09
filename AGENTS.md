@@ -139,6 +139,10 @@ absolute coefficient norms with coordinates fixed. Fixed decay and custom return
 RGB stay distinct. Ideal positive scalar half-life is not actual trail persistence;
 retain coordinate-feedback, storage/drawing/detail/discard and domain conditions.
 Unknown/nonlinear/blur transfers cannot become low-reactivity or Chill evidence.
+`source_colour_processing.py` exports ordered perRGB known tone suffixes and
+constant/sample/source-expression bases. Keep translator abs/domain power lowering,
+channel projections and unknown resources; alpha-only code is not RGB processing.
+Suffix recognition does not grant a complete palette/material or appearance claim.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

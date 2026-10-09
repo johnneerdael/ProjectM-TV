@@ -135,6 +135,13 @@ Image-driven coordinate maps can add nonlinear feedback response and remain
 outside that persistence estimate. These source coefficients help describe
 feedback character, while actual trail lifetime and mood confidence remain unknown.
 
+Ordered colour-processing records show supported tone steps per RGB channel:
+power/gamma, inversion, tint/bias and clipping, with channel permutations and
+unknown base programs retained. They follow the patched translator's abs/domain
+power handling. A known tone suffix can help an independent renderer adapt a
+material, but underlying sampled colours and mixed/nonlinear shading can still
+be unresolved. This does not verify the resulting palette or recognizable look.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

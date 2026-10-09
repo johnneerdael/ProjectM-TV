@@ -254,6 +254,29 @@ always null. Conditions still require valid sampler/input domains, target-stage
 selection, complete writes and source termination; discard/stale pixels remain
 an unresolved separate feedback route. Composite/display gain is excluded.
 
+## Ordered shader colour processing
+
+`colour_processing`, policy `source-ordered-colour-processing-v1`, records RGB
+channels for warp/composite source fields. Each channel has a base constant,
+sample channel or unresolved/source expression and `steps_from_base` in execution
+order. This is a known outer processing suffix, not a complete shader/material
+implementation or a verified final palette. Missing native/default/custom fields
+retain null channels and reasons rather than inventing a shader chain.
+
+Recognized steps: power with constant exponent, absolute value, domain guard,
+one-minus/constant-minus, constant gain/bias/division, saturate and ordered clamp.
+Per-channel sample indexes expose RGB permutation/repetition. Program/coordinate
+exports preserve unresolved inputs/resources. Dynamic powers and mixed spatial/
+colour formulas can remain in the base expression while known outer steps survive.
+
+The qualified translator inserts abs/domain handling for most pow calls, with
+its literal pow(x,1) exception. Those lowered operations are retained in order;
+do not silently reconstruct raw-HLSL power semantics. Power's usual bright/dark
+interpretation requires usable encoded RGB inputs and a valid exponent/domain.
+RGB is source encoded colour, not a verified linear-light/colorimetric space.
+Alpha-only/discarded values do not become RGB tone operations. No palette entropy,
+warm/cold classification, contrast or appearance score follows from step presence.
+
 ## Colour modes
 
 | `colour.mode_code` | Interpretation |

@@ -1209,6 +1209,118 @@
               }
             }
           }
+        },
+        "colour_processing": {
+          "type": "object",
+          "required": [
+            "policy",
+            "colour_space",
+            "stages",
+            "final_palette_verified",
+            "conditions"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-ordered-colour-processing-v1"
+            },
+            "colour_space": {
+              "const": "source encoded RGB"
+            },
+            "stages": {
+              "type": "object",
+              "properties": {
+                "warp": {
+                  "type": "object",
+                  "properties": {
+                    "channels": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "base": {
+                            "type": "object"
+                          },
+                          "steps_from_base": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "complete_scene_colour_model": {
+                            "const": false
+                          },
+                          "actual_palette": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    },
+                    "final_palette_verified": {
+                      "const": false
+                    },
+                    "unknown_reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "composite": {
+                  "type": "object",
+                  "properties": {
+                    "channels": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "base": {
+                            "type": "object"
+                          },
+                          "steps_from_base": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "complete_scene_colour_model": {
+                            "const": false
+                          },
+                          "actual_palette": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    },
+                    "final_palette_verified": {
+                      "const": false
+                    },
+                    "unknown_reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "final_palette_verified": {
+              "const": false
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
