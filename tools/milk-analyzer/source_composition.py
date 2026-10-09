@@ -13,7 +13,8 @@ def composition_from_analysis(analysis,elements):
     for i in range(4):
         if _scalar(analysis.values,f'wavecode_{i}_enabled',0,'bool'):configured.append('wave_'+str(i))
     alpha=getattr(analysis,'main',{}).get('wave_a')
-    if alpha is None or _phase_literal(alpha)!=0:configured.append('builtin_wave')
+    from source_waveform import builtin_wave_possible
+    if not hasattr(analysis,'main') or builtin_wave_possible(analysis.main):configured.append('builtin_wave')
     reads={};status={}
     for stage in ('warp','composite'):
         field=analysis.outputs.get(stage);selection=analysis.stages[stage]

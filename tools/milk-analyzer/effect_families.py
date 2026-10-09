@@ -852,10 +852,13 @@ class _Analysis:
 
     def primitives(self):
         self.component_controls={}
-        alpha = self.main['wave_a']; mode = _number(self.main['wave_mode'])
-        if _number(alpha) != 0:
+        from native_values import live_wave_mode
+        from source_waveform import builtin_wave_possible
+        alpha = self.main['wave_a']; raw_mode = _number(self.main['wave_mode'])
+        mode=None if raw_mode is None else live_wave_mode(raw_mode)
+        if builtin_wave_possible(self.main):
             dots = _number(self.main['wave_usedots'])
-            mechanism = 'point_cloud_primitive' if dots else ('circular_wave_primitive' if mode == 0 else 'builtin_wave_primitive')
+            mechanism = 'point_cloud_primitive' if dots is not None and dots!=0 else ('circular_wave_primitive' if mode == 0 else 'builtin_wave_primitive')
             self.add(mechanism, 'per_frame_', alpha, 'source builtin waveform mode/opacity gate',
                      component='builtin_wave', parameters={'mode': mode, 'dots': bool(dots) if dots is not None else None},
                      conditions=['audio waveform and volume-dependent opacity permit drawing'])

@@ -401,6 +401,7 @@ def appearance_from_analysis(analysis):
     from source_colour_processing import colour_processing
     from source_colour_mix import texture_colour_transfer
     from source_hue import composite_hue_recipe
+    from source_waveform import waveform_recipe,consumed_wave_controls
     elements={}
     for family in analysis.families:
         identity=family['component'] or ('mesh_warp' if family['stage']=='mesh_warp' else 'shader_'+family['stage'])
@@ -468,6 +469,15 @@ def appearance_from_analysis(analysis):
                                   'feedback contains visible texture; sampling-map motion is not a screen-speed measurement']
             element['evidence']+=[analysis.evidence(prefix,'source native feedback controls retain source curves','output')
                                  for prefix in ['per_frame_','per_pixel_']]
+    if 'builtin_wave' in elements:
+        elements['builtin_wave']['waveform_recipe']=waveform_recipe(analysis)
+        for name,unit in [('wave_mode','native waveform mode'),('wave_x','native waveform position control'),
+                          ('wave_y','native waveform position/separation control'),('wave_mystery','native mode-specific mystery control'),
+                          ('wave_a','source opacity'),('wave_r','encoded RGB component'),('wave_g','encoded RGB component'),('wave_b','encoded RGB component')]:
+            if name in consumed_wave_controls(elements['builtin_wave']['waveform_recipe']['effective_mode']):
+                routes=_routes(name,unit,analysis.main[name],analysis)
+                for route in routes:route['conditions'].append('selected native waveform mode consumes this authored control')
+                elements['builtin_wave']['audio_routes']+=routes
     for element in elements.values():
         if element['colour'] is None:element['colour']={'mode_code':None,'palette_diversity':None,'constant_rgb':None,'guaranteed_visible':False}
         element['conditions']=list(dict.fromkeys(element['conditions']))

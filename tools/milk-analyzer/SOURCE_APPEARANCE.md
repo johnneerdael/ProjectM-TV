@@ -788,3 +788,53 @@ Source31 FinalComposite.cpp328–375, PresetState.cpp25–28 and
 PresetCompVertexShaderGlsl330.vert establish generation, random lifetime and
 interpolation. Original MilkDrop2.25c milkdropfs.cpp4408–4450 uses the same
 corner-generation/max-normalization construction.
+
+## Static built-in waveform construction
+
+A retained builtin_wave element now has `waveform_recipe`, policy
+`source31-static-builtin-waveform-v1`. The evaluated mode follows the target's
+checked float-to-int truncation and signed remainder modulo16. Known invalid
+modes omit the native wave; dynamic modes retain unknown form/style. The mode
+dictionary describes source constructions, not actual silhouettes or audio stems:
+0circle,1stereo polar trace,2/3stereoXY,4momentum line,5quadratic stereo trace,
+6angled line,7parallel stereo,8log spectrum,9extended line,10crossed stereo,
+11parallel vertical stereo,12skewed polar,13star-named radial,14flower-named
+polar and15lasso-named nonlinear. Read the recipe's source qualification before
+using extended-mode names as visual labels.
+
+Known mode0 uses radius.5+.4*preprocessedRightSample+mystery, angular sample
+span6.28 and nominal rotation.2rad/second. It appends a closing endpoint but
+has strip path topology; actual draw may use GL lines or quad triangles. Mode1uses right samples for radius and offset left samples for
+angle with nominal2.3rad/second rotation. Mode2/3use stereoXYgeometry; mode3
+changes opacity rather than geometry. Line modes use clipped endpoints and mode-
+specific mystery angles; mode7uses squared wave_y as normal separation. Mode8
+uses spectrum_left log amplitude and requires a valid positive log argument.
+Source waveScale/128 and the one-pole audio smoothing recurrence are supplied,
+followed by common four-tap geometry interleaving. No audio sample, equation
+frame or native waveform adapter is executed by this source export.
+
+The source-gating correction is important: mode3 replaces authored wave_a with
+a reference-size coefficient*1.3*treb² before optional volume modulation. Thus
+wave_a=0 does not prove mode3inactive; a dynamic mode also cannot be excluded
+from that value alone. Composition and element admission share this rule.
+Dots, thickness and additive flags use evaluated nonzero semantics, including
+negative fractional values. `path_topology` describes points/strip/loop, while
+non-dot `hardware_draw_primitive` remainsnull without renderer context and
+`hardware_draw_candidates` retains line versus quad-triangle possibilities.
+Known modes suppress audio routes for unused controls (including mode3wave_a);
+dynamic modes retain possible routes. Render context, alpha clamps/threshold, native
+projection and subsequent shader/feedback still determine visibility.
+
+Extended mode9 allocates secondary vertex storage without explicit assignments
+in its source body. `path_count` remainsnull while the primary generated path is
+recorded; actual secondary draw behaviour is an open investigation, not an
+asserted engine bug. Nonfinite float32-narrowed controls leave derived angle/
+separation unknown and preserve other descriptor data. `native_control_domains_verified`
+staysfalse; `actual_screen_coverage`, `visible_motion_speed` and calibrated mood
+confidence remain unknown. Source/control expressions and audio causal routes
+remain available even where final geometry is unresolved.
+
+References: source31 Waveform.cpp90–110/246–295, WaveformMode.hpp, Waveforms/Factory.cpp
+and mode-specific GenerateVertices bodies. These are patched TV source rules,
+including16modes and authored-reference sample limits; original MilkDrop2's
+legacy wave math remains a separate reference.

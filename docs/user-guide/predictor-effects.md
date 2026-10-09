@@ -191,6 +191,12 @@ corner colours, shared-channel normalization and mesh interpolation. Random
 phases remain explicit inputs. This adds a colour ingredient to the mental map
 without claiming the shader's final palette; red-only use can still be grayscale.
 
+Built-in waveform records now distinguish supported circle, stereoXY, momentum,
+angled/two-channel and spectrum constructions with their source controls and
+audio-channel roles. Draw style and mode conversion follow the target engine.
+Actual shape still depends on sample data, opacity, clipping and later feedback;
+extended-mode names do not guarantee a star or flower silhouette.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

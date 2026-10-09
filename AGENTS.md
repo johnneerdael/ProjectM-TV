@@ -189,6 +189,12 @@ from familycodes) only for consumed _vDiffuseRGB. Preserve per-corner max
 normalization, unknown preset random phases, vertex-position blend followed by
 triangle interpolation, red-only usage and alpha/dead/warp exclusions. Nominal
 [2/3,1]input bounds are not a final palette or exact per-fragment bilinear claim.
+`source_waveform.py` exports source built-in wave recipes using target checked
+truncation/signedmod16 and evaluated nonzero flags. Share admission with
+source_composition: wave_a=0 cannot exclude mode3 or dynamicmode because native
+mode3replacesalpha with treble²/reference scaling. Keep input channels distinct
+from stems, waveform data/context/visibility unknown and extended mode9 secondary
+storage behaviour open. Nonfinite narrowing must preserve other descriptor data.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

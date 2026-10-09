@@ -204,3 +204,13 @@ compositeRGB actually consumes hue_shader/_vDiffuse. Keep random phases, actual
 context and final palette unknown; preserve vertex-position blending and GPU
 triangle interpolation rather than substituting per-pixel bilinear colour.
 Use mono/dead/warp controls, realHueBurst and the same fixed100 retentioncheck.
+
+## Built-in waveform source recipes
+
+Describe the16target waveform constructions, source controls, sample-channel
+roles, smoothing and nominal geometry/time factors without adapter execution.
+Correct source admission to native evaluated mode and mode3opacity replacement;
+share composition gate and keep dynamic/unsupported cases open. Preserve valid
+data alongside nonfinite control narrowing and uninvestigated extended storage.
+Measure the fixed100 and verify against source/known controls before claiming
+shape, coverage or whole-preset accuracy.

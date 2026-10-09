@@ -1150,6 +1150,111 @@
                     }
                   }
                 }
+              },
+              "waveform_recipe": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "mode_expression",
+                  "effective_mode",
+                  "form_name",
+                  "audio_inputs",
+                  "path_count",
+                  "hardware_draw_primitive",
+                  "control_expressions",
+                  "preprocess",
+                  "source_alpha_policy",
+                  "actual_screen_coverage",
+                  "visible_motion_speed",
+                  "appearance_guaranteed",
+                  "conditions",
+                  "path_topology",
+                  "hardware_draw_candidates",
+                  "consumed_authored_controls"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source31-static-builtin-waveform-v1"
+                  },
+                  "effective_mode": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0,
+                    "maximum": 15
+                  },
+                  "form_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "audio_inputs": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "waveform_left",
+                        "waveform_right",
+                        "spectrum_left"
+                      ]
+                    }
+                  },
+                  "audio_instrument_identity": {
+                    "type": "null"
+                  },
+                  "path_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "hardware_draw_primitive": {
+                    "enum": [
+                      null,
+                      "points"
+                    ]
+                  },
+                  "actual_screen_coverage": {
+                    "type": "null"
+                  },
+                  "visible_motion_speed": {
+                    "type": "null"
+                  },
+                  "native_control_domains_verified": {
+                    "const": false
+                  },
+                  "appearance_guaranteed": {
+                    "const": false
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "path_topology": {
+                    "enum": [
+                      null,
+                      "points",
+                      "strip",
+                      "loop"
+                    ]
+                  },
+                  "hardware_draw_candidates": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "points",
+                        "line_strip",
+                        "line_loop",
+                        "triangle_strip"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
