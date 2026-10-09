@@ -76,6 +76,9 @@ def verify(repo):
         capture = captures[case]
         assert capture['name'] == case
         assert all(capture[key] == value for key, value in indexed[case].items()), case
+        preset_file = repo / capture['preset_relative_path']
+        assert preset_file.is_file(), f'preset file missing: {case}'
+        assert sha(preset_file.read_bytes()) == capture['preset_sha256'], f'preset bytes: {case}'
         assert capture['texture_inventory_sha256'] == texture_digest, f'textures: {case}'
         assert set(capture['roles']) == set(canonical)
         for role in canonical:
@@ -91,6 +94,8 @@ def verify(repo):
             assert (manifest['width'], manifest['height']) == (capture['width'], capture['height']), case
             assert manifest['fps'] == 30 and manifest['seed'] == capture['seed'] == 12345
             assert manifest['identity'] == capture['roles'][role]['identity'], f'worker mismatch: {case}/{role}'
+            assert len(record['frame_sha256']) == capture['frames'], f'frame count: {case}/{role}/{repeat}'
+            assert record['frame_sha256'] == capture['roles'][role]['frame_sha256'], f'repeat frame hashes: {case}/{role}/{repeat}'
             assert record['inputs'] == {key: capture[key] for key in
                                        ('preset_sha256', 'pcm_sha256', 'texture_inventory_sha256')}, case
             assert manifest['status'] == 'success' and manifest['gl_error_frames'] == 0

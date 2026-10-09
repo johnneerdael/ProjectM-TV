@@ -7,7 +7,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/163.milk"
   },
   {
     "name": "I05-control",
@@ -17,7 +18,8 @@
     "width": 1280,
     "height": 720,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit inverse aspect.milk"
   },
   {
     "name": "I06",
@@ -27,7 +29,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Shreyas - Carnival loavthephysyq.milk"
   },
   {
     "name": "I06-control",
@@ -37,7 +40,8 @@
     "width": 1280,
     "height": 720,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit fresh wave time.milk"
   },
   {
     "name": "I08",
@@ -47,7 +51,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Mig_304 - geiss remix 2.milk"
   },
   {
     "name": "I08-4k",
@@ -57,7 +62,8 @@
     "width": 3840,
     "height": 2160,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Mig_304 - geiss remix 2.milk"
   },
   {
     "name": "I09",
@@ -67,7 +73,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit pi precision.milk"
   },
   {
     "name": "I10",
@@ -77,7 +84,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/BrainStain-fish on.milk"
   },
   {
     "name": "I11",
@@ -87,7 +95,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/07.milk"
   },
   {
     "name": "I12",
@@ -97,7 +106,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit legacy physical traversal.milk"
   },
   {
     "name": "I13",
@@ -107,7 +117,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Liquido.milk"
   },
   {
     "name": "I16",
@@ -117,7 +128,8 @@
     "width": 1280,
     "height": 720,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit followup uv default-feedback.milk"
   },
   {
     "name": "I17",
@@ -127,7 +139,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Happening.milk"
   },
   {
     "name": "I17-4k",
@@ -137,7 +150,8 @@
     "width": 3840,
     "height": 2160,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Happening.milk"
   },
   {
     "name": "I18",
@@ -147,7 +161,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/Geiss - Blur Mix 3.milk"
   },
   {
     "name": "I19",
@@ -157,7 +172,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/$$$ Royal - Mashup (103).milk"
   },
   {
     "name": "I19-4k",
@@ -167,7 +183,8 @@
     "width": 3840,
     "height": 2160,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/$$$ Royal - Mashup (103).milk"
   },
   {
     "name": "I20",
@@ -177,7 +194,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/$$$ Royal - Mashup (11).milk"
   },
   {
     "name": "I22",
@@ -187,7 +205,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk"
   },
   {
     "name": "I22-4k",
@@ -197,7 +216,8 @@
     "width": 3840,
     "height": 2160,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk"
   },
   {
     "name": "I22-control",
@@ -207,7 +227,8 @@
     "width": 1280,
     "height": 720,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit followup dot audit dot ring.milk"
   },
   {
     "name": "I24",
@@ -217,7 +238,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/martin - city lights v2 c.milk"
   },
   {
     "name": "I24-control",
@@ -227,7 +249,8 @@
     "width": 1280,
     "height": 720,
     "frames": 240,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit followup audit shape live disjoint-thick.milk"
   },
   {
     "name": "I29",
@@ -237,7 +260,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit negative echo.milk"
   },
   {
     "name": "I31",
@@ -247,7 +271,8 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "core/src/main/assets/presets/suksma - type o negative - world coming down.milk"
   },
   {
     "name": "M02",
@@ -257,6 +282,7 @@
     "width": 1280,
     "height": 720,
     "frames": 480,
-    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "preset_relative_path": "docs/superpowers/evidence/patch-visual-catalog/fixtures/audit border inverted.milk"
   }
 ]

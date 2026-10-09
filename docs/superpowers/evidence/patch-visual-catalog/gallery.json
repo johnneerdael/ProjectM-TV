@@ -30,7 +30,7 @@
     "case": "I31",
     "frame": 119,
     "preset": "suksma - type o negative - world coming down.milk",
-    "caption": "This original is a near-unchanged appearance example. The isolated historical repair changed only 17 total RGB bytes at 4K; the small differences in this full-engine pair also include other patches. The verified change is the gamma-only pass count, not a promised visible improvement.",
+    "caption": "This original is a near-unchanged appearance example. The isolated historical repair changed only 17 total RGB bytes at 4K; the small differences in this full-engine pair also include other patches. The verified change is the gamma-only pass count, not a promised visible improvement. At this boundary it removes one GPU draw. Valid historical emulator timings overlap (3.13\u20133.25 ms/frame before, 2.97\u20133.26 after), so a speedup or slowdown is not established.",
     "crop": null,
     "extras": []
   },

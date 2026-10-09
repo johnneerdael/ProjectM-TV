@@ -16,6 +16,10 @@ spec.loader.exec_module(verifier)
 class RunReceiptBinding(unittest.TestCase):
     def check(self, change=None, overrides=None, image_swap=None):
         overrides = overrides or {}
+        def write_override(path, value):
+            if value is None:
+                return
+            path.write_text(value if isinstance(value, str) else json.dumps(value))
         runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
         if change:
             change(runs)
@@ -27,13 +31,13 @@ class RunReceiptBinding(unittest.TestCase):
                 if path.name == 'run-manifests.json':
                     continue
                 if path.name in overrides:
-                    (evidence / path.name).write_text(json.dumps(overrides[path.name]))
-                elif path.name == 'captures' and any(name.startswith('captures/') for name in overrides):
-                    (evidence / 'captures').mkdir()
+                    write_override(evidence / path.name, overrides[path.name])
+                elif path.is_dir() and any(name.startswith(path.name + '/') for name in overrides):
+                    (evidence / path.name).mkdir()
                     for child in path.iterdir():
-                        key = 'captures/' + child.name
+                        key = path.name + '/' + child.name
                         if key in overrides:
-                            (evidence / key).write_text(json.dumps(overrides[key]))
+                            write_override(evidence / key, overrides[key])
                         else:
                             (evidence / key).symlink_to(child)
                 else:
@@ -41,6 +45,9 @@ class RunReceiptBinding(unittest.TestCase):
             (evidence / 'run-manifests.json').write_text(json.dumps(runs))
             assets = root / 'docs/user-guide/images/patches'
             assets.mkdir(parents=True)
+            presets = root / 'core/src/main/assets'
+            presets.mkdir(parents=True)
+            (presets / 'presets').symlink_to(REPO / 'core/src/main/assets/presets', target_is_directory=True)
             originals = REPO / 'docs/user-guide/images/patches/audit'
             if image_swap:
                 (assets / 'audit').mkdir()
@@ -119,6 +126,20 @@ class RunReceiptBinding(unittest.TestCase):
         gallery[0]['frame'] = 119
         with self.assertRaisesRegex(AssertionError, 'gallery frame'):
             self.check(overrides={'gallery.json': gallery})
+
+    def test_stale_repeat_flag_cannot_hide_hash_difference(self):
+        with self.assertRaisesRegex(AssertionError, 'repeat frame hashes'):
+            self.check(lambda runs: runs['I16'][1]['frame_sha256'].__setitem__(17, '0' * 64))
+
+    def test_preserved_fixture_tamper_fails(self):
+        fixture = 'fixtures/audit negative echo.milk'
+        altered = (EVIDENCE / fixture).read_text() + '\n// changed fixture\n'
+        with self.assertRaisesRegex(AssertionError, 'preset bytes'):
+            self.check(overrides={fixture: altered})
+
+    def test_missing_preserved_fixture_fails(self):
+        with self.assertRaisesRegex(AssertionError, 'preset file missing'):
+            self.check(overrides={'fixtures/audit negative echo.milk': None})
 
 
 if __name__ == '__main__':
