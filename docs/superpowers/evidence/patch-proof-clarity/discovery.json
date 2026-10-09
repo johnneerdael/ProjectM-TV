@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "status": "candidate discovery, not renderer or current-core activation proof",
+  "reader": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/source29/adapters/milk-native-reader",
+  "reader_sha256": "157642158141d1c8adfbaa61417cabba24fea7932b7b497c0a36f11795882007",
+  "adapter_profile": "historical predictor source29; source-execution numeric witness only",
+  "evaluation": {
+    "viewport": [
+      3840,
+      2160
+    ],
+    "mesh": [
+      8,
+      8
+    ],
+    "fps": 30,
+    "frames": 180,
+    "seed": 12345,
+    "audio": "Explicit finite scalar bands bass/mid/treb and attenuated bands=1; waveform480 and spectrum512 zero samples each, not recorded audio. First attempt used512 waveform entries for two custom-wave cases and failed; corrected to source29 expected480 without source changes.",
+    "clock": "initialization time 0; frames time=(index+1)/30",
+    "limits": "Historical source29 adapter does not model current34-patch traversal/publication policy; stateful per-pixel order and visible impact must be validated by current renderer ablation."
+  },
+  "candidates": [
+    {
+      "name": "Phat_Aderrasi - Chromatic Abyss (the other side)_PhatColours - EoS remix.milk",
+      "path": "core/src/main/assets/presets/Phat_Aderrasi - Chromatic Abyss (the other side)_PhatColours - EoS remix.milk",
+      "sha256": "d178b5242273483f3b686cdf86ce46c6c2425a62f15dd4983d456e76923d8b91",
+      "evaluation_status": "executed",
+      "motion_reenable_count": 1,
+      "motion_reenable_windows": [
+        {
+          "index": 92,
+          "time": 3.1,
+          "mv_a": 0.00043242684608302273,
+          "mv_x": 31.9999942779541,
+          "mv_y": 24.000003814697266,
+          "mv_l": 0.5,
+          "warp": 0.009999999776482582,
+          "dx": 9.999999747378752e-06,
+          "dy": 9.999999747378752e-06,
+          "rot": 0.0
+        },
+        {
+          "index": 93,
+          "time": 3.1333333333333333,
+          "mv_a": 1.7053536361610888e-05,
+          "mv_x": 31.9999942779541,
+          "mv_y": 24.000003814697266,
+          "mv_l": 0.5,
+          "warp": 0.009999999776482582,
+          "dx": 9.999999747378752e-06,
+          "dy": 9.999999747378752e-06,
+          "rot": 0.0
+        },
+        {
+          "index": 94,
+          "time": 3.1666666666666665,
+          "mv_a": 0.00015716929454551165,
+          "mv_x": 31.9999942779541,
+          "mv_y": 24.000003814697266,
+          "mv_l": 0.5,
+          "warp": 0.009999999776482582,
+          "dx": 9.999999747378752e-06,
+          "dy": 9.999999747378752e-06,
+          "rot": 0.0
+        },
+        {
+          "index": 95,
+          "time": 3.2,
+          "mv_a": 0.0008526134943720454,
+          "mv_x": 31.9999942779541,
+          "mv_y": 24.000003814697266,
+          "mv_l": 0.5,
+          "warp": 0.009999999776482582,
+          "dx": 9.999999747378752e-06,
+          "dy": 9.999999747378752e-06,
+          "rot": 0.0
+        }
+      ],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": [],
+      "previous_mesh_scalar_difference_max": {
+        "warp": 0.24817926476211682,
+        "dx": 0.0,
+        "dy": 0.0,
+        "rot": 0.0,
+        "sx": 0.0,
+        "sy": 0.0
+      }
+    },
+    {
+      "name": "Infused by Flexi with AdamFX 2 Stahlregen & Aderrasi - Slowflowers Ft Martin (AdamFXRemix)7.milk",
+      "path": "core/src/main/assets/presets/Infused by Flexi with AdamFX 2 Stahlregen & Aderrasi - Slowflowers Ft Martin (AdamFXRemix)7.milk",
+      "sha256": "7d3f1de88fc53c7ff70e605a7f0933da5a6bc4d0cdfc41c1582e7410165cd9d6",
+      "evaluation_status": "executed",
+      "initial_attempt_reason": "native scene execution failed: custom wave native audio array size mismatch\n",
+      "motion_reenable_count": 1,
+      "motion_reenable_windows": [
+        {
+          "index": 130,
+          "time": 4.366666666666666,
+          "mv_a": -0.01734690081623574,
+          "mv_x": 64.0,
+          "mv_y": 48.0,
+          "mv_l": 1.0,
+          "warp": 0.0,
+          "dx": 0.0,
+          "dy": 0.0,
+          "rot": 0.0
+        },
+        {
+          "index": 131,
+          "time": 4.4,
+          "mv_a": -0.0059258595041006175,
+          "mv_x": 64.0,
+          "mv_y": 48.0,
+          "mv_l": 1.0,
+          "warp": 0.0,
+          "dx": 0.0,
+          "dy": 0.0,
+          "rot": 0.0
+        },
+        {
+          "index": 132,
+          "time": 4.433333333333334,
+          "mv_a": 0.005115268220326947,
+          "mv_x": 64.0,
+          "mv_y": 48.0,
+          "mv_l": 1.0,
+          "warp": 0.0,
+          "dx": 0.0,
+          "dy": 0.0,
+          "rot": 0.0
+        },
+        {
+          "index": 133,
+          "time": 4.466666666666667,
+          "mv_a": 0.015736700181014605,
+          "mv_x": 64.0,
+          "mv_y": 48.0,
+          "mv_l": 1.0,
+          "warp": 0.0,
+          "dx": 0.0,
+          "dy": 0.0,
+          "rot": 0.0
+        }
+      ],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": [],
+      "previous_mesh_scalar_difference_max": {
+        "warp": 0.0,
+        "dx": 0.01005707177165148,
+        "dy": 0.005692539165075783,
+        "rot": 0.19361864081019153,
+        "sx": 0.0,
+        "sy": 0.0
+      }
+    },
+    {
+      "name": "Dbleja - Escape (Red Mix).milk",
+      "path": "core/src/main/assets/presets/Dbleja - Escape (Red Mix).milk",
+      "sha256": "fa85cd9e2d62fb11fea993ccc00fd933e3571a3eba2f710a6c5fd63459b12bbe",
+      "evaluation_status": "executed",
+      "motion_reenable_count": 0,
+      "motion_reenable_windows": [],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": [],
+      "alternate_finite_bands2_context": {
+        "frames": 30,
+        "fps": 30,
+        "bands": 2,
+        "inverted_visible_outer_count": 28,
+        "examples": [
+          {
+            "index": 0,
+            "time": 0.03333333333333333,
+            "ob_size": 1.1,
+            "ob_a": 0.018366550267164834,
+            "ib_size": 0.9129452507276277,
+            "ib_a": 0.036939273754816225
+          },
+          {
+            "index": 1,
+            "time": 0.06666666666666667,
+            "ob_size": 1.1,
+            "ob_a": 0.02920436872087507,
+            "ib_size": 0.9129452507276277,
+            "ib_a": 0.036939273754816225
+          },
+          {
+            "index": 2,
+            "time": 0.1,
+            "ob_size": 1.1,
+            "ob_a": 0.05657816326581047,
+            "ib_size": 0.9129452507276277,
+            "ib_a": 0.036939273754816225
+          },
+          {
+            "index": 3,
+            "time": 0.13333333333333333,
+            "ob_size": 1.1,
+            "ob_a": 0.003546034247421243,
+            "ib_size": 0.9129452507276277,
+            "ib_a": 0.036939273754816225
+          }
+        ],
+        "qualification": "Legal equation input values, not audio-provider-produced or renderer activation proof"
+      }
+    },
+    {
+      "name": "shifter - fractal grinder (opalescent).milk",
+      "path": "core/src/main/assets/presets/shifter - fractal grinder (opalescent).milk",
+      "sha256": "e4558027a49f42bba393d4538e0ff5f32440da90ef02dd0beeb78b2da047a2f7",
+      "evaluation_status": "executed",
+      "motion_reenable_count": 0,
+      "motion_reenable_windows": [],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": []
+    },
+    {
+      "name": "MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,ShadowHarlequin,Martin n Flexi - BitStorm AftermathFX D.milk",
+      "path": "core/src/main/assets/presets/MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,ShadowHarlequin,Martin n Flexi - BitStorm AftermathFX D.milk",
+      "sha256": "33f13df56d863f17ad3caf03ec43245ea4aaeaac2e3e62187dac786d023c80c1",
+      "evaluation_status": "executed",
+      "initial_attempt_reason": "native scene execution failed: custom wave native audio array size mismatch\n",
+      "motion_reenable_count": 0,
+      "motion_reenable_windows": [],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": []
+    },
+    {
+      "name": "shifter - neon pulse.milk",
+      "path": "core/src/main/assets/presets/shifter - neon pulse.milk",
+      "sha256": "605d80e5c1480be3fd21ef57cbd2780cbff192f06be5b6a4268ddf2d80aafcf2",
+      "evaluation_status": "executed",
+      "motion_reenable_count": 0,
+      "motion_reenable_windows": [],
+      "negative_active_odd_echo_count": 0,
+      "negative_active_odd_echo_examples": [],
+      "inverted_visible_border_count": 0,
+      "inverted_visible_border_examples": [],
+      "equation_warnings": []
+    }
+  ],
+  "scan": {
+    "corpus_count": 9606,
+    "inventory_sha256": "9be3b6a1f079ea2aa3ef558849b6278afb684d1821a3f034efe01c32f1f19e65",
+    "bounds": "All packaged .milk files, default values plus active numbered main per-frame assignments; not recursive dependency analysis or all possible audio/clock contexts",
+    "counts": {
+      "named_constant_lexical": 0,
+      "active_main_motion_assignments": 605,
+      "active_main_echo_orient_assignments": 149,
+      "active_main_border_size_assignments": 397,
+      "static_inverted_visible_borders": 0,
+      "active_main_echo_orient_direct_minus_operator": 0
+    },
+    "counts_are": "lexical candidates or static eligibility, never affected-preset impact counts"
+  },
+  "I12_exact_coy_recurrence_candidates": [
+    {
+      "name": "96.milk",
+      "path": "core/src/main/assets/presets/96.milk",
+      "sha256": "21275351b4a86dae87602a1ced85f2fdf0a09e4774ee71ea8d13f37348e7c6d8",
+      "triggers": [
+        {
+          "line": 300,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress - mash0000 - prismatic spectral haze filter.milk",
+      "path": "core/src/main/assets/presets/By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress - mash0000 - prismatic spectral haze filter.milk",
+      "sha256": "195c8dee292efdad30e1ce418016887fc357b3b29f07f1e921deb78042fccce0",
+      "triggers": [
+        {
+          "line": 310,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress 2.milk",
+      "path": "core/src/main/assets/presets/By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress 2.milk",
+      "sha256": "b2aa77df1588881beeb74a386520ca3b0fbf05e1b1b54f00391d753ae16ab0e9",
+      "triggers": [
+        {
+          "line": 368,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress 4.milk",
+      "path": "core/src/main/assets/presets/By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress 4.milk",
+      "sha256": "bdb46886da54164ddc6509d7150a1993973e8c35c0cdd48649ddecfbcc9166db",
+      "triggers": [
+        {
+          "line": 368,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress.milk",
+      "path": "core/src/main/assets/presets/By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar + Orb  + Mstress.milk",
+      "sha256": "59d3d1a984a22d4af04cc158f665b217d59fcf5b21157f467a9ed00236c13ab7",
+      "triggers": [
+        {
+          "line": 310,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar .milk",
+      "path": "core/src/main/assets/presets/By Adam FX 2 shifter + geiss - neon pulse (glow mix) + Rovastar .milk",
+      "sha256": "a24c5eaca003ebf0b66c1d3dc5caa2f0d694567dfa89ade1a0c5ef3dfa1e8a64",
+      "triggers": [
+        {
+          "line": 284,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an40.milk",
+      "path": "core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an40.milk",
+      "sha256": "055929fd368eb00313762a693f1f6beba5cf2fdd8bb0b42a5ae6816eb8f40a47",
+      "triggers": [
+        {
+          "line": 431,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter + geiss - neon pulse (glow mix).milk",
+      "path": "core/src/main/assets/presets/shifter + geiss - neon pulse (glow mix).milk",
+      "sha256": "e7c6398d6b28ffd202d0c9b4a78e2a2c78a95085b2b5b6c9a36c27d535af3b57",
+      "triggers": [
+        {
+          "line": 300,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - neon pulse (reactive).milk",
+      "path": "core/src/main/assets/presets/shifter - neon pulse (reactive).milk",
+      "sha256": "d7d47462ac08d93a2124be98e79867da1375ced5d0b4fadfa0cd6c930a8ad1c1",
+      "triggers": [
+        {
+          "line": 285,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - neon pulse.milk",
+      "path": "core/src/main/assets/presets/shifter - neon pulse.milk",
+      "sha256": "605d80e5c1480be3fd21ef57cbd2780cbff192f06be5b6a4268ddf2d80aafcf2",
+      "triggers": [
+        {
+          "line": 282,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - snakeskin (edged).milk",
+      "path": "core/src/main/assets/presets/shifter - snakeskin (edged).milk",
+      "sha256": "20f204b05312880d2784240856f7dc55ee50dbc0143e495a89868adaa1f1395e",
+      "triggers": [
+        {
+          "line": 282,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - snakeskin (pulse mini) - poisoning the infinite.milk",
+      "path": "core/src/main/assets/presets/shifter - snakeskin (pulse mini) - poisoning the infinite.milk",
+      "sha256": "6813cce63ca000788a19222e92dd33650de1dce9757939624123594cd119a36e",
+      "triggers": [
+        {
+          "line": 296,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - snakeskin (pulse mini).milk",
+      "path": "core/src/main/assets/presets/shifter - snakeskin (pulse mini).milk",
+      "sha256": "1db7712d1028cd478e0cfb5531ec2f9852ca879e01669ab06aef0a3892f8f6b4",
+      "triggers": [
+        {
+          "line": 281,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    },
+    {
+      "name": "shifter - snakeskin.milk",
+      "path": "core/src/main/assets/presets/shifter - snakeskin.milk",
+      "sha256": "6ada70b632edb8d77d0020f6482be586c533a82ae6778c1b9617039f44613c49",
+      "triggers": [
+        {
+          "line": 282,
+          "source": "per_pixel_1=coy = (coy + below(y,oy))*above(q1,0);"
+        }
+      ],
+      "status": "lexical carried-row recurrence, current renderer activation not tested by discovery unit"
+    }
+  ],
+  "prioritised_renderer_checks": [
+    {
+      "issue": "I16",
+      "candidate": "Infused by Flexi with AdamFX 2 Stahlregen & Aderrasi - Slowflowers Ft Martin (AdamFXRemix)7.milk",
+      "reason": "Native equation adapter finds gated re-enable with changing dx/dy/rot and alpha .0051, better visibility potential than cosine alpha .000157. Actual root PCM may move event."
+    },
+    {
+      "issue": "M02",
+      "candidate": "Dbleja - Escape (Red Mix).milk",
+      "reason": "Native equation adapter shows inverted visible radii under finite bands2; capture needs an actual PCM context reaching bass_att>1.82."
+    },
+    {
+      "issue": "I12",
+      "candidate": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an40.milk",
+      "reason": "Exact row recurrence plus stronger wave injection fWaveAlpha .401 and fDecay1; lexical only."
+    }
+  ]
+}

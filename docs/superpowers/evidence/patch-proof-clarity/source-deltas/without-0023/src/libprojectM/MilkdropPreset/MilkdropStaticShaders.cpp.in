@@ -1,0 +1,54 @@
+#include "MilkdropStaticShaders.hpp"
+
+#include <Renderer/OpenGL.h>
+
+#include <cstring>
+#include <stdexcept>
+
+namespace libprojectM {
+namespace MilkdropPreset {
+
+@STATIC_SHADER_CONTENTS@
+
+MilkdropStaticShaders::MilkdropStaticShaders(bool useGLES)
+    : m_useGLES(useGLES)
+{
+    if (m_useGLES)
+    {
+        // If GLES is enabled, use the embedded specification language variant.
+        m_versionHeader = "#version 300 es";
+        m_GLSLGeneratorVersion = M4::GLSLGenerator::Version::Version_300_ES;
+    }
+    else
+    {
+        m_versionHeader = "#version 330";
+        m_GLSLGeneratorVersion = M4::GLSLGenerator::Version::Version_330;
+    }
+}
+
+std::string MilkdropStaticShaders::AddVersionHeader(std::string shader_text)
+{
+    return m_versionHeader + "\n" + shader_text;
+}
+
+std::string MilkdropStaticShaders::GetLegacyPresetWarpVertexShader()
+{
+    return AddVersionHeader("" + kPresetWarpVertexShaderGlsl330);
+}
+
+#define DECLARE_SHADER_ACCESSOR(name)              \
+    std::string MilkdropStaticShaders::Get##name()       \
+    {                                              \
+        return AddVersionHeader(k##name##Glsl330); \
+    }
+
+#define DECLARE_SHADER_ACCESSOR_NO_HEADER(name) \
+    std::string MilkdropStaticShaders::Get##name()    \
+    {                                           \
+        return k##name##Glsl330;                \
+    }
+
+@STATIC_SHADER_ACCESSOR_DEFINITIONS@
+
+} // namespace MilkdropPreset
+} // namespace libprojectM
