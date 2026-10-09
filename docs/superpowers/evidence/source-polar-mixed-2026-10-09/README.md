@@ -53,5 +53,6 @@ SHA256: `eddd45229f92921750c25d87008023a4ad43b109bedd646ac4b5d9cb01d8b748`.
 ZIP CRC and all100 original source bytes/hash joins were verified. No audio/frame/
 image inputs, devices or shared corpus were used. The target remains the full
 published2.3.33AAR/source31 identity already qualified as byte-equivalent; this
-turn's fresh GitHub release lookup failed because network access was unavailable.
+turn's fresh GitHub API/web release lookups failed, so no newer release identity
+was established. Git transport remained usable; the feature commit was pushed.
 Existing47numeric export is unchanged. The recognizable-look gate remains unmet.
