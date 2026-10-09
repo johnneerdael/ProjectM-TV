@@ -1,12 +1,17 @@
 """Check published RGB, independent repeats, matched crops and source deltas."""
 import hashlib
+import html
 import json
 import re
 import shutil
 import subprocess
 import tempfile
+import sys
 from pathlib import Path
 from PIL import Image
+
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'patch-visual-catalog'))
+from guide_bindings import Fragment
 
 EXPECTED_PAIRS={('escape','0028'),('crush','0021'),('carnival','0021'),
                 ('swirl','0023'),('nebula','0030'),('city-alt','0032'),('salad','0033')}
@@ -79,6 +84,21 @@ def main():
         assert set(pair['roles'])==expected_roles
         assert expected_roles<=workers.keys()
         x,y,w,h=pair['crop'];assert 0<=x<x+w<=3840 and 0<=y<y+h<=2160
+        figure=Fragment(pair['figure_html']).root
+        assert f"<strong>{html.escape(pair['preset'])}</strong>" in pair['figure_html']
+        panels=list(figure.nodes('div','patch-panel'))
+        assert len(panels)==4
+        for index,panel in enumerate(panels):
+            role=('without-'+pair['patch'],'full')[index%2]
+            label='Only '+pair['patch']+' disabled' if index%2==0 else 'ProjectM TV · fix enabled'
+            strong,links,images=(list(panel.nodes(tag)) for tag in ('strong','a','img'))
+            assert len(strong)==len(links)==len(images)==1
+            assert strong[0].text()==label
+            original=f"../../images/patches/clarity/{pair['name']}-{role}.png"
+            assert links[0].attrs['href']==original
+            assert images[0].attrs['src']==(original.removesuffix('.png')+'-crop.png' if index<2 else original)
+            assert (images[0].attrs['width'],images[0].attrs['height'])==tuple(map(str,(w,h) if index<2 else (3840,2160)))
+            assert all('style' not in node.attrs for node in [panel,*panel.nodes()])
         for role,record in pair['roles'].items():
             assert record['identity_ref']==role
             path=repo/'docs/user-guide/images/patches/clarity'/f"{pair['name']}-{role}.png"
@@ -108,6 +128,7 @@ def main():
                 assert len(states)==len(selected)
                 assert [state['frame'] for state in states]==selected
                 preset=Path(request['preset_path']).name
+                assert preset==pair['preset']
                 assert sha((repo/'core/src/main/assets/presets'/preset).read_bytes())==pair['inputs']['preset_sha256']
                 assert sha((repo/'docs/superpowers/evidence/patch-visual-catalog/audio'/Path(request['pcm_path']).name).read_bytes())==pair['inputs']['pcm_sha256']
                 for state in states:
