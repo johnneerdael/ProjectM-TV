@@ -99,9 +99,14 @@ into static analysis. This additional work keeps the goal active.
   mutable sampler boundaries, loop/domain guards and bounded proofs.
 - [x] Check pixel bits and all47feature objects on two128p and one480p authored
   source-model controls; equal. Expression-level synthetic speedups18x/3x.
-- [ ] Implement verified uniform-output descriptor reduction without constructing
-  full display fields, preserving the existing47metric definitions/null rules.
-- [ ] Measure real preset eligibility and actual complete-preset speedups before
-  enabling automatic routes; do not infer corpus gains from synthetic kernels.
+- [x] Implement and independently review an opt-in uniform-expression descriptor
+  primitive without display fields.29controls preserve formula/null/failure rules;
+  selected-final-stage and whole-preset admission remain caller obligations.
+- [x] Measure the fixed100 real-source dependency candidates and synthetic
+  shader/descriptor cost:zero candidates;118x median synthetic gain after fixes.
+  No automatic route was enabled and no corpus gain was inferred.
+- [ ] Establish selected-stage/admission proofs and complete-preset speed evidence
+  before replacing the full forecast. The zero-candidate census makes broader
+  shared-work reuse and feedback/loop proofs higher priorities than this route.
 - [ ] Add conservative no-flash/invariance bounds as separate evidence where
   whole-program/context proofs support them. Preserve uncertain cases.

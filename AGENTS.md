@@ -96,6 +96,16 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 
 ## Codebase navigation and knowledge tools
 
+Experimental uniform final-expression reduction lives in
+`tools/milk-analyzer/uniform_source_descriptors.py` and `uniform_descriptors.py`.
+It is opt-in and not an automatic corpus route. Require selected final-stage,
+binding/storage and later-blit premises separately; reject unsupported spatial,
+texture, loop and effect dependencies. The current descriptor shortcut requires
+qualified OpenCV5.0.0 optimized ARM64/NEON and retains optical-flow nulls. See
+`docs/superpowers/evidence/predictor-uniform-descriptors/README.md` for controls
+and the fixed100 zero-candidate coverage limit. Do not extrapolate synthetic
+kernel speedups to the whole pack.
+
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
 - projectM sources: `third_party/projectm` shows patched code only after a CMake configure or a manual apply; the committed source of truth is `tools/projectm-patches/`. Search both the submodule and the patches.

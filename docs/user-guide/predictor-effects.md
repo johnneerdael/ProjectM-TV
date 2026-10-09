@@ -62,3 +62,23 @@ alongside editable audience assumptions. This export leaves `mood_labels` and
 The [complete field/API reference](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/tools/milk-analyzer/EFFECT_FAMILIES.md)
 and [primary-source research with exact witnesses](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/research/2026-10-09-static-effect-families.md)
 describe the supported constructions and boundaries.
+
+## Reducing numerical work
+
+Static proof can also reduce execution. The experimental `uniform-proof-v1`
+shader policy evaluates spatially independent subexpressions once per update,
+while retaining spatial and texture-dependent work. It remains opt-in; it does
+not change the exported metric definitions.
+
+A separate uniform final-expression primitive can calculate colour and sampled
+flashing descriptors without constructing display frames. Its caller must prove
+that this is the selected complete final composite and supply matching inputs
+and storage settings. It retains unknown motion values and rejects unsupported
+dependencies. The current numerical qualification is OpenCV5.0.0 optimized
+ARM64/NEON; other backends abstain.
+
+None of the fixed100 sources in the initial dependency census qualified for
+that narrow final-expression route. Its synthetic speedup therefore cannot be
+applied to the pack. General feedback and spatial shaders still require broader
+reasoning or execution. See the
+[controls and measurement scope](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/evidence/predictor-uniform-descriptors/README.md).
