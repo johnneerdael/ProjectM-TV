@@ -2129,6 +2129,10 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     g_engine.createdAt = g_engine.fpsWindowStart;
     g_engine.firstPresetLogged = false;
     projectmtv::WriteTrail(projectmtv::kTrailRender, "GL context created");
+    // The prewarm thread is stopped here: replace an older process's line in its slot, also when
+    // Background compile is off and the thread never starts.
+    projectmtv::WriteTrail(projectmtv::kTrailPrewarm, g_inputs.backgroundCompile.load()
+                                                          ? "not started yet" : "background compile off");
     LOGI("projectM instance created");
 }
 
