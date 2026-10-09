@@ -119,6 +119,9 @@ def main():
                 assert cfg['line_antialiasing'] is True and cfg['feedback_detail']==0
                 assert request['identity']==manifest['identity']=={'worker_ref':role}
                 assert manifest['status']=='success' and manifest['gl_error_frames']==0
+                assert manifest['gl_renderer']=='Apple M4 Pro' and manifest['gl_version']=='4.1 Metal - 89.4'
+                for field in ('width','height','fps','seed'):
+                    assert manifest[field]==cfg[field]
                 assert manifest['frames']==cfg['measurement_seconds']*30
                 selected=cfg['selected_frames']
                 assert selected==sorted(set(selected))
@@ -132,6 +135,11 @@ def main():
                 assert sha((repo/'core/src/main/assets/presets'/preset).read_bytes())==pair['inputs']['preset_sha256']
                 assert sha((repo/'docs/superpowers/evidence/patch-visual-catalog/audio'/Path(request['pcm_path']).name).read_bytes())==pair['inputs']['pcm_sha256']
                 for state in states:
+                    assert set(state)=={'frame','capture_framebuffer','before_read_framebuffer','after_read_framebuffer',
+                        'before_read_buffer','after_read_buffer','before_pack_alignment','after_pack_alignment'}
+                    assert all(type(value) is int for value in state.values())
+                    assert state['capture_framebuffer']>0
+                    assert state['before_read_framebuffer']>=0 and state['before_read_framebuffer']!=state['capture_framebuffer']
                     for key in ('read_framebuffer','read_buffer','pack_alignment'):
                         assert state['before_'+key]==state['after_'+key]
                 sequences.append(result['rgb_sha256'])
