@@ -65,8 +65,12 @@ def main():
     for pair in gallery:
         assert pair['figure_html'] in actual,pair['name']
         assert pair['inputs']['texture_inventory']==observed_textures
+        expected_roles={'full','without-'+pair['patch']}
+        assert set(pair['roles'])==expected_roles
+        assert expected_roles<=workers.keys()
         x,y,w,h=pair['crop'];assert 0<=x<x+w<=3840 and 0<=y<y+h<=2160
         for role,record in pair['roles'].items():
+            assert record['identity_ref']==role
             path=repo/'docs/user-guide/images/patches/clarity'/f"{pair['name']}-{role}.png"
             assert sha(path.read_bytes())==record['asset_sha256']
             image=Image.open(path);assert image.mode=='RGB' and image.size==(3840,2160)

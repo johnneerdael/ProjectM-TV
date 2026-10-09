@@ -12,6 +12,11 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def texture_inventory(root):
+    return {i.relative_to(root).as_posix(): sha(i.read_bytes())
+            for i in sorted(root.rglob('*')) if i.is_file()}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--repo', type=Path, required=True)
@@ -30,8 +35,7 @@ def main():
     target.mkdir(parents=True, exist_ok=False)
     pcm = args.repo / f'docs/superpowers/evidence/patch-visual-catalog/audio/frozen-{args.frames}-frames.f32'
     textures = args.repo / 'core/src/main/assets/textures'
-    texture_hashes = {i.relative_to(textures).as_posix(): sha(i.read_bytes())
-                      for i in sorted(textures.rglob('*')) if i.is_file()}
+    texture_hashes = texture_inventory(textures)
     inputs = {'preset_sha256': sha(args.preset.read_bytes()), 'pcm_sha256': sha(pcm.read_bytes()),
               'texture_inventory': texture_hashes}
     receipt = {'name': args.name, 'patch': args.patch, 'inputs': inputs, 'roles': {}}
@@ -64,6 +68,8 @@ def main():
                         Image.frombytes('RGB', (3840,2160), payload).save(run / f'frame-{frame:03d}.png')
                 if proc.wait():
                     raise ValueError((run / 'diagnostics.txt').read_text())
+                if texture_inventory(textures)!=texture_hashes:
+                    raise ValueError('Texture inputs changed during capture')
             manifest = json.loads((run / 'manifest.json').read_text())
             if manifest['status'] != 'success' or manifest['gl_error_frames']:
                 raise ValueError('renderer failure')
