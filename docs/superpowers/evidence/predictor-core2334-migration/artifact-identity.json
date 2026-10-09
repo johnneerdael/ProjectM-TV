@@ -1,0 +1,22 @@
+{
+  "release": "v2.3.34",
+  "release_commit": "984bfe19e408bed374647e4bdea8c053f0922a15",
+  "asset": "projectM-TV-core-2.3.34.aar",
+  "aar_sha256": "a2af1e99f81e6130c77167c11460b0bc9a02306b5fac7fc1b0a1d8c1e33b73a3",
+  "bytes": 41888344,
+  "acquired_from": "/Users/jneerdael/.gradle/caches/modules-2/files-2.1/nl.neerdael.projectm/projectM-TV-core/latest/ac85c1273f5a114a6d632a7526b8866faab64e17/projectM-TV-core-latest.aar",
+  "published_digest_verified": true,
+  "zip_crc_verified": true,
+  "asset_bytes_equal_published33": true,
+  "entry_hashes": {
+    "jni/arm64-v8a/libprojectmtv.so": "b04caf83c2d4b89015a727899225ecba970a9b732afc7997760e584dcc367013",
+    "jni/armeabi-v7a/libprojectmtv.so": "e0a6bb6927f8f44a93ab82665b7bf99faf0e801f3b4b38f3c2148946ffcb3596",
+    "classes.jar": "a4e3f33e655a784551d064b4a16ce9c43ced202bc24103892b1fc861c3d2ff92"
+  },
+  "asset_counts": {
+    "presets": 9606,
+    "textures": 74
+  },
+  "asset_inventory_sha256": "f383541e45c684b20fa1f60c60fe195cdffb35d099e82a7678a8238135eadfe7",
+  "runtime_qualified": false
+}

@@ -1,0 +1,26 @@
+{
+  "source_files_checked": 985,
+  "changed_files": [
+    {
+      "path": "src/libprojectM/ProjectMCWrapper.cpp",
+      "before": "196655b2d8ae3cbc617a3ab7ef908dd676899c1c9b3009461270c31fd4a3c2f4",
+      "after": "27cd32314138cafbd725179c52866a4c73b951516b894d36f237ea5cdbd4c58f"
+    },
+    {
+      "path": "src/api/include/projectM-4/render_opengl.h",
+      "before": "fc879402e97b8f1e592f47055a13957c0eec60c7e6895aa1d2df3b9ad5459edd",
+      "after": "13dfc0e072a8c3163cab60c61a47ed4c9e00785ddcbab2bbcd109519868880fc"
+    },
+    {
+      "path": "src/libprojectM/Renderer/Shader.cpp",
+      "before": "786eb1b0526dbd32d01e3627c97288522585707297d28fad8db3b81b3ddba83e",
+      "after": "b9be91439370c46e71e4fee4fff4a0a420d2748b39c96b5135948059cbe047b0"
+    },
+    {
+      "path": "src/libprojectM/Renderer/Shader.hpp",
+      "before": "05cc6fd1897a0af347d6530ab6a47fe4a5a53e8ad300fc9df7437a01b7378757",
+      "after": "4f89adca4cd75b4de4557969b4eafaacfa4806264dec1d98aa55817202ba754b"
+    }
+  ],
+  "scope": "Complete prepared source comparison, only cache-switch patch35 changes; not runtime parity"
+}
