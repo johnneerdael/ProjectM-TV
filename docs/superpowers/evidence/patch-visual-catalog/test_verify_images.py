@@ -288,6 +288,42 @@ class GuideRoleBinding(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'guide frame caption'):
             self.verify(changed)
 
+    def test_guide_descriptions_swapped_with_prefixes_unchanged_fail(self):
+        first, second = self.gallery[0]['caption'], self.gallery[1]['caption']
+        changed = self.source.replace(first, 'CAPTION-SWAP').replace(second, first).replace('CAPTION-SWAP', second)
+        with self.assertRaisesRegex(AssertionError, 'guide description caption'):
+            self.verify(changed)
+
+    def test_guide_description_edit_fails(self):
+        changed = self.source.replace('Before, many streaks wash toward white.',
+                                      'After, many streaks wash toward white.', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide description caption'):
+            self.verify(changed)
+
+    def test_gallery_description_edit_fails(self):
+        gallery = copy.deepcopy(self.gallery)
+        gallery[0]['caption'] += ' Invented extra benefit.'
+        with self.assertRaisesRegex(AssertionError, 'guide description caption'):
+            verifier.verify_guide(self.source, gallery, self.captures)
+
+    def test_guide_crop_suffix_edit_fails(self):
+        changed = self.source.replace('identical crop and nearest-neighbour display',
+                                      'different crop and nearest-neighbour display', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide description caption'):
+            self.verify(changed)
+
+    def test_guide_normalized_caption_whitespace_passes(self):
+        changed = self.source.replace('Before, many streaks wash toward white.',
+                                      'Before,   many\nstreaks wash toward white.', 1)
+        self.verify(changed)
+
+    def test_joint_guide_and_gallery_preset_label_drift_fails(self):
+        gallery = copy.deepcopy(self.gallery)
+        gallery[0]['preset'] = 'Other.milk'
+        changed = self.source.replace('Happening.milk', 'Other.milk')
+        with self.assertRaisesRegex(AssertionError, 'guide preset identity'):
+            verifier.verify_guide(changed, gallery, self.captures)
+
     def test_guide_wrong_patch_section_fails(self):
         changed = self.source.replace('## 0017 — Built-in wave opacity', '## 0018 — Built-in wave opacity')
         with self.assertRaisesRegex(AssertionError, 'guide patch section'):

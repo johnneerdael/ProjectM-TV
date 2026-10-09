@@ -20,5 +20,10 @@
     "commit": "d872e591e317b889602120ec5b106aabe18c7cce",
     "visual-jobs.json_sha256": "33e558b6b22b2e5086c722649fa81d2c8b7b523662036d81db33a6ce675e17d8",
     "visual-results.json_sha256": "ba572499e8d0478ec4ca7745eb2230ed232422b60945a08df967ebe9d5709e23"
+  },
+  "derived_records_anchors": {
+    "commit": "d872e591e317b889602120ec5b106aabe18c7cce",
+    "source-purpose.json_sha256": "a1a37314f625b6db7ee5ce5cf2e5831d9e7ea10e46cff0d581b7a6254c32e174",
+    "source-difference.json_sha256": "32179b81bb596daf580dd5ecaaff9002ad369603d03109b3e5c00eaa3e600b4e"
   }
 }

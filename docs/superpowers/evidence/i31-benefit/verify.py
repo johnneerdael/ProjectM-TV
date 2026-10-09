@@ -8,7 +8,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 
-from benchmark import analyze, canonical, config, digest, schedule_recipe
+from benchmark import analyze, canonical, config, digest, schedule_recipe, verify_job_summary, gamma_source_calculation
 from source_observer import observe
 
 SOURCE = "8a15996e8510533113a44e26feaddc3a7d6e85f5"
@@ -23,6 +23,11 @@ ENGINE_VIDEO_SHA256 = "56d7ab07f064c3addd5d71a6e7dac07d1d51f51f8af50bc02bf42379c
 # then cross-checked against the decoded compressed corpus. Never derive this
 # expected value from the artifact under verification or its analysis output.
 TIMED_CORPUS_SHA256 = "2f5263bb1a3e52d4b434050ebc225d528f3b88fab6e906119b5a3c20157446a1"
+DERIVED_RECORDS_ANCHORS = {
+    "commit": "d872e591e317b889602120ec5b106aabe18c7cce",
+    "source-purpose.json_sha256": "a1a37314f625b6db7ee5ce5cf2e5831d9e7ea10e46cff0d581b7a6254c32e174",
+    "source-difference.json_sha256": "32179b81bb596daf580dd5ecaaff9002ad369603d03109b3e5c00eaa3e600b4e",
+}
 INPUTS_SHA256 = "d5afb472ed0801641c9f2c76919207918e417b0768b668f04537ed944e52f7d6"
 TIMED_WORKERS = {"with-0019": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
                  "without-0019": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb"}
@@ -304,6 +309,20 @@ def verify(root=ROOT, repo=REPO, *, data=None, visuals=True):
             assert all(math.isfinite(sample[key]) and sample[key] > 0 for key in ("submit_ms", "complete_ms", "gpu_ns"))
         measured_frames += 360
     assert canonical(get("analysis.json")) == canonical(analyze(schedule, runs)), "all published analysis statistics"
+    verify_job_summary(schedule, runs, get("job-summary.json"))
+    assert custody["derived_records_anchors"] == DERIVED_RECORDS_ANCHORS, "frozen source explanation anchors"
+    purpose, difference = get("source-purpose.json"), get("source-difference.json")
+    for name, value in (("source-purpose.json", purpose), ("source-difference.json", difference)):
+        assert digest(value) == DERIVED_RECORDS_ANCHORS[name + "_sha256"], f"initial derived explanation: {name}"
+    source = root / "source-proof"
+    calculation = gamma_source_calculation((root / "original.milk").read_text(),
+                                          (source / "without-0019.cpp").read_text(),
+                                          (source / "with-0019.cpp").read_text())
+    assert canonical({key: purpose[key] for key in calculation}) == canonical(calculation), "independent float32/pass/8-bit source calculation"
+    changed = sorted(path for path in set(workers["without-0019"]["source"]) | set(workers["with-0019"]["source"])
+                     if workers["without-0019"]["source"].get(path) != workers["with-0019"]["source"].get(path))
+    assert difference["changed_files"] == changed == [VIDEO], "source difference record"
+    assert difference["harness_identical"] is (workers["without-0019"]["harness"] == workers["with-0019"]["harness"])
     if visuals:
         verify_visual(root, workers, inputs, get("visual-jobs.json"), get("visual-workers.json"),
                       get("visual-results.json"), get("observer-replay.json"),

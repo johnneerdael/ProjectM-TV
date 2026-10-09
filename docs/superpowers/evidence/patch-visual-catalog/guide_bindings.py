@@ -19,6 +19,8 @@ class Node:
                 yield from child.nodes(tag, css_class)
 
     def text(self):
+        if self.tag == 'br':
+            return ' '
         return ''.join(child.text() if isinstance(child, Node) else child
                        for child in self.children)
 
@@ -79,8 +81,10 @@ def verify_guide(source, gallery, captures):
         capture = captures[case]
         panels = list(figure.nodes('div', 'patch-panel'))
         assert len(panels) == (4 if pair['crop'] else 2), f'guide panel count: {case}'
-        preset = pair.get('preset', PurePosixPath(capture['preset_relative_path']).name +
-                          (' (synthetic)' if '/fixtures/' in capture['preset_relative_path'] else ''))
+        captured_preset = PurePosixPath(capture['preset_relative_path']).name + (
+            ' (synthetic)' if '/fixtures/' in capture['preset_relative_path'] else '')
+        preset = pair.get('preset', captured_preset)
+        assert preset == captured_preset, f'guide preset identity: {case}'
         for i, panel in enumerate(panels):
             role = ('upstream', 'patched')[i % 2]
             zoom = i >= 2
@@ -114,9 +118,13 @@ def verify_guide(source, gallery, captures):
         captions = list(figure.nodes('figcaption'))
         assert len(captions) == 1, f'guide caption count: {case}'
         caption = normalized(captions[0].text())
-        assert caption.startswith(f"{preset} · {capture['width']}×{capture['height']}, frame {pair['frame']} at 30 Hz."), f'guide frame caption: {case}'
+        prefix = f"{preset} · {capture['width']}×{capture['height']}, frame {pair['frame']} at 30 Hz."
+        assert caption.startswith(prefix), f'guide frame caption: {case}'
+        expected_caption = prefix + ' ' + pair['caption']
         if pair['crop']:
             x, y, width, height = pair['crop']
-            assert f'Zoom rectangle: ({x}, {y}), {width}×{height} source pixels;' in caption, f'guide crop caption: {case}'
+            expected_caption += (f' Zoom rectangle: ({x}, {y}), {width}×{height} source pixels;'
+                                 ' identical crop and nearest-neighbour display, with no brightness adjustment.')
+        assert caption == normalized(expected_caption), f'guide description caption: {case}'
     assert total_refs == expected_refs, 'guide has unbound audit image references'
     assert source.count('/images/patches/audit/') == expected_refs, 'guide has unbound audit image references'

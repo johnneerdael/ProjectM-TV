@@ -1,6 +1,8 @@
 """Shared, deterministic analysis and request recipe for the I31 evidence."""
 import hashlib
 import json
+import re
+import struct
 import numpy as np
 
 ROLES = ("without-0019", "with-0019")
@@ -76,3 +78,41 @@ def analyze(schedule, runs):
                          "gamma_draws_before": 2 if case == "inactive-classic" else 3,
                          "gamma_draws_after": 2, "metrics": metrics}
     return summary
+
+
+def summarize_jobs(schedule, runs):
+    """Reproduce every field and ordering emitted by the original timed runner."""
+    rows = []
+    for job in schedule:
+        run = runs[job["name"]]
+        measured = [sample for sample in run["samples"] if sample["measured"]]
+        stats = {metric: float(np.mean([sample[metric] for sample in measured]))
+                 for metric in ("submit_ms", "complete_ms")}
+        for field in ("gamma_draws", "gamma_invocations", "gamma"):
+            stats[field] = sorted({sample[field] for sample in measured})
+        stats["gpu_timer_valid"] = run["gpu_timer_valid"]
+        rows.append({**job, **stats})
+    return rows
+
+
+def verify_job_summary(schedule, runs, published):
+    assert canonical(published) == canonical(summarize_jobs(schedule, runs)), "all ordered per-job summary fields"
+
+
+def gamma_source_calculation(preset, before_source, after_source):
+    """Evaluate the witness with C++ float32 rounding and legacy 8-bit truncation."""
+    f32 = lambda value: struct.unpack("<f", struct.pack("<f", value))[0]
+    gamma_lines = [line.removeprefix("fGammaAdj=") for line in preset.splitlines()
+                   if line.startswith("fGammaAdj=")]
+    assert len(gamma_lines) == 1, "unique witness gamma parameter"
+    gamma = f32(float(gamma_lines[0]))
+    def passes(source):
+        gamma_only = source[source.index("void VideoEcho::DrawGammaAdjustment("):]
+        epsilon = re.findall(r"redrawCount = static_cast<int>\(gammaAdj - ([0-9.]+)f\) \+ 1;", gamma_only)
+        assert len(epsilon) == 1, "gamma-only source epsilon"
+        return int(f32(gamma - f32(float(epsilon[0])))) + 1
+    before, after = passes(before_source), passes(after_source)
+    weight = f32(gamma - f32(before - 1))
+    return {"loaded_float_gamma": gamma, "passes_upstream_epsilon": before,
+            "passes_milkdrop_epsilon": after, "extra_pass_weight": weight,
+            "milkdrop_white_channel_for_extra_pass": int(f32(weight * f32(255.0)))}

@@ -7,7 +7,7 @@ import shutil
 import tempfile
 import unittest
 
-from benchmark import analyze, digest
+from benchmark import analyze, digest, gamma_source_calculation, verify_job_summary, summarize_jobs
 from verify import ROOT, REPO, verify, verify_visual
 
 class CustodyTests(unittest.TestCase):
@@ -50,6 +50,12 @@ class CustodyTests(unittest.TestCase):
         self.change_timings_and_reanalyze()
         # Even coherently updating the adjacent receipt cannot replace the
         # independently fixed expected corpus digest in the verifier.
+        self.data["custody.json"]["timed_corpus_sha256"] = digest(self.data["runs"])
+        self.reject()
+
+    def test_correlated_timing_analysis_job_summary_and_receipt_edit(self):
+        self.change_timings_and_reanalyze()
+        self.data["job-summary.json"] = summarize_jobs(self.data["schedule.json"], self.data["runs"])
         self.data["custody.json"]["timed_corpus_sha256"] = digest(self.data["runs"])
         self.reject()
 
@@ -278,6 +284,71 @@ class VisualCustodyTests(unittest.TestCase):
                 if mutation == "png": self.data["visual-jobs.json"][self.name]["selected_pngs"] = {}
                 else: del self.data["visual-workers.json"]["with-0019"]
                 self.reject()
+
+class DerivedRecordTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.schedule = json.loads((ROOT / "schedule.json").read_text())
+        cls.summary = json.loads((ROOT / "job-summary.json").read_text())
+        with gzip.open(ROOT / "timed-runs.json.gz", "rt") as stream:
+            cls.runs = json.load(stream)
+
+    def test_complete_ordered_original_job_summary(self):
+        verify_job_summary(self.schedule, self.runs, self.summary)
+
+    def test_per_job_mean(self):
+        for field in ("submit_ms", "complete_ms"):
+            with self.subTest(field=field):
+                summary = copy.deepcopy(self.summary)
+                summary[0][field] += 0.1
+                with self.assertRaises(AssertionError):
+                    verify_job_summary(self.schedule, self.runs, summary)
+
+    def test_per_job_identity(self):
+        for field, value in (("role", "with-0019"), ("name", "another-job"), ("preset", "inactive-gamma2.milk"), ("block", 9)):
+            with self.subTest(field=field):
+                summary = copy.deepcopy(self.summary)
+                summary[0][field] = value
+                with self.assertRaises(AssertionError):
+                    verify_job_summary(self.schedule, self.runs, summary)
+
+    def test_correlated_whole_record_order_swap(self):
+        summary = copy.deepcopy(self.summary)
+        summary[0], summary[1] = summary[1], summary[0]
+        with self.assertRaises(AssertionError):
+            verify_job_summary(self.schedule, self.runs, summary)
+
+    def test_missing_or_duplicate_job(self):
+        for summary in (self.summary[:-1], [self.summary[0], *self.summary[:-1]]):
+            with self.assertRaises(AssertionError):
+                verify_job_summary(self.schedule, self.runs, summary)
+
+    def test_gamma_sets_and_timer_flag(self):
+        for field, value in (("gamma", [2.0]), ("gamma_draws", [2]), ("gamma_invocations", [0]), ("gpu_timer_valid", False)):
+            with self.subTest(field=field):
+                summary = copy.deepcopy(self.summary)
+                summary[0][field] = value
+                with self.assertRaises(AssertionError):
+                    verify_job_summary(self.schedule, self.runs, summary)
+
+    def test_float32_pass_and_8bit_calculation(self):
+        purpose = json.loads((ROOT / "source-purpose.json").read_text())
+        calculated = gamma_source_calculation((ROOT / "original.milk").read_text(),
+                      (ROOT / "source-proof/without-0019.cpp").read_text(),
+                      (ROOT / "source-proof/with-0019.cpp").read_text())
+        self.assertEqual(calculated, {key: purpose[key] for key in calculated})
+        self.assertEqual(calculated["passes_upstream_epsilon"], 3)
+        self.assertEqual(calculated["passes_milkdrop_epsilon"], 2)
+        self.assertEqual(calculated["milkdrop_white_channel_for_extra_pass"], 0)
+
+    def test_calculation_depends_on_fixture_and_source(self):
+        before = (ROOT / "source-proof/without-0019.cpp").read_text()
+        after = (ROOT / "source-proof/with-0019.cpp").read_text()
+        inactive = gamma_source_calculation((ROOT / "inactive-gamma2.milk").read_text(), before, after)
+        self.assertEqual(inactive["loaded_float_gamma"], 2.0)
+        self.assertEqual(inactive["passes_upstream_epsilon"], inactive["passes_milkdrop_epsilon"])
+        changed_source = gamma_source_calculation((ROOT / "original.milk").read_text(), after, after)
+        self.assertEqual(changed_source["passes_upstream_epsilon"], changed_source["passes_milkdrop_epsilon"])
 
 if __name__ == "__main__":
     unittest.main()

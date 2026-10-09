@@ -83,3 +83,5 @@ Complete guide/request binding: all104 original full job requests are retained a
 Independent anchors: the upstream955-file source inventory is independently reconstructed from exact e98fca85/evaluator22fb0cfd and frozen8a15996e instrumentation, with no TV patches. The verifier pins that observed digest independently of workers.json. Committed PCM files have independent240/480-frame byte/hash anchors. Coordinated source-inventory/worker-digest drift and altered PCM before worker launch reject.
 
 The independent source guard applies symmetrically to upstream and patched roles. The patched987-file inventory is separately reconstructed from engine6f648074/evaluator22fb0cfd, all34 ordered8a15996e patches and frozen instrumentation, matching original build/published bytes. Joint inventory/worker-digest drift rejects for either role.
+
+Caption verification includes the full normalized descriptive text, source-bound preset label, frame/dimension prefix and exact generated crop note. Swapped or edited descriptions reject even when image references remain valid; whitespace-only presentation changes remain allowed. No guide facts or images changed.

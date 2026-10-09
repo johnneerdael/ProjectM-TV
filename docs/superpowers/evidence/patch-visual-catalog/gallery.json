@@ -30,7 +30,7 @@
     "case": "I31",
     "frame": 119,
     "preset": "suksma - type o negative - world coming down.milk",
-    "caption": "This full upstream-master/main pair illustrates near-unchanged appearance and includes other patches. The separate single-patch4K benchmark proves a rendering-cost benefit; it does not depend on a visible improvement in this picture.",
+    "caption": "This full upstream-master/main pair illustrates near-unchanged appearance and includes other patches. The separate single-patch 4K benchmark above proves a rendering-cost benefit; it does not depend on a visible improvement in this picture.",
     "crop": null,
     "extras": []
   },
