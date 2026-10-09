@@ -12,10 +12,14 @@ the whole preset's look has not yet been validated.**
 
 !!! note "Implementation checkpoint"
     This page describes the committed source work at `9c8ff632` (2026-10-10) on
-    [`feat/predictor-static-output-bounds`](https://github.com/johnneerdael/ProjectM-TV/tree/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82).
+    `feat/predictor-static-output-bounds`.
     It follows the static mechanism work merged by PR #67 into the experimental
     predictor parent branch. Publishing these docs separately does not merge that
     implementation into `main` or replace the released mood indexes.
+
+    The [reference documentation archive](https://github.com/johnneerdael/ProjectM-TV/tree/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632)
+    preserves the cited contracts and evidence summaries. The implementation
+    checkpoint is local and is not published by this documentation update.
 
 ## Three different kinds of result
 
@@ -54,8 +58,8 @@ functions. Unsupported state, branches, domains, resources and excessive symboli
 complexity remain explicit unknowns. A detected fractal plus varied generated
 colour can be a psychedelic candidate; neither label proves a particular mood.
 
-Read the [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/SOURCE_APPEARANCE.md)
-and the [mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/EFFECT_FAMILIES.md)
+Read the [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/SOURCE_APPEARANCE.md)
+and the [mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/EFFECT_FAMILIES.md)
 for exact fields, units, conditions and source evidence.
 
 ## Current evidence
@@ -67,13 +71,13 @@ coverage evidence for individual ingredients:
 
 | Ingredient supported in that sample | Presets | Evidence |
 |---|---:|---|
-| Nonidentity constant-affine sample maps | 61 | [Sampling geometry](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-sampling-geometry-2026-10-09/README.md) |
-| Direct sampled-colour coordinate response | 23 | [Blur bindings and 64 response maps](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-blur-bindings-2026-10-09/README.md) |
-| Raw RGB mixture models | 35 | [36 supported shader stages](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-colour-mix-2026-10-09/README.md) |
-| Consumed native time formulas | 15 | [Native clock inputs](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-native-time-2026-10-09/README.md) |
-| Consumed native hue recipes | 14 | [Four-corner colour ingredient](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-composite-hue-2026-10-10/README.md) |
-| Mixed polar maps | 2 | [Four angle/depth maps](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-polar-mixed-2026-10-09/README.md) |
-| Repeating radial glow generators | 2 | [Four distinct generators](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/docs/superpowers/evidence/source-radial-grid-2026-10-09/README.md) |
+| Nonidentity constant-affine sample maps | 61 | [Sampling geometry](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-sampling-geometry-2026-10-09/README.md) |
+| Direct sampled-colour coordinate response | 23 | [Blur bindings and 64 response maps](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-blur-bindings-2026-10-09/README.md) |
+| Raw RGB mixture models | 35 | [36 supported shader stages](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-colour-mix-2026-10-09/README.md) |
+| Consumed native time formulas | 15 | [Native clock inputs](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-native-time-2026-10-09/README.md) |
+| Consumed native hue recipes | 14 | [Four-corner colour ingredient](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-composite-hue-2026-10-10/README.md) |
+| Mixed polar maps | 2 | [Four angle/depth maps](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-polar-mixed-2026-10-09/README.md) |
+| Repeating radial glow generators | 2 | [Four distinct generators](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-radial-grid-2026-10-09/README.md) |
 
 These groups overlap. The counts are neither a whole-pack success rate nor an
 appearance-accuracy percentage; even a computed record can have major unknowns.
@@ -84,7 +88,7 @@ verified byte-equivalent to 2.3.32 and the earlier qualified source31 target.
 Source CPU parser/model identities remain separate from AAR/JNI runtime identities.
 The runtime qualification contains three small 30-frame, 128×72 JNI controls;
 it does not certify all authored presets or 4K appearance. The
-[published profile](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/profiles/published-core-v2.3.33.json)
+[published profile](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/profiles/published-core-v2.3.33.json)
 records hashes and the exact scope. This is the latest locally verified profile
 for this documentation checkpoint, not a claim that no newer release exists.
 

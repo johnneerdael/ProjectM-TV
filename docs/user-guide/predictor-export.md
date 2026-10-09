@@ -16,7 +16,13 @@ Publishing this reference does not merge the experimental predictor or change th
 ## Static source-description contract
 
 Implementation checkpoint: `9c8ff632`, 2026-10-10, experimental
-[`feat/predictor-static-output-bounds`](https://github.com/johnneerdael/ProjectM-TV/tree/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82).
+`feat/predictor-static-output-bounds`.
+The [reference documentation archive](https://github.com/johnneerdael/ProjectM-TV/tree/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632)
+preserves the cited contracts and evidence summaries. The implementation
+checkpoint is local and is not published by this documentation update. The
+following command requires that implementation and its prepared environment;
+the archive alone cannot run it.
+
 Use `effect_family_export.py` from that prepared checkout:
 
 ```sh
@@ -45,9 +51,9 @@ profile identities; use a fresh process and output folder after code changes.
 | Semantic `record_sha256` members | Canonical content digests at their respective nested record scopes; not signatures or confidence values. |
 
 This table locates the contracts; it is not a complete example record. Read the
-[full mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/EFFECT_FAMILIES.md),
-[appearance fields and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/SOURCE_APPEARANCE.md)
-and [appearance JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82/tools/milk-analyzer/export-contract/source-appearance.schema.json)
+[full mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/EFFECT_FAMILIES.md),
+[appearance fields and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/SOURCE_APPEARANCE.md)
+and [appearance JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 for exact object shape, enum meanings, units and unknown variants. The schema
 alone does not verify hashes, source truth, visibility or reconstruction readiness.
 

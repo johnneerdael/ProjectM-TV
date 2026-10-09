@@ -117,3 +117,16 @@ The pre-existing Material startup warning did not fail either strict build. No
 analyzer code/tests were run for this documentation-only task, and no new
 appearance test is claimed. Existing analyzer test numbers above are attributed
 to their committed checkpoint rather than presented as freshly rerun.
+
+## PR 71 integration update
+
+The documented implementation checkpoint was found locally but was unavailable
+on GitHub during integration. Keep implementation publication outside this
+documentation-only PR. Instead, archive the eleven cited reference documents,
+JSON schema and profile metadata under
+`docs/superpowers/evidence/predictor-docs-reference-9c8ff632`.
+The archive manifest preserves original paths and content hashes. It contains
+no executable analyzer code or raw corpus batches. The user-guide links are
+pinned to documentation archive commit `fab54330f0144a63f1c30ed7afe7cb8b72191bc2`,
+rather than the mutable experimental branch or an unpublished source commit.
+Validation for this integration runs through the normal CI/CD pipeline.
