@@ -57,7 +57,7 @@
                 "items": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 8
+                  "maximum": 9
                 }
               },
               "parameters": {
@@ -952,6 +952,119 @@
                       "one",
                       "one_minus_source_alpha"
                     ]
+                  }
+                }
+              },
+              "procedural_forms": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "policy",
+                    "id",
+                    "form_code",
+                    "generator",
+                    "generator_expression",
+                    "mapping_expression",
+                    "cell_centre",
+                    "radial_gain",
+                    "core_radius_cell_units",
+                    "core_disk_area_per_cell",
+                    "mapping_matrix_uv4",
+                    "phase_motion_controls",
+                    "audio_routes",
+                    "actual_screen_coverage",
+                    "appearance_guaranteed",
+                    "conditions"
+                  ],
+                  "properties": {
+                    "policy": {
+                      "const": "source-periodic-radial-glow-v1"
+                    },
+                    "form_code": {
+                      "const": 9
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "cell_centre": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "exclusiveMaximum": 1
+                      }
+                    },
+                    "radial_gain": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "core_radius_cell_units": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "core_disk_area_per_cell": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "core_clipped_by_cell": {
+                      "type": "boolean"
+                    },
+                    "mapping_matrix_uv4": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "array",
+                        "minItems": 4,
+                        "maxItems": 4,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "mapping_rank_uv4": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "minimum": 2,
+                      "maximum": 2
+                    },
+                    "phase_motion_controls": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "audio_routes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "actual_screen_coverage": {
+                      "type": "null"
+                    },
+                    "visible_motion_speed": {
+                      "type": "null"
+                    },
+                    "appearance_guaranteed": {
+                      "const": false
+                    },
+                    "conditions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }

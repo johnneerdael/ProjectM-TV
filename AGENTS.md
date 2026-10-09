@@ -156,6 +156,13 @@ polar maps retain their explicit angle/depth-to-texture matrix and offset progra
 Axis-permutation radius proof must preserve the angle's ordered plane. Literal
 matrix folding uses existing typed matrix rules and rejects every input/resource/
 effect/loop even when native unbound defaults exist; vector/matrix order matters.
+`source_forms.py` recognizes live periodic radial glow generators (familycode9)
+and keeps distinct generator formulas in element.procedural_forms; identical
+formulas may deduplicate, so records are not usage/layer counts. Require typed
+native shader varying bases; shader globals named x/y/rad/ang are ordinary uniforms. Local cell core
+radius/area is not visible coverage. Reject known rank<2, nonspatial, dead/alpha-only
+and fully saturated cases; retain nonlinear mapping, reciprocal and later-mask
+conditions. These are fields in a mapping plane, not independent particle IDs.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

@@ -102,6 +102,7 @@ not records asserting that no effects exist.
 | Mechanism | Source evidence | Intended interpretation |
 |---|---|---|
 | Polar radial sampling | Contributing angular and reciprocal/log radial coordinates in the same sample | Tunnel/depth candidate, conditional on sampling, content and projection |
+| Periodic radial glow | Contributing saturated inverse-radius falloff around a repeating cell centre | Repeated glow generator in its mapping plane; final spots/particles/coverage are not certified |
 | Radial feedback transform | Complete contributing radial scaling of previous-frame sampling | Feedback zoom; radial zoom alone does not identify a tunnel |
 | Angular mirror fold | Reflection and periodic wrapping on the angular dependency | Kaleidoscope construction; report proven sector count where possible |
 | Radial twist | Paired spatial rotation/curve coordinates with radial phase | Swirl construction; unrelated trig calls are insufficient |

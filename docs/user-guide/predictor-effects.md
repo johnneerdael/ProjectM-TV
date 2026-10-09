@@ -156,6 +156,13 @@ These parameters help an approximation choose a radial layout; texture contents,
 colour weights and feedback still decide whether it looks like a visible tunnel
 or kaleidoscope.
 
+Procedural-form records now identify supported repeating radial glow fields:
+bright-core and inverse-radius falloff math, cell centres, mapping programs and
+phase/audio controls. Distinct generator formulas retain separate records;
+identical repeated formulas may share one, so this is not a layer count. This helps distinguish
+mathematically generated spot fields from sampled images or independent particles.
+Local core area does not establish visible screen coverage or final brightness.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

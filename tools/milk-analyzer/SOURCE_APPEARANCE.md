@@ -55,6 +55,7 @@ parameters remain null when no source constant is established.
 | 6 | Angular/cartesian mirror construction: kaleidoscope/symmetry candidate |
 | 7 | Recognized complex quadratic or iterated folding recurrence: fractal construction |
 | 8 | Feedback transport, rotation, scaling, advection or nonlinear transformation |
+| 9 | Repeating two-dimensional radial glow field; particle identities are not established |
 
 Multiple codes can coexist. Read `mechanisms`, `parameters` and `conditions`
 before choosing a reconstruction. An empty list means no supported construction
@@ -565,3 +566,43 @@ literal matrix expressions are folded; no audio, texture, equation frame or
 preset shader is executed. Nonfinite or unsupported constant operations abstain.
 The sampled source coordinate basis, wrap/filter, domain and visibility conditions
 from the preceding sections still apply.
+
+## Procedural radial glow fields
+
+`elements[].procedural_forms` retains each distinct recognized generator formula
+within its parent element. Identical repeated formulas may deduplicate; neither
+record count nor ID is a usage, drawing-layer or particle count. Form
+code9, policy `source-periodic-radial-glow-v1`, is the raw scalar
+`saturate(gain / length(frac(mapping)-cell_centre))`. Optional per-axis absolute
+value inside Euclidean length leaves the generator's radius unchanged. The full
+generator and mapping DAGs, source evidence and target identity remain available.
+Later RGB masks, tint, inversion, powers or feedback can change its final look.
+
+`radial_gain` and `core_radius_cell_units` are the supported positive constant
+gain. The raw generator reaches its saturation limit for radius<=gain in valid
+nonzero reciprocal domains; the exact zero-radius sample is not certified.
+`cell_centre` is a constant interior point of the unit cell. When the radius fits
+inside the cell, `core_disk_area_per_cell=pi*gain^2`; otherwise it is null and
+`core_clipped_by_cell=true`. This is area in the generator plane, not a visible
+screen fraction. Outer inverse-radius tails remain nonzero, so core area is not
+the whole luminous footprint. Gains saturating the entire valid cell are ignored.
+
+`mapping_matrix_uv4` and `mapping_rank_uv4` describe supported constant-affine
+mappings. Rank uses exact row minors of the exported nominal coefficients,
+not an SVD tolerance that might erase a highly stretched map. GPU precision and
+projection remain separate. Known rank below2 and nonspatial phases do not claim a two-dimensional
+grid. The spatial guard uses typed native shader `_uv`/`_rad_ang` inputs, never
+ordinary shader uniforms named like EEL x/y/rad/ang. Unresolved/dynamic/nonlinear
+mappings keep explicit dimensionality
+conditions. Phase offsets retain supported motion curves and precise audio
+control routes, not pixel speed. Multiple generators retain distinct IDs and
+records. `actual_screen_coverage`, `visible_motion_speed` and final mood/flash
+confidence remain unknown; `appearance_guaranteed=false`.
+
+[HLSL frac](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-frac)
+defines the repeating unit-cell range, and
+[HLSL length](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-length)
+defines the radial magnitude. The target translator maps frac to fract in
+source31 `vendor/hlslparser/src/GLSLGenerator.cpp:1217-1219`. Original MilkDrop2
+compiles authored HLSL through D3DX; this source construction needs no repaired
+preset, texture label or rendered-frame observation.

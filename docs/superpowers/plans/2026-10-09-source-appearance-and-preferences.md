@@ -149,3 +149,12 @@ proof preserving angle orientation, and a constant2x2 polar-to-sample matrix wit
 offset/audio/time programs. Expand literal matrix/vector products using the
 existing target typed arithmetic, never native defaults for dynamic inputs.
 Keep real-file regression controls and the same frozen100 coverage check.
+
+## Procedural radial grid extension
+
+Identify repeating saturated inverse-radius scalar generators reaching liveRGB.
+Export interior cell centres, raw gain/core-radius, unclipped local disk area,
+coordinate programs and phase/audio routes. Keep multiple layers separate and
+reject known nonspatial/rank-one/uniform/dead constructs. Distinguish a generator
+plane from final visible spots, particles, colour or coverage. Use real xtramartin
+regressions, positive/negative math controls and the same fixed100 census.

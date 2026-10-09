@@ -8,7 +8,7 @@ import hashlib
 import json
 
 POLICY='source-appearance-and-control-traits-v1'
-FAMILY_CODES={'builtin_wave_primitive':1,'custom_wave_primitive':1,'circular_wave_primitive':4,
+FAMILY_CODES={'periodic_radial_glow':9,'builtin_wave_primitive':1,'custom_wave_primitive':1,'circular_wave_primitive':4,
     'point_cloud_primitive':2,'polygon_shape_primitive':3,'parametric_radial_curve':4,
     'polar_radial_sampling':5,'angular_mirror_fold':6,'cartesian_mirror_fold':6,
     'complex_quadratic_recurrence':7,'mandelbox_recurrence':7,'iterated_spatial_fold':7,
@@ -409,7 +409,9 @@ def appearance_from_analysis(analysis):
         code=FAMILY_CODES.get(family['mechanism'])
         if code is not None and code not in element['family_codes']:element['family_codes'].append(code)
         element['mechanisms'].append(family['mechanism'])
-        element['parameters'].update(family['parameters'])
+        if family['mechanism']=='periodic_radial_glow':
+            element.setdefault('procedural_forms',[]).append(family['parameters'])
+        else:element['parameters'].update(family['parameters'])
         element['conditions'].extend(family['conditions']);element['evidence'].extend(family['evidence'])
     for stage,field in analysis.outputs.items():
         composite=analysis.outputs.get('composite')

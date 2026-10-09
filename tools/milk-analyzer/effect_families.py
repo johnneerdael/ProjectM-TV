@@ -966,6 +966,13 @@ class _Analysis:
         self.unknowns.extend({'section': prefix, 'reason': n.detail.get('reason', 'unresolved live typed field')}
                              for n, _ in nodes if n.op in {'unknown', 'uninitialized'})
         for node, path in nodes:
+            if node.op=='saturate':
+                from source_forms import periodic_radial_glow
+                try:form=periodic_radial_glow(node,self)
+                except (ValueError,RecursionError):form=None
+                if form is not None:
+                    self.add('periodic_radial_glow',prefix,node,
+                             'periodic two-dimensional radial falloff reaches live RGB',path=path,parameters=form)
             if node.op == 'loop_result' and node.detail.get('name') is not None:
                 self.recurrence(node, prefix, path)
             if node.op in {'smoothstep', 'step'} and node.args:
