@@ -1,0 +1,2 @@
+# Preserve exact original and controlled preset bytes, including authored whitespace.
+*.milk -text -whitespace

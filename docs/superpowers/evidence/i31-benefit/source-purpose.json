@@ -1,0 +1,9 @@
+{
+  "loaded_float_gamma": 2.000999927520752,
+  "passes_upstream_epsilon": 3,
+  "passes_milkdrop_epsilon": 2,
+  "extra_pass_weight": 0.0009999275207519531,
+  "milkdrop_white_channel_for_extra_pass": 0,
+  "source_reference": "milkdropfs.cpp:41,4245-4261; originalD3DCOLOR_RGBA_01 float-to-int truncation",
+  "interpretation": "extra fractional redraw uploads zeroRGB in the original8bitDiffuse pipeline for this witness; intent not independentlydocumented"
+}
