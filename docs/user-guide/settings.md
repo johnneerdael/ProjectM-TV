@@ -69,12 +69,12 @@ Opening **Advanced** also shows a **Diagnostics** card beside it with live value
 
 ## Exit report
 
-Selecting **Advanced › Last exit** opens **Recent exits**: the device, Android version, GPU and the two troubleshooting switches, then up to five recent exits of the app, newest first. Each exit shows:
+Selecting **Advanced › Last exit** opens **Recent exits**: the device, Android version, GPU and the current state of the two troubleshooting switches (*Now:*), then up to five recent exits of the app, newest first. Each exit shows:
 
 - how long ago and why it ended, as Android recorded it: for example *crashed (native code)*, *killed for low memory*, *killed by signal 11 (SIGSEGV)*, *stopped by the system* or *force stopped*;
 - whether the app was *on screen* or only running *in the background* (for example for track titles);
 - Android's description and the memory the app used at that moment, when Android provides them;
-- for the last process that showed visuals, what the engine was doing: the **render** line (*loading*, *blending into*, *showing* a preset, with its size and the switch states) and the **prewarm** line (*compiling* a preset in the background, or *idle*), each with the seconds before the exit.
+- for the last process that showed visuals, the **switches** it ran with (which can differ from today's settings) and what the engine was doing: the **render** line (*loading*, *blending into*, *showing* a preset, with its size) and the **prewarm** line (*compiling* a preset in the background, or *idle*), each with the seconds before the exit.
 
 The app keeps those two lines in a small file in its own storage and overwrites them in place; it never sends them anywhere. Android 10 and older have no exit records: the report then shows only the last render and prewarm lines. Take a photo of the report when you report a crash.
 

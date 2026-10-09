@@ -68,17 +68,22 @@ final class ExitDiagnostics {
         }
     }
 
-    /** A line of the trail file: which thread, its process, when, and what it was doing. */
+    /**
+     * A line of the trail file: which thread, its process, when, the troubleshooting switches of that
+     * process ({@code null} if not recorded) and what it was doing.
+     */
     static final class TrailLine {
         final String thread;
         final int pid;
         final long timeMs;
+        final String switches;
         final String message;
 
-        TrailLine(String thread, int pid, long timeMs, String message) {
+        TrailLine(String thread, int pid, long timeMs, String switches, String message) {
             this.thread = thread;
             this.pid = pid;
             this.timeMs = timeMs;
+            this.switches = switches;
             this.message = message;
         }
     }
@@ -139,9 +144,17 @@ final class ExitDiagnostics {
             String line = raw.trim();
             String[] parts = line.split(" ", 4);
             if (parts.length < 4 || !parts[1].startsWith("pid=") || !parts[2].startsWith("ms=")) continue;
+            String switches = null;
+            String message = parts[3].trim();
+            String[] states = message.split(" ", 3);
+            if (states.length == 3 && states[0].startsWith("cache=") && states[1].startsWith("compile=")) {
+                switches = "shader binary cache " + states[0].substring(6) + ", background compile "
+                        + states[1].substring(8);
+                message = states[2].trim();
+            }
             try {
                 lines.add(new TrailLine(parts[0], Integer.parseInt(parts[1].substring(4)),
-                        Long.parseLong(parts[2].substring(3)), parts[3].trim()));
+                        Long.parseLong(parts[2].substring(3)), switches, message));
             } catch (NumberFormatException ignored) {
                 // a line cut short by the crash
             }
@@ -243,6 +256,13 @@ final class ExitDiagnostics {
             if (exit.pssKb > 0 || exit.rssKb > 0) {
                 out.append(String.format(Locale.US, "\n  memory: %d MB PSS, %d MB RSS", exit.pssKb / 1024, exit.rssKb / 1024));
             }
+            // The switches of the process that ended, from its own trail (today's settings may differ).
+            for (int i = 0; i < lines.size(); i++) {
+                if (owners[i] == e && lines.get(i).switches != null) {
+                    out.append("\n  switches: ").append(lines.get(i).switches);
+                    break;
+                }
+            }
             for (int i = 0; i < lines.size(); i++) {
                 if (owners[i] != e) continue;
                 TrailLine line = lines.get(i);
@@ -252,7 +272,10 @@ final class ExitDiagnostics {
             out.append('\n');
         }
         if (!supported) {
-            for (TrailLine line : lines) out.append("\nLast ").append(line.thread).append(": ").append(line.message);
+            for (TrailLine line : lines) {
+                out.append("\nLast ").append(line.thread).append(": ").append(line.message);
+                if (line.switches != null) out.append(" (").append(line.switches).append(')');
+            }
         }
         return out.toString();
     }

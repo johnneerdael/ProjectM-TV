@@ -1236,7 +1236,6 @@ struct Inputs {
     // Troubleshooting switches (Settings › Advanced) for GPU drivers that fail with a second EGL
     // context or with program binaries moved between contexts.
     std::atomic<bool> backgroundCompile{true};
-    std::atomic<bool> programCache{true};
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
     std::atomic<bool> settingsDirty{true};
@@ -1679,9 +1678,8 @@ bool LoadPreset(const std::string& name, bool smooth) {
         g_engine.texturePaths = std::move(preset.texturePaths);
         g_engine.texturesApplied = true;
     }
-    projectmtv::WriteTrail(projectmtv::kTrailRender, "loading '%s' (%s, %dx%d, shader cache %s, background compile %s)",
-                           name.c_str(), smooth ? "blend" : "cut", g_engine.renderWidth, g_engine.renderHeight,
-                           g_inputs.programCache.load() ? "on" : "off", g_engine.prewarmerStarted ? "on" : "off");
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "loading '%s' (%s, %dx%d)", name.c_str(),
+                           smooth ? "blend" : "cut", g_engine.renderWidth, g_engine.renderHeight);
     // Parses the preset, loads its textures and compiles its shaders: the stall at a switch, unless
     // the prewarmer already compiled them (then they come from the program cache).
     projectm_load_preset_data(g_engine.pm, data.c_str(), smooth);
@@ -2295,12 +2293,13 @@ JNIEXPORT void JNICALL JNI_FN(release)(JNIEnv*, jclass) {
 // context (on), or only on the render thread at the switch (off). Applied on the GL thread.
 JNIEXPORT void JNICALL JNI_FN(setBackgroundCompile)(JNIEnv*, jclass, jboolean enabled) {
     g_inputs.backgroundCompile = enabled;
+    projectmtv::TrailCompileOn() = enabled;
 }
 
 // Settings › Advanced › Shader binary cache: reuse linked programs as binaries across instances and
 // contexts (on), or always compile from source (off; patch 0035).
 JNIEXPORT void JNICALL JNI_FN(setShaderBinaryCache)(JNIEnv*, jclass, jboolean enabled) {
-    g_inputs.programCache = enabled;
+    projectmtv::TrailCacheOn() = enabled;
     projectm_opengl_set_program_cache_enabled(enabled);
 }
 

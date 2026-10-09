@@ -111,7 +111,8 @@ public final class ProjectMJNI {
     /**
      * File in which the engine keeps one line per thread about what it was last doing (loading,
      * blending, compiling), overwritten in place, so it survives a crash of the process. Each line
-     * reads {@code <thread> pid=<pid> ms=<wall clock ms> <message>}. Read it before calling this.
+     * reads {@code <thread> pid=<pid> ms=<wall clock ms> cache=on|off compile=on|off <message>}, with
+     * the Shader binary cache and Background compile switches as set when it was written. Read it before calling this.
      */
     public static native void setDiagnosticsFile(String path);
     public static native void setMeshSize(int width, int height);

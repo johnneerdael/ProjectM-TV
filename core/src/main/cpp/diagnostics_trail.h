@@ -24,6 +24,17 @@ inline std::atomic<int>& TrailFd() {
     return fd;
 }
 
+// The troubleshooting switches as last set (Shader binary cache, Background compile), written into
+// every line: an exit report must show the states of the process that ended, not today's settings.
+inline std::atomic<bool>& TrailCacheOn() {
+    static std::atomic<bool> on{true};
+    return on;
+}
+inline std::atomic<bool>& TrailCompileOn() {
+    static std::atomic<bool> on{true};
+    return on;
+}
+
 // Opens (or creates) the trail file without truncating it: a process that never renders, e.g. one
 // started only for the notification listener, leaves the previous process's lines in place.
 inline void OpenTrail(const char* path) {
@@ -33,8 +44,8 @@ inline void OpenTrail(const char* path) {
     if (old >= 0) close(old);
 }
 
-// Writes "<slot> pid=<pid> ms=<wall clock ms> <message>" as this slot's line. A thread writes only
-// its own slot.
+// Writes "<slot> pid=<pid> ms=<wall clock ms> cache=on|off compile=on|off <message>" as this slot's
+// line. A thread writes only its own slot.
 inline void WriteTrail(TrailSlot slot, const char* format, ...) {
     int fd = TrailFd().load();
     if (fd < 0) return;
@@ -42,8 +53,9 @@ inline void WriteTrail(TrailSlot slot, const char* format, ...) {
     timespec now{};
     clock_gettime(CLOCK_REALTIME, &now);
     long long ms = static_cast<long long>(now.tv_sec) * 1000 + now.tv_nsec / 1000000;
-    int used = snprintf(line, sizeof(line), "%s pid=%d ms=%lld ", slot == kTrailRender ? "render" : "prewarm",
-                        static_cast<int>(getpid()), ms);
+    int used = snprintf(line, sizeof(line), "%s pid=%d ms=%lld cache=%s compile=%s ",
+                        slot == kTrailRender ? "render" : "prewarm", static_cast<int>(getpid()), ms,
+                        TrailCacheOn().load() ? "on" : "off", TrailCompileOn().load() ? "on" : "off");
     if (used < 0) return;
     va_list args;
     va_start(args, format);

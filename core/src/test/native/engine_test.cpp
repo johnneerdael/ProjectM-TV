@@ -887,6 +887,9 @@ int main(int argc, char** argv) {
     CHECK(text.find("loaded '" + current() + "' (cut) in ") != std::string::npos);
     CHECK(text.find("prewarm " + pid) == projectmtv::kTrailLineBytes);
     CHECK(text.find("background compile off") != std::string::npos);
+    // Every line carries the switch states of this process.
+    CHECK(text.find("render " + pid) == 0 && text.find(" cache=off compile=off loaded '") != std::string::npos);
+    CHECK(text.find(" cache=off compile=off background compile off") != std::string::npos);
     Java_nl_neerdael_projectm_core_ProjectMJNI_setBackgroundCompile(nullptr, nullptr, true);
     Java_nl_neerdael_projectm_core_ProjectMJNI_setShaderBinaryCache(nullptr, nullptr, true);
     CHECK(g_programCacheEnabled);

@@ -823,7 +823,7 @@ public class MainActivity extends Activity {
 
     /** Settings › Advanced › Last exit: the latest exits and what the engine was doing then. */
     private void showExitReport(List<ExitDiagnostics.Exit> exits) {
-        String header = String.format(Locale.US, "%s %s, Android %s (API %d)%nGPU: %s%nBackground compile %s, shader binary cache %s%n",
+        String header = String.format(Locale.US, "%s %s, Android %s (API %d)%nGPU: %s%nNow: background compile %s, shader binary cache %s%n",
                 Build.MANUFACTURER, Build.MODEL, Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
                 renderer.getGlRenderer().isEmpty() ? "unknown" : renderer.getGlRenderer(),
                 prefs.getBoolean(PREF_BACKGROUND_COMPILE, true) ? "on" : "off",

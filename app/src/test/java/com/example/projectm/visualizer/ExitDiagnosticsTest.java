@@ -20,8 +20,8 @@ public class ExitDiagnosticsTest {
     }
 
     private static final String TRAIL =
-            pad("render pid=4321 ms=" + (NOW - 63_000) + " blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648)")
-            + pad("prewarm pid=4321 ms=" + (NOW - 62_500) + " compiling 'Martin - liquid arrows.milk'");
+            pad("render pid=4321 ms=" + (NOW - 63_000) + " cache=off compile=on blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648)")
+            + pad("prewarm pid=4321 ms=" + (NOW - 62_500) + " cache=off compile=on compiling 'Martin - liquid arrows.milk'");
 
     @Test
     public void parsesFixedWidthTrailLinesAndSkipsCutOnes() {
@@ -32,6 +32,11 @@ public class ExitDiagnosticsTest {
         assertEquals(NOW - 63_000, lines.get(0).timeMs);
         assertEquals("blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648)", lines.get(0).message);
         assertEquals("compiling 'Martin - liquid arrows.milk'", lines.get(1).message);
+        assertEquals("shader binary cache off, background compile on", lines.get(0).switches);
+        // Lines without recorded switches (or an unknown order) keep the whole message.
+        ExitDiagnostics.TrailLine plain = ExitDiagnostics.parseTrail("render pid=7 ms=1 loading 'x'").get(0);
+        assertEquals(null, plain.switches);
+        assertEquals("loading 'x'", plain.message);
         assertTrue(ExitDiagnostics.parseTrail("render pid=x ms=1 broken\n\n").isEmpty());
     }
 
@@ -67,6 +72,7 @@ public class ExitDiagnosticsTest {
         assertTrue(report, report.startsWith("Device\n"));
         assertTrue(report, report.contains("60 s ago: crashed (native code), on screen\n  crash\n"
                 + "  memory: 300 MB PSS, 410 MB RSS\n"
+                + "  switches: shader binary cache off, background compile on\n"
                 + "  render: blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648) (3 s before)\n"
                 + "  prewarm: compiling 'Martin - liquid arrows.milk' (2 s before)\n"));
         // The trail belongs to process 4321 only.
@@ -101,6 +107,7 @@ public class ExitDiagnosticsTest {
         assertTrue(report, report.contains("Android 11 or later is needed"));
         assertTrue(report, report.contains("Last render: blending into 'Geiss - Spiral.milk'"));
         assertTrue(report, report.contains("Last prewarm: compiling"));
+        assertTrue(report, report.contains("(shader binary cache off, background compile on)"));
         assertTrue(ExitDiagnostics.report(Collections.emptyList(), true, "", NOW, "").contains("No exits recorded yet."));
     }
 
