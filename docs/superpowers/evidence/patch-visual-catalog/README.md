@@ -41,7 +41,7 @@ The gallery contains 13 unchanged bundled originals and nine explicitly syntheti
 
 ## Files and reproduction
 
-`gallery.json` maps all 18 IDs to captions, frames and matched crop rectangles. `images.json` binds every published PNG to both file and raw-RGB hashes. `captures/` retains the exact input/role identities, every-frame hashes and difference diagnostics for all 26 cases. `run-manifests.json` retains all 104 native run manifests. `workers.json`, the two source-tree inventories and `textures.json` identify the actual source/harness/binary/asset bytes. `fixtures/` preserves all nine synthetic preset inputs.
+`gallery.json` maps all 18 IDs to captions, frames and matched crop rectangles. `images.json` binds every published PNG to both file and raw-RGB hashes. `captures/` retains the exact input/role identities, every-frame hashes and difference diagnostics for all 26 cases. `run-manifests.json` retains all 104 native run manifests with explicit role/repeat labels and caller-observed preset/PCM hashes. These input hashes were bound from the preserved requests and unchanged files; they are caller observations, not additional worker telemetry. `workers.json`, the two source-tree inventories and `textures.json` identify the actual source/harness/binary/asset bytes. `fixtures/` preserves all nine synthetic preset inputs.
 
 See [BUILDING.md](BUILDING.md) for the portable two-worker recipe. Capture a pair with:
 
@@ -58,7 +58,10 @@ Run the bounded artifact/document checks with Pillow available:
 
 ```sh
 python3 docs/superpowers/evidence/patch-visual-catalog/verify_images.py --repo .
+python3 docs/superpowers/evidence/patch-visual-catalog/test_verify_images.py -v
 mkdocs build --strict
 ```
 
 Both pass. Chrome presentation checks pass at the normal desktop viewport and390×844: the pairs and matched zooms render, all76 compiled image references resolve, and the narrow page has390px content width with no horizontal overflow. The disappearing-dot crop and live outline crop retain source pixels without amplification. PR/Pages publication remains a separate gate from renderer or physical-TV qualification.
+
+PR66 review correction: the bounded verifier now requires identical run/capture/input case sets, exactly two repeats per role, matching dimensions/frame count/fps/seed, exact worker identity and preset/PCM hashes. The old same-length720p/4K manifest exchange incorrectly passed; it now fails. Six focused receipt controls pass without new renders or changes to any PNG.

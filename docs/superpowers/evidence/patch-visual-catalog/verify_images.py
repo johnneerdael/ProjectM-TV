@@ -42,13 +42,30 @@ def verify(repo):
         assert role['identity']['source_commit'] == '8a15996e8510533113a44e26feaddc3a7d6e85f5'
         cases.add(info['case'])
     runs = json.loads((evidence / 'run-manifests.json').read_text())
+    captures = {p.stem: json.loads(p.read_text()) for p in (evidence / 'captures').glob('*.json')}
+    inputs = json.loads((evidence / 'cases.json').read_text())
+    indexed = {entry['name']: entry for entry in inputs}
+    assert len(indexed) == len(inputs) == 26
+    assert set(runs) == set(captures) == set(indexed), 'run/capture/input case sets differ'
     for case, records in runs.items():
+        capture = captures[case]
+        assert capture['name'] == case
+        assert all(capture[key] == value for key, value in indexed[case].items()), case
+        observed = set()
         for record in records:
             manifest = record['manifest']
-            assert record['exit'] == 0 and record['frames'] == manifest['frames']
+            role, repeat = record['role'], record['repeat']
+            assert role in ('upstream', 'patched') and repeat in (0, 1)
+            assert (role, repeat) not in observed, f'duplicate run: {case}/{role}/{repeat}'
+            observed.add((role, repeat))
+            assert record['exit'] == 0 and record['frames'] == manifest['frames'] == capture['frames']
+            assert (manifest['width'], manifest['height']) == (capture['width'], capture['height']), case
+            assert manifest['fps'] == 30 and manifest['seed'] == capture['seed'] == 12345
+            assert manifest['identity'] == capture['roles'][role]['identity'], f'worker mismatch: {case}/{role}'
+            assert record['inputs'] == {key: capture[key] for key in ('preset_sha256', 'pcm_sha256')}, case
             assert manifest['status'] == 'success' and manifest['gl_error_frames'] == 0
             assert manifest['gl_renderer'] == 'Apple M4 Pro'
-            assert manifest['seed'] == 12345
+        assert observed == {(role, repeat) for role in ('upstream', 'patched') for repeat in (0, 1)}, case
         assert len(records) == 4, case
     assert cases <= set(runs)
     print(f'PASS: 18 repairs, {len(images)//2} pairs, {len(runs)} cases, '
