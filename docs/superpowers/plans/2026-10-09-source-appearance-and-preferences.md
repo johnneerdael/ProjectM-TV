@@ -169,3 +169,12 @@ claiming stillness. Share the existing affine parser, expand constant-weight dot
 products, retain shader/EEL namespace distinctions and bound working memory.
 Use independent formula controls, original xtramartin gradient and fixed100
 coverage/retention checks; do not infer screen motion or mood from this norm.
+
+## Native blur input derivation
+
+Source GetBlur scale/bias uniforms block many image-driven formulas despite
+constant authored ranges. Derive them only from an entirely constant main-frame
+triplet using the existing target safe-range normalizer and float32 packing.
+Keep dynamic/missing inputs unresolved, preserve native repairs over originalMD2
+bugs, respect lexical shadows and expose conditional binding provenance. Verify
+focused controls plus fixed100 coverage/retention before claiming a gain.

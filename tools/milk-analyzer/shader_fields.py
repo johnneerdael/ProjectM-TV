@@ -414,7 +414,7 @@ class ShaderFields:
                         domains=self.known_uniform_component_domains.get(name,{})
                         value=Field('components',tuple(
                             Field('constant',dtype='float',detail={'value':lanes[i],
-                                'basis':'source-proven untouched main Q component'}) if i in lanes else
+                                'basis':'explicit source/context uniform component binding'}) if i in lanes else
                             Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True,
                                 **({'source_domain':domains[i]} if i in domains else {})})
                             for i in range(4)),dtype)

@@ -169,6 +169,11 @@ conditional displacement ranges. This explains gradient and feedback-flow math
 without reading an image. Nested image lookups can add nonlinear response, so
 these direct coefficients do not establish visible movement speed or intensity.
 
+When all authored blur ranges are constant, source analysis now derives the
+engine's repaired scale/bias inputs. That resolves more blur-driven flow formulas
+without rendering. Dynamic ranges remain unknown, and known decode inputs do not
+prove the final image's colours or movement.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

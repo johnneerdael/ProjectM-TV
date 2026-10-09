@@ -650,3 +650,34 @@ defines the channel-weighted dot product. The target source31 header's lum macro
 uses(.32,.49,.29), whose weights sum to1.10. Original MilkDrop2's D3DX authored
 semantics remain a separate reference. Matrix/layout/floating-storage policies
 follow the qualified ProjectM TV target rather than generic shader assumptions.
+
+## Source-derived native blur inputs
+
+`native_input_bindings.blur_decode` records source-proven native packed inputs
+with policy `source31-constant-blur-decode-v1`. It is `source_constant` only if
+all six main-frame blur min/max values are supported finite constants after
+configuration resets and per-frame equations. Any missing/dynamic/unsupported
+value withholds the whole triplet: an invalid later level can trigger the target's
+coherent default policy for all levels. No partial triplet or guessed zero/default
+input is supplied. The record may be absent where no authored shader is lowered.
+
+The producer reuses `blur.native_ranges` with the qualified target policy. That
+applies float32 narrowing, minimum-gap repair, progressive hierarchy and the
+whole-triplet fallback. `_c5` is `[gap1,min1,gap2,min2]`; `_c6` is
+`[gap3,min3,min1,max1]`. `raw_ranges`, `safe_ranges` and `packed_components` retain
+the exact derived values. The existing component-binding interface injects them
+into uniform declarations; authored local shadows still use their local values.
+`observed_runtime_binding=false` distinguishes this source contract from a GPU
+capture. No frame, shader, audio or image is executed to derive these constants.
+
+The original MilkDrop2.25c `milkdropfs.cpp:1551-1583` contains a close-range bug
+that assigns both endpoints average-minus-half-gap. The patched TV target repairs
+that behaviour and adds coherent unsupported-range handling. This predictor
+preserves the target repair rather than restoring the original bug. Source31
+`BlurTexture.cpp:353-448` and `MilkdropShader.cpp:234-241` define normalization
+and packing. Existing native-range numerical/regression controls remain required.
+
+GetBlur decoding uses these scale/bias inputs, so resolving them can unblock
+affine colour and coordinate coefficients. It does not identify kernel history,
+actual texture contents, closed-loop flow speed, final colour palette or mood.
+The independent sample-range premise from the previous section still applies.

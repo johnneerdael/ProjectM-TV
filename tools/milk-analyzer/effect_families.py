@@ -945,7 +945,14 @@ class _Analysis:
         if section.get('status') != 'parsed' or not isinstance(section.get('tree'), list):
             self.unknowns.append({'section': prefix, 'reason': 'active shader tree is unavailable'})
             return
+        from source_uniforms import blur_decode_bindings
+        blur_binding=blur_decode_bindings(getattr(self,'main',{}))
+        self.native_input_bindings={'blur_decode':blur_binding}
+        components={} if blur_binding['packed_components'] is None else {
+            name:{i:value for i,value in enumerate(values)}
+            for name,values in blur_binding['packed_components'].items()}
         model = ShaderFields(stage=stage, frame=1, warp_reads_blur=False,
+            known_uniform_components=components,
             main_binding_policy='projectmtv-core-2.2.6-v1',
             global_input_policy=section.get('implicit_global_input_policy', 'strict-v1'),
             array_initializer_policy=section.get('array_initializer_policy', 'legacy-layout-v1'))

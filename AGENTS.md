@@ -169,6 +169,11 @@ Conditional[0,1]sample boxes are premises, not certified texture/blur ranges.
 Retain nested-coordinate dependencies, unknown full sensitivity/screen motion,
 64sample/4096node budgets and source-only binding status. Dot constantweights
 can be expanded; shader x/y globals are uniform offsets, not EEL coordinates.
+`source_uniforms.py` derives source31 blur decode _c5/_c6 components only when
+all6main-frame min/max fields are supported constants. Reuse blur.native_ranges
+CORE_2315_BLUR; retain coherent fallback, float32 packing and native-vs-MD2
+close-gap distinction. Never default-fill a dynamic/missing triplet. Injection
+uses known_uniform_components and respects local shadows; observed binding false.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

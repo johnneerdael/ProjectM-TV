@@ -2491,6 +2491,74 @@
               }
             }
           }
+        },
+        "native_input_bindings": {
+          "type": "object",
+          "properties": {
+            "blur_decode": {
+              "type": "object",
+              "required": [
+                "policy",
+                "status",
+                "packed_components",
+                "raw_ranges",
+                "safe_ranges",
+                "observed_runtime_binding",
+                "unknown_reasons",
+                "conditions"
+              ],
+              "properties": {
+                "policy": {
+                  "const": "source31-constant-blur-decode-v1"
+                },
+                "status": {
+                  "enum": [
+                    "unresolved",
+                    "source_constant"
+                  ]
+                },
+                "packed_components": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "_c5": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "_c6": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "observed_runtime_binding": {
+                  "const": false
+                },
+                "unknown_reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },

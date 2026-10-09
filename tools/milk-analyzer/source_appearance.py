@@ -473,6 +473,7 @@ def appearance_from_analysis(analysis):
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback_transfer(analysis),
+        'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),
         'execution_unknowns':list(analysis.unknowns),
