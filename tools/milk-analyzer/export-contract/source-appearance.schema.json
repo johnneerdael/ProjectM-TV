@@ -1255,6 +1255,120 @@
                     }
                   }
                 }
+              },
+              "fill_contribution": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "mean_fill_alpha",
+                  "mean_source_rgb_times_alpha",
+                  "nominal_alpha_area_fraction_per_aspect_y",
+                  "nominal_source_rgb_integral_per_aspect_y",
+                  "summed_nominal_alpha_area_fraction_per_aspect_y",
+                  "summed_nominal_source_rgb_integral_per_aspect_y",
+                  "blend_mode",
+                  "instance_aggregation",
+                  "border_included",
+                  "visible_screen_contribution",
+                  "unknown_reasons",
+                  "conditions",
+                  "uses_rendered_images",
+                  "uses_equation_execution",
+                  "uses_shader_execution"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-fill-integrals-v1"
+                  },
+                  "mean_fill_alpha": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "mean_source_rgb_times_alpha": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "nominal_alpha_area_fraction_per_aspect_y": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "nominal_source_rgb_integral_per_aspect_y": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "summed_nominal_alpha_area_fraction_per_aspect_y": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "summed_nominal_source_rgb_integral_per_aspect_y": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "blend_mode": {
+                    "enum": [
+                      null,
+                      "source_alpha_additive",
+                      "source_alpha_over"
+                    ]
+                  },
+                  "instance_aggregation": {
+                    "type": "string"
+                  },
+                  "border_included": {
+                    "const": false
+                  },
+                  "visible_screen_contribution": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "uses_rendered_images": {
+                    "const": false
+                  },
+                  "uses_equation_execution": {
+                    "const": false
+                  },
+                  "uses_shader_execution": {
+                    "const": false
+                  }
+                }
               }
             }
           }

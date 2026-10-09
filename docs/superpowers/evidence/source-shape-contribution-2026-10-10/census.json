@@ -1,0 +1,3509 @@
+{
+  "scope": "Same fixed100 source originals, parser/symbolic constants only; no shader/equation/frame execution or final appearance accuracy credit",
+  "count": 100,
+  "computed": 100,
+  "shape_presets": 53,
+  "known_mean_alpha_presets": 25,
+  "known_area_alpha_presets": 12,
+  "known_area_rgb_presets": 7,
+  "shape_elements": 125,
+  "known_area_alpha_elements": 17,
+  "known_area_rgb_elements": 10,
+  "original_sources_equal": true,
+  "before_zip_sha256": "ac936fee16de87300d239ce1273874f2b07ab09e834978c3a62a2b094f61976d",
+  "after_zip_sha256": "42449ca9ee52da19802441dfdacfa5f312e25d4bc3c16c31e022cb5da78965f5",
+  "reader_sha256": "a208ef1581e5655bfc44b2e9857b4429f8f321ef7d67f79abbe7bbd22fd61f0c",
+  "model_modules": {
+    "activity_model.py": "1955526da80753dd235a7a72353e0c4953624c234a1fd864dd8ef99c5dd7d052",
+    "analyzer_test_profiles.py": "2159b9643a1e8fd99524336b65d512371db941b8b794debe4964257e7b05096c",
+    "audience_export.py": "d9d43ffce753cf45a87d24740255160e125efecbd4c933193d6962079b363e03",
+    "audience_policy.py": "77c10ee184ae63943e4e42985123be566b0e4eb6a255bb627179b1d7fd6a0ba6",
+    "audience_ranking.py": "1d103a2c12a16868bb4530654b94692f28437cd97ed69f51d404c60ad04a1ad4",
+    "authored_canvas.py": "82b4bcd9ac50dc387b86f2db9f183f73b968e593249b5b1a99e2cf2fc09f59f7",
+    "behavior_evidence.py": "faa9cac24539ceda0953cdbc52e5867949ca8837d72171ed0f6dc73544693c3b",
+    "beta_collections.py": "8719e77c1cf196fc8206399281be45ba27597cfb8c9c89af141eea4d116d5692",
+    "beta_export.py": "d65ca3d61c391bc1b2e681fd16fc566254898baba85dd8d52fd8438f44eca886",
+    "beta_score.py": "72a4496b4014f7722597bbc71c528e68a937890e25cd4bb3c4d952418eb60eea",
+    "blur.py": "60197495fd89a90846201aa02d5e84e1d961f51d20c3f6cc20fd1890900a412b",
+    "builtin_wave.py": "ad60a25184d02397f9e8e8e5163227d8db1bf962372280ef498cca54b981b202",
+    "component_influence.py": "afe4d6e90351d2e5bc53b7cea209564c8a35949c8797ab902ebfbcda551b579c",
+    "composite_mesh.py": "8584494244d83e26072f9f7c2079e0cc0959e23835d54e93a6247763a8d32114",
+    "conftest.py": "49d3e5c80404fcae7030ffe96e763ed9db03488e02c3d49314ab101eb3e18195",
+    "core_backend.py": "6306d803e6e133f96649cb63dc435bb19cf712aa2748da471daa5ad05057eb45",
+    "core_corpus.py": "571dc6c61648eb9623c7988808dfd47137657c9e147466a4711c44eff235fa16",
+    "corpus_inputs.py": "22f2f0e1bc068a96d6d3e4c2218dd2effaabb73aff0498830efdef1bf1018bc8",
+    "corpus_store.py": "9c365fd6b30b87af10c038861d4716c50941a55935273522d6a04e90de99ce46",
+    "corpus_worker.py": "f5ce37680de0cbc0acb89130b31aea7a729adb602ae856ee750c92bbd958dbdb",
+    "coverage_audit.py": "1aa65df30448749c75004cd8cd4261c2d67f157692c9d79c269746b07d38b9cb",
+    "custom_wave.py": "fbf997c74f571cf71ec415c2062f4ccb4e888c6f1b355c5d0ae27cc3d3cb7bca",
+    "descriptors.py": "58d5bd476e3685d079ed3f28d006835173de243d416964760c758b7af8f09591",
+    "detail_pipeline.py": "fc8cc605ca60b84fcabb029e5c1f6226b9b894eb52c3e77fffaa9e802e82e406",
+    "effect_bursts.py": "6f2396d6ec1901919a5494f011d12b92f7e329281c2313a15a1ae793f3769cf4",
+    "effect_families.py": "af5a90c7c1c6369df62e4cf85d6761f4b036f76994b2b0a1001a3223635f84e8",
+    "effect_family_export.py": "64dfc2921a573f6b0f60fba3809819b027eed54ef155a4cf92df5d97c5e8538a",
+    "engine_profiles.py": "67dc2019b251631c5d6667ed164eb45bbf80239e3bef80c67b273b6273ff6cba",
+    "equation_domains.py": "d63bdda59623dbe88fb970414a93ae37fffff0cb8400ea12d3f42ee4a18a56b7",
+    "equation_loading.py": "e164850d796e51c69c0aaad9d668847b607b708c0577123fe8a8f2c75bfd7cd0",
+    "feedback.py": "e698ff1fede1264970689c60129d2768c3b2d80a34628fbe52154ec22634b1c8",
+    "feedback_field.py": "db25176d26e619ac7d952fbdb96110bac200768bab75359509c475f63e464288",
+    "field_math.py": "403a40ae31bd273a8ee86457a39b9278aca2dda76afb72c4dc92955b3b56b3bb",
+    "fit_activity_model.py": "01a46f7f77d90a8866885e0d403b7699f1d666e73939504c15c73932179293aa",
+    "forecast.py": "e381272f9083063e2313460baa09f08048ffa6ba31c125a6c0211fa3b7dc31dd",
+    "frame_chain.py": "5f8e9c10bfb70f4f0a4fa5981d8ac174cf37c851e808129facb8e3937ff2e7e0",
+    "gap_priority.py": "7843b151cf759496fcac8ba3fd9dea738a21abb87860a295d8861814ffdfdbf8",
+    "generate_composite_adapter.py": "ddaa3daeeada8664451af64fcd900fbbe818937923e6a306af94018e04b4fa8b",
+    "generate_noise_adapter.py": "6b15f33ae7ef451c73f1613950df7a247b1114e2b29db9e842f4c0f69492207b",
+    "generate_random_adapter.py": "e6d17325feb9bb7e09f922059ae45307fb90f5969ef800fdc22ed71b7a455b75",
+    "generate_shader_adapter.py": "ff5b1a87e146807dceab7a29228999240b805a527b27a30399e44e67f08be5ae",
+    "geometry.py": "15fab828160996974595e2dae39510df9ad6144d77704e81c4cf4f4c8f291991",
+    "geometry_features.py": "74e1a0e91dcafe94e8470cea4bd9be9e1c313b037041621021e2fcc80caf2ba8",
+    "grid_math.py": "d8e374f8e8f3e65eb92c102f2295ce810bd842e5c75dd70aedb916b51b769cbf",
+    "intensity_calibration.py": "388d215ed7a69891e085f6a3e9b17183fe993abd4b9c94ea05c2bb32ecf8551a",
+    "intensity_evidence.py": "dead5392ae70e92f51a90a597e81820f3e04c0887750af8ad5af81edc170f7aa",
+    "java_runtime.py": "588c6e08f55299196789a30c0223254c8effaa650dbddd59959feaa840bcdc25",
+    "legacy_composite.py": "8590d3070434d1b9719c0a6568881cbeb276bd5764978a265d8a61c650c413c7",
+    "line_points.py": "285fc5c4e514f4110d8c715d6d77c105ee5d6a9a12bd4281a4887dfe2865092b",
+    "materials.py": "f7ecf89afde220765571d977cbc772c0710f89ae3357e5f2b7c7737575e7c6a8",
+    "measured_motion.py": "0964d3fc6143f5a69b675d67ebd11e508aa929933ac21411168b425a247de8a5",
+    "mood_profiles.py": "b2ba437b403199c89f7a6917145c5808bf738ba8855a30697f57583d7f188895",
+    "mood_scoring.py": "048f4ccd6e968bda173554a080586b95c88d01488c8c33720d679dec955e7cdd",
+    "motion_vectors.py": "24e6d80a9630faf6c0f61d0897ddc8b05ce2cbbb7999657922606b0223fc7bc3",
+    "native_motion_executor.py": "f0eba962c7e5560772a2978bfae3767de3fe54dc1af2ef7781bcc0b82690cfa4",
+    "native_values.py": "0e05bff9b52057567f0bb52ea1c2bf8b344ff3d4e0e4bc58fed1565c38aadb7e",
+    "noise_inputs.py": "2e8d730f0ef39d156daa9bf3809b0c88fd03e1514d9f5b815beafb938b1b2730",
+    "palette_features.py": "363796b71c60c14048f2d749d9c51b09ee878b16d1fec161802e7a2d6cba080b",
+    "pipeline_fields.py": "18c823f668c5b5cc0bbb4ba7b0ca2b9d9bcdf95b853256a6fefa15e789ab3c5f",
+    "prediction_windows.py": "a6f18a314056d1143032dd04e68aae63bf10f09a4cfe41e2f2dba98295319c5a",
+    "preset_corpus.py": "ea82e505a817f03c56008d4b1304ccf292f2984da97ee18be81b41dc0627ab2b",
+    "primitives.py": "09a6abbbff15f646466a6600acb97a5427ccedb76e393f7c1c10bfa950dbda9c",
+    "process_memory.py": "ef128bf7c2ab0be11fd97303a8c4a7ca32bd62e3d76e63355cafadd6cf6d9f57",
+    "progress_report.py": "b01f72cd50c0edbdb0f1c8c45502fd5016e4610d21119188280f9ae16b4addc8",
+    "quad_lines.py": "121699d0af22d4c6142a6cb1d4065432d28513faf5afa4c00dc45d39ec2565cd",
+    "random_binding_context.py": "45b43d08719dbdca6dbe7e64de962d43132a58a31369947c81ad85938ff0714c",
+    "random_binding_contract.py": "6ee15603b09790ee23359887234f366782dd99ba2aa4c1d9633a37464d778896",
+    "sampling_policy.py": "c6e8767540704444fcada9a6b8d1c75da934bf13528c31b26abbf6b05aaab30f",
+    "scan.py": "a89ea2afacd4e474e1393e22d74287571adf9eba2dcc76c070b6b97a3184fcf5",
+    "scene_draw.py": "630a687aaf08d2ae851b1ac885f581d4112958a0e34ad4f9e086ac9c0a5e0d89",
+    "scene_equations.py": "0a7109a2bbc388bc1ee1c9492d5fed6566f7ab790351d96677aabe0f88ac9dc1",
+    "scene_warp.py": "b192e0b75badca5182cc0b081a63ceed4b9c8935120de45592dcc55fd1aff8ac",
+    "score_audit.py": "1d4326a433949c5405b0e32ab8667c5f71f07f61b019d166fd8e7eb60a18e7d6",
+    "scoring_context.py": "c93c721068c75acb32a69ef5f8da53530d1567be9a8f7cb7f2dd87d5d1c54fce",
+    "shader_bounds.py": "e371a00dd0ae8ba11a9f1a1ae0e1f7bb69fe06c9574bab3999fdd8cf0ea6c340",
+    "shader_compat.py": "a51f0d7fb84ed6c484b2fbab3d3b22aa40c236bab862b58a89c124288aba1e99",
+    "shader_fields.py": "06114264bd86fd051899490217d336417cd989fa154af3fb793dbc93c2a00dcf",
+    "shader_random.py": "a1c6f3661b0aca2c8118901923787f146eb4be254fa1ed9f3ec81d72ca27bc25",
+    "shader_uniformity.py": "1385070a2b84f891e70b9037cf5448bcd11a868f558d51d6ce517185ff628262",
+    "shader_uniforms.py": "2d8da6bbe979ad965aee945676b368f19d9a97c9fdffbaf5a3300e9db02d714e",
+    "shape_sampling.py": "ce4604d22395042b069aae5deaa59a51939e1d398b032bd8d744863ed72822ab",
+    "source_advection.py": "556e4098d3ef32b2dd90c9b2d1d3d220152c1a87ee2411f2ec9553dd3cdd5924",
+    "source_appearance.py": "4a2ef538d674e21d8aa75ff73f830c58ec91ffbdd76bdd4cc8118f5167f3fd56",
+    "source_bass.py": "df7b04726377beeb22e07f660d5ca2b3acfa790edd8fa75f283cefa2db293086",
+    "source_classify.py": "31274981a2cccad59aa6a2b0ade32115f4834ab493b16b6a240d45b11ff526b4",
+    "source_colour_mix.py": "75a460b2f7d9ef6337ec99f9377ed30a4a369227c991b62a9fb3969b62f4c8ba",
+    "source_colour_processing.py": "4d73d950c1b80c2b6ab0836f2911ebd53e5339eaa0069aab3c5abb996136f443",
+    "source_composition.py": "0e0ef144bedf3ea27ebb39a08ffa42f5fbbeab4e53d0c5ce634e93e1c0084556",
+    "source_context.py": "796a048fcba2996ac397be290ac27eed7c14bcf6b69837413cae5bcfe26279ea",
+    "source_extract.py": "6c53dc864ea5aea4cf03b1990834493cd3ad51581ab18dc7ec627bb9672c250e",
+    "source_features.py": "eed7fa18005a4ca061431b7620effc46be94847f7eddc00e456bc2cabd82c8e5",
+    "source_feedback.py": "d2181d9f0a921654ffeceb340e6688d43e24610ed65dd37eaf7bbdece24e019a",
+    "source_forms.py": "e028da74ce64ac18f2c2e77f23bd18312df0185e04fe3effa228d142558f653f",
+    "source_geometry.py": "4fcd9cef64a4231468287ec2d49f96ebbce7403939b4484b733c3d7d21f31f70",
+    "source_hue.py": "cc6ff8a88aafd4954d14781e4afa8148a0a7a5ffc050e2bf7d7c9c80730391a1",
+    "source_inventory.py": "b480521afb68cd3dfda3a4d97f9073f9d39a68bbb73a14838943d38a40007a01",
+    "source_material.py": "4965380da886d5114763d7d83a3c38dfe03078ba64852b1f5de0f23268c08eb9",
+    "source_motion.py": "8afac2f4f926a7b8f59591b2d153a7516a676c5354d2608d3cfea66681868ef4",
+    "source_polar.py": "6620d938b95358474db5be3348020e88227c6eef5eb50e4c7f29743bb4740c78",
+    "source_sampling.py": "7e340ad227045cff63c453531eb4838b4cd7afb942daf88211eda646620e73d9",
+    "source_temporal.py": "68a44fafa930293983bd141ac65462419c2f7a57a1de0a9e5b70c1db0ca39a12",
+    "source_transport.py": "e7415508088c791a2d404a4c68898ce8949486f015baa246f9f0ee0431704246",
+    "source_triggers.py": "3d124f2ce698f16f52e01cb3663d28f49d312705f2f13f1979f19baf0cdcafcb",
+    "source_uniforms.py": "60e8d820bfb1683f094e40e3eff750f9606653b32cff1c14c91d73455082bffa",
+    "source_waveform.py": "a9e2c5507415d57612d34f322688361299b569ff71d16a4a74b799dba635a673",
+    "spatial.py": "28574ddf26307bc348b5876c1c10ae5231282eec145c8c6431378e4c4a962e03",
+    "stage_resolution.py": "b5871fd68ee732991889cf3da5a63c356450b5c5ce720bae72df21587c2387a1",
+    "strict_source_features.py": "68915fbe03d2c6882a5d10634cd74c2aaa2dbbc6fa52d87610d71c9eabc5a11d",
+    "transport.py": "6c5cf734ff942277e7dc0e52108de150cec9b17e5f4c5c9a81a260b2844259de",
+    "uniform_descriptors.py": "a2e9bbfe13b60d9fbbe2a9e3b53128694b855b1c67c5ac2cf10dae4aadbd1347",
+    "uniform_source_descriptors.py": "210b9014920669b1e916196a0a1cf07e436f5b0f91e87a0b6c06b0162bba6b3d",
+    "unorm_sampler.py": "d2b1895ea6e5a480b7e8cdf97243d507c77a11e902cf7684c39621708e066d16"
+  },
+  "rows": [
+    {
+      "name": "$$$ Royal - Mashup (161).milk",
+      "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$$$ Royal - Mashup (253).milk",
+      "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$$$ Royal - Mashup (389).milk",
+      "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "$$$ Royal - Mashup (39).milk",
+      "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "19.milk",
+      "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "404.milk",
+      "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+      "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.9999998807907104,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.06645199181265189,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+      "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+      "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bmelgren - Tonic.milk",
+      "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 3,
+      "known_area_alpha": 3,
+      "known_area_rgb": 3,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.04333329200744629,
+          "mean_source_rgb_times_alpha": [
+            0.00303333271344286,
+            0.002166662534079933,
+            0.0025999950408959194
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.0937187581771933,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0065603179881480265,
+            0.004685933440001034,
+            0.00562312012800124
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.26666661898295274,
+            0.28333326776822787,
+            0.33333325386047835
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.0010825316579446637,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.000866025274736599,
+            0.0009201518060147002,
+            0.0010825315288968337
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.0333333412806193,
+          "mean_source_rgb_times_alpha": [
+            0.028333336909611262,
+            0.008333335320154825,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.004718841679079514,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.004011014977193776,
+            0.0011797104197698784,
+            0.0
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "EoS - heater core C_on route.milk",
+      "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EoS - more waveforms 7_phat_edit.milk",
+      "sha256": "026417e8c902bb6c5d0604c92f80b9996d891ebf498116dba657c922fbda4bbd",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 1,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.0333333412806193,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.0003027833269238191,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "EoS - pointfield 07 insek altcolors.milk",
+      "sha256": "00aab1e58d025b2b4f9163a0a95c4de5a6024f9c1c9b9e6270ee02a347d5705e",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Flexi - alien web bouncer [39].milk",
+      "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Flexi - disruptor [vision of eggs] nz+.milk",
+      "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 2,
+      "known_area_rgb": 2,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.16666662693023918,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.002451239650440726,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0012256196791150943,
+            0.0,
+            0.0
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0066666595141100515,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.1735347850474608,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0,
+            0.003470692391035866,
+            0.0
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "Flexi - splatter effects 11 halucination #1.milk",
+      "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+      "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+      "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Geiss - Tadpole Hunter.milk",
+      "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.7999999125798544,
+          "mean_source_rgb_times_alpha": [
+            null,
+            0.44433329288164697,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 2.598075811305022e-05,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            1.4430146331773329e-05,
+            0.0
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.7999999125798544,
+          "mean_source_rgb_times_alpha": [
+            null,
+            0.44433329288164697,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 2.598075811305022e-05,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            1.4430146331773329e-05,
+            0.0
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "InCUbuS - Our Destiny.milk",
+      "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LuxXx - Boiling Phosphene Soup I.milk",
+      "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+      "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+      "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 1,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.33333325386047835,
+            0.16666662693023918,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.0026162714131418023,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0026162711012579455,
+            0.0013081355506289727,
+            0.0
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "ORB - Firelight.milk",
+      "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+      "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Serge + martin - crystal palace003.milk",
+      "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 1,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.033915635229915704,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.9999998807907104,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            0.6666665474573819
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.9999998807907104,
+          "mean_source_rgb_times_alpha": [
+            null,
+            0.0,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+      "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+      "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+      "sha256": "01803be5f3f974981e9bd8dbb6b06d2a8c211f873497414ac2d5651bc908dea5",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Waltra - Codex Machine 2.milk",
+      "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Zylot - Funnels (Jelly).milk",
+      "sha256": "0008a62faf508e742f0d3dcf8c73ca6f41e372880f2de9834b10f838edfb79b1",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.16666662693023918,
+            0.16666662693023918,
+            0.16666662693023918
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zylot - Spiral.milk",
+      "sha256": "02481b33b1399e5a186bc12f5f4230bb00d368edfd802857e4a2dac4831f5923",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "amandio c - living boxes 4.milk",
+      "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.9999998807907104,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+      "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.1366666555404663,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bowel trounce dumring.milk",
+      "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "cortex meat - adm affect non.milk",
+      "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cpe domains flacc - portable massation segway nz+.milk",
+      "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.1800000270207723,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 4,
+      "known_area_alpha": 1,
+      "known_area_rgb": 1,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.0333333412806193,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.00011399833929493316,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fed - DSC-011 LSD Edit 2.milk",
+      "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+      "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+      "sha256": "014ddc38e758a5ebbfd2a950eaeda1956e0ec78b3ec048bd461452922b01dfe6",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "flexi - grind my glitch up [191].milk",
+      "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.0666666825612386,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.13333332538604736,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "martin + flexi - lock and release bipolar 02.milk",
+      "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+      "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.20000000794728598,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.02000000556310037
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+      "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.20000000794728598,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.02000000556310037
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shifter - liquid circuitry - conjugoth.milk",
+      "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 1,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.16666666666666666,
+          "mean_source_rgb_times_alpha": [
+            0.06666667262713115,
+            0.06666667262713115,
+            0.12499999006589253
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.0007200183425153902,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            0.00028800736275601865,
+            0.00028800736275601865,
+            0.0005400137139701051
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "name": "suksma - bonobo - absurd.milk",
+      "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - dotes hostile undertake - graphic novel fists.milk",
+      "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - ku pilled - forgoing utility nz.milk",
+      "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+      "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 1,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.00030084899116233265,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - never degweh - flx spr col.milk",
+      "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d",
+      "status": "computed",
+      "shape_elements": 3,
+      "known_mean_alpha": 3,
+      "known_area_alpha": 3,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.30000003178914386,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.009364336728133821,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.30000003178914386,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.009364336728133821,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": 0.30000003178914386,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": 0.009418579208120963,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 1 is dynamic or outside the unclamped [0,1] domain",
+            "RGB channel 2 is dynamic or outside the unclamped [0,1] domain"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - out of fuckus newband plays harry partch - shf.milk",
+      "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - prigogine quantum foam self-organizer.milk",
+      "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+      "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d",
+      "status": "computed",
+      "shape_elements": 1,
+      "known_mean_alpha": 1,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.03333333730697537,
+            0.03333333730697537,
+            0.03333333730697537
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - sick star bloat --- Isosceles edit08.milk",
+      "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - spectro exp 777 - blur.milk",
+      "sha256": "018e0c956d661138bb97cf78d36f5e62cff34f3e11057519532cdca042bf4119",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+      "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain",
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - tech ed lacquer sinus raw.milk",
+      "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "suksma - to finally feel like a cyborg.milk",
+      "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "status": "computed",
+      "shape_elements": 2,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "status": "computed",
+      "shape_elements": 4,
+      "known_mean_alpha": 2,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": [
+        {
+          "id": "shape_0",
+          "mean_fill_alpha": 0.23333330949147543,
+          "mean_source_rgb_times_alpha": [
+            0.2216666273276028,
+            0.08166664997736699,
+            0.10499998648961413
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_1",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill"
+          ]
+        },
+        {
+          "id": "shape_2",
+          "mean_fill_alpha": null,
+          "mean_source_rgb_times_alpha": [
+            null,
+            null,
+            null
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha is unresolved; vertex colour alone is not the fill",
+            "nominal polygon area is unresolved"
+          ]
+        },
+        {
+          "id": "shape_3",
+          "mean_fill_alpha": 0.3333332935969035,
+          "mean_source_rgb_times_alpha": [
+            0.16666662693023918,
+            0.03333333730697537,
+            0.06666667461395075
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y": null,
+          "nominal_source_rgb_integral_per_aspect_y": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal polygon area is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    },
+    {
+      "name": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+      "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9",
+      "status": "computed",
+      "shape_elements": 0,
+      "known_mean_alpha": 0,
+      "known_area_alpha": 0,
+      "known_area_rgb": 0,
+      "fill_contributions": []
+    }
+  ],
+  "all_visible_contribution_unknown": true
+}

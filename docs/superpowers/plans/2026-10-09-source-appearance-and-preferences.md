@@ -72,6 +72,15 @@ movement, feedback and colour. Implement incrementally in this same worktree.
 All steps require independently known formula controls, real-preset coverage,
 contract documentation and review. The numerical47-field export stays unchanged.
 
+The approved prominence step first joins existing polygon geometry and shape
+materials. For an untextured fan, integrate centre/perimeter RGB and alpha with
+barycentric first/second moments, rather than multiplying their averages. Export
+nominal per-aspect and summed-instance alpha/RGB injection coefficients with
+independent channel unknowns. Keep textured input, clipping, border coverage,
+destination colour, overlap union and later composition unresolved. This uses
+the established native colour policy and does not restore MilkDrop2's packed
+8-bit vertex colours or run image simulation.
+
 ## Quantitative checkpoint
 
 - Nominal shader-time RGB timing is implemented; fixed100 has zero timing

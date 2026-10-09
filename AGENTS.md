@@ -130,7 +130,12 @@ unresolved without inputs; retain stale-composite feedback from possible warp
 discard. Typed constant zero masks must prune data dependencies consistently while
 execution/domain obligations stay separate. This graph is not scene completeness.
 `source_material.py` reuses the qualified primitive colour-modulo helper for shape
-vertex RGBA, gradient/border and int-style blending/texture flags. Keep raw values,
+vertex RGBA, gradient/border and int-style blending/texture flags.
+`shape_fill_contribution` integrates known
+untextured centre/perimeter RGBA with barycentric second moments; preserve
+colour/alpha covariance and per-channel unknowns. Its per-aspect area coefficients
+are nominal unclipped injection, not displayed prominence or overlap union.
+Keep raw values,
 per-channel unknowns, raw border-alpha enable gating, source texture requests and
 unverified fallback/binding status. Perimeter/border/texture audio routes must not
 invent visibility or final palette verification; prune known unused style controls.

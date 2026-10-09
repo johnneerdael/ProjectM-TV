@@ -57,3 +57,46 @@ def shape_material(controls,requested_image):
                       'Texture lookup/fallback and sampler/render-context transforms remain unresolved',
                       'Texture multiplication, alpha conversion/blending, clipping and later shaders determine displayed colours'],
         'uses_rendered_images':False,'uses_equation_execution':False,'uses_shader_execution':False}
+
+
+def shape_fill_contribution(geometry,material):
+    """Integrate a nominal untextured fan's source colour and blend alpha.
+
+    Each triangle has one centre and two equal perimeter colours. Its uniform
+    barycentric moments are E[lambda_i]=1/3, E[lambda_i^2]=1/6 and
+    E[lambda_i*lambda_j]=1/12. Colour*alpha needs the second moments.
+    """
+    reasons=[];mean_alpha=None;rgb=[None]*3
+    if material['texture']['role']!='untextured_vertex_gradient':
+        reasons.append('texture colour/alpha is unresolved; vertex colour alone is not the fill')
+    else:
+        centre=material['centre_vertex_rgba'];edge=material['perimeter_vertex_rgba']
+        a0,a1=centre[3],edge[3]
+        if any(a is None or not math.isfinite(a) or not 0<=a<=1 for a in (a0,a1)):
+            reasons.append('alpha gradient is dynamic, nonfinite or outside the unclamped [0,1] domain')
+        else:
+            mean_alpha=(a0+2*a1)/3
+            for i,(c,p) in enumerate(zip(centre[:3],edge[:3])):
+                if any(v is None or not math.isfinite(v) or not 0<=v<=1 for v in (c,p)):
+                    reasons.append('RGB channel '+str(i)+' is dynamic or outside the unclamped [0,1] domain')
+                else:rgb[i]=((a0+a1)*c+(a0+3*a1)*p)/6
+    area=geometry['nominal_area_fraction_per_aspect_y']
+    if area is None:reasons.append('nominal polygon area is unresolved')
+    alpha_area=None if area is None or mean_alpha is None else area*mean_alpha
+    rgb_area=[None if area is None or v is None else area*v for v in rgb]
+    instances=geometry['configured_instances']
+    return {'policy':'source-custom-shape-fill-integrals-v1',
+        'mean_fill_alpha':mean_alpha,'mean_source_rgb_times_alpha':rgb,
+        'nominal_alpha_area_fraction_per_aspect_y':alpha_area,
+        'nominal_source_rgb_integral_per_aspect_y':rgb_area,
+        'summed_nominal_alpha_area_fraction_per_aspect_y':None if alpha_area is None else alpha_area*instances,
+        'summed_nominal_source_rgb_integral_per_aspect_y':[None if v is None else v*instances for v in rgb_area],
+        'blend_mode':material['blend_mode'],
+        'instance_aggregation':'sum of nominal per-instance integrals; overlaps counted repeatedly',
+        'border_included':False,'visible_screen_contribution':None,
+        'unknown_reasons':reasons,
+        'conditions':['Unclipped nominal filled regular polygon with linear centre/perimeter vertex RGBA interpolation',
+                      'Multiply area coefficients by the declared target aspectY; no aspect is assumed',
+                      'Source RGB times alpha is the incoming blend term, not the resulting stored/display colour',
+                      'Bounds, rasterization, overlap, destination colour, borders and later feedback/composite remain separate'],
+        'uses_rendered_images':False,'uses_equation_execution':False,'uses_shader_execution':False}

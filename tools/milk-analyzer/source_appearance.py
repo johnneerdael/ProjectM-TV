@@ -446,9 +446,10 @@ def appearance_from_analysis(analysis):
     for identity,controls in getattr(analysis,'component_controls',{}).items():
         if identity not in elements:continue #later composite disconnected this drawing
         from source_geometry import shape_geometry
-        from source_material import shape_material
+        from source_material import shape_material,shape_fill_contribution
         elements[identity]['geometry']=shape_geometry(controls,elements[identity]['parameters']['instances'])
         elements[identity]['material']=shape_material(controls,analysis.values.get('shapecode_'+identity.removeprefix('shape_')+'_image',''))
+        elements[identity]['fill_contribution']=shape_fill_contribution(elements[identity]['geometry'],elements[identity]['material'])
         elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
             application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():

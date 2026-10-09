@@ -127,6 +127,16 @@ unverified binding/hash fields and the previous-main fallback. These inputs help
 an independent approximation choose a fill/material; later shaders still determine
 the final palette. Audio routes also cover edge, border and texture controls.
 
+For known untextured fills, `fill_contribution` combines polygon area with the
+interpolated colour/opacity gradient. It reports nominal average alpha and
+source-alpha-weighted RGB, including their covariance, then supplies per-aspect
+area coefficients. A fully opaque polygon and one fading to a transparent edge
+can therefore have different predicted contributions despite the same radius.
+Copies sum with overlap counted repeatedly. Textured or unresolved values remain
+unknown, and clipping, borders, destination colour and later shaders still
+determine what appears on screen. This is a source contribution model; final
+prominence and mood eligibility remain pending.
+
 Supported warp expressions now describe how previous-image RGB is weighted or
 mixed, including spatial copies and constant colour injection. An ideal.98colour
 gain halves a floating-colour perturbation after about34.3warp evaluations;

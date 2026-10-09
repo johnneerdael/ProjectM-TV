@@ -206,6 +206,47 @@ texture zoom/rotation. Known untextured texture controls and disabled border RGB
 are not exported as live material responses. Final palette verification and visible
 colour contribution remain false/null; later shaders and opacity can hide them.
 
+### Nominal shape fill contribution
+
+Shape elements also export `fill_contribution`, policy
+`source-custom-shape-fill-integrals-v1`. For known untextured vertex RGBA in
+`[0,1]`, this integrates the incoming source-alpha blend term over the nominal
+unclipped polygon fan. It joins the existing geometry and material descriptors;
+it does not execute shaders or sample pixels.
+
+Let `C` and `P` be centre and perimeter RGB, with alpha `a0` and `a1`.
+Each fan triangle has one centre and two equal perimeter vertices. Uniform
+barycentric moments give:
+
+```text
+mean_fill_alpha = (a0 + 2*a1) / 3
+mean_source_rgb_times_alpha = ((a0+a1)*C + (a0+3*a1)*P) / 6
+```
+
+The second formula includes colour/alpha covariance. Multiplying average RGB by
+average alpha would be incorrect: a red opaque centre fading to a green
+transparent perimeter contributes nominal mean red and green of `1/6` each,
+before storage, rather than `1/9` red and `2/9` green.
+
+`nominal_alpha_area_fraction_per_aspect_y` and
+`nominal_source_rgb_integral_per_aspect_y` multiply those means by
+`geometry.nominal_area_fraction_per_aspect_y`. Multiply the coefficients by
+the declared target aspectY for a nominal viewport fraction/integral. The
+`summed_nominal_*` counterparts multiply by configured instance count, counting
+overlap repeatedly. Values can exceed a whole viewport; they are not union
+coverage or a normalized prominence score. RGB integrals are viewport fraction
+times encoded source RGB, weighted by source alpha.
+
+Dynamic radius leaves material means available while area integrals stay null.
+Dynamic colour channels abstain independently. Unknown alpha, unresolved
+texture colour/alpha, or values outside the admitted unclamped domain remain
+unknown. Native float32 modulo colours are retained, including small deviations
+from authored literals. Borders, clipping, raster coverage, destination colours,
+storage clamping and later feedback/composite are excluded;
+`visible_screen_contribution` remains null. The blend mode is carried separately:
+the incoming RGB term uses source alpha in both supported modes, while the
+destination term differs. See the [Khronos blending reference](https://wikis.khronos.org/opengl/Draw_Buffer_Blend).
+
 ## Logical composition and sampler flow
 
 `composition`, policy `source-logical-composition-v1`, explains the logical normal
