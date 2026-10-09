@@ -22,7 +22,7 @@ Eight alternating ABBA/BAAB blocks per active profile and four for the inactive 
 
 Statistics use whole ABBA/BAAB blocks rather than treating thousands of correlated frames as independent observations. Reported intervals are a fixed-seed, 100,000-resample paired-block bootstrap. They quantify this experiment’s variability, not universal hardware confidence.
 
-This establishes a lower rendering cost on the M4 Pro for this narrow gamma boundary. It is **not a claim of 20% higher app FPS, physical-TV performance, all-preset speedup or lower Android memory use**. Removing a fullscreen draw saves work when the branch is active; ordinary gamma values retain their counts.
+This establishes a lower rendering cost on the M4 Pro for this narrow gamma boundary. It is **not a claim of 20% higher app FPS, physical-TV performance, all-preset speedup or lower Android memory use**. Removing a fullscreen draw saves work when the branch is active; ordinary gamma values retain their counts. A weaker TV GPU may save more or fewer milliseconds or percentage time depending on its fill rate, bandwidth and CPU bottlenecks; hardware power alone does not determine the gain.
 
 ## Appearance and the original source
 

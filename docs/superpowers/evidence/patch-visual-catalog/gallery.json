@@ -30,7 +30,7 @@
     "case": "I31",
     "frame": 119,
     "preset": "suksma - type o negative - world coming down.milk",
-    "caption": "This whole-engine pair is a near-unchanged appearance example; the isolated historical repair changed only17 total RGB bytes at4K. A separate isolated native4K M4 Pro Standard-profile benchmark demonstrates completed-frame cost2.704\u21922.241 ms (-17.1%) and GPU2.307\u21921.847 ms (-19.9%), with matching selected RGB frames and inactivecontrol nearzero. Benefit is measured for this backend/boundary, not universal TV performance.",
+    "caption": "This full upstream-master/main pair illustrates near-unchanged appearance and includes other patches. The separate single-patch4K benchmark proves a rendering-cost benefit; it does not depend on a visible improvement in this picture.",
     "crop": null,
     "extras": []
   },
