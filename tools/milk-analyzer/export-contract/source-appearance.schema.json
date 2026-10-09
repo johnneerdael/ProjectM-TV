@@ -209,6 +209,109 @@
                     },
                     "minItems": 3,
                     "maxItems": 3
+                  },
+                  "temporal": {
+                    "type": "object",
+                    "required": [
+                      "policy",
+                      "scope",
+                      "angular_rate_rad_per_second_rgb",
+                      "cycle_frequency_hz_rgb",
+                      "period_seconds_rgb",
+                      "unmasked_component_slope_rgb_per_second",
+                      "channel_status",
+                      "shader_time_wrap_seconds",
+                      "visible_flash_frequency_hz",
+                      "conditions",
+                      "unknown_reasons_rgb"
+                    ],
+                    "properties": {
+                      "policy": {
+                        "const": "nominal-affine-shader-time-v1"
+                      },
+                      "scope": {
+                        "const": "unmasked source RGB oscillators between shader-clock wraps"
+                      },
+                      "angular_rate_rad_per_second_rgb": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "cycle_frequency_hz_rgb": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "period_seconds_rgb": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "unmasked_component_slope_rgb_per_second": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "channel_status": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "enum": [
+                            "computed",
+                            "constant",
+                            "unknown"
+                          ]
+                        }
+                      },
+                      "shader_time_wrap_seconds": {
+                        "const": 10000
+                      },
+                      "visible_flash_frequency_hz": {
+                        "type": "null"
+                      },
+                      "conditions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "unknown_reasons_rgb": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
                   }
                 }
               },

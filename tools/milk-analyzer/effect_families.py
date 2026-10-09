@@ -117,7 +117,10 @@ def _parts(value):
     cache = _CACHE.get(); key = ('parts', id(value))
     if cache is not None and key in cache and cache[key][0] is value:
         return cache[key][1]
-    result = tuple(_strip(part) for part in ShaderFields.parts(_PARTS, value))
+    # Preserve scalar numeric conversions in the sink graph. Downstream pattern
+    # helpers may ignore representation casts, but quantitative consumers must
+    # distinguish int(time) from continuous time.
+    result = tuple(ShaderFields.parts(_PARTS, value))
     if cache is not None:
         cache[key] = (value, result)
     return result

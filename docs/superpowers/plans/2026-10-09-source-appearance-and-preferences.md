@@ -43,3 +43,31 @@ expand it into a general proof framework unless a descriptor/mood need warrants
 that calculation. No full47-field replacement or new captured image is required
 to finish this source-description milestone. Coverage, preference usefulness and
 prediction accuracy are separate measurements.
+
+## Approved quantitative extension sequence
+
+The user approved all five extensions: timing/flash triggers, prominence,
+movement, feedback and colour. Implement incrementally in this same worktree.
+
+1. Add nominal RGB oscillator rates from scalar affine shader-time phases.
+   Export signed radians/second, cycles/second, periods and unmasked component
+   slope estimates. Preserve unknowns for audio/state/texture-dependent phases,
+   integer casts and nonlinear time. Source31 wraps shader time every10000seconds;
+   do not claim continuity across that reset or a measured visible flash rate.
+   Add positive/negative formula tests before implementation, document the
+   additive JSON contract and measure coverage on fixed cases.
+2. Extend to discontinuous brightness/opacity triggers, including causal audio
+   thresholds and affected channels. Trigger frequency needs declared audio
+   history; no fixed frequency or Chill eligibility follows from a threshold.
+3. Add projected primitive area, opacity and composition contribution estimates.
+   Retain clipping, instance overlap, masks and authored-canvas conditions.
+4. Add temporal/spatial derivatives for supported motion maps and named controls;
+   distinguish feedback sampling displacement from visible object motion.
+5. Add supported recurrence decay/amplification and transformed-copy analysis,
+   preserving texture-content and nonlinear-feedback uncertainty.
+6. Combine colour, area, motion and pulse facts into versioned mood/preference
+   estimates. Freeze predictions before human assessment; calibrate mood mappings
+   separately from source-math correctness. Keep unknowns in the denominator.
+
+All steps require independently known formula controls, real-preset coverage,
+contract documentation and review. The numerical47-field export stays unchanged.

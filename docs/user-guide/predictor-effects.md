@@ -82,6 +82,15 @@ feedback zoom, or one RGB component—with its source unit, available linear gai
 formula/Q bridge and branch/clipping/resource conditions. These are engine
 bands and volume inputs, not isolated instruments or vocals.
 
+Supported time-driven RGB oscillators now include nominal rates, periods and
+unmasked component-speed estimates. For example `.5+.25*cos(2*time+phase)` has a
+period of pi seconds and maximum nominal component slope of.5 per second.
+Each channel can abstain separately when its phase depends on audio, textures,
+state, integer steps or unsupported math. Estimates exclude frame sampling,
+float rounding and the engine's10000-second shader-clock reset. A colour cycle
+is not automatically a prominent brightness flash; masks, coverage and final
+composition still matter. These fields do not grant a Chill recommendation.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

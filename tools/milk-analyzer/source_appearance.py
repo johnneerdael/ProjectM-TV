@@ -71,8 +71,7 @@ def _packed_reads(field):
 
 
 def _colour_number(value,depth=0):
-    from effect_families import _number,_strip
-    value=_strip(value);number=_number(value)
+    number=_phase_literal(value)
     if number is not None:return number
     if depth>=64:return None
     if value.op in {'saturate','abs'}:
@@ -102,6 +101,14 @@ def _expression(field):
         return {'root':root,'nodes':nodes,'resources_resolved':resources,
                 'complete':resources and not any(n['op'] in {'unknown','uninitialized'} or n.get('unresolved_loop_plan') for n in nodes)}
     except (ValueError,RecursionError):return None
+
+
+def _typed_control_identity(field,*,required=False):
+    expression=_expression(field)
+    if expression is None:
+        if required:raise ValueError('source phase identity unresolved: control expression export budget exceeded')
+        return None
+    return _digest(expression)
 
 
 def _direct_audio(field):
@@ -170,73 +177,164 @@ def _routes(control,unit,value,analysis):
     return result
 
 
+def _phase_literal(value,depth=0,*,_memo=None):
+    """Fold scalar literals while retaining integer conversion semantics."""
+    from effect_families import _CACHE
+    if _memo is None:
+        cache=_CACHE.get()
+        _memo={} if cache is None else cache.setdefault('appearance_literals',{})
+    key=id(value)
+    saved=_memo.get(key)
+    if saved is not None and saved[0] is value:return saved[1]
+    if depth>64:return None
+    if len(_memo)>=65536:raise ValueError('source literal distinct-node budget exceeded')
+    result=_phase_literal_uncached(value,depth,_memo)
+    _memo[key]=(value,result)
+    return result
+
+
+def _phase_literal_uncached(value,depth,memo):
+    if value.op=='constant' and type(value.detail.get('value')) in {int,float}:
+        result=float(value.detail['value'])
+    elif value.op in {'cast','narrow','construct','unary','negate'} and len(value.args)==1:
+        result=_phase_literal(value.args[0],depth+1,_memo=memo)
+        if result is None:return None
+        if value.op=='negate' or value.op=='unary' and value.detail.get('operator')==0:result=-result
+        elif value.op=='unary' and value.detail.get('operator')!=1:return None
+    elif value.op in {'add','subtract','multiply','divide'} and len(value.args)==2:
+        a=_phase_literal(value.args[0],depth+1,_memo=memo);b=_phase_literal(value.args[1],depth+1,_memo=memo)
+        if a is None or b is None or value.op=='divide' and b==0:return None
+        result={'add':lambda:a+b,'subtract':lambda:a-b,'multiply':lambda:a*b,'divide':lambda:a/b}[value.op]()
+    else:return None
+    if not math.isfinite(result):return None
+    if value.dtype=='int':
+        if not -(2**31)<=result<2**31:return None
+        result=float(math.trunc(result))
+    elif value.dtype!='float':return None
+    return result
+
+
+def _colour_product(value,depth=0):
+    """Retain numeric casts when collecting a common colour multiplier."""
+    if depth>64:raise ValueError('source colour product depth exceeded')
+    number=_phase_literal(value)
+    if number is not None:return number,[]
+    if value.op=='multiply' and value.dtype=='float':
+        a,af=_colour_product(value.args[0],depth+1);b,bf=_colour_product(value.args[1],depth+1)
+        if len(af)+len(bf)>256 or not math.isfinite(a*b):raise ValueError('source colour product budget/nonfinite coefficient')
+        return a*b,af+bf
+    return 1.,[value]
+
+
+def _phase_terms(value,scale=1.,depth=0):
+    """Split floating affine syntax without erasing quantizing conversions."""
+    if depth>64:raise ValueError('source phase normalization depth exceeded')
+    terms=None
+    if value.dtype=='float':
+        if value.op=='negate' or value.op=='unary' and value.detail.get('operator')==0:
+            terms=_phase_terms(value.args[0],-scale,depth+1)
+        elif value.op in {'add','subtract'}:
+            terms=_phase_terms(value.args[0],scale,depth+1)+_phase_terms(value.args[1],
+                scale*(-1 if value.op=='subtract' else 1),depth+1)
+        elif value.op=='multiply':
+            for index in (0,1):
+                number=_phase_literal(value.args[index])
+                if number is not None:
+                    terms=_phase_terms(value.args[1-index],scale*number,depth+1);break
+        elif value.op=='divide':
+            number=_phase_literal(value.args[1])
+            if number not in {None,0}:terms=_phase_terms(value.args[0],scale/number,depth+1)
+    if terms is None:terms=[(scale,value)]
+    if len(terms)>256 or any(not math.isfinite(c) for c,t in terms):
+        raise ValueError('source phase normalization budget/nonfinite coefficient')
+    return terms
+
+
 def _oscillator(value):
-    from effect_families import _terms,_number,_strip,_deps,_key
+    from effect_families import _deps
     bias=0.;osc=None;amplitude=0.
-    for coefficient,term in _terms(value):
-        number=_number(term)
+    for coefficient,term in _phase_terms(value):
+        number=_phase_literal(term)
         if number is not None:bias+=coefficient*number;continue
-        term=_strip(term)
         if term.op not in {'sin','cos'} or osc is not None:return None
         osc=term;amplitude=coefficient
     if osc is None or amplitude==0:return None
     # Fully clipped oscillators cannot generate colour diversity at the sink.
     if bias-abs(amplitude)>=1 or bias+abs(amplitude)<=0:return None
     from shader_fields import Field
-    offset=-math.pi/2 if osc.op=='sin' else 0.;terms=[];variable_terms=[]
-    for coefficient,term in _terms(osc.args[0]):
-        number=_number(term)
+    offset=-math.pi/2 if osc.op=='sin' else 0.;merged={}
+    for coefficient,term in _phase_terms(osc.args[0]):
+        number=_phase_literal(term)
         if number is not None:offset+=coefficient*number
         else:
-            terms.append((coefficient,_key(term)))
-            variable_terms.append(term if coefficient==1 else Field('multiply',(Field('constant',detail={'value':coefficient}),term)))
-    if not terms:return None
+            key=_typed_control_identity(term,required=True);old=merged.get(key,(0.,term))[0]
+            merged[key]=(old+coefficient,term)
+    merged={key:pair for key,pair in merged.items() if pair[0]!=0}
+    if not merged:return None
+    if not math.isfinite(offset) or any(not math.isfinite(c) for c,t in merged.values()):
+        raise ValueError('source phase normalization nonfinite result')
+    # cos(-phase) == cos(phase). Canonicalize orientation after converting
+    # sin(phase) to cos(phase-pi/2), retaining its distinct offset.
+    orientation=-1 if merged[sorted(merged)[0]][0]<0 else 1
+    offset*=orientation;terms=[];variable_terms=[]
+    for key,(coefficient,term) in sorted(merged.items()):
+        coefficient*=orientation;terms.append((coefficient,key))
+        variable_terms.append(term if coefficient==1 else Field('multiply',(Field('constant',detail={'value':coefficient}),term)))
+    source_amplitude=amplitude
+    if amplitude<0:
+        amplitude=-amplitude;offset+=math.pi
     variable=variable_terms[0]
     for term in variable_terms[1:]:variable=Field('add',(variable,term))
-    return {'bias':bias,'amplitude':amplitude,'offset':offset,'phase_key':tuple(sorted(terms)),
+    return {'bias':bias,'amplitude':amplitude,'source_amplitude':source_amplitude,
+            'offset':offset,'phase_key':tuple(sorted(terms)),
             'variable_phase_expression':variable,'oscillator_function_code':2 if osc.op=='sin' else 1,
             'phase_expression':osc.args[0],
             'phase_dependencies':_deps(osc.args[0])}
 
 
 def _colour(field,*,allow_shared_multiplier=True):
-    from effect_families import _parts,_same,_number,_walk,_terms,_key,_product
+    from effect_families import _parts,_walk
     from shader_fields import Field
     from shader_fields import uses_input_components
+    from source_temporal import oscillator_timing
     field=_data_return(field)
     parts=[_canonical_lane(part) for part in _parts(field)[:3]]
     result={'mode_code':None,'bias_rgb':None,'amplitude_rgb':None,'phase_offsets_rad':None,
         'distinct_channel_phases':None,'constant_rgb':None,'depends_on_time':None,
         'palette_diversity':None,'guaranteed_visible':False,
         'conditions':['selected RGB path, source input domains and later masks/storage retain the colour contribution']}
-    values=[_number(p) for p in parts]
+    values=[_phase_literal(p) for p in parts]
     if len(parts)==3 and all(v is not None for v in values):
         result.update(mode_code=0,constant_rgb=[min(1.,max(0.,v)) for v in values]);return result
-    if len(parts)==3 and all(_same(parts[0],p) for p in parts[1:]):
+    identities=[_typed_control_identity(p) for p in parts]
+    if len(parts)==3 and None not in identities and len(set(identities))==1:
         result.update(mode_code=1);return result
     signals=[];gains=[]
     for part in parts:
-        terms=[(coefficient,term) for coefficient,term in _terms(part) if _number(term)!=0]
-        if len(terms)!=1 or _number(terms[0][1]) is not None:break
+        terms=[(coefficient,term) for coefficient,term in _phase_terms(part) if _phase_literal(term)!=0]
+        if len(terms)!=1 or _phase_literal(terms[0][1]) is not None:break
         gain,signal=terms[0]
         if gain<=0:break
-        gains.append(gain);signals.append(_key(signal))
+        identity=_typed_control_identity(signal)
+        if identity is None:break
+        gains.append(gain);signals.append(identity)
     if len(signals)==3 and len(set(signals))==1:
         result.update(mode_code=2,tint_rgb=gains)
         result['conditions'].append('fixed chromaticity requires a nonsaturating nonnegative signal domain')
         return result
     if allow_shared_multiplier and len(parts)==3:
-        products=[_product(part) for part in parts]
-        common=set(_key(factor) for factor in products[0][1])
-        for coefficient,factors in products[1:]:common&={_key(factor) for factor in factors}
+        products=[_colour_product(part) for part in parts]
+        common=set(_typed_control_identity(factor) for factor in products[0][1])
+        for coefficient,factors in products[1:]:common&={_typed_control_identity(factor) for factor in factors}
+        common.discard(None)
         if common:
-            if any(_key(factor) in common and _colour_number(factor)==0 for factor in products[0][1]):
+            if any(_typed_control_identity(factor) in common and _colour_number(factor)==0 for factor in products[0][1]):
                 result.update(mode_code=0,constant_rgb=[0.,0.,0.]);return result
             reduced=[];multipliers=[]
             for index,(coefficient,factors) in enumerate(products):
                 remaining=[]
                 for factor in factors:
-                    if _key(factor) in common:
+                    if _typed_control_identity(factor) in common:
                         if index==0:multipliers.append(factor)
                     else:remaining.append(factor)
                 lane=Field('constant',detail={'value':coefficient})
@@ -247,7 +345,10 @@ def _colour(field,*,allow_shared_multiplier=True):
                 inner['shared_multiplier_expressions']=[_expression(factor) for factor in multipliers]
                 inner['conditions'].append('shared spatial/feedback multiplier keeps the generated palette visible')
                 return inner
-    oscillators=[_oscillator(p) for p in parts]
+    try:oscillators=[_oscillator(p) for p in parts]
+    except ValueError as error:
+        result['unknown_reasons']=[str(error)]
+        oscillators=[]
     if len(oscillators)==3 and all(o is not None for o in oscillators) and len({o['phase_key'] for o in oscillators})==1:
         offsets=[o['offset'] for o in oscillators]
         distinct=[]
@@ -258,15 +359,17 @@ def _colour(field,*,allow_shared_multiplier=True):
                 amplitude_rgb=[o['amplitude'] for o in oscillators],phase_offsets_rad=offsets,
                 distinct_channel_phases=len(distinct),
                 common_phase_expression=_expression(oscillators[0]['variable_phase_expression']),
+                temporal=oscillator_timing(oscillators),
                 depends_on_time=int(any(uses_input_components(o['phase_expression'],'_c2',{0}) or
                                        'time' in o['phase_dependencies'] for o in oscillators)))
             result['conditions'].append('the common phase varies sufficiently; coefficients/phases are source forms, not a measured hue histogram')
             return result
     if len(oscillators)==3 and all(o is not None for o in oscillators) and len({o['phase_key'] for o in oscillators})>1:
         result.update(mode_code=5,bias_rgb=[o['bias'] for o in oscillators],
-            amplitude_rgb=[o['amplitude'] for o in oscillators],phase_offsets_rad=[o['offset'] for o in oscillators],
+            amplitude_rgb=[o['source_amplitude'] for o in oscillators],phase_offsets_rad=[o['offset'] for o in oscillators],
             channel_phase_expressions=[_expression(o['phase_expression']) for o in oscillators],
             oscillator_function_codes=[o['oscillator_function_code'] for o in oscillators],
+            temporal=oscillator_timing(oscillators),
             depends_on_time=int(any(uses_input_components(o['phase_expression'],'_c2',{0}) or
                                    'time' in o['phase_dependencies'] for o in oscillators)))
         result['conditions'].append('independent channel phases vary; no common cycle period or measured colour diversity established')

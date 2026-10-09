@@ -105,6 +105,10 @@ Preserve numeric category IDs, units, nulls, causal live RGB/control slices,
 complete32slot main/shape Q reload semantics, resource identities and explicit
 unresolved context. Source control gains are not screen response strengths;
 colourful/fractal candidates do not grant flash permission or calibrated confidence.
+`source_temporal.py` supplies nominal affine shader-time RGB oscillator timing
+without execution. Keep scalar casts in sink/phase graphs, per-channel unknowns,
+the source31 shader clock's10000-second wrap, and masks/storage/frame-sampling
+qualifications. These are not measured visible flash or screen-speed values.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

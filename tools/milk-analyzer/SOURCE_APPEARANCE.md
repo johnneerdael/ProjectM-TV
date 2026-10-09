@@ -92,6 +92,47 @@ on that argument. Its `phase_offsets_rad` are descriptive normalized offsets,
 already represented by those programs/functions; do not add them again. There
 is no implied shared period or hue count.
 
+Mode3 normalizes cosine's even symmetry and a negative amplitude into a positive
+amplitude plus a pi phase shift. It merges identical typed phase terms without
+discarding integer conversions. Mode5 keeps original signed amplitudes with the
+original function/program; descriptive offsets must never be applied again.
+An oversized phase export cannot establish shared phase identity. The colour
+record retains `unknown_reasons` for that gap; other understood elements and
+inherited texture-colour evidence remain available. Literal folding memoizes
+shared nodes and has a65536-distinct-node and64-depth limit.
+
+### Nominal oscillator timing
+
+Recognized modes3/5 additionally export `colour.temporal`, policy
+`nominal-affine-shader-time-v1`. Each RGB-ordered entry can be null independently.
+The producer derives the scalar phase slope for supported `a*time+b` formulas
+with finite constant coefficients; it never samples time or executes a shader.
+
+| Field | Unit / interpretation |
+|---|---|
+| `angular_rate_rad_per_second_rgb` | Signed nominal slope `a` of each original source oscillator argument, rad/s |
+| `cycle_frequency_hz_rgb` | `abs(a)/(2*pi)`, cycles/s |
+| `period_seconds_rgb` | `2*pi/abs(a)`, seconds; null for zero/unknown rates |
+| `unmasked_component_slope_rgb_per_second` | `abs(amplitude*a)`, nominal maximum absolute oscillator-component slope before masks/storage |
+| `channel_status` | `computed`, `constant` (zero phase slope), or `unknown` |
+| `shader_time_wrap_seconds` |10000 for the qualified source31 shader clock |
+| `visible_flash_frequency_hz` | Null; colour-cycle rate alone is not a visible flash measurement |
+| `unknown_reasons_rgb` | Per-channel abstention reason |
+
+These are continuous authored-formula estimates between clock wraps, not strict
+float32 derivatives or presented-frame measurements. `_c2.x` supplies shader
+time in seconds; `_c2.y` is FPS and does not qualify as time. The published
+source31 clock resets every10000seconds; reset discontinuities and frame aliasing
+are excluded. Integer casts, nonlinear time, audio/state/texture-dependent phases
+remain unknown in this first timing extractor. A shared mask can still vary or
+hide the oscillation. No Chill eligibility or flash contrast follows from rates.
+Scalar conversions remain in exported phase programs: `int(time)` must not
+silently become continuous time.
+Mode3's common phase can reverse orientation through cosine-even normalization;
+its signed derivative need not equal every original channel's signed rate.
+Use the common program/offsets to reconstruct mode3, and full original
+programs/functions to reconstruct mode5. Timing arrays are descriptive estimates.
+
 `distinct_channel_phases` is a source-form count, not rendered hue entropy.
 `depends_on_time` is1/0 when identified, not a measured rate; FPS/frame input is
 not automatically time. `palette_diversity` remains null. Generated colour plus

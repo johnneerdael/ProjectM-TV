@@ -1,5 +1,6 @@
 """Machine-readable mental-map traits from source, never rendered images."""
 import json
+import math
 import pytest
 from test_effect_families import shader,read,analyze
 
@@ -203,6 +204,153 @@ def test_independent_rgb_phase_rates_export_each_control_program():
     assert len(colour['channel_phase_expressions'])==3
     assert colour['oscillator_function_codes']==[2,2,2]
     assert colour['depends_on_time']==1
+
+
+def test_affine_time_palette_exports_period_and_unmasked_component_speed():
+    result=appearance(shader('shader_body {ret=.5+.25*cos(2*time+float3(0,2,4));}'))
+    temporal=result['elements'][0]['colour']['temporal']
+    assert temporal['angular_rate_rad_per_second_rgb']==pytest.approx([2]*3)
+    assert temporal['cycle_frequency_hz_rgb']==pytest.approx([1/math.pi]*3)
+    assert temporal['period_seconds_rgb']==pytest.approx([math.pi]*3)
+    assert temporal['unmasked_component_slope_rgb_per_second']==pytest.approx([.5]*3)
+    assert temporal['visible_flash_frequency_hz'] is None
+    assert temporal['shader_time_wrap_seconds']==10000
+    assert result['mood_matches']['chill']['eligible'] is None
+
+
+def test_independent_time_rates_keep_signed_direction_and_partial_unknowns():
+    result=appearance(shader('shader_body {ret=.5+.5*sin(float3(-2*time,3*time,time*bass));}'))
+    temporal=result['elements'][0]['colour']['temporal']
+    assert temporal['angular_rate_rad_per_second_rgb']==[-2,3,None]
+    assert temporal['cycle_frequency_hz_rgb'][:2]==pytest.approx([1/math.pi,3/math.tau])
+    assert temporal['cycle_frequency_hz_rgb'][2] is None
+    assert temporal['channel_status']==['computed','computed','unknown']
+
+
+@pytest.mark.parametrize('phase',['time*time','sin(time)','fps','int(time)','time+GetPixel(uv).r','time+bass'])
+def test_nonaffine_or_undeclared_inputs_do_not_claim_fixed_palette_frequency(phase):
+    result=appearance(shader('shader_body {ret=.5+.5*cos(('+phase+')+float3(0,2,4));}'))
+    temporal=next(e for e in result['elements'] if e['id']=='shader_composite')['colour']['temporal']
+    assert temporal['angular_rate_rad_per_second_rgb']==[None]*3
+    assert temporal['period_seconds_rgb']==[None]*3
+    assert temporal['channel_status']==['unknown']*3
+
+
+def test_masked_time_palette_rate_does_not_claim_final_brightness_speed():
+    result=appearance(shader('shader_body {ret=(.5+.5*cos(2*time+float3(0,2,4)))*GetPixel(uv).r;}'))
+    colour=next(e for e in result['elements'] if e['id']=='shader_composite')['colour']
+    assert colour['temporal']['angular_rate_rad_per_second_rgb']==[2]*3
+    assert colour['temporal']['scope']=='unmasked source RGB oscillators between shader-clock wraps'
+    assert colour['shared_multiplier_expressions']
+    assert colour['temporal']['visible_flash_frequency_hz'] is None
+
+
+def test_quantized_phase_keeps_integer_conversion_in_exported_common_program():
+    result=appearance(shader('shader_body {ret=.5+.5*cos(int(time)+float3(0,2,4));}'))
+    colour=result['elements'][0]['colour']
+    assert any(n['dtype']=='int' and n['op'] in {'cast','construct'}
+               for n in colour['common_phase_expression']['nodes'])
+
+
+def test_quantized_and_continuous_channel_phases_are_distinct():
+    result=appearance(shader('shader_body {ret=.5+.5*cos(float3(time,int(time)+2,time+4));}'))
+    colour=result['elements'][0]['colour']
+    assert colour['mode_code']==5
+    assert colour['temporal']['angular_rate_rad_per_second_rgb']==[1,None,1]
+
+
+@pytest.mark.parametrize('phases',['time,2*time-time,time','time,-time,time'])
+def test_equivalent_cosine_channels_do_not_invent_varied_palette(phases):
+    source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
+        'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'
+        'z=float2(z.x*z.x-z.y*z.y,2*z.x*z.y)+float2(.1,.2);}ret=GetPixel(z);}\n'
+        'comp_1=`shader_body {ret=(.5+.5*cos(float3('+phases+')))*GetPixel(uv).r;}\n')
+    result=appearance(source)
+    assert result['mood_matches']['psychedelic']['candidate'] is None
+    colour=next(e for e in result['elements'] if e['id']=='shader_composite')['colour']
+    assert colour['mode_code'] not in {3,5}
+
+
+def test_cosine_even_normalization_preserves_distinct_phase_offsets():
+    result=appearance(shader('shader_body {ret=.5+.5*cos(float3(-2*time,2*time+2,-2*time-4));}'))
+    colour=result['elements'][0]['colour']
+    assert colour['mode_code']==3
+    assert colour['phase_offsets_rad']==[0,2,4]
+    assert colour['temporal']['angular_rate_rad_per_second_rgb']==[-2,2,-2]
+
+
+def test_sine_opposite_time_direction_is_not_cosine_even():
+    result=appearance(shader('shader_body {ret=.5+.5*sin(float3(time,-time,time));}'))
+    colour=result['elements'][0]['colour']
+    assert colour['mode_code']==3
+    assert colour['distinct_channel_phases']==2
+
+
+def test_phase_identity_budget_failure_cannot_merge_unrelated_programs():
+    code='shader_body {float a=time,b=time,c=time;'+('a=sin(a);b=cos(b);c=abs(c);'*260)+\
+         'ret=.5+.5*cos(float3(a,b+2,c+4));}'
+    result=appearance(shader(code))
+    assert result['status']=='conditional source description'
+    colour=result['elements'][0]['colour']
+    assert colour['mode_code'] is None
+    assert any('phase identity unresolved' in r for r in colour['unknown_reasons'])
+
+
+def test_constant_colour_respects_integer_constructor_truncation():
+    result=appearance(shader('shader_body {ret=float3(int(.8),int(1.8),int(-.8));}'))
+    assert result['elements'][0]['colour']['constant_rgb']==[0,1,0]
+
+
+def test_integer_zero_multiplier_cannot_establish_palette_or_timing():
+    result=appearance(shader('shader_body {ret=(.5+.5*cos(time+float3(0,2,4)))*int(.8)*GetPixel(uv).r;}'))
+    colour=next(e for e in result['elements'] if e['id']=='shader_composite')['colour']
+    assert colour['mode_code'] not in {3,5}
+    assert 'temporal' not in colour
+
+
+def test_integer_channel_quantization_is_not_a_shared_monochrome_signal():
+    result=appearance(shader('shader_body {ret=float3(time,int(time),time);}'))
+    assert result['elements'][0]['colour']['mode_code'] is None
+
+
+def test_large_sample_colour_graph_retains_inherited_description_without_false_identity():
+    code='shader_body {float a=GetPixel(uv).r;'+('a=sin(a)+.1;'*150)+'ret=float3(a,a*.3,a*.5);}'
+    result=appearance(shader(code))
+    assert result['status']=='conditional source description'
+    colour=next(e for e in result['elements'] if e['id']=='shader_composite')['colour']
+    assert colour['mode_code']==4
+
+
+def test_constant_literal_shared_dag_is_folded_once_per_distinct_node(monkeypatch):
+    import source_appearance as module
+    from shader_fields import Field
+    value=Field('constant',detail={'value':1.})
+    for _ in range(18):value=Field('add',(value,value))
+    calls=0;original=module._phase_literal
+    def counted(*args,**kwargs):
+        nonlocal calls
+        calls+=1
+        return original(*args,**kwargs)
+    monkeypatch.setattr(module,'_phase_literal',counted)
+    assert module._phase_literal(value)==2**18
+    assert calls<100
+
+
+def test_sine_oddness_and_amplitude_sign_cannot_invent_varied_palette():
+    source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
+        'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'
+        'z=float2(z.x*z.x-z.y*z.y,2*z.x*z.y)+float2(.1,.2);}ret=GetPixel(z);}\n'
+        'comp_1=`shader_body {ret=(.5+float3(.5*sin(time),-.5*sin(-time),.5*sin(time)))*GetPixel(uv).r;}\n')
+    result=appearance(source)
+    assert result['mood_matches']['psychedelic']['candidate'] is None
+
+
+def test_independent_phase_programs_retain_original_negative_amplitudes():
+    result=appearance(shader('shader_body {ret=.5+float3(-.5*sin(time),.5*sin(2*time),.5*sin(3*time));}'))
+    colour=result['elements'][0]['colour']
+    assert colour['mode_code']==5
+    assert colour['amplitude_rgb']==[-.5,.5,.5]
+    assert colour['oscillator_function_codes']==[2,2,2]
 
 
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
