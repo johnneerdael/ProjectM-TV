@@ -91,7 +91,11 @@ contract documentation and review. The numerical47-field export stays unchanged.
 - Shape material records are implemented;35/100presets have known centre/edgeRGB
   across64shapes. Vertex/material colours remain separate from the finalpalette;
   source texture requests are not observed bindings.
-- Spatial/image motion, feedback recurrence and calibrated mood/preference
+- Nominal warp-colour transfer is implemented;22/100sample presets have known
+  fixed/custom source coefficients,10have idealfloating-perturbation half-lives.
+  Stored/closed-loop persistence remains unresolved; coordinates/injection/detail
+  and finalpalette interactions are not reduced to a wholeeffect certificate.
+- Spatial/image motion, full feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 
 See source-temporal, source-switch-sites and source-geometry evidence folders;

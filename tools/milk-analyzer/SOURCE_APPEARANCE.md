@@ -220,6 +220,40 @@ composite/feedback separation. Sampling policies are source interpretations,
 not certified runtime units/assets. No complete blend/material graph, recurrence
 solution, screen coverage or reconstruction readiness follows from these edges.
 
+## Nominal warp colour transfer
+
+`feedback_transfer`, policy `source-warp-colour-transfer-v1`, describes supported
+warp RGB expressions before storage/drawing/detail, holding sampling coordinates
+fixed. It is not the complete recurrence or measured trail lifetime.
+
+Native fixed warp uses `min(float32(decay),1)` as a diagonal main-colour gain.
+Custom warp receives its authored returned RGB; configured decay is not silently
+multiplied unless the program uses the supplied colour factor. Supported custom
+expressions are constant-affine combinations of previous-main RGB samples.
+`matrix_rgb` sums channel-mixing coefficients across sample sites and
+`constant_offset_rgb` records a source injection. `sample_contributions` keeps
+each site's matrix, coordinate program and sampling policy, so different spatial
+copies are not treated as one uniform transformation.
+
+`direct_colour_gain_norm` is the maximum RGB row sum of absolute per-site/channel
+coefficients. It bounds direct colour sensitivity with coordinates held fixed,
+treating distinct sampled values independently; sample overlap/cancellation can
+make actual sensitivity smaller. It does not measure on-screen reactivity.
+`uniform_diagonal_gain` is available only for an equal diagonal single-sample
+transfer (or zero samples). Image/blur-dependent coordinates mark nonlinear
+feedback; unknown coordinate effects retain unknown dependency.
+
+For a supported positive uniform gain `0<g<1` and coordinates independent of
+feedback, `nominal_half_life_warp_evaluations=log(.5)/log(g)` describes an ideal
+floating-colour perturbation. It does not say when an actual image disappears.
+UNORM rounding can preserve dim pixels; constant/drawing injection, clipping,
+blur, motion vectors and authored/native detail alter evolution. Negative gain,
+nonlinear/pulse gains, blur-colour mixing and unsupported operations abstain
+instead of granting a persistence/mood claim. `actual_feedback_persistence` is
+always null. Conditions still require valid sampler/input domains, target-stage
+selection, complete writes and source termination; discard/stale pixels remain
+an unresolved separate feedback route. Composite/display gain is excluded.
+
 ## Colour modes
 
 | `colour.mode_code` | Interpretation |

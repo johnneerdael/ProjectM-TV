@@ -1097,6 +1097,118 @@
               }
             }
           }
+        },
+        "feedback_transfer": {
+          "type": "object",
+          "required": [
+            "policy",
+            "scope",
+            "source_model",
+            "matrix_rgb",
+            "constant_offset_rgb",
+            "direct_colour_gain_norm",
+            "uniform_diagonal_gain",
+            "nominal_half_life_warp_evaluations",
+            "source_sample_sites",
+            "coordinate_feedback_dependency",
+            "sample_contributions",
+            "actual_feedback_persistence",
+            "unknown_reasons",
+            "conditions"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-warp-colour-transfer-v1"
+            },
+            "scope": {
+              "const": "selected warp RGB before storage/drawing/detail, holding sample coordinates fixed"
+            },
+            "source_model": {
+              "enum": [
+                "unknown",
+                "fixed_main_decay",
+                "affine_previous_main_samples"
+              ]
+            },
+            "matrix_rgb": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "constant_offset_rgb": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number"
+              }
+            },
+            "direct_colour_gain_norm": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "uniform_diagonal_gain": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "nominal_half_life_warp_evaluations": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "source_sample_sites": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "coordinate_feedback_dependency": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "sample_contributions": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "actual_feedback_persistence": {
+              "type": "null"
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },

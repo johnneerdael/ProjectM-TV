@@ -805,6 +805,63 @@ def test_configured_border_threshold_is_float32_equal_and_disabled():
     assert material['border_draw_enabled'] is False
 
 
+def test_fixed_warp_decay_has_nominal_gain_not_display_composite_gain():
+    source=read('fWaveAlpha=0\nfDecay=.98\nPSVERSION_COMP=2\n'
+        'comp_1=`shader_body {ret=GetPixel(uv)*2;}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==pytest.approx(.98)
+    assert feedback['nominal_half_life_warp_evaluations']==pytest.approx(math.log(.5)/math.log(.98),rel=2e-6)
+    assert feedback['actual_feedback_persistence'] is None
+
+
+def test_custom_warp_ret_does_not_implicitly_apply_configured_decay():
+    source=read('fWaveAlpha=0\nfDecay=.5\nPSVERSION_WARP=2\n'
+        'warp_1=`shader_body {ret=GetPixel(uv);}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==1
+    assert feedback['nominal_half_life_warp_evaluations'] is None
+
+
+def test_warp_colour_transfer_tracks_channel_mixing_and_bias():
+    feedback=appearance(shader('shader_body {ret=GetPixel(uv).bgr*float3(.8,.9,1.1)+float3(.1,0,0);}',stage='warp'))['feedback_transfer']
+    for actual,expected in zip(feedback['matrix_rgb'],[[0,0,.8],[0,.9,0],[1.1,0,0]]):
+        assert actual==pytest.approx(expected,abs=2e-7)
+    assert feedback['constant_offset_rgb']==pytest.approx([.1,0,0],abs=2e-7)
+    assert feedback['coordinate_feedback_dependency'] is False
+
+
+def test_multicopy_feedback_weight_counts_samples_at_different_positions():
+    feedback=appearance(shader('shader_body {ret=GetPixel(uv)*.6+GetPixel(uv*.5)*.6;}',stage='warp'))['feedback_transfer']
+    assert feedback['direct_colour_gain_norm']==pytest.approx(1.2,abs=2e-7)
+    assert feedback['source_sample_sites']==2
+
+
+def test_image_driven_coordinates_cannot_certify_feedback_attenuation():
+    feedback=appearance(shader('shader_body {ret=GetPixel(uv+.1*GetPixel(uv).rg)*.8;}',stage='warp'))['feedback_transfer']
+    assert feedback['coordinate_feedback_dependency'] is True
+    assert feedback['nominal_half_life_warp_evaluations'] is None
+
+
+@pytest.mark.parametrize('body',['ret=GetPixel(uv)*bass;','ret=pow(GetPixel(uv),2);','ret=GetBlur1(uv);'])
+def test_unsupported_feedback_colour_transfer_retains_unknown_model(body):
+    feedback=appearance(shader('shader_body {'+body+'}',stage='warp'))['feedback_transfer']
+    assert feedback['matrix_rgb'] is None
+    assert feedback['unknown_reasons']
+
+
+def test_negative_feedback_gain_is_not_slow_positive_trail_claim():
+    feedback=appearance(shader('shader_body {ret=GetPixel(uv)*-.9;}',stage='warp'))['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==pytest.approx(-.9,abs=2e-7)
+    assert feedback['nominal_half_life_warp_evaluations'] is None
+
+
+def test_known_coordinate_feedback_dependency_survives_another_unknown_coordinate_path():
+    body='shader_body {float2 q=uv;for(int n=0;n<2;n++){q+=.01;}'\
+         'ret=GetPixel(uv+.1*GetPixel(uv).rg)*.4+GetPixel(q)*.4;}'
+    feedback=appearance(shader(body,stage='warp'))['feedback_transfer']
+    assert feedback['coordinate_feedback_dependency'] is True
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

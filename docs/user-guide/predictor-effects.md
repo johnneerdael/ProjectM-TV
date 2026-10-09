@@ -127,6 +127,14 @@ unverified binding/hash fields and the previous-main fallback. These inputs help
 an independent approximation choose a fill/material; later shaders still determine
 the final palette. Audio routes also cover edge, border and texture controls.
 
+Supported warp expressions now describe how previous-image RGB is weighted or
+mixed, including spatial copies and constant colour injection. An ideal.98colour
+gain halves a floating-colour perturbation after about34.3warp evaluations;
+stored pixels need not follow that decay because rounding and new drawings matter.
+Image-driven coordinate maps can add nonlinear feedback response and remain
+outside that persistence estimate. These source coefficients help describe
+feedback character, while actual trail lifetime and mood confidence remain unknown.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

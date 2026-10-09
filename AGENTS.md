@@ -134,6 +134,11 @@ vertex RGBA, gradient/border and int-style blending/texture flags. Keep raw valu
 per-channel unknowns, raw border-alpha enable gating, source texture requests and
 unverified fallback/binding status. Perimeter/border/texture audio routes must not
 invent visibility or final palette verification; prune known unused style controls.
+`source_feedback.py` exports nominal warp RGB transfer matrices/bias and per-site
+absolute coefficient norms with coordinates fixed. Fixed decay and custom returned
+RGB stay distinct. Ideal positive scalar half-life is not actual trail persistence;
+retain coordinate-feedback, storage/drawing/detail/discard and domain conditions.
+Unknown/nonlinear/blur transfers cannot become low-reactivity or Chill evidence.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;
