@@ -123,6 +123,19 @@ def _parts(value):
     return result
 
 
+def _rgb_output(value):
+    """Follow the native ret.xyz sink, retaining execution-effect wrappers."""
+    if value.op == 'sequence':
+        return Field('sequence', value.args[:-1]+(_rgb_output(value.args[-1]),), 'float3')
+    # Preserve casts until parts applies scalar broadcast/vector truncation.
+    # Stripping a float3 cast first would invent lanes for scalar returns and
+    # follow discarded float4 values instead of the native RGB assignment.
+    parts = _parts(value)
+    if len(parts) < 3:
+        return Field('unknown', dtype='float3', detail={'reason': 'native RGB output type unresolved'})
+    return Field('components', parts[:3], 'float3')
+
+
 class _StaticParts(ShaderFields):
     def parts(self, value):
         return _parts(value)
@@ -183,7 +196,12 @@ def _children_uncached(value, *, plans=True):
                               {'field': ''.join(inner[i] for i in indices), 'swizzle': True}),)
         if source.op not in {'input', 'sample', 'uninitialized', 'unknown'}:
             indices = tuple('xyzw'.index(c) if c in 'xyzw' else 'rgba'.index(c) for c in fields)
-            return (_project(source, indices),)
+            projected = _project(source, indices)
+            if projected.op == 'member' and len(projected.args) == 1 and projected.args[0] is source:
+                # Cross-lane operations such as normalize depend on the whole
+                # vector. A generic member of itself cannot slice those reads.
+                return (source,)
+            return (projected,)
     if value.op == 'sequence':
         return value.args[-1:]
     if value.op == 'select':
@@ -831,6 +849,7 @@ class _Analysis:
         # An unknown wrapper is not a proof that its apparent child is live.
         if output.op == 'unknown':
             return
+        output = _rgb_output(output)
         self.outputs[stage] = output
         nodes = list(_walk(output))
         self.unknowns.extend({'section': prefix, 'reason': n.detail.get('reason', 'unresolved live typed field')}

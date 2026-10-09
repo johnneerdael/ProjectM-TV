@@ -41,7 +41,52 @@ def test_controller_freezes_full_publication_separately_from_source_archive():
     assert target['published_aar_sha256'] == '13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377'
     assert target['engine_profile_sha256'] == file_hash(args.engine_profile)
     assert target['source_engine_archive_sha256'] == '997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8'
+    migration = json.loads((ROOT / 'tools/milk-analyzer/fixtures/core2331-source-migration-2026-10-09.json').read_text())
+    assert preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256 == migration['source_adapter_archive_sha256']
     assert target['source_engine_archive_sha256'] != target['published_aar_sha256']
+    assert target['source_engine_archive_sha256'] not in migration['published']['native_libraries'].values()
+
+
+def test_controller_rejects_wellformed_unqualified_source_archive():
+    args = preset_corpus.parse_args([])
+    target = preset_corpus.target_identity(args, args.binaries)
+    target['source_engine_archive_sha256'] = '0' * 64
+    with pytest.raises(ValueError, match='source.*archive'):
+        preset_corpus.verify_target(target)
+
+
+def test_target_probe_cannot_admit_self_reported_unqualified_archive(monkeypatch):
+    import forecast
+    monkeypatch.setattr(forecast, 'read_source', lambda *args, **kwargs:
+        {'parser_inputs': {'engine': CORE_2331_ENGINE, 'engine_archive_sha256': '0' * 64}})
+    args = preset_corpus.parse_args([])
+    with pytest.raises(ValueError, match='source.*archive'):
+        preset_corpus.target_identity(args, args.binaries)
+
+
+def test_frozen_and_worker_admission_reject_unqualified_archive_before_parse(tmp_path, monkeypatch):
+    args = preset_corpus.parse_args([])
+    target = preset_corpus.target_identity(args, args.binaries)
+    inputs = tmp_path / 'inputs'
+    atomic_json(inputs / 'manifest.json', {'files': {}, 'textures': {}})
+    preset = tmp_path / 'one.milk'; preset.write_text('[preset00]\n')
+    config = {**target, 'source_engine_archive_sha256': '0' * 64,
+        'model_modules': model_file_hashes(), 'binaries': str(args.binaries), 'binary_sha256': {},
+        'validator': str(args.engine_profile), 'validator_sha256': file_hash(args.engine_profile),
+        'inputs': str(inputs), 'prepared_inputs_sha256': file_hash(inputs / 'manifest.json'),
+        'simulation': {'frames': 1, 'fps': 15, 'width': 32, 'height': 18}}
+    with pytest.raises(ValueError, match='source.*archive'):
+        preset_corpus.verify_frozen(config)
+    parsed = []
+    def unexpected_parse(*args, **kwargs):
+        parsed.append(True)
+        raise AssertionError('unqualified archive reached source parsing')
+    monkeypatch.setattr(corpus_worker, 'read_source', unexpected_parse)
+    result = corpus_worker.run({'configuration': config,
+        'case': {'path': str(preset), 'sha256': file_hash(preset)}})
+    assert result['stage'] == 'identity' and result['status'] == 'unsupported', result
+    assert 'source' in result['error'] and 'archive' in result['error']
+    assert result['feature_record'] is None and not parsed
 
 
 def test_controller_rejects_wrong_aar_profile_or_source_adapter(tmp_path):

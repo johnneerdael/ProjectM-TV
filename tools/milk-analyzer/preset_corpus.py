@@ -5,7 +5,6 @@ import json
 import math
 import os
 from pathlib import Path
-import re
 import shutil
 import signal
 import subprocess
@@ -21,6 +20,9 @@ ROOT=Path(__file__).resolve().parents[2]
 ADAPTERS=('milk-native-reader','milk-shader-translate','milk-audio-inputs','milk-wave-inputs',
           'milk-image-inputs','milk-noise-inputs','milk-composite-inputs','milk-shader-random')
 CORE_2331_AAR_SHA256='13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377'
+# Qualified host CPU static archive from core2331-source-migration-2026-10-09.json;
+# this is separate from the published AAR and its Android native libraries.
+CORE_2331_SOURCE_ARCHIVE_SHA256='997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8'
 
 
 def verify_target(configuration):
@@ -43,9 +45,8 @@ def verify_target(configuration):
         raise ValueError('exact full published31 AAR identity mismatch')
     if profile.get('qualification',{}).get('published_bytes_verified') is not True:
         raise ValueError('published profile lacks verified byte identity')
-    archive=configuration.get('source_engine_archive_sha256','')
-    if not isinstance(archive,str) or re.fullmatch('[0-9a-f]{64}',archive) is None:
-        raise ValueError('source adapter archive identity required')
+    if configuration.get('source_engine_archive_sha256')!=CORE_2331_SOURCE_ARCHIVE_SHA256:
+        raise ValueError('exact qualified31 source adapter archive identity mismatch')
 
 
 def target_identity(args,binaries):

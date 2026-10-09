@@ -74,6 +74,68 @@ def test_dead_overwritten_zero_mask_and_unselected_polar_forms_are_suppressed(bo
     assert 'polar_radial_sampling' not in families(analyze(shader('shader_body {' + body + '}')))
 
 
+@pytest.mark.parametrize('code', [
+    'shader_body {ret=float4(1,0,0,GetPixel(float2(ang,1/rad)).r);}',
+    'shader_body {ret=float4(1,0,0,tex2D(sampler_main,float2(ang,1/rad)).a);}',
+    'float4 colour(float2 p){return float4(1,0,0,GetPixel(p).r);}'
+    'shader_body {ret=colour(float2(ang,1/rad));}',
+    'shader_body {ret=(float3)float4(1,0,0,GetPixel(float2(ang,1/rad)).r);}',
+    'shader_body {float4 colour=float4(1,0,0,0);for(int n=0;n<2;n++)'
+    '{colour.w+=GetPixel(float2(ang,1/rad)).r;}ret=colour;}',
+])
+def test_discarded_fourth_return_lane_cannot_supply_polar_family(code):
+    # Native ret is float3; assigning float4 implicitly drops its fourth lane.
+    source = shader(code)
+    assert source['sections']['comp_']['status'] == 'parsed'
+    assert 'polar_radial_sampling' not in families(analyze(source))
+
+
+def test_discarded_composite_fourth_lane_cannot_preserve_warp_or_drawing():
+    source = read('PSVERSION_WARP=2\nPSVERSION_COMP=2\nfWaveAlpha=1\n'
+        'shapecode_0_enabled=1\nshapecode_0_sides=6\n'
+        'warp_1=`shader_body {ret=GetPixel(float2(ang,1/rad));}\n'
+        'comp_1=`shader_body {ret=float4(1,0,0,GetPixel(uv).r);}\n')
+    assert not families(analyze(source))
+
+
+@pytest.mark.parametrize('prefix', [
+    'while(bass>0){}',
+    'float values[1]={1};values[int(time)]=1;',
+])
+def test_discarded_fourth_lane_keeps_loop_and_domain_effect_uncertainty(prefix):
+    record = analyze(shader('shader_body {' + prefix +
+        'ret=float4(1,0,0,GetPixel(float2(ang,1/rad)).r);}'))
+    assert not families(record)
+    assert any('termination/domain' in row['reason'] for row in record['unknowns'])
+
+
+@pytest.mark.parametrize('code', [
+    'shader_body {ret=float4(GetPixel(float2(ang,1/rad)).r,0,0,1);}',
+    'float4 colour(float2 p){return float4(GetPixel(p).r,0,0,1);}'
+    'shader_body {ret=colour(float2(ang,1/rad));}',
+    'shader_body {float4 colour=0;for(int n=0;n<2;n++)'
+    '{colour.x+=GetPixel(float2(ang,1/rad)).r;}ret=colour;}',
+    'float live;float4 colour(float2 p){live=GetPixel(p).r;return 1;}'
+    'shader_body {float4 unused=colour(float2(ang,1/rad));ret=float4(live,0,0,unused.a);}',
+    'shader_body {ret=normalize(float4(1,0,0,GetPixel(float2(ang,1/rad)).r));}',
+    'shader_body {ret=float4(1,0,0,GetPixel(float2(ang,1/rad)).r).a;}',
+])
+def test_consumed_rgb_lanes_and_helper_side_effects_keep_polar_family(code):
+    source = shader(code)
+    assert source['sections']['comp_']['status'] == 'parsed'
+    assert 'polar_radial_sampling' in families(analyze(source))
+
+
+def test_live_composite_rgb_keeps_connected_warp_and_drawing():
+    source = read('PSVERSION_WARP=2\nPSVERSION_COMP=2\nfWaveAlpha=1\n'
+        'shapecode_0_enabled=1\nshapecode_0_sides=6\n'
+        'warp_1=`shader_body {ret=GetPixel(float2(ang,1/rad));}\n'
+        'comp_1=`shader_body {ret=float4(GetPixel(uv).r,0,0,1);}\n')
+    record = analyze(source)
+    assert any(row['stage'] == 'warp' for row in record['families'])
+    assert any(row['stage'] == 'drawing' for row in record['families'])
+
+
 def test_unused_helper_and_filename_cannot_supply_families():
     source = shader('float2 tunnel(float2 p){return float2(ang,1/rad);}'
                     'shader_body {ret=GetPixel(uv);}')

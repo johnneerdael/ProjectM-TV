@@ -96,6 +96,14 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 
 ## Codebase navigation and knowledge tools
 
+Canonical source31 corpus admission requires the exact qualified host CPU
+archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;
+a well-formed self-reported hash is insufficient. See the corpus export guide
+and `docs/superpowers/evidence/pr67-review-fixes/README.md`. Static shader
+mechanisms follow the typed native RGB sink; discarded fourth lanes cannot
+preserve visible families or upstream contribution, while cross-lane/effect
+dependencies retain their original qualifications.
+
 `SourcePipeline` has opt-in `shader_lowering_policy='cached-program-v1'`,
 forwarded from the forecast domain; default is `per-frame-v1`. Reuse only static
 lowered programs with complete tree/context/type identity, one entry per stage.

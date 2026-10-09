@@ -86,6 +86,10 @@ this predictor. It runs on the CPU; that declaration does not certify an arbitra
 GPU. The default run pins the full published 2.3.31 AAR and release profile
 separately from the exact34-patch source archive and current predictor code.
 Both controller and worker reject changed publication/profile/source identities.
+The canonical source31 run requires the separately qualified host CPU archive
+`997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8`;
+a matching commit/patch tuple plus an arbitrary well-formed hash is insufficient.
+This host archive is distinct from the AAR and its Android native libraries.
 Motion storage remains conditional and uses portable half/bilinear math; it does
 not inherit observed Apple float-path arithmetic for the packed fallback. It never substitutes an unpatched upstream
 library and never renders through a bare `libprojectM` reference binary.
