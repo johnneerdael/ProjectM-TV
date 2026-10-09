@@ -21,11 +21,12 @@
   "qualification": {
     "published_bytes_verified": true,
     "repository_assets_equal_published": true,
-    "jni_declarations_checked": false,
+    "jni_declarations_checked": true,
     "source_policy_controls_passed": true,
-    "published_runtime_numerical_controls_passed": false,
+    "published_runtime_numerical_controls_passed": true,
     "appearance_certified": false,
-    "runtime_scope": "No published-AAR execution in this migration checkpoint; host source adapters and per-policy tests are separate evidence.",
-    "source_scope": "Prepared historical+release31 suite:1834 tests+92 subtests; additive authored motion provenance follow-up:35 focused tests. Host CPU source modeling, not AAR runtime."
+    "runtime_scope": "Task-owned API34 ARM64/Apple M4 Pro GLES3.0; three frozen30frame128x72 public-JNI controls (gamma-only, negative echo, named constants), maxRGB8error0/1/0. FullAAR/classes/assets bound; no authored-preset or whole-corpus appearance certification.",
+    "source_scope": "Prepared historical+release31 suite:1834 tests+92 subtests; additive authored motion provenance follow-up:35 focused tests. Host CPU source modeling, not AAR runtime.",
+    "control_evidence_sha256": "372fc3b517c0a9eaddc62c80eb726935967329cd8873d4d163988d08be102722"
   }
 }

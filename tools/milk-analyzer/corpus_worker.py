@@ -1,15 +1,17 @@
 """One isolated offline preset simulation. No AI service, device or native renderer."""
 import argparse
 import copy
+import hashlib
 import json
 from pathlib import Path
 import re
 import time
 
-from corpus_store import atomic_json,file_hash
+from corpus_store import atomic_json,file_hash,digest
 from corpus_inputs import declared_random_assets,sampler_request,verify_inputs
-from forecast import read_source,forecast_source,model_file_hashes,CORE_2329_EQUATION_RNG_POLICY
-from engine_profiles import CORE_2329_ENGINE
+from forecast import read_source,forecast_source,model_file_hashes,CORE_2329_EQUATION_RNG_POLICY,CORE_2331_EQUATION_RNG_POLICY,_MODEL_IMPORT_HASHES
+from engine_profiles import CORE_2329_ENGINE,CORE_2331_ENGINE
+from effect_families import analyze_families,POLICY as EFFECT_POLICY,_IMPORT_MODEL_HASHES as _FAMILY_IMPORT_HASHES
 from materials import MaterialBank
 from noise_inputs import NoiseBank
 from shader_compat import check_shader
@@ -17,6 +19,45 @@ from shader_random import execute_ledger
 from shape_sampling import native_blur_level
 from stage_resolution import resolve_stages
 from sampling_policy import texture_settings
+
+
+def target_policies(config):
+    engine=config.get('source_engine',CORE_2329_ENGINE)
+    if engine==CORE_2331_ENGINE:return engine,CORE_2331_EQUATION_RNG_POLICY
+    if engine==CORE_2329_ENGINE:return engine,CORE_2329_EQUATION_RNG_POLICY
+    raise ValueError('unsupported corpus source engine')
+
+
+def effect_metadata(source,compatibility,*,cache=None):
+    """Cache static metadata by actual parsed inputs and selected compatibility."""
+    models=model_file_hashes()
+    if models!=_MODEL_IMPORT_HASHES or models!=_FAMILY_IMPORT_HASHES:
+        raise ValueError('static family model changed since import; start a fresh process')
+    # Parser timing is not part of source semantics. Keep every other parsed
+    # field and the complete actual target binding, including compiler status.
+    semantic_source={key:value for key,value in source.items() if key!='elapsed_ms'}
+    identity={'policy':EFFECT_POLICY,'source':digest(semantic_source),'compatibility':compatibility,
+              'profile':'gles300','model_modules':models}
+    key=digest(identity);path=None if cache is None else Path(cache)/(key+'.json')
+    if path is not None and path.is_file():
+        saved=json.loads(path.read_text())
+        if saved.get('cache_key')!=key or saved.get('analysis_sha256')!=digest(saved.get('analysis')):
+            raise ValueError('static effect metadata cache identity changed')
+        return saved['analysis'],True
+    try:
+        analysis=analyze_families(source,profile='gles300',compatibility=compatibility)
+        if not isinstance(analysis,dict) or not isinstance(analysis.get('families'),list) or not isinstance(analysis.get('unknowns'),list):
+            raise TypeError('static analysis returned an invalid metadata record')
+        analysis_hash=digest(analysis)
+    except Exception as error:
+        # A numeric result can remain valid when its separately exported static
+        # analysis fails. Keep the failure explicit and never cache it as proof.
+        return {'status':'error','error_type':type(error).__name__,'error':str(error),
+                'analysis_policy':EFFECT_POLICY,'appearance_prediction_complete':False},False
+    if model_file_hashes()!=identity['model_modules']:
+        raise ValueError('static effect model changed during analysis')
+    if path is not None:atomic_json(path,{'cache_key':key,'analysis':analysis,'analysis_sha256':analysis_hash})
+    return analysis,False
 
 
 def compatibility_for(source,binaries,validator):
@@ -86,15 +127,31 @@ def run(job):
     started=time.monotonic();stage='identity'
     config=job['configuration'];binaries=Path(config['binaries']);inputs=Path(config['inputs'])
     base={'schema_version':1,'export_kind':'preset-corpus-result','feature_record':None,
+          'effect_analysis':None,'effect_analysis_cache_hit':False,
           'simulation':config['simulation'],'uses_rendered_reference':False,'appearance_accuracy_verified':False}
     try:
         from preset_corpus import verify_frozen
         verify_frozen(config)
+        engine,rng_policy=target_policies(config)
         if file_hash(job['case']['path'])!=job['case']['sha256']:raise ValueError('preset input changed')
         manifest=json.loads((inputs/'manifest.json').read_text())
         stage='source_parse';source=read_source(Path(job['case']['path']),reader=binaries/'milk-native-reader')
-        if source['parser_inputs']['engine']!=CORE_2329_ENGINE:raise ValueError('exact published29 source engine required')
+        stage='identity'
+        if source['parser_inputs']['engine']!=engine:raise ValueError('actual source engine differs from configured corpus identity')
+        if source['reader_sha256']!=config['binary_sha256']['milk-native-reader']:
+            raise ValueError('actual source parser differs from frozen adapter identity')
+        if ('source_engine_archive_sha256' in config and
+                source['parser_inputs']['engine_archive_sha256']!=config['source_engine_archive_sha256']):
+            raise ValueError('actual source adapter archive differs from configured identity')
+        raw=Path(job['case']['path']).read_bytes()
+        if source['preset_sha256']!=job['case']['sha256'] or hashlib.sha256(raw).hexdigest()!=job['case']['sha256']:
+            raise ValueError('preset changed during source parse')
+        base['corpus_identity']={key:copy.deepcopy(config[key]) for key in
+            ('source_engine','source_engine_archive_sha256','published_aar_sha256','engine_profile_sha256') if key in config}
         stage='compatibility';compatibility,references=compatibility_for(source,binaries,Path(config['validator']))
+        source['numbered_source']=raw.decode('utf-8',errors='replace')
+        stage='effect_analysis'
+        base['effect_analysis'],base['effect_analysis_cache_hit']=effect_metadata(source,compatibility,cache=config.get('effect_cache'))
         stage='resources';materials=material_inputs(source,references,manifest,binaries,inputs,config['seed'])
         audio=json.loads((inputs/'audio.json').read_text())
         stage='random_inputs';random=random_uniforms(source,compatibility,audio,binaries,config['seed'])
@@ -103,7 +160,7 @@ def run(job):
         sim=config['simulation']
         domain={'width':sim['width'],'height':sim['height'],'mesh_x':48,'mesh_y':32,'profile':'gles300',
             'simulation_fps':sim['fps'],'initial_rgba':[0]*4,'hue_offsets':[0]*4,'equation_seed':0x4141f00d,
-            'equation_rng_policy':CORE_2329_EQUATION_RNG_POLICY,'equation_loader_policy':'projectmtv-core-2.2.8-v1',
+            'equation_rng_policy':rng_policy,'equation_loader_policy':'projectmtv-core-2.2.8-v1',
             'equation_timeout_seconds':config['equation_timeout'],'blur_levels':blur,'quantize':True,
             'line_rendering_profile':'projectmtv-gles-quad-lines-v1','warp_subpixel_bits':8,
             'triangle_subpixel_bits':8,'point_subpixel_bits':8,'composite_subpixel_bits':8,
@@ -112,6 +169,9 @@ def run(job):
             'shader_numeric_policy':'gles300-highp-infinity-v1',
             'declared_random_profile':{'policy':'corpus-declared-inputs-v1','seed':config['seed'],
                 'lifecycle':'fresh isolated preset; explicit assets and independent deterministic shader uniform stream'}}
+        if engine==CORE_2331_ENGINE:
+            domain.update(motion_uv_storage_profile='portable-half-nearest-v1',
+                          motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_backend='conditional')
         stage='simulation';report=forecast_source(source,audio=audio,binaries=binaries,domain=domain,
             compatibility=compatibility,materials=materials,random_inputs=random,retain_surfaces=False)
         record=report['source_features']

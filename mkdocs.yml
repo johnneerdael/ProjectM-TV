@@ -82,6 +82,7 @@ nav:
   - Predictor:
       - Road ahead: predictor.md
       - Export contract: predictor-export.md
+      - Static effect mechanisms: predictor-effects.md
       - Automated corpus export: preset-corpus-export.md
   - Build and test: development.md
 not_in_nav: |

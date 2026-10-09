@@ -1,0 +1,202 @@
+{
+  "deployment": {
+    "owner": {
+      "serial": "emulator-5670",
+      "pid": 42490,
+      "avd": "projectmtv-source31-controls"
+    },
+    "remote": "/data/local/tmp/projectmtv-source31-controls-991590747c48474fb18a477f523b1351",
+    "published": {
+      "release": "v2.3.31",
+      "release_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+      "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+      "native_libraries": {
+        "jni/arm64-v8a/libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+        "jni/armeabi-v7a/libprojectmtv.so": "c438a47d224868f7bc5e38000e97cf61ccf25c8e4e1383d3dc651a6d167439b8"
+      },
+      "engine": {
+        "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+      }
+    },
+    "sha256": {
+      "published-core.aar": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+      "libprojectmtv.so": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+      "classes.dex": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311",
+      "libbackendclock.so": "d34bf522deb53c8fcb28f4e1a3e5b0404521c6e38f8eb283f024eff3381cf355",
+      "transport.f32": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc",
+      "config.json": "de65e6a43db3a39aa8107f90c488f56fcb7883bb74ad13757d35b1edf9f211a8"
+    },
+    "java": {
+      "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+      "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+      "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+      "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+      "dex_sha256": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311",
+      "helper_classes_sha256": {
+        "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "5ea3b58e6741d892cc7c72d574a31e436501ae84f9d85cd0e3a02c888d9b25f6"
+      },
+      "min_api": 21,
+      "policy": "published-aar-reproduced-dex-v1",
+      "proof_sha256": "42aaba87e08c816abdd47d251482e249361cedefaf09ae34ba40bc7af47823ed",
+      "reconstructed_dex_sha256": "048a89863eef766de75d0601403287fb5ff07b36bec9951355e37247286af311"
+    },
+    "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys"
+  },
+  "rows": [
+    {
+      "case": "gamma-only",
+      "frames": 30,
+      "max_rgb8_error": 0,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "gamma-only.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 72p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 0,
+        "physical_surface_width": 128,
+        "physical_surface_height": 72,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          128,
+          72
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 128,
+          "height": 72,
+          "trails": 0
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "native_frames_sha256": "7f7b36c4de7cec3a49c4200d5b7025705ba16f215b0718fb3d0209aa4b18bad5",
+      "freeze_sha256": "f8628b3266a9c56aefd51a6de6cdaad4ee66758064a8ae9e5764a2cd58df3293"
+    },
+    {
+      "case": "negative-echo",
+      "frames": 30,
+      "max_rgb8_error": 1,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "negative-echo.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 72p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 0,
+        "physical_surface_width": 128,
+        "physical_surface_height": 72,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          128,
+          72
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 128,
+          "height": 72,
+          "trails": 0
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "native_frames_sha256": "3dffc8248cb8c31c6302fd6be3a83fc1b4e52106b02cd2a65d12dd992d8da05c",
+      "freeze_sha256": "01eee9ca41febeac835e9859cc2efc8de7b36a3b4a857fe7dc4590c3d09077bd"
+    },
+    {
+      "case": "named-constant",
+      "frames": 30,
+      "max_rgb8_error": 0,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "named-constant.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 72p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 0,
+        "physical_surface_width": 128,
+        "physical_surface_height": 72,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          128,
+          72
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 128,
+          "height": 72,
+          "trails": 0
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "native_frames_sha256": "90a31a221387299ec497662405a3c370c8d47aea9c86f3dfd1cd4000ff758653",
+      "freeze_sha256": "0ea98cda48475cf4f4ceb00a9d020d7436e4093c76785c09c1577ed4f8708787"
+    }
+  ],
+  "scope": "Bounded128x72 30frame unchanged published2.3.31AAR/JNI numerical controls; not whole-corpus appearance"
+}

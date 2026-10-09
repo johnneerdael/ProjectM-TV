@@ -15,7 +15,7 @@ Defaults: all bundled `.milk` files, **60 frames at 15fps, 854×480**, two isola
 workers, five-minute per-preset deadline, 100 completed cases per ZIP. Output:
 
 ```text
-~/Downloads/ProjectM-TV-preset-corpus-15fps-480p/
+~/Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2331/
   run-manifest.json
   progress.sqlite
   progress.json
@@ -50,7 +50,8 @@ Use a different folder for a limited run. Removing `--limit` changes the frozen
 inventory; it cannot resume that limited folder as the entire corpus.
 
 Options also include `--workers`, `--timeout`, `--equation-timeout`, `--seed`,
-`--presets`, `--textures`, `--binaries`, `--validator` and `--pcm`. `--pcm` accepts
+`--presets`, `--textures`, `--binaries`, `--validator`, `--aar`,
+`--engine-profile`, `--target` and `--pcm`. `--pcm` accepts
 normalized little-endian float32 mono 44100Hz samples of exactly the requested
 length; it does not decode M4A/WebM/MP3. Worker concurrency is a runtime setting,
 not a reason to change the underlying simulated input semantics.
@@ -82,15 +83,24 @@ Missing images/prefix matches remain unsupported rather than silently replaced.
 
 The simulator uses the declared Apple GLES numerical/raster profile modeled by
 this predictor. It runs on the CPU; that declaration does not certify an arbitrary
-GPU. The run is pinned to the source corresponding to the full published 2.3.29
-AAR and the current predictor code. It never substitutes an unpatched upstream
+GPU. The default run pins the full published 2.3.31 AAR and release profile
+separately from the exact34-patch source archive and current predictor code.
+Both controller and worker reject changed publication/profile/source identities.
+Motion storage remains conditional and uses portable half/bilinear math; it does
+not inherit observed Apple float-path arithmetic for the packed fallback. It never substitutes an unpatched upstream
 library and never renders through a bare `libprojectM` reference binary.
 
 ## Results, failures and unknowns
 
 Each JSON is a corpus envelope containing original preset name/path/hash,
 `run_identity`, simulation parameters, status, stage, elapsed time and
-`feature_record` on success. A computed record has exactly 47 keys; some values
+`feature_record` on success. A separate `effect_analysis` holds the static
+source-mechanism record (or its explicit failure); it does not change the47-key
+feature contract. Static evidence survives later resource/simulation failures
+when it was successfully extracted. Unknown mechanisms are not proof of absence.
+`effect_analysis_cache_hit` reports reuse under actual source/compatibility/model
+identity; parser timing is excluded from that cache key. Full compiler evidence
+remains part of its binding, so changed diagnostic paths can cause a safe cache miss. A computed record has exactly 47 keys; some values
 can legitimately remain null with support/unknown reasons. A parser, shader,
 resource or mathematical failure has `feature_record:null`, an explicit error
 and stage. A worker crash or deadline is likewise preserved. No failure becomes a
@@ -126,7 +136,8 @@ files are changed. Do not modify the predictor/adapters during an active run.
 ## Prerequisites and implementation
 
 The launcher targets this prepared macOS/Linux checkout. It locates
-`build/preset-lab-venv/bin/python`, source29 adapters and `glslangValidator` and
+`build/preset-lab-venv/bin/python`, source31 adapters, the full published31 AAR,
+its engine profile and `glslangValidator` and
 provides an actionable error if missing. It does not secretly download a different
 engine. See the analyzer README for source-bound adapter setup; those prerequisites
 are needed once on another machine. No AI is needed for execution or recovery.
@@ -184,3 +195,17 @@ completion inside the default300s deadline. For a fresh controlled run, start wi
 two workers; `--timeout 600` admits this particular observed duration while still
 bounding slow cases. More workers require measured throughput and peak-memory
 checks, not only free CPU cores.
+
+
+## Static mechanisms without pixel fields
+
+`effect_family_export.py` runs the separate cached source-only detector. It does
+not produce the47 numerical statistics and accepts no resolution/FPS setting.
+Use it for supported construction evidence without the expensive simulation.
+Its paired outputs default to `~/Downloads/ProjectM-TV-static-effect-families`.
+The source31 integration was checked with an actual32×18 one-frame worker;
+this is a bounded integration control, not whole-corpus visual qualification.
+
+`--target core2329-diagnostic` retains explicitly labeled historical source29
+math without claiming a published31 AAR binding. Earlier archives are never
+relabelled or mixed into source31 output.

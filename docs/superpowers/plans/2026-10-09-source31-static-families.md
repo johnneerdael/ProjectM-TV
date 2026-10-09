@@ -26,31 +26,31 @@ JSON and pytest; no new rendering foundation or classifier API.
 - [x] Download and hash-verify full published2.3.31AAR; bind extracted native
   library identities, releasecommit and34-patch source digest separately.
 - [x] Prepare isolated source31CPU adapters without mutating old adapters.
-- [ ] Reconcile every new patch0017–0034 with predictor behavior; preserve already
+- [x] Reconcile every new patch0017–0034 with predictor behavior; preserve already
   MilkDrop-correct behavior and actual custom/default stage distinctions.
-- [ ] Cover opacity/RGB clamp, audio windows/sample caps/customdots/circle,
+- [x] Cover opacity/RGB clamp, audio windows/sample caps/customdots/circle,
   per-pixel aspect/order/legacy deformation/seam, gamma/echo/borders,
   per-instance style and continuous motion-map semantics with focused controls.
-- [ ] Record supported GPU/storage scope, source/shader compilation versus actual
+- [x] Record supported GPU/storage scope, source/shader compilation versus actual
   rendering, and incompatible/fallback boundaries; no generic allowlist bypass.
-- [ ] Run prepared suite and bounded published-AAR/source controls appropriate to
+- [x] Run prepared suite and bounded published-AAR/source controls appropriate to
   changes. Attribute new issues correctly; native defects get separate Downloads
   handoffs, not silently modified presets or fake passing outputs.
 - [x] Research primary graphical-math/authoring sources and actual pack examples;
   rank candidates by frequency but never label from filenames/regex alone.
-- [ ] Implement static family inference for explicit primitives/waves, tunnel/
+- [x] Implement static family inference for explicit primitives/waves, tunnel/
   radial depth feedback, angular folding/kaleidoscope, flow/swirl, recognized
   iterative/feedback fractal constructions and particle-like mechanisms.
-- [ ] Trace outputs, stage reachability, alpha/zero masks and time/audio/resource
+- [x] Trace outputs, stage reachability, alpha/zero masks and time/audio/resource
   conditions. Distinguish a detected mechanism from guaranteed visible output.
-- [ ] Use exact positive fixtures and mutation/unused-code negative controls;
+- [x] Use exact positive fixtures and mutation/unused-code negative controls;
   mixed families/unknowns remain explicit. No native-image inspection required.
-- [ ] Export source hashes, location/path evidence, family-specific parameters,
+- [x] Export source hashes, location/path evidence, family-specific parameters,
   support/status and conditions in a versioned semantic record with an AI-free
   single-file/batch CLI. Keep47-field numeric exports backward-compatible.
-- [ ] Integrate cheap recognition/caching into corpus exports, benchmark cold/
+- [x] Integrate cheap recognition/caching into corpus exports, benchmark cold/
   cached static runs, and demonstrate no60-frame simulation on that path.
-- [ ] Update user guide/export contract/README/AGENTS in this worktree. Validate,
+- [x] Update user guide/export contract/README/AGENTS in this worktree. Validate,
   review and push regular checkpoints, respecting the no-main-merge predictor
   acceptance gate. Leave goal active until all requested work is verified.
 
@@ -74,3 +74,15 @@ Library preparation/reconciliation is the first implementation milestone.
 Research may progress independently during preparation. Family implementation
 starts only after the target engine profile is established. The full corpus
 remains stopped; later runs require their own immutable identity.
+
+
+## Verified delivery checkpoint
+
+- Full published2.3.31AAR/source profile and assets verified; exact source31 adapters prepared in this worktree.
+- Final prepared suite:1946tests+92subtests pass; strict MkDocs passes.
+- Three fullAAR/public-JNI30frame controls have maxRGB8difference0/1/0. No whole-corpus appearance credit.
+- Static detector/export:69+8focused controls, independent16-case reviewer recheck, all pass.
+-100fixed pack sources:25.61s cold/.704s cached;106.69MiB peak. Timing only, no precision/recall claim.
+- CLI produced verified100preset pairedZIP in Downloads;99records have supported mechanisms,91have explicit unknowns (mostly missing target compatibility). These are conditional source constructs, not verified visible families.
+- Corpus check inventories9606presets at60frames/15Hz/854×480 against source31/fullAAR/profile; no full numerical run started. Bounded1frame worker retains47fields plus separately cached static metadata.
+- Documentation synced from main for the existing contract/testing reference, then extended in the feature branch. Downloads includes independent static-contractZIP and both runnablelaunchers. Main merge remains held.

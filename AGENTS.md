@@ -753,4 +753,22 @@ remains separate. Explicit conditional/packed motion backends must not inherit
 Apple float-path evidence. The old corpus configuration stays source29 until
 integration is qualified. See the analyzer README, published-core-v2.3.31 profile
 and `docs/superpowers/plans/2026-10-09-source31-static-families.md`. Source-based
-effect-family research is available; detector/export work remains pending.
+effect-family research is available with its separately versioned detector/export.
+
+Static family maintenance (2026-10-09): `effect_families.py` detects contributing
+typed shader/EEL constructions without numerical execution or frames. Keep live
+lane/loop/output masks, exact profile conditions, unknowns and finite work budgets.
+`effect_family_export.py` provides an AI-free cached parser/detector CLI and paired
+100-preset ZIPs; parent import hashes require fresh-process operation after edits,
+not arbitrary hot reload. The100-preset cold/cache benchmark is25.61s/.704s;
+it is timing evidence, not corpus classification accuracy. Read
+`tools/milk-analyzer/EFFECT_FAMILIES.md` and the guide's `predictor-effects.md`.
+
+The numerical corpus now defaults to source31 with a separate full published-AAR
+and profile identity. New output suffix `-core2331` prevents mixing old rows.
+`corpus_worker.py` keeps47 numeric fields and separately exports `effect_analysis`,
+including explicit failures. Exact source31 noise admission retains all six
+byte-identical source29 generators. No full numerical corpus rerun was started.
+Three full published-AAR/public-JNI30frame128×72 controls pass at RGB8errors0/1/0;
+see `docs/superpowers/evidence/predictor-source31`. Do not claim whole-preset or
+whole-corpus appearance certification from those controls.

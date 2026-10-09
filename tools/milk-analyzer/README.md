@@ -8,6 +8,13 @@ motion, pulses, feedback and structure data is obtained algorithmically and pin 
 beta guide plus original MilkDrop2 source. Unsupported paths stay unknown while the
 interpreter is expanded; they do not trigger hidden visual analysis.
 
+[Static effect families](EFFECT_FAMILIES.md) are a separate schema1 symbolic
+export. `effect_family_export.py` follows parsed typed dependencies without
+executing equations, audio, shader fields or frames. It caches source/model-bound
+results and reuses the paired100-preset ZIP writer. Supported mechanisms remain
+conditional on active stages/resources/visibility; unrecognized forms are unknown,
+not proof of absence. These are not new mood indexes.
+
 This analyzer began with the inductive main-Q domain and shader selector proof
 from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25). It now includes
 an experimental numerical source forecaster and separate collection tools that
@@ -58,7 +65,7 @@ extractor CLI option. It requires GLES300 at source entry points; strict remains
 the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
 nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
 
-## Source migration in progress: published 2.3.31
+## Source target: published 2.3.31
 
 `profiles/published-core-v2.3.31.json` identifies the full published Native AAR,
 both native libraries, Java classes, all 9,606 presets and 74 textures, and the
@@ -83,10 +90,11 @@ the actual GLES capability probe, wrapper compilation, fallback selection or
 hardware rounding. An observed float-path operator cannot certify the packed path.
 
 `test_core2331_*.py` preserves historical controls alongside new behavior.
-The existing corpus launcher remains on its immutable source29 configuration
-until the separate corpus integration is qualified; do not relabel its rows.
-Common effect-family detection is the next milestone and is not implemented by
-these migration policies. See the [implementation plan](../../docs/superpowers/plans/2026-10-09-source31-static-families.md)
+The corpus launcher now defaults to source31 and verifies the complete AAR and
+profile separately from its source archive. It preserves the47-field contract
+and appends static effect metadata, with a new output directory. Earlier
+source29 rows remain immutable and must not be relabeled. Common source-family
+detection is implemented separately from these migration policies. See the [implementation plan](../../docs/superpowers/plans/2026-10-09-source31-static-families.md)
 and [source research](../../docs/superpowers/research/2026-10-09-static-effect-families.md).
 
 ## Historical source migration: published 2.3.27

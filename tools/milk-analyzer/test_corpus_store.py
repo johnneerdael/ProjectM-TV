@@ -80,3 +80,21 @@ def test_changed_source_is_rejected_before_archive(tmp_path):
         store.complete(cases[0],{'status':'computed','feature_record':{}})
         Path(cases[0]['path']).write_text('changed')
         with pytest.raises(ValueError,match='preset.*changed'):store.flush(partial=True)
+def test_atomic_json_concurrent_same_destination_has_private_temporaries(tmp_path,monkeypatch):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    from corpus_store import atomic_json
+    import json
+    from pathlib import Path
+    barrier=threading.Barrier(2)
+    original=Path.replace
+    def synchronized(path,destination):
+        barrier.wait(timeout=5)
+        return original(path,destination)
+    monkeypatch.setattr(Path,'replace',synchronized)
+    destination=tmp_path/'same-cache.json'
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures=[pool.submit(atomic_json,destination,{'writer':i}) for i in range(2)]
+        for future in futures:future.result(timeout=10)
+    assert json.loads(destination.read_text()) in [{'writer':0},{'writer':1}]
+    assert len(list(tmp_path.iterdir()))==1
