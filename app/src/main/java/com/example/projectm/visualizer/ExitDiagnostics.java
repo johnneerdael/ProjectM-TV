@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,9 +50,15 @@ final class ExitDiagnostics {
         final long pssKb;
         final long rssKb;
         final String description;
+        final String session;  // from the process's state summary, null if it recorded none
 
         Exit(int pid, int reason, int status, int importance, long timestampMs, long pssKb, long rssKb,
              String description) {
+            this(pid, reason, status, importance, timestampMs, pssKb, rssKb, description, null);
+        }
+
+        Exit(int pid, int reason, int status, int importance, long timestampMs, long pssKb, long rssKb,
+             String description, String session) {
             this.pid = pid;
             this.reason = reason;
             this.status = status;
@@ -60,6 +67,7 @@ final class ExitDiagnostics {
             this.pssKb = pssKb;
             this.rssKb = rssKb;
             this.description = description == null ? "" : description;
+            this.session = session;
         }
 
         /** The app was on screen (not just its notification listener in the background). */
@@ -76,13 +84,15 @@ final class ExitDiagnostics {
         final String thread;
         final int pid;
         final long timeMs;
+        final String session;  // null in lines without one
         final String switches;
         final String message;
 
-        TrailLine(String thread, int pid, long timeMs, String switches, String message) {
+        TrailLine(String thread, int pid, long timeMs, String session, String switches, String message) {
             this.thread = thread;
             this.pid = pid;
             this.timeMs = timeMs;
+            this.session = session;
             this.switches = switches;
             this.message = message;
         }
@@ -101,7 +111,18 @@ final class ExitDiagnostics {
     static void start(Context context) {
         File file = new File(context.getNoBackupFilesDir(), TRAIL_FILE);
         previousTrail = read(file);
-        ProjectMJNI.setDiagnosticsFile(file.getAbsolutePath());
+        // A random ID in this process's exit record and in its trail lines: Android reuses PIDs, and
+        // a process started only for the notification listener never rewrites the trail.
+        String session = Long.toHexString(new SecureRandom().nextLong());
+        if (Build.VERSION.SDK_INT >= 30) {
+            try {
+                context.getSystemService(ActivityManager.class)
+                        .setProcessStateSummary(session.getBytes(StandardCharsets.US_ASCII));
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Could not record the process session", e);
+            }
+        }
+        ProjectMJNI.setDiagnosticsFile(file.getAbsolutePath(), session);
     }
 
     private static String read(File file) {
@@ -129,8 +150,11 @@ final class ExitDiagnostics {
             ActivityManager manager = context.getSystemService(ActivityManager.class);
             for (ApplicationExitInfo info : manager.getHistoricalProcessExitReasons(
                     context.getPackageName(), 0, MAX_EXITS)) {
+                byte[] summary = info.getProcessStateSummary();
                 exits.add(new Exit(info.getPid(), info.getReason(), info.getStatus(), info.getImportance(),
-                        info.getTimestamp(), info.getPss(), info.getRss(), info.getDescription()));
+                        info.getTimestamp(), info.getPss(), info.getRss(), info.getDescription(),
+                        summary == null || summary.length == 0 ? null
+                                : new String(summary, StandardCharsets.US_ASCII)));
             }
         } catch (RuntimeException e) {
             Log.w(TAG, "Exit records unavailable", e);
@@ -141,20 +165,32 @@ final class ExitDiagnostics {
     static List<TrailLine> parseTrail(String text) {
         List<TrailLine> lines = new ArrayList<>();
         for (String raw : text.split("\n")) {
-            String line = raw.trim();
-            String[] parts = line.split(" ", 4);
-            if (parts.length < 4 || !parts[1].startsWith("pid=") || !parts[2].startsWith("ms=")) continue;
-            String switches = null;
-            String message = parts[3].trim();
-            String[] states = message.split(" ", 3);
-            if (states.length == 3 && states[0].startsWith("cache=") && states[1].startsWith("compile=")) {
-                switches = "shader binary cache " + states[0].substring(6) + ", background compile "
-                        + states[1].substring(8);
-                message = states[2].trim();
+            // "<thread> key=value ... <message>": pid and ms are required; session, cache and
+            // compile are optional.
+            String[] words = raw.trim().split(" ");
+            String pid = null, ms = null, session = null, cache = null, compile = null;
+            int i = 1;
+            for (; i < words.length; i++) {
+                String w = words[i];
+                if (w.startsWith("pid=")) pid = w.substring(4);
+                else if (w.startsWith("ms=")) ms = w.substring(3);
+                else if (w.startsWith("session=")) session = w.substring(8);
+                else if (w.startsWith("cache=")) cache = w.substring(6);
+                else if (w.startsWith("compile=")) compile = w.substring(8);
+                else break;
             }
+            StringBuilder message = new StringBuilder();
+            for (int j = i; j < words.length; j++) {
+                if (words[j].isEmpty()) continue;
+                if (message.length() > 0) message.append(' ');
+                message.append(words[j]);
+            }
+            if (pid == null || ms == null || message.length() == 0) continue;
+            String switches = cache != null && compile != null
+                    ? "shader binary cache " + cache + ", background compile " + compile : null;
             try {
-                lines.add(new TrailLine(parts[0], Integer.parseInt(parts[1].substring(4)),
-                        Long.parseLong(parts[2].substring(3)), switches, message));
+                lines.add(new TrailLine(words[0], Integer.parseInt(pid), Long.parseLong(ms),
+                        session == null || session.equals("-") ? null : session, switches, message.toString()));
             } catch (NumberFormatException ignored) {
                 // a line cut short by the crash
             }
@@ -225,13 +261,15 @@ final class ExitDiagnostics {
     }
 
     /**
-     * The exit each trail line belongs to: the earliest exit of the same PID at or after the line was
-     * written, or -1. Android reuses PIDs, so a PID alone could also match an older, unrelated exit.
+     * The exit each trail line belongs to, or -1. An exit that recorded a session must carry the
+     * line's session; otherwise the earliest exit of the same PID at or after the line was written
+     * (Android reuses PIDs, so a PID alone could also match an older, unrelated exit).
      */
     static int exitForLine(List<Exit> exits, TrailLine line) {
         int best = -1;
         for (int i = 0; i < exits.size(); i++) {
             Exit exit = exits.get(i);
+            if (exit.session != null && !exit.session.equals(line.session)) continue;
             if (exit.pid != line.pid || exit.timestampMs < line.timeMs) continue;
             if (best < 0 || exit.timestampMs < exits.get(best).timestampMs) best = i;
         }

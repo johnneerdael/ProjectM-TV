@@ -20,8 +20,8 @@ public class ExitDiagnosticsTest {
     }
 
     private static final String TRAIL =
-            pad("render pid=4321 ms=" + (NOW - 63_000) + " cache=off compile=on blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648)")
-            + pad("prewarm pid=4321 ms=" + (NOW - 62_500) + " cache=off compile=on compiling 'Martin - liquid arrows.milk'");
+            pad("render pid=4321 ms=" + (NOW - 63_000) + " session=s1 cache=off compile=on blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648)")
+            + pad("prewarm pid=4321 ms=" + (NOW - 62_500) + " session=s1 cache=off compile=on compiling 'Martin - liquid arrows.milk'");
 
     @Test
     public void parsesFixedWidthTrailLinesAndSkipsCutOnes() {
@@ -115,6 +115,21 @@ public class ExitDiagnosticsTest {
                 NOW - 60_000, 0, 0, "");
         String report = ExitDiagnostics.report(Collections.singletonList(crash), 30, trail, NOW, "");
         assertTrue(report, report.contains("  switches: shader binary cache off, background compile on\n"));
+    }
+
+    @Test
+    public void sessionsKeepTrailsFromOtherProcessesWithTheSamePid() {
+        // A later process reused PID 4321 but only ran the notification listener (another session).
+        ExitDiagnostics.Exit listener = new ExitDiagnostics.Exit(4321, 13, 0, 400, NOW - 1_000, 0, 0, "", "s2");
+        List<ExitDiagnostics.TrailLine> lines = ExitDiagnostics.parseTrail(TRAIL);
+        assertEquals("s1", lines.get(0).session);
+        assertEquals(-1, ExitDiagnostics.exitForLine(Collections.singletonList(listener), lines.get(0)));
+        ExitDiagnostics.Exit visual = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
+                NOW - 60_000, 0, 0, "", "s1");
+        assertEquals(1, ExitDiagnostics.exitForLine(Arrays.asList(listener, visual), lines.get(0)));
+        // Exits without a recorded session fall back to PID and time.
+        ExitDiagnostics.Exit unknown = new ExitDiagnostics.Exit(4321, 13, 0, 400, NOW - 1_000, 0, 0, "");
+        assertEquals(0, ExitDiagnostics.exitForLine(Collections.singletonList(unknown), lines.get(0)));
     }
 
     @Test

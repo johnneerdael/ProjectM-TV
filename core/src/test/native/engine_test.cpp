@@ -868,7 +868,7 @@ int main(int argc, char** argv) {
     int created = mkstemp(path);
     CHECK(created >= 0);
     close(created);
-    projectmtv::OpenTrail(path);
+    projectmtv::OpenTrail(path, "abc123");
     auto trail = [&path]() { std::ifstream in(path); std::stringstream text; text << in.rdbuf(); return text.str(); };
     const std::string pid = "pid=" + std::to_string(getpid()) + " ";
     int stops = g_prewarmStops, starts = g_prewarmStarts;
@@ -885,6 +885,7 @@ int main(int argc, char** argv) {
     printf("%s", text.c_str());
     CHECK(text.size() == 2 * projectmtv::kTrailLineBytes);  // two fixed-size lines
     CHECK(text.rfind("render " + pid, 0) == 0);
+    CHECK(text.find(" session=abc123 cache=") != std::string::npos);
     CHECK(text.find("loaded '" + current() + "' (cut) in ") != std::string::npos);
     CHECK(text.find("prewarm " + pid) == projectmtv::kTrailLineBytes);
     CHECK(text.find("background compile off") != std::string::npos);

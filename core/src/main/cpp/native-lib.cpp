@@ -2335,12 +2335,13 @@ JNIEXPORT void JNICALL JNI_FN(setShaderBinaryCache)(JNIEnv*, jclass, jboolean en
 }
 
 // File in which the engine records what it was last doing (see diagnostics_trail.h).
-JNIEXPORT void JNICALL JNI_FN(setDiagnosticsFile)(JNIEnv* env, jclass, jstring path) {
-    if (!path) return;
+JNIEXPORT void JNICALL JNI_FN(setDiagnosticsFile)(JNIEnv* env, jclass, jstring path, jstring session) {
+    if (!path || !session) return;
     const char* text = env->GetStringUTFChars(path, nullptr);
-    if (!text) return;
-    projectmtv::OpenTrail(text);
-    env->ReleaseStringUTFChars(path, text);
+    const char* id = env->GetStringUTFChars(session, nullptr);
+    if (text && id) projectmtv::OpenTrail(text, id);
+    if (text) env->ReleaseStringUTFChars(path, text);
+    if (id) env->ReleaseStringUTFChars(session, id);
 }
 
 JNIEXPORT void JNICALL JNI_FN(addWaveform)(JNIEnv* env, jclass, jbyteArray waveform, jint length) {

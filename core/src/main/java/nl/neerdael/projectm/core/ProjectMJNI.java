@@ -112,10 +112,12 @@ public final class ProjectMJNI {
     /**
      * File in which the engine keeps one line per thread about what it was last doing (loading,
      * blending, compiling), overwritten in place, so it survives a crash of the process. Each line
-     * reads {@code <thread> pid=<pid> ms=<wall clock ms> cache=on|off compile=on|off <message>}, with
-     * the Shader binary cache and Background compile switches as set when it was written. Read it before calling this.
+     * reads {@code <thread> pid=<pid> ms=<wall clock ms> session=<session> cache=on|off
+     * compile=on|off <message>}, with the Shader binary cache and Background compile states as
+     * applied when it was written. {@code session} (letters and digits, up to 23) identifies this
+     * process, e.g. matching what the app stores with {@code ActivityManager.setProcessStateSummary}. Read it before calling this.
      */
-    public static native void setDiagnosticsFile(String path);
+    public static native void setDiagnosticsFile(String path, String session);
     public static native void setMeshSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */
     public static native void skipCurrentPreset();
