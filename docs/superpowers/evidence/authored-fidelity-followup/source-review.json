@@ -18,15 +18,15 @@
   "actionable_findings": [],
   "followup": "Reliability identified real partial-initialization coverage gap; added actual Standard/High constructor failure controls, normal/sanitizer/Linux pass; focused independent source re-review found no actionable issue. Active-canvas lifecycle is independently bound and rejects inactive/fallback.",
   "residual_requirements": [
-    "isolated combined cost",
-    "fresh recursive/analyzer/docs",
-    "final main integration",
-    "new PR required current-head review/CI"
+    "new non-draftPR current-head external review",
+    "required immutable reviewed-head CI green"
   ],
   "limits": [
     "GLES common-driver oscillator premise",
     "pbuffer lifecycle not Activity/audio/exhaustion",
     "physical-TV headroom unmeasured"
   ],
-  "live_main_advance": "af4b520f3ad0e0ed02ad3c91300e16062708ebeb docs-only; integration pending"
+  "live_main_advance": "af4b520f3ad0e0ed02ad3c91300e16062708ebeb docs-only integrated at6a016447",
+  "checkpoint_kind": "source review plus final local qualification followup; not remote PR approval",
+  "final_evidence_review": "release notes/evidence limits consistent; stale live ledgerP3 corrected; no actionable sourcefinding"
 }

@@ -65,7 +65,7 @@
     "capture_helper_subtests": 24,
     "linux_normal": 63,
     "linux_explicit": 63,
-    "linux_sanitizer": "initial30s timeouts isolated to built-innoise setup; diagnostic in progress",
+    "linux_sanitizer": "first whole63 run hit30s startup timeouts; unchanged deformation/seam focused controls pass at150s process limit; wholeLinuxsan suite not claimedpassing",
     "shipping_build": "bothARM ABIs core release and app debug pass",
     "combined_cost": {
       "status": "verified",
@@ -94,15 +94,13 @@
     "source_review": "10 personas no actionable findings; targeted partial-failure control re-review no findings",
     "fresh_recursive": "clean pinned recursive source; coreDebug and releaseAPK pass at6a016447",
     "shader_links": "both unchanged warp variants GLSL ES3.00 pass",
-    "docs": "strict MkDocs pass; final updated docs recheck pending"
+    "docs": "strict MkDocs passes after final local acceptance updates"
   },
-  "current_head": "34da568c",
+  "current_head": "fix/milkdrop-authored-fidelity (resolve live Git ref)",
   "remaining": [
-    "final updated docs consistency/strictcheck",
-    "newPR body currentfullscope and actualcost",
-    "push newbranch/opennewnon-draftPR",
-    "required current-head code-review/CIgreen; no merge"
+    "open new non-draftPR with verified fullscope/cost/release notes",
+    "required current-head external review and CI green; no merge/release"
   ],
-  "last_turn_progress": "confirmed live main stilldocs-only af4b520f; verified running exactcostsession66197",
-  "latest_main_verified": "af4b520f3ad0e0ed02ad3c91300e16062708ebeb"
+  "last_turn_progress": "all84 costjobs/672captures verified; integratedaf4b520f; freshrecursive/shaderlink/docs/analyzerchecks pass",
+  "qualified_recursive_source_commit": "6a016447fff92a4691ca5fe656261732926bc2d3"
 }

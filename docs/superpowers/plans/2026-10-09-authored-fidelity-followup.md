@@ -84,7 +84,7 @@ Interfaces: all five source patches and controls; frozenbaseline960eed2c plusfin
 - [x] Freeze/artifact-build exactbaseline/candidate; validate original/finite/unaffectedNative repeats and captures.
 - [x] Measure isolated combined ABBA on relevant original/structural workloads; report absolute/relative cost and selected appearance.
 - [x] Fresh normal/sanitizer/host/JVM/bothABI/recursive/docs/helpers/analyzer and Linux/Mesa bothlinkroutes; shaderlink when required.
-- [ ] Fullce:review/autofix, resolvefindings, finalhead checks; newPRrelease notes and monitoring/rollback plan.
+- [x] Fullce:review/autofix, resolvefindings, finalhead source linkage; release notes and monitoring/rollback plan prepared.
 - [ ] RequiredGitHubCI/review green; PRnon-draft/merge-ready, without merging/releasing.
 
 ## Next focus after this PR
