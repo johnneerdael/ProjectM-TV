@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source_base": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+  "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+  "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+  "schedule_sha256": "e052e6ef33f74fa28340ec3448ff30811e1d6128a6cb05a5fdfa4d57c11ccc7a",
+  "inputs_sha256": "d5afb472ed0801641c9f2c76919207918e417b0768b668f04537ed944e52f7d6",
+  "requests_sha256": "4d91e3d1ecc515628c0046171f8695e0c60ddd7ecc963640a7ae3834cba20dbe",
+  "workers_sha256": "c001690d76ac97ef2f7a85c696facdfaee5c3819314cac10e9a39170223206bd",
+  "source_files": {
+    "frozen-patched.cpp": "04d4fbd4ee333c8bd9c6841445cbdb6a6a4fabbc6202087cb2da37d231d35c5d",
+    "with-0019.cpp": "c922351e82c4ff25988a35c0c01262ab3260003e1a6718bfd33a31f61d92a694",
+    "without-0019.cpp": "f00ec81945628e63f0db2eb84a10b78f660155e8a2555bfbe4ac8cf3d6f56b06",
+    "0019.patch": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a",
+    "engine-base.cpp": "56d7ab07f064c3addd5d71a6e7dac07d1d51f51f8af50bc02bf42379c106403b"
+  }
+}

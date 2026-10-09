@@ -1,0 +1,418 @@
+{
+  "classic-with-0019-0": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 0,
+        "line_antialiasing": false,
+        "feedback_detail": -1.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/classic-with-0019-0/manifest.json",
+      "identity": {
+        "role": "with-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "with-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {
+      "frame-239.png": "85078a9d7c15e3978bee9f02e5c19f10db7ad3bb60dfcab58273c8f3305f4dc9",
+      "frame-119.png": "50b2d432926a4ccb8a373368630ea771bad35c4c7393f7324b45d97d088d9369",
+      "frame-479.png": "890d895f3d75fdc951dd81bb39a4b50e32c1ecb16a3d83b84a2f266b79bb5ffc"
+    },
+    "observer_worker_sha256": "c0d41591d4315f1a0951994d57edfe8f1ee7a0b65429ec7c18c1a2aba5f42de4",
+    "linked_engine_library_sha256": "37109ee97c61b3c0b2bfc230edf77596ce2674cdad0f8f3b157e39bd9c8f4628",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "classic-with-0019-1": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 0,
+        "line_antialiasing": false,
+        "feedback_detail": -1.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/classic-with-0019-1/manifest.json",
+      "identity": {
+        "role": "with-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "with-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {},
+    "observer_worker_sha256": "c0d41591d4315f1a0951994d57edfe8f1ee7a0b65429ec7c18c1a2aba5f42de4",
+    "linked_engine_library_sha256": "37109ee97c61b3c0b2bfc230edf77596ce2674cdad0f8f3b157e39bd9c8f4628",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "classic-without-0019-0": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 0,
+        "line_antialiasing": false,
+        "feedback_detail": -1.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/classic-without-0019-0/manifest.json",
+      "identity": {
+        "role": "without-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "without-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {
+      "frame-239.png": "85078a9d7c15e3978bee9f02e5c19f10db7ad3bb60dfcab58273c8f3305f4dc9",
+      "frame-119.png": "50b2d432926a4ccb8a373368630ea771bad35c4c7393f7324b45d97d088d9369",
+      "frame-479.png": "890d895f3d75fdc951dd81bb39a4b50e32c1ecb16a3d83b84a2f266b79bb5ffc"
+    },
+    "observer_worker_sha256": "93496928b22170b7db313d5b84b4cbf6549dbf80a6ecc74fbb836a72fb78e2ab",
+    "linked_engine_library_sha256": "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "classic-without-0019-1": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 0,
+        "line_antialiasing": false,
+        "feedback_detail": -1.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/classic-without-0019-1/manifest.json",
+      "identity": {
+        "role": "without-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "without-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {},
+    "observer_worker_sha256": "93496928b22170b7db313d5b84b4cbf6549dbf80a6ecc74fbb836a72fb78e2ab",
+    "linked_engine_library_sha256": "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "standard-with-0019-0": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 720,
+        "line_antialiasing": true,
+        "feedback_detail": 0.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/standard-with-0019-0/manifest.json",
+      "identity": {
+        "role": "with-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "with-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {
+      "frame-239.png": "79a0b0676846110aa8d5d830fd17a415aea6843b28a7d9d7d7359c29d05f0d2e",
+      "frame-119.png": "f326ac0fe07c8ff09ed04368346ea889f5e5a40e6e13f153ea606341dfb5df47",
+      "frame-479.png": "67bffc98caf807ce5c6fa2221189fc7f1e9a819be0f7bf3bbfcb0e8e5b456060"
+    },
+    "observer_worker_sha256": "c0d41591d4315f1a0951994d57edfe8f1ee7a0b65429ec7c18c1a2aba5f42de4",
+    "linked_engine_library_sha256": "37109ee97c61b3c0b2bfc230edf77596ce2674cdad0f8f3b157e39bd9c8f4628",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "standard-with-0019-1": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 720,
+        "line_antialiasing": true,
+        "feedback_detail": 0.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/standard-with-0019-1/manifest.json",
+      "identity": {
+        "role": "with-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "with-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {},
+    "observer_worker_sha256": "c0d41591d4315f1a0951994d57edfe8f1ee7a0b65429ec7c18c1a2aba5f42de4",
+    "linked_engine_library_sha256": "37109ee97c61b3c0b2bfc230edf77596ce2674cdad0f8f3b157e39bd9c8f4628",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "standard-without-0019-0": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 720,
+        "line_antialiasing": true,
+        "feedback_detail": 0.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/standard-without-0019-0/manifest.json",
+      "identity": {
+        "role": "without-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "without-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {
+      "frame-239.png": "79a0b0676846110aa8d5d830fd17a415aea6843b28a7d9d7d7359c29d05f0d2e",
+      "frame-119.png": "f326ac0fe07c8ff09ed04368346ea889f5e5a40e6e13f153ea606341dfb5df47",
+      "frame-479.png": "67bffc98caf807ce5c6fa2221189fc7f1e9a819be0f7bf3bbfcb0e8e5b456060"
+    },
+    "observer_worker_sha256": "93496928b22170b7db313d5b84b4cbf6549dbf80a6ecc74fbb836a72fb78e2ab",
+    "linked_engine_library_sha256": "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "standard-without-0019-1": {
+    "job": {
+      "schema_version": 1,
+      "config": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "warmup_seconds": 4,
+        "measurement_seconds": 12,
+        "seed": 12345,
+        "line_reference_height": 720,
+        "line_antialiasing": true,
+        "feedback_detail": 0.0
+      },
+      "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+      "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+      "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+      "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/visual/standard-without-0019-1/manifest.json",
+      "identity": {
+        "role": "without-0019",
+        "kind": "selected-frame verification, outside timedjobs"
+      }
+    },
+    "manifest": {
+      "fps": 30,
+      "frames": 480,
+      "gl_error_frames": 0,
+      "gl_renderer": "Apple M4 Pro",
+      "gl_version": "4.1 Metal - 89.4",
+      "height": 2160,
+      "identity": {
+        "kind": "selected-frame verification, outside timedjobs",
+        "role": "without-0019"
+      },
+      "seed": 12345,
+      "status": "success",
+      "width": 3840
+    },
+    "selected_pngs": {},
+    "observer_worker_sha256": "93496928b22170b7db313d5b84b4cbf6549dbf80a6ecc74fbb836a72fb78e2ab",
+    "linked_engine_library_sha256": "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393",
+    "observer_harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "8b3bf76efd4dcf53c272de539cd5cda3fa152688dac53bdc8140ca76ca0d7e62",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  }
+}

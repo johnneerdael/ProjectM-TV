@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from PIL import Image
+from guide_bindings import verify_guide
 
 
 def sha(data):
@@ -14,6 +15,40 @@ def sha(data):
 def inventory_digest(value):
     return sha(json.dumps(value, sort_keys=True, separators=(',', ':'),
                           ensure_ascii=False, allow_nan=False).encode('utf-8'))
+
+
+def verify_request(record, capture, canonical, case):
+    """Bind the original complete request to inputs, outputs and the frozen protocol.
+
+    Do not resolve historical absolute paths on another checkout. The preserved
+    relative inputs are checked separately against the actual committed bytes.
+    """
+    role, repeat = record['role'], record['repeat']
+    request = record['request']
+    assert set(request) == {'schema_version', 'config', 'pcm_path', 'preset_path',
+                            'texture_root', 'bands_path', 'manifest_path', 'identity'}, f'request fields: {case}/{role}'
+    assert type(request['schema_version']) is int and request['schema_version'] == 1, f'request schema: {case}'
+    assert request['identity'] == canonical[role], f'request worker: {case}/{role}'
+    config = request['config']
+    expected = {'width': capture['width'], 'height': capture['height'], 'fps': 30,
+                'warmup_seconds': 0, 'measurement_seconds': capture['frames']/30,
+                'seed': 12345, 'line_reference_height': 0, 'line_antialiasing': False}
+    assert set(config) == set(expected), f'request config fields: {case}/{role}'
+    for key, value in expected.items():
+        assert type(config[key]) is type(value) and config[key] == value, f'request config {key}: {case}/{role}'
+    # The frozen worker derives absent line_reference_width from height, thus0/0.
+    # Its hash binds the fixed48×32 mesh, (frame+1)/fps clock and TV feedback-off
+    # setup. Requests cannot add an override that the protocol did not admit.
+    assert request['identity']['harness']['worker.cpp'] == 'b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f', f'request clock harness: {case}'
+    worker = Path(canonical[role]['worker'])
+    host = worker.parents[2]
+    run = host / 'captures' / case / f'{role}-{repeat}'
+    assert request['pcm_path'] == str(host / 'captures' / case / 'audio.f32'), f'request PCM path: {case}/{role}'
+    assert request['preset_path'] == capture['preset_path'], f'request preset path: {case}/{role}'
+    assert request['texture_root'] == str(host.parent.parent / 'core/src/main/assets/textures'), f'request texture path: {case}/{role}'
+    assert request['bands_path'] == str(run / 'bands.jsonl'), f'request bands path: {case}/{role}/{repeat}'
+    assert request['manifest_path'] == str(run / 'manifest.json'), f'request manifest path: {case}/{role}/{repeat}'
+    assert (Path(request['preset_path']).name == Path(capture['preset_relative_path']).name), f'request preset name: {case}'
 
 
 def verify(repo):
@@ -57,6 +92,10 @@ def verify(repo):
     workers = json.loads((evidence / 'workers.json').read_text())
     textures = json.loads((evidence / 'textures.json').read_text())
     texture_digest = inventory_digest(textures)
+    texture_root = repo / 'core/src/main/assets/textures'
+    actual_textures = {path.relative_to(texture_root).as_posix(): sha(path.read_bytes())
+                       for path in texture_root.rglob('*') if path.is_file()}
+    assert actual_textures == textures, 'preserved texture bytes differ from inventory'
     assert set(workers) == {'upstream', 'patched'}
     canonical = {}
     supplementary = {'source_tree_sha256', 'texture_inventory_sha256',
@@ -83,6 +122,7 @@ def verify(repo):
         pcm_file = repo / capture['pcm_relative_path']
         assert pcm_file.is_file(), f'PCM file missing: {case}'
         assert sha(pcm_file.read_bytes()) == capture['pcm_sha256'], f'PCM bytes: {case}'
+        assert pcm_file.stat().st_size == capture['frames'] * 1470 * 4, f'PCM frame length: {case}'
         assert capture['texture_inventory_sha256'] == texture_digest, f'textures: {case}'
         assert set(capture['roles']) == set(canonical)
         for role in canonical:
@@ -94,6 +134,7 @@ def verify(repo):
             assert role in ('upstream', 'patched') and repeat in (0, 1)
             assert (role, repeat) not in observed, f'duplicate run: {case}/{role}/{repeat}'
             observed.add((role, repeat))
+            verify_request(record, capture, canonical, case)
             assert record['exit'] == 0 and record['frames'] == manifest['frames'] == capture['frames']
             assert (manifest['width'], manifest['height']) == (capture['width'], capture['height']), case
             assert manifest['fps'] == 30 and manifest['seed'] == capture['seed'] == 12345
@@ -107,6 +148,7 @@ def verify(repo):
         assert observed == {(role, repeat) for role in ('upstream', 'patched') for repeat in (0, 1)}, case
         assert len(records) == 4, case
     assert cases <= set(runs)
+    verify_guide((repo / 'docs/user-guide/engine/patches.md').read_text(), gallery, captures)
     print(f'PASS: 18 repairs, {len(images)//2} pairs, {len(runs)} cases, '
           f'{sum(len(r) for r in runs.values())} successful runs; PNG/RGB hashes and pins match')
 

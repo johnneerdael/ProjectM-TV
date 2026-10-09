@@ -76,6 +76,7 @@ int main(int argc, char** argv) {
         if (!engine.failure.empty()) throw std::runtime_error(engine.failure);
         std::vector<float> pcm(block);
         int error_frames = 0;
+        json readbackStates = json::array();
         for (int frame = 0; frame < frames; ++frame) {
             audio.read(reinterpret_cast<char*>(pcm.data()), pcm.size() * sizeof(float));
             if (!audio) throw std::runtime_error("truncated PCM");
@@ -90,7 +91,21 @@ int main(int argc, char** argv) {
 #endif
             engine.RenderFrame(capture.framebuffer);
             if (frame == 119 || frame == 239 || frame == 479) {
+                GLint beforeRead = 0, beforeBuffer = 0, beforePack = 0;
+                glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &beforeRead);
+                glGetIntegerv(GL_READ_BUFFER, &beforeBuffer);
+                glGetIntegerv(GL_PACK_ALIGNMENT, &beforePack);
                 auto pixels = capture.Read();
+                GLint afterRead = 0, afterBuffer = 0, afterPack = 0;
+                glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &afterRead);
+                glGetIntegerv(GL_READ_BUFFER, &afterBuffer);
+                glGetIntegerv(GL_PACK_ALIGNMENT, &afterPack);
+                if (beforeRead != afterRead || beforeBuffer != afterBuffer || beforePack != afterPack)
+                    throw std::runtime_error("observer changed caller readback state");
+                readbackStates.push_back({{"frame", frame}, {"capture_framebuffer", capture.framebuffer},
+                    {"before_read_framebuffer", beforeRead}, {"after_read_framebuffer", afterRead},
+                    {"before_read_buffer", beforeBuffer}, {"after_read_buffer", afterBuffer},
+                    {"before_pack_alignment", beforePack}, {"after_pack_alignment", afterPack}});
                 std::cout.write(reinterpret_cast<char*>(pixels.data()), pixels.size());
                 if (!std::cout) throw std::runtime_error("frame consumer closed");
             }
@@ -100,7 +115,7 @@ int main(int argc, char** argv) {
                        {"width", width}, {"height", height}, {"fps", fps},
                        {"gl_error_frames", error_frames}, {"gl_version", reinterpret_cast<const char*>(glGetString(GL_VERSION))},
                        {"gl_renderer", reinterpret_cast<const char*>(glGetString(GL_RENDERER))},
-                       {"identity", job.at("identity")}, {"seed", cfg.at("seed")}};
+                       {"identity", job.at("identity")}, {"seed", cfg.at("seed")}, {"config", cfg}, {"readback_states", readbackStates}};
         std::string target = job.at("manifest_path");
         std::ofstream manifest(target + ".tmp");
         manifest << result.dump();

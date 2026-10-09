@@ -6,6 +6,8 @@ from pathlib import Path
 import shutil
 import subprocess
 
+from source_observer import observe
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--repo', type=Path, required=True)
 parser.add_argument('--catalog-work', type=Path, required=True)
@@ -38,17 +40,8 @@ for role in ('with-0019', 'without-0019'):
             env=dict(os.environ, GIT_CEILING_DIRECTORIES=str(source.parent)))
     (source / 'src/libprojectM/analysis_hooks.hpp').write_text(hooks)
     video = source / 'src/libprojectM/MilkdropPreset/VideoEcho.cpp'
-    content = video.read_text()
-    start = content.index('void VideoEcho::DrawGammaAdjustment(')
-    gamma = content[start:]
-    anchor = '    auto const gammaAdj = static_cast<float>(*perFrameContext.gamma);'
-    if gamma.count(anchor) != 1:
-        raise SystemExit('Gamma observer anchor differs')
-    gamma = gamma.replace(anchor, anchor + '\n    ++lab::gamma_invocations;\n    lab::gamma_value = gammaAdj;', 1)
-    gamma = gamma.replace('        m_echoMesh.Draw();',
-                          '        m_echoMesh.Draw();\n        ++lab::gamma_draw_calls;', 1)
-    video.write_text(content[:start] + gamma)
-for name in ('original.milk', 'inactive-gamma2.milk', 'protocol.md'):
+    video.write_text(observe(video.read_text()))
+for name in ('original.milk', 'inactive-gamma2.milk', 'protocol.md', 'benchmark.py', 'source_observer.py', 'capture_visual.py'):
     shutil.copyfile(evidence / name, work / name)
 for name in ('build.py', 'run.py', 'analyze.py', 'verify_visual.py'):
     content = (evidence / ('executed-' + name)).read_text()

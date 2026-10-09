@@ -35,9 +35,11 @@ MilkDrop’s source uses `.001f` for the gamma-only pass count (`milkdropfs.cpp:
 - `analysis.json` contains all block means, absolute/percentage deltas and intervals.
 - `timed-runs.json.gz` retains every independent per-frame timing/draw record for all 80 scheduled jobs.
 - `schedule.json`, `job-summary.json`, `inputs.json` and `workers.json` bind ordering, inputs, sources, harness and binaries.
-- `visual-results.json` and `visual-jobs.json` retain selected RGB hashes, repeats and separate verification identities. Their local PNGs remain under the task worktree’s `build/i31-benefit/visual/`.
+- `visual-results.json` and `visual-jobs.json` retain selected RGB hashes, repeats and separate verification identities. The corrected observer restores caller read framebuffer, read buffer and pack alignment at each read; its PNGs remain under the task worktree’s `build/i31-benefit/observer-restored-bound-replay/visual/`. The initial observer records are retained under `historical-observer/`. Corrected selected hashes equal those initial hashes; no timed benchmark job was repeated.
 - `source-purpose.json` records the independent float/pass/8-bit calculation.
-- `executed-*.py` preserve the exact orchestration recipes as executed under `repo/build/i31-benefit`; `prepare.py` ports that layout to an explicit output directory.
+- `requests.json` retains all 80 original full timing requests with explicit retained-file provenance. The input-hash bindings are retrospective checks against preserved requests/files, not invented historical before/after mutation observations. Future private runs additionally check inputs before/after.
+- `custody.json`, `source-proof/`, `benchmark.py` and `source_observer.py` bind the fixed source/observer recipe and reproducible analysis. `verify.py` reconstructs the frozen patch chain, validates the complete requests and regenerates all statistics.
+- `executed-*.py` retain the initial command layout with documented post-review custody hardening; `prepare.py` ports it to an explicit output directory. `capture_visual.py` emits complete corrected observer receipts, input snapshots and caller-state checks.
 
 First prepare the frozen catalog engine with the neighboring [catalog builder](../patch-visual-catalog/BUILDING.md). Then:
 
@@ -49,7 +51,11 @@ I31_PROOF_REPO=/path/to/ProjectM-TV python3 /path/to/new-i31-proof/run.py smoke
 I31_PROOF_REPO=/path/to/ProjectM-TV python3 /path/to/new-i31-proof/run.py benchmark
 python3 /path/to/new-i31-proof/analyze.py
 python3 /path/to/new-i31-proof/link_images.py
-I31_PROOF_REPO=/path/to/ProjectM-TV python3 /path/to/new-i31-proof/verify_visual.py
+python3 docs/superpowers/evidence/i31-benefit/capture_visual.py \
+  --repo /path/to/ProjectM-TV --work /path/to/new-i31-proof \
+  --output /path/to/new-visual-output
 ```
 
 The portable adapter changes only repo-path resolution. New machines/compilers require their own worker/input/runtime receipts. The image verification recipe is archived separately; it links an observer worker against the same private static libraries and reads only the three selected frames. Do not mix its timing with the benchmark.
+
+PR66 closeout validation: the actual guide references are checked by the neighboring gallery verifier. Benchmark verification binds source, complete requests, profiles, controls, inputs, workers and every published statistic. Corrected visual verification binds all eight requests and 24 restored caller-state observations. Native sentinel control fails with the initial read helper and passes with the restored helper. Timing data and analysis remain byte-identical to the original measured records.

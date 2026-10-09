@@ -69,7 +69,7 @@ for role in ['upstream','patched']:
    finished=time.monotonic()
    verify_inputs(preset,pcm,textures,summary)
   manifest=json.loads((run/'manifest.json').read_text()) if (run/'manifest.json').exists() else {}
-  result={'exit':exitcode,'frames':len(framehash),'frame_sha256':framehash,'manifest':manifest,'wall_seconds':finished-started,'role':role,'repeat':repeat,'inputs':{key:summary[key] for key in ('preset_sha256','pcm_sha256','texture_inventory_sha256')}}
+  result={'exit':exitcode,'frames':len(framehash),'frame_sha256':framehash,'manifest':manifest,'wall_seconds':finished-started,'role':role,'repeat':repeat,'request':job,'inputs':{key:summary[key] for key in ('preset_sha256','pcm_sha256','texture_inventory_sha256')}}
   (run/'result.json').write_text(json.dumps(result,indent=2))
   if sha(Path(identity['worker']).read_bytes())!=identity['worker_sha256']:raise SystemExit('worker changed during capture')
   hashes.append(framehash)

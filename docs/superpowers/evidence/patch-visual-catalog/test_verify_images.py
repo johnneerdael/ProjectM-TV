@@ -47,9 +47,13 @@ class RunReceiptBinding(unittest.TestCase):
             (evidence / 'run-manifests.json').write_text(json.dumps(runs))
             assets = root / 'docs/user-guide/images/patches'
             assets.mkdir(parents=True)
+            guide = root / 'docs/user-guide/engine'
+            guide.mkdir(parents=True)
+            (guide / 'patches.md').symlink_to(REPO / 'docs/user-guide/engine/patches.md')
             presets = root / 'core/src/main/assets'
             presets.mkdir(parents=True)
             (presets / 'presets').symlink_to(REPO / 'core/src/main/assets/presets', target_is_directory=True)
+            (presets / 'textures').symlink_to(REPO / 'core/src/main/assets/textures', target_is_directory=True)
             originals = REPO / 'docs/user-guide/images/patches/audit'
             if image_swap or image_overrides:
                 (assets / 'audit').mkdir()
@@ -95,7 +99,7 @@ class RunReceiptBinding(unittest.TestCase):
     def test_texture_inventory_tamper_fails(self):
         textures = json.loads((EVIDENCE / 'textures.json').read_text())
         textures[next(iter(textures))] = '0' * 64
-        with self.assertRaisesRegex(AssertionError, 'texture inventory mismatch'):
+        with self.assertRaisesRegex(AssertionError, 'preserved texture bytes'):
             self.check(overrides={'textures.json': textures})
 
     def test_source_inventory_tamper_fails(self):
@@ -161,6 +165,127 @@ class RunReceiptBinding(unittest.TestCase):
         images[name].update(width=640, height=1440, png_sha256=verifier.sha(data))
         with self.assertRaisesRegex(AssertionError, 'image dimensions'):
             self.check(overrides={'images.json': images}, image_overrides={name: data})
+
+    def test_changed_complete_request_controls_fail(self):
+        runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
+        captures = json.loads((EVIDENCE / 'captures/I16.json').read_text())
+        canonical = {r: captures['roles'][r]['identity'] for r in ('upstream', 'patched')}
+        for field, value in [('width', 3840), ('height', 2160), ('fps', 60),
+                             ('seed', 1), ('warmup_seconds', 1),
+                             ('measurement_seconds', 16.0),
+                             ('line_reference_height', 1080), ('line_antialiasing', True)]:
+            with self.subTest(field=field):
+                record = copy.deepcopy(runs['I16'][0])
+                record['request']['config'][field] = value
+                with self.assertRaisesRegex(AssertionError, 'request config ' + field):
+                    verifier.verify_request(record, captures, canonical, 'I16')
+
+    def test_unexpected_request_override_fails(self):
+        with self.assertRaisesRegex(AssertionError, 'request config fields'):
+            self.check(lambda runs: runs['I16'][0]['request']['config'].update(line_reference_width=1920))
+
+    def test_wrong_request_worker_fails(self):
+        def change(runs):
+            runs['I16'][0]['request']['identity'] = runs['I16'][2]['request']['identity']
+        with self.assertRaisesRegex(AssertionError, 'request worker'):
+            self.check(change)
+
+    def test_missing_complete_request_fails(self):
+        with self.assertRaises(KeyError):
+            self.check(lambda runs: runs['I16'][0].pop('request'))
+
+    def test_changed_request_paths_fail(self):
+        runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
+        capture = json.loads((EVIDENCE / 'captures/I16.json').read_text())
+        canonical = {r: capture['roles'][r]['identity'] for r in ('upstream', 'patched')}
+        for field, label in [('preset_path', 'preset'), ('pcm_path', 'PCM'),
+                             ('texture_root', 'texture'), ('bands_path', 'bands'),
+                             ('manifest_path', 'manifest')]:
+            with self.subTest(field=field):
+                record = copy.deepcopy(runs['I16'][0])
+                record['request'][field] += '.wrong'
+                with self.assertRaisesRegex(AssertionError, 'request ' + label + ' path'):
+                    verifier.verify_request(record, capture, canonical, 'I16')
+
+
+class GuideRoleBinding(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.source = (REPO / 'docs/user-guide/engine/patches.md').read_text()
+        cls.gallery = json.loads((EVIDENCE / 'gallery.json').read_text())
+        cls.captures = {p.stem: json.loads(p.read_text()) for p in (EVIDENCE / 'captures').glob('*.json')}
+
+    def verify(self, source):
+        verifier.verify_guide(source, self.gallery, self.captures)
+
+    def test_guide_passes(self):
+        self.verify(self.source)
+
+    def test_guide_role_reference_swap_fails(self):
+        changed = self.source.replace('I17-4k-upstream.png', 'ROLE-SWAP.png').replace(
+            'I17-4k-patched.png', 'I17-4k-upstream.png').replace('ROLE-SWAP.png', 'I17-4k-patched.png')
+        with self.assertRaisesRegex(AssertionError, 'guide role reference'):
+            self.verify(changed)
+
+    def test_guide_link_without_image_swap_fails(self):
+        changed = self.source.replace('href="../../images/patches/audit/I17-4k-upstream.png"',
+                                      'href="../../images/patches/audit/I17-4k-patched.png"', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide role reference'):
+            self.verify(changed)
+
+    def test_guide_visible_role_label_swap_fails(self):
+        changed = self.source.replace('Before · upstream master</strong><a href="../../images/patches/audit/I17-',
+                                      'After · ProjectM TV</strong><a href="../../images/patches/audit/I17-', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide role label'):
+            self.verify(changed)
+
+    def test_guide_alt_role_label_swap_fails(self):
+        changed = self.source.replace('alt="Happening.milk — Before · upstream master"',
+                                      'alt="Happening.milk — After · ProjectM TV"', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide image label'):
+            self.verify(changed)
+
+    def test_guide_zoom_reference_swap_fails(self):
+        changed = self.source.replace('class="patch-crop" href="../../images/patches/audit/I08-4k-upstream.png"',
+                                      'class="patch-crop" href="../../images/patches/audit/I08-4k-patched.png"', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide role reference'):
+            self.verify(changed)
+
+    def test_guide_same_but_wrong_crop_fails(self):
+        changed = self.source.replace('--image-top:-75.000000000%;', '--image-top:-74.000000000%;')
+        with self.assertRaisesRegex(AssertionError, 'guide crop rectangle'):
+            self.verify(changed)
+
+    def test_guide_extra_crop_style_fails(self):
+        changed = self.source.replace('--crop-ratio:1152/864;', '--crop-ratio:1152/864;filter:brightness(2);')
+        with self.assertRaisesRegex(AssertionError, 'guide crop rectangle'):
+            self.verify(changed)
+
+    def test_guide_image_colour_adjustment_fails(self):
+        changed = self.source.replace('alt="Happening.milk — Before · upstream master"',
+                                      'style="filter:brightness(2)" alt="Happening.milk — Before · upstream master"', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide panel style'):
+            self.verify(changed)
+
+    def test_guide_caption_frame_drift_fails(self):
+        changed = self.source.replace('3840×2160, frame 239 at 30 Hz.', '3840×2160, frame 119 at 30 Hz.', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide frame caption'):
+            self.verify(changed)
+
+    def test_guide_wrong_patch_section_fails(self):
+        changed = self.source.replace('## 0017 — Built-in wave opacity', '## 0018 — Built-in wave opacity')
+        with self.assertRaisesRegex(AssertionError, 'guide patch section'):
+            self.verify(changed)
+
+    def test_guide_additional_unbound_image_fails(self):
+        changed = self.source + '\n<img src="../../images/patches/audit/I17-4k-upstream.png">\n'
+        with self.assertRaisesRegex(AssertionError, 'unbound audit image'):
+            self.verify(changed)
+
+    def test_guide_markdown_image_outside_figure_fails(self):
+        changed = self.source + '\n![Wrong After](../../images/patches/audit/I17-4k-upstream.png)\n'
+        with self.assertRaisesRegex(AssertionError, 'unbound audit image'):
+            self.verify(changed)
 
 
 if __name__ == '__main__':

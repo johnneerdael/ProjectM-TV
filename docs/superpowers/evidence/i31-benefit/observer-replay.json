@@ -1,0 +1,8 @@
+{
+  "replaces": "historical-observer/visual-jobs.json",
+  "selected_hashes_equal_historical": true,
+  "timed_benchmark_replayed": false,
+  "runs": 8,
+  "capture_states": 24,
+  "native_state_control": "PASS: sentinel readFBO/readBuffer GL_NONE/packAlignment8 restored"
+}

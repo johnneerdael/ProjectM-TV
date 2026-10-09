@@ -55,9 +55,18 @@ public:
     }
     std::vector<unsigned char> Read() {
         std::vector<unsigned char> data(width * height * 3), flipped(data.size());
+        GLint previousReadFramebuffer = 0, previousReadBuffer = 0;
+        GLint previousPackAlignment = 0;
+        glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &previousReadFramebuffer);
+        glGetIntegerv(GL_READ_BUFFER, &previousReadBuffer);
+        glGetIntegerv(GL_PACK_ALIGNMENT, &previousPackAlignment);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
         glReadBuffer(GL_COLOR_ATTACHMENT0);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
         glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data.data());
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, previousReadFramebuffer);
+        glReadBuffer(previousReadBuffer);
+        glPixelStorei(GL_PACK_ALIGNMENT, previousPackAlignment);
         for (int row = 0; row < height; ++row)
             std::copy_n(data.data() + (height - row - 1) * width * 3, width * 3,
                         flipped.data() + row * width * 3);

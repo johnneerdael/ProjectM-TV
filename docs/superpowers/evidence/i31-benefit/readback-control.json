@@ -1,0 +1,8 @@
+{
+  "old_observer_expected_failure": {
+    "exit": 1,
+    "stderr": "readback caller state not restored\n"
+  },
+  "corrected_observer": "PASS from native sentinel control",
+  "test_source_sha256": "6eb2a0c75c31889770bc3a24cf6815949c9b7f14c893f3fa7eda59bf0b4d298a"
+}

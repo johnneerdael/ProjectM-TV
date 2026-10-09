@@ -1,0 +1,2486 @@
+{
+  "schema_version": 1,
+  "provenance": "Complete requests preserved from the original runs/<schedule-name>/job.json. Input hashes re-established after the batch from retained unchanged fixtures/audio and the frozen source texture inventory; not retrospective per-run mutation observations.",
+  "requests": {
+    "original-classic-b00-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b00-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "614cf6a5b689c42c7bd49d72f23b24049e5eae6bf35ecbc05c46d79b75f9db24",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b00-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b00-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "ee038143417c29a5471294bc32532c06a9458916692aeca2225cc997043f9360",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b00-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b00-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "1e69bdf85032deb6a684131c8a09161d0be477ff1e0524a37076cc31cca7485e",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b00-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b00-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "da724d509498449b65b4faeb563b1154826969f010379d2c6de88b41c7dbe7d0",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b01-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b01-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "8f7a97bb1e0d44e0b31e1a1733b5fd094eaf83c1345a50ac2238c730a935b7cc",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b01-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b01-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "3e4f053dd60e90e84c0962f682b47c97b4b1d16cdccbb4806fd5a35fc0bf4ccc",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b01-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b01-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "119e79513aea9da19582eb030c235044a35bd33d773a885362708a686af3300b",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b01-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b01-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "cc63afb2b34fb3c0497b01206bba3684f565b3d65b2e89283b7805078ddff2af",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b02-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b02-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "80c2c100369b6e4c1dcc02ae6012835642849e2e30be7e906267e6a5c354866e",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b02-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b02-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "9c18822bffcca138fc6c2d4a4580c0e42e77128a4751869d4489292909832586",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b02-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b02-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "890360df1618ec648ca8ebae417d29db65d682517e8b7e88dbe2d29886d2419a",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b02-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b02-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "bba12f11caea67d879bdad837ee177c4737c70de9c0a56f4bf6ca83917a2b4dc",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b03-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b03-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "f1d1c30c03e8267c7b3618ccb72213c70f69eb3525bb554bb0c9334c0bfc2f6c",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b03-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b03-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "9c020803fbcc8bb423b5611ff509d1f4f23cd193f13c371800ad332b8c246923",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b03-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b03-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "a65ccb9490b9ce559131e107b4d024b8f697cb486b6034b3a680454f89c71947",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b03-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b03-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "7edeef4e6eeaeca57c03f67c5fe8f983ec8148f83e8a3f5ccfccc900046f9a43",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b04-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b04-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "d2c45084125ef7c5ec7a12994998f633a867e09032fb6eedbedd60562e90ee93",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b04-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b04-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "41424494d586cfcb8becada85b9da9261df0094734182b39724bcf602f0bcdf4",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b04-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b04-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "6e40e95bd5258d8131ed877b69ac693fe9d57134f2bf3ce56dd9103659a39102",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b04-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b04-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "e3110d338108685f0999b204e5d8eb8893c5907a0272999f26834015bcf01e40",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b05-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b05-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "f838c35f3eeb008437308d28cf6598b29a5084a34ab4f16be0027d9a258177f5",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b05-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b05-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "8d2462a80d2e8bdd6f1a1920e26cfa23eec644c67de44632fe1a2bc2ea4ce71c",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b05-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b05-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "442b77dd4197851c10e36535598ffceddd01910e72c6aa2c7b6db00b00a07ff4",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b05-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b05-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "6c57dbe27348d88365a6072da26aabda3c2ab3b1d64f1c94f3dd764f832a9956",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b06-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b06-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "158892ddc7c3be3b2e3304078dba788a2407fb09d5e1950d169a838ffac1cb4a",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b06-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b06-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "5c0d1a2e75b759fb13300c995dc9a14fe37a561e64a886c6499d6f336ced3571",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b06-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b06-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "9c191a2f2c7205e65a47c5d63c8474c4a7082e6cce2a4e5b0a1eaa64688b7d89",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b06-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b06-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "cd73a2a2c80063f62c5db310bc9c9902f57b3912fcfa98abf9696c190b20631c",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b07-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b07-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "d37ade21addb99ff4778a4233f8d2241de9a6a6870bd84588dfe3efac3b12104",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b07-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b07-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "3c81bc064ca2803ee9e40c5b64fc1f34a1d2bf307c45fab7ef7658ec01aabf48",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b07-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b07-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "d85f8251a0668db2211defcdb38ef566628db5ab01cdc4b8e29a4211bdf0efdd",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-classic-b07-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-classic-b07-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "999d8f49a095ee8cb87e3db5c23b6bd7bc9fbc3018c7350bffdba2cd43994715",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b00-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b00-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "fdfdb0ed8fdbee44c11bdb7662413729b772b61c0313a2d9f1f1cd3b28bfb392",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b00-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b00-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "3f88a3fd5c8b3e28e472d7bf6783128ebd8857f728795bd33806a47ebaa9bdde",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b00-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b00-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "aeef0ebd86800f59ad7fb86762b9f818da1cd059044e321e28d89996616caafd",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b00-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b00-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "1b93a1378f316a28c3b1ad0e4c3c17f92104bf6853eabdbf1aa4584da37519f9",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b01-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b01-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "8086caa7ca90f1e5dd2ad0552fc775694781d6cc66eca2927a24903d5c8800aa",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b01-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b01-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "a0781128e342f34476a20f777a25c9ddfca82e4bf8b1709473406ace5a858dc2",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b01-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b01-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "bdb0b79908945c93623eeaf7a9c781a3d5090feed903c481dc15602af07f808b",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b01-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b01-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "4763437caad9ff9516cc7550c8a499caa01986fa91e8630c50b1b5f4a6051d8c",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b02-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b02-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "d53e006ae54810f47265e7afa851b849c1ba609e67f7166c1656f5de78016888",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b02-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b02-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "b422b7e867f94f896acfd31f11a3f7b3fe24475779503ca3827ec8be707b1f23",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b02-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b02-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "374f7670a0c1f11807fe94f03c276318bf7c67b156da923ad423b0c42a61d51e",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b02-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b02-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "5211966c4b07c4322eb6648003e017faacc4bf5879a13f0ce2f35a8e26b055ac",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b03-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b03-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "a43167855cb7fcf2c7de3a760d942afff05099fbd0bf51bd72e08f64d5409c17",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b03-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b03-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "d2d12b172a0512367924aa2b92d4c1462e316258b61cc335a1f34b952139f0d4",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b03-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b03-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "3c35dd81556ae74497f2f5c240f72dd6db3c4778bfad9bb2c3427d86b1c5e3a8",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b03-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b03-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "0b30413a4d416de67751417033afb3f891efecb1fd87cb7fcbe46c07b80912de",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b04-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b04-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "c35c7475a890f88ed0d556cdfdd88e4d56db48b7fba8a8bc0d8ec5fcc526cbda",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b04-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b04-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "90876a9babb3754856ec9ee59fbf35ebc089063e7745130206187b1592f42f84",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b04-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b04-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "e81882b4da60799ccb892de2bba2b6b7f840e115e5a07ad4d89aa54dc75a7c84",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b04-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b04-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "ea6a2af90400f11786695f15ced1c3d9a87dfd3a6247a411121a87332a6b0a0e",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b05-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b05-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "902d508de4f60a5a3f80900e86fc8de85a6e4428027e6ac02f7dca574aa445ba",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b05-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b05-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "143a78a2bc86e452e14303db4ab8787b03c23e8bb51ccf2c115b9da4c3c22248",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b05-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b05-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "1186d638512c49ca52a3480d7a644013c61b33f8aca01e051894b6f74af19d1f",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b05-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b05-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "43adc4a22208df38cb5b786751bb4fd9e7836f4f85976586d82d8e12abfc7118",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b06-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b06-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "5c67c8eaaf9f853d69a494ffc8b3e7b58f27745c0f945de8028dfc40edb06a8f",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b06-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b06-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "1162691f3ab7af26354edc0210c617518460b1f0e2cfe1b13cfc423d7aab5b18",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b06-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b06-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "26542c0a59d05a42e48176ca10fedfe70b3fdd41b47d0609937931941adc183a",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b06-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b06-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "cf5264d2f54a9795848fbb70ea097edcc5d89b268e2de8aeee6a5f6aaf81a0a2",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b07-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b07-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "ccb26bcceb406bfe323687efe16559f315dc94452b9693a7f8a3ea625ec88afd",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b07-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b07-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "430702e5e4c2d2b08e3f7fc629f94b05008159f189670bef46e6e07577757535",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b07-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b07-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "2d8c3f2dd65b0d65c217e578305b3d722766e6ebe75f26d7935d1f5c76c8deae",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "original-standard-b07-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 720,
+          "line_antialiasing": true,
+          "feedback_detail": 0.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/original.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/original-standard-b07-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "ba93f9a5313d00a475e975ddcafa4f6e914869ac5cedfe8fe1fa2e3309874f40",
+      "input_hashes": {
+        "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b00-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b00-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "c4339c20179afd86a8cb5573717803f8cad7a632daaaffe6d3e07ff777673718",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b00-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b00-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "28e25e098a0256f8d8a155422bda217323ef9490aab7f9bc7f1ac0496cc3d6ab",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b00-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b00-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "feb184712607d5cc76f142ff77b70472d7e8a848a7e7273dbf5ebd61f253829c",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b00-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b00-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "3df42bb8ee439526755be06bcbfddc93bee9de9bc542860d1a12867f63a9ecef",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b01-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b01-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "7c6dca660a5ea3408adf3c8e9131ba1c52a9b387a74869b9dcd3d5ba6d41d95d",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b01-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b01-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "84a5f8a1a73eb5a9184893639119e45c6cdc2b66952ac2c781dc45dacb1cf6cc",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b01-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b01-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "d72a19324d5e1d2bd0c89227ee9994ae5c047eaeddea96dc04e838556f3f0de3",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b01-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b01-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "f608d9a4b8964cda4753c515e953520012f177ea05994144038ba5ad75e588db",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b02-p0-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b02-p0-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "c4ec36a46e39f469ce0652041628bc7ae01d5055f626f3e0ad628c2b946d2e4a",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b02-p1-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b02-p1-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "88bda249b72d8c657f8cffac9c39755f5fab41b9c9bb8a14352c8e676e623cff",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b02-p2-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b02-p2-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "d58dcb96178425eeba9aa7300d4a2a54e917bbf43018895f338c926d08bffc69",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b02-p3-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b02-p3-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "846fd6d3bf535d2c5b7a7737d661cb165da2597420437fef7f125e2c51a1ebc3",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b03-p0-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b03-p0-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "ec4c6dbc5f2ac7714caa17983f7fe6588b9491828578be41cac3296bca63c908",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b03-p1-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b03-p1-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "8f45b2f84399f77a47c2f0eb62e4eadb117535d90ac90ba2acb588ef49a7e3be",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b03-p2-without-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b03-p2-without-0019/result.json",
+        "identity": {
+          "role": "without-0019",
+          "worker_sha256": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb",
+          "source_tree_sha256": "8e7c613bea9cce602a6f4c286157abc5c1e6b41945bad232cbd953a84e5a9b57"
+        }
+      },
+      "request_sha256": "6b5699b8165323e18f453c901eeb11326bc7e05af0df9eb2e34f4f54dc8acea5",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    },
+    "inactive-classic-b03-p3-with-0019": {
+      "request": {
+        "schema_version": 1,
+        "config": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "warmup_seconds": 4,
+          "measurement_seconds": 12,
+          "seed": 12345,
+          "line_reference_height": 0,
+          "line_antialiasing": false,
+          "feedback_detail": -1.0
+        },
+        "pcm_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/docs/superpowers/evidence/patch-visual-catalog/audio/frozen-480-frames.f32",
+        "preset_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/inactive-gamma2.milk",
+        "texture_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/core/src/main/assets/textures",
+        "manifest_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/i31-benefit/runs/inactive-classic-b03-p3-with-0019/result.json",
+        "identity": {
+          "role": "with-0019",
+          "worker_sha256": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
+          "source_tree_sha256": "7ff715d5589c117b291d8ba7eb9636edd68a5edec32d34cd12718fd381df2ef3"
+        }
+      },
+      "request_sha256": "d195f804d8ac60b482326fa02aacd4ae7dc7d7cb8cc09503ca7999e8125a5bda",
+      "input_hashes": {
+        "preset_sha256": "1923c554c360035b710ad13e3189e38d7e67259c076c3bf7165326b34c616f60",
+        "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
+        "textures_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
+      }
+    }
+  }
+}
