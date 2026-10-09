@@ -1,0 +1,4545 @@
+{
+  "source_inventories_match": true,
+  "presets": 100,
+  "presets_with_changed_parameters_or_routes": 10,
+  "changed": [
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 6.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 1024.0,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": 0.0,
+            "r": null,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 36.0,
+            "instances": 1.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              2,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              3,
+              0.3333333333333333
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_noise_lq"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "radial_mapping": "log_radius",
+            "tunnel_appearance_guaranteed": false,
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 6.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 1024,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": 0.0,
+            "r": null,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 36.0,
+            "instances": 1,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              2,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              3,
+              0.3333333333333333
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_noise_lq"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "radial_mapping": "log_radius",
+            "tunnel_appearance_guaranteed": false,
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": 1.0099999904632568,
+            "zoomexp": 2.112989902496338,
+            "rot": null,
+            "dx": 0.0,
+            "dy": 0.0,
+            "sx": 1.0,
+            "sy": 1.0,
+            "warp": 0.009999999776482582
+          },
+          "audio_routes": [
+            [
+              "rotation",
+              1,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 6.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 1024.0,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": 0.0,
+            "r": null,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 36.0,
+            "instances": 1.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              2,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              3,
+              0.3333333333333333
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_main"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "radial_mapping": "log_radius",
+            "tunnel_appearance_guaranteed": false,
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 6.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 1024,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": 0.0,
+            "r": null,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 36.0,
+            "instances": 1,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              2,
+              0.3333333333333333
+            ],
+            [
+              "radius",
+              3,
+              0.3333333333333333
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_main"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "radial_mapping": "log_radius",
+            "tunnel_appearance_guaranteed": false,
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": 1.0099999904632568,
+            "zoomexp": 2.112989902496338,
+            "rot": null,
+            "dx": 0.0,
+            "dy": 0.0,
+            "sx": 1.0,
+            "sy": 1.0,
+            "warp": 0.009999999776482582
+          },
+          "audio_routes": [
+            [
+              "rotation",
+              1,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "name": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 7.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              6,
+              null
+            ],
+            [
+              "position_y",
+              6,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": null,
+            "zoomexp": 1.0,
+            "rot": 0.0,
+            "dx": null,
+            "dy": null,
+            "sx": null,
+            "sy": null,
+            "warp": null
+          },
+          "audio_routes": [
+            [
+              "translation_y",
+              4,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 7,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              6,
+              null
+            ],
+            [
+              "position_y",
+              6,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": null,
+            "zoomexp": 1.0,
+            "rot": 0.0,
+            "dx": null,
+            "dy": null,
+            "sx": null,
+            "sy": null,
+            "warp": null
+          },
+          "audio_routes": [
+            [
+              "translation_y",
+              4,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "cpe domains flacc - portable massation segway nz+.milk",
+        "name": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              4,
+              null
+            ],
+            [
+              "radius",
+              5,
+              null
+            ],
+            [
+              "radius",
+              6,
+              null
+            ],
+            [
+              "radius",
+              7,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ],
+            [
+              "opacity",
+              4,
+              null
+            ],
+            [
+              "opacity",
+              5,
+              null
+            ],
+            [
+              "opacity",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              7,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 7.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "radius",
+              4,
+              null
+            ],
+            [
+              "radius",
+              5,
+              null
+            ],
+            [
+              "radius",
+              6,
+              null
+            ],
+            [
+              "radius",
+              7,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ],
+            [
+              "opacity",
+              4,
+              null
+            ],
+            [
+              "opacity",
+              5,
+              null
+            ],
+            [
+              "opacity",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              7,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              4,
+              null
+            ],
+            [
+              "radius",
+              5,
+              null
+            ],
+            [
+              "radius",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              4,
+              null
+            ],
+            [
+              "opacity",
+              5,
+              null
+            ],
+            [
+              "opacity",
+              6,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 7,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "radius",
+              4,
+              null
+            ],
+            [
+              "radius",
+              5,
+              null
+            ],
+            [
+              "radius",
+              6,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              4,
+              null
+            ],
+            [
+              "opacity",
+              5,
+              null
+            ],
+            [
+              "opacity",
+              6,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "name": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoom"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 1.0,
+            "dots": true
+          },
+          "audio_routes": []
+        },
+        "wave_0": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "wave_1": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 12.0,
+            "instances": 92.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 1.5707999467849731,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": []
+        },
+        "wave_2": {
+          "parameters": {
+            "exact_circle_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 20.0,
+            "instances": null,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.3400000035762787,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_x",
+              6,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              6,
+              null
+            ]
+          ]
+        },
+        "shape_3": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 311.0,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": null,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_pw_main"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": 1.0004899501800537,
+            "zoomexp": 1.0,
+            "rot": 0.0,
+            "dx": null,
+            "dy": null,
+            "sx": 1.0,
+            "sy": 1.0,
+            "warp": 0.009999999776482582
+          },
+          "audio_routes": [
+            [
+              "translation_x",
+              1,
+              null
+            ],
+            [
+              "translation_x",
+              2,
+              null
+            ],
+            [
+              "translation_x",
+              3,
+              null
+            ],
+            [
+              "translation_x",
+              4,
+              null
+            ],
+            [
+              "translation_x",
+              5,
+              null
+            ],
+            [
+              "translation_x",
+              6,
+              null
+            ],
+            [
+              "translation_y",
+              1,
+              null
+            ],
+            [
+              "translation_y",
+              2,
+              null
+            ],
+            [
+              "translation_y",
+              3,
+              null
+            ],
+            [
+              "translation_y",
+              4,
+              null
+            ],
+            [
+              "translation_y",
+              5,
+              null
+            ],
+            [
+              "translation_y",
+              6,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoom"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 1.0,
+            "dots": true
+          },
+          "audio_routes": []
+        },
+        "wave_0": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 32.0,
+            "instances": 33,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "wave_1": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 12.0,
+            "instances": 92,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 1.5707999467849731,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": null,
+            "border_a": 0.0
+          },
+          "audio_routes": []
+        },
+        "wave_2": {
+          "parameters": {
+            "exact_circle_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 20.0,
+            "instances": 1024,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.3400000035762787,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_x",
+              5,
+              null
+            ],
+            [
+              "position_x",
+              6,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              5,
+              null
+            ],
+            [
+              "position_y",
+              6,
+              null
+            ]
+          ]
+        },
+        "shape_3": {
+          "parameters": {
+            "sides": 3.0,
+            "instances": 311,
+            "x": null,
+            "y": null,
+            "rad": 0.009999999776482582,
+            "ang": null,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_pw_main"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              5,
+              null
+            ],
+            [
+              "colour_r",
+              6,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              5,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              5,
+              null
+            ],
+            [
+              "colour_b",
+              6,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": 1.0004899501800537,
+            "zoomexp": 1.0,
+            "rot": 0.0,
+            "dx": null,
+            "dy": null,
+            "sx": 1.0,
+            "sy": 1.0,
+            "warp": 0.009999999776482582
+          },
+          "audio_routes": [
+            [
+              "translation_x",
+              1,
+              null
+            ],
+            [
+              "translation_x",
+              2,
+              null
+            ],
+            [
+              "translation_x",
+              3,
+              null
+            ],
+            [
+              "translation_x",
+              4,
+              null
+            ],
+            [
+              "translation_x",
+              5,
+              null
+            ],
+            [
+              "translation_x",
+              6,
+              null
+            ],
+            [
+              "translation_y",
+              1,
+              null
+            ],
+            [
+              "translation_y",
+              2,
+              null
+            ],
+            [
+              "translation_y",
+              3,
+              null
+            ],
+            [
+              "translation_y",
+              4,
+              null
+            ],
+            [
+              "translation_y",
+              5,
+              null
+            ],
+            [
+              "translation_y",
+              6,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "equidistant from vomit (out of totality).milk",
+        "name": "equidistant from vomit (out of totality).milk",
+        "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 30.0,
+            "instances": 1.0,
+            "x": 0.5,
+            "y": 0.5,
+            "rad": 0.06622999906539917,
+            "ang": 0.02,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.10000000149011612,
+            "border_a": 0.0
+          },
+          "audio_routes": []
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 4.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              5,
+              0.10000000149011612
+            ]
+          ]
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 1.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              4,
+              0.10000000149011612
+            ]
+          ]
+        },
+        "shape_3": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 5.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              6,
+              0.07418999820947647
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 0.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 30.0,
+            "instances": 1,
+            "x": 0.5,
+            "y": 0.5,
+            "rad": 0.06622999906539917,
+            "ang": null,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.10000000149011612,
+            "border_a": 0.0
+          },
+          "audio_routes": []
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 4,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              5,
+              0.10000000149011612
+            ]
+          ]
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 1,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              4,
+              0.10000000149011612
+            ]
+          ]
+        },
+        "shape_3": {
+          "parameters": {
+            "sides": 40.0,
+            "instances": 5,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": null,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              6,
+              0.07418999820947647
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              3,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              3,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "name": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      "before": {
+        "wave_0": {
+          "parameters": {
+            "authored_samples": 41.0,
+            "independent_particle_state_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 84.0,
+            "instances": 1.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.20000000298023224,
+            "a": 0.6000000238418579,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "wave_0": {
+          "parameters": {
+            "authored_samples": 41.0,
+            "independent_particle_state_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 84.0,
+            "instances": 1,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.20000000298023224,
+            "a": 0.6000000238418579,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "name": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      "before": {
+        "wave_0": {
+          "parameters": {
+            "authored_samples": 41.0,
+            "independent_particle_state_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 84.0,
+            "instances": 1.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.20000000298023224,
+            "a": 0.6000000238418579,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "wave_0": {
+          "parameters": {
+            "authored_samples": 41.0,
+            "independent_particle_state_proven": false
+          },
+          "audio_routes": []
+        },
+        "shape_2": {
+          "parameters": {
+            "sides": 84.0,
+            "instances": 1,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.20000000298023224,
+            "a": 0.6000000238418579,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              1.0
+            ]
+          ]
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": [
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "shifter - liquid circuitry - conjugoth.milk",
+        "name": "shifter - liquid circuitry - conjugoth.milk",
+        "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 4.0,
+            "instances": 1.0,
+            "x": 0.5,
+            "y": 0.5,
+            "rad": 1.3277499675750732,
+            "ang": null,
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "rotation",
+              1,
+              0.001
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_main"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_r",
+              7,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              7,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              7,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "zoomexp"
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 4.0,
+            "instances": 1,
+            "x": 0.5,
+            "y": 0.5,
+            "rad": 1.3277499675750732,
+            "ang": null,
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "rotation",
+              1,
+              0.001
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_blur1"
+            ]
+          },
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {
+            "coordinate_samplers": [
+              "sampler_main"
+            ]
+          },
+          "audio_routes": [
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              4,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              2,
+              null
+            ],
+            [
+              "colour_g",
+              4,
+              null
+            ],
+            [
+              "colour_b",
+              1,
+              null
+            ],
+            [
+              "colour_b",
+              2,
+              null
+            ],
+            [
+              "colour_b",
+              4,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - ku pilled - forgoing utility nz.milk",
+        "name": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      "before": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 5.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 20.0,
+            "instances": null,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": 1.0,
+            "a": null,
+            "border_a": 0.006000000052154064
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.01
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 100.0,
+            "instances": 11.0,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": null,
+            "zoomexp": 0.04258999973535538,
+            "rot": null,
+            "dx": -0.005,
+            "dy": -0.005,
+            "sx": 0.9143400192260742,
+            "sy": 0.9514700174331665,
+            "warp": null
+          },
+          "audio_routes": [
+            [
+              "zoom",
+              2,
+              null
+            ],
+            [
+              "zoom",
+              4,
+              null
+            ],
+            [
+              "zoom",
+              6,
+              null
+            ],
+            [
+              "deformation",
+              1,
+              null
+            ]
+          ]
+        }
+      },
+      "after": {
+        "shader_mesh_warp": {
+          "parameters": {
+            "native_output": "sy"
+          },
+          "audio_routes": []
+        },
+        "builtin_wave": {
+          "parameters": {
+            "mode": 5.0,
+            "dots": false
+          },
+          "audio_routes": []
+        },
+        "shape_0": {
+          "parameters": {
+            "sides": 20.0,
+            "instances": 1024,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": null,
+            "g": null,
+            "b": 1.0,
+            "a": null,
+            "border_a": 0.006000000052154064
+          },
+          "audio_routes": [
+            [
+              "position_x",
+              1,
+              null
+            ],
+            [
+              "position_x",
+              2,
+              null
+            ],
+            [
+              "position_x",
+              3,
+              null
+            ],
+            [
+              "position_x",
+              4,
+              null
+            ],
+            [
+              "position_y",
+              1,
+              null
+            ],
+            [
+              "position_y",
+              2,
+              null
+            ],
+            [
+              "position_y",
+              3,
+              null
+            ],
+            [
+              "position_y",
+              4,
+              null
+            ],
+            [
+              "radius",
+              1,
+              0.01
+            ],
+            [
+              "colour_r",
+              1,
+              null
+            ],
+            [
+              "colour_r",
+              2,
+              null
+            ],
+            [
+              "colour_r",
+              3,
+              null
+            ],
+            [
+              "colour_g",
+              1,
+              null
+            ],
+            [
+              "colour_g",
+              6,
+              null
+            ],
+            [
+              "opacity",
+              1,
+              null
+            ],
+            [
+              "opacity",
+              2,
+              null
+            ],
+            [
+              "opacity",
+              3,
+              null
+            ]
+          ]
+        },
+        "shape_1": {
+          "parameters": {
+            "sides": 100.0,
+            "instances": 11,
+            "x": null,
+            "y": null,
+            "rad": null,
+            "ang": 0.0,
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0,
+            "border_a": 0.0
+          },
+          "audio_routes": [
+            [
+              "radius",
+              1,
+              null
+            ],
+            [
+              "radius",
+              2,
+              null
+            ],
+            [
+              "radius",
+              3,
+              null
+            ]
+          ]
+        },
+        "shader_warp": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "shader_composite": {
+          "parameters": {},
+          "audio_routes": []
+        },
+        "mesh_warp": {
+          "parameters": {
+            "zoom": null,
+            "zoomexp": 0.04258999973535538,
+            "rot": null,
+            "dx": -0.005,
+            "dy": -0.005,
+            "sx": 0.9143400192260742,
+            "sy": 0.9514700174331665,
+            "warp": null
+          },
+          "audio_routes": [
+            [
+              "zoom",
+              2,
+              null
+            ],
+            [
+              "zoom",
+              4,
+              null
+            ],
+            [
+              "zoom",
+              6,
+              null
+            ],
+            [
+              "deformation",
+              1,
+              null
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Source descriptor corrections; no image/appearance score comparison"
+}

@@ -13,7 +13,7 @@ from contextvars import ContextVar
 from pathlib import Path
 
 from equation_loading import select_equation
-from scene_equations import MAIN, SHAPE, _scalar, source_settings
+from scene_equations import MAIN, SHAPE, READONLY, _scalar, source_settings
 from shader_fields import Field, ShaderFields, uses_input_components
 from stage_resolution import resolve_stages
 
@@ -585,7 +585,9 @@ def _periodic_advection(parts):
 
 class _EEL:
     """Symbolic native EEL tree substitution; stateful forms remain unknown."""
-    OPS = {'_add': 'add', '_sub': 'subtract', '_mul': 'multiply', '_div': 'divide',
+    COMPOUND={'_addop':'add','_subop':'subtract','_mulop':'multiply','_divop':'eel_divide',
+              '_modop':'remainder','_orop':'eel_bitwise_or','_andop':'eel_bitwise_and'}
+    OPS = {'_add': 'add', '_sub': 'subtract', '_mul': 'multiply', '_div': 'eel_divide',
            '_mod': 'remainder', '_neg': 'negate', '_equal': 'equal',
            '_below': 'less', '_above': 'greater', 'below': 'less', 'above': 'greater',
            'equal': 'equal', 'if': 'select'}
@@ -594,6 +596,20 @@ class _EEL:
         self.environment = dict(environment or {})
         self.written = set()
         self.unknown = []
+
+    @classmethod
+    def assignment_targets(cls,tree):
+        written=set();pending=[tree];seen=set()
+        while pending:
+            node=pending.pop()
+            if not isinstance(node,(dict,list)) or id(node) in seen:continue
+            seen.add(id(node))
+            if len(seen)>MAX_FIELD_VISITS:raise _SemanticBudget('equation assignment inventory budget exceeded')
+            if isinstance(node,list):pending.extend(node);continue
+            if node.get('function') in {'assign','_set',*cls.COMPOUND} and node.get('args') and node['args'][0].get('kind')=='variable':
+                written.add(node['args'][0]['name'].lower())
+            pending.extend(v for v in node.values() if isinstance(v,(dict,list)))
+        return written
 
     def lower(self, tree):
         if tree is None:
@@ -613,12 +629,18 @@ class _EEL:
             for instruction in tree.get('instructions', []):
                 result = self.lower(instruction)
             return result
-        if function == 'assign' and tree['args'][0].get('kind') == 'variable':
+        if function in {'assign','_set'} and tree['args'][0].get('kind') == 'variable':
             name = tree['args'][0]['name'].lower()
             value = self.lower(tree['args'][1])
             self.environment[name] = value; self.written.add(name)
             return value
-        if function == 'if' and len(tree.get('args', [])) == 3:
+        if function in self.COMPOUND and tree['args'][0].get('kind')=='variable':
+            name=tree['args'][0]['name'].lower()
+            right=self.lower(tree['args'][1]);left=self.environment.get(name,Field('input',detail={'name':name}))
+            value=self.operation(self.COMPOUND[function],(left,right))
+            self.environment[name]=value;self.written.add(name)
+            return value
+        if function in {'if','_if'} and len(tree.get('args', [])) == 3:
             condition = self.lower(tree['args'][0]); number = _number(condition)
             if number is not None:
                 return self.lower(tree['args'][1 if number else 2])
@@ -636,7 +658,7 @@ class _EEL:
             # Invalidate destinations; retaining their pre-loop value would invent absence.
             def writes(node):
                 if isinstance(node, dict):
-                    if node.get('function') == 'assign' and node.get('args', [{}])[0].get('kind') == 'variable':
+                    if node.get('function') in {'assign','_set',*self.COMPOUND} and node.get('args', [{}])[0].get('kind') == 'variable':
                         name = node['args'][0]['name'].lower()
                         self.environment[name] = Field('unknown', detail={'reason': function})
                         self.written.add(name)
@@ -647,7 +669,25 @@ class _EEL:
                         writes(child)
             writes(tree)
             return Field('unknown', detail={'reason': function})
-        return Field(self.OPS.get(function, function), tuple(self.lower(arg) for arg in tree.get('args', [])))
+        # Native operators can retain pointers to variable storage while later
+        # arguments overwrite it. Value substitution cannot certify that case.
+        embedded=self.assignment_targets(tree.get('args',[]))
+        if embedded:
+            reason='native expression reference aliases require separate interpretation'
+            self.unknown.append(reason)
+            for name in embedded:
+                self.environment[name]=Field('unknown',detail={'reason':reason});self.written.add(name)
+            return Field('unknown',detail={'reason':reason})
+        return self.operation(self.OPS.get(function,function),tuple(self.lower(arg) for arg in tree.get('args',[])))
+
+    @staticmethod
+    def operation(op,args):
+        if op=='eel_divide' and len(args)==2:
+            denominator=_number(args[1])
+            if denominator is not None:
+                if abs(denominator)<.00001:return _constant(0)
+                return Field('divide',args)
+        return Field(op,args)
 
 
 class _Analysis:
@@ -731,16 +771,30 @@ class _Analysis:
         self.unknowns.extend({'section': prefix, 'reason': reason} for reason in dict.fromkeys(model.unknown))
         return model
 
+    def frame_environment(self,prefix,initialized,resets):
+        """Reload target fields; persistent written locals need previous-state inputs."""
+        selected=select_equation(self.sections.get(prefix),prefix,policy=self.policy)
+        written=_EEL.assignment_targets(selected.get('tree'))
+        inputs=dict(initialized)
+        for name in inputs.keys()-resets.keys():
+            if name in written or re.fullmatch(r'reg[0-9]{2}',name):
+                inputs[name]=Field('input',detail={'name':name,'state_scope':'previous persistent or shared register value'})
+        inputs.update(resets)
+        return inputs
+
     def main_equations(self):
         environment = {name: _constant(_scalar(self.values, key, default, kind))
                        for name, (key, default, kind) in MAIN.items()}
         # The native preset owns a zero-initialized complete Q snapshot.
         # Init writes then establish values reloaded before main frame code.
         environment.update({f'q{i}':_constant(0) for i in range(1,33)})
-        init = self.equation('per_frame_init_', environment)
-        # Frame-written values can depend on previous state. Treat those as inputs,
-        # except immediate source constants established by an initializer.
-        frame = self.equation('per_frame_', init.environment)
+        init_inputs={**environment,**{name:Field('input',detail={'name':'init:per_frame_init_:'+name})
+                                     for name in READONLY}}
+        init = self.equation('per_frame_init_', init_inputs)
+        resets={**environment,**{name:Field('input',detail={'name':name}) for name in
+            (*READONLY,'meshx','meshy','pixelsx','pixelsy','aspectx','aspecty')},
+            **{f'q{i}':init.environment.get(f'q{i}',_constant(0)) for i in range(1,33)}}
+        frame = self.equation('per_frame_',self.frame_environment('per_frame_',init.environment,resets))
         self.main = frame.environment
         mesh = self.equation('per_pixel_', frame.environment)
         self.mesh_controls=mesh.environment
@@ -816,15 +870,25 @@ class _Analysis:
                 else:
                     env = {name: _constant(_scalar(self.values, prefix+name, default, dtype))
                            for name, (default, dtype) in SHAPE.items()}
-                    init = self.equation(f'shape_{index}_init', env)
+                    init_prefix=f'shape_{index}_init'
+                    init_inputs={**env,**{name:Field('input',detail={'name':'init:'+init_prefix+':'+name})
+                        for name in (*READONLY,*(f'q{i}' for i in range(1,33)))}}
+                    init = self.equation(init_prefix, init_inputs)
                     # ShapePerFrameContext::LoadState reloads the main frameQ
                     # snapshot before shape equations; init Q writes do not
                     # persist here. Explicit per-frame local writes still win.
-                    shape_inputs={**init.environment,**{f'q{i}':self.main.get(f'q{i}',Field('unknown'))
+                    shape_resets={**{name:Field('input',detail={'name':name}) for name in READONLY},
+                                  **{name:_constant(_scalar(self.values,prefix+name,default,dtype))
+                                     for name,(default,dtype) in SHAPE.items()},
+                                  'instance':Field('input',detail={'name':'instance'}),
+                                  'thick':_constant(_scalar(self.values,prefix+'thickoutline',0,'bool')),
+                                  **{f't{i}':init.environment.get(f't{i}',_constant(0)) for i in range(1,9)},
+                                  **{f'q{i}':self.main.get(f'q{i}',Field('unknown'))
                                   for i in range(1,33)}}
-                    frame = self.equation(f'shape_{index}_per_frame', shape_inputs)
+                    frame_prefix=f'shape_{index}_per_frame'
+                    frame = self.equation(frame_prefix,self.frame_environment(frame_prefix,init.environment,shape_resets))
                     env = frame.environment
-                    count = _number(env['num_inst'])
+                    count = _scalar(self.values,prefix+'num_inst',1,'int')
                     if all(_number(env[name]) == 0 for name in ('a', 'a2', 'border_a')) or _number(env['rad']) == 0 or count is not None and count <= 0:
                         continue
                     geometry = Field('construct', (env['x'], env['y'], env['rad']), 'float3')
@@ -834,9 +898,9 @@ class _Analysis:
                     self.component_controls[f'shape_{index}']=env
                     self.add('polygon_shape_primitive', f'shape_{index}_per_frame', geometry,
                              'enabled shape with possible fill/border and nonzero radius', component=f'shape_{index}',
-                             parameters={'sides': _number(env['sides']), 'instances': _number(env['num_inst'])},
+                             parameters={'sides': _number(env['sides']), 'instances': count},
                              conditions=['shape opacity and projection permit drawing'])
-                    if 'instance' in _deps(geometry) and _number(env['num_inst']) != 1:
+                    if 'instance' in _deps(geometry) and count != 1:
                         self.add('procedural_shape_instances', f'shape_{index}_per_frame', geometry,
                                  'instance-dependent repeated shape geometry', component=f'shape_{index}')
 

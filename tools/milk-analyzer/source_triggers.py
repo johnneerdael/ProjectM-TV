@@ -3,9 +3,9 @@ REVERSE={'greater':'less','less':'greater','greater_equal':'less_equal','less_eq
 
 
 def direct_band(node):
-    from source_appearance import AUDIO,PACKED,_canonical_lane
+    from source_appearance import EEL_AUDIO,PACKED,_canonical_lane
     node=_canonical_lane(node)
-    if node.op=='input' and node.dtype=='float':return AUDIO.get(node.detail.get('name'))
+    if node.op=='input' and node.dtype=='float':return EEL_AUDIO.get(node.detail.get('name'))
     if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle'):
         parent=node.args[0];name=parent.detail.get('name');lane=node.detail.get('field','')
         if parent.op=='input' and parent.dtype=='float4' and name in PACKED and len(lane)==1:

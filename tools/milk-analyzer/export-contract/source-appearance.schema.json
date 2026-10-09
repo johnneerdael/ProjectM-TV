@@ -564,6 +564,106 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "geometry": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "status",
+                  "radius_ndc",
+                  "effective_sides",
+                  "configured_instances",
+                  "nominal_area_fraction_per_aspect_y",
+                  "summed_nominal_area_fraction_per_aspect_y",
+                  "circumcircle_width_fraction_per_aspect_y",
+                  "circumcircle_height_fraction",
+                  "center_source_xy",
+                  "aspect_y_formula",
+                  "visible_coverage_fraction",
+                  "unknown_reasons",
+                  "conditions"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-footprint-v1"
+                  },
+                  "status": {
+                    "enum": [
+                      "conditional nominal geometry",
+                      "unknown geometry"
+                    ]
+                  },
+                  "radius_ndc": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "effective_sides": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 3,
+                    "maximum": 100
+                  },
+                  "configured_instances": {
+                    "type": "integer"
+                  },
+                  "nominal_area_fraction_per_aspect_y": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "summed_nominal_area_fraction_per_aspect_y": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "circumcircle_width_fraction_per_aspect_y": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "circumcircle_height_fraction": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "center_source_xy": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "aspect_y_formula": {
+                    "const": "min(1, viewport_height / viewport_width)"
+                  },
+                  "visible_coverage_fraction": {
+                    "type": "null"
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }

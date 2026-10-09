@@ -410,6 +410,141 @@ def test_constant_integer_branch_and_self_predicate_have_no_switch_site(code):
     assert not any(r['switch_triggers'] for e in result['elements'] for r in e['audio_routes'])
 
 
+def test_shape_frame_reload_discards_init_parameter_writes_but_retains_scratch():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_rad=.2\n'
+        'shape_0_init1=rad=.9;x=.9;r=bass;t1=.25;k=.3;\n'
+        'shape_0_per_frame1=y=t1;x=k;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['parameters']['rad']==pytest.approx(.2)
+    assert element['parameters']['x']==pytest.approx(.3)
+    assert element['parameters']['y']==pytest.approx(.25)
+    assert not any(r['control']=='colour_r' for r in element['audio_routes'])
+
+
+def test_shape_instance_count_comes_from_configuration_not_equation_write():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_num_inst=3\n'
+        'shape_0_per_frame1=num_inst=0;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['parameters']['instances']==3
+
+
+def test_persistent_shape_local_counter_is_not_a_constant_radius():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_init1=k=.3;\n'
+        'shape_0_per_frame1=k=k+.1;rad=k;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['parameters']['rad'] is None
+
+
+def test_main_reset_and_persistent_counter_do_not_invent_constant_shape_q_radius():
+    source=read('fWaveAlpha=0\nper_frame_init_1=k=.3;wave_a=1;\n'
+        'per_frame_1=k=k+.1;q1=k;\nshapecode_0_enabled=1\nshape_0_per_frame1=rad=q1;\n')
+    result=appearance(source)
+    assert not any(e['id']=='builtin_wave' for e in result['elements'])
+    element=next(e for e in result['elements'] if e['id']=='shape_0')
+    assert element['parameters']['rad'] is None
+
+
+def test_static_square_geometry_exports_area_coefficient_and_radius_units():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_sides=4\n'
+        'shapecode_0_rad=.2\nshapecode_0_num_inst=3\n'))
+    element=next(e for e in result['elements'] if e['id']=='shape_0')
+    geometry=element['geometry']
+    assert geometry['effective_sides']==4 and geometry['configured_instances']==3
+    assert geometry['radius_ndc']==pytest.approx(.2)
+    assert geometry['nominal_area_fraction_per_aspect_y']==pytest.approx(.02)
+    assert geometry['summed_nominal_area_fraction_per_aspect_y']==pytest.approx(.06)
+    assert geometry['circumcircle_width_fraction_per_aspect_y']==pytest.approx(.2)
+    assert geometry['circumcircle_height_fraction']==pytest.approx(.2)
+    assert geometry['visible_coverage_fraction'] is None
+    assert element['approximate_screen_coverage'] is None
+
+
+@pytest.mark.parametrize('sides,effective',[(2.8,3),(101,100),(-2147483648.5,3)])
+def test_geometry_uses_native_side_truncation_and_clamp(sides,effective):
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=sides='+str(sides)+';\n')
+    geometry=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['geometry']
+    assert geometry['effective_sides']==effective
+
+
+def test_audio_dependent_radius_remains_unknown_geometry():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=rad=.2+bass*.05;\n')
+    geometry=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['geometry']
+    assert geometry['radius_ndc'] is None
+    assert geometry['nominal_area_fraction_per_aspect_y'] is None
+    assert geometry['unknown_reasons']
+
+
+def test_instance_dependent_radius_does_not_claim_one_size_for_every_copy():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_num_inst=3\n'
+        'shape_0_per_frame1=rad=.2+instance*.05;\n')
+    geometry=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['geometry']
+    assert geometry['configured_instances']==3
+    assert geometry['summed_nominal_area_fraction_per_aspect_y'] is None
+
+
+def test_negative_radius_preserves_sign_but_positive_geometric_area():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_rad=-.2\n')
+    geometry=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['geometry']
+    assert geometry['radius_ndc']==pytest.approx(-.2)
+    assert geometry['nominal_area_fraction_per_aspect_y']==pytest.approx(.02)
+
+
+@pytest.mark.parametrize('body',[
+ 'shape_0_init1=k=bass;\nshape_0_per_frame1=rad=k;\n',
+ 'per_frame_init_1=q1=bass;\nshape_0_per_frame1=rad=q1;\n'])
+def test_init_captured_audio_is_not_current_frame_reactivity(body):
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\n'+body)
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert not any(r['control']=='radius' for r in element['audio_routes'])
+    assert element['geometry']['radius_ndc'] is None
+
+
+def test_unregistered_eel_volume_is_not_engine_volume_aggregate():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=rad=vol+vol_att;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert not element['audio_routes']
+
+
+def test_shader_volume_macros_still_export_engine_aggregate_codes():
+    result=appearance(shader('shader_body {ret=float3(vol,vol_att,0);}'))
+    assert {r['input_code'] for r in result['elements'][0]['audio_routes']}=={7,8}
+
+
+def test_native_if_assignment_merges_shape_radius_branches():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=if(above(bass,1),rad=.8,rad=.1);\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['parameters']['rad'] is None
+    assert element['geometry']['radius_ndc'] is None
+    route=next(r for r in element['audio_routes'] if r['control']=='radius')
+    assert route['switch_triggers'][0]['absolute_control_jump']==pytest.approx(.7)
+
+
+@pytest.mark.parametrize('code,radius',[('rad+=.1;',.2),('rad*=2;',.2)])
+def test_compound_shape_parameter_assignments_update_geometry(code,radius):
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1='+code+'\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['geometry']['radius_ndc']==pytest.approx(radius)
+
+
+def test_compound_persistent_local_is_not_replaced_by_its_init_value():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_init1=k=.3;\n'
+        'shape_0_per_frame1=k+=.1;rad=k;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['geometry']['radius_ndc'] is None
+
+
+def test_eel_guarded_small_denominator_does_not_create_huge_nominal_shape():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=d=.000001;rad=.1/d;\n')
+    assert not any(e['id']=='shape_0' for e in appearance(source)['elements'])
+
+
+def test_nested_assignment_aliases_are_not_folded_as_value_snapshots():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=rad=(rad=.2)+(rad=.3);\n'))
+    assert any('reference aliases' in r['reason'] for r in result['execution_unknowns'])
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

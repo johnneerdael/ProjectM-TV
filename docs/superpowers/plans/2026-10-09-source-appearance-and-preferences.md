@@ -71,3 +71,19 @@ movement, feedback and colour. Implement incrementally in this same worktree.
 
 All steps require independently known formula controls, real-preset coverage,
 contract documentation and review. The numerical47-field export stays unchanged.
+
+## Quantitative checkpoint
+
+- Nominal shader-time RGB timing is implemented; fixed100 has zero timing
+  candidates, so no practical coverage gain is claimed for that rule.
+- Direct-band switch sites are implemented;23/100presets have supported sites.
+  Frequency/visible contrast remain unknown.
+- Nominal custom-shape geometry is implemented;34/100presets have known area
+  coefficients. Lifecycle, init/live inputs, compound writes and guarded division
+  were corrected before those calculations; other state/reference effects remain
+  explicit gaps. Clipping, union area and opacity contributions are still pending.
+- Motion/transform rates, feedback recurrence and calibrated mood/preference
+  matching remain required work. Existing47numeric fields stay unchanged.
+
+See source-temporal, source-switch-sites and source-geometry evidence folders;
+source-math controls do not establish image accuracy or completed preference fit.

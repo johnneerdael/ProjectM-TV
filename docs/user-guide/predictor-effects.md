@@ -98,6 +98,13 @@ Nested switches retain their trigger but leave the whole-control jump unknown;
 later masks and feedback can hide or amplify a change. These are switch candidates
 for further interpretation, not measured screen flashes.
 
+Custom shapes now include nominal size and polygon-area formulas. A square with
+radius0.2 occupies an unclipped area fraction of `0.02*aspectY`; on a16:9viewport
+that is about1.125%. Copies are counted separately, so the summed estimate does
+not resolve overlap. Dynamic sizes, opacity, clipping and later shaders can still
+prevent a visible-area estimate. Init-only audio captures remain separate from
+live reactivity, and changing persistent variables do not masquerade as fixed sizes.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

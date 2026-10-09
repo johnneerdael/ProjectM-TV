@@ -113,6 +113,13 @@ qualifications. These are not measured visible flash or screen-speed values.
 threshold units/expressions, reversed predicates, null whole-control levels for
 nested switches and null frequency without audio history. Site presence is not
 certification of a visible flash; empty results do not prove absence.
+`source_geometry.py` adds nominal custom-shape footprints. Preserve NDC radius,
+aspectY coefficients, native side conversion/clamp, configured draw counts and
+null visible/union coverage. Static EEL frame inputs reload config/audio/Q/T as
+the target does; writable persistent custom locals/shared registers remain
+previous-state inputs. Init captures use namespaced inputs; EELvol is local,
+packed shader volume remains aggregate. Branch assignments use native `_if`
+environment merging. None of these facts establishes image or mood accuracy.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

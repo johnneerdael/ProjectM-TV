@@ -66,6 +66,48 @@ Existing parameters include polygon sides/instances, complex recurrence subtype
 (`julia_style`, `mandelbrot_style`, `unclassified`), bailout evidence, depth-map
 kind and sampling scales where proved. Preserve nulls and original units.
 
+### Custom-shape footprint
+
+Shape elements add `geometry`, policy `source-custom-shape-footprint-v1`. This
+describes nominal unclipped primitives, not perceived prominence or displayed
+coverage. Source31 and MilkDrop2 both construct a regular polygon using
+`center=(2*x-1,1-2*y)` and radius `rad` in normalized device coordinates, with
+horizontal radius multiplied by renderer `aspectY=min(1,height/width)`.
+
+| Field | Unit / interpretation |
+|---|---|
+| `radius_ndc` | Signed constant radius after native float32 conversion; null if dynamic/unknown |
+| `effective_sides` | Native truncation to int32, then clamp3…100; null outside the conversion domain |
+| `configured_instances` | Draw-loop count from preset configuration; equation-written `num_inst` does not change this count |
+| `nominal_area_fraction_per_aspect_y` | `n*r*r*sin(2*pi/n)/8`; multiply by target aspectY for one polygon's nominal viewport-area fraction |
+| `summed_nominal_area_fraction_per_aspect_y` | Above coefficient times configured count; overlaps counted repeatedly, not union coverage |
+| `circumcircle_width_fraction_per_aspect_y` | `abs(r)`; multiply by aspectY for a containing-circle width fraction |
+| `circumcircle_height_fraction` | `abs(r)`; containing-circle height fraction |
+| `center_source_xy` | Authored source coordinates or per-coordinate nulls; not post-composite screen positions |
+| `visible_coverage_fraction` | Null until clipping, opacity, overlap and later composition are resolved |
+
+The denominator8 comes from regular-polygon area `n*r*r*sin(2*pi/n)/2` and
+the NDC viewport area4. These nominal geometric estimates omit float32 trig
+rounding and raster edges; circle extents need not be the polygon's exact box.
+Dynamic radius/sides and instance-dependent sizes retain nulls and reasons.
+No target aspect is silently assumed. Borders, texture/opacity conversion,
+blend order, feedback and composite shaders can change the visible contribution.
+
+Static equations now honor target frame resets: config/audio fields reload,
+main Q reloads init snapshots, shape Q reloads main frame Q, and shape T reloads
+init snapshots each instance. Mutable initialized custom locals become previous
+state inputs; assignments before reads can reestablish constants. Shared registers
+remain inputs. Initial audio/time captures use `init:<section>:<variable>` input
+names and are not current-frame audio routes. Plain EEL `vol`/`vol_att` are local
+names, not registered aggregates; shader packed volume lanes remain codes7/8.
+Native EEL `_if` assignments merge branch environments before geometry inference.
+Compound assignments update their destinations and count as persistent writes.
+EEL division has its own node `eel_divide`: the qualified evaluator returns0
+when `abs(denominator)<0.00001`; a proved constant denominator outside that guard
+can use ordinary division. Unresolved denominators retain the native guarded
+operation. Nested assignment/reference-alias expressions remain explicit gaps
+rather than being folded as copied values. No native engine policy is changed.
+
 ## Colour modes
 
 | `colour.mode_code` | Interpretation |

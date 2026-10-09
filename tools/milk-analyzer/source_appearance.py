@@ -17,6 +17,7 @@ FAMILY_CODES={'builtin_wave_primitive':1,'custom_wave_primitive':1,'circular_wav
     'uv_advection':8,'image_driven_advection':8,'noise_driven_advection':8,
     'gradient_driven_advection':8,'nonlinear_feedback_map':8}
 AUDIO={'bass':1,'mid':2,'treb':3,'bass_att':4,'mid_att':5,'treb_att':6,'vol':7,'vol_att':8}
+EEL_AUDIO={name:code for name,code in AUDIO.items() if name not in {'vol','vol_att'}}
 PACKED={'_c3':(1,2,3,7),'_c4':(4,5,6,8)}
 SHAPE_CONTROLS={'x':('position_x','milkdrop shape coordinate'),'y':('position_y','milkdrop shape coordinate'),
     'rad':('radius','milkdrop shape radius'),'ang':('rotation','rad'),
@@ -114,7 +115,7 @@ def _typed_control_identity(field,*,required=False):
 def _direct_audio(field):
     from effect_families import _strip
     field=_strip(field)
-    if field.op=='input':return AUDIO.get(field.detail.get('name'))
+    if field.op=='input':return EEL_AUDIO.get(field.detail.get('name'))
     if field.op=='member' and field.detail.get('swizzle') and len(field.detail.get('field',''))==1:
         parent=_strip(field.args[0]);name=parent.detail.get('name')
         if parent.op=='input' and name in PACKED:
@@ -128,7 +129,7 @@ def _audio_codes(field,analysis):
     from effect_families import _deps
     dependencies=_deps(field)
     reads=_packed_reads(field)
-    result={AUDIO[name] for name in dependencies if name in AUDIO}
+    result={EEL_AUDIO[name] for name in dependencies if name in EEL_AUDIO}
     for name,codes in PACKED.items():
         if name not in dependencies:continue
         for index in reads.get(name,()):result.add(codes[index])
@@ -136,11 +137,11 @@ def _audio_codes(field,analysis):
         if '_q'+letter not in dependencies:continue
         for lane in reads.get('_q'+letter,()):
                 value=getattr(analysis,'main',{}).get('q'+str(bank*4+lane+1))
-                if value is not None:result.update(AUDIO[name] for name in _deps(value) if name in AUDIO)
+                if value is not None:result.update(EEL_AUDIO[name] for name in _deps(value) if name in EEL_AUDIO)
     for name in dependencies:
         if name.startswith('q') and name[1:].isdigit() and 1<=int(name[1:])<=32:
             main=getattr(analysis,'main',{}).get(name)
-            if main is not None:result.update(AUDIO[name] for name in _deps(main) if name in AUDIO)
+            if main is not None:result.update(EEL_AUDIO[name] for name in _deps(main) if name in EEL_AUDIO)
     return sorted(result)
 
 
@@ -407,6 +408,8 @@ def appearance_from_analysis(analysis):
         for channel,value in zip('rgb',_parts(_data_return(field))[:3]):element['audio_routes']+=_routes('colour_'+channel,'encoded RGB component',value,analysis)
     for identity,controls in getattr(analysis,'component_controls',{}).items():
         if identity not in elements:continue #later composite disconnected this drawing
+        from source_geometry import shape_geometry
+        elements[identity]['geometry']=shape_geometry(controls,elements[identity]['parameters']['instances'])
         for name,(control,unit) in SHAPE_CONTROLS.items():
             if name in controls:
                 value=controls[name];elements[identity]['parameters'][name]=_number(value)
