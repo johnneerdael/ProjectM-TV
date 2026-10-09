@@ -35,6 +35,9 @@ static Pixels Read()
     return pixels;
 }
 
+// Test infrastructure only; the production shader and actual draw remain unchanged.
+#include "gles_warp_reference.hpp"
+
 struct Control
 {
     ShaderCache cache;
@@ -289,6 +292,10 @@ static GLuint deformationBuffer{};
 static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles, traversalDistances, traversalStretch;
 static std::vector<uint32_t> deformationIndices;
 static std::vector<float> seamTransforms, seamCosines;
+#ifndef __APPLE__
+static std::vector<float> observedCenters;
+static WarpUniformObservation observedWarpUniforms;
+#endif
 static void LinkDeformation(GLuint program)
 {
     GLint count{}; glGetProgramiv(program, GL_ATTACHED_SHADERS, &count);
@@ -319,6 +326,10 @@ static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void*
     }
     Check(mode == GL_TRIANGLES && type == GL_UNSIGNED_INT && offset == nullptr,
           "unexpected warp index draw contract");
+#ifndef __APPLE__
+    observedWarpUniforms.Capture(static_cast<GLuint>(program));
+    observedCenters = AttributeData(5);
+#endif
     deformationPositions = AttributeData(0);
     deformationRadiusAngles = AttributeData(3);
     traversalDistances = AttributeData(6);
@@ -344,6 +355,96 @@ static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void*
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
     Check(glGetError() == GL_NO_ERROR, "production warp transform-feedback GL error");
 }
+
+#ifndef __APPLE__
+static void QualifyGlesWarp(GlesWarpReference& reference, int path, bool seam,
+                           bool requireSeparation, float expectedTime, float expectedWarp)
+{
+    const auto& observed = observedWarpUniforms;
+    Check(observed.aspect == std::array<float,4>{1,1,1,1} &&
+              observed.offset == std::array<float,2>{0,0} && observed.scale == 1,
+          "GLES reference only qualifies unit-aspect/scale and zero-offset fixture");
+    Check(observed.time == expectedTime, "production warp time producer changed");
+    const std::array<float,4> expectedFactors{
+        11.68f+4*cosf(expectedTime*1.413f+10), 8.77f+3*cosf(expectedTime*1.113f+7),
+        10.54f+3*cosf(expectedTime*1.233f+3), 11.49f+4*cosf(expectedTime*.933f+5)};
+    Check(observed.factors == expectedFactors, "production warp-factor producer changed");
+    const size_t nodes = deformationPositions.size()/2;
+    Check(seamTransforms.size()==nodes*4 && seamCosines.size()==nodes &&
+              observedCenters.size()==nodes*2 && traversalStretch.size()==nodes*2 &&
+              traversalDistances.size()==nodes*2 && deformationUV.size()==deformationIndices.size()*4,
+          "GLES reference observed attribute/output cardinality changed");
+    std::vector<WarpReferenceVertex> vertices;
+    for(size_t n=0;n<nodes;++n) {
+        Check(seamTransforms[n*4]==1 && seamTransforms[n*4+1]==1 &&
+                  observedCenters[n*2]==.5f && observedCenters[n*2+1]==.5f &&
+                  traversalStretch[n*2]==1 && traversalStretch[n*2+1]==1,
+              "GLES reference left declared unit zoom/stretch and centered fixture");
+        Check(seamTransforms[n*4+3]==expectedWarp && traversalDistances[n*2+1]==0,
+              "production warp/displacement producer changed authored fixture values");
+        if(!seam)
+            Check(seamTransforms[n*4+2]==0 && seamCosines[n]==1 && traversalDistances[n*2]==0,
+                  "deformation production rotation/translation producer changed");
+        vertices.push_back({deformationPositions[n*2],deformationPositions[n*2+1],
+                            seamTransforms[n*4+2],seamCosines[n],
+                            traversalDistances[n*2],traversalDistances[n*2+1],seamTransforms[n*4+3]});
+    }
+    const bool legacy = path!=1;
+    const auto correct = reference.Run(vertices,observed,legacy);
+    auto badVertices = vertices;
+    if(seam) {
+        // Counterfactual restores the opposite +/-pi exact negative-X axis
+        // policy. CPU angle/displacement/trig checks independently prove which
+        // branch production must upload; this checks that it reaches GPU UV.
+        for(size_t n=0;n<nodes;++n) {
+            const auto& v=vertices[n];
+            if(v.x<0 && v.y==0) {
+                const double raw=deformationRadiusAngles[n*2+1];
+                const double wrongAngle=legacy?-raw:raw;
+                const float wrongRotation=static_cast<float>(.02+
+                    (wrongAngle<-.65 && !(wrongAngle>-2.45) ? .1 : -.1));
+                badVertices[n].dx=static_cast<float>(wrongAngle*.01);
+                badVertices[n].sine=sinf(wrongRotation);
+                badVertices[n].cosine=cosf(wrongRotation);
+            }
+        }
+    }
+    const auto incorrect = reference.Run(badVertices,observed,seam?legacy:!legacy);
+    std::array<bool,2> separated{};
+    std::array<double,4> worstFraction{};
+    for(size_t i=0;i<deformationIndices.size();++i) {
+        const auto node=deformationIndices[i];
+        Check(node<nodes,"GLES reference index outside actual attribute arrays");
+        const auto bound=reference.budget.Bounds(vertices[node],correct[node]);
+        const auto badBound=reference.budget.Bounds(badVertices[node],incorrect[node]);
+        for(size_t axis=0;axis<4;++axis) {
+            const auto actual=deformationUV[i*4+axis], expected=correct[node].uv[axis];
+            Check(std::isfinite(actual)&&std::isfinite(expected)&&
+                      std::abs(actual-expected)<=bound[axis],
+                  std::string(seam?"seam":"deformation")+" actual production GPU output differs from independent mediump reference path="+
+                  std::to_string(path)+" node="+std::to_string(node)+" axis="+std::to_string(axis)+
+                  " actual="+std::to_string(actual)+" reference="+std::to_string(expected)+
+                  " arithmetic/transport bound="+std::to_string(bound[axis]));
+            worstFraction[axis]=std::max(worstFraction[axis],std::abs(actual-expected)/bound[axis]);
+            if(axis<2 && std::isfinite(incorrect[node].uv[axis]) &&
+               std::abs(expected-incorrect[node].uv[axis])>bound[axis]+badBound[axis]) {
+                Check(std::abs(actual-incorrect[node].uv[axis])>badBound[axis],
+                      "actual output remains inside discriminating incorrect-reference envelope");
+                separated[axis]=true;
+            }
+        }
+    }
+    if(requireSeparation)
+        Check(separated[0]&&separated[1],
+              std::string(seam?"seam":"wrong-Y")+" GPU references lack disjoint arithmetic/transport envelopes on both UV axes");
+    // A large residual never expands the bound: it fails closed above.
+    std::cout << (seam?"seam":"deformation") << " GLES production/reference path=" << path
+              << " time=" << expectedTime << " separated=" << separated[0] << ',' << separated[1]
+              << " max-bound-fractions=" << worstFraction[0] << ',' << worstFraction[1]
+              << ',' << worstFraction[2] << ',' << worstFraction[3] << '\n';
+}
+#endif
+
 struct DeformationHook
 {
     DeformationHook()
@@ -361,6 +462,9 @@ struct DeformationHook
 static void DeformationControls(TextureManager& textures)
 {
     DeformationHook hook;
+#ifndef __APPLE__
+    GlesWarpReference reference;
+#endif
     for (int path : {0, 1, 2}) // Actual legacy, compiled custom, failed custom -> legacy.
     for (bool perPixel : {false, true})
     for (bool replay : {false, true})
@@ -417,13 +521,19 @@ static void DeformationControls(TextureManager& textures)
                 u += warp * .0035f * cosf(time * .753f - (x*f1 - sourceY*f2));
                 v += warp * .0035f * sinf(time * .825f + x*f0 + sourceY*f3);
                 const std::string label = "path=" + std::to_string(path) + " warp=" + std::to_string(warp) + " time=" + std::to_string(time);
+#ifdef __APPLE__
                 Check(std::abs(deformationUV[i*4] - u) < 2e-5f && std::abs(deformationUV[i*4+1] - v) < 2e-5f,
                       label + " wrong physical oscillator-Y at node " + std::to_string(vertex) +
                       " got=" + std::to_string(deformationUV[i*4]) + "," + std::to_string(deformationUV[i*4+1]) +
                       " expected=" + std::to_string(u) + "," + std::to_string(v));
                 Check(deformationUV[i*4+2] == x*.5f+.5f && deformationUV[i*4+3] == y*.5f+.5f,
                       label + " changed original-UV varying");
+#endif
             }
+#ifndef __APPLE__
+            // Amplified original witnesses must discriminate wrong oscillator-Y.
+            QualifyGlesWarp(reference,path,false,warp==50.f,time,warp);
+#endif
             const auto pixels = Read();
             Check(std::abs(int(pixels[(Height/2*Width+Width/2)*4+2]) - (path == 1 ? 64 : 191)) <= 1,
                   "requested compiled/fallback path was not drawn");
@@ -626,6 +736,9 @@ static void TraversalControls(TextureManager& textures)
 static void AngleSeamControls(TextureManager& textures)
 {
     DeformationHook hook;
+#ifndef __APPLE__
+    GlesWarpReference reference;
+#endif
     for (int path : {0,1,2}) for (int grid : {8,9}) for (bool replay : {false,true})
     {
         Control c(textures,path==1,false);
@@ -672,13 +785,20 @@ static void AngleSeamControls(TextureManager& textures)
                 const float r=static_cast<float>(.02+(ang<-.65&&!(ang> -2.45)?.1:-.1));
                 const float u=px*.5f*cosf(r)-py*.5f*sinf(r)+.5f-static_cast<float>(ang*.01);
                 const float v=px*.5f*sinf(r)+py*.5f*cosf(r)+.5f;
+#ifdef __APPLE__
                 Check(std::abs(deformationUV[i*4]-u)<2e-6f&&std::abs(deformationUV[i*4+1]-v)<2e-6f,
                       "seam equation did not reach actual warp vertex output node="+std::to_string(node)+
                       " got="+std::to_string(deformationUV[i*4])+","+std::to_string(deformationUV[i*4+1])+
                       " expected="+std::to_string(u)+","+std::to_string(v));
                 Check(deformationUV[i*4+2]==px*.5f+.5f&&deformationUV[i*4+3]==py*.5f+.5f,
                       "seam changed original UV varying");
+#endif
             }
+#ifndef __APPLE__
+            // Only the even grid has an exact negative-X axis witness. Keep the
+            // odd grid's producer/cardinality/replay/reference checks too.
+            QualifyGlesWarp(reference,path,true,grid%2==0,c.state.renderContext.time,0);
+#endif
             Check(c.state.globalRegisters[0]==(frame+1)*nodes,"seam changed evaluator call count");
             const auto uv=deformationUV;const auto calls=c.state.globalRegisters[0];
             c.mesh.DrawAgain(c.state,c.frame);

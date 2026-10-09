@@ -29,7 +29,7 @@ static void Samples(ShaderCache& cache)
         {3840, 2160, 1280, 720, 426, 240},
         {1280, 720, 1280, 720, 426, 240},
     };
-    PresetState state; Configure(state, cache);
+    PresetState state; state.audioData={}; Configure(state, cache);
     PerFrameContext frame(state.globalMemory, &state.globalRegisters); frame.RegisterBuiltinVariables();
     for (const auto& canvas : canvases)
     {

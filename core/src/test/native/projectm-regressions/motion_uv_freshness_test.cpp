@@ -43,9 +43,16 @@ static std::array<float,2> ReadUV(GLuint texture,int w,int h,int x) {
     GLuint fbo{};glGenFramebuffers(1,&fbo);glBindFramebuffer(GL_FRAMEBUFFER,fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,texture,0);
     Require(glCheckFramebufferStatus(GL_FRAMEBUFFER)==GL_FRAMEBUFFER_COMPLETE,"UV probe FBO incomplete");
-    glReadBuffer(GL_COLOR_ATTACHMENT0);std::array<float,8> pixels{};
-    glReadPixels(x-1,h/2-1,2,2,GL_RG,GL_FLOAT,pixels.data());
-    std::array<float,2> result{};for(int i=0;i<4;++i){result[0]+=.25f*pixels[2*i];result[1]+=.25f*pixels[2*i+1];}
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+#ifdef USE_GLES
+    static bool logged=false;
+    if(!logged){GLint format{},type{};glGetIntegerv(GL_IMPLEMENTATION_COLOR_READ_FORMAT,&format);glGetIntegerv(GL_IMPLEMENTATION_COLOR_READ_TYPE,&type);std::cout<<"RG16F readback implementation format="<<format<<" type="<<type<<'\n';logged=true;}
+#endif
+    // RG is not a required GLES read format. RGBA/FLOAT reads the same real
+    // floating attachment; unused B/A channels are ignored, never modeled.
+    std::array<float,16> pixels{};
+    glReadPixels(x-1,h/2-1,2,2,GL_RGBA,GL_FLOAT,pixels.data());
+    std::array<float,2> result{};for(int i=0;i<4;++i){result[0]+=.25f*pixels[4*i];result[1]+=.25f*pixels[4*i+1];}
     glBindFramebuffer(GL_READ_FRAMEBUFFER,oldRead);glBindFramebuffer(GL_DRAW_FRAMEBUFFER,oldDraw);glDeleteFramebuffers(1,&fbo);
     Require(glGetError()==GL_NO_ERROR,"backend does not admit actual RG16F readback");return result;
 }
@@ -61,7 +68,9 @@ static std::array<float,4> ReadColor(GLuint fbo,int w,int h) {
 static void ProducerElements(GLenum mode,GLsizei count,GLenum type,const void* indices) {
     GLint program{};glGetIntegerv(GL_CURRENT_PROGRAM,&program);
     Publication p{};bool capture=false;
-    if(observe&&mode==GL_TRIANGLES&&glGetUniformLocation(program,"warpTime")>=0) {
+    // Constant-output custom warps can optimize every warp uniform away.
+    // Actual owned attachment1 + enabled MRT is the producer contract.
+    if(observe&&mode==GL_TRIANGLES) {
         GLint fbo{},uv{},color{},buffer{};glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING,&fbo);
         if(fbo) {
             glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME,&uv);
@@ -108,6 +117,34 @@ public:
 #endif
     }
 };
+
+// Exercise the real constructor exception/RAII path after valid allocations.
+// Only the selected status is injected; the driver and later GL checks remain real.
+class DetailFramebufferFault {
+public:
+    explicit DetailFramebufferFault(unsigned failAt):remaining(failAt) {
+        Require(!active,"nested framebuffer fault");active=this;
+        saved=glad_glCheckFramebufferStatus;glad_glCheckFramebufferStatus=Check;
+    }
+    ~DetailFramebufferFault(){glad_glCheckFramebufferStatus=saved;active=nullptr;}
+    GLuint failedFramebuffer{};
+private:
+    static GLenum Check(GLenum target) {
+        const auto status=active->saved(target);
+        if(active->remaining&&--active->remaining==0) {
+            Require(status==GL_FRAMEBUFFER_COMPLETE,"fault requires a valid real framebuffer");
+            GLint fbo{};glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING,&fbo);
+            Require(fbo!=0,"fault reached the default framebuffer");
+            active->failedFramebuffer=static_cast<GLuint>(fbo);
+            return GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT;
+        }
+        return status;
+    }
+    unsigned remaining;
+    PFNGLCHECKFRAMEBUFFERSTATUSPROC saved{};
+    static DetailFramebufferFault* active;
+};
+DetailFramebufferFault* DetailFramebufferFault::active{};
 
 static std::string Fixture(const std::string& off="0",const std::string& shader="default",float bias=0,bool same=false) {
     std::ostringstream s;s<<"MILKDROP_PRESET_VERSION=201\nPSVERSION=2\nPSVERSION_WARP="<<(shader=="default"?0:2)<<"\nPSVERSION_COMP=0\n[preset00]\n"
@@ -235,6 +272,27 @@ static void Lifecycle() {
     Render(e,out,512,288);Require(records.empty()&&published.size()==1,"hard-cut first-frame guard failed");
     owners.clear();
 }
+static void PartialFailure() {
+    for(float gain:{0.0f,.5f}) {
+        Target out(512,288);libprojectM::ProjectM e;Configure(e,false);Load(e,Fixture());
+        auto& p=Access::Active(e);owners={&p};Render(e,out,256,144);Render(e,out,256,144);
+        e.SetWindowSize(512,288);Render(e,out,512,288);Render(e,out,512,288);
+        auto native=Access::UV(p);e.SetLineReferenceSize(256,144);e.SetFeedbackDetail(gain);
+        GLuint failed{};
+        {
+            // Standard fails the first canvas check; High fails its native-detail
+            // framebuffer after all three canvas checks succeeded.
+            DetailFramebufferFault fault(gain>0?4:1);Render(e,out,512,288);failed=fault.failedFramebuffer;
+            Require(failed&&!Access::Detail(p)&&published.size()==1&&Access::UV(p)==native,
+                    "partial detail failure did not retain the native producer");
+        }
+        Require(glIsFramebuffer(failed)==GL_FALSE,"failed detail framebuffer survived constructor unwind");
+        const auto previous=ReadUV(native);Render(e,out,512,288);
+        Require(records.size()==1&&published.size()==1&&!Access::Detail(p),"failed detail did not continue native rendering");
+        Near(MotionEnd(records[0])[0],previous[0],"failure successor did not consume latest completed native map",6e-4);
+        Require(glGetError()==GL_NO_ERROR,"partial detail failure leaked GL error state");owners.clear();
+    }
+}
 static void Transition(uint32_t divisor) {
     Target out(256,144);libprojectM::ProjectM e;Configure(e,false);e.SetOutgoingPresetFrameDivisor(divisor);Load(e,Fixture());auto& old=Access::Active(e);owners={&old};
     Render(e,out,256,144);Render(e,out,256,144);auto oldUV=Access::UV(old);
@@ -260,7 +318,7 @@ int main(int argc,char** argv) {try {
             Temporal("equal(frame,2)",shader,detail,true);CountsOff(true,detail);CountsOff(false,detail);CountsOff(false,detail,true);
         }
         else if(mode=="producer")for(bool detail:{false,true})Discard(detail);
-        else if(mode=="lifecycle")Lifecycle();
+        else if(mode=="lifecycle"){Lifecycle();PartialFailure();}
         else if(mode=="transition"){Transition(1);Transition(2);}
         else if(mode=="context")Temporal("equal(frame,2)","output",false);
         else throw std::runtime_error("unknown mode");

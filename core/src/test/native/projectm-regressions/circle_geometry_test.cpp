@@ -87,7 +87,7 @@ static void Render(libprojectM::Renderer::ShaderCache& cache){
  realElements=glad_glDrawElements;realInstanced=glad_glDrawArraysInstanced;
  glad_glDrawElements=Elements;glad_glDrawArraysInstanced=Instanced;
  for(bool dots:{false,true})for(bool thick:{false,true}){
-  PresetState state;auto& rc=state.renderContext;rc.shaderCache=&cache;state.LoadShaders();
+  PresetState state;state.audioData={};auto& rc=state.renderContext;rc.shaderCache=&cache;state.LoadShaders();
   rc.viewportSizeX=rc.viewportSizeY=128;rc.lineReferenceWidth=rc.lineReferenceHeight=64;
   rc.aspectX=rc.aspectY=rc.invAspectX=rc.invAspectY=1;
   state.waveMode=0;state.waveAlpha=1;state.waveR=1;state.waveG=state.waveB=0;
