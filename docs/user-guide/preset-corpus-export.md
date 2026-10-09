@@ -134,3 +134,25 @@ are needed once on another machine. No AI is needed for execution or recovery.
 Controller: `preset_corpus.py`; isolated worker: `corpus_worker.py`; deterministic
 inputs: `corpus_inputs.py`; durable outputs: `corpus_store.py`. The existing
 predictor export is documented in [export contract](predictor-export.md).
+
+
+## Fresh run after the quad-allocation fix
+
+The batching fix preserves ordered raster blends while avoiding full-frame
+copies per waveform/motion-vector segment. It changes predictor code identity.
+Keep completed old records and archives; start the fixed predictor with a new
+output folder rather than resuming the old identity. On the prepared Mac, the
+updated Downloads launcher uses the isolated `predictor-corpus-batching`
+worktree and defaults to `~/Downloads/ProjectM-TV-preset-corpus-15fps-480p-batched`.
+
+Stop the old controller with Ctrl+C and wait for its partial ZIP/shutdown message,
+then run:
+
+```sh
+~/Downloads/run-preset-corpus.command --workers 4
+```
+
+This starts all 9,606 presets from the beginning in the new folder. Later repeats
+resume this new run. No files in the original output folder are deleted. The
+prepared environment/adapters are shared read-only from `predictor-visual-loop`;
+retain both worktrees and the referenced build dependencies.

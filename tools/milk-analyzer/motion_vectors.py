@@ -7,7 +7,8 @@ profile limitations; canonical unsmoothed lines are not driver-exact coverage.
 """
 import numpy as np
 from line_points import draw_lines
-from quad_lines import PROFILE,draw_quad_lines,line_scale
+from primitives import _finite
+from quad_lines import PROFILE,quad_line_vertices,_draw_quad_segments,line_scale
 from scene_equations import MAIN
 from spatial import sample2d
 
@@ -163,12 +164,17 @@ def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
     if not len(geometry['positions']):
         return target
     colour = [_value(state, 'mv_' + channel, single=True) for channel in 'rgba']
-    for index,segment in enumerate(geometry['positions']):
-        # Independent flat-ended vectors, not a connected strip across the grid.
-        if quad:
-            target=draw_quad_lines(target,segment,colour,additive=False,quantize=quantize,
-                clip_positions=geometry['clip_positions'][index],raster_subpixel_bits=raster_subpixel_bits,
-                reference_size=reference_size)
-        else:
-            target = draw_lines(target, segment, colour, additive=False, quantize=quantize)
+    if quad:
+        # The old per-vector draw validated even a skipped/degenerate quad.
+        _finite(target,'framebuffer')
+        segments=[]
+        for index,segment in enumerate(geometry['positions']):
+            # Keep vectors independent: connecting the grid would create joins
+            # and different coverage. Only the already-generated quads are batched.
+            segments.extend(quad_line_vertices(segment,colour,width=width,height=height,
+                clip_positions=geometry['clip_positions'][index],reference_size=reference_size))
+        return _draw_quad_segments(target,segments,additive=False,quantize=quantize,
+                                   raster_subpixel_bits=raster_subpixel_bits)
+    for segment in geometry['positions']:
+        target=draw_lines(target,segment,colour,additive=False,quantize=quantize)
     return target

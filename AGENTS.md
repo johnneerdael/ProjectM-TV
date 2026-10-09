@@ -717,3 +717,15 @@ cases retain null records. Configuration/input hashes bind resumable output;
 changed identities stop the run and require a new folder. No AI/device operation
 is required. See `tools/milk-analyzer/CORPUS_EXPORT.md` and the user-guide
 `preset-corpus-export.md`; do not infer30Hz fidelity or no-flash certification.
+
+
+Corpus allocation fix (2026-10-09): quad strips and independent motion-vector
+quads share one ordered triangle batch per draw. Keep vector endpoint topology,
+triangle blend order and per-blend quantization unchanged; `test_quad_batching.py`
+compares against ordered per-quad raster calls and guards full-frame allocation
+counts. Never change code under an active checksum-bound corpus run. A fresh
+output folder is required for the changed code identity. The prepared isolated
+`predictor-corpus-batching` worktree shares the old Python environment and pinned
+source29 adapters read-only; keep those dependencies during execution. See
+`CORPUS_EXPORT.md` for the restart procedure. No AAR, presets or native numerical
+producer code changes are part of this fix.

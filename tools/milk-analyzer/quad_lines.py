@@ -120,9 +120,25 @@ def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quanti
         raise ValueError('raster subpixel bits must be an integer within 4..16')
     target=_finite(destination,'framebuffer').copy()
     height,width=target.shape[:2]
-    triangles=np.array([[0,1,2],[2,1,3]],np.int64)
-    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions,viewport_policy=viewport_policy,reference_size=reference_size):
-        target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
-                              additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,
-                              window_positions=segment.get('window_positions'))
-    return target
+    segments=quad_line_vertices(positions,colours,width=width,height=height,closed=closed,
+        clip_positions=clip_positions,viewport_policy=viewport_policy,reference_size=reference_size)
+    return _draw_quad_segments(target,segments,additive=additive,quantize=quantize,
+                               raster_subpixel_bits=raster_subpixel_bits)
+
+
+def _draw_quad_segments(destination,segments,*,additive,quantize,raster_subpixel_bits):
+    """Batch generated quads without reordering triangle blends or rounding.
+
+    Each segment remains four independent vertices. Concatenation changes only
+    ownership/allocation: draw_triangles still visits the original triangle order
+    and quantizes each blend. Callers supply an already owned framebuffer.
+    """
+    if not segments:return destination
+    positions=np.concatenate([segment['positions'] for segment in segments])
+    colours=np.concatenate([segment['colours'] for segment in segments])
+    triangles=(np.arange(len(segments),dtype=np.int64)[:,None,None]*4+
+               np.array([[0,1,2],[2,1,3]],np.int64)).reshape(-1,3)
+    windows=[segment.get('window_positions') for segment in segments]
+    window_positions=None if windows[0] is None else np.concatenate(windows)
+    return draw_triangles(destination,positions,colours,triangles,additive=additive,
+        quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,window_positions=window_positions)
