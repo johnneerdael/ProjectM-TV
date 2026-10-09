@@ -4,6 +4,7 @@
 #include <MilkdropPreset/MilkdropPreset.hpp>
 #include <ProjectM.hpp>
 #include <functional>
+#include <unordered_map>
 
 namespace libprojectM {
 class FeedbackDetailTestAccess {
@@ -36,6 +37,53 @@ static PFNGLDRAWELEMENTSPROC nextElements{};
 static PFNGLINVALIDATEFRAMEBUFFERPROC nextInvalidate{};
 #endif
 
+
+static std::unordered_map<GLuint,GLint> allocatedFormats;
+static bool rejectFloatMRT=false, hideFloatExtensions=false, requirePacked=false;
+static unsigned floatMRTProbes=0;
+static bool coreFloatWithoutExtensions=false;
+static PFNGLTEXIMAGE2DPROC nextImage{};
+static PFNGLCHECKFRAMEBUFFERSTATUSPROC nextStatus{};
+static PFNGLGETSTRINGIPROC nextStringi{};
+static PFNGLGETINTEGERVPROC nextInteger{};
+static GLint maskedMinorVersion=0;
+static void IntegerCapability(GLenum name,GLint* value) {
+    nextInteger(name,value);
+    // Simulate capability profiles while allocation/producer/storage/consumer remain real.
+    if(hideFloatExtensions&&!coreFloatWithoutExtensions&&name==GL_MAJOR_VERSION)*value=3;
+    if(hideFloatExtensions&&!coreFloatWithoutExtensions&&name==GL_MINOR_VERSION)*value=maskedMinorVersion;
+}
+static void AllocatedImage(GLenum target,GLint level,GLint format,GLsizei width,GLsizei height,
+                           GLint border,GLenum external,GLenum type,const void* data) {
+    if(target==GL_TEXTURE_2D&&level==0) {GLint name{};glGetIntegerv(GL_TEXTURE_BINDING_2D,&name);allocatedFormats[name]=format;}
+    nextImage(target,level,format,width,height,border,external,type,data);
+}
+static GLenum CheckedStatus(GLenum target) {
+    const auto status=nextStatus(target);
+    GLint fbo{};glGetIntegerv(target==GL_READ_FRAMEBUFFER?GL_READ_FRAMEBUFFER_BINDING:GL_DRAW_FRAMEBUFFER_BINDING,&fbo);
+    if(fbo&&target!=GL_READ_FRAMEBUFFER) {
+        GLint attachment{};glGetFramebufferAttachmentParameteriv(target,GL_COLOR_ATTACHMENT1,GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME,&attachment);
+        if(attachment&&allocatedFormats[attachment]==GL_RG16F) {++floatMRTProbes;if(rejectFloatMRT)return GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT;}
+    }
+    return status;
+}
+static const GLubyte* Extensions(GLenum name,GLuint index) {
+    auto* value=nextStringi(name,index);
+    if(hideFloatExtensions&&name==GL_EXTENSIONS&&value&&
+        (std::strcmp(reinterpret_cast<const char*>(value),"GL_EXT_color_buffer_float")==0||
+         std::strcmp(reinterpret_cast<const char*>(value),"GL_EXT_color_buffer_half_float")==0))
+        return reinterpret_cast<const GLubyte*>("GL_TEST_hidden_float_color_extension");
+    return value;
+}
+class FormatObserver {
+public:
+    FormatObserver(){allocatedFormats.clear();floatMRTProbes=0;
+        nextImage=glad_glTexImage2D;nextStatus=glad_glCheckFramebufferStatus;nextStringi=glad_glGetStringi;nextInteger=glad_glGetIntegerv;
+        glad_glTexImage2D=AllocatedImage;glad_glCheckFramebufferStatus=CheckedStatus;glad_glGetStringi=Extensions;glad_glGetIntegerv=IntegerCapability;}
+    ~FormatObserver(){glad_glTexImage2D=nextImage;glad_glCheckFramebufferStatus=nextStatus;glad_glGetStringi=nextStringi;glad_glGetIntegerv=nextInteger;}
+};
+static float HalfValue(uint16_t bits){_Float16 half{};static_assert(sizeof(half)==2,"host requires IEEE binary16");std::memcpy(&half,&bits,2);return static_cast<float>(half);}
+
 // Temporary read-FBO probes retain old read/draw bindings. The old FBO's read-buffer state is
 // never changed. Float RG16F readback is a backend gate; do not silently substitute a fake field.
 static std::array<float,2> ReadUV(GLuint texture,int w,int h,int x) {
@@ -50,9 +98,17 @@ static std::array<float,2> ReadUV(GLuint texture,int w,int h,int x) {
 #endif
     // RG is not a required GLES read format. RGBA/FLOAT reads the same real
     // floating attachment; unused B/A channels are ignored, never modeled.
-    std::array<float,16> pixels{};
-    glReadPixels(x-1,h/2-1,2,2,GL_RGBA,GL_FLOAT,pixels.data());
-    std::array<float,2> result{};for(int i=0;i<4;++i){result[0]+=.25f*pixels[4*i];result[1]+=.25f*pixels[4*i+1];}
+    std::array<float,2> result{};
+    if(allocatedFormats[texture]==GL_RG16UI) {
+        std::array<GLuint,16> pixels{};
+        glReadPixels(x-1,h/2-1,2,2,GL_RGBA_INTEGER,GL_UNSIGNED_INT,pixels.data());
+        for(int i=0;i<4;++i){result[0]+=.25f*HalfValue(uint16_t(pixels[4*i]));result[1]+=.25f*HalfValue(uint16_t(pixels[4*i+1]));}
+    } else {
+        Require(!requirePacked,"unsupported GLES backend allocated RG16F UV storage");
+        std::array<float,16> pixels{};
+        glReadPixels(x-1,h/2-1,2,2,GL_RGBA,GL_FLOAT,pixels.data());
+        for(int i=0;i<4;++i){result[0]+=.25f*pixels[4*i];result[1]+=.25f*pixels[4*i+1];}
+    }
     glBindFramebuffer(GL_READ_FRAMEBUFFER,oldRead);glBindFramebuffer(GL_DRAW_FRAMEBUFFER,oldDraw);glDeleteFramebuffers(1,&fbo);
     Require(glGetError()==GL_NO_ERROR,"backend does not admit actual RG16F readback");return result;
 }
@@ -78,10 +134,13 @@ static void ProducerElements(GLenum mode,GLsizei count,GLenum type,const void* i
             glGetIntegerv(GL_DRAW_BUFFER1,&buffer);
             for(auto* owner:owners)if(uv==static_cast<GLint>(Access::UV(*owner)->TextureID())&&buffer==GL_COLOR_ATTACHMENT1) {
                 Require(color!=uv&&color!=0,"producer routing aliases color and UV");
+                if(requirePacked)Require(allocatedFormats[uv]==GL_RG16UI,"float rejection did not select required RG16UI target");
+                if(coreFloatWithoutExtensions)Require(allocatedFormats[uv]==GL_RG16F,"GLES3.2 core float support unnecessarily selected packed storage");
                 p.owner=owner;p.program=program;p.fbo=fbo;p.uv=uv;p.color=color;glGetIntegerv(GL_VIEWPORT,p.viewport);capture=true;
             }
         }
     }
+    if(capture)Require(glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER)==GL_FRAMEBUFFER_COMPLETE,"actual producer MRT is incomplete");
     nextElements(mode,count,type,indices); // exactly one real fragment invocation
     if(capture) {
         auto texture=Access::UV(*p.owner);
@@ -170,8 +229,10 @@ static void Load(libprojectM::ProjectM& e,const std::string& text,bool smooth=fa
 static void Render(libprojectM::ProjectM& e,Target& out,int w,int h) {
     records.clear();published.clear();warpInvalidations=0;
     e.SetFrameTime(Access::EngineFrame(e)/30.0);out.Bind(w,h);GLint fbo{};glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING,&fbo);
+    const auto dither=glIsEnabled(GL_DITHER);
     observe=true;try{e.RenderFrame(fbo);}catch(...){observe=false;throw;}observe=false;
     GLint draw{},viewport[4]{};glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING,&draw);glGetIntegerv(GL_VIEWPORT,viewport);
+    Require(glIsEnabled(GL_DITHER)==dither,"packed UV changed caller color dithering state");
     Require(draw==fbo&&viewport[2]==w&&viewport[3]==h,"pipeline did not restore caller output/viewport");
     GLint attached{};glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME,&attached);
     Require(attached==0,"UV attachment leaked into caller output");
@@ -310,10 +371,73 @@ static void Transition(uint32_t divisor) {
     }
     owners.clear();
 }
+
+static void PackedBackendSuite() {
+    for(bool detail:{false,true})for(const auto& shader:{"default","custom","fallback","output"}) {
+        Temporal("equal(frame,2)",shader,detail);
+        Temporal("above(frame,1)*below(frame,5)",shader,detail);
+        CountsOff(true,detail);CountsOff(false,detail);Discard(detail);
+    }
+    Lifecycle();PartialFailure();Transition(1);Transition(2);
+}
+static void PackedBilinear() {
+    // The first grid node is at .5,.5. It lies between four actual UV texels. A checkerboard
+    // straddling the boundary catches filtering bit patterns instead of decoded half values,
+    // nearest-only consumption, range clipping, swapped words and erroneous Y orientation.
+    for(bool detail:{false,true}) {
+        auto text=Fixture("0","output");
+        const auto begin=text.find("warp_1=");text.erase(begin);
+        text+="warp_1=`shader_body { _mv_tex_coords.xy=float2(uv_orig.x<.5?-2.0:4.0,uv_orig.y<.5?-4.0:6.0);ret=float3(.25,.5,.75); }\n";
+        Target out(768,432);libprojectM::ProjectM e;Configure(e,detail);Load(e,text);auto& p=Access::Active(e);owners={&p};
+        Render(e,out,detail?768:256,detail?432:144);
+        Require(published.size()==1&&records.empty(),"packed bilinear first-frame producer/guard missing");
+        Near(published[0].center[0],1.f,"packed producer clipped signed/out-of-range half U",1e-6);
+        Near(published[0].center[1],1.f,"packed producer clipped signed/out-of-range half V",1e-6);
+        Render(e,out,detail?768:256,detail?432:144);
+        Require(records.size()==size_t(detail?2:1),"packed bilinear production consumer absent");
+        for(const auto& r:records) {
+            Near(MotionEnd(r)[0],1.f,"packed consumer did not decode before bilinear U interpolation",8e-4);
+            Near(MotionEnd(r)[1],1.f,"packed consumer did not decode before bilinear V interpolation",8e-4);
+        }
+        Near(published[0].colorCenter[0],.25f,"mixed integer MRT altered actual color output",.005f);
+        owners.clear();
+    }
+}
 int main(int argc,char** argv) {try {
-    Require(argc==2,"usage: motion-uv-freshness temporal|producer|lifecycle|transition|context");const std::string mode=argv[1];
-    auto run=[&]() {GLContext gl;Hooks tf;ProducerObserver producer;
-        if(mode=="temporal")for(bool detail:{false,true})for(const auto& shader:{"default","custom","fallback","output"}) {
+    Require(argc==2,"usage: motion-uv-compat temporal|producer|lifecycle|transition|context|packed-no-extension|packed-fbo-reject|packed-bilinear");const std::string mode=argv[1];
+    auto run=[&]() {GLContext gl;Hooks tf;FormatObserver formats;ProducerObserver producer;
+        hideFloatExtensions=mode=="packed-no-extension"||mode=="float-core-no-extension";
+        maskedMinorVersion=mode=="float-core-no-extension"?2:0;
+        rejectFloatMRT=mode=="packed-fbo-reject";
+        requirePacked=mode!="float-core-no-extension"&&(hideFloatExtensions||rejectFloatMRT||mode=="packed-bilinear");
+#ifndef USE_GLES
+        Require(!requirePacked,"packed backend controls require real GLES 3; desktop float controls remain supported");
+#endif
+        if(mode=="packed-bilinear")hideFloatExtensions=true;
+        if(mode=="float-core-no-extension") {
+            Target out(256,144);libprojectM::ProjectM e;Configure(e,false);Load(e,Fixture("0","output"));
+            auto& preset=Access::Active(e);owners={&preset};
+            Require(allocatedFormats[Access::UV(preset)->TextureID()]==GL_RG16F, "GLES3.2 core float capability silently switched to integer fallback");
+            Require(floatMRTProbes>0, "GLES3.2 core capability bypassed the real mixed float MRT probe");
+            Render(e,out,256,144);Require(records.empty()&&published.size()==1,"core float first-frame guard/producer changed");
+            const auto previous=published[0].center;Render(e,out,256,144);
+            Require(records.size()==1&&published.size()==1,"core float successor producer/consumer absent");
+            Near(MotionEnd(records[0])[0],previous[0],"core float previous UV changed",6e-4);owners.clear();
+        }
+        else if(mode=="core-float-no-extension") {
+            coreFloatWithoutExtensions=true;hideFloatExtensions=true;requirePacked=false;
+            GLint major{},minor{};nextInteger(GL_MAJOR_VERSION,&major);nextInteger(GL_MINOR_VERSION,&minor);
+            Require(major>3||(major==3&&minor>=2),"core float qualification requires real GLES3.2");
+            for(bool detail:{false,true})for(const auto& shader:{"default","custom","fallback","output"})Temporal("equal(frame,2)",shader,detail);
+            Require(floatMRTProbes>0,"core float path did not probe real mixed MRT");
+        }
+        else if(mode=="packed-no-extension"||mode=="packed-fbo-reject") {
+            PackedBackendSuite();
+            if(hideFloatExtensions)Require(floatMRTProbes==0,"extension rejection still attempted a float MRT probe");
+            if(rejectFloatMRT)Require(floatMRTProbes>0,"float MRT rejection control never reached real capability probe");
+        }
+        else if(mode=="packed-bilinear")PackedBilinear();
+        else if(mode=="temporal")for(bool detail:{false,true})for(const auto& shader:{"default","custom","fallback","output"}) {
             for(const auto& off:{"0","1","equal(frame,2)","above(frame,1)*below(frame,5)"})Temporal(off,shader,detail);
             Temporal("equal(frame,2)",shader,detail,true);CountsOff(true,detail);CountsOff(false,detail);CountsOff(false,detail,true);
         }
@@ -323,6 +447,6 @@ int main(int argc,char** argv) {try {
         else if(mode=="context")Temporal("equal(frame,2)","output",false);
         else throw std::runtime_error("unknown mode");
     };
-    run();if(mode=="context")run(); // Destroy every engine/resource before destroying each GL context.
+    run();if(mode=="context"||mode=="packed-no-extension"||mode=="packed-fbo-reject")run();
     std::cout<<"actual motion UV "<<mode<<" controls pass; Native pixels/cost remain separate\n";return 0;
 } catch(const std::exception& e) {std::cerr<<e.what()<<'\n';return 1;}}

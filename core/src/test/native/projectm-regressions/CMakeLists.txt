@@ -435,3 +435,23 @@ foreach(uv_mode temporal producer lifecycle transition context)
     set_tests_properties(motion-uv-${uv_mode} PROPERTIES TIMEOUT 120
         ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 endforeach()
+
+# Packed half UV storage is a GLES-only fallback. Desktop retains RG16F.
+if(NOT APPLE)
+ foreach(control packed-no-extension packed-fbo-reject packed-bilinear core-float-no-extension)
+  add_test(NAME motion-uv-${control} COMMAND motion-uv-freshness-regressions ${control})
+  set_tests_properties(motion-uv-${control} PROPERTIES TIMEOUT 180 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+ endforeach()
+ add_executable(motion-uv-precision-edges-regressions motion_uv_precision_edges_test.cpp)
+ target_compile_features(motion-uv-precision-edges-regressions PRIVATE cxx_std_17)
+ target_compile_definitions(motion-uv-precision-edges-regressions PRIVATE USE_GLES GL_SILENCE_DEPRECATION)
+ target_include_directories(motion-uv-precision-edges-regressions PRIVATE
+  "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset"
+  "${PROJECTM_SOURCE}/vendor" "${PROJECTM_SOURCE}/vendor/glad/include"
+  "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+ target_link_libraries(motion-uv-precision-edges-regressions PRIVATE libprojectM::projectM ${REGRESSION_GL_TARGET})
+ foreach(control fractional nonfinite edge)
+  add_test(NAME motion-uv-${control} COMMAND motion-uv-precision-edges-regressions ${control})
+  set_tests_properties(motion-uv-${control} PROPERTIES TIMEOUT 180 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+ endforeach()
+endif()
