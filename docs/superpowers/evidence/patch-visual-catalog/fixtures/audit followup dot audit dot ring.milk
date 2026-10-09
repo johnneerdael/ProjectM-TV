@@ -1,0 +1,15 @@
+MILKDROP_PRESET_VERSION=100
+[preset00]
+fDecay=0
+fGammaAdj=1
+fShader=0
+fWaveAlpha=0
+nWaveMode=0
+ob_size=0
+ib_size=0
+mv_a=0
+wavecode_0_enabled=1
+wavecode_0_samples=12
+wavecode_0_bUseDots=1
+wavecode_0_smoothing=0
+wave_0_per_point1=x=.5+.35*cos(sample*6.283185307179586);y=.5+.35*sin(sample*6.283185307179586);r=1;g=0;b=0;a=1;

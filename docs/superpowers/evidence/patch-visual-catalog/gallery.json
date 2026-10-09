@@ -1,0 +1,257 @@
+[
+  {
+    "issue": "I17",
+    "patch": 17,
+    "case": "I17-4k",
+    "frame": 239,
+    "preset": "Happening.milk",
+    "caption": "Before, many streaks wash toward white. After, green, pink and blue remain distinct. This full-engine comparison also includes the legacy warp repairs.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I08",
+    "patch": 18,
+    "case": "I08-4k",
+    "frame": 239,
+    "preset": "Mig_304 - geiss remix 2.milk",
+    "caption": "The centered, separated audio windows change the small blue custom-wave trace. The matched zoom makes its changed geometry easier to inspect.",
+    "crop": [
+      1344,
+      648,
+      1152,
+      864
+    ],
+    "extras": []
+  },
+  {
+    "issue": "I31",
+    "patch": 19,
+    "case": "I31",
+    "frame": 119,
+    "preset": "suksma - type o negative - world coming down.milk",
+    "caption": "This original is a near-unchanged appearance example. The isolated historical repair changed only 17 total RGB bytes at 4K; the small differences in this full-engine pair also include other patches. The verified change is the gamma-only pass count, not a promised visible improvement.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I09",
+    "patch": 20,
+    "case": "I09",
+    "frame": 239,
+    "preset": "audit pi precision.milk (synthetic)",
+    "caption": "This diagnostic deliberately amplifies the float-rounding error in $pi. Upstream makes an oversized red border; the double input restores the narrow border requested by the expression.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I05",
+    "patch": 21,
+    "case": "I05",
+    "frame": 300,
+    "preset": "163.milk",
+    "caption": "Inverse aspect inputs change the feedback displacement in this original. The separate synthetic drift example below makes the equation-input effect easier to see.",
+    "crop": null,
+    "extras": [
+      {
+        "case": "I05-control",
+        "frame": 239,
+        "caption": "Synthetic inverse-aspect drift: the same red square is displaced using dx=aspecty/10.",
+        "crop": [
+          200,
+          225,
+          600,
+          300
+        ]
+      }
+    ]
+  },
+  {
+    "issue": "I06",
+    "patch": 21,
+    "case": "I06",
+    "frame": 479,
+    "preset": "Shreyas - Carnival loavthephysyq.milk",
+    "caption": "Fresh host time changes the colour pattern in the custom waves. It does not mean every preset should become brighter or darker.",
+    "crop": null,
+    "extras": [
+      {
+        "case": "I06-control",
+        "frame": 239,
+        "caption": "Synthetic fresh-time input: main time is slowed to one tenth; wave-point time must still use the host clock.",
+        "crop": [
+          225,
+          200,
+          250,
+          320
+        ]
+      }
+    ]
+  },
+  {
+    "issue": "I29",
+    "patch": 22,
+    "case": "I29",
+    "frame": 239,
+    "preset": "audit negative echo.milk (synthetic)",
+    "caption": "Negative odd echo orientation moves the orange square from the left to the right by applying the authored horizontal mirror.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I10",
+    "patch": 23,
+    "case": "I10",
+    "frame": 150,
+    "preset": "BrainStain-fish on.milk",
+    "caption": "The legacy oscillator uses the original physical Y direction, changing the curved feedback geometry. Custom warp-shader coordinates keep their separate contract.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I11",
+    "patch": 24,
+    "case": "I11",
+    "frame": 150,
+    "preset": "07.milk",
+    "caption": "The physical triangle diagonal changes interpolation within the legacy warp mesh. The original radial feedback makes that difference accumulate into a different pattern.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I12",
+    "patch": 25,
+    "case": "I12",
+    "frame": 239,
+    "preset": "audit legacy physical traversal.milk (synthetic)",
+    "caption": "The equation increments q1 at each mesh point. Restoring physical row order changes its coloured shear; this control makes stateful traversal visible.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I13",
+    "patch": 26,
+    "case": "I13",
+    "frame": 180,
+    "preset": "Liquido.milk",
+    "caption": "This original branches on ang at the exact left axis. The original seam value selects the intended branch; feedback then propagates the changed deformation.",
+    "crop": [
+      0,
+      216,
+      640,
+      288
+    ],
+    "extras": []
+  },
+  {
+    "issue": "I18",
+    "patch": 27,
+    "case": "I18",
+    "frame": 239,
+    "preset": "Geiss - Blur Mix 3.milk",
+    "caption": "The brightened built-in waveform uses clamped colour channels before normalization. Inspect the narrow central wave in the matched zoom; the full pair includes the other wave repairs too.",
+    "crop": [
+      128,
+      288,
+      1024,
+      158
+    ],
+    "extras": []
+  },
+  {
+    "issue": "M02",
+    "patch": 28,
+    "case": "M02",
+    "frame": 239,
+    "preset": "audit border inverted.milk (synthetic)",
+    "caption": "An intentionally oversized, translucent border exposes overlapping coverage. Restored strip-fan indices change that coverage. The neutral colour also reflects earlier patch 0014 honoring fShader=0; it is not caused by the border topology repair.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I19",
+    "patch": 29,
+    "case": "I19",
+    "frame": 239,
+    "preset": "$$$ Royal - Mashup (103).milk",
+    "caption": "At 1280\u00d7720, the original width-dependent cap changes submitted waveform geometry and this witness becomes brighter. That direction is not universal: the uncapped 4K pair below is nearly unchanged.",
+    "crop": null,
+    "extras": [
+      {
+        "case": "I19-4k",
+        "frame": 239,
+        "caption": "The same original at 3840\u00d72160 with actual-width sampling and TV feedback detail off. Both width budgets reach the full raw sample count, so the cap itself is inactive here.",
+        "crop": null
+      }
+    ]
+  },
+  {
+    "issue": "I22",
+    "patch": 30,
+    "case": "I22-4k",
+    "frame": 239,
+    "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+    "caption": "The custom wave describes 42 stars. Discrete dots retain authored samples instead of inserting line-interpolation dots. A synthetic zoom below isolates an extra dot that disappears.",
+    "crop": null,
+    "extras": [
+      {
+        "case": "I22-control",
+        "frame": 239,
+        "caption": "Synthetic 12-sample dot ring. This nearest-neighbour crop surrounds one interpolated dot: it is present upstream and absent after the repair. The original full frames remain available by clicking.",
+        "crop": [
+          170,
+          340,
+          40,
+          40
+        ]
+      }
+    ]
+  },
+  {
+    "issue": "I20",
+    "patch": 31,
+    "case": "I20",
+    "frame": 119,
+    "preset": "$$$ Royal - Mashup (11).milk",
+    "caption": "Original circle spacing and exact closure change the accumulating circular feedback. This is the full preset result, not a close-up proof that every changed pixel lies at the closing seam.",
+    "crop": null,
+    "extras": []
+  },
+  {
+    "issue": "I24",
+    "patch": 32,
+    "case": "I24",
+    "frame": 239,
+    "preset": "martin - city lights v2 c.milk",
+    "caption": "The four overlay shape instances can use their evaluated thick outlines while the other 45 remain thin. This busy original also contains other repaired features; the disjoint-square diagnostic below isolates live thickness.",
+    "crop": null,
+    "extras": [
+      {
+        "case": "I24-control",
+        "frame": 239,
+        "caption": "Synthetic disjoint shape instances, with thin saved style and live thick=1. The matched corner crop exposes the evaluated border width.",
+        "crop": [
+          275,
+          130,
+          70,
+          70
+        ]
+      }
+    ]
+  },
+  {
+    "issue": "I16",
+    "patch": 33,
+    "case": "I16",
+    "frame": 239,
+    "preset": "audit followup uv default-feedback.milk (synthetic)",
+    "caption": "The motion field changes while vectors are hidden for one frame. When the red vectors return, they use the latest completed field. The matched zoom shows the changed segment; this is a diagnostic, not a confirmed stock-preset census.",
+    "crop": [
+      240,
+      348,
+      320,
+      28
+    ],
+    "extras": []
+  }
+]

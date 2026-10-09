@@ -70,6 +70,8 @@ visual forecasts. Build its source adapters against a hash-
 identified host engine before `python -m pytest tools/milk-analyzer -q`; Preset Lab CI
 performs this setup. Its results are source diagnostics, not visual certification.
 
+Visual patch catalog maintenance (2026-10-09): the 18 audit repairs in 0017–0033 have native Apple M4 Pro master/main image pairs, with explicit synthetic diagnostics and matched CSS zooms. Preserve their exact source/worker/audio/dimension identities and distinguish whole-series comparison from isolated repair causality. Royal103 actual-width4K is separate from production Standard-trails4K. Use [catalog evidence](docs/superpowers/evidence/patch-visual-catalog/README.md) and its bounded image verifier; no physical-TV performance or Windows-pixel claim follows.
+
 ## Codebase navigation and knowledge tools
 
 - I11 candidate0024 (2026-10-08): actual legacy/default mesh uses the original physical AD diagonal; compiled custom keeps BC and failed custom uses legacy. Select six offsets once, keep one existing index buffer, winding/quadrant/count/replay contracts, and include compiled-path identity in cached topology. Real corner-field GL/indices/affine/path-change control RED→GREEN. Initial Native4K/custom-path proof passes but initial cost+4.337% is not accepted. Revised complete viewport/aspect/path static mesh cache passes49 controls and fresh24-patch application; missing-aspect ablation fails. Revised native equivalence/cost and integration pending. See [I11](docs/superpowers/evidence/milkdrop-audit-repairs/I11/README.md).

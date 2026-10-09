@@ -1,0 +1,187 @@
+{
+  "upstream": {
+    "role": "upstream",
+    "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+    "engine": {
+      "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+      "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e"
+    },
+    "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2",
+    "harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    },
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+    "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+    "source_tree_sha256": "cbd3e22aae01abde85c6ae6af80e63b01196c4c2a15f269b75aa88b89cd0fa62",
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+    "ordered_patches": []
+  },
+  "patched": {
+    "role": "patched",
+    "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+    "engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321",
+      "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e"
+    },
+    "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c",
+    "harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f",
+      "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+      "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    },
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+    "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+    "source_tree_sha256": "5e48da2b8a47f160a1884a648cae19127d833e69f5b5f3c55ffb5c64eff66533",
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+    "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+    "ordered_patches": [
+      {
+        "filename": "0001-tv-rendering-and-preset-compatibility.patch",
+        "sha256": "65900645b989f653d697bdce5cdc265ab9cbf5b5f0ac699d737fb09488033dd7"
+      },
+      {
+        "filename": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+        "sha256": "eb210256beb15ba61b3989b072e0a245e02baf8b7b983550de1e6773249e6571"
+      },
+      {
+        "filename": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+        "sha256": "dc9ba43e32b9894e01a897f0f5727cae1cbb1b6cd9643f85b4dcd240cabc1419"
+      },
+      {
+        "filename": "0004-textured-shape-sampler.patch",
+        "sha256": "3601f673c62f48f44757c8956910a6930e37eb0bb5116fc6a3d90ab6964690d9"
+      },
+      {
+        "filename": "0005-blur-range-interval.patch",
+        "sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a"
+      },
+      {
+        "filename": "0006-fixed-warp-signed-unit-zoom.patch",
+        "sha256": "44703476e7ebdc189c053b31a23b14a4beb45e17304def8c53adf52f0b68f90d"
+      },
+      {
+        "filename": "0007-live-builtin-wave-controls.patch",
+        "sha256": "1c2bb9ac7328fec193c7b60a84df980afe4ac872e74dc8e8b6984ac7e83fc700"
+      },
+      {
+        "filename": "0008-live-legacy-display-controls.patch",
+        "sha256": "322335d4638e3513bf8a00d6bd2d9d39436647cc368cc32a79ea28cb420c93b6"
+      },
+      {
+        "filename": "0009-user-texture-premultiplication.patch",
+        "sha256": "2f62c09e83b45ac25a4161be1f71f941a3e9852fa5401a930e00fc19836be6d0"
+      },
+      {
+        "filename": "0010-preset-texture-search-path-ownership.patch",
+        "sha256": "62740719eacde9bfd12f8d3caf83413d2e3a744d0f4b713693f8eade4e049296"
+      },
+      {
+        "filename": "0011-cpu-warp-rotation-trig.patch",
+        "sha256": "c99a6221174a33a7d87381e055ee3187a91edea403fe0d5ea9a9efb9a502488b"
+      },
+      {
+        "filename": "0012-shape-pixel-centers.patch",
+        "sha256": "9e4614734be2eced389433bcdef2afd3292afaebac3330fee55222a25c9fa7be"
+      },
+      {
+        "filename": "0013-composite-texel-centers.patch",
+        "sha256": "85edc00b4adcc725c6b824673ec24dd756bded652511b170b62f91912e8dd2d2"
+      },
+      {
+        "filename": "0014-legacy-tint-and-mode1-waveform.patch",
+        "sha256": "6f5f5d7ebebc7600f96f2fcae0a24be9d77f98a0b5402e486c207d16cbe2b689"
+      },
+      {
+        "filename": "0015-warp-negative-zoom-cpu-power.patch",
+        "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
+      },
+      {
+        "filename": "0016-cache-mesh-init-per-viewport.patch",
+        "sha256": "5ab17fdd496d2771f9a835c8716e0298b57320e44d3ae829e1430b18b1934d31"
+      },
+      {
+        "filename": "0017-builtin-wave-opacity.patch",
+        "sha256": "3b898d63a7ef0baafb4862a8a37044dd3fe4df3a6d0bc1e4562287d9a7197652"
+      },
+      {
+        "filename": "0018-custom-wave-input-windows.patch",
+        "sha256": "68d3b8307f172575b6d35eded5ed9e0d3d2213033e12e040f623221844e6b187"
+      },
+      {
+        "filename": "0019-gamma-only-pass-epsilon.patch",
+        "sha256": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a"
+      },
+      {
+        "filename": "0020-eel-named-constant-precision.patch",
+        "sha256": "dd152e9036a7e07a8aae22db1827fd3148505a243724a8c938f5a34c6f05d29a"
+      },
+      {
+        "filename": "0021-original-equation-inputs.patch",
+        "sha256": "02d1a76b832a76f86f2f7612adcb0669d0e9e91351f0e8222daeabe522bc8d92"
+      },
+      {
+        "filename": "0022-negative-odd-echo-orientation.patch",
+        "sha256": "5ab654be6d7008c9fc83af736690243d915a9e2b5fe08e3a990620a4818490f4"
+      },
+      {
+        "filename": "0023-legacy-warp-oscillator-y.patch",
+        "sha256": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff"
+      },
+      {
+        "filename": "0024-legacy-warp-physical-diagonal.patch",
+        "sha256": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546"
+      },
+      {
+        "filename": "0025-legacy-per-pixel-traversal.patch",
+        "sha256": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc"
+      },
+      {
+        "filename": "0026-legacy-angle-seam.patch",
+        "sha256": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a"
+      },
+      {
+        "filename": "0027-wave-rgb-clamp.patch",
+        "sha256": "2af590bc0a9e9519cc6a3fc2bc3486a9bf048537849077a6cd85b3c44e8bde55"
+      },
+      {
+        "filename": "0028-original-border-fan-topology.patch",
+        "sha256": "1cbbd2ba3c93eea3647e586e37d0c1bfd749e3c93ae3256b4c4c636741bc00d6"
+      },
+      {
+        "filename": "0029-original-line-sample-caps.patch",
+        "sha256": "275277d85db16912e93c7225ef2feae15e38076e1d21fccdbbcfe0a3e87225ff"
+      },
+      {
+        "filename": "0030-authored-custom-dots.patch",
+        "sha256": "303f3cc60ec2cda45de1c280c94dda05da4798e63ddde439153782fda9e35b3c"
+      },
+      {
+        "filename": "0031-original-circle-closure.patch",
+        "sha256": "7bdb26d64f82c43c27f9f39f31ea6d3cf5073d1479c876cd185747eedaa4535b"
+      },
+      {
+        "filename": "0032-live-shape-instance-thickness.patch",
+        "sha256": "a1c0dae19663d9f28513071da462e50dfdbd9bd7468660ca9905287ccdbdd0ae"
+      },
+      {
+        "filename": "0033-latest-previous-motion-field.patch",
+        "sha256": "326077fc447f5941e607f40e871413863d704a2954aefd0e77305b3145bab496"
+      },
+      {
+        "filename": "0034-gles-compatible-continuous-motion-uv.patch",
+        "sha256": "086639386702d45ee9d7b0af56ca32799e18dbe5cdccf6b88c83f59466de5b1c"
+      }
+    ]
+  }
+}

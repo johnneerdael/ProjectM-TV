@@ -1,0 +1,3694 @@
+{
+  "I05": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I05-control": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I06": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I06-control": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I08": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I08-4k": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    }
+  ],
+  "I09": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I10": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I11": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I12": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I13": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I16": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I17": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I17-4k": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    }
+  ],
+  "I18": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I19": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I19-4k": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    }
+  ],
+  "I20": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I22": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I22-4k": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 2160,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 3840
+      }
+    }
+  ],
+  "I22-control": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I24": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I24-control": [
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 240,
+      "manifest": {
+        "fps": 30,
+        "frames": 240,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I29": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "I31": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ],
+  "M02": [
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "upstream",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/engines/3a9f5e3d6caff9417acf4ede83ba06043370ed3d68350cd9e4db78eafb6f1784",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/upstream/native-build/preset-lab-worker",
+          "worker_sha256": "a066418817c31c14a255cd8231b1a618f2f2665f229127b424eb5a3b223e13a2"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    },
+    {
+      "exit": 0,
+      "frames": 480,
+      "manifest": {
+        "fps": 30,
+        "frames": 480,
+        "gl_error_frames": 0,
+        "gl_renderer": "Apple M4 Pro",
+        "gl_version": "4.1 Metal - 89.4",
+        "height": 720,
+        "identity": {
+          "engine": {
+            "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+            "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+            "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+          },
+          "harness": {
+            "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+            "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+            "gl_capture.hpp": "ecca4501e31f1aebd0e813f42f2d28130f01dcc5ae1b3703900b01c6ad67fbfe",
+            "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+            "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+            "worker.cpp": "b4e39678acbfd70c386101425854666bf057bccd075a803c7fd6ba42737e260f"
+          },
+          "role": "patched",
+          "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/engines/e3a24f7d882d507b1be2b50f52d0a6788fadfbb109bf60fed3a0c1fdb5842127",
+          "source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+          "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/docs-patch-visual-catalog/build/catalog-host/patched/native-build/preset-lab-worker",
+          "worker_sha256": "9a257c6f2509820bac5dab2be3c49b259787741e69b7f3593168d8c447d3a26c"
+        },
+        "seed": 12345,
+        "status": "success",
+        "width": 1280
+      }
+    }
+  ]
+}
