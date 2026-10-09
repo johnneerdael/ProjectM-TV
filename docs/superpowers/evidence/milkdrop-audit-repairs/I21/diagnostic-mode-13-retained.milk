@@ -1,0 +1,24 @@
+MILKDROP_PRESET_VERSION=201
+[preset00]
+fDecay=1
+fGammaAdj=1
+fVideoEchoAlpha=0
+fWaveAlpha=.8
+fWaveScale=1
+fWaveParam=.25
+wave_x=.5
+wave_y=.5
+wave_r=.2
+wave_g=.7
+wave_b=1
+bWaveDots=0
+bWaveThick=0
+bAdditiveWaves=0
+bMaximizeWaveColor=0
+bModWaveAlphaByVolume=0
+ob_size=0
+ib_size=0
+mv_a=0
+bDarkenCenter=0
+warp_1=`shader_body { ret=float3(0,0,0); }
+nWaveMode=13

@@ -1,0 +1,12 @@
+{"issue": "I12-warm", "cycle": 0, "step": 0, "role": "before", "mean_ms": 6.296834044444444, "p90_ms": 7.132625, "status": "ok"}
+{"issue": "I12-warm", "cycle": 0, "step": 1, "role": "after", "mean_ms": 5.931775830555556, "p90_ms": 6.717959, "status": "ok"}
+{"issue": "I12-warm", "cycle": 0, "step": 2, "role": "after", "mean_ms": 5.641843374999995, "p90_ms": 6.124375, "status": "ok"}
+{"issue": "I12-warm", "cycle": 0, "step": 3, "role": "before", "mean_ms": 5.716001833333334, "p90_ms": 6.344458, "status": "ok"}
+{"issue": "I12-warm", "cycle": 1, "step": 0, "role": "before", "mean_ms": 5.680612427777781, "p90_ms": 6.17325, "status": "ok"}
+{"issue": "I12-warm", "cycle": 1, "step": 1, "role": "after", "mean_ms": 5.617797808333335, "p90_ms": 6.050167, "status": "ok"}
+{"issue": "I12-warm", "cycle": 1, "step": 2, "role": "after", "mean_ms": 6.873040861111118, "p90_ms": 8.173792, "status": "ok"}
+{"issue": "I12-warm", "cycle": 1, "step": 3, "role": "before", "mean_ms": 4.944970136111111, "p90_ms": 5.640625, "status": "ok"}
+{"issue": "I12-warm", "cycle": 2, "step": 0, "role": "before", "mean_ms": 4.924952436111111, "p90_ms": 5.422458, "status": "ok"}
+{"issue": "I12-warm", "cycle": 2, "step": 1, "role": "after", "mean_ms": 4.812701738888892, "p90_ms": 5.301833, "status": "ok"}
+{"issue": "I12-warm", "cycle": 2, "step": 2, "role": "after", "mean_ms": 4.62162175, "p90_ms": 4.954333, "status": "ok"}
+{"issue": "I12-warm", "cycle": 2, "step": 3, "role": "before", "mean_ms": 4.952404269444442, "p90_ms": 5.350333, "status": "ok"}

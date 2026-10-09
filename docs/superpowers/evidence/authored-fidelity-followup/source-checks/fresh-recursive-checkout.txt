@@ -1,0 +1,9 @@
+Cloning into '/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/fresh-recursive'...
+done.
+HEAD is now at 6a016447 Merge remote-tracking branch 'origin/main' into fix/milkdrop-authored-fidelity
+Cloning into '/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/fresh-recursive/third_party/projectm'...
+done.
+Submodule path 'third_party/projectm': checked out '6f64807467e312034883a4389e6aa80a675458bc'
+Cloning into '/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/authored-followup/fresh-recursive/third_party/projectm/vendor/projectm-eval'...
+done.
+Submodule path 'third_party/projectm/vendor/projectm-eval': checked out '22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a'

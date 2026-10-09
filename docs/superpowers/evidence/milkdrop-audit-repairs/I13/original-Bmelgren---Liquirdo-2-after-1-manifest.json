@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 9361,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/audio.u8",
+    "preset": "Bmelgren - Liquirdo 2.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "94c353645ea77b174629aae8bb528cf7ea40061ddb438c79faa905c34ac79d94",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f053cdcd35a10db634f94da89c6cd701973fa0b4dee6b8a719650f0f47f254c1",
+      "pngBytes": 7868332,
+      "pngSha256": "24c0b264bb392e7149855d28074d6e9acce38d9184dcdd1cda759dfa88fdaf93",
+      "rgbMean": [
+        22.85952594521605,
+        26.425486593364198,
+        16.07295428240741
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "70e4222ab33902aefeb7dada152bf80845483655c92c13e4e61525e204eeb7af",
+      "pngBytes": 7612424,
+      "pngSha256": "fbc81a5b0cf10ad18dc72fb1e88479d0264f0def88d78e99d84874b3151b445f",
+      "rgbMean": [
+        19.38272219810957,
+        21.87127941743827,
+        13.24196072048611
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b9536d277aa697156ba6414b9f6dcacd2d2474d4c093bb45f46f400f4ac967d9",
+      "pngBytes": 7340213,
+      "pngSha256": "0cefe9542488f2b0e0d8048ba3eb1cbc03776449fd35064c27ebb76b23aeb119",
+      "rgbMean": [
+        30.001901644483024,
+        33.49008885513117,
+        20.31178855613426
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a7073abe26e76ca7df184b17162035b9bacd97fd0cb70c0e2a868c957668775a",
+      "pngBytes": 7795485,
+      "pngSha256": "bcf18c055f8cdc3c261c9ee6831ef0d8eacc666de351b6ad86622bd8f5fabc82",
+      "rgbMean": [
+        33.1809294222608,
+        32.819547284915124,
+        22.462594280478395
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "2d6235abfa01078769ccb275ba543b82270085eb05529829e8af9647eeadbd29",
+      "pngBytes": 6463101,
+      "pngSha256": "3bc765206e543589cf3541f3f0e2ffb02d7dc6dd42bc739cadeb31c1c6771c95",
+      "rgbMean": [
+        43.32295163001543,
+        40.80703776041667,
+        30.590722173996912
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0c94e98e534c1f852c5d07378e6f88a2fbe3c045c5dfc25b73cc58e903a5afe6",
+      "pngBytes": 8263708,
+      "pngSha256": "275701c03a197e8157250c5616ebbe35fdae64213fe9bae4848ce1bdd1aebbc2",
+      "rgbMean": [
+        25.744680507330248,
+        19.317286361882715,
+        17.43881100501543
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f83a7f65e0922f2575d656d50adf92cb7cd66b06baf44432fe5966b305169356",
+      "pngBytes": 7787514,
+      "pngSha256": "8ec9d95e8469df75a613c849946c290a65a0e74f07ac11ca59315bcfa20fc329",
+      "rgbMean": [
+        34.16776849440586,
+        21.251096281828705,
+        23.99780285493827
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i13-original-Bmelgren---Liquirdo-2-after-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ae081a5b19ba8c0a444e1afcefff010e13c2e59ccafd82be88cd022026605163",
+      "pngBytes": 6947308,
+      "pngSha256": "ed8950086ce0b096ce4c0040fcfc670f18a658e8ce30fa6704aff3594c63d63f",
+      "rgbMean": [
+        19.888213372878088,
+        15.382757402584877,
+        14.93383186246142
+      ],
+      "exactBlackFraction": 1.326195987654321E-6
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 35505858,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 301,
+      "elapsedRealtimeMs": 35517947,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "7251d5d5c8b8ccaa347ec34ff93c2b4eff24e227f3f6ee587428698ab6479ae7",
+  "forcedPresetPrefix": "Bmelgren - Liquirdo 2.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 16,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43187,
+  "framesRendered": 480,
+  "renderWallDurationMs": 16135,
+  "pssAfterFramesKB": 71550,
+  "serializedFrameMeanMs": 2.3522013000000017,
+  "serializedFrameP90Ms": 2.402916,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Bmelgren - Liquirdo 2.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 16475
+}

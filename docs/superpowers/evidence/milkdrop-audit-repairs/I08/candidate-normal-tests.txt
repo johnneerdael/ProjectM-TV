@@ -1,0 +1,83 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+      Start  1: warp-rotation-regressions
+ 1/39 Test  #1: warp-rotation-regressions ....................   Passed    0.36 sec
+      Start  2: user-texture-premultiplication-regressions
+ 2/39 Test  #2: user-texture-premultiplication-regressions ...   Passed    0.10 sec
+      Start  3: texture-routing-regressions
+ 3/39 Test  #3: texture-routing-regressions ..................   Passed    0.46 sec
+      Start  4: warp-zoom-regressions
+ 4/39 Test  #4: warp-zoom-regressions ........................   Passed    0.07 sec
+      Start  5: custom-wave-input-windows
+ 5/39 Test  #5: custom-wave-input-windows ....................   Passed    0.10 sec
+      Start  6: legacy-hue
+ 6/39 Test  #6: legacy-hue ...................................   Passed    0.09 sec
+      Start  7: legacy-wave-alpha
+ 7/39 Test  #7: legacy-wave-alpha ............................   Passed    0.07 sec
+      Start  8: legacy-wave-topology
+ 8/39 Test  #8: legacy-wave-topology .........................   Passed    0.07 sec
+      Start  9: legacy-opacity
+ 9/39 Test  #9: legacy-opacity ...............................   Passed    0.07 sec
+      Start 10: dynamic-original-presets
+10/39 Test #10: dynamic-original-presets .....................   Passed    0.51 sec
+      Start 11: dynamic-wave-controls
+11/39 Test #11: dynamic-wave-controls ........................   Passed    0.55 sec
+      Start 12: dynamic-display-controls
+12/39 Test #12: dynamic-display-controls .....................   Passed    3.06 sec
+      Start 13: shape-sampler-regressions
+13/39 Test #13: shape-sampler-regressions ....................   Passed    0.37 sec
+      Start 14: shape-sampler-preset
+14/39 Test #14: shape-sampler-preset .........................   Passed    0.15 sec
+      Start 15: blur-range-regressions
+15/39 Test #15: blur-range-regressions .......................   Passed    0.01 sec
+      Start 16: blur-range-render
+16/39 Test #16: blur-range-render ............................   Passed    0.47 sec
+      Start 17: float-literal-regressions
+17/39 Test #17: float-literal-regressions ....................   Passed    0.07 sec
+      Start 18: random-texture-manager
+18/39 Test #18: random-texture-manager .......................   Passed    0.12 sec
+      Start 19: random-texture-stages
+19/39 Test #19: random-texture-stages ........................   Passed    0.14 sec
+      Start 20: random-texture-shorthand
+20/39 Test #20: random-texture-shorthand .....................   Passed    0.11 sec
+      Start 21: random-texture-numerical
+21/39 Test #21: random-texture-numerical .....................   Passed    0.18 sec
+      Start 22: random-texture-lifecycle
+22/39 Test #22: random-texture-lifecycle .....................   Passed    0.20 sec
+      Start 23: random-texture-blur-framebuffers
+23/39 Test #23: random-texture-blur-framebuffers .............   Passed    0.14 sec
+      Start 24: random-texture-midgit-render
+24/39 Test #24: random-texture-midgit-render .................   Passed    0.18 sec
+      Start 25: shader-parser-regressions
+25/39 Test #25: shader-parser-regressions ....................   Passed    0.01 sec
+      Start 26: hlsl-self-reference
+26/39 Test #26: hlsl-self-reference ..........................   Passed    0.18 sec
+      Start 27: custom-waveform-bounds
+27/39 Test #27: custom-waveform-bounds .......................   Passed    0.09 sec
+      Start 28: shader-render-regressions
+28/39 Test #28: shader-render-regressions ....................   Passed    2.03 sec
+      Start 29: float-literal-render
+29/39 Test #29: float-literal-render .........................   Passed    0.17 sec
+      Start 30: parser-presets
+30/39 Test #30: parser-presets ...............................   Passed    0.38 sec
+      Start 31: implicit-global-regressions
+31/39 Test #31: implicit-global-regressions ..................   Passed    0.01 sec
+      Start 32: implicit-input-bindings
+32/39 Test #32: implicit-input-bindings ......................   Passed    0.09 sec
+      Start 33: initialization-presets
+33/39 Test #33: initialization-presets .......................   Passed    0.25 sec
+      Start 34: float-literal-presets
+34/39 Test #34: float-literal-presets ........................   Passed    1.13 sec
+      Start 35: gles-loader-gles30
+35/39 Test #35: gles-loader-gles30 ...........................   Passed    0.01 sec
+      Start 36: gles-loader-gles20
+36/39 Test #36: gles-loader-gles20 ...........................   Passed    0.01 sec
+      Start 37: gles-loader-glsl100
+37/39 Test #37: gles-loader-glsl100 ..........................   Passed    0.01 sec
+      Start 38: shape-pixel-center-regressions
+38/39 Test #38: shape-pixel-center-regressions ...............   Passed    0.20 sec
+      Start 39: composite-texel-center-regressions
+39/39 Test #39: composite-texel-center-regressions ...........   Passed    0.20 sec
+
+100% tests passed, 0 tests failed out of 39
+
+Total Test time (real) =  12.46 sec

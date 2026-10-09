@@ -1,0 +1,20 @@
+{
+  "key_policy_test.cpp": "fdedf38a8195905e5df8e507df0677905ee9f7735c033eaceacbdc3267a73717",
+  "README.md": "12a7824bd9da8890a0901482623466a404c8db1881971fae54152c6b5024e50c",
+  "source-identity.json": "de8e0bb553a1444f511c9546fb4e9c79ab0d6573154c10ff1c8e2b1074cb6e50",
+  "fixture-expectations.json": "49e2ba55e3ff1df3d20ecdd15b7af7f99fa51f678e593f3606df4da99170029e",
+  "stock-oracle-pairs.json": "0c7bd13dc2822ba85b50dc3dccfe1da9e447567813150f8a4cf6973976a3b49a",
+  "candidates.json": "62fd8f3af751ed09e46e77893eae54dc86cc11bf9093e7dc502da42087fbb78b",
+  "parser/PresetFileParser.cpp": "0bd179b8f58e167ea5a2340297b8ce702242a6b7983be8abd22afc26100a7757",
+  "parser/PresetFileParser.hpp": "94c5345d1a47b669ca521adc3fc94c93fca195773590932f79246724ce05d6d2",
+  "fixtures/i01-actual-tolerant.milk": "c0eb139967bd689ce1d1e0641067bedda8a53d9adfdce826e303623787adb10f",
+  "fixtures/i01-canonical-positive.milk": "ff230ba87f632cda1b41bfd7651b2e1bdb8a2ab15d89275cbc406b8bc78ad79e",
+  "fixtures/i01-duplicate-lower-first.milk": "b09e39636e64481f47568a0db1a28108f1374a25ddd23d942daddff564d0c384",
+  "fixtures/i01-duplicate-upper-first.milk": "f5cd43dbbf47c0e21951ec22bb9aa4dcf4b8ccb9f122e9d639cfe12a0d924e11",
+  "fixtures/i01-missing-default.milk": "09a3f93120635d8cc47d5282073bdc84f84efefd20a32470fb9177940c12756d",
+  "fixtures/i01-strict-source-oracle.milk": "0dfed57a798f0f620068e28055582eba9e64be186c26f1d6a43329713987644f",
+  "originals/PyroCybin - Computronium [stahlregens gelatine finish].milk": "71450433120e7c01fc82f269226341b462ba1834d83c09c1287d7935eb1d6bf5",
+  "originals/PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk": "7d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3",
+  "stock-oracles/PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk": "23edd9a5320ffb84073dc5bd34fbeb6964dcae5d2f30f3e291ba126498b34d93",
+  "stock-oracles/PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk": "ee0929d194a88b312932428342c33b1b51b95b99d3c270cac9618bb47c67c910"
+}

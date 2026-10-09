@@ -1,0 +1,38 @@
+[
+  {
+    "old": "tools/projectm-patches/0020-gamma-only-pass-epsilon.patch",
+    "new": "tools/projectm-patches/0019-gamma-only-pass-epsilon.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0021-eel-named-constant-precision.patch",
+    "new": "tools/projectm-patches/0020-eel-named-constant-precision.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0022-original-equation-inputs.patch",
+    "new": "tools/projectm-patches/0021-original-equation-inputs.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0023-negative-odd-echo-orientation.patch",
+    "new": "tools/projectm-patches/0022-negative-odd-echo-orientation.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0024-legacy-warp-oscillator-y.patch",
+    "new": "tools/projectm-patches/0023-legacy-warp-oscillator-y.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0025-legacy-warp-physical-diagonal.patch",
+    "new": "tools/projectm-patches/0024-legacy-warp-physical-diagonal.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch",
+    "new": "tools/projectm-patches/0025-legacy-per-pixel-traversal.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0027-legacy-angle-seam.patch",
+    "new": "tools/projectm-patches/0026-legacy-angle-seam.patch"
+  },
+  {
+    "old": "tools/projectm-patches/0028-wave-rgb-clamp.patch",
+    "new": "tools/projectm-patches/0027-wave-rgb-clamp.patch"
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "diagnostic": "audit inverse aspect.milk",
+  "display": [
+    3840,
+    2160
+  ],
+  "reference_canvas": [
+    1280,
+    720
+  ],
+  "qualification": "Source-instrumented Native engine; private diagnostic APK; not Windows screenshot or shipping APK bytes.",
+  "roles": {
+    "before": {
+      "nonblack_pixels": 1295632,
+      "red_x_mean": 1935.4821523395533,
+      "red_x_min": 0,
+      "red_x_max": 3839,
+      "captures": [
+        {
+          "frame": 120,
+          "rgb_sha256": "1fc737dab17e013ae3ed8401ba7f2f586543a3c42d0048eee68a6177f3b795b4"
+        },
+        {
+          "frame": 150,
+          "rgb_sha256": "4f51ef6ec712dcf667b872b70c7587db4669b51af8983bdb0ce674b7c49e7b7f"
+        },
+        {
+          "frame": 180,
+          "rgb_sha256": "4acc6b1078e26ae6878ec5167dd4d7f0ab55971c7bb50ae2b3945d70c5790c4c"
+        },
+        {
+          "frame": 210,
+          "rgb_sha256": "9bee0665ef2257aa0d920213c62e35872006cafa332bf3fa9ef2d9af18e02310"
+        },
+        {
+          "frame": 239,
+          "rgb_sha256": "0da842f1bff97e0807c8fce53d4a5b38d85ec5760205627a76ccf1d6cd93e329"
+        },
+        {
+          "frame": 300,
+          "rgb_sha256": "e483b43e30cd7785848bc11abbe93dcf8fee37f1e16e363a1a55e0c39dc164cd"
+        },
+        {
+          "frame": 390,
+          "rgb_sha256": "8e56f8da514b9ff1615cc9a889eb188845aa93b56b8f9acde720a8c4c2ffa5c3"
+        },
+        {
+          "frame": 479,
+          "rgb_sha256": "bde9f954ddd3456c1e936ae7d07adcc4af1a8077657f0884ef742effdd5d0bce"
+        }
+      ]
+    },
+    "after": {
+      "nonblack_pixels": 907893,
+      "red_x_mean": 1945.1825886971262,
+      "red_x_min": 0,
+      "red_x_max": 3839,
+      "captures": [
+        {
+          "frame": 120,
+          "rgb_sha256": "20e2178161de196d68a506b5d680d0b105022eec86231728d47c9e3dd062804c"
+        },
+        {
+          "frame": 150,
+          "rgb_sha256": "983d92235b535576cf32d741629f74c6d6b51511f94568fe0f07fbac4d5db19a"
+        },
+        {
+          "frame": 180,
+          "rgb_sha256": "3e5d5d3585c0afdf6ac0e703ed3a521cb94a2fdecc2ba1dc57f5cf227226442b"
+        },
+        {
+          "frame": 210,
+          "rgb_sha256": "ef245f34a113c3529d62ba3c4114fa7f5996513d8aebe76c8009b8f88ec21e03"
+        },
+        {
+          "frame": 239,
+          "rgb_sha256": "89be92369e4c434677d3823ba4090024d53ae23b273865f9d050945650f0f52b"
+        },
+        {
+          "frame": 300,
+          "rgb_sha256": "d51e95464448c96fab3aa72ef7e56e0e12839ca06a9f65c4a49f564133d3588e"
+        },
+        {
+          "frame": 390,
+          "rgb_sha256": "5f2254bc2774580e4f6d89e007af73600bcba1d1f1085fecc23564052cd80f9e"
+        },
+        {
+          "frame": 479,
+          "rgb_sha256": "32e21a85c6a5827e4d5866427bb96e8e178eba22a82371de6adf6412e5f5c5fa"
+        }
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true
+}

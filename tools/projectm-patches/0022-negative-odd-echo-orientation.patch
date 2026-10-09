@@ -1,0 +1,25 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Preserve horizontal flips for negative odd echo orientations
+
+Follow MilkDrop2 milkdropfs.cpp echo orientation nonzero signed remainder.
+Finite negative odd orientations flip U just like positive odd values.
+Preserve signed modulo4, V predicate, valid-input guards, zoom, mix,
+gamma-only/echo epsilon distinctions and current float diffuse policy.
+No pass, vertex, allocation or additional draw is introduced.
+
+Original source: milkdrop2 f05b0d8, vis_milk2/milkdropfs.cpp.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.cpp b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+index 99d5f00a1..a1dd06a6c 100644
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+@@ -139,7 +139,7 @@ void VideoEcho::DrawVideoEcho(const PerFrameContext& perFrameContext)
+         {
+             for (int vertex = 0; vertex < 4; vertex++)
+             {
+-                if (videoEchoOrientation % 2 == 1)
++                if (videoEchoOrientation % 2 != 0)
+                 {
+                     m_echoMesh.UVs()[vertex].SetU(1.0f - m_echoMesh.UVs()[vertex].U());
+                 }

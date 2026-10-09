@@ -1,0 +1,221 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 11161,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/audio.u8",
+    "preset": "Shreyas - Carnival loavthephysyq.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "66867c4db676ede854172d73c716f0c1509291a0d5ec3b20d93184e2e4f9b601",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "18a44a1c5b1de4225e8b3874ba90fd54b053c586c8e94b669d5d4c73046df7c4",
+      "pngBytes": 9166916,
+      "pngSha256": "7a0a5bc05c2cde0b1e48a0f060881f84814e9d14539eef9f9db0c1009edccaf1",
+      "rgbMean": [
+        36.132961154513886,
+        174.89949833622686,
+        48.969274811921295
+      ],
+      "exactBlackFraction": 4.822530864197531E-7
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "cb2e05ec384e92ea6002779f6cc2297618690cb178fab48ae55fba29d7eee0b8",
+      "pngBytes": 7931512,
+      "pngSha256": "148a613d2243288e4570aa0f4f1633434af4c320593d73727e947463ccca9afb",
+      "rgbMean": [
+        31.98154610339506,
+        189.74099054783952,
+        41.841707055362654
+      ],
+      "exactBlackFraction": 2.290702160493827E-6
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6412034a36d87d873bb75ba174cf3b17719fad3c6deaf6cff727af1bc44eacaf",
+      "pngBytes": 8027111,
+      "pngSha256": "3c5838f4178e77994e57cb6be07a01e155947bd44eede5d908b15c06be89c45d",
+      "rgbMean": [
+        37.39410481770833,
+        187.66873058931327,
+        52.106053602430556
+      ],
+      "exactBlackFraction": 3.2552083333333335E-6
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "00216dece40e39342cce5cecba0b8766ec67e3481164130609cba3b21f2f23b6",
+      "pngBytes": 9227498,
+      "pngSha256": "b36c01250c649df4a24815620609d73ff40aeb05d8520a2ca82eb4d6f822b92c",
+      "rgbMean": [
+        45.89944806134259,
+        174.4391924672068,
+        56.4807591869213
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "629a77c41f6c6233153fee79f19f1d0a5cd1d6e0a7f1151f2e97e9d8137a51be",
+      "pngBytes": 9606116,
+      "pngSha256": "89e80b944046dd13f6f7fa3c4f97fde250b2c019f372910b828379da9453e924",
+      "rgbMean": [
+        45.77591411072531,
+        171.5613222173997,
+        52.495160469714506
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "565ca40cab9c17c5a176ebf3b5d3fd51a5ee145df28feeac231d27b6767164a6",
+      "pngBytes": 8242136,
+      "pngSha256": "4d2b30cd082083653f479cb3e95b8af3590c674685ad93de411c8a263a4c3b6d",
+      "rgbMean": [
+        32.35326859085648,
+        184.08137719425153,
+        54.722042221257716
+      ],
+      "exactBlackFraction": 2.4112654320987655E-7
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "76746dd2d81fcb8650123974454642e29e552eab9e6cc17f431299e260031911",
+      "pngBytes": 9588216,
+      "pngSha256": "413a991fb7420ab78fc9bb4a2ed67349e4955202178e987b8facdd9426955048",
+      "rgbMean": [
+        42.746922622492285,
+        171.7314737654321,
+        56.227142650462966
+      ],
+      "exactBlackFraction": 3.134645061728395E-6
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-readonly-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "24ac37e13d98314a05ecf0ee91fac732a26c225fd5b1486029b265b003c5ad84",
+      "pngBytes": 10587709,
+      "pngSha256": "fb02992323b5e8f8e0a8049a0e2a7cf11d2806e4e9bd3b1f3ea6f8d05956a15e",
+      "rgbMean": [
+        40.03534698109568,
+        162.64041160300926,
+        63.55314935378087
+      ],
+      "exactBlackFraction": 6.028163580246913E-7
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 9836478,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 301,
+      "elapsedRealtimeMs": 9846935,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "da5440792b7f6e1dd987024e72261fa90a3ea455354bd0daf38a1075fcdffeef",
+  "forcedPresetPrefix": "Shreyas - Carnival loavthephysyq.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 14,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43365,
+  "framesRendered": 480,
+  "renderWallDurationMs": 14561,
+  "pssAfterFramesKB": 72073,
+  "serializedFrameMeanMs": 4.011564594444444,
+  "serializedFrameP90Ms": 4.50575,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Shreyas - Carnival loavthephysyq.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 14889
+}

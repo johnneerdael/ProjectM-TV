@@ -1,0 +1,35 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Evaluate legacy per-pixel rows in original physical order
+
+I12: original fixed-function mesh/projection visits physical rows opposite
+ the current GL traversal. Evaluate legacy equation rows descending in
+current storage, keeping X ascending and addressing each attribute by row.
+Preserve actual custom path order, no-equation fill, one Q copy per frame,
+ordinary/register/global-memory recurrence, RNG sequence, original raw
+values, point/equation counts and prepared replay. No new pass or buffer.
+Cache locality requires focused Native4K cost qualification.
+
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -256,12 +256,15 @@
+     float sx = static_cast<float>(*perFrameContext.sx);
+     float sy = static_cast<float>(*perFrameContext.sy);
+-
++
+-    int vertex = 0;
+-
+     // Can't make this multithreaded as per-pixel code may use gmegabuf or regXX vars.
+     auto& vertices = m_warpMesh.Vertices();
+-    for (int y = 0; y <= m_gridSizeY; y++)
+-    {
++    // Original legacy equations traverse physical bottom-to-top, X ascending.
++    // Keep custom order and the cheap no-equation attribute fill unchanged.
++    const bool reverseRows = perPixelContext.perPixelCodeHandle && !m_warpShader;
++    for (int row = 0; row <= m_gridSizeY; row++)
++    {
++        const int y = reverseRows ? m_gridSizeY - row : row;
++        int vertex = y * (m_gridSizeX + 1);
+         for (int x = 0; x <= m_gridSizeX; x++)
+         {
+             auto& curVertex = vertices[vertex];

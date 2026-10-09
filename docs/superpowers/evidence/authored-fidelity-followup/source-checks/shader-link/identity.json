@@ -1,0 +1,19 @@
+{
+  "source_vertex_sha256": "d5d25153edc331b2bf80a2b27793c81eddbf5fe3b2a4b9e8758fafa48ebd4d39",
+  "source_fragment_sha256": "919a63a9a697bfc6c45fe89c33341c4235d5460642a26e1b66dd100bb4667b36",
+  "header": "production #version 300 es; legacy define only where real accessor supplies it",
+  "pairs": [
+    {
+      "variant": "legacy",
+      "vertex_sha256": "58d56372a26cf12022060012b9fcc041f98e3bbed7f38301d43a29c720c9dbea",
+      "fragment_sha256": "8f692b7dc800da1414f161fe35446b46b3ae227e85859c3ae3b6f2c14957fca5",
+      "status": "pass"
+    },
+    {
+      "variant": "custom-contract",
+      "vertex_sha256": "a025ebf0cdfdd051a0d808791d1d8ce2babe3ca680c08200dbfb7d1a836c25d1",
+      "fragment_sha256": "8f692b7dc800da1414f161fe35446b46b3ae227e85859c3ae3b6f2c14957fca5",
+      "status": "pass"
+    }
+  ]
+}

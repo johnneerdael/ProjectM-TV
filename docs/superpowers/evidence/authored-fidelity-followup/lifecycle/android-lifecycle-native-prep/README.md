@@ -1,0 +1,3 @@
+# Active Native4K lifecycle profile
+
+The original zero-reference lifecycle-v1 jobs remain frozen and qualify only inactive/native-fallback behavior. This separately bound controller uses the same built private worker and production33 AAR, the same schedule/audio/seed, and explicit reference1280x720 at Native3840x2160 (reduced2560x1440). The Java worker already supports positive paired reference dimensions. Every frame must report an actual1280x720 canvas; inactive/fallback status is rejected. Old artifacts/helpers are not mutated or relabelled. Context recreation resets engine state but preserves global PCM/frame clock, and only matching protocols/generations are compared. This remains pbuffer JNI validation, not Activity Home/real audio or physical-TV headroom.

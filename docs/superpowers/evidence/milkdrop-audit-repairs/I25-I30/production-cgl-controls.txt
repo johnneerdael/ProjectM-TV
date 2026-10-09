@@ -1,0 +1,18 @@
+i25-shape-flat-float-current actual RGBA/pass/replay controls passed
+i25-shape-flat-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-shape-gradient-float-current actual RGBA/pass/replay controls passed
+i25-shape-gradient-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-shape-border-float-current actual RGBA/pass/replay controls passed
+i25-shape-border-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-shape-subbyte-alpha-float-current actual RGBA/pass/replay controls passed
+i25-shape-subbyte-alpha-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-wave-line-float-current actual RGBA/pass/replay controls passed
+i25-wave-line-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-wave-dots-float-current actual RGBA/pass/replay controls passed
+i25-wave-dots-byte-source-oracle actual RGBA/pass/replay controls passed
+i25-shape-border-hdr-current-probe actual RGBA/pass/replay controls passed
+gamma075 actual display attributes/passes passed
+gamma09 actual display attributes/passes passed
+gamma1 actual display attributes/passes passed
+echoHalf actual display attributes/passes passed
+actual completed composite vertices/indices captured and pre-interpolation byte replay passed

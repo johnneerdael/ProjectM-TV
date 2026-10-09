@@ -1,0 +1,207 @@
+[1/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompileContext.c.o
+[2/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Compiler.c.o
+[3/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompilerFunctions.c.o
+[4/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/MemoryBuffer.c.o
+[5/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Scanner.c.o
+[6/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeVariables.c.o
+[7/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/ExpressionTree.c.o
+[8/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeFunctions.c.o
+[9/113] Building C object production-controls/projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/api/projectm-eval.c.o
+[10/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTokenizer.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor/hlslparser/src/HLSLTokenizer.cpp:641:9: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  641 |         sprintf(buffer, "%f", m_fValue);
+      |         ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor/hlslparser/src/HLSLTokenizer.cpp:645:9: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  645 |         sprintf(buffer, "%d", m_iValue);
+      |         ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+2 warnings generated.
+[11/113] Linking C static library production-controls/projectm/vendor/projectm-eval/projectm-eval/libprojectM_evald.a
+[12/113] Building C object production-controls/projectm/vendor/glad/CMakeFiles/glad_obj.dir/src/gl.c.o
+[13/113] Building C object production-controls/projectm/vendor/stb_image/CMakeFiles/stb_image.dir/image_DXT.c.o
+[14/113] Building C object production-controls/projectm/vendor/stb_image/CMakeFiles/stb_image.dir/wfETC.c.o
+[15/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/CodeWriter.cpp.o
+[16/113] Linking C static library production-controls/projectm/vendor/glad/libgladd.a
+[17/113] Building C object production-controls/projectm/vendor/stb_image/CMakeFiles/stb_image.dir/stb_image.c.o
+[18/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/Engine.cpp.o
+[19/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/GLSLGenerator.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor/hlslparser/src/GLSLGenerator.cpp:798:45: warning: data argument not used by format string [-Wformat-extra-args]
+  798 |                         m_writer.Write(",", op);
+      |                                        ~~~  ^
+1 warning generated.
+[20/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTree.cpp.o
+[21/113] Building CXX object production-controls/projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLParser.cpp.o
+[22/113] Building CXX object production-controls/projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/Loudness.cpp.o
+[23/113] Generating BuiltInTransitionsResources.hpp
+[24/113] Generating MilkdropStaticShaders.cpp, MilkdropStaticShaders.hpp
+[25/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/BlendMode.cpp.o
+[26/113] Building CXX object production-controls/projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/WaveformAligner.cpp.o
+[27/113] Building CXX object production-controls/projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/MilkdropFFT.cpp.o
+[28/113] Building CXX object production-controls/projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/PCM.cpp.o
+[29/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/FileScanner.cpp.o
+[30/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Framebuffer.cpp.o
+[31/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropStaticShaders.cpp.o
+[32/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/CopyTexture.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp:89:18: warning: unused variable 'attachment' [-Wunused-variable]
+   89 |     const GLenum attachment = GL_COLOR_ATTACHMENT0;
+      |                  ^~~~~~~~~~
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp:185:46: warning: struct 'Texture' was previously declared as a class; this is valid, but may result in linker errors under the Microsoft C++ ABI [-Wmismatched-tags]
+  185 |                        const std::shared_ptr<struct Texture>& originalTexture,
+      |                                              ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/../Renderer/Texture.hpp:19:7: note: previous use is here
+   19 | class Texture
+      |       ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp:185:46: note: did you mean class here?
+  185 |                        const std::shared_ptr<struct Texture>& originalTexture,
+      |                                              ^~~~~~
+      |                                              class
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp:186:46: warning: struct 'Texture' was previously declared as a class; this is valid, but may result in linker errors under the Microsoft C++ ABI [-Wmismatched-tags]
+  186 |                        const std::shared_ptr<struct Texture>& targetTexture,
+      |                                              ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/../Renderer/Texture.hpp:19:7: note: previous use is here
+   19 | class Texture
+      |       ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp:186:46: note: did you mean class here?
+  186 |                        const std::shared_ptr<struct Texture>& targetTexture,
+      |                                              ^~~~~~
+      |                                              class
+3 warnings generated.
+[33/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/EvalLibMutex.cpp.o
+[34/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Border.cpp.o
+[35/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/BlurTexture.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp:311:26: warning: unused variable 'attachment' [-Wunused-variable]
+  311 |             const GLenum attachment = GL_COLOR_ATTACHMENT0;
+      |                          ^~~~~~~~~~
+1 warning generated.
+[36/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomWaveform.cpp.o
+[37/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomShape.cpp.o
+[38/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/DarkenCenter.cpp.o
+[39/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LegacyEquationCode.cpp.o
+[40/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDetail.cpp.o
+[41/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Factory.cpp.o
+[42/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDiffusion.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp:288:22: warning: unused variable 'attachments' [-Wunused-variable]
+  288 |         const GLenum attachments[] = {static_cast<GLenum>(GL_COLOR_ATTACHMENT0 + FilteredAttachment),
+      |                      ^~~~~~~~~~~
+1 warning generated.
+[43/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineGeometry.cpp.o
+[44/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Filters.cpp.o
+[45/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FinalComposite.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/FinalComposite.cpp:107:26: warning: unused variable 'attachment' [-Wunused-variable]
+  107 |             const GLenum attachment = presetState.compositeToDefaultFramebuffer ? GL_COLOR : GL_COLOR_ATTACHMENT0;
+      |                          ^~~~~~~~~~
+1 warning generated.
+[46/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineRenderer.cpp.o
+[47/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/IdlePreset.cpp.o
+[48/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerFrameContext.cpp.o
+[49/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelContext.cpp.o
+[50/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MotionVectors.cpp.o
+[51/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropPreset.cpp.o
+[52/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelMesh.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp:383:22: warning: unused variable 'attachments' [-Wunused-variable]
+  383 |         const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+      |                      ^~~~~~~~~~~
+1 warning generated.
+[53/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropShader.cpp.o
+[54/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetFileParser.cpp.o
+[55/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/ShapePerFrameContext.cpp.o
+[56/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetState.cpp.o
+[57/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerFrameContext.cpp.o
+[58/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveform.cpp.o
+In file included from /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp:1:
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.hpp:49:9: warning: private field 'm_samples' is not used [-Wunused-private-field]
+   49 |     int m_samples{};         //!< Number of samples in the current waveform. Depends on the mode.
+      |         ^
+1 warning generated.
+[59/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/VideoEcho.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/VideoEcho.cpp:84:22: warning: unused variable 'attachment' [-Wunused-variable]
+   84 |         const GLenum attachment = m_presetState.compositeToDefaultFramebuffer ? GL_COLOR : GL_COLOR_ATTACHMENT0;
+      |                      ^~~~~~~~~~
+1 warning generated.
+[60/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerPointContext.cpp.o
+[61/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/CenteredSpiro.cpp.o
+[62/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Circle.cpp.o
+[63/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Factory.cpp.o
+[64/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DerivativeLine.cpp.o
+[65/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DoubleLine.cpp.o
+[66/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/ExplosiveHash.cpp.o
+[67/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/LineBase.cpp.o
+[68/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Line.cpp.o
+[69/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave11.cpp.o
+[70/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave9.cpp.o
+[71/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveFlower.cpp.o
+[72/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/SpectrumLine.cpp.o
+[73/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveLasso.cpp.o
+[74/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveSkewed.cpp.o
+[75/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveStar.cpp.o
+[76/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveX.cpp.o
+[77/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/WaveformMath.cpp.o
+[78/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/Logging.cpp.o
+[79/113] Building CXX object production-controls/projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/XYOscillationSpiral.cpp.o
+[80/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactory.cpp.o
+[81/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactoryManager.cpp.o
+[82/113] Generating SpriteShaders.hpp
+[83/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/TimeKeeper.cpp.o
+[84/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM.dir/__/__/dummy.cpp.o
+[85/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectMCWrapper.cpp.o
+[86/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/Utils.cpp.o
+[87/113] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectM.cpp.o
+[88/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary.cpp.o
+[89/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Mesh.cpp.o
+[90/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/MilkdropNoise.cpp.o
+[91/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GladLoader.cpp.o
+[92/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Sampler.cpp.o
+[93/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GLResolver.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/Platform/GLResolver.cpp:843:11: warning: declaration shadows a type alias in 'libprojectM::Renderer::Platform::GLResolver' [-Wshadow]
+  843 |     using CglGetCurrentContextFn = void* (*) ();
+      |           ^
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/Platform/GLResolver.hpp:342:11: note: previous declaration is here
+  342 |     using CglGetCurrentContextFn = void* (*) ();
+      |           ^
+1 warning generated.
+[94/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GLProbe.cpp.o
+[95/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Texture.cpp.o
+[96/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/ShaderCache.cpp.o
+[97/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Shader.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/Shader.cpp:27:29: warning: unused variable 'maxBytes' [-Wunused-const-variable]
+   27 |     static constexpr size_t maxBytes = 8 * 1024 * 1024;
+      |                             ^~~~~~~~
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Renderer/Shader.cpp:142:12: warning: private field 'm_bytes' is not used [-Wunused-private-field]
+  142 |     size_t m_bytes{};
+      |            ^
+2 warnings generated.
+[98/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/PresetTransition.cpp.o
+[99/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureAttachment.cpp.o
+[100/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/VertexBufferUsage.cpp.o
+[101/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_win32.cpp.o
+[102/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_emscripten.cpp.o
+[103/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureSamplerDescriptor.cpp.o
+[104/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_posix.cpp.o
+[105/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureManager.cpp.o
+[106/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/VertexIndexArray.cpp.o
+[107/113] Building CXX object production-controls/projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TransitionShaderManager.cpp.o
+[108/113] Building CXX object production-controls/projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/Factory.cpp.o
+[109/113] Building CXX object production-controls/projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/SpriteManager.cpp.o
+[110/113] Building CXX object production-controls/projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/MilkdropSprite.cpp.o
+[111/113] Building CXX object CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o
+FAILED: [code=1] CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o 
+/usr/bin/c++ -DGL_SILENCE_DEPRECATION -DPROJECTM_CXX_STATIC_DEFINE -DPROJECTM_STATIC_DEFINE -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/test/native/projectm-regressions -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor/glad/include -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/vendor/projectm-eval/projectm-eval/api -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/api/include -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/extended-mode-proposal/cgl-normal/production-controls/projectm/src/api/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -include/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/test/native/projectm-regressions/macos_gl.hpp -MD -MT CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o -MF CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o.d -o CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o -c /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/extended-mode-proposal/extended_mode_controls.cpp
+In file included from /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/extended-mode-proposal/extended_mode_controls.cpp:3:
+In file included from /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.hpp:7:
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/WaveformMath.hpp:3:10: fatal error: 'Constants.hpp' file not found
+    3 | #include "Constants.hpp"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+[112/113] Linking CXX static library production-controls/projectm/src/libprojectM/libprojectM-4d.a
+ninja: build stopped: subcommand failed.

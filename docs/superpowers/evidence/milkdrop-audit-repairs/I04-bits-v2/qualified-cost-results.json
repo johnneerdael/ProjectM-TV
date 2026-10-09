@@ -1,0 +1,1042 @@
+{
+  "runs": 48,
+  "selected_pngs_verified": 384,
+  "exact_constant_geometry_groups": 4,
+  "scope": "v2 unchanged-flags evaluator candidate; all four runtime-Q workloads; no I03 recovery",
+  "results": [
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "means": {
+        "before": 1.388077003703704,
+        "after": 1.3755081944444445
+      },
+      "delta_ms": -0.012568809259259517,
+      "delta_percent": -0.905483573729926,
+      "cycles": [
+        {
+          "cycle": 0,
+          "before": 1.3692105513888895,
+          "after": 1.3713028374999996,
+          "delta_percent": 0.15280966897222026
+        },
+        {
+          "cycle": 1,
+          "before": 1.413614693055556,
+          "after": 1.3665928986111116,
+          "delta_percent": -3.326351563508856
+        },
+        {
+          "cycle": 2,
+          "before": 1.3814057666666666,
+          "after": 1.3886288472222224,
+          "delta_percent": 0.5228789925341815
+        }
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "means": {
+        "before": 1.4207704967592596,
+        "after": 1.4221991763888895
+      },
+      "delta_ms": 0.001428679629629892,
+      "delta_percent": 0.1005566791321133,
+      "cycles": [
+        {
+          "cycle": 0,
+          "before": 1.4184314736111112,
+          "after": 1.4321891125000006,
+          "delta_percent": 0.9699191779680705
+        },
+        {
+          "cycle": 1,
+          "before": 1.4515857305555557,
+          "after": 1.4072868680555564,
+          "delta_percent": -3.0517565423466397
+        },
+        {
+          "cycle": 2,
+          "before": 1.3922942861111114,
+          "after": 1.4271215486111117,
+          "delta_percent": 2.5014296795886626
+        }
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "means": {
+        "before": 1.4732381828703711,
+        "after": 1.4189018412037033
+      },
+      "delta_ms": -0.05433634166666779,
+      "delta_percent": -3.688225183031979,
+      "cycles": [
+        {
+          "cycle": 0,
+          "before": 1.507833279166669,
+          "after": 1.4038843069444442,
+          "delta_percent": -6.893930095486034
+        },
+        {
+          "cycle": 1,
+          "before": 1.4503088152777774,
+          "after": 1.418904419444444,
+          "delta_percent": -2.165359232634778
+        },
+        {
+          "cycle": 2,
+          "before": 1.4615724541666668,
+          "after": 1.433916797222222,
+          "delta_percent": -1.8921851506987442
+        }
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "means": {
+        "before": 1.3925239842592596,
+        "after": 1.413928038425926
+      },
+      "delta_ms": 0.021404054166666464,
+      "delta_percent": 1.53706897752659,
+      "cycles": [
+        {
+          "cycle": 0,
+          "before": 1.4126775486111112,
+          "after": 1.4367410833333336,
+          "delta_percent": 1.7033989636120905
+        },
+        {
+          "cycle": 1,
+          "before": 1.3944498375,
+          "after": 1.4010335944444443,
+          "delta_percent": 0.47214010625493685
+        },
+        {
+          "cycle": 2,
+          "before": 1.3704445666666676,
+          "after": 1.4040094375000003,
+          "delta_percent": 2.4491958047579088
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-0-0-before",
+      "mean_ms": 1.3719763944444454,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-0-1-after",
+      "mean_ms": 1.3832547694444446,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-0-2-after",
+      "mean_ms": 1.3593509055555546,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-0-3-before",
+      "mean_ms": 1.3664447083333333,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-1-0-before",
+      "mean_ms": 1.432192941666667,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-1-1-after",
+      "mean_ms": 1.3769568388888895,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-1-2-after",
+      "mean_ms": 1.3562289583333333,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-1-3-before",
+      "mean_ms": 1.3950364444444447,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-2-0-before",
+      "mean_ms": 1.3827699999999996,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-2-1-after",
+      "mean_ms": 1.4047197750000004,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-2-2-after",
+      "mean_ms": 1.3725379194444445,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-1",
+      "preset": "audit i04 audit math I04-only runtime-div-suppressed-work.milk",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-1-2-3-before",
+      "mean_ms": 1.3800415333333338,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-0-0-before",
+      "mean_ms": 1.4324892277777785,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-0-1-after",
+      "mean_ms": 1.4602764805555564,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-0-2-after",
+      "mean_ms": 1.4041017444444446,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-0-3-before",
+      "mean_ms": 1.4043737194444441,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-1-0-before",
+      "mean_ms": 1.4677226694444443,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-1-1-after",
+      "mean_ms": 1.3864704861111115,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-1-2-after",
+      "mean_ms": 1.4281032500000013,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-1-3-before",
+      "mean_ms": 1.435448791666667,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-2-0-before",
+      "mean_ms": 1.3851568444444455,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-2-1-after",
+      "mean_ms": 1.4499638111111122,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-2-2-after",
+      "mean_ms": 1.4042792861111115,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-2",
+      "preset": "audit i04 audit math I04-only runtime-ordinary-work.milk",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-2-2-3-before",
+      "mean_ms": 1.3994317277777775,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-0-0-before",
+      "mean_ms": 1.618882988888891,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-0-1-after",
+      "mean_ms": 1.4083594777777777,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-0-2-after",
+      "mean_ms": 1.399409136111111,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-0-3-before",
+      "mean_ms": 1.396783569444447,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-1-0-before",
+      "mean_ms": 1.3803344777777775,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-1-1-after",
+      "mean_ms": 1.4314653222222213,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-1-2-after",
+      "mean_ms": 1.4063435166666665,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-1-3-before",
+      "mean_ms": 1.5202831527777774,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-2-0-before",
+      "mean_ms": 1.4730443305555563,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-2-1-after",
+      "mean_ms": 1.3920406361111108,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-2-2-after",
+      "mean_ms": 1.4757929583333331,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-3",
+      "preset": "audit i04 audit math I04-only runtime-pow-suppressed-work.milk",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-3-2-3-before",
+      "mean_ms": 1.4501005777777773,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-0-0-before",
+      "mean_ms": 1.4285004722222223,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-0-1-after",
+      "mean_ms": 1.5007880694444458,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-0-2-after",
+      "mean_ms": 1.3726940972222217,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-0-3-before",
+      "mean_ms": 1.3968546249999998,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-1-0-before",
+      "mean_ms": 1.3952767555555559,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-1-1-after",
+      "mean_ms": 1.432060394444444,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-1-2-after",
+      "mean_ms": 1.3700067944444445,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-1-3-before",
+      "mean_ms": 1.3936229194444443,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-2-0-before",
+      "mean_ms": 1.3704698055555569,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-2-1-after",
+      "mean_ms": 1.4036766305555557,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-2-2-after",
+      "mean_ms": 1.4043422444444449,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "case": "I04-bits-v2-4",
+      "preset": "audit i04 audit math I04-only runtime-rem-work.milk",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-I04-bits-v2-4-2-3-before",
+      "mean_ms": 1.3704193277777783,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    }
+  ]
+}

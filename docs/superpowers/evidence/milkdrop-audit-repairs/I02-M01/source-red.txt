@@ -1,0 +1,119 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 51: boolean-parser
+1/3 Test #51: boolean-parser ...................***Failed    0.26 sec
+FAIL bRedBlueStereo=-2147483648
+FAIL bBrighten=-2147483648
+FAIL bDarken=-2147483648
+FAIL bSolarize=-2147483648
+FAIL bInvert=-2147483648
+FAIL bAdditiveWaves=-2147483648
+FAIL bWaveDots=-2147483648
+FAIL bWaveThick=-2147483648
+FAIL bModWaveAlphaByVolume=-2147483648
+FAIL bMaximizeWaveColor=-2147483648
+FAIL bMotionVectorsOn=-2147483648
+FAIL bTexWrap=-2147483648
+FAIL bDarkenCenter=-2147483648
+FAIL wavecode_0_enabled=-2147483648
+FAIL wavecode_0_bSpectrum=-2147483648
+FAIL wavecode_0_bUseDots=-2147483648
+FAIL wavecode_0_bDrawThick=-2147483648
+FAIL wavecode_0_bAdditive=-2147483648
+FAIL shapecode_0_enabled=-2147483648
+FAIL shapecode_0_additive=-2147483648
+FAIL shapecode_0_thickOutline=-2147483648
+FAIL shapecode_0_textured=-2147483648
+FAIL bRedBlueStereo=-2
+FAIL bBrighten=-2
+FAIL bDarken=-2
+FAIL bSolarize=-2
+FAIL bInvert=-2
+FAIL bAdditiveWaves=-2
+FAIL bWaveDots=-2
+FAIL bWaveThick=-2
+FAIL bModWaveAlphaByVolume=-2
+FAIL bMaximizeWaveColor=-2
+FAIL bMotionVectorsOn=-2
+FAIL bTexWrap=-2
+FAIL bDarkenCenter=-2
+FAIL wavecode_0_enabled=-2
+FAIL wavecode_0_bSpectrum=-2
+FAIL wavecode_0_bUseDots=-2
+FAIL wavecode_0_bDrawThick=-2
+FAIL wavecode_0_bAdditive=-2
+FAIL shapecode_0_enabled=-2
+FAIL shapecode_0_additive=-2
+FAIL shapecode_0_thickOutline=-2
+FAIL shapecode_0_textured=-2
+FAIL bRedBlueStereo=-1
+FAIL bBrighten=-1
+FAIL bDarken=-1
+FAIL bSolarize=-1
+FAIL bInvert=-1
+FAIL bAdditiveWaves=-1
+FAIL bWaveDots=-1
+FAIL bWaveThick=-1
+FAIL bModWaveAlphaByVolume=-1
+FAIL bMaximizeWaveColor=-1
+FAIL bMotionVectorsOn=-1
+FAIL bTexWrap=-1
+FAIL bDarkenCenter=-1
+FAIL wavecode_0_enabled=-1
+FAIL wavecode_0_bSpectrum=-1
+FAIL wavecode_0_bUseDots=-1
+FAIL wavecode_0_bDrawThick=-1
+FAIL wavecode_0_bAdditive=-1
+FAIL shapecode_0_enabled=-1
+FAIL shapecode_0_additive=-1
+FAIL shapecode_0_thickOutline=-1
+FAIL shapecode_0_textured=-1
+FAIL negative integer prefix
+FAIL negative integer prefix
+FAIL negative integer prefix
+FAIL normalized first negative occurrence
+FAIL effective main flags -2
+FAIL effective main flags -1
+failures=72
+
+    Start 52: boolean-wave
+2/3 Test #52: boolean-wave .....................***Failed    0.07 sec
+FAIL actual wave-frame gate -2
+FAIL second main frame visibility -2
+FAIL one frame evaluation per Draw -2
+FAIL actual wave-frame gate -1
+FAIL second main frame visibility -1
+FAIL one frame evaluation per Draw -1
+failures=6
+
+    Start 53: boolean-render
+3/3 Test #53: boolean-render ...................***Failed    0.09 sec
+FAIL one wave frame per render
+FAIL two points once despite Native replay
+FAIL negative/positive enabled geometry and zero absence
+FAIL negative/positive enabled geometry and zero absence
+FAIL following main frame visibility
+FAIL one wave frame per render
+FAIL two points once despite Native replay
+FAIL negative/positive enabled geometry and zero absence
+FAIL negative/positive enabled geometry and zero absence
+FAIL one wave frame per render
+FAIL two points once despite Native replay
+FAIL negative/positive enabled geometry and zero absence
+FAIL negative/positive enabled geometry and zero absence
+FAIL following main frame visibility
+FAIL one wave frame per render
+FAIL two points once despite Native replay
+FAIL negative/positive enabled geometry and zero absence
+FAIL negative/positive enabled geometry and zero absence
+failures=18
+
+
+0% tests passed, 3 tests failed out of 3
+
+Total Test time (real) =   0.43 sec
+
+The following tests FAILED:
+	 51 - boolean-parser (Failed)
+	 52 - boolean-wave (Failed)
+	 53 - boolean-render (Failed)
+Errors while running CTest

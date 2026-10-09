@@ -1,0 +1,8 @@
+{
+  "original_path": "core/src/main/assets/presets/suksma - i'll go ahead and get the salad bar nz+.milk",
+  "original_sha256": "d300f7f3b57f6c32d29e44cbfef313efe8cb504006dafe3102b0b8ea618805f2",
+  "derived_sibling": "stock-salad-bar-original-alias0.milk",
+  "derived_sha256": "a4b92e4765c35b11cc63c8cd028a37bd682b1b249bb83fb0e2b7a17b589767dd",
+  "sole_change": "saved nWaveMode8\u21920; full source main-frame program has no later wave_mode overwrite",
+  "qualification": "current-engine selector comparison; no original D3D rendering or runtime proof"
+}

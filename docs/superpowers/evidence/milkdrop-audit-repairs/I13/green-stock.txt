@@ -1,0 +1,2 @@
+stock_file_default_stage left-axis sy=0.8999 expected=0.8999 raw_angle=3.14159
+failures=0

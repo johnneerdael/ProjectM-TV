@@ -1,0 +1,12 @@
+# Proposed canonical native-test target; root owns integration after proof.
+add_executable(eel-arithmetic-controls eel_arithmetic_test.cpp)
+target_compile_features(eel-arithmetic-controls PRIVATE cxx_std_17)
+target_include_directories(eel-arithmetic-controls PRIVATE "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(eel-arithmetic-controls PRIVATE libprojectM::projectM)
+if(CMAKE_CXX_COMPILER_ID MATCHES "^(Clang|AppleClang|GNU)$")
+    target_compile_options(eel-arithmetic-controls PRIVATE -fno-fast-math)
+endif()
+foreach(family I03 I04 boundaries aliases)
+    add_test(NAME eel-arithmetic-${family} COMMAND eel-arithmetic-controls ${family})
+    set_tests_properties(eel-arithmetic-${family} PROPERTIES TIMEOUT 20 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
+endforeach()

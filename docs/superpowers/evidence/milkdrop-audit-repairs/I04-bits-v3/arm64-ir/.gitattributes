@@ -1,0 +1,2 @@
+# Keep exact recorded compiler assembly bytes.
+TreeFunctions.s whitespace=-blank-at-eol

@@ -1,0 +1,502 @@
+[
+  {
+    "path": "core/src/main/assets/presets/suksma - i'll go ahead and get the salad bar nz+.milk",
+    "sha256": "d300f7f3b57f6c32d29e44cbfef313efe8cb504006dafe3102b0b8ea618805f2",
+    "source_disposition": "strong static-visible:mode8 fixed; alpha4.1,no volume modulation/no later wave_a or wave_mode edits; RGB.65\u00b1.4 remainspositive",
+    "evidence": [
+      {
+        "line": 12,
+        "text": "nWaveMode=8"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 16,
+        "text": "bModWaveAlphaByVolume=0"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=4.100"
+      },
+      {
+        "line": 26,
+        "text": "fWaveScale=1.286"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=0.650"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=0.650"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=0.650"
+      },
+      {
+        "line": 256,
+        "text": "per_frame_32=wave_x = 0.6+0.3*sin(time*0.724);"
+      },
+      {
+        "line": 257,
+        "text": "per_frame_33=wave_r = wave_r + 0.400*( 0.60*sin(0.933*time) + 0.40*sin(1.045*time) );"
+      },
+      {
+        "line": 258,
+        "text": "per_frame_34=wave_g = wave_g + 0.400*( 0.60*sin(0.900*time) + 0.40*sin(0.956*time) );"
+      },
+      {
+        "line": 259,
+        "text": "per_frame_35=wave_b = wave_b + 0.400*( 0.60*sin(0.910*time) + 0.40*sin(0.920*time) );"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  },
+  {
+    "path": "core/src/main/assets/presets/suksma - nymphinite juice.milk",
+    "sha256": "43cc4d527db74290c9452670e28e88868aac225762cdfdd4c49673e690dd055e",
+    "source_disposition": "conditional source gate:q1/q2/q3>0, all three flop1, q4>0 andq5>0 makesq6=6 andmode8. Alpha.006 above.004, no volume modulation/no later wave_a overwrite. Faint visibility; actual full-state/PCM required.",
+    "evidence": [
+      {
+        "line": 12,
+        "text": "nWaveMode=2"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 16,
+        "text": "bModWaveAlphaByVolume=0"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=0.006"
+      },
+      {
+        "line": 26,
+        "text": "fWaveScale=0.000"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=1.000"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=0.000"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=0.000"
+      },
+      {
+        "line": 396,
+        "text": "per_frame_2=old_bass_flop=bass_flop;"
+      },
+      {
+        "line": 397,
+        "text": "per_frame_3=old_treb_flop=treb_flop;"
+      },
+      {
+        "line": 398,
+        "text": "per_frame_4=old_mid_flop=mid_flop;"
+      },
+      {
+        "line": 402,
+        "text": "per_frame_8=bass_flop=abs(bass_flop-equal(bass_thresh,2));"
+      },
+      {
+        "line": 404,
+        "text": "per_frame_10=treb_flop=abs(treb_flop-equal(treb_thresh,2));"
+      },
+      {
+        "line": 406,
+        "text": "per_frame_12=mid_flop=abs(mid_flop-equal(mid_thresh,2));"
+      },
+      {
+        "line": 417,
+        "text": "per_frame_23=q4=sin(pulse);"
+      },
+      {
+        "line": 418,
+        "text": "per_frame_24=q5=cos(pulse/2+q1);"
+      },
+      {
+        "line": 419,
+        "text": "per_frame_25=q6=above(q1,0)+above(q2,0)+above(q3,0)+above(q3,0)*bass_flop+above(q2,0)*mid_flop+above(q1,0)*treb_flop;"
+      },
+      {
+        "line": 423,
+        "text": "per_frame_29=wave_mystery=sin(q1+q5);"
+      },
+      {
+        "line": 424,
+        "text": "per_frame_30=wave_r=wave_r+.5*sin(q1+q2*1.14+q4);"
+      },
+      {
+        "line": 425,
+        "text": "per_frame_31=wave_b=wave_b+.5*sin(q2+q3*1.14+q4);"
+      },
+      {
+        "line": 426,
+        "text": "per_frame_32=wave_g=wave_g+.5*sin(q3+q1*1.14+q4);"
+      },
+      {
+        "line": 427,
+        "text": "per_frame_33=ob_r=if(bass_flop,ob_r+.5*sin(q1+q3*1.14+q4),wave_b);"
+      },
+      {
+        "line": 428,
+        "text": "per_frame_34=ob_b=if(treb_flop,ob_b+.5*sin(q2+q1*1.14+q4),wave_g);"
+      },
+      {
+        "line": 429,
+        "text": "per_frame_35=ob_g=if(mid_flop,ob_g+.5*sin(q3+q2*1.14+q4),wave_r);"
+      },
+      {
+        "line": 441,
+        "text": "per_frame_47=wave_mode=q6+above(q4,0)+above(q5,0);"
+      },
+      {
+        "line": 442,
+        "text": "per_frame_48=wave_mystery=sin(q3*1.14+q1*1.14+q2);"
+      },
+      {
+        "line": 446,
+        "text": "per_frame_52=wave_x=wave_x+.1*q7*q4;"
+      },
+      {
+        "line": 447,
+        "text": "per_frame_53=wave_y=wave_y+.1*q6*q5;"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  },
+  {
+    "path": "core/src/main/assets/presets/Rovastar - Parallelogram Bin 2.milk",
+    "sha256": "f9d50349cd553c96ebfb395bcbd715246c63333a218057a6cf4ce746a252d86e",
+    "source_disposition": "exclude visible main wave:per_frame9 unconditionally setswave_a0 despite savedmode8",
+    "evidence": [
+      {
+        "line": 8,
+        "text": "nWaveMode=8"
+      },
+      {
+        "line": 9,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 10,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 11,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 12,
+        "text": "bModWaveAlphaByVolume=0"
+      },
+      {
+        "line": 21,
+        "text": "fWaveAlpha=4.099998"
+      },
+      {
+        "line": 22,
+        "text": "fWaveScale=1.285751"
+      },
+      {
+        "line": 40,
+        "text": "wave_r=0.650000"
+      },
+      {
+        "line": 41,
+        "text": "wave_g=0.650000"
+      },
+      {
+        "line": 42,
+        "text": "wave_b=0.650000"
+      },
+      {
+        "line": 67,
+        "text": "per_frame_4=mv_r = wave_r + 0.350*( 0.60*sin(0.980*time) + 0.40*sin(1.047*time) );"
+      },
+      {
+        "line": 68,
+        "text": "per_frame_5=mv_g = wave_g + 0.350*( 0.60*sin(0.835*time) + 0.40*sin(1.081*time) );"
+      },
+      {
+        "line": 69,
+        "text": "per_frame_6=mv_b = wave_b + 0.350*( 0.60*sin(0.814*time) + 0.40*sin(1.011*time) );"
+      },
+      {
+        "line": 72,
+        "text": "per_frame_9=wave_a = 0;"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  },
+  {
+    "path": "core/src/main/assets/presets/Rovastar - Parallelogram Bin 2 (Naked Mix).milk",
+    "sha256": "94814f7836c3e740803bb92e7e2ed2d595b55a98b98971d9637f81c4a5a40bfc",
+    "source_disposition": "exclude visible main wave:per_frame8 unconditionally setswave_a0 despite savedmode8",
+    "evidence": [
+      {
+        "line": 8,
+        "text": "nWaveMode=8"
+      },
+      {
+        "line": 9,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 10,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 11,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 12,
+        "text": "bModWaveAlphaByVolume=0"
+      },
+      {
+        "line": 21,
+        "text": "fWaveAlpha=4.099998"
+      },
+      {
+        "line": 22,
+        "text": "fWaveScale=1.285751"
+      },
+      {
+        "line": 40,
+        "text": "wave_r=0.650000"
+      },
+      {
+        "line": 41,
+        "text": "wave_g=0.650000"
+      },
+      {
+        "line": 42,
+        "text": "wave_b=0.650000"
+      },
+      {
+        "line": 66,
+        "text": "per_frame_3=mv_r = wave_r + 0.350*( 0.60*sin(0.980*time) + 0.40*sin(1.047*time) );"
+      },
+      {
+        "line": 67,
+        "text": "per_frame_4=mv_g = wave_g + 0.350*( 0.60*sin(0.835*time) + 0.40*sin(1.081*time) );"
+      },
+      {
+        "line": 68,
+        "text": "per_frame_5=mv_b = wave_b + 0.350*( 0.60*sin(0.814*time) + 0.40*sin(1.011*time) );"
+      },
+      {
+        "line": 71,
+        "text": "per_frame_8=wave_a = 0;"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  },
+  {
+    "path": "core/src/main/assets/presets/3D function draw template [flexi's learning by doing session 05] nz+ nglumbrephonle hsdv el norte.milk",
+    "sha256": "b44d1513c9230630b8006fd8498c665925be457b89dcdae04c4238fb98626fc3",
+    "source_disposition": "exclude main-wave visible effect in this source:baseRGB0/0/0, no main-frame RGB override, additive1 means black source contributes nothing; custom waves are separate",
+    "evidence": [
+      {
+        "line": 12,
+        "text": "nWaveMode=8"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=0"
+      },
+      {
+        "line": 16,
+        "text": "bModWaveAlphaByVolume=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=4.100"
+      },
+      {
+        "line": 26,
+        "text": "fWaveScale=1.286"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=0.000"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=0.000"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=0.000"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  },
+  {
+    "path": "core/src/main/assets/presets/Halfbreak - Crazy Againist.milk",
+    "sha256": "b9ffd5bd4df0528fed9d2c0556cb840b790a16f06b360bbc19c13f90ef4ecef0",
+    "source_disposition": "narrow endpoint only:4+4*sin(pulse) truncates\u22647 except exactlysin(pulse)=1. Do not claim robust extended-mode occupancy",
+    "evidence": [
+      {
+        "line": 12,
+        "text": "nWaveMode=5"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=0"
+      },
+      {
+        "line": 14,
+        "text": "bWaveDots=0"
+      },
+      {
+        "line": 15,
+        "text": "bWaveThick=1"
+      },
+      {
+        "line": 16,
+        "text": "bModWaveAlphaByVolume=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=1.136"
+      },
+      {
+        "line": 26,
+        "text": "fWaveScale=2.051"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=1.000"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=1.000"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=1.000"
+      },
+      {
+        "line": 271,
+        "text": "per_frame_2=old_bass_flop=bass_flop;"
+      },
+      {
+        "line": 272,
+        "text": "per_frame_3=old_treb_flop=treb_flop;"
+      },
+      {
+        "line": 273,
+        "text": "per_frame_4=old_mid_flop=mid_flop;"
+      },
+      {
+        "line": 277,
+        "text": "per_frame_8=bass_flop=abs(bass_flop-equal(bass_thresh,2));"
+      },
+      {
+        "line": 279,
+        "text": "per_frame_10=treb_flop=abs(treb_flop-equal(treb_thresh,2));"
+      },
+      {
+        "line": 281,
+        "text": "per_frame_12=mid_flop=abs(mid_flop-equal(mid_thresh,2));"
+      },
+      {
+        "line": 292,
+        "text": "per_frame_23=q4=sin(pulse);"
+      },
+      {
+        "line": 293,
+        "text": "per_frame_24=q5=sin(pulse/2);"
+      },
+      {
+        "line": 294,
+        "text": "per_frame_25=wave_r=wave_r+.5*bass_residual;"
+      },
+      {
+        "line": 295,
+        "text": "per_frame_26=wave_r=wave_g+.5*mid_residual;"
+      },
+      {
+        "line": 296,
+        "text": "per_frame_27=wave_r=wave_b+.5*treb_residual;"
+      },
+      {
+        "line": 297,
+        "text": "per_frame_28=wave_mystery=mid_residual;"
+      },
+      {
+        "line": 298,
+        "text": "per_frame_29=ob_r=if(bass_flop,treb_flop,wave_r);"
+      },
+      {
+        "line": 299,
+        "text": "per_frame_30=ob_b=if(treb_flop,mid_flop,wave_b);"
+      },
+      {
+        "line": 300,
+        "text": "per_frame_31=ob_g=if(mid_flop,bass_flop,wave_g);"
+      },
+      {
+        "line": 301,
+        "text": "per_frame_32=ob_a=.05+.05*cos(wave_r+pulse*.03);"
+      },
+      {
+        "line": 306,
+        "text": "per_frame_37=ib_size=ob_size*cos(wave_g+pulse*0.4)*.5;"
+      },
+      {
+        "line": 310,
+        "text": "per_frame_41=mv_r=wave_b;"
+      },
+      {
+        "line": 311,
+        "text": "per_frame_42=mv_b=wave_g;"
+      },
+      {
+        "line": 312,
+        "text": "per_frame_43=mv_g=wave_r;"
+      },
+      {
+        "line": 313,
+        "text": "per_frame_44=wave_mode=4+4*q4;"
+      }
+    ],
+    "qualification": "static source inspection only; no load/execute/render or census"
+  }
+]

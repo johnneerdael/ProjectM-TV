@@ -1,0 +1,7 @@
+# I04 bits-v2 current qualification
+
+Actual host/ARM64 candidate passes76 remainder and12 preservation controls with unchanged release fast-math flags. All20 boundary observations match baseline, including9 NaN-policy-sensitive cases. This does not restore wider power/invsqrt guards or I03 recovery. [Exact NDK IR/assembly and guard review](arm64-ir/GUARD-REVIEW.md) confirm guarded casts/remainder in both mod and mod_op. Clang emits input sign clearing through a non-fast fabs intrinsic; do not claim no floating intrinsic exists.
+
+Four actual Native4K sign-witness jobs verify2 exact selected-RGB repeat groups and32 PNGs. [Native images/hashes](native/native-results.json) bind the sealed v2 worker plus separate lab-seed instrumentation. The earlier floating-range v1 source/results remain separate. The durable review patch has whitespace-only syntax normalization with identical applied source proof; sealed raw v2 patch/worker bytes are unchanged. Independent remainder/ordinary/pow-suppressed/div-suppressed runtime cost and final integration remain open. No adoption yet.
+
+Final disposition supersedes earlier pending language: all48independent cost jobs/384selectedPNGs for this variant are verified; no-loss acceptance remains unproven and no arithmetic patch is adopted. See [complete owner decision](../I04-bits-v3/OWNER-DECISION.md). V3 additionally passes92host/ARM64 remainder controls after the reviewer's missed-path coverage fix.

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "audit i02-invert--1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": false
+  },
+  {
+    "name": "audit i02-invert-0.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit i02-invert-1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit m01-wave--1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": false
+  },
+  {
+    "name": "audit m01-wave-0.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit m01-wave-1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  }
+]

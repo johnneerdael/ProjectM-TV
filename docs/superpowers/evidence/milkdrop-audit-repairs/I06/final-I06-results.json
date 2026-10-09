@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "Shreyas - Carnival loavthephysyq.milk",
+      "preset_sha256": "da5440792b7f6e1dd987024e72261fa90a3ea455354bd0daf38a1075fcdffeef",
+      "rgb_hashes": [
+        "135e6d36f3ed0bc32f959a1bfacce6209f62120d9a2f00e120674db5d124fc78",
+        "42ff7748504b72cfb0724a3371ff1985903eaece41d497d32332431941365f0b",
+        "8178f934233f112a3dd77eae74816c8ef161a59dd18db61813b2aea9b7fc120b",
+        "b1857510c400bf88189f02ba0f5c3d50e410a865b924d69d5db6ca5b1d20d667",
+        "6f2a7b581ac0a79fe5ff8f0318f569cc6904c45a9ccddb20b7f19e0040decc63",
+        "454ac9a5c99004b259bf34e71c6c4698876ed61cb0fc0520b214743f72067cad",
+        "141b2f895f41c928a5402d25d4ab65d6fb69d6c3c70f7984f590fc15fb4c6a24",
+        "9758cad77807926e1c4cd97967083c4a542a15e66ce7210c635e68556c46d96e"
+      ]
+    },
+    "after": {
+      "preset": "Shreyas - Carnival loavthephysyq.milk",
+      "preset_sha256": "da5440792b7f6e1dd987024e72261fa90a3ea455354bd0daf38a1075fcdffeef",
+      "rgb_hashes": [
+        "0fa8298af55aa25b05bda7be69aa0276c3deba397b6c8a3611eb001aa61c6be4",
+        "fd5e8e7adffd1a1f429a88f44e1e8f7b76cb64c84e4f593abae33449171cd9de",
+        "f8497294c35b1f62e0922306bf096528a0d37a8f7c2858270dfe2b6425e43ab9",
+        "6206104aa65962c3ee585bdda8542923162b02226173ac843eb34dd87de597a0",
+        "d6128831567a3efe280f65116ec7eab3a37c18bc32e23d90c894812818b8f7ea",
+        "7b32344be46ed24e9936bcd00cd8ea1432e52710f34b964e88ad773d7e904d0f",
+        "3d3383e155b898def684416bd69d7b2b5a792cd09ad5a76b58890f7621d49ec3",
+        "5399d66fd1cb4a59be59d83e623303230fc660456504d5d5782b2771cd6134bb"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 10.580640150784465,
+      "before_rgb_mean": 76.09758206340021,
+      "after_rgb_mean": 75.2784193753215
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 11.496452345357511,
+      "before_rgb_mean": 73.8809578751929,
+      "after_rgb_mean": 74.60136099858539
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 12.139441872427984,
+      "before_rgb_mean": 69.36731573913323,
+      "after_rgb_mean": 69.08458490065587
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 12.808985018004115,
+      "before_rgb_mean": 74.8256783291538,
+      "after_rgb_mean": 75.43317358699845
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 14.133836644804527,
+      "before_rgb_mean": 75.88964281121399,
+      "after_rgb_mean": 74.98917896412037
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 18.679646307548868,
+      "before_rgb_mean": 76.60313978909466,
+      "after_rgb_mean": 76.64471197434413
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 27.336351634837964,
+      "before_rgb_mean": 69.7983668901106,
+      "after_rgb_mean": 70.80403300218622
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 36.65211054044496,
+      "before_rgb_mean": 72.09444621270576,
+      "after_rgb_mean": 72.17542177051183
+    }
+  ],
+  "illustrated_frame": 479,
+  "all_selected_before_after_rgb_identical": false
+}

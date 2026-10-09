@@ -1,0 +1,77 @@
+[
+  {
+    "path": "diagnostic-equal-half-actual-retained.milk",
+    "sha256": "9324adc5f7fdfa1c2cf14c9bd4686ebb51cce23d22034bf49eb8d42519235977",
+    "case": "equal-half",
+    "role": "actual-retained",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-equal-half-explicit-expanded-oracle.milk",
+    "sha256": "709b4fe5e49d42cf561a3497752e3b0eeb0b29050a7695d45402f2bb3563676d",
+    "case": "equal-half",
+    "role": "explicit-expanded-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-equal-half-finite-collapsed-decode-oracle.milk",
+    "sha256": "ea6d41d00e65e98b985036b34c4356cb1a1bf031d10076eea4b1a63e5b557c8a",
+    "case": "equal-half",
+    "role": "finite-collapsed-decode-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-near-quarter-actual-retained.milk",
+    "sha256": "88b0930c98063bb189fbb607041b92e920417c0b00ca29bbf026ce4c251004bc",
+    "case": "near-quarter",
+    "role": "actual-retained",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-near-quarter-explicit-expanded-oracle.milk",
+    "sha256": "5bfcc17fa199f41c629737a15921c8874a2cecea9748df1115b98e72dba2b03d",
+    "case": "near-quarter",
+    "role": "explicit-expanded-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-near-quarter-finite-collapsed-decode-oracle.milk",
+    "sha256": "6aa67bfface118941d74da03cfbbc867f5d2a8b283a93c8ecbf319663f68a0c8",
+    "case": "near-quarter",
+    "role": "finite-collapsed-decode-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-reversed-actual-retained.milk",
+    "sha256": "b0fbe4123271f9e1989fb8c85ab881e483ab8960d259202862730951ae263f93",
+    "case": "reversed",
+    "role": "actual-retained",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-reversed-explicit-expanded-oracle.milk",
+    "sha256": "709b4fe5e49d42cf561a3497752e3b0eeb0b29050a7695d45402f2bb3563676d",
+    "case": "reversed",
+    "role": "explicit-expanded-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-reversed-finite-collapsed-decode-oracle.milk",
+    "sha256": "93cccdf5dc264562757903c0bc2d600b7a75557faf6aca93c937f9dbea5f22b6",
+    "case": "reversed",
+    "role": "finite-collapsed-decode-oracle",
+    "qualification": "Current safe engine only; collapsed-decode sibling assumes finite safe texture, never executes original zero-division pipeline"
+  },
+  {
+    "path": "diagnostic-unsupported-finite-fallback.milk",
+    "sha256": "d016d6a8b3697dec554eed02c57fd5d4df5276ac1612340f906b902278c487f2",
+    "role": "unsupported-finite-fallback",
+    "qualification": "EEL per-frame double1e300, not float32 file key parsing; verify actual evaluator value before accepting coherent fallback"
+  },
+  {
+    "path": "diagnostic-explicit-default-oracle.milk",
+    "sha256": "0f0532ec1c18c146bd36e6d27bd1603cf84756b1a507de82b67aa7d6c23eb9c5",
+    "role": "explicit-default-oracle",
+    "qualification": "unsupported finite equation value triggers coherent current[0,1] fallback; expected same producer as explicit-default sibling"
+  }
+]

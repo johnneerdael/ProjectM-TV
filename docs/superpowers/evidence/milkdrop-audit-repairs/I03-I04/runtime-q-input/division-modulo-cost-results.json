@@ -1,0 +1,13 @@
+{
+  "means": {
+    "before": 1.5763564476851848,
+    "after": 1.4811114208333334
+  },
+  "delta_pct": -6.04209961469786,
+  "cycles_pct": [
+    -11.701115443274524,
+    -0.016512824041869933,
+    -5.511213532163284
+  ],
+  "scope": "runtimeQinputs div/mod per-pixel atmesh48x32; no newdraw/geometry"
+}

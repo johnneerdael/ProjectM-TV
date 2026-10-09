@@ -1,0 +1,77 @@
+PASS literal remainder witness q=1 a=0 b=0 expected=1
+PASS literal assignment witness q=1 a=1 b=0 expected=1
+PASS q=a%b; signs q=1 a=-5 b=-2 expected=1
+PASS q=a%b; signs q=1 a=-5 b=2 expected=1
+PASS q=a%b; signs q=1 a=5 b=-2 expected=1
+PASS q=a%b; signs q=1 a=5 b=2 expected=1
+PASS q=a%b; exact multiple q=0 a=-4 b=2 expected=0
+PASS q=a%b; fraction truncation q=1 a=-5.9000000000000004 b=2.8999999999999999 expected=1
+PASS q=a%b; fraction divisor zero q=0 a=-5 b=0.90000000000000002 expected=0
+PASS q=a%b; upper original boundary q=1 a=-2147483647.9000001 b=2 expected=1
+PASS q=a%b; excluded original boundary q=-2 a=-2147483648 b=3 expected=-2
+PASS q=a%b; wide unchanged q=-1 a=-4294967297 b=2 expected=-1
+PASS q=a%b; wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=a%b; signed minimum safe q=-2 a=-9.2233720368547758e+18 b=3 expected=-2
+PASS q=a%b; signed minimum/-1 q=0 a=-9.2233720368547758e+18 b=-1 expected=0
+PASS q=a%b; out of range q=0 a=9.2233720368547758e+18 b=2 expected=0
+PASS q=a%b; infinite q=0 a=inf b=2 expected=0
+PASS q=a%b; nan q=0 a=nan b=2 expected=0
+PASS q=a%b; infinite divisor q=0 a=5 b=inf expected=0
+PASS q=a%b; nan divisor q=0 a=5 b=nan expected=0
+PASS q=_mod(a,b); signs q=1 a=-5 b=-2 expected=1
+PASS q=_mod(a,b); signs q=1 a=-5 b=2 expected=1
+PASS q=_mod(a,b); signs q=1 a=5 b=-2 expected=1
+PASS q=_mod(a,b); signs q=1 a=5 b=2 expected=1
+PASS q=_mod(a,b); exact multiple q=0 a=-4 b=2 expected=0
+PASS q=_mod(a,b); fraction truncation q=1 a=-5.9000000000000004 b=2.8999999999999999 expected=1
+PASS q=_mod(a,b); fraction divisor zero q=0 a=-5 b=0.90000000000000002 expected=0
+PASS q=_mod(a,b); upper original boundary q=1 a=-2147483647.9000001 b=2 expected=1
+PASS q=_mod(a,b); excluded original boundary q=-2 a=-2147483648 b=3 expected=-2
+PASS q=_mod(a,b); wide unchanged q=-1 a=-4294967297 b=2 expected=-1
+PASS q=_mod(a,b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=_mod(a,b); signed minimum safe q=-2 a=-9.2233720368547758e+18 b=3 expected=-2
+PASS q=_mod(a,b); signed minimum/-1 q=0 a=-9.2233720368547758e+18 b=-1 expected=0
+PASS q=_mod(a,b); out of range q=0 a=9.2233720368547758e+18 b=2 expected=0
+PASS q=_mod(a,b); infinite q=0 a=inf b=2 expected=0
+PASS q=_mod(a,b); nan q=0 a=nan b=2 expected=0
+PASS q=_mod(a,b); infinite divisor q=0 a=5 b=inf expected=0
+PASS q=_mod(a,b); nan divisor q=0 a=5 b=nan expected=0
+PASS q=(a%=b); signs q=1 a=1 b=-2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=-2 expected=1
+PASS q=(a%=b); signs q=1 a=1 b=2 expected=1
+PASS q=(a%=b); exact multiple q=0 a=0 b=2 expected=0
+PASS q=(a%=b); fraction truncation q=1 a=1 b=2.8999999999999999 expected=1
+PASS q=(a%=b); fraction divisor zero q=0 a=0 b=0.90000000000000002 expected=0
+PASS q=(a%=b); upper original boundary q=1 a=1 b=2 expected=1
+PASS q=(a%=b); excluded original boundary q=-2 a=-2 b=3 expected=-2
+PASS q=(a%=b); wide unchanged q=-1 a=-1 b=2 expected=-1
+PASS q=(a%=b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=(a%=b); signed minimum safe q=-2 a=-2 b=3 expected=-2
+PASS q=(a%=b); signed minimum/-1 q=0 a=0 b=-1 expected=0
+PASS q=(a%=b); out of range q=0 a=0 b=2 expected=0
+PASS q=(a%=b); infinite q=0 a=0 b=2 expected=0
+PASS q=(a%=b); nan q=0 a=0 b=2 expected=0
+PASS q=(a%=b); infinite divisor q=0 a=0 b=inf expected=0
+PASS q=(a%=b); nan divisor q=0 a=0 b=nan expected=0
+PASS q=_modop(a,b); signs q=1 a=1 b=-2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=-2 expected=1
+PASS q=_modop(a,b); signs q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); exact multiple q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); fraction truncation q=1 a=1 b=2.8999999999999999 expected=1
+PASS q=_modop(a,b); fraction divisor zero q=0 a=0 b=0.90000000000000002 expected=0
+PASS q=_modop(a,b); upper original boundary q=1 a=1 b=2 expected=1
+PASS q=_modop(a,b); excluded original boundary q=-2 a=-2 b=3 expected=-2
+PASS q=_modop(a,b); wide unchanged q=-1 a=-1 b=2 expected=-1
+PASS q=_modop(a,b); wide denominator unchanged q=-5 a=-5 b=4294967296 expected=-5
+PASS q=_modop(a,b); signed minimum safe q=-2 a=-2 b=3 expected=-2
+PASS q=_modop(a,b); signed minimum/-1 q=0 a=0 b=-1 expected=0
+PASS q=_modop(a,b); out of range q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); infinite q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); nan q=0 a=0 b=2 expected=0
+PASS q=_modop(a,b); infinite divisor q=0 a=0 b=inf expected=0
+PASS q=_modop(a,b); nan divisor q=0 a=0 b=nan expected=0
+PASS remainder assignment alias q=0 a=0 b=0 expected=0
+PASS remainder argument side effect q=1 a=-5 b=2 expected=1
+I04 executed=76 failures=0 unsafe_baseline_skips=0

@@ -1,0 +1,26 @@
+GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+seam GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0.064893,0.0624946,0,0
+seam GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0.064893,0.0624946,0,0
+seam GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0.064893,0.0624946,0,0
+seam GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0.064893,0.0624946,0,0
+seam GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0.0604161,0.0451553,0,0
+seam GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+seam GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0.0648933,0.0624943,0,0
+legacy/custom/fallback exact-axis equations, CPU trig, GPU UV, odd grid and replay pass

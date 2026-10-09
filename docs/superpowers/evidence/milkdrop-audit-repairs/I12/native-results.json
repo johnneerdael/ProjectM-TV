@@ -1,0 +1,44 @@
+[
+  {
+    "case": "original",
+    "selected_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "case": "legacy",
+    "selected_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "case": "custom",
+    "selected_rgb_repeats_exact": true,
+    "before_after_equal": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  }
+]

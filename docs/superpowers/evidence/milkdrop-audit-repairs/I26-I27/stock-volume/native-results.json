@@ -1,0 +1,110 @@
+{
+  "status": "capture stage passed; scope: original versus full preset shader-comma-scalar surrogate; no Windows claim",
+  "runs": 4,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 2,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "shaderstock-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0",
+      "preset": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "863cce684775c8790ea27095e378062b65bf278dd98b4a0625eeb9f90f4f3bad",
+        "6383484c6cbb7b657659d51f45232c3717e5695ffa7698d5ac5533cf328e59f2",
+        "e05afa7b53a09a297ac224a11dfae75cd1c065b288408301bf81f202eb130d92",
+        "8f7386bd5c88d70caca654b4f150f94e0d6137052b06fce52cb9bb5f46bce069",
+        "79f2111edf98e1b9e001ce3de19206415dd1372ca86f4fca2098716b21220819",
+        "500c1a60d21c9b3ff007d64d93f3a64ef9c9411cd304998264edd548a5993a1c",
+        "78a4d4330fdb28d59d5160f2045e81175fd7776353ac5615b8aae5ee2cb0a0c0",
+        "ccd5e6448fafe379f42d68bb09214e7e001fe0db373e26a380dff53a4a0c52a8"
+      ]
+    },
+    {
+      "directory": "shaderstock-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-1",
+      "preset": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "863cce684775c8790ea27095e378062b65bf278dd98b4a0625eeb9f90f4f3bad",
+        "6383484c6cbb7b657659d51f45232c3717e5695ffa7698d5ac5533cf328e59f2",
+        "e05afa7b53a09a297ac224a11dfae75cd1c065b288408301bf81f202eb130d92",
+        "8f7386bd5c88d70caca654b4f150f94e0d6137052b06fce52cb9bb5f46bce069",
+        "79f2111edf98e1b9e001ce3de19206415dd1372ca86f4fca2098716b21220819",
+        "500c1a60d21c9b3ff007d64d93f3a64ef9c9411cd304998264edd548a5993a1c",
+        "78a4d4330fdb28d59d5160f2045e81175fd7776353ac5615b8aae5ee2cb0a0c0",
+        "ccd5e6448fafe379f42d68bb09214e7e001fe0db373e26a380dff53a4a0c52a8"
+      ]
+    },
+    {
+      "directory": "shaderstock-audit-shader-stock-cope-original-comma-volume-current-0",
+      "preset": "audit shader stock cope-original-comma-volume.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "008936beeb2c3f3afcaf0690b88bc4656b6411a5327b7c675ca84efb182306e7",
+        "1455a6309a4a53d3f05e1bb7aae731c310b06bdfb06c077f00090e433f0916c1",
+        "b994287e16e647a6daf3185c9175ebd97b3d0f8bd2c8183d63df805b7ef50880",
+        "3a791097b6b271cf2ef56d5caa6e3b13b61a34f8f662f2c4373a15e70002706c",
+        "95d1293b12a680146d4b15d42ec62e9e6fd13545854767d73935b9cdf429ada2",
+        "5da9d847f589b5916a69a676f99b6b308dcbee53ec63fb1d2e8ba9762947654f",
+        "11319469e122dfe85c1510aa4b8bbf24754a554d3e401daf7d02175b926f1b53",
+        "c770e8b0d3cbcd83b49813003b362caae2d453a4fc466a74313b132d7847cc45"
+      ]
+    },
+    {
+      "directory": "shaderstock-audit-shader-stock-cope-original-comma-volume-current-1",
+      "preset": "audit shader stock cope-original-comma-volume.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "008936beeb2c3f3afcaf0690b88bc4656b6411a5327b7c675ca84efb182306e7",
+        "1455a6309a4a53d3f05e1bb7aae731c310b06bdfb06c077f00090e433f0916c1",
+        "b994287e16e647a6daf3185c9175ebd97b3d0f8bd2c8183d63df805b7ef50880",
+        "3a791097b6b271cf2ef56d5caa6e3b13b61a34f8f662f2c4373a15e70002706c",
+        "95d1293b12a680146d4b15d42ec62e9e6fd13545854767d73935b9cdf429ada2",
+        "5da9d847f589b5916a69a676f99b6b308dcbee53ec63fb1d2e8ba9762947654f",
+        "11319469e122dfe85c1510aa4b8bbf24754a554d3e401daf7d02175b926f1b53",
+        "c770e8b0d3cbcd83b49813003b362caae2d453a4fc466a74313b132d7847cc45"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "original": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "original_shader_comma_scalar_surrogate": "audit shader stock cope-original-comma-volume.milk",
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 29.81741628890175
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 30.550331950874487
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 29.025012860082306
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 29.066427308384775
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 29.136349866576648
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 29.70151652520576
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 28.53085451228138
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 29.2907424688143
+        }
+      ]
+    }
+  ]
+}

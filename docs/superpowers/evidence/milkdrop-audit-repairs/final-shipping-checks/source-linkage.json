@@ -1,0 +1,10 @@
+{
+  "shipping_branch_head_before_final_docs": "c480cb192561e894bd93337ef947275f32792673",
+  "canonical_patch_count": 28,
+  "new_repair_patch_count": 12,
+  "native_M02_proof_Border_source": "build/audit/border-topology-native-workers/candidate-native/snapshots/engines/2cbde0d162d00491ca23b3936dd5c7c5df631c8eb5a79fe06e4b918275c1bf3f/src/libprojectM/MilkdropPreset/Border.cpp",
+  "shipping_Border_source": "third_party/projectm/src/libprojectM/MilkdropPreset/Border.cpp",
+  "Border_sha256": "2c722624d3250a5453fb9e5fc3897ca3fd8b2f578ac69f5cde2897a1947683ff",
+  "relevant_source_bytes_identical": true,
+  "scope": "Links frozen source-instrumented M02 Native proof to final shipping border body; newly built release AAR is not falsely called the frozen capture artifact"
+}

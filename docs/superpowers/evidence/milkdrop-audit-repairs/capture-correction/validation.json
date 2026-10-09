@@ -1,0 +1,13 @@
+{
+  "final_output_runs": 84,
+  "frames_per_run": 480,
+  "frames_rendered": 40320,
+  "selected_captures": 672,
+  "per_role_selected_rgb_repeats_exact": true,
+  "capture_read_framebuffer_zero": true,
+  "all_core_and_egl_cleanup_complete": true,
+  "normal_renderer_controls": "46/46",
+  "capture_helper_controls": "57 tests /20 subtests",
+  "strict_docs": "passed",
+  "limits": "Source-instrumented emulator; no all-frame RGB hashes, no full-corpus fidelity or physical-TV performance certification; final combined integration remains open."
+}

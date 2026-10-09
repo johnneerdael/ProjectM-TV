@@ -1,0 +1,12 @@
+{"cycle": 0, "step": 0, "role": "before", "mean_ms": 1.3644478000000004, "p90_ms": 1.666, "status": "ok"}
+{"cycle": 0, "step": 1, "role": "after", "mean_ms": 1.4534454944444446, "p90_ms": 1.73625, "status": "ok"}
+{"cycle": 0, "step": 2, "role": "after", "mean_ms": 1.5253795055555566, "p90_ms": 1.839875, "status": "ok"}
+{"cycle": 0, "step": 3, "role": "before", "mean_ms": 1.346431116666667, "p90_ms": 1.564375, "status": "ok"}
+{"cycle": 1, "step": 0, "role": "before", "mean_ms": 1.338934955555556, "p90_ms": 1.584375, "status": "ok"}
+{"cycle": 1, "step": 1, "role": "after", "mean_ms": 1.4561616722222226, "p90_ms": 1.781208, "status": "ok"}
+{"cycle": 1, "step": 2, "role": "after", "mean_ms": 1.4347387777777776, "p90_ms": 1.730209, "status": "ok"}
+{"cycle": 1, "step": 3, "role": "before", "mean_ms": 1.423096219444445, "p90_ms": 1.76825, "status": "ok"}
+{"cycle": 2, "step": 0, "role": "before", "mean_ms": 1.3544035916666661, "p90_ms": 1.616542, "status": "ok"}
+{"cycle": 2, "step": 1, "role": "after", "mean_ms": 1.4595150499999991, "p90_ms": 1.708417, "status": "ok"}
+{"cycle": 2, "step": 2, "role": "after", "mean_ms": 1.4415683944444444, "p90_ms": 1.68625, "status": "ok"}
+{"cycle": 2, "step": 3, "role": "before", "mean_ms": 1.3313793944444443, "p90_ms": 1.55775, "status": "ok"}

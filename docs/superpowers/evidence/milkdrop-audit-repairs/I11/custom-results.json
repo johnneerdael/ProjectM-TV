@@ -1,0 +1,70 @@
+{
+  "qualification": "Source-instrumented Native4K final output, exact installed APK/native AAR hashes; original or explicitly declared private fixture; not Windows proof",
+  "roles": {
+    "before": {
+      "preset": "audit custom physical diagonal.milk",
+      "sha256": "58631ee286a4266d9f43d47d89f07acd3bac3860deb02dc1ec6e27a9b2b9d402",
+      "hashes": [
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a"
+      ]
+    },
+    "after": {
+      "preset": "audit custom physical diagonal.milk",
+      "sha256": "58631ee286a4266d9f43d47d89f07acd3bac3860deb02dc1ec6e27a9b2b9d402",
+      "hashes": [
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a",
+        "b7b365c7928b0fb8fabc0edceebd9d7514f798c466a935f04b27a4ca1637649a"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 0.0
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 0.0
+    }
+  ],
+  "all_selected_rgb_repeats_exact": true,
+  "all_before_after_selected_rgb_identical": true,
+  "illustrated_frame": 120
+}

@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditi21policy",
+  "pid": 27545,
+  "job": {
+    "expectedPresetCount": 9623,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/audio.u8",
+    "preset": "suksma - i'll go ahead and get the salad bar nz+.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "350dbb649a4b5f869f1663f4e22dbe97b9c4580b8fc743744823cb849bc301bd",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "fd77c8fc0aff246c5a366244de073af19acdbfa64bf6ece0b724ef509a74b722",
+      "pngBytes": 6111532,
+      "pngSha256": "450390b3042ef8882a0dc1d8db9c77f718826a7f4b3661c1b52d434c387bbbdc",
+      "rgbMean": [
+        0.0025489486882716047,
+        59.84855287905093,
+        131.4324461082176
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3e250b56f972c1b7b2134943537e9ae50935e68bc1dd4b63f61ece908a0f4363",
+      "pngBytes": 6758083,
+      "pngSha256": "6c36665e4bc41f081464fbac46eb94c068db037481ea017a94ef786256cd7dca",
+      "rgbMean": [
+        9.054301697530864E-4,
+        58.91002025462963,
+        128.51038821373456
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "54265e2f53ab5f7f67be3655507845669ab6268d9f620a4baee44648aea60f94",
+      "pngBytes": 8326080,
+      "pngSha256": "b4175787d28688c615d6c175817065a8e9a2b53980678e86f8f4a9f34710b2a1",
+      "rgbMean": [
+        1.8595785108024692,
+        68.51698832947531,
+        119.04529200424383
+      ],
+      "exactBlackFraction": 0.01627905574845679
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "925f9c91c60cb0528484e66ae5ae2ef7728c11ba57b5a2fb8c9af4196a8931c4",
+      "pngBytes": 7501506,
+      "pngSha256": "2ebe9d014799ab1ad0f89204aad461137f4857e9b0a8f94c641a21c5d8a997b9",
+      "rgbMean": [
+        3.8713234230324076,
+        68.88492006655093,
+        124.63845184702932
+      ],
+      "exactBlackFraction": 0.027069709683641974
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b1dc883ec635756d15f42ddf15009f877c66fbc5e71e723e555ee83c64dbde87",
+      "pngBytes": 6848556,
+      "pngSha256": "9d601ee62d7833d55c6f8f6d788f11d856d96c302b401a62db8e2d77f44d1349",
+      "rgbMean": [
+        2.1666564187885804,
+        66.08060631269291,
+        124.09133138020833
+      ],
+      "exactBlackFraction": 1.7204378858024693E-4
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "346743ef5862413b0c936e4b9d6e14e9c2a43e2b8eade6f350dcddc015c8760c",
+      "pngBytes": 5727064,
+      "pngSha256": "71de91b7839ecf2c20a60d6fc3a414afac5d10809c8b254e072d4ee1cb6b1d98",
+      "rgbMean": [
+        0.8366304976851852,
+        72.57675998263889,
+        110.82154308931327
+      ],
+      "exactBlackFraction": 0.005551335841049383
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "61edc2c4baf52acf5129a8db068791f883f6f5bcc1f3c9ebc216817019bb52da",
+      "pngBytes": 6401155,
+      "pngSha256": "f0f286e312ad550ccc58562e9ee605d14564a276d804b11fdb35bd7705b6a866",
+      "rgbMean": [
+        1.9980510947145063,
+        55.66701220100309,
+        128.36712070794752
+      ],
+      "exactBlackFraction": 0.017296730324074073
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3eef19db31de0209ae431d47ee001c95ea72605b301418ec4552593cef2de61b",
+      "pngBytes": 5506381,
+      "pngSha256": "23f22beaf3ba15eba5dce914788f72e8afd1d3926e0862dae37d0ec6d55fa411",
+      "rgbMean": [
+        0.16924406828703703,
+        43.71020978009259,
+        113.83713324652778
+      ],
+      "exactBlackFraction": 3.8266782407407406E-4
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 43936036,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 211,
+      "elapsedRealtimeMs": 43947177,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9623,
+  "indexSha256": "590dd743eb19ef8848cf759b0ca321e31b1bbffefbc1d441e2d80a674605fd58",
+  "presetAssetSha256": "d300f7f3b57f6c32d29e44cbfef313efe8cb504006dafe3102b0b8ea618805f2",
+  "forcedPresetPrefix": "suksma - i'll go ahead and get the salad bar nz+.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 15,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43488,
+  "framesRendered": 480,
+  "renderWallDurationMs": 21987,
+  "pssAfterFramesKB": 72413,
+  "serializedFrameMeanMs": 9.674438222222225,
+  "serializedFrameP90Ms": 11.316584,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "suksma - i'll go ahead and get the salad bar nz+.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 22317
+}

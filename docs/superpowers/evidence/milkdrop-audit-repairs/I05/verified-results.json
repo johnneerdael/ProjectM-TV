@@ -1,0 +1,45 @@
+{
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 13.247184058333328,
+      "p90_ms": 24.193833,
+      "manifest_sha256": "599715133feee915d09d7d63f707f37b13a167fcfb567a75047c4e687acdc88d"
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 7.734227555555554,
+      "p90_ms": 9.808333,
+      "manifest_sha256": "7bb5626cb6aa125aee0ca8efd3d5153bd7ca080a6b357fec509a2b9c2990da65"
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 5.778678236111109,
+      "p90_ms": 6.669541,
+      "manifest_sha256": "f609c9f82b28c685327f8c2510cd09303cb653f981f53eafb0ae0ececc1c4855"
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 11.540054047222217,
+      "p90_ms": 16.678,
+      "manifest_sha256": "06c8a6158aac6748a7e366d486085da257eff5295bc44e6ab97db85b8a145325"
+    }
+  ],
+  "controller": "render_input_verified.py",
+  "installed_apk_hash_checked_each_run": true,
+  "frames_per_run": 480,
+  "render": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "selected_rgb_repeats_exact": true,
+  "scope": "original comparison rerun after invalid shared-package v1; no universal timing claim"
+}

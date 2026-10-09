@@ -1,0 +1,500 @@
+{
+  "runs": 24,
+  "selected_pngs_verified": 192,
+  "exact_role_repeat_groups": 4,
+  "qualification": "city-c retry2 cycles1/2 and retry3 cycle3; alt retry3 cycles0/1/2. First-run ENOSPC and retry2city-c0 overlap/alt ENOSPC excluded, preserved separately",
+  "results": [
+    {
+      "issue": "I24-city-c",
+      "means": {
+        "before": 6.081852999074074,
+        "after": 6.1713507703703705
+      },
+      "delta_ms": 0.08949777129629677,
+      "delta_percent": 1.4715543323707836,
+      "cycles": [
+        {
+          "cycle": 1,
+          "before": 5.983613706944446,
+          "after": 5.896175651388889,
+          "delta_percent": -1.4612917851645202
+        },
+        {
+          "cycle": 2,
+          "before": 5.997203431944442,
+          "after": 5.90956103888889,
+          "delta_percent": -1.4613876959504002
+        },
+        {
+          "cycle": 3,
+          "before": 6.264741858333334,
+          "after": 6.708315620833334,
+          "delta_percent": 7.080479491903713
+        }
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "means": {
+        "before": 6.588474473611113,
+        "after": 6.420338790740743
+      },
+      "delta_ms": -0.1681356828703695,
+      "delta_percent": -2.5519668254586847,
+      "cycles": [
+        {
+          "cycle": 0,
+          "before": 6.501308040277779,
+          "after": 6.379756654166668,
+          "delta_percent": -1.8696450830826605
+        },
+        {
+          "cycle": 1,
+          "before": 6.744694687500002,
+          "after": 6.506530808333337,
+          "delta_percent": -3.5311291348451346
+        },
+        {
+          "cycle": 2,
+          "before": 6.519420693055556,
+          "after": 6.374728909722225,
+          "delta_percent": -2.2193963259259597
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "issue": "I24-city-c",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-1-0-before",
+      "mean_ms": 6.002429836111109,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-1-1-after",
+      "mean_ms": 5.873374013888888,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-1-2-after",
+      "mean_ms": 5.91897728888889,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-1-3-before",
+      "mean_ms": 5.964797577777783,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-2-0-before",
+      "mean_ms": 5.9545745638888885,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-2-1-after",
+      "mean_ms": 6.015560636111112,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-2-2-after",
+      "mean_ms": 5.803561441666669,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry2-I24-city-c-2-3-before",
+      "mean_ms": 6.039832299999995,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 3,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-c-3-0-before",
+      "mean_ms": 6.321670749999998,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 3,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-c-3-1-after",
+      "mean_ms": 7.045645363888887,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 3,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-c-3-2-after",
+      "mean_ms": 6.3709858777777795,
+      "rgb_hashes": [
+        "8877fcf8b2aee5e73c52f812a5922dcf93ceb387c2db49077e50c6ca0d4a1dae",
+        "1ce9982fbf536f2fb4afe593e027f8a486763c9f4e96830bf7f89b93033cee90",
+        "2f3fd6a0d1892854ebe00fb290cb694b49913edb2c4e91b9950410ad35be5b8f",
+        "ec5ca809123e04a77f84982f48facd3e41704671a51805914989cb8f6c002e60",
+        "d2165e3f6991eb120ffa812eae4e8d26948d294abbb3f5a799929a0e3d84bd18",
+        "92786a0b18bb597f4db94cd33f5849d70f93a1736956ed8d11f2f0eacc1ba90a",
+        "c6e944081c5231bbc874f7f0fd9100e9518f41a440c7753fcc0eac0f3407c968",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-c",
+      "cycle": 3,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-c-3-3-before",
+      "mean_ms": 6.207812966666671,
+      "rgb_hashes": [
+        "99039c578093a22fc07ca6015c4c265f29267e097985ac73969a7aad606d529e",
+        "bd177bbca1b50af96b87c74f60be77178458ff40ae11fd67c39b0210684669d4",
+        "a1fbebf86525e3dd5a8f672a08980ff8fcbcbdd2ef0a63996c04e85ad1ed54b5",
+        "8d26847aa0a67528ad32dda89cfffc617cbc789c292220a79d4bd451b5dda802",
+        "53c7c2af6b0ba7133f8e34a636c7b681ea1317db67626bf8d4a096a5215095ee",
+        "190874a2b0b8e32d795906c90f9d5e35e8b86592cc85262eb6c0c7e1c0b01e2a",
+        "b4eaa0b4f900f257c5de11ad35d9f9a7c88f7d3ae63d342c7331cbf8930c3ad0",
+        "cf005db6dcafa1bb493aa2a5365a6b60142c2cee7910f93b6801f8c9bca56ca6"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-0-0-before",
+      "mean_ms": 6.495264722222226,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-0-1-after",
+      "mean_ms": 6.3151014777777785,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-0-2-after",
+      "mean_ms": 6.444411830555556,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-0-3-before",
+      "mean_ms": 6.507351358333334,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-1-0-before",
+      "mean_ms": 7.003931722222224,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-1-1-after",
+      "mean_ms": 6.525961488888893,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-1-2-after",
+      "mean_ms": 6.487100127777781,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-1-3-before",
+      "mean_ms": 6.48545765277778,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-2-0-before",
+      "mean_ms": 6.5285731277777765,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-2-1-after",
+      "mean_ms": 6.362683886111115,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-2-2-after",
+      "mean_ms": 6.386773933333335,
+      "rgb_hashes": [
+        "58f841b2ee4d658010ac24fc99d0b097425d3ee3da7851a207d3729b610497d7",
+        "26cd0d71cfd695424cdfd311cb1e18d894c098b12060fea9f3beaf73eb69357a",
+        "764a9bf272ab9308ac55e03876c80893fc0a6d0e800d05c6290dddb1d7e00799",
+        "01ed16393a7af7e5dab2c61ced26a202f97a67e188a05167be8083cfec3fbcc9",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "2a77401c6ba819aa0c7496695dcaec6b6ba72b83ece03cea5e28b252a1b26c8f",
+        "d1a1fefb83865bcc4aa8cd894bd1ca3130c17dccceb52609c8557061c6b78c40",
+        "0ede0865b4b36c50b8d37360fa7e94ed45d6fe5dad755299d22cea64eb326c15"
+      ]
+    },
+    {
+      "issue": "I24-city-alt",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "directory": "build/audit/captures/warp-clean-i24-retry3-I24-city-alt-2-3-before",
+      "mean_ms": 6.510268258333335,
+      "rgb_hashes": [
+        "ab37ef9e978418897aa6a0ac8119696bf480049f031ad4127af64a1622a485cc",
+        "f267e2cf6777953894a757adde381426f1ea6b40b0c88719c544dd09487407ea",
+        "a17d7d96e86eb8f84f2ad826d25ddbc13b141ad4ccdaf60799952bd2c89101d6",
+        "5729398e8a49fdab20add851625da3c761b1e1e87110c2c60b782c8863d0e939",
+        "10f7e1799c5a4c817a0ed7f98428b9833516ff65fedf4798a5a5dbbc6724083c",
+        "f2f8fb7705284d663133be734816e0d5795687fbed893fd64c188194fe4db0cb",
+        "516b15393db1ab018d4fee054def31211c0a66358ddcbd98ae1375dbb191a6e3",
+        "3740d0cde8cf7f14b828363dd57aa637734bf019ef6fbbaefe1b2cf72f941a07"
+      ]
+    }
+  ]
+}

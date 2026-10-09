@@ -1,0 +1,98 @@
+[
+  {
+    "original": "Liquido",
+    "frame": 120,
+    "mae": 4.47750775623714,
+    "changed_pixels": 5819622
+  },
+  {
+    "original": "Liquido",
+    "frame": 150,
+    "mae": 5.00983470775463,
+    "changed_pixels": 6066978
+  },
+  {
+    "original": "Liquido",
+    "frame": 180,
+    "mae": 6.214605436599794,
+    "changed_pixels": 5693078
+  },
+  {
+    "original": "Liquido",
+    "frame": 210,
+    "mae": 4.749456460583848,
+    "changed_pixels": 6438296
+  },
+  {
+    "original": "Liquido",
+    "frame": 239,
+    "mae": 2.5236722366898148,
+    "changed_pixels": 4458322
+  },
+  {
+    "original": "Liquido",
+    "frame": 300,
+    "mae": 2.3901734503600824,
+    "changed_pixels": 4365512
+  },
+  {
+    "original": "Liquido",
+    "frame": 390,
+    "mae": 5.789808183834877,
+    "changed_pixels": 6555254
+  },
+  {
+    "original": "Liquido",
+    "frame": 479,
+    "mae": 3.5948164625128602,
+    "changed_pixels": 3459907
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 120,
+    "mae": 2.9530258568029835,
+    "changed_pixels": 3059019
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 150,
+    "mae": 4.470172244727366,
+    "changed_pixels": 4571798
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 180,
+    "mae": 6.890234616126543,
+    "changed_pixels": 4494297
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 210,
+    "mae": 3.5408111898791153,
+    "changed_pixels": 4137006
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 239,
+    "mae": 3.640107783564815,
+    "changed_pixels": 3097547
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 300,
+    "mae": 1.8153048241383745,
+    "changed_pixels": 2771789
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 390,
+    "mae": 6.737097157921811,
+    "changed_pixels": 4708421
+  },
+  {
+    "original": "Bmelgren---Liquirdo-2",
+    "frame": 479,
+    "mae": 2.2852647971322018,
+    "changed_pixels": 2189473
+  }
+]

@@ -1,0 +1,53 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Preserve original circle spacing and pre-smoothing closure
+
+MilkDrop2 unblended circle uses i/(240-1)*6.28 for 240 angular
+samples, then duplicates the first vertex before shared smoothing:
+241 raw points become 481 smoothed points and draw as a strip.
+Preserve PCM/window smoothing, first-tenth seam-radius blending,
+6.28f/time/aspect/mystery inputs, Native line/dot style and density
+policies, evaluated modes and one-producer prepared geometry replay.
+
+The TV pipeline fades separately rendered presets; this does not emulate
+original geometry-blended waves, where MilkDrop suppresses the duplicate.
+No shared smoothing change, equation evaluation, new pass or target.
+
+Original: vis_milk2/milkdropfs.cpp:2899-2923,3319-3334,3359-3365.
+
+--- a/src/libprojectM/MilkdropPreset/Waveforms/Circle.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveforms/Circle.cpp
+@@ -10,7 +10,8 @@
+
+ auto Circle::IsLoop() -> bool
+ {
+-    return true;
++    // Closure is an explicit endpoint before smoothing, drawn as a strip.
++    return false;
+ }
+
+ auto Circle::UsesNormalizedMysteryParam() -> bool
+@@ -23,11 +24,11 @@
+ {
+     m_samples = Audio::WaveformSamples / 2;
+
+-    m_wave1Vertices.resize(m_samples);
++    m_wave1Vertices.resize(m_samples + 1);
+
+     const int sampleOffset{(Audio::WaveformSamples - m_samples) / 2};
+
+-    const float inverseSamplesMinusOne{1.0f / static_cast<float>(m_samples)};
++    const float inverseSamplesMinusOne{1.0f / static_cast<float>(m_samples - 1)};
+
+     for (int i = 0; i < m_samples; i++)
+     {
+@@ -45,6 +46,10 @@
+             radius * cosf(angle) * m_aspectY + m_waveX,
+             radius * sinf(angle) * m_aspectX + m_waveY};
+     }
++
++    // MilkDrop closes the unblended circle before its common smoothing pass.
++    m_wave1Vertices[m_samples] = m_wave1Vertices.front();
++    ++m_samples;
+ }
+
+ } // namespace Waveforms

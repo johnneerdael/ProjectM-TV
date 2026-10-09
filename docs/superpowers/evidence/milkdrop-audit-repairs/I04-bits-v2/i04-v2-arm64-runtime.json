@@ -1,0 +1,8 @@
+{
+  "device": "emulator-5640",
+  "user": 0,
+  "baseline_sha256": "783dece3024a4c30f9f1d7a98e2b3ec22f3ee1269f35d6c5c69900a1b11a80ae",
+  "candidate_sha256": "dc6057d05636ad4e7cc757c1016261499fcfd736ca1bfc78d492b67183eddbce",
+  "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys",
+  "compiler_flags_unchanged": true
+}

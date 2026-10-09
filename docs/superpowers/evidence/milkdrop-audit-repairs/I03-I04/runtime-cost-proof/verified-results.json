@@ -1,0 +1,582 @@
+{
+  "status": "36runtime jobs verified; allrole/combined selectedRGB identical",
+  "rows": [
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-0-0-before",
+      "role": "before",
+      "mean_ms": 1.8395663083333333,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-0-1-after",
+      "role": "after",
+      "mean_ms": 1.5026246611111111,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-0-2-after",
+      "role": "after",
+      "mean_ms": 1.5484834305555542,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-0-3-before",
+      "role": "before",
+      "mean_ms": 1.6158658944444433,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-1-0-before",
+      "role": "before",
+      "mean_ms": 1.5446517138888882,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-1-1-after",
+      "role": "after",
+      "mean_ms": 1.5597028833333344,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-1-2-after",
+      "role": "after",
+      "mean_ms": 1.4186011805555563,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-1-3-before",
+      "role": "before",
+      "mean_ms": 1.4341442333333336,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-2-0-before",
+      "role": "before",
+      "mean_ms": 1.553915866666665,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-2-1-after",
+      "role": "after",
+      "mean_ms": 1.4038158527777778,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-2-2-after",
+      "role": "after",
+      "mean_ms": 1.453440516666666,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-div-mod",
+      "directory": "warp-clean-runtime-div-mod-2-3-before",
+      "role": "before",
+      "mean_ms": 1.4699946694444455,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-0-0-before",
+      "role": "before",
+      "mean_ms": 1.3915829916666667,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-0-1-after",
+      "role": "after",
+      "mean_ms": 1.4291834055555563,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-0-2-after",
+      "role": "after",
+      "mean_ms": 1.586895797222221,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-0-3-before",
+      "role": "before",
+      "mean_ms": 1.4240352888888892,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-1-0-before",
+      "role": "before",
+      "mean_ms": 1.4820890972222207,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-1-1-after",
+      "role": "after",
+      "mean_ms": 1.4980253555555556,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-1-2-after",
+      "role": "after",
+      "mean_ms": 1.5386930194444448,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-1-3-before",
+      "role": "before",
+      "mean_ms": 1.4081776638888885,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-2-0-before",
+      "role": "before",
+      "mean_ms": 1.5520454777777777,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-2-1-after",
+      "role": "after",
+      "mean_ms": 1.537182291666667,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-2-2-after",
+      "role": "after",
+      "mean_ms": 1.8800332055555555,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-pow",
+      "directory": "warp-clean-runtime-pow-2-3-before",
+      "role": "before",
+      "mean_ms": 1.5510195416666666,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-0-0-before",
+      "role": "before",
+      "mean_ms": 1.561598402777778,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-0-1-after",
+      "role": "after",
+      "mean_ms": 2.0304634500000005,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-0-2-after",
+      "role": "after",
+      "mean_ms": 1.6730159361111119,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-0-3-before",
+      "role": "before",
+      "mean_ms": 1.5872271027777778,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-1-0-before",
+      "role": "before",
+      "mean_ms": 1.4603268444444457,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-1-1-after",
+      "role": "after",
+      "mean_ms": 1.5174362527777763,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-1-2-after",
+      "role": "after",
+      "mean_ms": 1.4592909861111103,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-1-3-before",
+      "role": "before",
+      "mean_ms": 1.5159153527777767,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-2-0-before",
+      "role": "before",
+      "mean_ms": 1.5015016416666669,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-2-1-after",
+      "role": "after",
+      "mean_ms": 1.6838767444444442,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-2-2-after",
+      "role": "after",
+      "mean_ms": 1.5247751138888908,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "issue": "runtime-ordinary",
+      "directory": "warp-clean-runtime-ordinary-2-3-before",
+      "role": "before",
+      "mean_ms": 1.5115451277777794,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    }
+  ],
+  "limits": "emulator/sourceinstrumentedcore/selectedframes only"
+}

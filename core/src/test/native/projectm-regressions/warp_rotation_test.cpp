@@ -35,6 +35,9 @@ static Pixels Read()
     return pixels;
 }
 
+// Test infrastructure only; the production shader and actual draw remain unchanged.
+#include "gles_warp_reference.hpp"
+
 struct Control
 {
     ShaderCache cache;
@@ -281,6 +284,357 @@ static void Feedback(TextureManager& textures, bool perPixel, bool preparedRepla
     }
 }
 
+// Capture the actual production warp vertex outputs, before raster interpolation.
+// This separates oscillator-Y from the independently audited mesh diagonal.
+static PFNGLLINKPROGRAMPROC deformationLink{};
+static PFNGLDRAWELEMENTSPROC deformationDraw{};
+static GLuint deformationBuffer{};
+static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles, traversalDistances, traversalStretch;
+static std::vector<uint32_t> deformationIndices;
+static std::vector<float> seamTransforms, seamCosines;
+#ifndef __APPLE__
+static std::vector<float> observedCenters;
+static WarpUniformObservation observedWarpUniforms;
+#endif
+static void LinkDeformation(GLuint program)
+{
+    GLint count{}; glGetProgramiv(program, GL_ATTACHED_SHADERS, &count);
+    std::vector<GLuint> attached(count);
+    glGetAttachedShaders(program, count, nullptr, attached.data());
+    for (auto shader : attached)
+    {
+        GLint type{}, length{};
+        glGetShaderiv(shader, GL_SHADER_TYPE, &type);
+        if (type != GL_VERTEX_SHADER) continue;
+        glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, &length);
+        std::string source(length, '\0');
+        glGetShaderSource(shader, length, nullptr, source.data());
+        if (source.find("uniform vec4 warpFactors") != std::string::npos)
+        {
+            const char* varying = "frag_TEXCOORD0";
+            glTransformFeedbackVaryings(program, 1, &varying, GL_INTERLEAVED_ATTRIBS);
+        }
+    }
+    deformationLink(program);
+}
+static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void* offset)
+{
+    GLint program{}; glGetIntegerv(GL_CURRENT_PROGRAM, &program);
+    if (glGetUniformLocation(program, "warpFactors") < 0)
+    {
+        deformationDraw(mode, count, type, offset); return;
+    }
+    Check(mode == GL_TRIANGLES && type == GL_UNSIGNED_INT && offset == nullptr,
+          "unexpected warp index draw contract");
+#ifndef __APPLE__
+    observedWarpUniforms.Capture(static_cast<GLuint>(program));
+    observedCenters = AttributeData(5);
+#endif
+    deformationPositions = AttributeData(0);
+    deformationRadiusAngles = AttributeData(3);
+    traversalDistances = AttributeData(6);
+    traversalStretch = AttributeData(7);
+    seamTransforms = AttributeData(4); seamCosines = AttributeData(8);
+    deformationIndices.resize(count);
+    const auto* indices = static_cast<const uint32_t*>(glMapBufferRange(
+        GL_ELEMENT_ARRAY_BUFFER, 0, count * sizeof(uint32_t), GL_MAP_READ_BIT));
+    Check(indices, "warp index readback failed");
+    std::copy(indices, indices + count, deformationIndices.begin());
+    glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, deformationBuffer);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, count * 4 * sizeof(float), nullptr, GL_STREAM_READ);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, deformationBuffer);
+    glBeginTransformFeedback(GL_TRIANGLES);
+    deformationDraw(mode, count, type, offset);
+    glEndTransformFeedback();
+    const auto* output = static_cast<const float*>(glMapBufferRange(
+        GL_TRANSFORM_FEEDBACK_BUFFER, 0, count * 4 * sizeof(float), GL_MAP_READ_BIT));
+    Check(output, "warp varying readback failed");
+    deformationUV.assign(output, output + count * 4);
+    glUnmapBuffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
+    Check(glGetError() == GL_NO_ERROR, "production warp transform-feedback GL error");
+}
+
+#ifndef __APPLE__
+static void QualifyGlesWarp(GlesWarpReference& reference, int path, bool seam,
+                           bool requireSeparation, float expectedTime, float expectedWarp)
+{
+    const auto& observed = observedWarpUniforms;
+    Check(observed.aspect == std::array<float,4>{1,1,1,1} &&
+              observed.offset == std::array<float,2>{0,0} && observed.scale == 1,
+          "GLES reference only qualifies unit-aspect/scale and zero-offset fixture");
+    Check(observed.time == expectedTime, "production warp time producer changed");
+    const std::array<float,4> expectedFactors{
+        11.68f+4*cosf(expectedTime*1.413f+10), 8.77f+3*cosf(expectedTime*1.113f+7),
+        10.54f+3*cosf(expectedTime*1.233f+3), 11.49f+4*cosf(expectedTime*.933f+5)};
+    Check(observed.factors == expectedFactors, "production warp-factor producer changed");
+    const size_t nodes = deformationPositions.size()/2;
+    Check(seamTransforms.size()==nodes*4 && seamCosines.size()==nodes &&
+              observedCenters.size()==nodes*2 && traversalStretch.size()==nodes*2 &&
+              traversalDistances.size()==nodes*2 && deformationUV.size()==deformationIndices.size()*4,
+          "GLES reference observed attribute/output cardinality changed");
+    std::vector<WarpReferenceVertex> vertices;
+    for(size_t n=0;n<nodes;++n) {
+        Check(seamTransforms[n*4]==1 && seamTransforms[n*4+1]==1 &&
+                  observedCenters[n*2]==.5f && observedCenters[n*2+1]==.5f &&
+                  traversalStretch[n*2]==1 && traversalStretch[n*2+1]==1,
+              "GLES reference left declared unit zoom/stretch and centered fixture");
+        Check(seamTransforms[n*4+3]==expectedWarp && traversalDistances[n*2+1]==0,
+              "production warp/displacement producer changed authored fixture values");
+        if(!seam)
+            Check(seamTransforms[n*4+2]==0 && seamCosines[n]==1 && traversalDistances[n*2]==0,
+                  "deformation production rotation/translation producer changed");
+        vertices.push_back({deformationPositions[n*2],deformationPositions[n*2+1],
+                            seamTransforms[n*4+2],seamCosines[n],
+                            traversalDistances[n*2],traversalDistances[n*2+1],seamTransforms[n*4+3]});
+    }
+    const bool legacy = path!=1;
+    const auto correct = reference.Run(vertices,observed,legacy);
+    auto badVertices = vertices;
+    if(seam) {
+        // Counterfactual restores the opposite +/-pi exact negative-X axis
+        // policy. CPU angle/displacement/trig checks independently prove which
+        // branch production must upload; this checks that it reaches GPU UV.
+        for(size_t n=0;n<nodes;++n) {
+            const auto& v=vertices[n];
+            if(v.x<0 && v.y==0) {
+                const double raw=deformationRadiusAngles[n*2+1];
+                const double wrongAngle=legacy?-raw:raw;
+                const float wrongRotation=static_cast<float>(.02+
+                    (wrongAngle<-.65 && !(wrongAngle>-2.45) ? .1 : -.1));
+                badVertices[n].dx=static_cast<float>(wrongAngle*.01);
+                badVertices[n].sine=sinf(wrongRotation);
+                badVertices[n].cosine=cosf(wrongRotation);
+            }
+        }
+    }
+    const auto incorrect = reference.Run(badVertices,observed,seam?legacy:!legacy);
+    std::array<bool,2> separated{};
+    std::array<double,4> worstFraction{};
+    for(size_t i=0;i<deformationIndices.size();++i) {
+        const auto node=deformationIndices[i];
+        Check(node<nodes,"GLES reference index outside actual attribute arrays");
+        const auto bound=reference.budget.Bounds(vertices[node],correct[node]);
+        const auto badBound=reference.budget.Bounds(badVertices[node],incorrect[node]);
+        for(size_t axis=0;axis<4;++axis) {
+            const auto actual=deformationUV[i*4+axis], expected=correct[node].uv[axis];
+            Check(std::isfinite(actual)&&std::isfinite(expected)&&
+                      std::abs(actual-expected)<=bound[axis],
+                  std::string(seam?"seam":"deformation")+" actual production GPU output differs from independent mediump reference path="+
+                  std::to_string(path)+" node="+std::to_string(node)+" axis="+std::to_string(axis)+
+                  " actual="+std::to_string(actual)+" reference="+std::to_string(expected)+
+                  " arithmetic/transport bound="+std::to_string(bound[axis]));
+            worstFraction[axis]=std::max(worstFraction[axis],std::abs(actual-expected)/bound[axis]);
+            if(axis<2 && std::isfinite(incorrect[node].uv[axis]) &&
+               std::abs(expected-incorrect[node].uv[axis])>bound[axis]+badBound[axis]) {
+                Check(std::abs(actual-incorrect[node].uv[axis])>badBound[axis],
+                      "actual output remains inside discriminating incorrect-reference envelope");
+                separated[axis]=true;
+            }
+        }
+    }
+    if(requireSeparation)
+        Check(separated[0]&&separated[1],
+              std::string(seam?"seam":"wrong-Y")+" GPU references lack disjoint arithmetic/transport envelopes on both UV axes");
+    // A large residual never expands the bound: it fails closed above.
+    std::cout << (seam?"seam":"deformation") << " GLES production/reference path=" << path
+              << " time=" << expectedTime << " separated=" << separated[0] << ',' << separated[1]
+              << " max-bound-fractions=" << worstFraction[0] << ',' << worstFraction[1]
+              << ',' << worstFraction[2] << ',' << worstFraction[3] << '\n';
+}
+#endif
+
+struct DeformationHook
+{
+    DeformationHook()
+    {
+        deformationLink = glad_glLinkProgram; glad_glLinkProgram = LinkDeformation;
+        deformationDraw = glad_glDrawElements; glad_glDrawElements = DrawDeformation;
+        glGenBuffers(1, &deformationBuffer);
+    }
+    ~DeformationHook()
+    {
+        glad_glLinkProgram = deformationLink; glad_glDrawElements = deformationDraw;
+        glDeleteBuffers(1, &deformationBuffer);
+    }
+};
+static void DeformationControls(TextureManager& textures)
+{
+    DeformationHook hook;
+#ifndef __APPLE__
+    GlesWarpReference reference;
+#endif
+    for (int path : {0, 1, 2}) // Actual legacy, compiled custom, failed custom -> legacy.
+    for (bool perPixel : {false, true})
+    for (bool replay : {false, true})
+    {
+        Control control(textures, path == 1, false);
+        if (path == 2)
+        {
+            control.state.warpShaderVersion = 2;
+            control.state.warpShader = "shader_body { ret = missing_function_that_must_fail(uv); }";
+            control.mesh.LoadWarpShader(control.state);
+            control.mesh.CompileWarpShader(control.state);
+        }
+        control.state.warpAnimSpeed = control.state.warpScale = 1;
+        control.state.renderContext.texelOffsetX = control.state.renderContext.texelOffsetY = 0;
+        *control.frame.zoom = *control.frame.zoomexp = 1;
+        *control.frame.sx = *control.frame.sy = 1;
+        *control.frame.rot = 0;
+        if (perPixel) control.pixel.CompilePerPixelCode("reg00=reg00+1;warp=q1;");
+        for (float time : {0.f, 1.5f, 17.f})
+        for (float warp : {0.f, 1.f, -1.f, 50.f})
+        {
+            control.state.renderContext.time = time;
+            *control.frame.warp = warp; *control.frame.q_vars[0] = warp;
+            control.pixel.LoadStateReadOnlyVariables(control.state, control.frame);
+            control.pixel.LoadPerFrameQVariables(control.state, control.frame);
+            deformationUV.clear();
+            glBindFramebuffer(GL_FRAMEBUFFER, control.framebuffer);
+            if (replay) { control.mesh.Prepare(control.state, control.frame, control.pixel); control.mesh.DrawAgain(control.state, control.frame); }
+            else control.mesh.Draw(control.state, control.frame, control.pixel);
+            Check(!deformationUV.empty(), "production warp was not captured");
+            const auto first = deformationUV;
+            if (replay)
+            {
+                const double evaluations = control.state.globalRegisters[0];
+                control.mesh.DrawAgain(control.state, control.frame);
+                Check(control.state.globalRegisters[0] == evaluations, "warp replay reevaluated equations");
+                Check(deformationUV == first, "warp replay changed prepared outputs");
+            }
+            // MilkDrop2 milkdropfs.cpp:1882-1898, mapped to the current physical
+            // legacy projection. The absent original custom VS is not an oracle:
+            // its positive-Y contract below explicitly preserves current behavior.
+            const float f0 = 11.68f + 4 * cosf(time * 1.413f + 10);
+            const float f1 = 8.77f + 3 * cosf(time * 1.113f + 7);
+            const float f2 = 10.54f + 3 * cosf(time * 1.233f + 3);
+            const float f3 = 11.49f + 4 * cosf(time * .933f + 5);
+            for (size_t i = 0; i < deformationIndices.size(); ++i)
+            {
+                const auto vertex = deformationIndices[i];
+                const float x = deformationPositions[vertex * 2], y = deformationPositions[vertex * 2 + 1];
+                const float sourceY = path == 1 ? y : -y;
+                float u = x * .5f + .5f, v = y * .5f + .5f;
+                u += warp * .0035f * sinf(time * .333f + x*f0 - sourceY*f3);
+                v += warp * .0035f * cosf(time * .375f - (x*f2 + sourceY*f1));
+                u += warp * .0035f * cosf(time * .753f - (x*f1 - sourceY*f2));
+                v += warp * .0035f * sinf(time * .825f + x*f0 + sourceY*f3);
+                const std::string label = "path=" + std::to_string(path) + " warp=" + std::to_string(warp) + " time=" + std::to_string(time);
+#ifdef __APPLE__
+                Check(std::abs(deformationUV[i*4] - u) < 2e-5f && std::abs(deformationUV[i*4+1] - v) < 2e-5f,
+                      label + " wrong physical oscillator-Y at node " + std::to_string(vertex) +
+                      " got=" + std::to_string(deformationUV[i*4]) + "," + std::to_string(deformationUV[i*4+1]) +
+                      " expected=" + std::to_string(u) + "," + std::to_string(v));
+                Check(deformationUV[i*4+2] == x*.5f+.5f && deformationUV[i*4+3] == y*.5f+.5f,
+                      label + " changed original-UV varying");
+#endif
+            }
+#ifndef __APPLE__
+            // Amplified original witnesses must discriminate wrong oscillator-Y.
+            QualifyGlesWarp(reference,path,false,warp==50.f,time,warp);
+#endif
+            const auto pixels = Read();
+            Check(std::abs(int(pixels[(Height/2*Width+Width/2)*4+2]) - (path == 1 ? 64 : 191)) <= 1,
+                  "requested compiled/fallback path was not drawn");
+        }
+    }
+    std::cout << "legacy/custom/fallback deformation and prepared replay controls pass\n";
+}
+
+static void DiagonalControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    Control control(textures, false, false);
+    *control.frame.zoom = *control.frame.zoomexp = 1;
+    *control.frame.sx = *control.frame.sy = 1;
+    *control.frame.rot = *control.frame.warp = 0;
+    control.state.renderContext.texelOffsetX = control.state.renderContext.texelOffsetY = 0;
+    // At the first cell only D has displacement1; A/B/C have0. The current
+    // unflipped grid coordinates are transformed by the physical Y projection.
+    control.pixel.CompilePerPixelCode("dx=-above(x,.12499)*above(y,.16665);");
+    for (int path : {0, 1, 2, 0}) // Change compiled path without changing dimensions.
+    {
+        control.state.warpShaderVersion = path == 0 ? 0 : 2;
+        control.state.warpShader = path == 1
+            ? "shader_body { ret=float3(uv.x,uv.y,0.25); }"
+            : path == 2 ? "shader_body { ret=missing_function_that_must_fail(uv); }" : "";
+        control.mesh.LoadWarpShader(control.state);
+        control.mesh.CompileWarpShader(control.state);
+        control.pixel.LoadStateReadOnlyVariables(control.state, control.frame);
+        control.pixel.LoadPerFrameQVariables(control.state, control.frame);
+        glBindFramebuffer(GL_FRAMEBUFFER, control.framebuffer);
+        control.mesh.Prepare(control.state, control.frame, control.pixel);
+        control.mesh.DrawAgain(control.state, control.frame);
+        const bool legacy = path != 1;
+        const auto pixels = Read();
+        // Cell width/height8 pixels. At raw local(.3125,.3125), legacy AD
+        // diagonal contributes .3125; custom BC contributes0. Base u=.0390625.
+        const int expectedRed = legacy ? 90 : 10;
+        Check(std::abs(int(pixels[(45*Width+2)*4]) - expectedRed) <= 1,
+              "path="+std::to_string(path)+" wrong known corner-field interpolation");
+        Check(std::abs(int(pixels[(45*Width+2)*4+2]) - (legacy ? 191 : 64)) <= 1,
+              "diagonal test did not use requested compiled/fallback path");
+        Check(deformationIndices.size() == 8*6*6, "changed triangle/index count");
+        for (size_t i = 0; i < deformationIndices.size(); i += 6)
+        {
+            const auto a=deformationIndices[i], b=a+1, c=a+9, d=a+10;
+            const std::array<uint32_t,6> expected = legacy
+                ? std::array<uint32_t,6>{a,b,d,a,c,d}
+                : std::array<uint32_t,6>{a,b,c,b,c,d};
+            Check(std::equal(expected.begin(), expected.end(), deformationIndices.begin()+i),
+                  "wrong cell diagonal/winding/quadrant index layout");
+        }
+        const auto first = deformationIndices;
+        control.mesh.DrawAgain(control.state, control.frame);
+        Check(deformationIndices == first, "prepared replay changed topology");
+    }
+    // Affine inputs cannot expose a diagonal: sample the unchanged u/v field.
+    projectm_eval_code_destroy(control.pixel.perPixelCodeHandle);
+    control.pixel.perPixelCodeHandle = nullptr;
+    *control.frame.dx = 0;
+    for (bool custom : {false,true})
+    {
+        control.state.warpShaderVersion = custom ? 2 : 0;
+        control.state.warpShader = custom ? "shader_body { ret=float3(uv.x,uv.y,0.25); }" : "";
+        control.mesh.LoadWarpShader(control.state); control.mesh.CompileWarpShader(control.state);
+        control.mesh.Draw(control.state, control.frame, control.pixel);
+        const auto pixels=Read();
+        Check(std::abs(int(pixels[(45*Width+2)*4])-10)<=1, "diagonal changed affine UV interpolation");
+    }
+    std::cout << "legacy/custom/fallback diagonals, live path changes and affine/replay controls pass\n";
+}
+
+static void CacheControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    Control control(textures, false, false);
+    *control.frame.zoom = *control.frame.zoomexp = 1;
+    *control.frame.sx = *control.frame.sy = 1;
+    *control.frame.rot = *control.frame.warp = 0;
+    for (const auto aspect : {std::array<float,2>{1,1}, {1,1}, {.75f,1}, {1,.5f}, {1,1}})
+    {
+        control.state.renderContext.aspectX=aspect[0];control.state.renderContext.aspectY=aspect[1];
+        control.state.renderContext.invAspectX=1/aspect[0];control.state.renderContext.invAspectY=1/aspect[1];
+        control.mesh.Draw(control.state,control.frame,control.pixel);
+        Check(std::abs(deformationRadiusAngles[0]-std::hypot(aspect[0],aspect[1]))<1e-6,
+              "static mesh cache retained a stale aspect radius");
+        Check(std::abs(deformationRadiusAngles[1]-std::atan2(-aspect[1],-aspect[0]))<1e-6,
+              "static mesh cache retained a stale aspect angle");
+    }
+    for (const auto grid : {std::array<int,2>{10,8}, {8,6}})
+    {
+        control.state.renderContext.perPixelMeshX=grid[0];control.state.renderContext.perPixelMeshY=grid[1];
+        control.mesh.Draw(control.state,control.frame,control.pixel);
+        Check(deformationPositions.size()==size_t((grid[0]+1)*(grid[1]+1)*2), "cache retained stale mesh dimensions");
+        Check(deformationIndices.size()==size_t(grid[0]*grid[1]*6), "cache retained stale index count");
+    }
+    control.state.renderContext.viewportSizeX=128;control.state.renderContext.viewportSizeY=96;
+    control.mesh.Draw(control.state,control.frame,control.pixel);
+    Check(deformationPositions.front()==-1 && deformationPositions.back()==1,"resize changed normalized grid endpoints");
+    std::cout << "static mesh aspect/grid/viewport invalidation controls pass\n";
+}
+
 // The mesh keeps its static vertices and indices between frames. A reused instance must still
 // match a fresh one after viewport (aspect) and grid changes: stale radius/angle or indices fail.
 static void MeshCacheControls(TextureManager& textures)
@@ -322,12 +676,154 @@ static void MeshCacheControls(TextureManager& textures)
     std::cout << "mesh cache: reused mesh matches fresh mesh across viewport and grid changes\n";
 }
 
-int main()
+static void TraversalControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    for (int path : {0,1,2})
+    for (bool replay : {false,true})
+    {
+        Control c(textures,path==1,false);
+        c.state.renderContext.perPixelMeshX=c.state.renderContext.perPixelMeshY=8;
+        *c.frame.zoom=*c.frame.zoomexp=*c.frame.sx=*c.frame.sy=1;
+        *c.frame.rot=*c.frame.warp=0;
+        if (path==2)
+        {
+            c.state.warpShaderVersion=2;c.state.warpShader="shader_body { ret=missing_function_that_must_fail(uv); }";
+            c.mesh.LoadWarpShader(c.state);c.mesh.CompileWarpShader(c.state);
+        }
+        c.pixel.CompilePerPixelCode("q1=q1+1;ordinary=ordinary+1;reg00=reg00+1;gmegabuf(0)=gmegabuf(0)+1;dx=q1*.001;dy=ordinary*.001;sx=1+reg00*.001;sy=1+gmegabuf(0)*.001;");
+        Check(c.pixel.perPixelCodeHandle,"traversal equations failed to compile");
+        for (int frame=0;frame<2;++frame)
+        {
+            *c.frame.q_vars[0]=0; // One original per-frame copy, not per-node.
+            c.pixel.LoadStateReadOnlyVariables(c.state,c.frame);c.pixel.LoadPerFrameQVariables(c.state,c.frame);
+            glBindFramebuffer(GL_FRAMEBUFFER,c.framebuffer);
+            if (replay) { c.mesh.Prepare(c.state,c.frame,c.pixel);c.mesh.DrawAgain(c.state,c.frame); }
+            else c.mesh.Draw(c.state,c.frame,c.pixel);
+            Check(traversalDistances.size()==162 && traversalStretch.size()==162,"wrong traversal node count");
+            for (int y=0;y<=8;++y) for (int x=0;x<=8;++x)
+            {
+                const int vertex=y*9+x;
+                const int ordinal=(path==1?y:8-y)*9+x+1;
+                const float continuing=frame*81+ordinal;
+                const std::string label="path="+std::to_string(path)+" node="+std::to_string(vertex)+" frame="+std::to_string(frame);
+                Check(std::abs(traversalDistances[vertex*2]-ordinal*.001f)<1e-6f,label+" wrong carried Q placement");
+                Check(std::abs(traversalDistances[vertex*2+1]-continuing*.001f)<1e-6f,label+" ordinary local reset/reordered");
+                Check(std::abs(traversalStretch[vertex*2]-(1+continuing*.001f))<1e-6f,label+" register recurrence reset/reordered");
+                Check(std::abs(traversalStretch[vertex*2+1]-(1+continuing*.001f))<1e-6f,label+" global buffer recurrence reset/reordered");
+            }
+            Check(c.state.globalRegisters[0]==(frame+1)*81,"wrong evaluator call count");
+            if (replay)
+            {
+                const auto old=traversalDistances;const auto calls=c.state.globalRegisters[0];
+                c.mesh.DrawAgain(c.state,c.frame);
+                Check(traversalDistances==old && c.state.globalRegisters[0]==calls,"traversal replay reevaluated state");
+            }
+        }
+        projectm_eval_code_destroy(c.pixel.perPixelCodeHandle);c.pixel.perPixelCodeHandle=nullptr;
+        c.pixel.CompilePerPixelCode("dx=x*.001;dy=y*.001;");
+        c.mesh.Draw(c.state,c.frame,c.pixel);
+        for(int y=0;y<=8;++y) for(int x=0;x<=8;++x)
+        {
+            const int v=y*9+x;
+            Check(std::abs(traversalDistances[v*2]-x/8.f*.001f)<1e-6f &&
+                  std::abs(traversalDistances[v*2+1]-y/8.f*.001f)<1e-6f,"stateless per-node geometry changed");
+        }
+    }
+    std::cout<<"legacy/custom/fallback carried Q/local/reg/global-buffer traversal and stateless/replay controls pass\n";
+}
+
+static void AngleSeamControls(TextureManager& textures)
+{
+    DeformationHook hook;
+#ifndef __APPLE__
+    GlesWarpReference reference;
+#endif
+    for (int path : {0,1,2}) for (int grid : {8,9}) for (bool replay : {false,true})
+    {
+        Control c(textures,path==1,false);
+        c.state.renderContext.perPixelMeshX=c.state.renderContext.perPixelMeshY=grid;
+        c.state.renderContext.texelOffsetX=c.state.renderContext.texelOffsetY=0;
+        *c.frame.zoom=*c.frame.zoomexp=*c.frame.sx=*c.frame.sy=1;
+        *c.frame.warp=*c.frame.dy=0; *c.frame.rot=.02;
+        if (path==2)
+        {
+            c.state.warpShaderVersion=2;
+            c.state.warpShader="shader_body { ret=missing_function_that_must_fail(uv); }";
+            c.mesh.LoadWarpShader(c.state);c.mesh.CompileWarpShader(c.state);
+        }
+        // Actual Liquido rotation predicate, plus an amplified input diagnostic.
+        c.pixel.CompilePerPixelCode("dx=ang*.01;rot=if(below(ang,-.65),if(above(ang,-2.45),rot-.1,rot+.1),rot-.1);reg00+=1;");
+        Check(c.pixel.perPixelCodeHandle,"seam EEL compilation failed");
+        for (int frame=0;frame<2;++frame)
+        {
+            c.pixel.LoadStateReadOnlyVariables(c.state,c.frame);c.pixel.LoadPerFrameQVariables(c.state,c.frame);
+            glBindFramebuffer(GL_FRAMEBUFFER,c.framebuffer);
+            if (replay) { c.mesh.Prepare(c.state,c.frame,c.pixel);c.mesh.DrawAgain(c.state,c.frame); }
+            else c.mesh.Draw(c.state,c.frame,c.pixel);
+            const size_t nodes=(grid+1)*(grid+1);
+            Check(seamTransforms.size()==nodes*4 && seamCosines.size()==nodes,
+                  "seam production attribute count changed");
+            for (int y=0;y<=grid;++y) for (int x=0;x<=grid;++x)
+            {
+                const size_t node=y*(grid+1)+x;
+                const float px=deformationPositions[node*2],py=deformationPositions[node*2+1];
+                const float raw=(x==grid/2&&y==grid/2)?0.f:atan2f(py,px);
+                Check(deformationRadiusAngles[node*2+1]==raw,"seam changed cached shader angle");
+                const double ang=path!=1&&px<0&&py==0?raw:-raw;
+                const float rotation=static_cast<float>(.02+(ang<-.65&&!(ang> -2.45)?.1:-.1));
+                Check(std::abs(traversalDistances[node*2]-static_cast<float>(ang*.01))<1e-7f,
+                      "wrong exact-axis/default/custom equation angle at node "+std::to_string(node));
+                Check(seamTransforms[node*4+2]==sinf(rotation)&&seamCosines[node]==cosf(rotation),
+                      "seam rotation did not reach preserved CPU float trig");
+            }
+            for (size_t i=0;i<deformationIndices.size();++i)
+            {
+                const auto node=deformationIndices[i];
+                const float px=deformationPositions[node*2],py=deformationPositions[node*2+1];
+                const double ang=path!=1&&px<0&&py==0?deformationRadiusAngles[node*2+1]:-deformationRadiusAngles[node*2+1];
+                const float r=static_cast<float>(.02+(ang<-.65&&!(ang> -2.45)?.1:-.1));
+                const float u=px*.5f*cosf(r)-py*.5f*sinf(r)+.5f-static_cast<float>(ang*.01);
+                const float v=px*.5f*sinf(r)+py*.5f*cosf(r)+.5f;
+#ifdef __APPLE__
+                Check(std::abs(deformationUV[i*4]-u)<2e-6f&&std::abs(deformationUV[i*4+1]-v)<2e-6f,
+                      "seam equation did not reach actual warp vertex output node="+std::to_string(node)+
+                      " got="+std::to_string(deformationUV[i*4])+","+std::to_string(deformationUV[i*4+1])+
+                      " expected="+std::to_string(u)+","+std::to_string(v));
+                Check(deformationUV[i*4+2]==px*.5f+.5f&&deformationUV[i*4+3]==py*.5f+.5f,
+                      "seam changed original UV varying");
+#endif
+            }
+#ifndef __APPLE__
+            // Only the even grid has an exact negative-X axis witness. Keep the
+            // odd grid's producer/cardinality/replay/reference checks too.
+            QualifyGlesWarp(reference,path,true,grid%2==0,c.state.renderContext.time,0);
+#endif
+            Check(c.state.globalRegisters[0]==(frame+1)*nodes,"seam changed evaluator call count");
+            const auto uv=deformationUV;const auto calls=c.state.globalRegisters[0];
+            c.mesh.DrawAgain(c.state,c.frame);
+            Check(deformationUV==uv&&c.state.globalRegisters[0]==calls,"seam replay changed outputs/evaluation count");
+            // The existing quadrant builder leaves an odd-grid center gap;
+            // verify program activity at a covered point away from that gap.
+            const auto pixels=Read();
+            Check(std::abs(int(pixels[(8*Width+8)*4+2])-(path==1?64:191))<=1,
+                  "seam requested custom/fallback program was not active: path="+std::to_string(path)+" grid="+std::to_string(grid)+" replay="+std::to_string(replay)+" frame="+std::to_string(frame)+" blue="+std::to_string(pixels[(8*Width+8)*4+2]));
+        }
+    }
+    std::cout<<"legacy/custom/fallback exact-axis equations, CPU trig, GPU UV, odd grid and replay pass\n";
+}
+
+int main(int argc, char** argv)
 {
     try
     {
         GLContext gl;
         TextureManager textures(std::vector<std::string>{});
+        if (argc > 1 && std::string(argv[1]) == "deformation") { DeformationControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "cache") { CacheControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "traversal") { TraversalControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "angle-seam") { AngleSeamControls(textures); return 0; }
         PowerUploadControls(textures);
         MeshCacheControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';

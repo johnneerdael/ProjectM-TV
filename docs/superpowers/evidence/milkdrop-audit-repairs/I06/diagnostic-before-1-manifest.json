@@ -1,0 +1,216 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditinputbefore",
+  "pid": 11623,
+  "job": {
+    "expectedPresetCount": 9608,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/audio.u8",
+    "preset": "audit fresh wave time.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "d6be8e89435f358df5391c02c11dadb7a8571ebf28aabd005e1339029394053d",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a9d5b365e45dcec63787e23ab9dcd7b8b8513f177c324d58a363f5fe73045f22",
+      "pngBytes": 37661,
+      "pngSha256": "dde2450bb553c62cce2f01a186a9e121aef999ab24d65a0708b4f8b706787a89",
+      "rgbMean": [
+        0.2362648292824074,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9990734712577161
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a93e7941e61ac312ce20650853b70b7d253b176faed543f2f24e85d8f1152c82",
+      "pngBytes": 37659,
+      "pngSha256": "8ce5b3c7dd321e582eb5014eea48208a63c4dbab212247afeed68375249440f2",
+      "rgbMean": [
+        0.18901186342592594,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9992587770061728
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b871ce1455d83142c0486f9ae5e15da6d9a591b693f6cb18eff8474de5d2dd8b",
+      "pngBytes": 37659,
+      "pngSha256": "abc2107664217ee54438b8b7f29492bd1804e370b58791a363dc3584276c2440",
+      "rgbMean": [
+        0.18901186342592594,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9992587770061728
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9eb0de2e635ffd4c981d1c2cbbe063b8d836952e73bea666fe6830229df101f4",
+      "pngBytes": 37662,
+      "pngSha256": "f9bff070e598e9666e18e2ad17cee4c289e49c1ae18fb7b22235fde65cdc7973",
+      "rgbMean": [
+        0.2362648292824074,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9990734712577161
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "d1f79204b719466218154d2dda613da80964c04b19a29b4d7369f8a3d15776d0",
+      "pngBytes": 37660,
+      "pngSha256": "1b331bcd2cb5447b15919de2b5f5e714ad6b897ee92d56e3751078d8ff84947c",
+      "rgbMean": [
+        0.18901186342592594,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9992587770061728
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "142408d53d0b529f834ab0721b373e0d64e404b8d129041d968843d55d63c5b5",
+      "pngBytes": 37659,
+      "pngSha256": "e12416cb9a86c97c7d42c4ed03953ab0de6f1d2368cede51069e9f5bc2e0adbb",
+      "rgbMean": [
+        0.2362648292824074,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9990734712577161
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0585209ce80ff101f5685823c505db575418c6022d2e064b2f0d74d7b5e425b7",
+      "pngBytes": 37659,
+      "pngSha256": "67ac71846f5e754ca178bce304196f82c0f8a4d78200d414f1be6cd2d7f606b9",
+      "rgbMean": [
+        0.2362648292824074,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9990734712577161
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-fresh-wave-time-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "c3c71236d7427df57af8593c8c40d133553f3124f05f1b56b54306e0e41b4bad",
+      "pngBytes": 37661,
+      "pngSha256": "d5098a9f5a46c5759d22e24f120d5ddea50cf1351c689f06ff32df9a76ff7ad7",
+      "rgbMean": [
+        0.2362648292824074,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9990734712577161
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 10354372,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9608,
+  "indexSha256": "71281e89d2192f2a7dce93f9dfcdc9838dc4691b52dad6d6e72a58240f790f6a",
+  "presetAssetSha256": "722396d367013519d0894257e602bee17a46c99dff4565462d9e0c672038219a",
+  "forcedPresetPrefix": "audit fresh wave time.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 15,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43975,
+  "framesRendered": 480,
+  "renderWallDurationMs": 5317,
+  "pssAfterFramesKB": 71800,
+  "serializedFrameMeanMs": 1.7463252666666658,
+  "serializedFrameP90Ms": 2.07275,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit fresh wave time.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 5652
+}

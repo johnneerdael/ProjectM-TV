@@ -1,0 +1,10 @@
+{
+  "base": "ac3dd034c15dced5423feed3077c15c39580823b +27patches",
+  "v2_source_sha256": "1ba8f79382e4323817fd4826322190944b0c4868e9084778a953c3bbb7e89a56",
+  "v3_source_sha256": "41e33e9a8492c8ae3908c2007362a82e04da53d0d01d12c897384cb11b37435a",
+  "v3_patch_sha256": "e46671bd8adf733542f235fac9d282a8a4b42be84b2af17c42f5ddbf85341830",
+  "scope": "common OR magnitude admission is sufficient, not necessary; missed cases fall through to byte-identical v2 guarded wide behavior",
+  "flags_unchanged": true,
+  "v2_frozen": true,
+  "new_execution": false
+}

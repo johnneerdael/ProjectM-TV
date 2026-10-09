@@ -1,0 +1,21 @@
+PASS q=pow(a,b); outside invalid fraction restored q=0 a=-1 b=0.5 expected=0
+PASS q=pow(a,b); outside NaN exponent restored q=0 a=2 b=nan expected=0
+PASS q=pow(a,b); outside overflow retained q=inf a=2 b=1024 expected=inf
+PASS q=pow(a,b); outside finite unchanged q=8 a=2 b=3 expected=8
+PASS q=a^b; outside invalid fraction restored q=0 a=-1 b=0.5 expected=0
+PASS q=a^b; outside NaN exponent restored q=0 a=2 b=nan expected=0
+PASS q=a^b; outside overflow retained q=inf a=2 b=1024 expected=inf
+PASS q=a^b; outside finite unchanged q=8 a=2 b=3 expected=8
+PASS q=(a^=b); outside invalid fraction restored q=0 a=0 b=0.5 expected=0
+PASS q=(a^=b); outside NaN exponent restored q=0 a=0 b=nan expected=0
+PASS q=(a^=b); outside overflow retained q=inf a=inf b=1024 expected=inf
+PASS q=(a^=b); outside finite unchanged q=8 a=8 b=3 expected=8
+PASS q=_powop(a,b); outside invalid fraction restored q=0 a=0 b=0.5 expected=0
+PASS q=_powop(a,b); outside NaN exponent restored q=0 a=0 b=nan expected=0
+PASS q=_powop(a,b); outside overflow retained q=inf a=inf b=1024 expected=inf
+PASS q=_powop(a,b); outside finite unchanged q=8 a=8 b=3 expected=8
+PASS outside division NaN retained q=nan a=nan b=2 expected=nan
+PASS outside division Infinity retained q=inf a=inf b=2 expected=inf
+PASS invsqrt NaN guard restored q=0 a=nan b=0 expected=0
+PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434
+boundaries executed=20 failures=0 unsafe_baseline_skips=0

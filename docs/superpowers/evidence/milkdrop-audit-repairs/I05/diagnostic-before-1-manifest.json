@@ -1,0 +1,216 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditinputbefore",
+  "pid": 11329,
+  "job": {
+    "expectedPresetCount": 9608,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/audio.u8",
+    "preset": "audit inverse aspect.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "81d17cbc5f0e29d18b0d8ca790a0466af37ce236be086baa24a7f49423901d5d",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "1fc737dab17e013ae3ed8401ba7f2f586543a3c42d0048eee68a6177f3b795b4",
+      "pngBytes": 345191,
+      "pngSha256": "8c785f840fff762ca825ac9143685970806cc9cb07998b27a9906c713187dc45",
+      "rgbMean": [
+        22.905913387345677,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.8489787085262346
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "4f51ef6ec712dcf667b872b70c7587db4669b51af8983bdb0ce674b7c49e7b7f",
+      "pngBytes": 408715,
+      "pngSha256": "1e9b794e50fb10e35f1465e7a9bf449da9e9cbe67daf9ca75fc0f33b2ae4c0e5",
+      "rgbMean": [
+        21.902258029513888,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.8183385175540123
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "4acc6b1078e26ae6878ec5167dd4d7f0ab55971c7bb50ae2b3945d70c5790c4c",
+      "pngBytes": 412558,
+      "pngSha256": "062c415f31ec446de39051c58e583c62cf2d1cc5014cceda306b9676eb76bc06",
+      "rgbMean": [
+        18.994001494984566,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.8000831886574075
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9bee0665ef2257aa0d920213c62e35872006cafa332bf3fa9ef2d9af18e02310",
+      "pngBytes": 421686,
+      "pngSha256": "041890fb2367ee75cec53f59907188fbe1e2705133201d81872e2bc4b9dda686",
+      "rgbMean": [
+        18.967834924768518,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.7910366030092593
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0da842f1bff97e0807c8fce53d4a5b38d85ec5760205627a76ccf1d6cd93e329",
+      "pngBytes": 429698,
+      "pngSha256": "3c0c45a8b9f2a9ee52884e2124ae160c5192f7006cd4190ba31f70c2f827e246",
+      "rgbMean": [
+        20.175431013695988,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.7747276475694445
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e483b43e30cd7785848bc11abbe93dcf8fee37f1e16e363a1a55e0c39dc164cd",
+      "pngBytes": 461651,
+      "pngSha256": "2fe042ab6a02f93f12d8bed26d666ed160212798c67d3d03ab653199e846a10b",
+      "rgbMean": [
+        22.51850043402778,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.7278525270061729
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8e56f8da514b9ff1615cc9a889eb188845aa93b56b8f9acde720a8c4c2ffa5c3",
+      "pngBytes": 479567,
+      "pngSha256": "7a6fd80316283f24d27cf2ee79ae0194f1ed6951b02229f62eab3463c6e969d4",
+      "rgbMean": [
+        22.26737545814043,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.7219908613040124
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditinputbefore\/files\/native-trails\/inputdiag-audit-inverse-aspect-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "bde9f954ddd3456c1e936ae7d07adcc4af1a8077657f0884ef742effdd5d0bce",
+      "pngBytes": 421926,
+      "pngSha256": "ca731b621ee5cb5fd7bb5f8532233230295830b39ec6eb67a77e235609e12f44",
+      "rgbMean": [
+        21.976301962770062,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.6872034143518518
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 10331217,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9608,
+  "indexSha256": "71281e89d2192f2a7dce93f9dfcdc9838dc4691b52dad6d6e72a58240f790f6a",
+  "presetAssetSha256": "5ee1fdff3bec0ef6de2a08890cde1ae656d843bd257a02c23ebd8ee4888b7596",
+  "forcedPresetPrefix": "audit inverse aspect.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 14,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 44089,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4490,
+  "pssAfterFramesKB": 72401,
+  "serializedFrameMeanMs": 1.7558960305555555,
+  "serializedFrameP90Ms": 2.282042,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit inverse aspect.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 4826
+}

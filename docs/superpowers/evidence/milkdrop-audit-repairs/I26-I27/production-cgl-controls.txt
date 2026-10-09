@@ -1,0 +1,71 @@
+backend Apple Apple M4 Pro 4.1 Metal - 89.4
+uniform _c3 1 1 1 0.999000013
+uniform _c4 1 1 1 0.999000013
+pixel I26-real-cold-mono 64 64 0 read_fbo=1 sample_target=16x16
+original_comma I26-real-cold-mono 0.333299994 0.333299994 current=0.999000013,0.999000013
+uniform _c3 1 2 3 1.99800003
+uniform _c4 0.5 1 2 1.16550004
+pixel I26-injected-0 127 74 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-0 0.999899983 0.666599989 current=1.99800003,1.16550004
+uniform _c3 1 1 1 0.999000013
+uniform _c4 1 1 1 0.999000013
+pixel I26-injected-1 64 64 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-1 0.333299994 0.333299994 current=0.999000013,0.999000013
+uniform _c3 1 0 0 0.333000004
+uniform _c4 1 0 0 0.333000004
+pixel I26-injected-2 21 21 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-2 0 0 current=0.333000004,0.333000004
+uniform _c3 0 1 0 0.333000004
+uniform _c4 0 1 0 0.333000004
+pixel I26-injected-3 21 21 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-3 0 0 current=0.333000004,0.333000004
+uniform _c3 0 0 1 0.333000004
+uniform _c4 0 0 1 0.333000004
+pixel I26-injected-4 21 21 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-4 0.333299994 0.333299994 current=0.333000004,0.333000004
+uniform _c3 0 0 0 0
+uniform _c4 0 0 0 0
+pixel I26-injected-5 0 0 0 read_fbo=1 sample_target=16x16
+original_comma I26-injected-5 0 0 current=0,0
+uniform _c3 1 2 3 1.99800003
+uniform _c4 0.5 1 2 1.16550004
+pixel I26-mutated-EEL 127 74 0 read_fbo=1 sample_target=16x16
+original_comma I26-mutated-EEL 0.999899983 0.666599989 current=1.99800003,1.16550004
+uniform _c3 1 2 3 1.99800003
+uniform _c4 0.5 1 2 1.16550004
+pixel I26-same-frame-rebind 127 74 0 read_fbo=1 sample_target=16x16
+original_comma I26-same-frame-rebind 0.999899983 0.666599989 current=1.99800003,1.16550004
+uniform _c12 8 8 8 0
+pixel square 128 128 128 read_fbo=1 sample_target=16x16
+profile square reported_canvas=256x256 context_viewport=256x256 reference=0x0 original_duplicate=8
+uniform _c12 8 8 8 0
+uniform _c12 8 7.16992521 7.58496284 0
+pixel landscape 128 114 121 read_fbo=1 sample_target=16x16
+profile landscape reported_canvas=256x144 context_viewport=256x144 reference=0x0 original_duplicate=8
+uniform _c12 8 7.16992521 7.58496284 0
+uniform _c12 7.16992521 8 7.58496284 0
+pixel portrait 114 128 121 read_fbo=1 sample_target=16x16
+profile portrait reported_canvas=144x256 context_viewport=144x256 reference=0x0 original_duplicate=7.16992521
+uniform _c12 7.16992521 8 7.58496284 0
+uniform _c12 10.321928 9.49185276 9.90689087 0
+pixel native-reference 165 151 158 read_fbo=1 sample_target=16x16
+profile native-reference reported_canvas=1280x720 context_viewport=3840x2160 reference=1280x720 original_duplicate=10.321928
+uniform _c12 10.321928 9.49185276 9.90689087 0
+uniform _c12 11.9068899 11.0768156 11.4918528 0
+pixel native-no-reference 190 177 183 read_fbo=1 sample_target=16x16
+profile native-no-reference reported_canvas=3840x2160 context_viewport=3840x2160 reference=0x0 original_duplicate=11.9068909
+uniform _c12 11.9068899 11.0768156 11.4918528 0
+pixel I26-live.milk 127 74 0 read_fbo=1 sample_target=16x16
+pixel I26-mutable-eel-live.milk 127 74 0 read_fbo=1 sample_target=16x16
+pixel I26-current-oracle.milk 127 74 0 read_fbo=1 sample_target=16x16
+pixel I26-comma-oracle.milk 64 42 0 read_fbo=1 sample_target=16x16
+pixel I26-direct-bands.milk 64 128 191 read_fbo=1 sample_target=16x16
+pixel I26-direct-attenuated.milk 32 64 128 read_fbo=1 sample_target=16x16
+pixel I27-live.milk 128 114 121 read_fbo=1 sample_target=16x16
+pixel I27-256x144-current-oracle.milk 128 114 121 read_fbo=1 sample_target=16x16
+pixel I27-256x144-duplicate-oracle.milk 128 128 128 read_fbo=1 sample_target=16x16
+pixel I27-256x256-current-oracle.milk 128 128 128 read_fbo=1 sample_target=16x16
+pixel I27-256x256-duplicate-oracle.milk 128 128 128 read_fbo=1 sample_target=16x16
+pixel I27-1280x720-current-oracle.milk 165 151 158 read_fbo=1 sample_target=16x16
+pixel I27-1280x720-duplicate-oracle.milk 165 165 165 read_fbo=1 sample_target=16x16
+Production shader input CGL controls pass; Native4K output and unchanged-library gates remain separate

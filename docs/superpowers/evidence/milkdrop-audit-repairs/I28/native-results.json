@@ -1,0 +1,388 @@
+{
+  "status": "retained TV blur safety policy qualified; no new engine patch",
+  "runs": 24,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 12,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "blurpolicy-Cope---The-Cloud-current-0",
+      "preset": "Cope - The Cloud.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-Cope---The-Cloud-current-1",
+      "preset": "Cope - The Cloud.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-actual-retained-current-0",
+      "preset": "audit blur diagnostic-equal-half-actual-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-actual-retained-current-1",
+      "preset": "audit blur diagnostic-equal-half-actual-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-explicit-expanded-oracle-current-0",
+      "preset": "audit blur diagnostic-equal-half-explicit-expanded-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-explicit-expanded-oracle-current-1",
+      "preset": "audit blur diagnostic-equal-half-explicit-expanded-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-finite-collapsed-decode-oracle-current-0",
+      "preset": "audit blur diagnostic-equal-half-finite-collapsed-decode-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-equal-half-finite-collapsed-decode-oracle-current-1",
+      "preset": "audit blur diagnostic-equal-half-finite-collapsed-decode-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-explicit-default-oracle-current-0",
+      "preset": "audit blur diagnostic-explicit-default-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "d79e39c478fae7698201ba30e5892eba9e5edec11a594ded5df10b709d6bda13",
+        "0923f58750036519cc996b625256f4bb3977b482b00e4abafe4897bb9cc2a201",
+        "16c84f8b65feafd3740969eb2f46a78d61255c4335aa777ab19b99c223b08ad3",
+        "94dfe146b454182dd217c1e865451c336a8c28382ab69319395e6d141b694782",
+        "a20c72480fca67bbebffe9b17298e4bc0ea81630ca12e0eaee2f93bced119b27",
+        "351fdd7b930ef5dc405734f57c5e7d7e84db3e50d5106dfadf59763d3b13b05e",
+        "d682206bb306a8aeafcff6b6de034ae2dc789b80be68554081b31d6fa2b469c7",
+        "69cad00f275aa0af93bb5b47f0a4d86b5e678fd2d3885aec3b1ebb2835d222f4"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-explicit-default-oracle-current-1",
+      "preset": "audit blur diagnostic-explicit-default-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "d79e39c478fae7698201ba30e5892eba9e5edec11a594ded5df10b709d6bda13",
+        "0923f58750036519cc996b625256f4bb3977b482b00e4abafe4897bb9cc2a201",
+        "16c84f8b65feafd3740969eb2f46a78d61255c4335aa777ab19b99c223b08ad3",
+        "94dfe146b454182dd217c1e865451c336a8c28382ab69319395e6d141b694782",
+        "a20c72480fca67bbebffe9b17298e4bc0ea81630ca12e0eaee2f93bced119b27",
+        "351fdd7b930ef5dc405734f57c5e7d7e84db3e50d5106dfadf59763d3b13b05e",
+        "d682206bb306a8aeafcff6b6de034ae2dc789b80be68554081b31d6fa2b469c7",
+        "69cad00f275aa0af93bb5b47f0a4d86b5e678fd2d3885aec3b1ebb2835d222f4"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-actual-retained-current-0",
+      "preset": "audit blur diagnostic-near-quarter-actual-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "a6dc5c0778b96ec1fe6d91cfc3dd29d83c06a8bfa29375bff2c08450b229c155",
+        "5da564fad1c157571d6e831eb1eb7e5621640ab6eb599ebc422f80f75d4066f3",
+        "95761d953f5cb9a8b9b3bff5f404eeb5516a055cb5e4f89383f8b372ae96c11e",
+        "f33cd40fec0b4d7ef269105e040c514127824ebec2fc2aec59dff9bbf0a912d0",
+        "b9a91fd3e5039361c3103c2d406b3f3bcc046d5f0e82e210b3a15108cae041f0",
+        "fa2594c593cad3f9cecacf5dd0010e49ff7855307f0e2c11e16d6c1d5f68204b",
+        "08f7957af87273380ec932f981b996c717eea79fbc18f73e9726f78fef69a79e",
+        "d2b963896c9deacf2c5107ec3aca9044caef1a07ceebc54e687aa34ca3d4768e"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-actual-retained-current-1",
+      "preset": "audit blur diagnostic-near-quarter-actual-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "a6dc5c0778b96ec1fe6d91cfc3dd29d83c06a8bfa29375bff2c08450b229c155",
+        "5da564fad1c157571d6e831eb1eb7e5621640ab6eb599ebc422f80f75d4066f3",
+        "95761d953f5cb9a8b9b3bff5f404eeb5516a055cb5e4f89383f8b372ae96c11e",
+        "f33cd40fec0b4d7ef269105e040c514127824ebec2fc2aec59dff9bbf0a912d0",
+        "b9a91fd3e5039361c3103c2d406b3f3bcc046d5f0e82e210b3a15108cae041f0",
+        "fa2594c593cad3f9cecacf5dd0010e49ff7855307f0e2c11e16d6c1d5f68204b",
+        "08f7957af87273380ec932f981b996c717eea79fbc18f73e9726f78fef69a79e",
+        "d2b963896c9deacf2c5107ec3aca9044caef1a07ceebc54e687aa34ca3d4768e"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-explicit-expanded-oracle-current-0",
+      "preset": "audit blur diagnostic-near-quarter-explicit-expanded-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "a6dc5c0778b96ec1fe6d91cfc3dd29d83c06a8bfa29375bff2c08450b229c155",
+        "5da564fad1c157571d6e831eb1eb7e5621640ab6eb599ebc422f80f75d4066f3",
+        "95761d953f5cb9a8b9b3bff5f404eeb5516a055cb5e4f89383f8b372ae96c11e",
+        "f33cd40fec0b4d7ef269105e040c514127824ebec2fc2aec59dff9bbf0a912d0",
+        "b9a91fd3e5039361c3103c2d406b3f3bcc046d5f0e82e210b3a15108cae041f0",
+        "fa2594c593cad3f9cecacf5dd0010e49ff7855307f0e2c11e16d6c1d5f68204b",
+        "08f7957af87273380ec932f981b996c717eea79fbc18f73e9726f78fef69a79e",
+        "d2b963896c9deacf2c5107ec3aca9044caef1a07ceebc54e687aa34ca3d4768e"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-explicit-expanded-oracle-current-1",
+      "preset": "audit blur diagnostic-near-quarter-explicit-expanded-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "a6dc5c0778b96ec1fe6d91cfc3dd29d83c06a8bfa29375bff2c08450b229c155",
+        "5da564fad1c157571d6e831eb1eb7e5621640ab6eb599ebc422f80f75d4066f3",
+        "95761d953f5cb9a8b9b3bff5f404eeb5516a055cb5e4f89383f8b372ae96c11e",
+        "f33cd40fec0b4d7ef269105e040c514127824ebec2fc2aec59dff9bbf0a912d0",
+        "b9a91fd3e5039361c3103c2d406b3f3bcc046d5f0e82e210b3a15108cae041f0",
+        "fa2594c593cad3f9cecacf5dd0010e49ff7855307f0e2c11e16d6c1d5f68204b",
+        "08f7957af87273380ec932f981b996c717eea79fbc18f73e9726f78fef69a79e",
+        "d2b963896c9deacf2c5107ec3aca9044caef1a07ceebc54e687aa34ca3d4768e"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-finite-collapsed-decode-oracle-current-0",
+      "preset": "audit blur diagnostic-near-quarter-finite-collapsed-decode-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-near-quarter-finite-collapsed-decode-oracle-current-1",
+      "preset": "audit blur diagnostic-near-quarter-finite-collapsed-decode-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-actual-retained-current-0",
+      "preset": "audit blur diagnostic-reversed-actual-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-actual-retained-current-1",
+      "preset": "audit blur diagnostic-reversed-actual-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-explicit-expanded-oracle-current-0",
+      "preset": "audit blur diagnostic-reversed-explicit-expanded-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-explicit-expanded-oracle-current-1",
+      "preset": "audit blur diagnostic-reversed-explicit-expanded-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0c160fef66b6f4533ccf697eb6c3d1d39e6bff47e108c992b467faf207f8ceaf",
+        "cad8e3377669ef5c526e787cd8d0732dc88db90cca1b1cbf3053569518dd0e6b",
+        "e945e1f6406aebd0ec679d54fb26966890f15f1665ce8d4e8c8cdb83cd06155d",
+        "b64f8532b9b17431a97e3c4217052706169c369bc0f2b08edee10d52af689580",
+        "22307ecf7ae51b0105bb40cf577a4fce859ae67123e40aafb1170bc8b009ec84",
+        "0b89c6c1546a33bf41f9ac386fdf9ddf59c38574a014a765ba4a1c7d7e2bf520",
+        "0cd918a3f4b6bb1aaa8a9ea36944adf376bbc66565c810a232163bdb8434dfc1",
+        "e943b6095def3b4f81e57a2a084efa1f8907a682d059217c9c31d02ff4fd96e9"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-finite-collapsed-decode-oracle-current-0",
+      "preset": "audit blur diagnostic-reversed-finite-collapsed-decode-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-reversed-finite-collapsed-decode-oracle-current-1",
+      "preset": "audit blur diagnostic-reversed-finite-collapsed-decode-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-unsupported-finite-fallback-current-0",
+      "preset": "audit blur diagnostic-unsupported-finite-fallback.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "d79e39c478fae7698201ba30e5892eba9e5edec11a594ded5df10b709d6bda13",
+        "0923f58750036519cc996b625256f4bb3977b482b00e4abafe4897bb9cc2a201",
+        "16c84f8b65feafd3740969eb2f46a78d61255c4335aa777ab19b99c223b08ad3",
+        "94dfe146b454182dd217c1e865451c336a8c28382ab69319395e6d141b694782",
+        "a20c72480fca67bbebffe9b17298e4bc0ea81630ca12e0eaee2f93bced119b27",
+        "351fdd7b930ef5dc405734f57c5e7d7e84db3e50d5106dfadf59763d3b13b05e",
+        "d682206bb306a8aeafcff6b6de034ae2dc789b80be68554081b31d6fa2b469c7",
+        "69cad00f275aa0af93bb5b47f0a4d86b5e678fd2d3885aec3b1ebb2835d222f4"
+      ]
+    },
+    {
+      "directory": "blurpolicy-audit-blur-diagnostic-unsupported-finite-fallback-current-1",
+      "preset": "audit blur diagnostic-unsupported-finite-fallback.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "d79e39c478fae7698201ba30e5892eba9e5edec11a594ded5df10b709d6bda13",
+        "0923f58750036519cc996b625256f4bb3977b482b00e4abafe4897bb9cc2a201",
+        "16c84f8b65feafd3740969eb2f46a78d61255c4335aa777ab19b99c223b08ad3",
+        "94dfe146b454182dd217c1e865451c336a8c28382ab69319395e6d141b694782",
+        "a20c72480fca67bbebffe9b17298e4bc0ea81630ca12e0eaee2f93bced119b27",
+        "351fdd7b930ef5dc405734f57c5e7d7e84db3e50d5106dfadf59763d3b13b05e",
+        "d682206bb306a8aeafcff6b6de034ae2dc789b80be68554081b31d6fa2b469c7",
+        "69cad00f275aa0af93bb5b47f0a4d86b5e678fd2d3885aec3b1ebb2835d222f4"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "case": "equal-half",
+      "same_selected_RGB": true
+    },
+    {
+      "case": "near-quarter",
+      "same_selected_RGB": true
+    },
+    {
+      "case": "reversed",
+      "same_selected_RGB": true
+    },
+    {
+      "case": "unsupported-finite-fallback",
+      "same_selected_RGB": true
+    }
+  ]
+}

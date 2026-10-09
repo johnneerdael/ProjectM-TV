@@ -1,0 +1,42 @@
+[
+  {
+    "stage": "red",
+    "case": "controls",
+    "exit_code": 1,
+    "stdout": "grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81\ngrid=8x8 custom=0 generated raw pi=3.14159 evaluations=81\ngrid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617\ngrid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617\ngrid=8x8 custom=1 generated raw pi=3.14159 evaluations=81\ngrid=8x8 custom=1 generated raw pi=3.14159 evaluations=81\ngrid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617\ngrid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617\nfailures=136\n",
+    "command": [
+      "build/audit/angle-seam-proposal/build/angle-seam-controls"
+    ]
+  },
+  {
+    "stage": "red",
+    "case": "stock",
+    "exit_code": 1,
+    "stdout": "stock_file_default_stage left-axis sy=1.0999 expected=0.8999 raw_angle=3.14159\nfailures=1\n",
+    "command": [
+      "build/audit/angle-seam-proposal/build/angle-seam-controls",
+      "stock",
+      "core/src/main/assets/presets/Illusion & Rovastar - Dotty Mad Space (Jelly).milk"
+    ]
+  },
+  {
+    "stage": "green",
+    "case": "controls",
+    "exit_code": 0,
+    "stdout": "grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81\ngrid=8x8 custom=0 generated raw pi=3.14159 evaluations=81\ngrid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617\ngrid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617\ngrid=8x8 custom=1 generated raw pi=3.14159 evaluations=81\ngrid=8x8 custom=1 generated raw pi=3.14159 evaluations=81\ngrid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617\ngrid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617\nfailures=0\n",
+    "command": [
+      "build/audit/angle-seam-proposal/build/angle-seam-controls"
+    ]
+  },
+  {
+    "stage": "green",
+    "case": "stock",
+    "exit_code": 0,
+    "stdout": "stock_file_default_stage left-axis sy=0.8999 expected=0.8999 raw_angle=3.14159\nfailures=0\n",
+    "command": [
+      "build/audit/angle-seam-proposal/build/angle-seam-controls",
+      "stock",
+      "core/src/main/assets/presets/Illusion & Rovastar - Dotty Mad Space (Jelly).milk"
+    ]
+  }
+]

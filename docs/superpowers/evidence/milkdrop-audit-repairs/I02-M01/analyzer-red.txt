@@ -1,0 +1,84 @@
+FFF...FF.............                                                    [100%]
+=================================== FAILURES ===================================
+______________ test_nonzero_boolean_integer_prefix[-2147483648-1] ______________
+
+text = '-2147483648', expected = 1
+
+    @pytest.mark.parametrize('text, expected', [
+        ('-2147483648', 1), ('-2', 1), ('-1', 1), ('0', 0),
+        ('1', 1), ('2147483647', 1), ('-1suffix', 1), ('-1.5', 1),
+        ('-.5', 0), ('0.5', 0),
+    ])
+    def test_nonzero_boolean_integer_prefix(text, expected):
+>       assert scalar({'btexwrap': text}, 'bTeXwRaP', 0, 'bool') == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = scalar({'btexwrap': '-2147483648'}, 'bTeXwRaP', 0, 'bool')
+
+tools/milk-analyzer/test_source_booleans.py:13: AssertionError
+__________________ test_nonzero_boolean_integer_prefix[-2-1] ___________________
+
+text = '-2', expected = 1
+
+    @pytest.mark.parametrize('text, expected', [
+        ('-2147483648', 1), ('-2', 1), ('-1', 1), ('0', 0),
+        ('1', 1), ('2147483647', 1), ('-1suffix', 1), ('-1.5', 1),
+        ('-.5', 0), ('0.5', 0),
+    ])
+    def test_nonzero_boolean_integer_prefix(text, expected):
+>       assert scalar({'btexwrap': text}, 'bTeXwRaP', 0, 'bool') == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = scalar({'btexwrap': '-2'}, 'bTeXwRaP', 0, 'bool')
+
+tools/milk-analyzer/test_source_booleans.py:13: AssertionError
+__________________ test_nonzero_boolean_integer_prefix[-1-1] ___________________
+
+text = '-1', expected = 1
+
+    @pytest.mark.parametrize('text, expected', [
+        ('-2147483648', 1), ('-2', 1), ('-1', 1), ('0', 0),
+        ('1', 1), ('2147483647', 1), ('-1suffix', 1), ('-1.5', 1),
+        ('-.5', 0), ('0.5', 0),
+    ])
+    def test_nonzero_boolean_integer_prefix(text, expected):
+>       assert scalar({'btexwrap': text}, 'bTeXwRaP', 0, 'bool') == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = scalar({'btexwrap': '-1'}, 'bTeXwRaP', 0, 'bool')
+
+tools/milk-analyzer/test_source_booleans.py:13: AssertionError
+_______________ test_nonzero_boolean_integer_prefix[-1suffix-1] ________________
+
+text = '-1suffix', expected = 1
+
+    @pytest.mark.parametrize('text, expected', [
+        ('-2147483648', 1), ('-2', 1), ('-1', 1), ('0', 0),
+        ('1', 1), ('2147483647', 1), ('-1suffix', 1), ('-1.5', 1),
+        ('-.5', 0), ('0.5', 0),
+    ])
+    def test_nonzero_boolean_integer_prefix(text, expected):
+>       assert scalar({'btexwrap': text}, 'bTeXwRaP', 0, 'bool') == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = scalar({'btexwrap': '-1suffix'}, 'bTeXwRaP', 0, 'bool')
+
+tools/milk-analyzer/test_source_booleans.py:13: AssertionError
+_________________ test_nonzero_boolean_integer_prefix[-1.5-1] __________________
+
+text = '-1.5', expected = 1
+
+    @pytest.mark.parametrize('text, expected', [
+        ('-2147483648', 1), ('-2', 1), ('-1', 1), ('0', 0),
+        ('1', 1), ('2147483647', 1), ('-1suffix', 1), ('-1.5', 1),
+        ('-.5', 0), ('0.5', 0),
+    ])
+    def test_nonzero_boolean_integer_prefix(text, expected):
+>       assert scalar({'btexwrap': text}, 'bTeXwRaP', 0, 'bool') == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = scalar({'btexwrap': '-1.5'}, 'bTeXwRaP', 0, 'bool')
+
+tools/milk-analyzer/test_source_booleans.py:13: AssertionError
+=========================== short test summary info ============================
+FAILED tools/milk-analyzer/test_source_booleans.py::test_nonzero_boolean_integer_prefix[-2147483648-1]
+FAILED tools/milk-analyzer/test_source_booleans.py::test_nonzero_boolean_integer_prefix[-2-1]
+FAILED tools/milk-analyzer/test_source_booleans.py::test_nonzero_boolean_integer_prefix[-1-1]
+FAILED tools/milk-analyzer/test_source_booleans.py::test_nonzero_boolean_integer_prefix[-1suffix-1]
+FAILED tools/milk-analyzer/test_source_booleans.py::test_nonzero_boolean_integer_prefix[-1.5-1]
+5 failed, 16 passed in 0.07s

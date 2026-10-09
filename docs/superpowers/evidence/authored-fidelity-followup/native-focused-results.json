@@ -1,0 +1,759 @@
+{
+  "jobs": 76,
+  "presets": 19,
+  "selected_captures_verified": 608,
+  "all_repeats_match": true,
+  "dimensions": [
+    3840,
+    2160
+  ],
+  "reference_dimensions": [
+    1280,
+    720
+  ],
+  "canvas": "Standard1280x720; native final3840x2160",
+  "scope": "eight selected final-output RGB frames per480-frame run; not all-frame or whole-corpus certification; correctness run timings not isolated cost",
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (103).milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 95.76738526395319,
+          "changed_pixel_fraction": 0.9999995177469135,
+          "before_mean": 64.5225758744856,
+          "after_mean": 156.52670440297067
+        },
+        {
+          "frame": 479,
+          "mae": 85.342262811857,
+          "changed_pixel_fraction": 0.9999990354938272,
+          "before_mean": 81.06788825392232,
+          "after_mean": 164.37974870595423
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(103)-before-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(103)-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(103)-after-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(103)-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(103)-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(103)-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(103)-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(103)-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (11).milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 21.666726867926954,
+          "changed_pixel_fraction": 0.956124252507716,
+          "before_mean": 62.87143438143004,
+          "after_mean": 65.06265367798353
+        },
+        {
+          "frame": 479,
+          "mae": 19.509125313464505,
+          "changed_pixel_fraction": 0.6622141444830247,
+          "before_mean": 65.5991202498071,
+          "after_mean": 69.34795138888889
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(11)-before-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(11)-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(11)-after-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(11)-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(11)-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(11)-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(11)-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(11)-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (137).milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 12.715889355066873,
+          "changed_pixel_fraction": 0.9885628858024691,
+          "before_mean": 182.89083019868826,
+          "after_mean": 182.7454168274177
+        },
+        {
+          "frame": 479,
+          "mae": 11.08250200938786,
+          "changed_pixel_fraction": 0.9923343460648149,
+          "before_mean": 181.40060932677468,
+          "after_mean": 181.77634010095164
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(137)-before-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(137)-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-$$$-Royal---Mashup-(137)-after-0/manifest.json",
+          "native-captures/authored-followup-$$$-Royal---Mashup-(137)-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(137)-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(137)-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(137)-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-$$$-Royal---Mashup-(137)-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "101.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.3302859760802469,
+          "changed_pixel_fraction": 0.1488061824845679,
+          "before_mean": 15.781879701967593,
+          "after_mean": 15.610564035172326
+        },
+        {
+          "frame": 479,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 12.6143755626286,
+          "after_mean": 12.6143755626286
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-101-before-0/manifest.json",
+          "native-captures/authored-followup-101-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-101-after-0/manifest.json",
+          "native-captures/authored-followup-101-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-101-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-101-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-101-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-101-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "Mig_304 - geiss remix 2.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": true,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 11.252743015367798,
+          "after_mean": 11.252743015367798
+        },
+        {
+          "frame": 479,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 12.515593372235083,
+          "after_mean": 12.515593372235083
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-Mig_304---geiss-remix-2-before-0/manifest.json",
+          "native-captures/authored-followup-Mig_304---geiss-remix-2-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-Mig_304---geiss-remix-2-after-0/manifest.json",
+          "native-captures/authored-followup-Mig_304---geiss-remix-2-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-Mig_304---geiss-remix-2-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-Mig_304---geiss-remix-2-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-Mig_304---geiss-remix-2-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-Mig_304---geiss-remix-2-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup audit shape live alternating.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.020154642489711935,
+          "changed_pixel_fraction": 0.0006082417052469135,
+          "before_mean": 0.042654160236625514,
+          "after_mean": 0.06280880272633745
+        },
+        {
+          "frame": 479,
+          "mae": 0.020154642489711935,
+          "changed_pixel_fraction": 0.0006082417052469135,
+          "before_mean": 0.042654160236625514,
+          "after_mean": 0.06280880272633745
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-alternating-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-alternating-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-alternating-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-alternating-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-alternating-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-alternating-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-alternating-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-alternating-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup audit shape live disjoint-thick.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.060473009902263376,
+          "changed_pixel_fraction": 0.0018247251157407407,
+          "before_mean": 0.042654160236625514,
+          "after_mean": 0.10312717013888889
+        },
+        {
+          "frame": 479,
+          "mae": 0.060473009902263376,
+          "changed_pixel_fraction": 0.0018247251157407407,
+          "before_mean": 0.042654160236625514,
+          "after_mean": 0.10312717013888889
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup audit shape live overlap-thick.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.029681431648662552,
+          "changed_pixel_fraction": 0.0006102912808641976,
+          "before_mean": 0.024882691936728395,
+          "after_mean": 0.041925636574074075
+        },
+        {
+          "frame": 479,
+          "mae": 0.029681431648662552,
+          "changed_pixel_fraction": 0.0006102912808641976,
+          "before_mean": 0.024882691936728395,
+          "after_mean": 0.041925636574074075
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup dot audit dot ring.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.0006459378215020576,
+          "changed_pixel_fraction": 1.3020833333333334e-05,
+          "before_mean": 0.0012920765817901235,
+          "after_mean": 0.0006461387602880659
+        },
+        {
+          "frame": 479,
+          "mae": 0.0006459378215020576,
+          "changed_pixel_fraction": 1.3020833333333334e-05,
+          "before_mean": 0.0012920765817901235,
+          "after_mean": 0.0006461387602880659
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-dot-audit-dot-ring-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-dot-ring-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-dot-audit-dot-ring-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-dot-ring-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-dot-ring-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-dot-ring-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-dot-ring-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-dot-ring-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup dot audit single dot.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 9.223090277777778e-05,
+          "changed_pixel_fraction": 1.4467592592592592e-06,
+          "before_mean": 0.0,
+          "after_mean": 9.223090277777778e-05
+        },
+        {
+          "frame": 479,
+          "mae": 9.223090277777778e-05,
+          "changed_pixel_fraction": 1.4467592592592592e-06,
+          "before_mean": 0.0,
+          "after_mean": 9.223090277777778e-05
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-dot-audit-single-dot-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-single-dot-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-dot-audit-single-dot-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-single-dot-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-single-dot-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-single-dot-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-single-dot-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-single-dot-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup dot audit two dots.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 9.223090277777778e-05,
+          "changed_pixel_fraction": 1.0850694444444444e-06,
+          "before_mean": 0.0002766927083333333,
+          "after_mean": 0.00018446180555555555
+        },
+        {
+          "frame": 479,
+          "mae": 9.223090277777778e-05,
+          "changed_pixel_fraction": 1.0850694444444444e-06,
+          "before_mean": 0.0002766927083333333,
+          "after_mean": 0.00018446180555555555
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-dot-audit-two-dots-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-two-dots-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-dot-audit-two-dots-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-dot-audit-two-dots-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-two-dots-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-two-dots-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-two-dots-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-dot-audit-two-dots-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup uv all-disabled.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": true,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 0.0,
+          "after_mean": 0.0
+        },
+        {
+          "frame": 479,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 0.0,
+          "after_mean": 0.0
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-uv-all-disabled-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-all-disabled-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-uv-all-disabled-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-all-disabled-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-disabled-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-disabled-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-disabled-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-disabled-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup uv all-enabled.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": true,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 0.11805603780864198,
+          "after_mean": 0.11805603780864198
+        },
+        {
+          "frame": 479,
+          "mae": 0.0,
+          "changed_pixel_fraction": 0.0,
+          "before_mean": 0.11805603780864198,
+          "after_mean": 0.11805603780864198
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-uv-all-enabled-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-all-enabled-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-uv-all-enabled-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-all-enabled-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-enabled-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-enabled-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-enabled-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-all-enabled-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup uv custom-feedback.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.02952168531378601,
+          "changed_pixel_fraction": 0.00029296875,
+          "before_mean": 0.11805684156378601,
+          "after_mean": 0.11805603780864198
+        },
+        {
+          "frame": 479,
+          "mae": 0.02952168531378601,
+          "changed_pixel_fraction": 0.00029296875,
+          "before_mean": 0.11805684156378601,
+          "after_mean": 0.11805603780864198
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-uv-custom-feedback-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-custom-feedback-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-uv-custom-feedback-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-custom-feedback-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-custom-feedback-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-custom-feedback-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-custom-feedback-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-custom-feedback-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "audit followup uv default-feedback.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.02952168531378601,
+          "changed_pixel_fraction": 0.00029296875,
+          "before_mean": 0.11805684156378601,
+          "after_mean": 0.11805603780864198
+        },
+        {
+          "frame": 479,
+          "mae": 0.02952168531378601,
+          "changed_pixel_fraction": 0.00029296875,
+          "before_mean": 0.11805684156378601,
+          "after_mean": 0.11805603780864198
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-audit-followup-uv-default-feedback-before-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-default-feedback-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-audit-followup-uv-default-feedback-after-0/manifest.json",
+          "native-captures/authored-followup-audit-followup-uv-default-feedback-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-default-feedback-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-default-feedback-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-default-feedback-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-audit-followup-uv-default-feedback-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "martin - city lights v2 c.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.1463454459233539,
+          "changed_pixel_fraction": 0.030759669174382716,
+          "before_mean": 38.4777380320859,
+          "after_mean": 38.43727213541667
+        },
+        {
+          "frame": 479,
+          "mae": 0.2976006703317901,
+          "changed_pixel_fraction": 0.04475405092592592,
+          "before_mean": 35.04723090277778,
+          "after_mean": 34.74963023244599
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-martin---city-lights-v2-c-before-0/manifest.json",
+          "native-captures/authored-followup-martin---city-lights-v2-c-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-martin---city-lights-v2-c-after-0/manifest.json",
+          "native-captures/authored-followup-martin---city-lights-v2-c-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2-c-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2-c-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2-c-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2-c-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "martin - city lights v2(1).milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.1669826630015432,
+          "changed_pixel_fraction": 0.025103563850308642,
+          "before_mean": 37.139898164223254,
+          "after_mean": 36.972915501221706
+        },
+        {
+          "frame": 479,
+          "mae": 0.280897834683642,
+          "changed_pixel_fraction": 0.0327709056712963,
+          "before_mean": 27.09181122202932,
+          "after_mean": 26.815575890560698
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-martin---city-lights-v2(1)-before-0/manifest.json",
+          "native-captures/authored-followup-martin---city-lights-v2(1)-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-martin---city-lights-v2(1)-after-0/manifest.json",
+          "native-captures/authored-followup-martin---city-lights-v2(1)-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2(1)-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2(1)-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2(1)-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-martin---city-lights-v2(1)-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 5.887382450810185,
+          "changed_pixel_fraction": 0.7746625434027777,
+          "before_mean": 104.2696481561857,
+          "after_mean": 98.38226570537552
+        },
+        {
+          "frame": 479,
+          "mae": 16.356821068029834,
+          "changed_pixel_fraction": 0.8758801118827161,
+          "before_mean": 114.31518827964248,
+          "after_mean": 97.95836721161265
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-0/manifest.json",
+          "native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-after-0/manifest.json",
+          "native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-after-1/manifest.json"
+      ]
+    },
+    {
+      "preset": "shifter - mosaic mitosis.milk",
+      "repeats_match": true,
+      "selected_frames_unchanged_before_after": false,
+      "metrics": [
+        {
+          "frame": 239,
+          "mae": 0.004824057998971194,
+          "changed_pixel_fraction": 0.0032683497299382715,
+          "before_mean": 78.81970281153549,
+          "after_mean": 78.8218116239069
+        },
+        {
+          "frame": 479,
+          "mae": 1.0022253970550412,
+          "changed_pixel_fraction": 0.055166136188271604,
+          "before_mean": 78.29088525591564,
+          "after_mean": 77.69791976112397
+        }
+      ],
+      "manifests": {
+        "before": [
+          "native-captures/authored-followup-shifter---mosaic-mitosis-before-0/manifest.json",
+          "native-captures/authored-followup-shifter---mosaic-mitosis-before-1/manifest.json"
+        ],
+        "after": [
+          "native-captures/authored-followup-shifter---mosaic-mitosis-after-0/manifest.json",
+          "native-captures/authored-followup-shifter---mosaic-mitosis-after-1/manifest.json"
+        ]
+      },
+      "producer_manifests_before": [
+        "build/authored-followup/captures/authored-followup-shifter---mosaic-mitosis-before-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-shifter---mosaic-mitosis-before-1/manifest.json"
+      ],
+      "producer_manifests_after": [
+        "build/authored-followup/captures/authored-followup-shifter---mosaic-mitosis-after-0/manifest.json",
+        "build/authored-followup/captures/authored-followup-shifter---mosaic-mitosis-after-1/manifest.json"
+      ]
+    }
+  ]
+}

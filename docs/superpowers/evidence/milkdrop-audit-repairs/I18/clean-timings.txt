@@ -1,0 +1,12 @@
+{"issue": "I18-RGB", "cycle": 0, "step": 0, "role": "before", "mean_ms": 1.8228546333333342, "p90_ms": 2.195375, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 0, "step": 1, "role": "after", "mean_ms": 1.6678745444444447, "p90_ms": 1.985792, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 0, "step": 2, "role": "after", "mean_ms": 1.569993988888888, "p90_ms": 1.849709, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 0, "step": 3, "role": "before", "mean_ms": 1.8692589444444438, "p90_ms": 2.553792, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 1, "step": 0, "role": "before", "mean_ms": 2.115073944444444, "p90_ms": 3.601583, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 1, "step": 1, "role": "after", "mean_ms": 2.085069891666667, "p90_ms": 2.769542, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 1, "step": 2, "role": "after", "mean_ms": 2.37185001388889, "p90_ms": 3.763041, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 1, "step": 3, "role": "before", "mean_ms": 2.2470088138888866, "p90_ms": 4.122333, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 2, "step": 0, "role": "before", "mean_ms": 2.189715288888888, "p90_ms": 3.725083, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 2, "step": 1, "role": "after", "mean_ms": 2.003873638888889, "p90_ms": 3.393291, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 2, "step": 2, "role": "after", "mean_ms": 1.842262138888889, "p90_ms": 2.799833, "status": "ok"}
+{"issue": "I18-RGB", "cycle": 2, "step": 3, "role": "before", "mean_ms": 1.9729325194444443, "p90_ms": 3.137, "status": "ok"}

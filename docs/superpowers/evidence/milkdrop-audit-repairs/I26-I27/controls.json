@@ -1,0 +1,224 @@
+{
+  "status": "Source-only models; Native producer/program/transport/output gates open",
+  "I26": [
+    {
+      "name": "unequal",
+      "relative_bands": [
+        1,
+        2,
+        3
+      ],
+      "attenuated_bands": [
+        0.5,
+        1,
+        2
+      ],
+      "current_volume_model": [
+        1.9980000257492065,
+        1.1655000448226929
+      ],
+      "original_comma_model": [
+        0.9998999834060669,
+        0.6665999889373779
+      ]
+    },
+    {
+      "name": "equal",
+      "relative_bands": [
+        1,
+        1,
+        1
+      ],
+      "attenuated_bands": [
+        1,
+        1,
+        1
+      ],
+      "current_volume_model": [
+        0.9990000128746033,
+        0.9990000128746033
+      ],
+      "original_comma_model": [
+        0.33329999446868896,
+        0.33329999446868896
+      ]
+    },
+    {
+      "name": "bass_only",
+      "relative_bands": [
+        1,
+        0,
+        0
+      ],
+      "attenuated_bands": [
+        1,
+        0,
+        0
+      ],
+      "current_volume_model": [
+        0.3330000042915344,
+        0.3330000042915344
+      ],
+      "original_comma_model": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "mid_only",
+      "relative_bands": [
+        0,
+        1,
+        0
+      ],
+      "attenuated_bands": [
+        0,
+        1,
+        0
+      ],
+      "current_volume_model": [
+        0.3330000042915344,
+        0.3330000042915344
+      ],
+      "original_comma_model": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "treble_only",
+      "relative_bands": [
+        0,
+        0,
+        1
+      ],
+      "attenuated_bands": [
+        0,
+        0,
+        1
+      ],
+      "current_volume_model": [
+        0.3330000042915344,
+        0.3330000042915344
+      ],
+      "original_comma_model": [
+        0.33329999446868896,
+        0.33329999446868896
+      ]
+    },
+    {
+      "name": "zero_injected",
+      "relative_bands": [
+        0,
+        0,
+        0
+      ],
+      "attenuated_bands": [
+        0,
+        0,
+        0
+      ],
+      "current_volume_model": [
+        0.0,
+        0.0
+      ],
+      "original_comma_model": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "I27": [
+    {
+      "declared_canvas": [
+        256,
+        144
+      ],
+      "current_ideal_tuple": [
+        8.0,
+        7.169925001442312,
+        7.584962500721156
+      ],
+      "duplicate_width_ideal_tuple": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "qualification": "Ideal logarithms, not observed float32 logf/native shader output"
+    },
+    {
+      "declared_canvas": [
+        256,
+        256
+      ],
+      "current_ideal_tuple": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "duplicate_width_ideal_tuple": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "qualification": "Ideal logarithms, not observed float32 logf/native shader output"
+    },
+    {
+      "declared_canvas": [
+        1280,
+        720
+      ],
+      "current_ideal_tuple": [
+        10.321928094887362,
+        9.491853096329674,
+        9.906890595608518
+      ],
+      "duplicate_width_ideal_tuple": [
+        10.321928094887362,
+        10.321928094887362,
+        10.321928094887362
+      ],
+      "qualification": "Ideal logarithms, not observed float32 logf/native shader output"
+    },
+    {
+      "declared_canvas": [
+        3840,
+        2160
+      ],
+      "current_ideal_tuple": [
+        11.906890595608518,
+        11.076815597050832,
+        11.491853096329674
+      ],
+      "duplicate_width_ideal_tuple": [
+        11.906890595608518,
+        11.906890595608518,
+        11.906890595608518
+      ],
+      "qualification": "Ideal logarithms, not observed float32 logf/native shader output"
+    }
+  ],
+  "uniforms": {
+    "_c3": [
+      "bass",
+      "mid",
+      "treb",
+      "vol"
+    ],
+    "_c4": [
+      "bassAtt",
+      "midAtt",
+      "trebAtt",
+      "volAtt"
+    ],
+    "_c12": [
+      "mipX",
+      "mipY",
+      "mipAvg",
+      0
+    ]
+  },
+  "packing": "float32 vec4; no public ABI changes",
+  "I26_zero_band_case_is_injected_not_silence_PCM": true,
+  "I27_original_candidate_available": false
+}

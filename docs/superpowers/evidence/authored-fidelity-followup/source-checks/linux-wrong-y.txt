@@ -1,0 +1,246 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /work/cxx-wrapper - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1")
+-- Checking for module 'egl'
+--   Found egl, version 1.5
+-- Found Git: /usr/bin/git (found version "2.43.0")
+-- Building for OpenGL Embedded Profile
+-- Performing Test FAST_MATH_OPTIMIZATION_SUPPORTED
+-- Performing Test FAST_MATH_OPTIMIZATION_SUPPORTED - Success
+-- Performing Test NO_MATH_LIB_REQUIRED
+-- Performing Test NO_MATH_LIB_REQUIRED - Success
+-- Performing Test CXXFLAG_-Wpedantic_SUPPORTED
+-- Performing Test CXXFLAG_-Wpedantic_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wextra_SUPPORTED
+-- Performing Test CXXFLAG_-Wextra_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wall_SUPPORTED
+-- Performing Test CXXFLAG_-Wall_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wchar-subscripts_SUPPORTED
+-- Performing Test CXXFLAG_-Wchar-subscripts_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wformat-security_SUPPORTED
+-- Performing Test CXXFLAG_-Wformat-security_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wpointer-arith_SUPPORTED
+-- Performing Test CXXFLAG_-Wpointer-arith_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wshadow_SUPPORTED
+-- Performing Test CXXFLAG_-Wshadow_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wsign-compare_SUPPORTED
+-- Performing Test CXXFLAG_-Wsign-compare_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wtype-limits_SUPPORTED
+-- Performing Test CXXFLAG_-Wtype-limits_SUPPORTED - Success
+-- Performing Test STD_FILESYSTEM_EXISTS
+-- Performing Test STD_FILESYSTEM_EXISTS - Success
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+--
+-- libprojectM v4.2.0
+-- ==============================================
+--
+--     prefix:                      /usr/local
+--     libdir:                      lib
+--     includedir:                  include
+--     bindir:                      bin
+--
+--     compiler:                    /work/cxx-wrapper
+--     cflags:
+--     cxxflags:
+--     ldflags:
+--
+-- Features:
+-- ==============================================
+--
+--     Build shared libraries:      OFF
+--     Filesystem support:          C++17 STL
+--     SDL2:                        OFF
+--     OpenGL ES:                   ON
+--     macOS Framework:             OFF
+--     Emscripten:                  OFF
+--     Use system GLM:              OFF
+--     Use system projectM-eval:    OFF
+--
+-- Targets and applications:
+-- ==============================================
+--
+--     libprojectM:                 (always built)
+--     Playlist library:            OFF
+--     SDL2 Test UI:                OFF
+--     Tests:                       OFF
+--     Documentation:               OFF
+--
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (2.5s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/build
+[1/114] Building C object projectm/vendor/glad/CMakeFiles/glad_obj.dir/src/egl.c.o
+[2/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/CodeWriter.cpp.o
+[3/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTokenizer.cpp.o
+[4/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/Engine.cpp.o
+[5/114] Building C object projectm/vendor/glad/CMakeFiles/glad_obj.dir/src/gles2.c.o
+[6/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Compiler.c.o
+[7/114] Linking C static library projectm/vendor/glad/libglad.a
+[8/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompileContext.c.o
+[9/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/ExpressionTree.c.o
+[10/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompilerFunctions.c.o
+[11/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/MemoryBuffer.c.o
+[12/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Scanner.c.o
+[13/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/api/projectm-eval.c.o
+[14/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeVariables.c.o
+[15/114] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeFunctions.c.o
+[16/114] Linking C static library projectm/vendor/projectm-eval/projectm-eval/libprojectM_eval.a
+[17/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/GLSLGenerator.cpp.o
+/src/build/authored-followup/mutant-engine/vendor/hlslparser/src/GLSLGenerator.cpp: In member function 'void M4::GLSLGenerator::OutputExpression(M4::HLSLExpression*, const M4::HLSLType*)':
+/src/build/authored-followup/mutant-engine/vendor/hlslparser/src/GLSLGenerator.cpp:798:40: warning: too many arguments for format [-Wformat-extra-args]
+  798 |                         m_writer.Write(",", op);
+      |                                        ^~~
+[18/114] Building C object projectm/vendor/stb_image/CMakeFiles/stb_image.dir/image_DXT.c.o
+[19/114] Building C object projectm/vendor/stb_image/CMakeFiles/stb_image.dir/wfETC.c.o
+[20/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLParser.cpp.o
+[21/114] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/Loudness.cpp.o
+[22/114] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTree.cpp.o
+[23/114] Generating MilkdropStaticShaders.cpp, MilkdropStaticShaders.hpp
+[24/114] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/MilkdropFFT.cpp.o
+[25/114] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/PCM.cpp.o
+[26/114] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/WaveformAligner.cpp.o
+[27/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropStaticShaders.cpp.o
+[28/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Border.cpp.o
+[29/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/EvalLibMutex.cpp.o
+[30/114] Building C object projectm/vendor/stb_image/CMakeFiles/stb_image.dir/stb_image.c.o
+[31/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomWaveform.cpp.o
+[32/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/BlurTexture.cpp.o
+[33/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomShape.cpp.o
+[34/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/DarkenCenter.cpp.o
+[35/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LegacyEquationCode.cpp.o
+[36/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDetail.cpp.o
+[37/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Filters.cpp.o
+[38/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Factory.cpp.o
+[39/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDiffusion.cpp.o
+[40/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineGeometry.cpp.o
+[41/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FinalComposite.cpp.o
+[42/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineRenderer.cpp.o
+[43/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/IdlePreset.cpp.o
+[44/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerFrameContext.cpp.o
+[45/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MotionVectors.cpp.o
+[46/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropPreset.cpp.o
+[47/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelContext.cpp.o
+[48/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetFileParser.cpp.o
+[49/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelMesh.cpp.o
+[50/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/ShapePerFrameContext.cpp.o
+[51/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/VideoEcho.cpp.o
+[52/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveform.cpp.o
+[53/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerFrameContext.cpp.o
+[54/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetState.cpp.o
+[55/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/CenteredSpiro.cpp.o
+[56/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerPointContext.cpp.o
+[57/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Circle.cpp.o
+[58/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DoubleLine.cpp.o
+[59/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DerivativeLine.cpp.o
+[60/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Factory.cpp.o
+[61/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/ExplosiveHash.cpp.o
+[62/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropShader.cpp.o
+[63/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/LineBase.cpp.o
+[64/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave11.cpp.o
+[65/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave9.cpp.o
+[66/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Line.cpp.o
+[67/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveLasso.cpp.o
+[68/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveFlower.cpp.o
+[69/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveSkewed.cpp.o
+[70/114] Generating BuiltInTransitionsResources.hpp
+[71/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/SpectrumLine.cpp.o
+[72/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/Logging.cpp.o
+[73/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveX.cpp.o
+[74/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveStar.cpp.o
+[75/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactory.cpp.o
+[76/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/WaveformMath.cpp.o
+[77/114] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/XYOscillationSpiral.cpp.o
+[78/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/BlendMode.cpp.o
+[79/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/Utils.cpp.o
+[80/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/TimeKeeper.cpp.o
+[81/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactoryManager.cpp.o
+[82/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Mesh.cpp.o
+[83/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectMCWrapper.cpp.o
+[84/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/FileScanner.cpp.o
+[85/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Framebuffer.cpp.o
+/src/build/authored-followup/mutant-engine/src/libprojectM/Renderer/Framebuffer.cpp: In member function 'void libprojectM::Renderer::Framebuffer::MaskDrawBuffer(int, bool)':
+/src/build/authored-followup/mutant-engine/src/libprojectM/Renderer/Framebuffer.cpp:344:38: warning: unused parameter 'bufferIndex' [-Wunused-parameter]
+  344 | void Framebuffer::MaskDrawBuffer(int bufferIndex, bool masked)
+      |                                  ~~~~^~~~~~~~~~~
+[86/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/CopyTexture.cpp.o
+[87/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary.cpp.o
+[88/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/MilkdropNoise.cpp.o
+[89/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectM.cpp.o
+[90/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GladLoader.cpp.o
+[91/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Sampler.cpp.o
+[92/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GLProbe.cpp.o
+[93/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Texture.cpp.o
+[94/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/ShaderCache.cpp.o
+[95/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureAttachment.cpp.o
+[96/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/PresetTransition.cpp.o
+[97/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/VertexBufferUsage.cpp.o
+[98/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/GLResolver.cpp.o
+[99/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Shader.cpp.o
+[100/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_win32.cpp.o
+[101/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/VertexIndexArray.cpp.o
+[102/114] Generating SpriteShaders.hpp
+[103/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_emscripten.cpp.o
+[104/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Platform/DynamicLibrary_posix.cpp.o
+[105/114] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM.dir/__/__/dummy.cpp.o
+[106/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TransitionShaderManager.cpp.o
+[107/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureSamplerDescriptor.cpp.o
+[108/114] Building CXX object projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/Factory.cpp.o
+[109/114] Building CXX object projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/SpriteManager.cpp.o
+[110/114] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureManager.cpp.o
+[111/114] Building CXX object projectm/src/libprojectM/UserSprites/CMakeFiles/UserSprites.dir/MilkdropSprite.cpp.o
+[112/114] Building CXX object CMakeFiles/warp-rotation-regressions.dir/warp_rotation_test.cpp.o
+[113/114] Linking CXX static library projectm/src/libprojectM/libprojectM-4.a
+[114/114] Linking CXX executable warp-rotation-regressions
+Internal ctest changing into directory: /work/build
+UpdateCTestConfiguration  from :/work/build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/work/build/DartConfiguration.tcl
+Test project /work/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 3
+    Start 3: legacy-warp-deformation
+
+3: Test command: /work/build/warp-rotation-regressions "deformation"
+3: Working Directory: /work/build
+3: Environment variables:
+3:  ASAN_OPTIONS=detect_leaks=0
+3:  EGL_PLATFORM=surfaceless
+3: Test timeout computed to be: 30
+3: GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+3: deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+3: deformation actual production GPU output differs from independent mediump reference path=0 node=0 axis=0 actual=-0.006348 reference=0.000244 arithmetic/transport bound=0.005467
+1/1 Test #3: legacy-warp-deformation ..........***Failed    0.39 sec
+GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation actual production GPU output differs from independent mediump reference path=0 node=0 axis=0 actual=-0.006348 reference=0.000244 arithmetic/transport bound=0.005467
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.39 sec
+
+The following tests FAILED:
+	  3 - legacy-warp-deformation (Failed)
+Errors while running CTest

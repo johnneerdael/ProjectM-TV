@@ -1,0 +1,70 @@
+{
+  "jobs": 4,
+  "frames_per_job": 480,
+  "selected_captures_verified": 120,
+  "all_same_protocol_repeats_match": true,
+  "reference": [
+    1280,
+    720
+  ],
+  "native_dimensions": [
+    3840,
+    2160
+  ],
+  "reduced_dimensions": [
+    2560,
+    1440
+  ],
+  "require_active_canvas": true,
+  "scope": "pbuffer production JNI; no Activity/audio/exhaustion/physical-TV claims; generation2 is not compared to uninterrupted frames",
+  "rows": [
+    {
+      "fixture": "default",
+      "repeat": 0,
+      "status": "ok",
+      "captures": 30,
+      "nativeTrailsStatuses": {
+        "Standard \u00b7 1280\u00d7720 canvas": 450,
+        "High \u00b7 1280\u00d7720 canvas": 30
+      },
+      "manifest": "lifecycle/lifecycle-native-default-2160-r0/manifest.json",
+      "producer_manifest": "build/authored-followup/lifecycle-native-default-2160-r0/manifest.json"
+    },
+    {
+      "fixture": "default",
+      "repeat": 1,
+      "status": "ok",
+      "captures": 30,
+      "nativeTrailsStatuses": {
+        "Standard \u00b7 1280\u00d7720 canvas": 450,
+        "High \u00b7 1280\u00d7720 canvas": 30
+      },
+      "manifest": "lifecycle/lifecycle-native-default-2160-r1/manifest.json",
+      "producer_manifest": "build/authored-followup/lifecycle-native-default-2160-r1/manifest.json"
+    },
+    {
+      "fixture": "custom",
+      "repeat": 0,
+      "status": "ok",
+      "captures": 30,
+      "nativeTrailsStatuses": {
+        "Standard \u00b7 1280\u00d7720 canvas": 450,
+        "High \u00b7 1280\u00d7720 canvas": 30
+      },
+      "manifest": "lifecycle/lifecycle-native-custom-2160-r0/manifest.json",
+      "producer_manifest": "build/authored-followup/lifecycle-native-custom-2160-r0/manifest.json"
+    },
+    {
+      "fixture": "custom",
+      "repeat": 1,
+      "status": "ok",
+      "captures": 30,
+      "nativeTrailsStatuses": {
+        "Standard \u00b7 1280\u00d7720 canvas": 450,
+        "High \u00b7 1280\u00d7720 canvas": 30
+      },
+      "manifest": "lifecycle/lifecycle-native-custom-2160-r1/manifest.json",
+      "producer_manifest": "build/authored-followup/lifecycle-native-custom-2160-r1/manifest.json"
+    }
+  ]
+}

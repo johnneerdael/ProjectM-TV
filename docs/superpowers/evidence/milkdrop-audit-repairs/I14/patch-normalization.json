@@ -1,0 +1,20 @@
+[
+  {
+    "patch": "diagnostic-bilerp-oracle-square8.patch",
+    "raw_sha256": "de4b3bc05b198380c0698387e114743973259f3a3ac05e8ba1b339a3408f25bb",
+    "normalized_sha256": "2ff03ea9135924bd43c5557f08f41a74f04e77104d09dacdac402895bfc34e02",
+    "applied_source_sha256": {
+      "src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert": "cfc54c732becbd1ea4ed8cf6554a10d30bd925bd5aaa7baf26ae90be8757105d",
+      "src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert": "542d9d8ac98c250bf7f98e0d3d145ad223e0eb202abc668c8997625cce210848"
+    }
+  },
+  {
+    "patch": "diagnostic-bilerp-oracle-native48x32.patch",
+    "raw_sha256": "f128f8e1f39de30224e1152daf6d994e08dc95c4a232ddb2d69cfabb7e6f7f6a",
+    "normalized_sha256": "3a36b9f29dc36ade3c3db6183b705d50cc059bc7261b0f49bc3f575043f9a960",
+    "applied_source_sha256": {
+      "src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert": "cbd9a386240bf9ca6991583571f42793485c23591cc9365c95ac1cf40af1adda",
+      "src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert": "1cd8205dc01d29062d8e01e02a69cf9201bf4f76236eecb2f6575e1d82b1b423"
+    }
+  }
+]

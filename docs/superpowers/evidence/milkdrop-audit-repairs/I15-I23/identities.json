@@ -1,0 +1,244 @@
+{
+  "source_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+      "sha256": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.hpp",
+      "sha256": "205ed354bcc4826c7348e26aca4fd2bb200f43909fa31483b44c46c13e39a9fb"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/LineGeometry.cpp",
+      "sha256": "b9a3dc3788d4b7e227fd6078cd9195c7136790faed575e3cbe014c6cf63f192f"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+      "sha256": "d3f22fa53f3be1e3c0b48e340697f71b5ce03400512081e7a4cad70458a05865"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+      "sha256": "d130f18901015b63d2f4ef2022daf639afe154e437bfaf02066627906efbcbae"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+      "sha256": "9fa368056c5014a5f4c0a6257d2316e1ab68e136ffddc6528afc915bf2885081"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/GeometryTargets.hpp",
+      "sha256": "0c6d7243d5b1286615b60f0aff3ad391ae10572ae00f3a5feb4f9f1942ea621b"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "sha256": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert",
+      "sha256": "3d374d1f39a6e535d2fe42a49f4daabbde18f8fc517b5e6ad8377d2c3c5c446e"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert",
+      "sha256": "d237428a5fbe617df7fe3c2ad16741bdaeae98227c7ebc5d380ade53960e6232"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert",
+      "sha256": "c9d2a01aa465438e8953712cced5bbd51ada9bec32504161b07bfe3a26d3eaa2"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9"
+    }
+  ],
+  "candidates": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/Rovastar - Parallelogram Bin 2.milk",
+      "sha256": "f9d50349cd553c96ebfb395bcbd715246c63333a218057a6cf4ce746a252d86e",
+      "executed_or_rendered": false,
+      "relevant_lines": [
+        {
+          "line": 55,
+          "text": "nMotionVectorsX=64.000000"
+        },
+        {
+          "line": 56,
+          "text": "nMotionVectorsY=48.000000"
+        },
+        {
+          "line": 59,
+          "text": "mv_l=0.000000"
+        },
+        {
+          "line": 63,
+          "text": "mv_a=1.000000"
+        },
+        {
+          "line": 72,
+          "text": "per_frame_9=wave_a = 0;"
+        },
+        {
+          "line": 74,
+          "text": "per_pixel_1=dx = sin((1000+sin(q8))/x)/200;"
+        },
+        {
+          "line": 75,
+          "text": "per_pixel_2=dy = cos((1000+sin(q8))/y)/200;"
+        }
+      ]
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/$$$ Royal - Mashup (113).milk",
+      "sha256": "5a15da0f2d10a9f4d1221170b47238a676f216204c1933f4cd094d2e200c78e9",
+      "executed_or_rendered": false,
+      "relevant_lines": [
+        {
+          "line": 59,
+          "text": "nMotionVectorsX=3.000"
+        },
+        {
+          "line": 60,
+          "text": "nMotionVectorsY=2.000"
+        },
+        {
+          "line": 63,
+          "text": "mv_l=0.150"
+        },
+        {
+          "line": 67,
+          "text": "mv_a=0.000"
+        },
+        {
+          "line": 75,
+          "text": "wavecode_0_enabled=1"
+        },
+        {
+          "line": 79,
+          "text": "wavecode_0_bUseDots=0"
+        },
+        {
+          "line": 80,
+          "text": "wavecode_0_bDrawThick=1"
+        },
+        {
+          "line": 87,
+          "text": "wavecode_0_a=1.000"
+        },
+        {
+          "line": 174,
+          "text": "wavecode_1_enabled=1"
+        },
+        {
+          "line": 178,
+          "text": "wavecode_1_bUseDots=0"
+        },
+        {
+          "line": 179,
+          "text": "wavecode_1_bDrawThick=1"
+        },
+        {
+          "line": 186,
+          "text": "wavecode_1_a=1.000"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-256x144-current-oracle.milk",
+      "sha256": "6f8964b7109954ff6cead54492c26792c6b4c08e099dc33324152101d8890f79"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-live-zero.milk",
+      "sha256": "4643a54192e505bbd2ba3d9b001bef13b112509e0333c2da7f87ab2d96eed7fb"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/CMakeLists.txt",
+      "sha256": "d5e845a57539d0038104605397fb18d4e85d13306bc372957b6b04e68f1a5047"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-alpha-zero.milk",
+      "sha256": "3509b3fc0be83d1c9c7d38c2330a16970865a32438ac85a79ded4bfc6b354af6"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-3840x2160-diffusion-1-current-oracle.milk",
+      "sha256": "71ad2ec419ab2d7a8a4735d0cc94cac9174863695b8e920049d33d03d09f14ff"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-3840x2160-diffusion-0-current-oracle.milk",
+      "sha256": "63bc757704a76120613af4b46dcfa8fea54c80933fd85b4b0185a3780b21eb9a"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/diagnostics.json",
+      "sha256": "9d892b2a1a170b330561687bd829f5d6414a1890d22fe69e33bdb8bad6c6de0f"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/motion_style_controls.cpp",
+      "sha256": "67c05d437e63c014afa19f122ee4c7a68de889f6e6c3400d0f8dc3636fbd7904"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/README.md",
+      "sha256": "06120febb29dd234c471d56c7915678aa6cff33b26778f4030194248723f8fad"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-256x144-current-oracle.milk",
+      "sha256": "5679f185a53ccfda3c27828d971072758ab874bad27115ed7cade65357d99fc1"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-3840x2160-diffusion-1-original-width-oracle.milk",
+      "sha256": "faf7d08a3fe987e437ff63617ef58bb7d1ae0c0b198278f2c59854da242e36d4"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-1280x720-original-reference-oracle.milk",
+      "sha256": "7a5cdaedd659be2351c6016d233991bc7a9edac8c62c497a13ec2894037c9a57"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-1280x720-original-reference-oracle.milk",
+      "sha256": "676b6e7ee611b1b1a525416cc4663d71724870f5e528233a4781364f4f825d2a"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-thin.milk",
+      "sha256": "ba0e005d94cc4dd4990e175fc8cdc0d4315816deb05427f70f6a519fce5480bb"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-1280x720-current-oracle.milk",
+      "sha256": "73468ff0512d06daf591f7dc5b8be1b1de76a87a5098e61f18a70edc71ae0162"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-256x144-original-reference-oracle.milk",
+      "sha256": "2b0f3686bcba6e492bfc3d9f012e821f342a2baa496d0675187fc708f3acf14a"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-live.milk",
+      "sha256": "ef0e0b1fbb1a5ff691fa147b83e92f9e6e3869b5ee0dcd18373b1359d64f41a9"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-256x144-diffusion-0-original-width-oracle.milk",
+      "sha256": "ddd1e51e5833eff3dab37c004ec7d46a3a2c75eb06fa36068124da6bc018ccee"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-256x144-diffusion-0-current-oracle.milk",
+      "sha256": "9e403e9b747f656df093c4763d238c48fb04227061abfa6d3a1c410bc725671c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-thin.milk",
+      "sha256": "eb960a0aafd7bd7d08f2f004a51b626939541eb794d85d9d85a8ba01cb4be4a9"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-live.milk",
+      "sha256": "92d6bf133ea17c5a073314b34cad501a92657a8783074ee2d29f92fd60f80e0e"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-wave-1280x720-current-oracle.milk",
+      "sha256": "bbb859278cc04b7320a9dbeaa6289fd9c4a20b234402187d914874b27bed25e6"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I15-endpoint-3840x2160-diffusion-0-original-width-oracle.milk",
+      "sha256": "faf7d08a3fe987e437ff63617ef58bb7d1ae0c0b198278f2c59854da242e36d4"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/motion-style-policy/I23-shape-256x144-original-reference-oracle.milk",
+      "sha256": "9b2c79b8327cb24399b4c30640a0407c7c39df4054aa446416fadf8deff24a08"
+    }
+  ],
+  "compiled_or_executed": false,
+  "qualified_completion": false
+}

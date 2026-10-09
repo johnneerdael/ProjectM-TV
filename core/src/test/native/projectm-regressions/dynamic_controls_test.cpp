@@ -351,11 +351,14 @@ static void DisplayControls()
         for (const float gamma : {0.f, .5f, 1.f, 1.5f, 3.f, 8.f})
         for (const float alpha : {0.f, .001f, .5f, 1.f})
         for (const float zoom : {.001f, 1.f, 2.f, 1000.f})
-        for (const int orientation : {-1, 0, 1, 2, 3, 5})
+        for (const int orientation : {-7, -5, -3, -1, 0, 1, 2, 3, 5})
         {
             frame.LoadStateVariables(state);
             *frame.q_vars[0] = gamma; *frame.q_vars[1] = alpha;
-            *frame.q_vars[2] = zoom; *frame.q_vars[3] = orientation + .75;
+            // Conversion truncates toward zero. Keep the fractional input in
+            // the intended integer's interval for both signs.
+            *frame.q_vars[2] = zoom;
+            *frame.q_vars[3] = orientation + (orientation < 0 ? -.75 : .75);
             frame.ExecutePerFrameCode(); output.Bind(); composite.Draw(state, frame);
             const auto actual = output.Pixels();
             PresetState reference; Configure(reference, size, false);

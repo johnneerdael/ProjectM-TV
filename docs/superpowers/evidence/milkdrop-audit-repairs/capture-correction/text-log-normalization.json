@@ -1,0 +1,8 @@
+[
+  {
+    "name": "guard-before-fixture-update.txt",
+    "raw_sha256": "f84b9a34071114aca45f499e9055119ab82dd9cfb9ff6add8c8f9b7737a9af08",
+    "normalized_sha256": "e3b95cfc9c47600e62893fa61dd4910fff034c27b8f6aaa36fc0aef6f9ab244e",
+    "normalization": "Trailing whitespace only; original raw log remains in build/audit."
+  }
+]

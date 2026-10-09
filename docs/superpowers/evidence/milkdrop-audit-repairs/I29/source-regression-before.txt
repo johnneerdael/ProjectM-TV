@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 16: legacy-echo-orientation
+1/1 Test #16: legacy-echo-orientation ..........***Failed    0.23 sec
+echo orientation -7 omits original horizontal flip
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	 16 - legacy-echo-orientation (Failed)
+Errors while running CTest

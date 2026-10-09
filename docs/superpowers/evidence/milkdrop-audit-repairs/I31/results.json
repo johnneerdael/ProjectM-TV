@@ -1,0 +1,42 @@
+{
+  "preset": "suksma - type o negative - world coming down.milk",
+  "source_before": "5c88ffe1",
+  "source_after": "b5f8af6d",
+  "render": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "all_selected_frames_before_after_rgb_identical": true,
+  "within_role_repeats_identical": true,
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 3.3430829111111082,
+      "p90_ms": 3.986375
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 3.2723272138888913,
+      "p90_ms": 4.183333
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 3.440227441666665,
+      "p90_ms": 4.347042
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 3.3321714055555574,
+      "p90_ms": 4.148084
+    }
+  ],
+  "interpretation": "source pass/weight oracle proves correction; image identity is an admitted result; no measured speedup claim"
+}

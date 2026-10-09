@@ -1,0 +1,38 @@
+From: ProjectM TV diagnostics
+Subject: [TEST ONLY] I14 finite analytic bilerp endpoint oracle native48x32
+
+Applies ONLY to the paired finite diagnostic preset. Replace only the
+motion query with the declared four-node bilerp field; retain warp/AD
+geometry, styles, minimum lengths and UV ownership. This is not a generic
+I14 repair or original GPU oracle and must never ship.
+
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetMotionVectorsVertexShaderGlsl330.vert
+@@ -23,7 +23,10 @@
+         // done by the fragment shader during the warp mesh drawing. We just need to look up the
+         // motion vector coordinate.
+         // We simply invert the y coordinate because it's easier than flipping the u/v texture.
+-        vec2 oldUV = texture(warp_coordinates, vec2(pos.x, 1.0 - pos.y)).xy;
++        // TEST ONLY: endpoint payload of an independent four-node bilerp.
++    float wx = max(0.0, 1.0 - abs(48.0 * pos.x - 18.0));
++    float wy = max(0.0, 1.0 - abs(32.0 * pos.y - 12.0));
++    vec2 oldUV = pos + vec2(0.125 + 0.25 * wx * wy, -0.25 * wx * wy);
+-
++
+         // Enforce minimum trail length
+         vec2 dist = oldUV - pos;
+--- a/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert
+@@ -30,7 +30,10 @@
+ void main()
+ {
+     vec2 start = vector_start;
+-    vec2 oldUV = texture(warp_coordinates, vec2(start.x, 1.0 - start.y)).xy;
++    // TEST ONLY: endpoint payload of an independent four-node bilerp.
++    float wx = max(0.0, 1.0 - abs(48.0 * start.x - 18.0));
++    float wy = max(0.0, 1.0 - abs(32.0 * start.y - 12.0));
++    vec2 oldUV = start + vec2(0.125 + 0.25 * wx * wy, -0.25 * wx * wy);
+-
++
+     // Enforce the minimum trail length, as the GL-line shader does.
+     vec2 dist = (oldUV - start) * length_multiplier;

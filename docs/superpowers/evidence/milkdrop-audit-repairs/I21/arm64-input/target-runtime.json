@@ -1,0 +1,12 @@
+{
+  "device": "emulator-5640",
+  "android_user": 0,
+  "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys",
+  "abi": "arm64-v8a",
+  "runtime_libm_sha256": "a01413bf699c7deaa50cf8b8ca7ff1dc5640286851efc63e4ae8a0b70e748eec",
+  "executable_sha256": "3734b217b277730683e26ccef468e39697c4a02577154a69459fbbb170459b31",
+  "transport_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "trace_sha256": "9aff449fdbe0ed1f93849cb4a5f149361592c4039bc1d3275e63a07ca08690b6",
+  "waveSmoothing": 0.75,
+  "qualification": "separate source ARM64 producer; no shipping hidden-array observation; no GPU/context/draw"
+}

@@ -1,0 +1,41 @@
+path=0 format=33327 native=0 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=0 format=33327 native=0 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=0 format=33327 native=1 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=0 format=33327 native=1 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=0 format=33328 native=0 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=0 format=33328 native=0 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=0 format=33328 native=1 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=0 format=33328 native=1 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=1 format=33327 native=0 nearest=0 endpoint=0.40625,0.296875 original=0.4296875,0.2734375
+path=1 format=33327 native=0 nearest=1 endpoint=0.408203125,0.294921875 original=0.4296875,0.2734375
+path=1 format=33327 native=1 nearest=0 endpoint=0.40625,0.296875 original=0.4296875,0.2734375
+path=1 format=33327 native=1 nearest=1 endpoint=0.408203125,0.294921875 original=0.4296875,0.2734375
+path=1 format=33328 native=0 nearest=0 endpoint=0.40625,0.296875 original=0.4296875,0.2734375
+path=1 format=33328 native=0 nearest=1 endpoint=0.408203125,0.294921875 original=0.4296875,0.2734375
+path=1 format=33328 native=1 nearest=0 endpoint=0.40625,0.296875 original=0.4296875,0.2734375
+path=1 format=33328 native=1 nearest=1 endpoint=0.408203125,0.294921875 original=0.4296875,0.2734375
+path=2 format=33327 native=0 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=2 format=33327 native=0 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=2 format=33327 native=1 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=2 format=33327 native=1 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=2 format=33328 native=0 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=2 format=33328 native=0 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+path=2 format=33328 native=1 nearest=0 endpoint=0.46875,0.234375 original=0.4296875,0.2734375
+path=2 format=33328 native=1 nearest=1 endpoint=0.474609375,0.228515625 original=0.4296875,0.2734375
+storage format=33327 write=render-target input=0.172999993 stored=0.172973633
+storage format=33327 write=upload input=0.172999993 stored=0.172973633
+storage format=33328 write=render-target input=0.172999993 stored=0.172999993
+storage format=33328 write=upload input=0.172999993 stored=0.172999993
+storage format=33327 write=render-target input=0.173089996 stored=0.172973633
+storage format=33327 write=upload input=0.173089996 stored=0.172973633
+storage format=33328 write=render-target input=0.173089996 stored=0.173089996
+storage format=33328 write=upload input=0.173089996 stored=0.173089996
+storage format=33327 write=render-target input=0.25 stored=0.25
+storage format=33327 write=upload input=0.25 stored=0.25
+storage format=33328 write=render-target input=0.25 stored=0.25
+storage format=33328 write=upload input=0.25 stored=0.25
+storage format=33327 write=render-target input=0.5 stored=0.5
+storage format=33327 write=upload input=0.5 stored=0.5
+storage format=33328 write=render-target input=0.5 stored=0.5
+storage format=33328 write=upload input=0.5 stored=0.5
+production field/raster/filter/storage/motion controls PASS

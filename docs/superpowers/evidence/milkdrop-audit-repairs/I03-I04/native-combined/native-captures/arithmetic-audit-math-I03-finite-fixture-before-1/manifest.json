@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditmathbefore",
+  "pid": 14640,
+  "job": {
+    "expectedPresetCount": 9609,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/audio.u8",
+    "preset": "audit math I03-finite-fixture.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "b0e93bd6712c38cf13d44aa8cacc2d526b4c49a3399153de1368f3551951c87e",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6ecc0c2ce9472cffe7e10be8e12d3158f49c8e49594435a7a879dd341521fe0d",
+      "pngBytes": 780863,
+      "pngSha256": "0b439fe134d814ba3fe9ab815da0fc61b2114c99548b6913183d0ed070377959",
+      "rgbMean": [
+        10.60258487654321,
+        0,
+        70.1696950954861
+      ],
+      "exactBlackFraction": 0.6154906925154321
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b57e144b368ac9a477e844037ba0e9af39b21d1b12e03ff25a36cfd11aee7682",
+      "pngBytes": 805576,
+      "pngSha256": "7f095561d2b7b4e9647ece2f31682f5c308954880fdbae8de38c24655a17b8be",
+      "rgbMean": [
+        10.492304205246914,
+        0,
+        107.08740945698302
+      ],
+      "exactBlackFraction": 0.4327276234567901
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f57e4489bd04cc65bb722f3e40f6b9dc89bab753a6e4b115d826c67fbe87163b",
+      "pngBytes": 787066,
+      "pngSha256": "9beb91ee511399d77e4e038658fa8fbd1ff310b7f0a5cc8f06e65a6be2cc4812",
+      "rgbMean": [
+        10.627744381751544,
+        0,
+        102.661474609375
+      ],
+      "exactBlackFraction": 0.4516538869598765
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0aa6a4034c7be8b9a1a696ec03ea48b99b123aa5a504e3929ee8a320829fd0b2",
+      "pngBytes": 963434,
+      "pngSha256": "b6650bd38a1000742eb829fae9aae33b6152a24dd1d56c83cfa1e35718799b2e",
+      "rgbMean": [
+        10.65283805941358,
+        0,
+        101.13399510513118
+      ],
+      "exactBlackFraction": 0.39098656925154324
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "dc4fea11c32abaa4b0a97a7c4abdeb99cd7b5111cd9d0fe79d7e88889f69c441",
+      "pngBytes": 1070824,
+      "pngSha256": "04b818a0f2f0956e3679a593837f0521844aed27fcbd3d77b35e4bb4d702b0cc",
+      "rgbMean": [
+        10.606871383101852,
+        0,
+        108.4687262490355
+      ],
+      "exactBlackFraction": 0.3802881462191358
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "7c72df5ae0999af5b37985cb1b63a558d2e92e086416a06674b312219904d1ba",
+      "pngBytes": 996101,
+      "pngSha256": "3df91ba61dde4347316c04600612ff7d8c1c87a18c2664b6a859260668c5d1f8",
+      "rgbMean": [
+        10.733167920524691,
+        0,
+        119.58595582561729
+      ],
+      "exactBlackFraction": 0.35799864969135803
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "5e186963cfe06a86da76eed4c3588b0d872b8f1b61560f01a8a10c8d1c202c4d",
+      "pngBytes": 1042220,
+      "pngSha256": "1d0efdaccaba61ae5c2db7609115584e5147e2952594e127f6d8b569e4946402",
+      "rgbMean": [
+        11.602673852237654,
+        0,
+        124.43431278935185
+      ],
+      "exactBlackFraction": 0.27930302372685184
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditmathbefore\/files\/native-trails\/arithmetic-audit-math-I03-finite-fixture-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "10850d8f6b00c43039f0e4cb44e6e320d1416225048a04ed6fa2c5a8fc209d8d",
+      "pngBytes": 988806,
+      "pngSha256": "b35f8dd27f2940dc6860f5d4120a0aa62def8454c7102dedd41fd5f2864e1665",
+      "rgbMean": [
+        11.923475477430555,
+        0,
+        140.99553084008488
+      ],
+      "exactBlackFraction": 0.16148316936728396
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 51821087,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9609,
+  "indexSha256": "57f9139654c6fa2633ad1b7f41bb5760dd603932a2fc1f4df3da34011d264dc5",
+  "presetAssetSha256": "d1d10cd816ae2b5776f379558b07eaca20dbb0aefe794456fd85552d92e32ca4",
+  "forcedPresetPrefix": "audit math I03-finite-fixture.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 15,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43244,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4820,
+  "pssAfterFramesKB": 71288,
+  "serializedFrameMeanMs": 1.4905678611111102,
+  "serializedFrameP90Ms": 1.816834,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit math I03-finite-fixture.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 5135
+}

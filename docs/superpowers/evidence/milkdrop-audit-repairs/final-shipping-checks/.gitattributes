@@ -1,0 +1,2 @@
+# Preserve raw Gradle output, including its emitted daemon-message space.
+final-shipping-android-build.txt whitespace=-blank-at-eol

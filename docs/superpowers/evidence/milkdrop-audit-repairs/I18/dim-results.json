@@ -1,0 +1,17 @@
+[
+  {
+    "brighten": -1,
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": false
+  },
+  {
+    "brighten": 0,
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": true
+  },
+  {
+    "brighten": 1,
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": true
+  }
+]

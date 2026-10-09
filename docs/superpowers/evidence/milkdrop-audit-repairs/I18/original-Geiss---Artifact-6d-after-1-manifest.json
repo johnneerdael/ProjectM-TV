@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 12213,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/audio.u8",
+    "preset": "Geiss - Artifact 6d.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "397520621ccb76f2101a8de5a5ade83fa3861030bbd1a93d54521c9a475bc228",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "2639cd664768480ee65c8e0f5b790eb454fbb72a0efd4ebdec4ff5b225b25143",
+      "pngBytes": 2129050,
+      "pngSha256": "945b9eaa3c76834d262c90eff8cb5de93ed0a37d76d1349210dff3e978caf9ff",
+      "rgbMean": [
+        7.206678481867284,
+        10.732563657407407,
+        13.133584346064815
+      ],
+      "exactBlackFraction": 0.7034124228395062
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6a882688d2856b814b0d828f0db685e60defe0bc57ae48426a044d6b00e6cc10",
+      "pngBytes": 1836680,
+      "pngSha256": "61b1763082dad114fd42e29964f109ee152032633955f841faec78db02f89c5d",
+      "rgbMean": [
+        3.9636472800925926,
+        6.088432677469136,
+        7.7391027681327165
+      ],
+      "exactBlackFraction": 0.7370882764274691
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f5bdb995a0b8d4533a43fb3adbc1e821340f6d89001b1eaf10f17e2b08991a0e",
+      "pngBytes": 1726470,
+      "pngSha256": "161b6a094457aeef6cc19a35415c4ea1afbe3f7104dee00b50bd01ad82ba8cf6",
+      "rgbMean": [
+        4.244203197337963,
+        6.366152946566358,
+        7.969668089313272
+      ],
+      "exactBlackFraction": 0.7459670380015432
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "39da2e5fedef09a662b43ca6042ccebcd9f79561f2ccc426a74d7f6ab16db287",
+      "pngBytes": 2864847,
+      "pngSha256": "dfe5462f46d4bda6e2164c24e789a27e1897484c9c3d3764144d9c8f837ebe78",
+      "rgbMean": [
+        14.582933545524691,
+        21.10024197048611,
+        25.369407793209877
+      ],
+      "exactBlackFraction": 0.6195926167052469
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "be700f67df359c9c137dd2f046654dde3694c5b697cc60e1417ff51f50f541df",
+      "pngBytes": 1577789,
+      "pngSha256": "0856d877708bde7f1fd799874a01b8954837ee33ffcf295825a55b4b4e1ed781",
+      "rgbMean": [
+        2.6120741705246915,
+        4.037686270254629,
+        5.208033733603395
+      ],
+      "exactBlackFraction": 0.758218074845679
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "29e509a4dbbfa220ee92078abc8a5a424f6c1149eec9eaa3d123a546b72bc080",
+      "pngBytes": 2091912,
+      "pngSha256": "993d22257578124add5d8fcc4b0b8df1c90210d338145a2e35fd0bfbdb3801bb",
+      "rgbMean": [
+        5.628600863233025,
+        8.63867561246142,
+        10.923027946566359
+      ],
+      "exactBlackFraction": 0.7030952208719136
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "fcea431e78ca4fad907d741aa134c2fd4de9878d84d47dbed315d7fede3d6f6c",
+      "pngBytes": 2006448,
+      "pngSha256": "b39d3250ae8b81cac4fba76f183d10c873d83b087076bf1b98aa9bbdb2015e72",
+      "rgbMean": [
+        5.293858627507716,
+        8.028896122685186,
+        10.128584346064814
+      ],
+      "exactBlackFraction": 0.7152464313271605
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-Geiss---Artifact-6d-after-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "86308137f9397d590629efafd8087b0bf38968e365f4db7b68c3dcf8489f6345",
+      "pngBytes": 1807474,
+      "pngSha256": "5f4a45724d4a623f5d194afc00d78a7c645cac8f73a6ffdf65e4b7f21c07b115",
+      "rgbMean": [
+        4.305614872685185,
+        6.617343870563271,
+        8.406386357060185
+      ],
+      "exactBlackFraction": 0.7372709297839506
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 37718947,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "a4a8d1b5cc46f2b60fce2493a8f44e4652b932656155bb7e75fe815c5d8e01b4",
+  "forcedPresetPrefix": "Geiss - Artifact 6d.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 15,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43401,
+  "framesRendered": 480,
+  "renderWallDurationMs": 6574,
+  "pssAfterFramesKB": 71768,
+  "serializedFrameMeanMs": 1.645164488888889,
+  "serializedFrameP90Ms": 1.94375,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Geiss - Artifact 6d.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 6891
+}

@@ -1,0 +1,7 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 5: warp-mesh-cache
+1/1 Test #5: warp-mesh-cache ..................   Passed    0.34 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.34 sec

@@ -1,0 +1,9 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 6: per-pixel-inverse-aspect
+1/2 Test #6: per-pixel-inverse-aspect .........   Passed    0.18 sec
+    Start 8: custom-wave-readonly-inputs
+2/2 Test #8: custom-wave-readonly-inputs ......   Passed    0.19 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.37 sec

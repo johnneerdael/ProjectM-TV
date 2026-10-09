@@ -1,0 +1,47 @@
+outer size=-0.25 alpha=0 target=8 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=0.0005 target=8 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=0.5 target=8 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=1 target=8 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0 target=8 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0.0005 target=8 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0.5 target=8 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=1 target=8 current00=0 originalfan00=0 same=1
+outer size=0.5 alpha=0 target=8 current00=0 originalfan00=0 same=1
+outer size=0.5 alpha=0.0005 target=8 current00=0 originalfan00=0 same=1
+outer size=0.5 alpha=0.5 target=8 current00=128 originalfan00=128 same=1
+outer size=0.5 alpha=1 target=8 current00=255 originalfan00=255 same=1
+outer size=1 alpha=0 target=8 current00=0 originalfan00=0 same=1
+outer size=1 alpha=0.0005 target=8 current00=0 originalfan00=0 same=1
+outer size=1 alpha=0.5 target=8 current00=128 originalfan00=128 same=1
+outer size=1 alpha=1 target=8 current00=255 originalfan00=255 same=1
+outer size=1.5 alpha=0 target=8 current00=0 originalfan00=0 same=1
+outer size=1.5 alpha=0.0005 target=8 current00=0 originalfan00=0 same=1
+outer size=1.5 alpha=0.5 target=8 current00=128 originalfan00=223 same=0
+outer size=1.5 alpha=1 target=8 current00=255 originalfan00=255 same=1
+outer size=-0.25 alpha=0 target=32 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=0.0005 target=32 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=0.5 target=32 current00=0 originalfan00=0 same=1
+outer size=-0.25 alpha=1 target=32 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0 target=32 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0.0005 target=32 current00=0 originalfan00=0 same=1
+outer size=0.1 alpha=0.5 target=32 current00=128 originalfan00=128 same=1
+outer size=0.1 alpha=1 target=32 current00=255 originalfan00=255 same=1
+outer size=0.5 alpha=0 target=32 current00=0 originalfan00=0 same=1
+outer size=0.5 alpha=0.0005 target=32 current00=0 originalfan00=0 same=1
+outer size=0.5 alpha=0.5 target=32 current00=128 originalfan00=128 same=1
+outer size=0.5 alpha=1 target=32 current00=255 originalfan00=255 same=1
+outer size=1 alpha=0 target=32 current00=0 originalfan00=0 same=1
+outer size=1 alpha=0.0005 target=32 current00=0 originalfan00=0 same=1
+outer size=1 alpha=0.5 target=32 current00=128 originalfan00=128 same=1
+outer size=1 alpha=1 target=32 current00=255 originalfan00=255 same=1
+outer size=1.5 alpha=0 target=32 current00=0 originalfan00=0 same=1
+outer size=1.5 alpha=0.0005 target=32 current00=0 originalfan00=0 same=1
+outer size=1.5 alpha=0.5 target=32 current00=128 originalfan00=223 same=0
+outer size=1.5 alpha=1 target=32 current00=255 originalfan00=255 same=1
+inner ob=0.1 ib=0.1 same=1
+inner ob=0.1 ib=0.5 same=1
+inner ob=0.1 ib=1.5 same=0
+inner ob=0.5 ib=0.1 same=1
+inner ob=0.5 ib=0.5 same=1
+inner ob=0.5 ib=1.5 same=0
+border topology cases=46 failures=4; exact-quarter same-alpha originalfan oracle, not original packing/D3D

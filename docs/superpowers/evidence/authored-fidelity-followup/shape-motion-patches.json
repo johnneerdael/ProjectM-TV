@@ -1,0 +1,21 @@
+[
+  {
+    "patch": "0032-live-shape-instance-thickness.patch",
+    "sha256": "a1c0dae19663d9f28513071da462e50dfdbd9bd7468660ca9905287ccdbdd0ae",
+    "source": "build/authored-followup/i24-prep/i24-captured-instance-thickness.patch",
+    "applied_source_sha256": {
+      "src/libprojectM/MilkdropPreset/CustomShape.hpp": "8d44e442c3d365bdfc0b2931756635aacdd9b12f2dc0d7a250fd1ff540515602",
+      "src/libprojectM/MilkdropPreset/CustomShape.cpp": "468644762d187a3d589e218ea6c5210526662a3a712e6d0614834b5d56b69fb4"
+    },
+    "normalization_preserves_source": true
+  },
+  {
+    "patch": "0033-latest-previous-motion-field.patch",
+    "sha256": "326077fc447f5941e607f40e871413863d704a2954aefd0e77305b3145bab496",
+    "source": "build/authored-followup/i16-qualified/proposed-real-warp-publication.patch",
+    "applied_source_sha256": {
+      "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": "5e6df4213bb2fd14b3af23d13ea52360f48e5a8129b7b8a16f0b6417f166a124"
+    },
+    "normalization_preserves_source": true
+  }
+]

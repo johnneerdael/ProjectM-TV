@@ -1,0 +1,15 @@
+# Shared evaluator build-policy proposal
+
+`evaluator-finite-source-property-engine.patch` replaces the previous app-only CMake proposal. It is a patch-series-ready diff against `vendor/projectm-eval/projectm-eval/CMakeLists.txt`; the parent assigns its canonical ordered number during integration. The proposed complete evaluator CMake text is retained as `evaluator-CMakeLists-proposed.txt`. No canonical patch or CMake file was edited, and no builds were run for this adaptation.
+
+Set the source COMPILE_OPTIONS property in the same directory that defines projectM_eval, after that target is created. Unlike the app-only proposal, TARGET_DIRECTORY is unnecessary in this scope. Clang, AppleClang and GNU receive `-fno-finite-math-only` for TreeFunctions.c. Source options follow existing directory/target options, so RelWithDebInfo/Release keeps `-O3 -ffast-math -fno-finite-math-only` in that order. Debug also receives the harmless finite-only override. Other evaluator sources retain their prior flags. Bundled evaluator host/engine consumers share the policy; externally supplied system evaluator binaries do not inherit it.
+
+Exact NDK and Apple host qualification already proved the option itself. The standalone CMake3.22 source-scope fixture proved property order; this new same-directory placement has not been configured or built. GNU's supported flag is proposed but not executed here. MSVC is deliberately excluded: its /fp options do not provide the same independently qualified narrow finite-only override. MSVC fast-math builds remain deferred rather than being described as safe, and no /fp policy or broader optimization switch is introduced.
+
+## Runtime evidence and additional behavior
+
+Parent-run records in android-runtime/results.json match the frozen binary hashes: Android I03 passes89/89, I04 passes76/76, and finite-policy baseline/both candidates pass20/20 outside-boundary controls. Original-flags baseline fails9/20 boundaries. The latter are eight pow/pow_op NaN controls plus invsqrt(NaN). This confirms the additional restoration rather than leaving it as an IR prediction.
+
+Explicit disposition is required for restored source-authored **pow/^/^= NaN→0 outside the tiny-base region** and **invsqrt NaN→0**. Treat them as protective evaluator behavior restored from existing code, not merely the small-finite division/power repair. No general NaN/Infinity clamp or new sanitizer is added. Outside-region overflow, division NaN/Infinity propagation, authored equation values passed to geometry/shaders, invalid negative GLSL power transport, JNI settings and prepared replay remain governed by their existing contracts. The compiler override touches evaluator arithmetic assumptions only; it does not edit renderer or native transport code.
+
+Do not retain the obsolete app-only CMake proposal in the integrated diff: use the evaluator patch so the engine's own build controls the policy. Raw/bit/pragma negative qualification artifacts remain preserved. Runtime/source proof is bug-specific; no full-corpus, Windows/MSVC or performance qualification follows from these controls.

@@ -1,0 +1,78 @@
+-- Building for OpenGL Embedded Profile
+--
+-- libprojectM v4.2.0
+-- ==============================================
+--
+--     prefix:                      /usr/local
+--     libdir:                      lib
+--     includedir:                  include
+--     bindir:                      bin
+--
+--     compiler:                    /work/cxx-wrapper
+--     cflags:
+--     cxxflags:
+--     ldflags:
+--
+-- Features:
+-- ==============================================
+--
+--     Build shared libraries:      OFF
+--     Filesystem support:          C++17 STL
+--     SDL2:                        OFF
+--     OpenGL ES:                   ON
+--     macOS Framework:             OFF
+--     Emscripten:                  OFF
+--     Use system GLM:              OFF
+--     Use system projectM-eval:    OFF
+--
+-- Targets and applications:
+-- ==============================================
+--
+--     libprojectM:                 (always built)
+--     Playlist library:            OFF
+--     SDL2 Test UI:                OFF
+--     Tests:                       OFF
+--     Documentation:               OFF
+--
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /work/build
+[1/12] Generating MilkdropStaticShaders.cpp, MilkdropStaticShaders.hpp
+[2/6] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropStaticShaders.cpp.o
+[3/6] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelMesh.cpp.o
+[4/6] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM.dir/__/__/dummy.cpp.o
+[5/6] Linking CXX static library projectm/src/libprojectM/libprojectM-4.a
+[6/6] Linking CXX executable warp-rotation-regressions
+Internal ctest changing into directory: /work/build
+UpdateCTestConfiguration  from :/work/build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/work/build/DartConfiguration.tcl
+Test project /work/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 54
+    Start 54: legacy-angle-seam
+
+54: Test command: /work/build/warp-rotation-regressions "angle-seam"
+54: Working Directory: /work/build
+54: Environment variables:
+54:  ASAN_OPTIONS=detect_leaks=0
+54:  EGL_PLATFORM=surfaceless
+54: Test timeout computed to be: 30
+54: GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+54: wrong exact-axis/default/custom equation angle at node 36
+1/1 Test #54: legacy-angle-seam ................***Failed    0.24 sec
+GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+wrong exact-axis/default/custom equation angle at node 36
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.25 sec
+
+The following tests FAILED:
+	 54 - legacy-angle-seam (Failed)
+Errors while running CTest

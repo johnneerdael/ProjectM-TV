@@ -1,0 +1,9 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/angle-seam-proposal/build
+    Start 1: angle-seam-contract
+1/2 Test #1: angle-seam-contract ..............   Passed    0.03 sec
+    Start 2: exact-stock-angle-stage
+2/2 Test #2: exact-stock-angle-stage ..........   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.04 sec

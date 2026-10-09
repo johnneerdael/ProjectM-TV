@@ -1,0 +1,380 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Publish motion UV with required integer half storage on GLES fallback
+
+Preserve RG16F shaders and filtering on capable contexts. Gate float UV allocation
+with GLES core/extension capability and an actual mixed-MRT probe. Otherwise use
+required RG16UI storage with half words, typed clearing and decode-before-bilinear
+consumers. Keep real fragment output/discard, primary color, dither, once-only
+geometry/replay and per-preset previous-field lifecycle. No new render exceptions
+or per-frame capability polling. OpenGL ES 3.0/GLSL ES 3.00 format/packing contracts
+provide the compatibility path; GLES 3.2 core float support remains eligible.
+
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -21,6 +21,7 @@
+
+ #include "MilkdropPreset.hpp"
+ #include "GeometryTargets.hpp"
++#include "MotionUV.hpp"
+ #include <optional>
+
+ #include "Factory.hpp"
+@@ -472,7 +473,10 @@
+ void MilkdropPreset::InitializePreset(PresetFileParser& parsedFile)
+ {
+     // Create the offscreen rendering surfaces.
+-    m_motionVectorUVMap = std::make_shared<Renderer::TextureAttachment>(GL_RG16F, GL_RG, GL_FLOAT, 0, 0);
++    m_state.motionUVPacked = !MotionUVFloatRenderable();
++    m_motionVectorUVMap = m_state.motionUVPacked
++        ? std::make_shared<Renderer::TextureAttachment>(GL_RG16UI, GL_RG_INTEGER, GL_UNSIGNED_SHORT, 0, 0)
++        : std::make_shared<Renderer::TextureAttachment>(GL_RG16F, GL_RG, GL_FLOAT, 0, 0);
+     m_framebuffer.CreateColorAttachment(0, 0); // Main image 1
+     m_framebuffer.CreateColorAttachment(1, 0); // Main image 2
+
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -1,4 +1,5 @@
+ #include "MilkdropShader.hpp"
++#include "MotionUV.hpp"
+
+ #include "LineGeometry.hpp"
+ #include "PerFrameContext.hpp"
+@@ -778,7 +779,9 @@
+                                           ? MilkdropStaticShaders::Get()->GetPresetWarpVertexShader()
+                                           : MilkdropStaticShaders::Get()->GetPresetCompVertexShader();
+
++    const bool packedMotion = m_type == ShaderType::WarpShader && presetState.motionUVPacked;
+     std::string cacheKey = shaderTypeString + '\0' + program;
++    if (packedMotion) cacheKey += "packed-motion-half-v1";
+     for (const auto& declaration : samplerDeclarations)
+     {
+         cacheKey += '\0' + declaration;
+@@ -859,8 +862,10 @@
+     // Now we have GLSL source for the preset shader program (hopefully it's valid!)
+     // Compile the preset shader fragment shader with the standard vertex shader and cross our fingers.
+     // Cached only after it compiled: a translation that fails to compile is not reused.
+-    m_shader.CompileProgram(vertexShader, generator.GetResult());
+-    TranslationCache::Instance().Store(cacheKey, generator.GetResult());
++    const std::string translated = packedMotion ? PackedMotionUVWarp(generator.GetResult(), true)
++                                                : std::string(generator.GetResult());
++    m_shader.CompileProgram(vertexShader, translated);
++    TranslationCache::Instance().Store(cacheKey, translated);
+ }
+
+ void MilkdropShader::UpdateMaxBlurLevel(BlurTexture::BlurLevel requestedLevel)
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/MotionUV.hpp
+@@ -0,0 +1,138 @@
++#pragma once
++
++#include <Renderer/OpenGL.h>
++#include <cstring>
++#include <regex>
++#include <stdexcept>
++#include <string>
++
++namespace libprojectM {
++namespace MilkdropPreset {
++
++// Test the exact mixed MRT before TextureAttachment allocates/clears float storage.
++// Deliberately context-local: prewarm and recreated contexts must make their own decision.
++inline bool MotionUVFloatRenderable()
++{
++#ifndef USE_GLES
++    return true; // RG16F is a required desktop GL color format; retain GLSL 330 verbatim.
++#else
++    GLint count = 0;
++    glGetIntegerv(GL_NUM_EXTENSIONS, &count);
++    GLint major = 0, minor = 0;
++    glGetIntegerv(GL_MAJOR_VERSION, &major);
++    glGetIntegerv(GL_MINOR_VERSION, &minor);
++    bool advertised = major > 3 || (major == 3 && minor >= 2); // RG16F color rendering is core in GLES 3.2.
++    for (GLint i = 0; i < count; ++i) {
++        const auto* extension = reinterpret_cast<const char*>(glGetStringi(GL_EXTENSIONS, i));
++        advertised |= extension && (std::strcmp(extension, "GL_EXT_color_buffer_float") == 0 ||
++                                    std::strcmp(extension, "GL_EXT_color_buffer_half_float") == 0);
++    }
++    if (!advertised) return false;
++    GLint read = 0, draw = 0, texture = 0, unpack = 0;
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &read);
++    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &draw);
++    glGetIntegerv(GL_TEXTURE_BINDING_2D, &texture);
++    glGetIntegerv(GL_PIXEL_UNPACK_BUFFER_BINDING, &unpack);
++    GLuint framebuffer = 0, textures[2] = {};
++    glGenFramebuffers(1, &framebuffer);
++    glGenTextures(2, textures);
++    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
++    glBindTexture(GL_TEXTURE_2D, textures[0]);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++    glBindTexture(GL_TEXTURE_2D, textures[1]);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, 1, 1, 0, GL_RG, GL_FLOAT, nullptr);
++    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures[0], 0);
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures[1], 0);
++    const GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
++    glDrawBuffers(2, buffers);
++    const bool complete = glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
++    // Never clear or draw to the rejected float target.
++    glBindFramebuffer(GL_READ_FRAMEBUFFER, read);
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw);
++    glBindTexture(GL_TEXTURE_2D, texture);
++    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, unpack);
++    glDeleteFramebuffers(1, &framebuffer);
++    glDeleteTextures(2, textures);
++    return complete;
++#endif
++}
++
++// GLSL ES 3.00 half packing preserves the RG16F representation, including signed/out-of-range
++// values. Encode only the final actual fragment output, after all authored coordinate writes.
++// A discard exits before this wrapper, retaining the previous stored coordinates at that pixel.
++inline std::string PackedMotionUVWarp(std::string source, bool custom)
++{
++    const std::regex main(R"(void\s+main\s*\(\s*\)\s*\{)");
++    if (!std::regex_search(source, main)) throw std::runtime_error("Missing warp GLSL entry point");
++    source = std::regex_replace(source, main, "void projectmtvMotionWarp() {",
++                                std::regex_constants::format_first_only);
++    if (custom) {
++        const std::string output = "out vec4 rast_FragData[2];";
++        const auto at = source.find(output);
++        if (at == std::string::npos) throw std::runtime_error("Missing custom motion UV output");
++        // Retain the generator's exact authored temporaries; only final MRT routing changes.
++        source.replace(at, output.size(), "vec4 rast_FragData[2];\nlayout(location = 0) out vec4 projectmtvWarpColor;\nlayout(location = 1) out highp uvec2 projectmtvPackedUV;");
++    } else {
++        const std::string output = "layout(location = 1) out vec2 texCoords;";
++        const auto at = source.find(output);
++        if (at == std::string::npos) throw std::runtime_error("Missing default motion UV output");
++        source.replace(at, output.size(), "vec2 texCoords;\nlayout(location = 1) out highp uvec2 projectmtvPackedUV;");
++    }
++    source += R"(
++precision highp int;
++highp uvec2 projectmtvEncodeMotionUV(highp vec2 uv)
++{
++    highp uint bits = packHalf2x16(uv);
++    return uvec2(bits & 65535u, bits >> 16u);
++}
++void main()
++{
++    projectmtvMotionWarp();
++)";
++    source += custom ? "    projectmtvWarpColor = rast_FragData[0];\n    projectmtvPackedUV = projectmtvEncodeMotionUV(rast_FragData[1].xy);\n}\n"
++                     : "    projectmtvPackedUV = projectmtvEncodeMotionUV(texCoords);\n}\n";
++    return source;
++}
++
++inline std::string PackedMotionUVConsumer(std::string source)
++{
++    const std::string sampler = "uniform sampler2D warp_coordinates;";
++    const auto samplerAt = source.find(sampler);
++    if (samplerAt == std::string::npos) throw std::runtime_error("Missing motion UV sampler");
++    source.replace(samplerAt, sampler.size(), "uniform highp usampler2D warp_coordinates;");
++    const auto read = source.find("texture(warp_coordinates,");
++    if (read == std::string::npos) throw std::runtime_error("Missing motion UV consumer lookup");
++    const auto end = source.find(").xy", read);
++    if (end == std::string::npos) throw std::runtime_error("Missing motion UV consumer channels");
++    // The lookup argument contains vec2(...); retain that exact coordinate expression.
++    const auto coordinate = read + std::strlen("texture(warp_coordinates,");
++    source.replace(read, end + 4 - read,
++                   "projectmtvSampleMotionUV(" + source.substr(coordinate, end - coordinate) + ")");
++    const auto main = source.find("void main");
++    if (main == std::string::npos) throw std::runtime_error("Missing motion UV consumer entry point");
++    source.insert(main, R"(
++precision highp int;
++highp vec2 projectmtvDecodeMotionUV(ivec2 pixel, ivec2 dimensions)
++{
++    // Integer textures cannot filter. Decode each real half texel before interpolation.
++    highp uvec2 words = texelFetch(warp_coordinates, clamp(pixel, ivec2(0), dimensions - 1), 0).xy;
++    return unpackHalf2x16(words.x | (words.y << 16u));
++}
++highp vec2 projectmtvSampleMotionUV(highp vec2 coordinate)
++{
++    ivec2 dimensions = textureSize(warp_coordinates, 0);
++    highp vec2 pixel = coordinate * vec2(dimensions) - 0.5;
++    ivec2 lower = ivec2(floor(pixel));
++    highp vec2 weight = fract(pixel);
++    return mix(mix(projectmtvDecodeMotionUV(lower, dimensions),
++                   projectmtvDecodeMotionUV(lower + ivec2(1, 0), dimensions), weight.x),
++               mix(projectmtvDecodeMotionUV(lower + ivec2(0, 1), dimensions),
++                   projectmtvDecodeMotionUV(lower + ivec2(1, 1), dimensions), weight.x), weight.y);
++}
++)");
++    return source;
++}
++
++} // namespace MilkdropPreset
++} // namespace libprojectM
+--- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
++++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
+@@ -1,4 +1,5 @@
+ #include "MotionVectors.hpp"
++#include "MotionUV.hpp"
+
+ #include "LineRenderer.hpp"
+ #include "FeedbackDiffusion.hpp"
+@@ -85,6 +86,7 @@
+
+     shader->SetUniformInt("warp_coordinates", 0);
+
++    if (m_presetState.motionUVPacked) m_sampler->FilterMode(GL_NEAREST);
+     motionTexture->Bind(0, m_sampler);
+
+     glVertexAttrib4f(1,
+@@ -159,10 +161,12 @@
+
+ std::shared_ptr<Renderer::Shader> MotionVectors::GetShader()
+ {
++    const std::string key = m_presetState.motionUVPacked ? "milkdrop_motion_vectors_packed_half"
++                                                       : "milkdrop_motion_vectors";
+     auto shader = m_motionVectorShader.lock();
+     if (!shader)
+     {
+-        shader = m_presetState.renderContext.shaderCache->Get("milkdrop_motion_vectors");
++        shader = m_presetState.renderContext.shaderCache->Get(key);
+     }
+     if (!shader)
+     {
+@@ -170,10 +174,12 @@
+         auto staticShaders = libprojectM::MilkdropPreset::MilkdropStaticShaders::Get();
+
+         shader = std::make_shared<Renderer::Shader>();
+-        shader->CompileProgram(staticShaders->GetPresetMotionVectorsVertexShader(),
++        shader->CompileProgram(m_presetState.motionUVPacked
++                                   ? PackedMotionUVConsumer(staticShaders->GetPresetMotionVectorsVertexShader())
++                                   : staticShaders->GetPresetMotionVectorsVertexShader(),
+                                staticShaders->GetUntexturedDrawFragmentShader());
+
+-        m_presetState.renderContext.shaderCache->Insert("milkdrop_motion_vectors", shader);
++        m_presetState.renderContext.shaderCache->Insert(key, shader);
+     }
+
+     m_motionVectorShader = shader;
+@@ -187,10 +193,12 @@
+     {
+         return {};
+     }
++    const std::string key = m_presetState.motionUVPacked ? "milkdrop_motion_vector_lines_packed_half"
++                                                       : "milkdrop_motion_vector_lines";
+     auto shader = m_motionVectorQuadShader.lock();
+     if (!shader)
+     {
+-        shader = m_presetState.renderContext.shaderCache->Get("milkdrop_motion_vector_lines");
++        shader = m_presetState.renderContext.shaderCache->Get(key);
+     }
+     if (!shader)
+     {
+@@ -198,7 +206,9 @@
+         shader = std::make_shared<Renderer::Shader>();
+         try
+         {
+-            shader->CompileProgram(staticShaders->GetMotionVectorLineVertexShader(),
++            shader->CompileProgram(m_presetState.motionUVPacked
++                                       ? PackedMotionUVConsumer(staticShaders->GetMotionVectorLineVertexShader())
++                                       : staticShaders->GetMotionVectorLineVertexShader(),
+                                    staticShaders->GetLineFragmentShader());
+         }
+         catch (const Renderer::ShaderException&)
+@@ -207,7 +217,7 @@
+             m_quadShaderFailed = true;
+             return {};
+         }
+-        m_presetState.renderContext.shaderCache->Insert("milkdrop_motion_vector_lines", shader);
++        m_presetState.renderContext.shaderCache->Insert(key, shader);
+     }
+     m_motionVectorQuadShader = shader;
+     return shader;
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -1,4 +1,5 @@
+ #include "PerPixelMesh.hpp"
++#include "MotionUV.hpp"
+
+ #include <array>
+
+@@ -444,7 +445,9 @@
+         return perPixelMeshShader;
+     }
+
+-    perPixelMeshShader = presetState.renderContext.shaderCache->Get("milkdrop_default_warp_shader");
++    const std::string key = presetState.motionUVPacked ? "milkdrop_default_warp_shader_packed_half"
++                                                      : "milkdrop_default_warp_shader";
++    perPixelMeshShader = presetState.renderContext.shaderCache->Get(key);
+     if (perPixelMeshShader)
+     {
+         return perPixelMeshShader;
+@@ -454,9 +457,11 @@
+
+     perPixelMeshShader = std::make_shared<Renderer::Shader>();
+     perPixelMeshShader->CompileProgram(staticShaders->GetLegacyPresetWarpVertexShader(),
+-                                       staticShaders->GetPresetWarpFragmentShader());
+-
+-    presetState.renderContext.shaderCache->Insert("milkdrop_default_warp_shader", perPixelMeshShader);
++                                       presetState.motionUVPacked
++                                           ? PackedMotionUVWarp(staticShaders->GetPresetWarpFragmentShader(), false)
++                                           : staticShaders->GetPresetWarpFragmentShader());
++
++    presetState.renderContext.shaderCache->Insert(key, perPixelMeshShader);
+     m_perPixelMeshShader = perPixelMeshShader;
+
+     return perPixelMeshShader;
+--- a/src/libprojectM/MilkdropPreset/PresetState.hpp
++++ b/src/libprojectM/MilkdropPreset/PresetState.hpp
+@@ -139,6 +139,7 @@
+
+     libprojectM::Audio::FrameAudioData audioData; //!< Holds audio/spectrum data and values for beat detection.
+     Renderer::RenderContext renderContext;        //!< Current renderer state data like viewport size and generic shaders.
++    bool motionUVPacked{false}; //!< Context-selected RG16UI half-bit storage for GLES float-FBO rejection.
+     bool compositeToDefaultFramebuffer{false};     //!< The final composite is drawn into the default framebuffer.
+
+     std::string perFrameInitCode; //!< Preset init code, run once on load.
+--- a/src/libprojectM/Renderer/TextureAttachment.cpp
++++ b/src/libprojectM/Renderer/TextureAttachment.cpp
+@@ -114,7 +114,7 @@
+                            : 0;
+     if (textureId != 0)
+     {
+-        ClearPooledTexture(textureId);
++        ClearPooledTexture(textureId, m_internalFormat == GL_RG16UI);
+         glBindTexture(GL_TEXTURE_2D, textureId);
+     }
+     else
+@@ -125,7 +125,7 @@
+         if (m_attachmentType == AttachmentType::Color)
+         {
+             // Fresh storage is undefined; feedback must start with the same black as pooled storage.
+-            ClearPooledTexture(textureId);
++            ClearPooledTexture(textureId, m_internalFormat == GL_RG16UI);
+         }
+     }
+
+@@ -143,7 +143,7 @@
+     }
+ }
+
+-void TextureAttachment::ClearPooledTexture(GLuint textureId)
++void TextureAttachment::ClearPooledTexture(GLuint textureId, bool integerColor)
+ {
+     // A local framebuffer cannot collide with a cached name from a lost context.
+     GLuint clearFramebuffer = 0;
+@@ -160,7 +160,10 @@
+     glDisable(GL_SCISSOR_TEST);
+     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+-    glClear(GL_COLOR_BUFFER_BIT);
++    if (integerColor) {
++        const GLuint zero[4] = {};
++        glClearBufferuiv(GL_COLOR, 0, zero);
++    } else glClear(GL_COLOR_BUFFER_BIT);
+     glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+     glColorMask(colorMask[0], colorMask[1], colorMask[2], colorMask[3]);
+     if (scissor == GL_TRUE)
+--- a/src/libprojectM/Renderer/TextureAttachment.hpp
++++ b/src/libprojectM/Renderer/TextureAttachment.hpp
+@@ -87,7 +87,7 @@
+     /**
+      * @brief Clears a texture taken from the pool to transparent black, like a new texture.
+      */
+-    static void ClearPooledTexture(GLuint textureId);
++    static void ClearPooledTexture(GLuint textureId, bool integerColor);
+
+     /**
+      * @brief Replaces the current texture with a new one, e.g. if the framebuffer was resized.

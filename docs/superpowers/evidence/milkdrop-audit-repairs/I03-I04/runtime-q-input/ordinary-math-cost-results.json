@@ -1,0 +1,13 @@
+{
+  "means": {
+    "before": 1.5230190787037041,
+    "after": 1.6481430805555557
+  },
+  "delta_pct": 8.215524257145157,
+  "cycles_pct": [
+    17.614627408758167,
+    0.016297116784280696,
+    6.491936695856704
+  ],
+  "scope": "runtimeQ ordinary pow/div/mod, identicalgeometry/output"
+}

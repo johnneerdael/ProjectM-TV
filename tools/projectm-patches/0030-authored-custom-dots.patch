@@ -1,0 +1,69 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Submit authored custom dots without line interpolation
+
+Follow MilkDrop 2.25c milkdropfs.cpp:2634,2677,2722-2726: discrete
+custom dots bypass line smoothing and keep their authored point count.
+Permit one dot, preserving its undefined normalized sample coordinate
+as NaN instead of inventing 0; point programs may overwrite finite
+position/color without using that input. Zero dots and lines with fewer
+than 2 points remain suppressed. Retain maximum buffer capacity, all
+line smoothing, Native dot styles and one-evaluation prepared replay.
+
+Original source: milkdrop2 f05b0d8, milkdropfs.cpp SHA256
+68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9.
+
+---
+
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -12,6 +12,7 @@
+ #include <algorithm>
+ #include <cassert>
+ #include <cmath>
++#include <limits>
+
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -116,7 +117,7 @@
+     const int separation = std::min(sampleCount - 1, std::max(0, m_sep));
+
+     // If there aren't enough samples to draw a single line or dot, skip drawing the waveform.
+-    if ((m_useDots && sampleCount < 1) || sampleCount < 2)
++    if (sampleCount < (m_useDots ? 1 : 2))
+     {
+         return;
+     }
+@@ -201,7 +202,11 @@
+     float const sampleMultiplicator = sampleCount > 1 ? 1.0f / static_cast<float>(sampleCount - 1) : 0.0f;
+     for (int sample = 0; sample < sampleCount; sample++)
+     {
+-        float const sampleIndex = static_cast<float>(sample) * sampleMultiplicator;
++        // MilkDrop's single-dot sample coordinate is 0/0. Preserve that
++        // nonfinite input; finite point code may overwrite position/color
++        // without using it. Do not invent a zero sample coordinate.
++        float const sampleIndex = sampleCount == 1 ? std::numeric_limits<float>::quiet_NaN()
++                                                  : static_cast<float>(sample) * sampleMultiplicator;
+         LoadPerPointEvaluationVariables(sampleIndex, sampleDataL[sample], sampleDataR[sample]);
+
+         m_perPointContext.ExecutePerPointCode();
+@@ -215,7 +220,19 @@
+                                                                  static_cast<float>(*m_perPointContext.a)));
+     }
+
+-    SmoothWave(points, colors);
++    if (m_useDots)
++    {
++        // Discrete authored points must not acquire line-smoothing midpoints.
++        // Keep the maximum-sized storage for later frames and Native replay.
++        std::copy(points.begin(), points.end(), m_mesh.Vertices().Get().begin());
++        std::copy(colors.begin(), colors.end(), m_mesh.Colors().Get().begin());
++        m_mesh.Indices().Resize(points.size());
++        m_mesh.Indices().MakeContinuous();
++    }
++    else
++    {
++        SmoothWave(points, colors);
++    }
+
+     const auto count = m_mesh.Indices().Size();
+     const auto& smoothedPoints = m_mesh.Vertices().Get();

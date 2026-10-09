@@ -1,0 +1,119 @@
+{
+  "scope": "Native4K finite/original fixtures as named; source-instrumented workers, not published shipping or Windows bytes",
+  "runs": 4,
+  "exact_repeat_groups": 2,
+  "selected_pngs_verified": 32,
+  "rows": [
+    {
+      "directory": "motion-field-oracle-v2-audit-motion-bilerp-native48x32-after-0",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-v2-audit-motion-bilerp-native48x32-after-1",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b",
+        "03553c40d704a6b63bcad6761e4ba5bf0dec4d48df2cd96f6a7571482b0f815b"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-v2-audit-motion-bilerp-native48x32-before-0",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-v2-audit-motion-bilerp-native48x32-before-1",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618",
+        "32d3464a6acf49083a21766ee14121f4d08c58e60d47acd50a22e81c98101618"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "preset": "audit motion bilerp native48x32.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.29840735918209876,
+          "changed_pixels": 67636
+        }
+      ]
+    }
+  ]
+}

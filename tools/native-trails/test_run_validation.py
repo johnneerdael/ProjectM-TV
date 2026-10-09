@@ -68,6 +68,7 @@ class CaptureTests(unittest.TestCase):
             pixels = np.array([[[10,20,30]]],dtype=np.uint8)
             cv2.imwrite(str(file),pixels)
             manifest['captures'].append({'frame':frame,'pngSha256':runner.file_digest(file),
+                'captureReadFramebufferBinding':0, 'previousReadFramebufferBinding':7,
                 'rgbSha256':hashlib.sha256(cv2.cvtColor(pixels,cv2.COLOR_BGR2RGB).tobytes()).hexdigest()})
         runner.write(path/'manifest.json',manifest)
         return request,manifest
@@ -94,6 +95,22 @@ class CaptureTests(unittest.TestCase):
             path = Path(temp); request,manifest = self.manifest(path)
             manifest['captures'].pop(); runner.write(path/'manifest.json',manifest)
             with self.assertRaisesRegex(ValueError,'temporal'): runner.verify(path,request,'preset-sha')
+
+    def test_intermediate_read_target_is_rejected_even_with_valid_pixels(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            manifest['captures'][0]['captureReadFramebufferBinding'] = 7
+            runner.write(path/'manifest.json',manifest)
+            with self.assertRaisesRegex(ValueError,'final-output read framebuffer'):
+                runner.verify(path,request,'preset-sha')
+
+    def test_unrecorded_read_target_cannot_certify_final_output(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            del manifest['captures'][0]['captureReadFramebufferBinding']
+            runner.write(path/'manifest.json',manifest)
+            with self.assertRaisesRegex(ValueError,'final-output read framebuffer'):
+                runner.verify(path,request,'preset-sha')
 
 
 class FakeADB:

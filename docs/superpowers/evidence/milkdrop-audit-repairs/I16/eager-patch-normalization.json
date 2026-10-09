@@ -1,0 +1,7 @@
+{
+  "raw_sha256": "4b046c913c299de09c48c26cf2e31f38db92d718b9f2a4623843ae4c3761f806",
+  "normalized_sha256": "d34c1abba05c46a5a203e261f87dec89e96222e78376cfdf58a4475838776b5a",
+  "applied_source_sha256": {
+    "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": "c078b9c1ae622eb58a99d5953da4c97b39ba7321d433831f4e71b18c2a552b71"
+  }
+}

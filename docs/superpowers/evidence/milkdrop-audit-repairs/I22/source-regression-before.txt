@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 6: custom-wave-discrete-dots
+1/1 Test #6: custom-wave-discrete-dots ........***Failed    0.38 sec
+finite two-point dot wave acquired an interpolated midpoint
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.39 sec
+
+The following tests FAILED:
+	  6 - custom-wave-discrete-dots (Failed)
+Errors while running CTest

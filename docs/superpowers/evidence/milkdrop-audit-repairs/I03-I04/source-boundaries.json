@@ -1,0 +1,148 @@
+{
+  "original_sources": [
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/ns-eel2/asm-nseel-x86-msvc.c",
+      "sha256": "57484a08429ff49067e99e618d1bae7b0b84edb3f737396193044ff5420458a2"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/ns-eel2/nseel-compiler.c",
+      "sha256": "68546ae66435f328b411dc84bc4d84fc3a618beb457ab384e0baafaf1fba8a28"
+    }
+  ],
+  "baseline_evaluator_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CMakeLists.txt",
+      "sha256": "e37c655c0bf9254968666591fb85a4ea357cfb1c904808a5baf9ba76a5fdce90"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CompileContext.c",
+      "sha256": "a5667c3f0527ed69ba93060d1ef60d0b8ca27acd5f8de8d9919df5609d458823"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CompileContext.h",
+      "sha256": "fe06f80ba52458cb096a7e18d33512a2a78d8ea2f64596dd3187079e0f3bbce1"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Compiler.c",
+      "sha256": "c3585524374683a04069f66181275f00b6aba783ac317230b575475ab089aaee"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Compiler.h",
+      "sha256": "3400290695f0b43f44206fffeec9969aea5a18f6bb9bdd4262edd2f1c8a6fa38"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Compiler.y",
+      "sha256": "d07f1f2737e9e4444c4adce5f1d3d6fb5da3120c59e7d02eb370a8be9e159afd"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CompilerFunctions.c",
+      "sha256": "bb480770eaee55141e31163cef70500b8150c02d160be97a97213fb84755768f"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CompilerFunctions.h",
+      "sha256": "f1a37997a3be8119cb1e09d103f2a3d47602d52a3d15cbe9ef7b845b962833c0"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/CompilerTypes.h",
+      "sha256": "43fea2e9e51a16c4d8f611047209b6d4115017c6e39430dd47f5c6c4e633e641"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/ExpressionTree.c",
+      "sha256": "84be0ffcc1886f55dc0fcb2e92e59461c48ba9f0ac2495adb262151c5e7daf1c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/ExpressionTree.h",
+      "sha256": "c6b3cee5cf05bec9b481c17817ca7b15960ace19f1ec9678b47b53aa6a5b0b24"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/MemoryBuffer.c",
+      "sha256": "8c23249067422890578ad60a07677b2fff6f5713bb7eb5ee01bf69c1a9009773"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/MemoryBuffer.h",
+      "sha256": "7cb8ac4f643ba56197b428ac8d8ec639e7dd75bd46c49bcf3c8ce337e8b999fe"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Scanner.c",
+      "sha256": "eaa2f7502bde33bd2da7624415a7e8b7246b31e536e35c69835c0565e415dfad"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Scanner.h",
+      "sha256": "745d4ddad0810a07cf5a1ba3b305c86e670575652883ef81634cb48e1ca90189"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/Scanner.l",
+      "sha256": "de73c1bc06c90a0f2cb9bf599ec9e9ded8b0bf23c20ed16f3b816064f8c482a4"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/TreeFunctions.c",
+      "sha256": "f62f7f1afe154251460f900c8237e4d3c6607f27a5e1c3a7e565420c9abd39ab"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/TreeFunctions.h",
+      "sha256": "0b3b9fd238513f6e64c4b7ac82df9544ad40dcad3ab8fa6c3c9861aada751eaa"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/TreeVariables.c",
+      "sha256": "3c6c929403dea7ac2918119d71cc7147d66ce99efc333e27faa754d6851e44bc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/TreeVariables.h",
+      "sha256": "5ff712096129d1a837a8a11ada5cdea2c6b63afde09a5c52cd0db0a4345724fc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/api/projectm-eval.c",
+      "sha256": "e11d9cb655667310a29536efd8e2d59954a788618a5d190cd574387bb980e07d"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/api/projectm-eval.h",
+      "sha256": "8c2b3c14baebe477042e6f380f63c782910ead225d55a8dd5cf7885c7b082674"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/install-pkgconfig.cmake.in",
+      "sha256": "25e937a174e0a776d427fc98b8ca6b6a3dd1560427be8bd2d0f408e15a106e5c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/projectM-EvalConfig.cmake.in",
+      "sha256": "826a4882f3a8565dc8a57afe32c4027249e4fca247f26249c21e8ea94116ea6b"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/baseline/projectm-eval/projectm-eval.pc.in",
+      "sha256": "464d60a856c6717f4b9c49b64ff51e6c740ab0e05250374df6bb1ee100b6d5d4"
+    }
+  ],
+  "candidate": {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/390 threx no more warningsce Rumbo Pal Recodo.milk",
+    "sha256": "ae12392bb5713fddc484b5835209b374ff9646781e48d9bbd164bec7785d7b70"
+  },
+  "candidate_lines": [
+    {
+      "line": 698,
+      "text": "shape_3_per_frame11=x= (int(x)-x+x%2)*pow(-1,1+int(x));"
+    },
+    {
+      "line": 699,
+      "text": "shape_3_per_frame12=y= (int(y)-y+y%2)*pow(-1,1+int(y));"
+    }
+  ],
+  "proposals": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/I03-proposal.patch",
+      "sha256": "d90094c9001a0ae057188b7e2d72f367bf885b2bf121917f2e61de69b40eeb84"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/I04-proposal.patch",
+      "sha256": "7cb42cae67cbb39379a369eb4509d91d6ddf9554c7c27ad6b5f5cfa708b03f40"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/I03-finite-fixture.milk",
+      "sha256": "d1d10cd816ae2b5776f379558b07eaca20dbb0aefe794456fd85552d92e32ca4"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/I04-finite-fixture.milk",
+      "sha256": "7ff02be8d7bac4aaf702d3026db1bcc8071b72237d325619cea062497b13a9f0"
+    }
+  ]
+}

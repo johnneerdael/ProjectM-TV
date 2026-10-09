@@ -1,0 +1,216 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpusrebasecandidate",
+  "pid": 6240,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/audio.u8",
+    "preset": "Mig_304 - geiss remix 2.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "44f4b9dc2e9296cfc78a6baedcb6f78b3eee9890d7af99c107ecd1f95c10b719",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "749d115e398adea3ada06098af17d814b44b18dc19aacfea7e3de4d61753f6e8",
+      "pngBytes": 212614,
+      "pngSha256": "be1dc55f438c1c4701223c0f74ebc47dfa98fce41067fceaed81fd01698c04ad",
+      "rgbMean": [
+        5.672789834104938,
+        4.308565297067902,
+        6.178773027584876
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "05f94c5763f3f920394fd3205f6f52fab495822550defd1f2965b232f64fe05f",
+      "pngBytes": 206904,
+      "pngSha256": "b26b49af49cbd1e48c643564239f9dede1868ff6960ff0c6d2f5e2e687b23364",
+      "rgbMean": [
+        6.8192895206404325,
+        5.5414133632330245,
+        7.009641083140432
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "7942902d36a9560769e84a61928cdb15870811e32e69ce222200463d3b367aa7",
+      "pngBytes": 187216,
+      "pngSha256": "4222d6f59455df18d5b61b8fe92f4d72b4abbd232d81591ae01d628a9baa85f8",
+      "rgbMean": [
+        6.995742428626543,
+        5.477566309799383,
+        7.1066796875
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "401b4036121cd7c8a6ad748766d70afe696a771b3d82d0681e9584cccf060bf6",
+      "pngBytes": 167465,
+      "pngSha256": "9a52f8b68bd0dcec251885baa3518a527272917a2468219b1da04a581ac26b26",
+      "rgbMean": [
+        6.598651017554013,
+        5.496813994984568,
+        6.9564158950617285
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9934ef8c2a25fbac06d3188d0ddd938d47cd68507b39cbd75ded6aebea45fbea",
+      "pngBytes": 161992,
+      "pngSha256": "452cfaf42e74ea6d210e405bc857cae829e297452030f18cbd57fc9f9971fde9",
+      "rgbMean": [
+        6.4695030381944445,
+        6.053955439814815,
+        6.963372034143519
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0d4b4a224e4010d04f968685bf2beeb3525bcca9abdaf60410b537accee732a6",
+      "pngBytes": 186005,
+      "pngSha256": "6a14e94183fced3068a2ed02da861157bfaef859b38dff0e950dd1b884f93c50",
+      "rgbMean": [
+        6.506697892554012,
+        6.059459394290124,
+        7.118323688271605
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f61785c3f28717d3f54ecc93f71a6661fc445e4a90a00199ddb2bb08370b973a",
+      "pngBytes": 228579,
+      "pngSha256": "480872ee6978e1feb89a67ddabdd0040f93a98991d1ae006207edefc22c8e5f7",
+      "rgbMean": [
+        7.01920826099537,
+        6.098064236111111,
+        7.665684558256173
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpusrebasecandidate\/files\/native-trails\/i08-api34-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b98aa93ef24c902cb09da7684d26d407e19bf943697834a7f9391167ecab619c",
+      "pngBytes": 237593,
+      "pngSha256": "36a155907b0a7d817194e56bb029b007659fca0b43f197ddd85358b61cfa6ee1",
+      "rgbMean": [
+        7.308843315972222,
+        6.172040171682099,
+        8.170998746141976
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 3073993,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "7ce8638f68118846bf4a4ed71f96c24a5e030767fb3f4511885dffe45e556e96",
+  "forcedPresetPrefix": "Mig_304 - geiss remix 2.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 19,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43934,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4456,
+  "pssAfterFramesKB": 72297,
+  "serializedFrameMeanMs": 2.490418744444443,
+  "serializedFrameP90Ms": 3.423292,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Mig_304 - geiss remix 2.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 4803
+}

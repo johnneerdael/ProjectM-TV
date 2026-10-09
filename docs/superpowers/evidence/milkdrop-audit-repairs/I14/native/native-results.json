@@ -1,0 +1,119 @@
+{
+  "scope": "Native4K finite/original fixtures as named; source-instrumented workers, not published shipping or Windows bytes",
+  "runs": 4,
+  "exact_repeat_groups": 2,
+  "selected_pngs_verified": 32,
+  "rows": [
+    {
+      "directory": "motion-field-oracle-audit-motion-bilerp-native48x32-after-0",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-audit-motion-bilerp-native48x32-after-1",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584",
+        "660d5ff27a3a5bcb4db45ba19c3aa30e44bb29f064898324fb305f2391ee7584"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-audit-motion-bilerp-native48x32-before-0",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee"
+      ]
+    },
+    {
+      "directory": "motion-field-oracle-audit-motion-bilerp-native48x32-before-1",
+      "preset": "audit motion bilerp native48x32.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee",
+        "30b0268fa50ba031fbc6413d5f499d9620ac6546be57101a05c03224d44474ee"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "preset": "audit motion bilerp native48x32.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.2805883487654321,
+          "changed_pixels": 67878
+        }
+      ]
+    }
+  ]
+}

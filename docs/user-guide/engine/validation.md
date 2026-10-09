@@ -83,3 +83,11 @@ Every reviewed pull request and every merge to `main` runs, before anything is p
 - a strict build of this guide.
 
 A merge publishes a versioned APK and core AAR only after the full suite passes.
+
+## Authored-fidelity followup
+
+The five added patches0029–0033 have63 normal/sanitizer renderer controls, including sample counts, discrete/single dots, circle closure, per-instance style/domain/replay and actual previous-field publication/consumption. Partial feedback initialization failures exercise real constructor unwind and fallback. Linux controls retain the unchanged mediump shader and document their same-backend arithmetic-reference premise.
+
+The focused Native4K checkpoint contains76 before/after jobs across19 originals/fixtures, with608 selected final-output RGB captures verified and repeated. Four active-canvas production JNI lifecycle jobs verify120 boundary captures within matching schedules/context generations. Both use frozen audio/seed/clock and artifact identities. The zero-reference lifecycle runs are kept separately as inactive/fallback evidence. [Evidence and review images](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/authored-fidelity-followup/README.md).
+
+These selected captures are not an all-frame or whole-library certification. JNI pbuffer checks do not establish Activity Home/real-audio recovery, actual memory exhaustion or physical-TV performance. The isolated seven-workload84-job cost matrix verifies672 selected captures and reports per-workload/cycle deltas. It does not establish physical-TV headroom. Final PR CI is a separate acceptance gate.

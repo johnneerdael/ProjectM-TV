@@ -1,0 +1,34 @@
+[
+  {
+    "patch": "0029-original-line-sample-caps.patch",
+    "proposal": "I19/proposed-width-cap.patch",
+    "sha256": "275277d85db16912e93c7225ef2feae15e38076e1d21fccdbbcfe0a3e87225ff",
+    "files": {
+      "src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp": "fed38af3d3de4fc1f9a32c280b11fd4c11461bbb3167b70a3d43d87fb8dae7b2",
+      "src/libprojectM/MilkdropPreset/Waveforms/Line.cpp": "bfa86475801aca24732f93f7e36bb80dc05a364c0a855e597ad38ae9196adcad",
+      "src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp": "3291c5a4b92f5ea48fccd47a058e278fcd7a9afce375e4dd77344866d64f2ffc"
+    },
+    "blank_context_shorthand_applies_by_default": true,
+    "normalized_applied_bytes_identical": true
+  },
+  {
+    "patch": "0030-authored-custom-dots.patch",
+    "proposal": "I22/proposed-custom-dots.patch",
+    "sha256": "303f3cc60ec2cda45de1c280c94dda05da4798e63ddde439153782fda9e35b3c",
+    "files": {
+      "src/libprojectM/MilkdropPreset/CustomWaveform.cpp": "20d45e9ee573d5409e0fe9420802bc5cf37f40d6037cac8347eccd26e28d36a8"
+    },
+    "blank_context_shorthand_applies_by_default": true,
+    "normalized_applied_bytes_identical": true
+  },
+  {
+    "patch": "0031-original-circle-closure.patch",
+    "proposal": "I20/proposed-circle-source-closure.patch",
+    "sha256": "7bdb26d64f82c43c27f9f39f31ea6d3cf5073d1479c876cd185747eedaa4535b",
+    "files": {
+      "src/libprojectM/MilkdropPreset/Waveforms/Circle.cpp": "e3618e8888b5cdf91f713831de8e4fbc832d05b9d015fe04d9db482ca892f7e5"
+    },
+    "blank_context_shorthand_applies_by_default": true,
+    "normalized_applied_bytes_identical": true
+  }
+]

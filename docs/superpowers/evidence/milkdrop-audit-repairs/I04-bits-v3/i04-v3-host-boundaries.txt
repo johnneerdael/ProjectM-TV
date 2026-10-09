@@ -1,0 +1,41 @@
+BOUNDARY_JSON {"name":"q=pow(a,b); outside invalid fraction baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":-1,"negativeZero":false},"b":{"class":"finite","value":0.5,"negativeZero":false}}
+OBSERVE q=pow(a,b); outside invalid fraction baseline policy q=0 a=-1 b=0.5 expected=0
+BOUNDARY_JSON {"name":"q=pow(a,b); outside NaN exponent baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"nan"}}
+OBSERVE q=pow(a,b); outside NaN exponent baseline policy q=0 a=2 b=nan expected=0
+BOUNDARY_JSON {"name":"q=pow(a,b); outside overflow retained","policySensitive":false,"q":{"class":"inf","negative":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"finite","value":1024,"negativeZero":false}}
+PASS q=pow(a,b); outside overflow retained q=inf a=2 b=1024 expected=inf
+BOUNDARY_JSON {"name":"q=pow(a,b); outside finite unchanged","policySensitive":false,"q":{"class":"finite","value":8,"negativeZero":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"finite","value":3,"negativeZero":false}}
+PASS q=pow(a,b); outside finite unchanged q=8 a=2 b=3 expected=8
+BOUNDARY_JSON {"name":"q=a^b; outside invalid fraction baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":-1,"negativeZero":false},"b":{"class":"finite","value":0.5,"negativeZero":false}}
+OBSERVE q=a^b; outside invalid fraction baseline policy q=0 a=-1 b=0.5 expected=0
+BOUNDARY_JSON {"name":"q=a^b; outside NaN exponent baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"nan"}}
+OBSERVE q=a^b; outside NaN exponent baseline policy q=0 a=2 b=nan expected=0
+BOUNDARY_JSON {"name":"q=a^b; outside overflow retained","policySensitive":false,"q":{"class":"inf","negative":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"finite","value":1024,"negativeZero":false}}
+PASS q=a^b; outside overflow retained q=inf a=2 b=1024 expected=inf
+BOUNDARY_JSON {"name":"q=a^b; outside finite unchanged","policySensitive":false,"q":{"class":"finite","value":8,"negativeZero":false},"a":{"class":"finite","value":2,"negativeZero":false},"b":{"class":"finite","value":3,"negativeZero":false}}
+PASS q=a^b; outside finite unchanged q=8 a=2 b=3 expected=8
+BOUNDARY_JSON {"name":"q=(a^=b); outside invalid fraction baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":0,"negativeZero":false},"b":{"class":"finite","value":0.5,"negativeZero":false}}
+OBSERVE q=(a^=b); outside invalid fraction baseline policy q=0 a=0 b=0.5 expected=0
+BOUNDARY_JSON {"name":"q=(a^=b); outside NaN exponent baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":0,"negativeZero":false},"b":{"class":"nan"}}
+OBSERVE q=(a^=b); outside NaN exponent baseline policy q=0 a=0 b=nan expected=0
+BOUNDARY_JSON {"name":"q=(a^=b); outside overflow retained","policySensitive":false,"q":{"class":"inf","negative":false},"a":{"class":"inf","negative":false},"b":{"class":"finite","value":1024,"negativeZero":false}}
+PASS q=(a^=b); outside overflow retained q=inf a=inf b=1024 expected=inf
+BOUNDARY_JSON {"name":"q=(a^=b); outside finite unchanged","policySensitive":false,"q":{"class":"finite","value":8,"negativeZero":false},"a":{"class":"finite","value":8,"negativeZero":false},"b":{"class":"finite","value":3,"negativeZero":false}}
+PASS q=(a^=b); outside finite unchanged q=8 a=8 b=3 expected=8
+BOUNDARY_JSON {"name":"q=_powop(a,b); outside invalid fraction baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":0,"negativeZero":false},"b":{"class":"finite","value":0.5,"negativeZero":false}}
+OBSERVE q=_powop(a,b); outside invalid fraction baseline policy q=0 a=0 b=0.5 expected=0
+BOUNDARY_JSON {"name":"q=_powop(a,b); outside NaN exponent baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"finite","value":0,"negativeZero":false},"b":{"class":"nan"}}
+OBSERVE q=_powop(a,b); outside NaN exponent baseline policy q=0 a=0 b=nan expected=0
+BOUNDARY_JSON {"name":"q=_powop(a,b); outside overflow retained","policySensitive":false,"q":{"class":"inf","negative":false},"a":{"class":"inf","negative":false},"b":{"class":"finite","value":1024,"negativeZero":false}}
+PASS q=_powop(a,b); outside overflow retained q=inf a=inf b=1024 expected=inf
+BOUNDARY_JSON {"name":"q=_powop(a,b); outside finite unchanged","policySensitive":false,"q":{"class":"finite","value":8,"negativeZero":false},"a":{"class":"finite","value":8,"negativeZero":false},"b":{"class":"finite","value":3,"negativeZero":false}}
+PASS q=_powop(a,b); outside finite unchanged q=8 a=8 b=3 expected=8
+BOUNDARY_JSON {"name":"outside division NaN retained","policySensitive":false,"q":{"class":"nan"},"a":{"class":"nan"},"b":{"class":"finite","value":2,"negativeZero":false}}
+PASS outside division NaN retained q=nan a=nan b=2 expected=nan
+BOUNDARY_JSON {"name":"outside division Infinity retained","policySensitive":false,"q":{"class":"inf","negative":false},"a":{"class":"inf","negative":false},"b":{"class":"finite","value":2,"negativeZero":false}}
+PASS outside division Infinity retained q=inf a=inf b=2 expected=inf
+BOUNDARY_JSON {"name":"invsqrt NaN baseline policy","policySensitive":true,"q":{"class":"finite","value":0,"negativeZero":false},"a":{"class":"nan"},"b":{"class":"finite","value":0,"negativeZero":false}}
+OBSERVE invsqrt NaN baseline policy q=0 a=nan b=0 expected=0
+BOUNDARY_JSON {"name":"invsqrt ordinary unchanged","policySensitive":false,"q":{"class":"finite","value":0.99830814271181434,"negativeZero":false},"a":{"class":"finite","value":1,"negativeZero":false},"b":{"class":"finite","value":0,"negativeZero":false}}
+PASS invsqrt ordinary unchanged q=0.99830814271181434 a=1 b=0 expected=0.99830814271181434
+boundaries executed=20 failures=0 unsafe_baseline_skips=0

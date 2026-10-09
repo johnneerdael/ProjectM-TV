@@ -1,0 +1,8 @@
+{
+  "means": {
+    "before": 1.5574080083333337,
+    "after": 1.5532080925925924
+  },
+  "delta_pct": -0.26967343934720667,
+  "scope": "literal operations folded at compile time; no runtime callback cost proof"
+}

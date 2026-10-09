@@ -1,0 +1,12 @@
+{"issue": "I12-isolated", "cycle": 0, "step": 0, "role": "before", "mean_ms": 5.010371288888888, "p90_ms": 5.428583, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 0, "step": 1, "role": "after", "mean_ms": 4.733802350000002, "p90_ms": 5.035209, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 0, "step": 2, "role": "after", "mean_ms": 5.326630213888892, "p90_ms": 6.300209, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 0, "step": 3, "role": "before", "mean_ms": 4.940123727777779, "p90_ms": 5.305291, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 1, "step": 0, "role": "before", "mean_ms": 5.077075791666668, "p90_ms": 5.431375, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 1, "step": 1, "role": "after", "mean_ms": 4.705636958333335, "p90_ms": 5.113583, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 1, "step": 2, "role": "after", "mean_ms": 4.668689838888885, "p90_ms": 5.094042, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 1, "step": 3, "role": "before", "mean_ms": 4.850566666666664, "p90_ms": 5.391625, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 2, "step": 0, "role": "before", "mean_ms": 4.959665136111111, "p90_ms": 5.512167, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 2, "step": 1, "role": "after", "mean_ms": 4.607925225000004, "p90_ms": 4.950791, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 2, "step": 2, "role": "after", "mean_ms": 4.61369753611111, "p90_ms": 5.053292, "status": "ok"}
+{"issue": "I12-isolated", "cycle": 2, "step": 3, "role": "before", "mean_ms": 4.576089152777776, "p90_ms": 4.96925, "status": "ok"}

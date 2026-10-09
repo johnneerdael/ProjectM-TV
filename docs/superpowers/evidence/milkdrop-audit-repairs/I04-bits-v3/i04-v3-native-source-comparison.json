@@ -1,0 +1,9 @@
+{
+  "root_source": "build/audit/i04-bits-v3-engine/vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+  "root_sha256": "41e33e9a8492c8ae3908c2007362a82e04da53d0d01d12c897384cb11b37435a",
+  "native_source": "build/audit/i04-bits-v3-native-workers/candidate-native/snapshots/engines/2cbde0d162d00491ca23b3936dd5c7c5df631c8eb5a79fe06e4b918275c1bf3f/vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+  "native_sha256": "cdd3b9d1d2ef93b3825d7e0e487cecf3d00f08851b7ba1c3c405ceae7bd55046",
+  "diff": "--- \n+++ \n@@ -1,3 +1,4 @@\n+#include <stdlib.h>\n /**\n  * @file TreeFunctions.c\n  * @brief Implements all intrinsic projectM-EvalLib functions and helpers.\n@@ -168,7 +169,7 @@\n \n     if (!mti)\n     {\n-        uint32_t s = 0x4141f00d; // Initial Mersenne Twister seed\n+        uint32_t s = getenv(\"PRESET_LAB_SEED\") ? (uint32_t)strtoul(getenv(\"PRESET_LAB_SEED\"), NULL, 10) : 0x4141f00d;\n         mt[0] = s & 0xffffffffUL;\n         for (mti = 1; mti < N; mti++)\n         {\n",
+  "scope": "Only declared standard lab seed/stdlib source instrumentation outside remainder proposal permitted",
+  "exact_declared_instrumentation_only": true
+}

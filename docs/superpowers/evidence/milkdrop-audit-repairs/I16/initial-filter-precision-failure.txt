@@ -1,0 +1,3 @@
+field frame=0 alpha=1 prior=0,0 published=0.562255859,0.49987793 observed_publication_generation=0 mesh_evaluations=1617 UV=256x144 custom=0 detail=0 eager_oracle=0
+frame=1 endpoint=0.5625,0.5 storedPrevious=0.562256,0.499878 mv_l=1
+actual motion did not query pre-warp published texture

@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditi01policy",
+  "pid": 21054,
+  "job": {
+    "expectedPresetCount": 9614,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/audio.u8",
+    "preset": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "48ea53b0ac694e53df8afc9df8850c4beb9cee2f911513ee7cccbcff88171c09",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "dcaaaf28a66d78edb07305d1b3349692b04486af81f6d4354abfb56b71d40b18",
+      "pngBytes": 1347865,
+      "pngSha256": "5e551d9ba298403f2723a51742846dd052b2ad07a028e90952aa0b761aac2582",
+      "rgbMean": [
+        29.43725344810957,
+        6.605795114776234,
+        34.677725573881176
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "aa2ac88697557c8d7185e6eb633bba5d6eea7c59ec450393127b7f0e8a72d4e7",
+      "pngBytes": 1313379,
+      "pngSha256": "2d44d0caebc72c64ed1e9cd45f08ba7d98e862dd063214d6e2336ff8f42a4f56",
+      "rgbMean": [
+        28.849262514467593,
+        9.243659577546296,
+        32.07996588059414
+      ],
+      "exactBlackFraction": 5.701437114197531E-4
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "55dfe66ce678a0e42c6c509ad5d1ad668dbe74d30e1e2d8a1e9d708b0677dd40",
+      "pngBytes": 736827,
+      "pngSha256": "07639b3065f0976b7795a433067b0e36ddfecd59a3687e112367ac5f4b136566",
+      "rgbMean": [
+        22.755205198688273,
+        10.544062741126544,
+        26.081568287037037
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e7338ceb50759b4e3018af73cddd8922336de1e185d1d4a2d44c2358aa8e9e6e",
+      "pngBytes": 907116,
+      "pngSha256": "d603c33a8eeaed3271f24d11f709ab1e77a01cb82227af3aa9c1e45d8b0932fc",
+      "rgbMean": [
+        19.736074701003087,
+        14.405503110532408,
+        22.517796465084878
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "335ca12af68880c1ae48b860a9ed350b2015c0f0cb18eeb78241f0d0936b5dce",
+      "pngBytes": 1448300,
+      "pngSha256": "bf0a8060e0bc0cf3d76ad8dd231358d8a51c08adb7fa380cb071c8f50e636087",
+      "rgbMean": [
+        23.47730914834105,
+        22.990653694058643,
+        24.74483687789352
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8d2a4777840a0e826a2cf54709a36bcea2d9dab01503c88c66b3ed35f0558961",
+      "pngBytes": 1928326,
+      "pngSha256": "6ad9c11be54f78f579f93786c6430c4e7ea4295485153de6a5a305b187a3741b",
+      "rgbMean": [
+        19.57329921392747,
+        31.930584852430556,
+        18.049387418016977
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "4665b53c23a192a2267b1366a5a8b8006b6421dfc9b2ef8727992eed5358faa0",
+      "pngBytes": 1131749,
+      "pngSha256": "f3d2fb1fcc5658b5d138c9f54b6d3d71b8bf9d6ef002dbdeb7c82bf91c570661",
+      "rgbMean": [
+        19.798013237847222,
+        41.33963794849537,
+        16.920494550540123
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "1330b6881e33d235055da56d584072f5fc492e6461ad79da991ea033c5756857",
+      "pngBytes": 2451209,
+      "pngSha256": "08b57f9bc29926d812aae9e2ea9da9fd3fc0b95038364afcb32150b819ca9df1",
+      "rgbMean": [
+        16.07091290509259,
+        38.73791895736883,
+        21.417896291473767
+      ],
+      "exactBlackFraction": 4.846643518518518E-5
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 42901952,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9614,
+  "indexSha256": "3d0e9ccbe5f9802e9c99bbc1992e79e6bac2324c9aefa1bbe9b83e521ba16e6e",
+  "presetAssetSha256": "23edd9a5320ffb84073dc5bd34fbeb6964dcae5d2f30f3e291ba126498b34d93",
+  "forcedPresetPrefix": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-def",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 20,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43320,
+  "framesRendered": 480,
+  "renderWallDurationMs": 6166,
+  "pssAfterFramesKB": 71702,
+  "serializedFrameMeanMs": 2.365797588888888,
+  "serializedFrameP90Ms": 2.753292,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 6520
+}

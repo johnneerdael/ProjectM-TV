@@ -1,0 +1,21 @@
+{
+  "history_files": {
+    "android-safe/README.md": "4f1efe073d647bac87bd1f6716c039d8f789e60efb183efea142988290c05c57",
+    "I04-bits-proposal.patch": "c4c2a7a758c87f22ee70d7389df721080096a330502028dc054382ab6fa8a8c8",
+    "I04-I04-bits-fast-math-safe.txt": "dd9c7bf190cb0505b85b7277b1ef67b9b3cb6ab1fedc85d04399431bf8f4f4a4",
+    "I03-I03-bits-fast-math-safe.txt": "fab48d2ab6256d8be2b34ed064781fdedf15039ed1340854f2e0081850f539f0",
+    "results-fast-math-safe.json": "fee0f435e318aef33851b31181691d7b10d61129e8025e1b908c6aa9c3ca8a4e",
+    "android-safe/I04-bits/TreeFunctions.ll": "447957c4b63a39170b39070ad2b493299db6ef62e73e0f4da3bd7d1075ebd3b3",
+    "android-safe/I04-bits/TreeFunctions.s": "6cf817bd2829b44890d4d4c6443c06fa0c12a179f92b767b8f5a8feea7079f10",
+    "android-safe/commands.json": "be6f763c53b1ef5b58b0f4f9438bcb7589f84808fb0aeed122aa6026a3d01bac"
+  },
+  "history_scope": "AppleI04bits64/64 and NDK static IR/assembly only; no full76/new integer-range form acceptance",
+  "new_files": {
+    "i04-only-bit-guards.patch": "9dd800abf251780e26718c8abdeab2dff4e62b2fff34447323edd136cf0693f8",
+    "eel_i04_bits_test.cpp": "980376e59cfe3c85b19b91c3edd14b503915a5e4b1153e744ddab74d3df679cb",
+    "CMakeLists.txt": "d005ad42b3b610345d354f05ed4450e7c6dba28b1e43befe41cb953e553a8b4c",
+    "compare_boundaries.py": "5f80659e8b629b8641b8ac0169ed4025d0b5dd0585dae4d6c178f976559fbd14",
+    "capture_release_ir.py": "ee367116a7e2d8a6f2cb27b4d3a9fb39cae9ecdd53111d8b8ed5acc3e414ef32"
+  },
+  "no_build_gpu_device_git": true
+}

@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 14709,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/audio.u8",
+    "preset": "suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "0d2dc54872720666caf4de7a872f8192ab1aa27243b5013da4a79ab535c6c39e",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "d2939baa5e5b815856785951452e6056f3f47f76cae8d8e0ed9eaca5e76ecdc8",
+      "pngBytes": 2979646,
+      "pngSha256": "c3b6f36d55747ceb469b1c4fdd97bdbdaab07f7e4368c94e2d9dd0ec6ee7f936",
+      "rgbMean": [
+        28.300556158371915,
+        46.839170524691355,
+        25.021325472608023
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "43a984ed46acbea4f2ad34c3ed9cc87030a690adef7a9e2fbfe21135068c26d8",
+      "pngBytes": 4248872,
+      "pngSha256": "cfdc5bfeeea6cb0a27f2cbe65b663dc5c0d539837f8958e872ec3cad43eb876e",
+      "rgbMean": [
+        13.55895206404321,
+        52.06933015046296,
+        97.24432267554012
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "77be1fe51a4439e787e029fddc338d9c87c2d9b7285e66733a91a73abb1a3fc7",
+      "pngBytes": 2775358,
+      "pngSha256": "7c079bb3a2f708103b83f600f50cdd5ed8e342cb12b32f37e1f6227874c1093d",
+      "rgbMean": [
+        76.17830873842593,
+        213.35171682098766,
+        248.98905683352623
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "011906e361d204b5cbfb2731a1479bbdbd636537514fdd131ad9908e14cbd171",
+      "pngBytes": 3716318,
+      "pngSha256": "1e6b0baf96a9fdc5b0db8780fbe690c1f710507fefef6d3547522ea7143295df",
+      "rgbMean": [
+        189.00432376060957,
+        250.04244514371143,
+        231.88777331693672
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ae84b550a992f044496c06c6766b298c2b66fb611d57402b3a7d36af164b2687",
+      "pngBytes": 7857219,
+      "pngSha256": "67d861ba2128f2abb14eaa64993bb1e08c50877d643aa8e07aed22e93d9c000d",
+      "rgbMean": [
+        225.80181990258487,
+        189.8452615017361,
+        222.08322880497684
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "00877769667c299c4a1be7374b7223ce77af7b10c394b81b40f7e993f7e77a3b",
+      "pngBytes": 3260947,
+      "pngSha256": "41b5e1fc717d0636a5370e3215c9bd64895859d612599d453443dd35b9b8aea4",
+      "rgbMean": [
+        34.17285433545525,
+        30.317662639853395,
+        126.09420054494599
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3fdd26a4f87000d2a487d15b4940e865a2498de65518f5f675516fa986fa7da2",
+      "pngBytes": 7042672,
+      "pngSha256": "6b57672029cf02b49112531f76cb8fdd470f7475e157471136ca73cce9774fca",
+      "rgbMean": [
+        125.31000289351852,
+        252.86564935378087,
+        170.4267497347608
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---chemosynthetic-nosferatu---gdy-patent-pending-free-energy-devices---rand-tritex---inv-play-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8d1bcd4e195f9dd415fb9d30a8b176bdd8a36c1e8b19f3e676fae72379e86669",
+      "pngBytes": 2549644,
+      "pngSha256": "dd05bb03c1f3ce08fe31e5af7e0b16158e07a7ef4ee0d0c9f9da80c510a4bdd1",
+      "rgbMean": [
+        87.93518783757716,
+        49.85365089699074,
+        251.55505955825618
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 38284070,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "9d7041c1943e9bf2b3ab629e6e79917af8e1dd88d9121d579d31e1d40608f18d",
+  "forcedPresetPrefix": "suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - ran",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 20,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43340,
+  "framesRendered": 480,
+  "renderWallDurationMs": 8294,
+  "pssAfterFramesKB": 73026,
+  "serializedFrameMeanMs": 2.7195093638888888,
+  "serializedFrameP90Ms": 3.256084,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 8646
+}

@@ -1,0 +1,18 @@
+--------- beginning of main
+         1791510993.237  2263  2282 I projectM-Native: Textures ready: 74 files (0 copied) in 0 ms
+         1791510993.266  2263  2282 I projectM-Native: Indexed 9616 presets (9615 skipped) in 0 ms from presets.idx
+         1791510993.267  2263  2281 W projectM-Native: PREWARM paused for 20 s: memory pressure
+         1791510993.316  2263  2281 I projectM-Native: projectM instance created
+         1791510993.316  2263  2281 I projectM-Native: Render size 3840x2160
+         1791510993.317  2263  2281 I projectM-Native: BENCHMARK preset='audit followup uv default-feedback.milk' (debug.projectmtv.preset), auto change off
+         1791510993.344  2263  2281 I projectM-Native: LOAD preset='audit followup uv default-feedback.milk' ms=0 smooth=0 size=3840x2160 weight_mb=0 shader_kb=0.0 loops=0 programs_cached=0 programs_compiled=2 pool_mb=0 avail_drop_mb=3 rss_growth_mb=3
+         1791510993.359  2263  2281 I projectM-Native: STARTUP first preset rendered 0 ms after engine creation
+         1791510994.216  2263  2281 W projectM-Native: PREWARM paused for 20 s: memory pressure
+         1791510995.949  2263  2281 I projectM-Native: Render size 2560x1440
+         1791510996.571  2263  2281 I projectM-Native: Render size 3840x2160
+         1791510997.824  2263  2281 I projectM-Native: OUTPUT preset='audit followup uv default-feedback.milk' samples=3 luma_range=19..25 change_pct_min=0.0 change_pct_avg=0.0 region_pct_min=0.0 luma_changes=0 hue_only_changes=0 flat=0/3 still=0/0 skipped=no
+         1791510997.868  2263  2281 I projectM-Native: projectM instance created
+         1791510997.868  2263  2281 I projectM-Native: Render size 3840x2160
+         1791510997.895  2263  2281 I projectM-Native: LOAD preset='audit followup uv default-feedback.milk' ms=0 smooth=0 size=3840x2160 weight_mb=0 shader_kb=0.0 loops=0 programs_cached=0 programs_compiled=2 pool_mb=0 avail_drop_mb=0 rss_growth_mb=3
+         1791510997.909  2263  2281 I projectM-Native: STARTUP first preset rendered 0 ms after engine creation
+         1791511006.114  2263  2281 I projectM-Native: OUTPUT preset='audit followup uv default-feedback.milk' samples=6 luma_range=25..32 change_pct_min=3.2 change_pct_avg=4.5 region_pct_min=50.4 luma_changes=1698 hue_only_changes=2 flat=0/6 still=0/5 skipped=no

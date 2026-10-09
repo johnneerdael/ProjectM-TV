@@ -1,0 +1,9 @@
+grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81
+grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81
+grid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617
+grid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617
+grid=8x8 custom=1 generated raw pi=3.14159 evaluations=81
+grid=8x8 custom=1 generated raw pi=3.14159 evaluations=81
+grid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617
+grid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617
+failures=0

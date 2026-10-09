@@ -1,0 +1,31 @@
+{
+  "source_defined_context": "Colored asymmetric feedback, warp10, scale.91, live shapes, legacy/custom compiled paths",
+  "roles": {
+    "before": {
+      "hashes": [
+        "937ec934eee95f2024f7ec2fe35968c55cb43f3177f7764eb24f558a78029b46",
+        "7391f291bc7cd08544e5a8e1a81f471640d5f45fee38a87826b215c2f647febb",
+        "37849fc0e2ed9c347c0c6718ef033f9e5b95e79ce74ec9e71ef1d9706939818a",
+        "2cb7e93d2eef02b679ce8fd4fd62e2165398dd8b0888e3d3d24e9251e8c75d4e",
+        "39c48467616feca9c478d830219f667a936ef8c6621a5b912fe75b8a318cbede",
+        "ee50a65fedd2c5bd8b26c8e03b5e4c576dfea024263140b57e113445f33c858b",
+        "64f3117ef2acd5652fd8dcf4970bf91f07c245e57488022121c0eda879965e80",
+        "21aa042b136c3e3ee2a3ea3e44b666f2d309562c40fd1db097396f68c9c4b80c"
+      ]
+    },
+    "after": {
+      "hashes": [
+        "4c260921fe1c35c6176afd3b0feee97ee64e749569af9cdfc1fdb70d7bf5d2b3",
+        "81114a734b9f621de6567660bc696ff397dd48a5ece7f4cf021782f7b830c67f",
+        "a95cce98a730c84d1c6c3fbc97953bc4cb483c7c62595a0f65280f5101978321",
+        "07828bba8f139c274c2163d9845177e3096455f8cf5b42d5f5cd43b6323ace9a",
+        "4262c6ea180782e68f890022262bef8563692b40acffbe8e98b9c3799fe97901",
+        "8f4b8cbaff6ec8f5238527f7dca0b828357cf0883df82fd57a2b29ec904666c9",
+        "0c25203ebc7ba615ffcb7e727916044314f7fa0164be8aa57a26d49a87eae111",
+        "d8dd3d1dfb30306b3d19c6397a852f24a2dc3d17d83b8caa2b12b9a566f82fa3"
+      ]
+    }
+  },
+  "all_selected_rgb_repeats_exact": true,
+  "all_before_after_selected_rgb_identical": false
+}

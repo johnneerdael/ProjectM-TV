@@ -1,0 +1,4 @@
+bounded production GL modes/aliases/recovery/replay PASS
+actual full pipeline constant-blue custom warp marker PASS (256x144 source CGL)
+production projectm_pcm_get_max_samples=576; spectrum bins=512
+common-PCM selected finite qualification=1 (host source producer only)

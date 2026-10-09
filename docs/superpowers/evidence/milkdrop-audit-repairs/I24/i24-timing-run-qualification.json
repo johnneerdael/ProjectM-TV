@@ -1,0 +1,22 @@
+{
+  "first_run": "i24-grouped-clean-timings.log",
+  "first_run_disposition": "host ENOSPC during tar extraction; partial rows preserved, no acceptance",
+  "retry2": "i24-grouped-clean-timings-retry2.log",
+  "retry2_city_c_cycle0": "excluded: cleanup record completed after request directory creation; startup/IO overlap cannot be ruled out",
+  "accept_city_c_cycles": [
+    1,
+    2,
+    3
+  ],
+  "accept_city_alt_cycles": [
+    0,
+    1,
+    2
+  ],
+  "cycle3_controller": "run_i24_grouped_extra_clean_cycle3.py",
+  "all_scope": "Same frozen source/APK/PCM; no helper mutated during active run",
+  "retry2_disposition": "city-c cycles1/2 completed before repeated ENOSPC; city-c0 excluded for cleanup startup overlap; city-alt partial not acceptance",
+  "retry3": "New fixed controller after dedup terminal: city-c cycle3 + city-alt cycles0/1/2, same frozen artifacts",
+  "accepted_city_c_paths": "retry2 cycles1/2 + retry3 cycle3",
+  "accepted_city_alt_paths": "retry3 cycles0/1/2"
+}

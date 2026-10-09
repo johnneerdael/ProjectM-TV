@@ -1,0 +1,195 @@
+{
+  "status": "capture stage passed; source/Native finite proof; arithmetic cost gate not accepted",
+  "runs": 12,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 6,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "arithmetic-audit-math-I03-finite-fixture-after-0",
+      "preset": "audit math I03-finite-fixture.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "21df23dd94e556f72611ba86cebf1b141fe09aa0d5b1d08706734967f25d6d48",
+        "e017b0153aba7dfa9e366a4e0c4f2be0e31e53a608bc72c9bfa6209868160a7e",
+        "356317581f9d8087ed39012a4b5893a59568b1d015506d619cbb6ecb9ba7db6f",
+        "1e3cfd53a388181ff8d8463bea54122f7bcd8caae7a0e7a949a2101f96a9fa02",
+        "fe75a1a79d5c4da5ef75ecda137954db3f325ac5dad489c071e9650c842460ff",
+        "069a774e310eba59e75fa2d5bce88541aeacf77f8c31803b4e335a88b984bc04",
+        "5933146c88007ca92561c0664e77f924ab90aa5c75d30db394809575d93b6a45",
+        "c9fd54a9e6398c3f2d5f9e0577dde837144934e87fb964ce510a5ccded869c3a"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I03-finite-fixture-after-1",
+      "preset": "audit math I03-finite-fixture.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "21df23dd94e556f72611ba86cebf1b141fe09aa0d5b1d08706734967f25d6d48",
+        "e017b0153aba7dfa9e366a4e0c4f2be0e31e53a608bc72c9bfa6209868160a7e",
+        "356317581f9d8087ed39012a4b5893a59568b1d015506d619cbb6ecb9ba7db6f",
+        "1e3cfd53a388181ff8d8463bea54122f7bcd8caae7a0e7a949a2101f96a9fa02",
+        "fe75a1a79d5c4da5ef75ecda137954db3f325ac5dad489c071e9650c842460ff",
+        "069a774e310eba59e75fa2d5bce88541aeacf77f8c31803b4e335a88b984bc04",
+        "5933146c88007ca92561c0664e77f924ab90aa5c75d30db394809575d93b6a45",
+        "c9fd54a9e6398c3f2d5f9e0577dde837144934e87fb964ce510a5ccded869c3a"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I03-finite-fixture-before-0",
+      "preset": "audit math I03-finite-fixture.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "6ecc0c2ce9472cffe7e10be8e12d3158f49c8e49594435a7a879dd341521fe0d",
+        "b57e144b368ac9a477e844037ba0e9af39b21d1b12e03ff25a36cfd11aee7682",
+        "f57e4489bd04cc65bb722f3e40f6b9dc89bab753a6e4b115d826c67fbe87163b",
+        "0aa6a4034c7be8b9a1a696ec03ea48b99b123aa5a504e3929ee8a320829fd0b2",
+        "dc4fea11c32abaa4b0a97a7c4abdeb99cd7b5111cd9d0fe79d7e88889f69c441",
+        "7c72df5ae0999af5b37985cb1b63a558d2e92e086416a06674b312219904d1ba",
+        "5e186963cfe06a86da76eed4c3588b0d872b8f1b61560f01a8a10c8d1c202c4d",
+        "10850d8f6b00c43039f0e4cb44e6e320d1416225048a04ed6fa2c5a8fc209d8d"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I03-finite-fixture-before-1",
+      "preset": "audit math I03-finite-fixture.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "6ecc0c2ce9472cffe7e10be8e12d3158f49c8e49594435a7a879dd341521fe0d",
+        "b57e144b368ac9a477e844037ba0e9af39b21d1b12e03ff25a36cfd11aee7682",
+        "f57e4489bd04cc65bb722f3e40f6b9dc89bab753a6e4b115d826c67fbe87163b",
+        "0aa6a4034c7be8b9a1a696ec03ea48b99b123aa5a504e3929ee8a320829fd0b2",
+        "dc4fea11c32abaa4b0a97a7c4abdeb99cd7b5111cd9d0fe79d7e88889f69c441",
+        "7c72df5ae0999af5b37985cb1b63a558d2e92e086416a06674b312219904d1ba",
+        "5e186963cfe06a86da76eed4c3588b0d872b8f1b61560f01a8a10c8d1c202c4d",
+        "10850d8f6b00c43039f0e4cb44e6e320d1416225048a04ed6fa2c5a8fc209d8d"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I04-finite-fixture-after-0",
+      "preset": "audit math I04-finite-fixture.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "072ef042b8647b323255f78ee75bd0724d05e20310615ca1452654ec06665226",
+        "4ee13918d22f7460de60b798d99b771d821e7a218b64c64575f342600f1c5534",
+        "81b89534085eeab68d9b43115c153ce9288cf95abab5d05df2dec33c19442831",
+        "9f0a51a668f02f8352fd3f847a397ba8f35566fdb845f5d122e837ba7b0fe692",
+        "64151177c0ce6d1e64f4d7ab7961afc3a59d62aa8e52851eaa17aee2a81c19a8",
+        "0adc461b90196222621aea18ec57cae4afbe2a9869e350655c899f4e008c1ebf",
+        "10f70d77fa6728fb6a06dfc7932a1f087e1fb29d10acc008751ad2cdb54dba1d",
+        "932cf9069ce94ff6992ebe6e72b85f5c506181400ba5e228c2d48a05940acb04"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I04-finite-fixture-after-1",
+      "preset": "audit math I04-finite-fixture.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "072ef042b8647b323255f78ee75bd0724d05e20310615ca1452654ec06665226",
+        "4ee13918d22f7460de60b798d99b771d821e7a218b64c64575f342600f1c5534",
+        "81b89534085eeab68d9b43115c153ce9288cf95abab5d05df2dec33c19442831",
+        "9f0a51a668f02f8352fd3f847a397ba8f35566fdb845f5d122e837ba7b0fe692",
+        "64151177c0ce6d1e64f4d7ab7961afc3a59d62aa8e52851eaa17aee2a81c19a8",
+        "0adc461b90196222621aea18ec57cae4afbe2a9869e350655c899f4e008c1ebf",
+        "10f70d77fa6728fb6a06dfc7932a1f087e1fb29d10acc008751ad2cdb54dba1d",
+        "932cf9069ce94ff6992ebe6e72b85f5c506181400ba5e228c2d48a05940acb04"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I04-finite-fixture-before-0",
+      "preset": "audit math I04-finite-fixture.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "6f985b5a5c1ec1cd33d173749e4dd6f194683923fa62a4b3ea352eba3b9b8599",
+        "b9263d37e39257680577fe10697932095693efadb6fce341860dd0d4d2ec3709",
+        "1b28e0d168ca8889e3f44f3565cc1d5e568393661210f72ba480b2f7eb40caf7",
+        "9d27b6e6554c28a7c9d20bb9ab6ded3b17ca401bb12eb8c933309a28c1f168c6",
+        "12ff91c5f7cf5636a5e10511dde089163a29c5cb50dbfc66ddd2231ce33d0e53",
+        "bcf38e69494407e94f2c4acd3e9834d3f3962255bc619354f28808e18ba4faf2",
+        "7c88cc3e1e30bdfca13b317153caf2132c6191ba8d35d841e1ceef4b237dbcce",
+        "49a2b5f67f4b276558c32d45b6f3d0cdbee2e8c5e0722b61e670b851385ad359"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-I04-finite-fixture-before-1",
+      "preset": "audit math I04-finite-fixture.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "6f985b5a5c1ec1cd33d173749e4dd6f194683923fa62a4b3ea352eba3b9b8599",
+        "b9263d37e39257680577fe10697932095693efadb6fce341860dd0d4d2ec3709",
+        "1b28e0d168ca8889e3f44f3565cc1d5e568393661210f72ba480b2f7eb40caf7",
+        "9d27b6e6554c28a7c9d20bb9ab6ded3b17ca401bb12eb8c933309a28c1f168c6",
+        "12ff91c5f7cf5636a5e10511dde089163a29c5cb50dbfc66ddd2231ce33d0e53",
+        "bcf38e69494407e94f2c4acd3e9834d3f3962255bc619354f28808e18ba4faf2",
+        "7c88cc3e1e30bdfca13b317153caf2132c6191ba8d35d841e1ceef4b237dbcce",
+        "49a2b5f67f4b276558c32d45b6f3d0cdbee2e8c5e0722b61e670b851385ad359"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-constant-geometry-work-after-0",
+      "preset": "audit math constant-geometry-work.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-constant-geometry-work-after-1",
+      "preset": "audit math constant-geometry-work.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-constant-geometry-work-before-0",
+      "preset": "audit math constant-geometry-work.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "arithmetic-audit-math-constant-geometry-work-before-1",
+      "preset": "audit math constant-geometry-work.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "scope": "finite division/pow/remainder diagrams; constantgeometry workload retained unchanged"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Treat parsed file booleans as nonzero integers
+
+Match original MilkDrop2 finite integer file flags and custom-wave enable.
+Preserve GetInt parsing, invalid/range defaults, case-insensitive keys and
+normalized first occurrence. Negative flags now activate the same path as
+positive flags across main settings, custom waves and custom shapes.
+Keep unconditional init and one-evaluation Native geometry replay unchanged.
+No new equation evaluation is added except authored work formerly disabled
+by a negative enable value. Nonfinite/out-of-range strings retain defaults.
+
+Original: vis_milk2/state.cpp:1191,1406 and milkdropfs.cpp:2600.
+
+diff --git a/src/libprojectM/MilkdropPreset/PresetFileParser.cpp b/src/libprojectM/MilkdropPreset/PresetFileParser.cpp
+--- a/src/libprojectM/MilkdropPreset/PresetFileParser.cpp
++++ b/src/libprojectM/MilkdropPreset/PresetFileParser.cpp
+@@ -142,7 +142,7 @@
+-
++
+ auto PresetFileParser::GetBool(const std::string& key, bool defaultValue) -> bool
+ {
+-    return GetInt(key, static_cast<int>(defaultValue)) > 0;
++    return GetInt(key, static_cast<int>(defaultValue)) != 0;
+ }
+-
++
+ auto PresetFileParser::GetString(const std::string& key, const std::string& defaultValue) -> std::string

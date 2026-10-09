@@ -1,0 +1,337 @@
+{
+  "scope": "Native4K finite/original fixtures as named; source-instrumented workers, not published shipping or Windows bytes",
+  "runs": 12,
+  "exact_repeat_groups": 6,
+  "selected_pngs_verified": 96,
+  "rows": [
+    {
+      "directory": "uv-cadence-audit-uv-all-disabled-after-0",
+      "preset": "audit uv all-disabled.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-all-disabled-after-1",
+      "preset": "audit uv all-disabled.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-all-disabled-before-0",
+      "preset": "audit uv all-disabled.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-all-disabled-before-1",
+      "preset": "audit uv all-disabled.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-bounded-custom-after-0",
+      "preset": "audit uv cadence bounded-custom.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "7bdbded36a00b464a3069763aa96b0b1b3825327e2e921faa08175d77550b6c9",
+        "3fb89a0bc75c192462539f8b2cf7deeb051dec159d7eef26ca54fee31d68ee46",
+        "a7801e95aba0806f3871bdd6a647f86b3433575eff0b77ebfa4169a0d80c7ddf",
+        "d8c7e0d7d5f5443e5c1b8ef9e5a716c3e01c9986891fdcbbd896651f1018fc80",
+        "272d5c4bd66072868ee9ce07d7f9750bed2e71ecd0bcbdc9351950faabb78309",
+        "a7801e95aba0806f3871bdd6a647f86b3433575eff0b77ebfa4169a0d80c7ddf",
+        "3fb89a0bc75c192462539f8b2cf7deeb051dec159d7eef26ca54fee31d68ee46",
+        "272d5c4bd66072868ee9ce07d7f9750bed2e71ecd0bcbdc9351950faabb78309"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-bounded-custom-after-1",
+      "preset": "audit uv cadence bounded-custom.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "7bdbded36a00b464a3069763aa96b0b1b3825327e2e921faa08175d77550b6c9",
+        "3fb89a0bc75c192462539f8b2cf7deeb051dec159d7eef26ca54fee31d68ee46",
+        "a7801e95aba0806f3871bdd6a647f86b3433575eff0b77ebfa4169a0d80c7ddf",
+        "d8c7e0d7d5f5443e5c1b8ef9e5a716c3e01c9986891fdcbbd896651f1018fc80",
+        "272d5c4bd66072868ee9ce07d7f9750bed2e71ecd0bcbdc9351950faabb78309",
+        "a7801e95aba0806f3871bdd6a647f86b3433575eff0b77ebfa4169a0d80c7ddf",
+        "3fb89a0bc75c192462539f8b2cf7deeb051dec159d7eef26ca54fee31d68ee46",
+        "272d5c4bd66072868ee9ce07d7f9750bed2e71ecd0bcbdc9351950faabb78309"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-bounded-custom-before-0",
+      "preset": "audit uv cadence bounded-custom.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "528a67f5cf37e978e3948f62b62ddf424b61dd9097370ed9c86b5b1c480edb1a",
+        "ca9ab24243a530e51d7ee77fa636f4d63b397b90c6237405cd739e28a1f43abe",
+        "c9a0e1ed0cf1ca2164606d45d16f453b0c79e9bb564048d26c6a873020d5c0b5",
+        "d6e91e474d9924afa01160af179186ac45d58a48876091c2f5d5743c53c24607",
+        "27436e6e921496eb00be0e18ca88c3c157a0f958f7fcf81690ad4c5d71af0c21",
+        "c9a0e1ed0cf1ca2164606d45d16f453b0c79e9bb564048d26c6a873020d5c0b5",
+        "ca9ab24243a530e51d7ee77fa636f4d63b397b90c6237405cd739e28a1f43abe",
+        "27436e6e921496eb00be0e18ca88c3c157a0f958f7fcf81690ad4c5d71af0c21"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-bounded-custom-before-1",
+      "preset": "audit uv cadence bounded-custom.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "528a67f5cf37e978e3948f62b62ddf424b61dd9097370ed9c86b5b1c480edb1a",
+        "ca9ab24243a530e51d7ee77fa636f4d63b397b90c6237405cd739e28a1f43abe",
+        "c9a0e1ed0cf1ca2164606d45d16f453b0c79e9bb564048d26c6a873020d5c0b5",
+        "d6e91e474d9924afa01160af179186ac45d58a48876091c2f5d5743c53c24607",
+        "27436e6e921496eb00be0e18ca88c3c157a0f958f7fcf81690ad4c5d71af0c21",
+        "c9a0e1ed0cf1ca2164606d45d16f453b0c79e9bb564048d26c6a873020d5c0b5",
+        "ca9ab24243a530e51d7ee77fa636f4d63b397b90c6237405cd739e28a1f43abe",
+        "27436e6e921496eb00be0e18ca88c3c157a0f958f7fcf81690ad4c5d71af0c21"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-default-after-0",
+      "preset": "audit uv cadence default.milk",
+      "role": "after",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-default-after-1",
+      "preset": "audit uv cadence default.milk",
+      "role": "after",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-default-before-0",
+      "preset": "audit uv cadence default.milk",
+      "role": "before",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    },
+    {
+      "directory": "uv-cadence-audit-uv-cadence-default-before-1",
+      "preset": "audit uv cadence default.milk",
+      "role": "before",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "preset": "audit uv all-disabled.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        }
+      ]
+    },
+    {
+      "preset": "audit uv cadence bounded-custom.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.01476048096707819,
+          "changed_pixels": 1215
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.014760561342592593,
+          "changed_pixels": 1215
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.014760802469135803,
+          "changed_pixels": 1215
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.014730099022633746,
+          "changed_pixels": 1205
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.02952168531378601,
+          "changed_pixels": 2430
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.014760802469135803,
+          "changed_pixels": 1215
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.014760561342592593,
+          "changed_pixels": 1215
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.02952168531378601,
+          "changed_pixels": 2430
+        }
+      ]
+    },
+    {
+      "preset": "audit uv cadence default.milk",
+      "frames": [
+        {
+          "frame": 120,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 150,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 180,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 210,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 239,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 300,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 390,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        },
+        {
+          "frame": 479,
+          "rgb_mae": 0.0,
+          "changed_pixels": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "scope": "same unchangedoriginal/current27Native versus width-minimum-only source oracle; currentdiffusion/style kept",
+  "frames": [
+    {
+      "frame": 120,
+      "RGB_MAE": 55.868724762088476
+    },
+    {
+      "frame": 150,
+      "RGB_MAE": 43.23491849922839
+    },
+    {
+      "frame": 180,
+      "RGB_MAE": 34.39536092624743
+    },
+    {
+      "frame": 210,
+      "RGB_MAE": 35.99687700938786
+    },
+    {
+      "frame": 239,
+      "RGB_MAE": 35.21773115997942
+    },
+    {
+      "frame": 300,
+      "RGB_MAE": 39.68115704571759
+    },
+    {
+      "frame": 390,
+      "RGB_MAE": 26.864356232317387
+    },
+    {
+      "frame": 479,
+      "RGB_MAE": 25.66931813432356
+    }
+  ]
+}

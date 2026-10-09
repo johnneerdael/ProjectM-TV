@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 12: legacy-gamma
+1/1 Test #12: legacy-gamma .....................***Failed    0.25 sec
+gamma 1.000500 gamma-only expected 1 passes got 2
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.25 sec
+
+The following tests FAILED:
+	 12 - legacy-gamma (Failed)
+Errors while running CTest

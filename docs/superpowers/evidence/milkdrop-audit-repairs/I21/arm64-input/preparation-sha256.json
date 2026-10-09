@@ -1,0 +1,11 @@
+{
+  "files": {
+    "arm64_input_producer.cpp": "d46dd42aae60aec4b56058fca33af9876bac19462bcac04d22cf1549ac7169de",
+    "constructor_sink.hpp": "e071cf119cfec5d3f9ffef8f2d0cb2951fa3678c4c236bb2dc56bec3c0aa547f",
+    "build_arm64_target.py": "58da47b8041b3238e2606373a3fe2c07982cb28db9486c4ed5c31cdf35f86b25",
+    "frozen-link-inputs.json": "299fa1f7adedeadb3752c874788aa17c82cb8b9c2d2fa5c977d3154bc6082959",
+    "README.md": "5bda104b949ec95ad334d3a0ebbdc44d9288b5528ed9743a06773c888e2db065"
+  },
+  "prepared_only": true,
+  "no_build_gpu_device_execution": true
+}

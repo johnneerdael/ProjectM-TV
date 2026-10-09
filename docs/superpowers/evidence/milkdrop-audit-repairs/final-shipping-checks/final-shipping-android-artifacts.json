@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/build/outputs/aar/core-release.aar",
+    "sha256": "b11666e552f502c373d0c379a45e06da8b56ecf6675e751b6916c14c27d435c9",
+    "native_libraries": {
+      "jni/arm64-v8a/libprojectmtv.so": "d7e1dc2cacec97dd6aac5d867f4c104d32f617321407d6bf1f4ee85dae6a6f54",
+      "jni/armeabi-v7a/libprojectmtv.so": "2d3fe3a2df29a8d60a8d491a78cf57e7dc0fd14f8b8ae1f15339f54a2f5422e9"
+    }
+  },
+  {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/app/build/outputs/apk/debug/app-debug.apk",
+    "sha256": "77311e3cb3b9451ac450e3808e9e6275b38ac91a8b0256224bcbdf2cdb54ef00",
+    "native_libraries": {
+      "lib/arm64-v8a/libprojectmtv.so": "445b83df9ec499e70a1bc29e0aa989f64d009f8f05dd9979145fb6ff05f397ae",
+      "lib/armeabi-v7a/libprojectmtv.so": "39e2f7e62dda60a19a59feea9da980d0f63a3fa2700280923f2bf6d8e7089893"
+    }
+  }
+]

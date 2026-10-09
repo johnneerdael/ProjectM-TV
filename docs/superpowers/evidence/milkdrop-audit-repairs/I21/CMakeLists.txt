@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.22)
+project(extended_mode_proposal LANGUAGES C CXX)
+if(NOT PROJECTM_SOURCE OR NOT REPO_ROOT)
+  message(FATAL_ERROR "Provide frozen PROJECTM_SOURCE and REPO_ROOT")
+endif()
+add_subdirectory("${REPO_ROOT}/core/src/test/native/projectm-regressions" production-controls)
+add_executable(extended-mode-controls extended_mode_controls.cpp)
+target_compile_features(extended-mode-controls PRIVATE cxx_std_17)
+target_include_directories(extended-mode-controls PRIVATE
+ "${REPO_ROOT}/core/src/test/native/projectm-regressions"
+ "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset" "${PROJECTM_SOURCE}/vendor"
+ "${PROJECTM_SOURCE}/vendor/glad/include"
+ "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(extended-mode-controls PRIVATE libprojectM::projectM)
+if(APPLE)
+ find_library(EXTENDED_OPENGL_FRAMEWORK OpenGL REQUIRED)
+ target_link_libraries(extended-mode-controls PRIVATE "${EXTENDED_OPENGL_FRAMEWORK}")
+ target_compile_definitions(extended-mode-controls PRIVATE GL_SILENCE_DEPRECATION)
+ target_compile_options(extended-mode-controls PRIVATE "-include${REPO_ROOT}/core/src/test/native/projectm-regressions/macos_gl.hpp")
+else()
+ message(FATAL_ERROR "This proposal wrapper is CGL only; qualify GLES with its own explicit integration")
+endif()
+if(SANITIZERS)
+ target_compile_options(extended-mode-controls PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+ target_link_options(extended-mode-controls PRIVATE -fsanitize=address,undefined)
+endif()

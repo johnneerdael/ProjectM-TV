@@ -1,0 +1,346 @@
+[
+  {
+    "path": "core/src/main/assets/presets/Cope - The Cloud.milk",
+    "sha256": "9c93b7182617fc543a329b094067136fde5e67a6ccf78047d350dc7c7f90ad9c",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=1.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=1.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000"
+      },
+      {
+        "line": 283,
+        "text": "warp_4=`    float3 rc = GetBlur2(uv)+GetPixel(uv);"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:b1n=b1x1 changes progressive level2; warp addsGetBlur2+GetPixel; no main-frame bound overwrite found"
+  },
+  {
+    "path": "core/src/main/assets/presets/Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+    "sha256": "e5389c815f0f3b89227722f9deff98b190663ed5fb9b4aef26067a1ff3ab6734",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=1.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=1.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=1.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=1.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000"
+      },
+      {
+        "line": 367,
+        "text": "warp_5=`    float1 dx = ( GetBlur1(uv + float2(d,0)) - GetBlur1(uv-float2(d,0)) ).y*1280*texsize.z;"
+      },
+      {
+        "line": 368,
+        "text": "warp_6=`    float1 dy = ( GetBlur1(uv + float2(0,d)) - GetBlur1(uv-float2(0,d)) ).y*1024*texsize.w;"
+      },
+      {
+        "line": 374,
+        "text": "warp_12=`    ret.y += (ret.y - GetBlur1(uv).y - 0.1)*.6 +0.27;"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:allbounds1; actualGetBlur1 derivatives plus direct sample feed warp with1280/1024 scaling; no bound overwrite found"
+  },
+  {
+    "path": "core/src/main/assets/presets/Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+    "sha256": "af2294355b6d5f4ce72b8c3ea31f6e531a546547ea390dd53a5be353e542f13d",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=1.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=1.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=1.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=1.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000"
+      },
+      {
+        "line": 367,
+        "text": "warp_5=`    float1 dx = ( GetBlur1(uv + float2(d,0)) - GetBlur1(uv-float2(d,0)) ).y*1280*texsize.z;"
+      },
+      {
+        "line": 368,
+        "text": "warp_6=`    float1 dy = ( GetBlur1(uv + float2(0,d)) - GetBlur1(uv-float2(0,d)) ).y*1024*texsize.w;"
+      },
+      {
+        "line": 374,
+        "text": "warp_12=`    ret.y += (ret.y - GetBlur1(uv).y - 0.1)*.6 +0.27;"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:allbounds1; actualGetBlur1 derivatives plus direct sample feed warp with1280/1024 scaling; no bound overwrite found"
+  },
+  {
+    "path": "core/src/main/assets/presets/$$$ Royal - Mashup (29).milk",
+    "sha256": "05d916118a7f54c1b981e8111c6a3490872117761141829ec999544382791607",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=1.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=1.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000"
+      },
+      {
+        "line": 232,
+        "text": "warp_5=`    ret = GetBlur3((uv.x + -uv.y)*50);"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:level1 collapse propagates3; warp finalretGetBlur3 at scaled coordinates"
+  },
+  {
+    "path": "core/src/main/assets/presets/Mig_015.milk",
+    "sha256": "4b2f227da1789b1be41aea662d163032eaa9f74e3642f91d8f6b5ff1250d795f",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=0.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=0.200"
+      },
+      {
+        "line": 72,
+        "text": "b2x=0.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=0.000"
+      },
+      {
+        "line": 271,
+        "text": "comp_4=`              GetBlur1(uv)*3 +"
+      },
+      {
+        "line": 272,
+        "text": "comp_5=`              GetBlur2(uv)*0 +"
+      },
+      {
+        "line": 273,
+        "text": "comp_6=`              GetBlur3(uv)*0 +"
+      },
+      {
+        "line": 275,
+        "text": "comp_8=`    ret += GetBlur2( (uv-0.5)*0.333 + 0.5);"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:level2 equal0 used in actualnonzeroGetBlur2addition despite earlierGetBlur2*0line"
+  },
+  {
+    "path": "core/src/main/assets/presets/goody - woven beads (ps2-0).milk",
+    "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=0.000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=0.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000"
+      },
+      {
+        "line": 304,
+        "text": "comp_13=`uvd-=GetBlur2(uv);"
+      },
+      {
+        "line": 321,
+        "text": "comp_30=`blum = GetBlur1(background)*background;"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:equal0level2 used in warp/composite displacement; no main-frame bound overwrite found"
+  },
+  {
+    "path": "core/src/main/assets/presets/shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+    "sha256": "61f1423c040cabdcb37c5caa9294313b5c5692bc7c0ab3c04d7d4e499677487f",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=0.000000"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=1.000000"
+      },
+      {
+        "line": 72,
+        "text": "b2x=0.000000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=1.000000"
+      },
+      {
+        "line": 354,
+        "text": "warp_10=`uv -= -.002*GetBlur1(uv)*d;"
+      },
+      {
+        "line": 361,
+        "text": "warp_17=`float3 blur = GetBlur2(frac(uv));"
+      },
+      {
+        "line": 382,
+        "text": "comp_13=`uvd-=GetBlur2(uv);"
+      },
+      {
+        "line": 399,
+        "text": "comp_30=`blum = GetBlur1(background)*background;"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "strong source stage:equal0level2 used in warp/composite displacement; no main-frame bound overwrite found"
+  },
+  {
+    "path": "core/src/main/assets/presets/EVET - Scanazoic --- Isosceles edit.milk",
+    "sha256": "d5b351797af60543cfd3d4230c0ebb708f71c74d53f9a86cd592a79585ba0075",
+    "source_evidence": [
+      {
+        "line": 68,
+        "text": "b1n=0.230"
+      },
+      {
+        "line": 69,
+        "text": "b2n=0.000"
+      },
+      {
+        "line": 70,
+        "text": "b3n=0.000"
+      },
+      {
+        "line": 71,
+        "text": "b1x=0.930"
+      },
+      {
+        "line": 72,
+        "text": "b2x=1.000"
+      },
+      {
+        "line": 73,
+        "text": "b3x=0.000"
+      },
+      {
+        "line": 479,
+        "text": "warp_27=`  tmp = GetBlur1(uvi)*3;"
+      },
+      {
+        "line": 527,
+        "text": "comp_9=`dx = ( GetBlur1(uv+float2(1,0)*d)-GetBlur1(uv-float2(1,0)*d) );"
+      },
+      {
+        "line": 528,
+        "text": "comp_10=`dy = ( GetBlur1(uv+float2(0,1)*d)-GetBlur1(uv-float2(0,1)*d) );"
+      },
+      {
+        "line": 532,
+        "text": "comp_14=`float3 bg = pow(length(dz)*0.8+0,0.7) + GetBlur2(uv).y*0.4-0.1;"
+      }
+    ],
+    "qualification": "exact source inventory/consumer evidence; no executed/visible/affected count",
+    "disposition": "unused-level narrow-scan candidate:only level3 collapsed input, current shader usesGetBlur1/2; no finite ordinary prior-level effect established"
+  }
+]

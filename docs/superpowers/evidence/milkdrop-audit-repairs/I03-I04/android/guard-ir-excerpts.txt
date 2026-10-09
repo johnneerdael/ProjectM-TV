@@ -1,0 +1,427 @@
+I03 div
+define hidden void @prjm_eval_func_div(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !878 {
+  %3 = alloca double, align 8, !DIAssignID !889
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !882, metadata !DIExpression(), metadata !889, metadata ptr %3, metadata !DIExpression()), !dbg !890
+  %4 = alloca double, align 8, !DIAssignID !891
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !883, metadata !DIExpression(), metadata !891, metadata ptr %4, metadata !DIExpression()), !dbg !890
+  %5 = alloca ptr, align 8, !DIAssignID !892
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !884, metadata !DIExpression(), metadata !892, metadata ptr %5, metadata !DIExpression()), !dbg !890
+  %6 = alloca ptr, align 8, !DIAssignID !893
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !885, metadata !DIExpression(), metadata !893, metadata ptr %6, metadata !DIExpression()), !dbg !890
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !880, metadata !DIExpression()), !dbg !890
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !881, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !894
+  store double 0.000000e+00, ptr %3, align 8, !dbg !895, !tbaa !312, !DIAssignID !896
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !882, metadata !DIExpression(), metadata !896, metadata ptr %3, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !897
+  store double 0.000000e+00, ptr %4, align 8, !dbg !898, !tbaa !312, !DIAssignID !899
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !883, metadata !DIExpression(), metadata !899, metadata ptr %4, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !900
+  store ptr %3, ptr %5, align 8, !dbg !901, !tbaa !300, !DIAssignID !902
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !884, metadata !DIExpression(), metadata !902, metadata ptr %5, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !903
+  store ptr %4, ptr %6, align 8, !dbg !904, !tbaa !300, !DIAssignID !905
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !885, metadata !DIExpression(), metadata !905, metadata ptr %6, metadata !DIExpression()), !dbg !890
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !906
+  %8 = load ptr, ptr %7, align 8, !dbg !906, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !906, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !906, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !906
+  %11 = load ptr, ptr %7, align 8, !dbg !907, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !907
+  %13 = load ptr, ptr %12, align 8, !dbg !907, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !907, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !907
+  %15 = load ptr, ptr %6, align 8, !dbg !908, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !909, !tbaa !312
+  %17 = call fast double @llvm.fabs.f64(double %16), !dbg !910
+  %18 = fcmp fast olt double %17, 1.000000e-05, !dbg !911
+  br i1 %18, label %19, label %28, !dbg !912
+
+19:                                               ; preds = %2
+  %20 = fcmp fast une double %16, 0.000000e+00, !dbg !913
+  br i1 %20, label %21, label %32, !dbg !914
+
+21:                                               ; preds = %19
+  %22 = load ptr, ptr %5, align 8, !dbg !915, !tbaa !300
+  %23 = load double, ptr %22, align 8, !dbg !915, !tbaa !312
+  %24 = call double @llvm.fabs.f64(double %23), !dbg !915
+  %25 = fcmp ueq double %24, 0x7FF0000000000000, !dbg !915
+  br i1 %25, label %32, label %26, !dbg !916
+
+26:                                               ; preds = %21
+  %27 = fdiv fast double %23, %16, !dbg !917
+  br label %32, !dbg !916
+
+28:                                               ; preds = %2
+  %29 = load ptr, ptr %5, align 8, !dbg !918, !tbaa !300
+  %30 = load double, ptr %29, align 8, !dbg !918, !tbaa !312
+  %31 = fdiv fast double %30, %16, !dbg !918
+  br label %32, !dbg !919
+
+32:                                               ; preds = %26, %21, %19, %28
+  %33 = phi double [ %31, %28 ], [ %27, %26 ], [ 0.000000e+00, %21 ], [ 0.000000e+00, %19 ]
+  %34 = load ptr, ptr %1, align 8, !dbg !890, !tbaa !300
+  store double %33, ptr %34, align 8, !dbg !890, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !919
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !919
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !919
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !919
+  ret void, !dbg !919
+}
+
+I03 div_op
+define hidden void @prjm_eval_func_div_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1165 {
+  %3 = alloca double, align 8, !DIAssignID !1174
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1169, metadata !DIExpression(), metadata !1174, metadata ptr %3, metadata !DIExpression()), !dbg !1175
+  %4 = alloca ptr, align 8, !DIAssignID !1176
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1170, metadata !DIExpression(), metadata !1176, metadata ptr %4, metadata !DIExpression()), !dbg !1175
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1167, metadata !DIExpression()), !dbg !1175
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1168, metadata !DIExpression()), !dbg !1175
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1177
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1178, !tbaa !312, !DIAssignID !1179
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1169, metadata !DIExpression(), metadata !1179, metadata ptr %3, metadata !DIExpression()), !dbg !1175
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1180
+  store ptr %3, ptr %4, align 8, !dbg !1181, !tbaa !300, !DIAssignID !1182
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1170, metadata !DIExpression(), metadata !1182, metadata ptr %4, metadata !DIExpression()), !dbg !1175
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1183
+  %6 = load ptr, ptr %5, align 8, !dbg !1183, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1183, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1183, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1183
+  %9 = load ptr, ptr %5, align 8, !dbg !1184, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1184
+  %11 = load ptr, ptr %10, align 8, !dbg !1184, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1184, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1184
+  %13 = load ptr, ptr %4, align 8, !dbg !1185, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1186, !tbaa !312
+  %15 = call fast double @llvm.fabs.f64(double %14), !dbg !1187
+  %16 = fcmp fast olt double %15, 1.000000e-05, !dbg !1188
+  br i1 %16, label %17, label %28, !dbg !1189
+
+17:                                               ; preds = %2
+  %18 = fcmp fast une double %14, 0.000000e+00, !dbg !1190
+  %19 = load ptr, ptr %1, align 8, !dbg !1191, !tbaa !300
+  br i1 %18, label %20, label %26, !dbg !1192
+
+20:                                               ; preds = %17
+  %21 = load double, ptr %19, align 8, !dbg !1193, !tbaa !312
+  %22 = call double @llvm.fabs.f64(double %21), !dbg !1193
+  %23 = fcmp ueq double %22, 0x7FF0000000000000, !dbg !1193
+  br i1 %23, label %26, label %24, !dbg !1194
+
+24:                                               ; preds = %20
+  %25 = fdiv fast double %21, %14, !dbg !1195
+  br label %26, !dbg !1194
+
+26:                                               ; preds = %17, %20, %24
+  %27 = phi fast double [ %25, %24 ], [ 0.000000e+00, %20 ], [ 0.000000e+00, %17 ], !dbg !1194
+  tail call void @llvm.dbg.value(metadata double %27, metadata !1171, metadata !DIExpression()), !dbg !1196
+  store double %27, ptr %19, align 8, !dbg !1191, !tbaa !312
+  br label %32
+
+28:                                               ; preds = %2
+  %29 = load ptr, ptr %1, align 8, !dbg !1197, !tbaa !300
+  %30 = load double, ptr %29, align 8, !dbg !1197, !tbaa !312
+  %31 = fdiv fast double %30, %14, !dbg !1197
+  store double %31, ptr %29, align 8, !dbg !1197, !tbaa !312
+  br label %32, !dbg !1198
+
+32:                                               ; preds = %28, %26
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1198
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1198
+  ret void, !dbg !1198
+}
+
+I03 pow
+define hidden void @prjm_eval_func_pow(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !1508 {
+  %3 = alloca double, align 8, !DIAssignID !1520
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1512, metadata !DIExpression(), metadata !1520, metadata ptr %3, metadata !DIExpression()), !dbg !1521
+  %4 = alloca double, align 8, !DIAssignID !1522
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1513, metadata !DIExpression(), metadata !1522, metadata ptr %4, metadata !DIExpression()), !dbg !1521
+  %5 = alloca ptr, align 8, !DIAssignID !1523
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1514, metadata !DIExpression(), metadata !1523, metadata ptr %5, metadata !DIExpression()), !dbg !1521
+  %6 = alloca ptr, align 8, !DIAssignID !1524
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1515, metadata !DIExpression(), metadata !1524, metadata ptr %6, metadata !DIExpression()), !dbg !1521
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1510, metadata !DIExpression()), !dbg !1521
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1511, metadata !DIExpression()), !dbg !1521
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1525
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1526, !tbaa !312, !DIAssignID !1527
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1512, metadata !DIExpression(), metadata !1527, metadata ptr %3, metadata !DIExpression()), !dbg !1521
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1528
+  store double 0.000000e+00, ptr %4, align 8, !dbg !1529, !tbaa !312, !DIAssignID !1530
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1513, metadata !DIExpression(), metadata !1530, metadata ptr %4, metadata !DIExpression()), !dbg !1521
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !1531
+  store ptr %3, ptr %5, align 8, !dbg !1532, !tbaa !300, !DIAssignID !1533
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1514, metadata !DIExpression(), metadata !1533, metadata ptr %5, metadata !DIExpression()), !dbg !1521
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !1534
+  store ptr %4, ptr %6, align 8, !dbg !1535, !tbaa !300, !DIAssignID !1536
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !1515, metadata !DIExpression(), metadata !1536, metadata ptr %6, metadata !DIExpression()), !dbg !1521
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1537
+  %8 = load ptr, ptr %7, align 8, !dbg !1537, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !1537, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !1537, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !1537
+  %11 = load ptr, ptr %7, align 8, !dbg !1538, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !1538
+  %13 = load ptr, ptr %12, align 8, !dbg !1538, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !1538, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !1538
+  %15 = load ptr, ptr %5, align 8, !dbg !1539, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !1540, !tbaa !312
+  %17 = call fast double @llvm.fabs.f64(double %16), !dbg !1541
+  %18 = fcmp fast olt double %17, 1.000000e-05, !dbg !1542
+  %19 = load ptr, ptr %6, align 8, !dbg !1543, !tbaa !300
+  %20 = load double, ptr %19, align 8, !dbg !1544, !tbaa !312
+  %21 = fcmp fast olt double %20, 0.000000e+00
+  %22 = select i1 %18, i1 %21, i1 false, !dbg !1545
+  br i1 %22, label %23, label %30, !dbg !1545
+
+23:                                               ; preds = %2
+  %24 = fcmp fast oeq double %16, 0.000000e+00, !dbg !1546
+  %25 = call double @llvm.fabs.f64(double %20)
+  %26 = fcmp ueq double %25, 0x7FF0000000000000
+  %27 = or i1 %24, %26, !dbg !1547
+  %28 = call fast double @llvm.pow.f64(double %16, double %20), !dbg !1547
+  %29 = select fast i1 %27, double 0.000000e+00, double %28, !dbg !1547
+  tail call void @llvm.dbg.value(metadata double %29, metadata !1516, metadata !DIExpression()), !dbg !1548
+  br label %32
+
+30:                                               ; preds = %2
+  %31 = call fast double @llvm.pow.f64(double %16, double %20), !dbg !1549
+  tail call void @llvm.dbg.value(metadata double %31, metadata !1519, metadata !DIExpression()), !dbg !1521
+  br label %32, !dbg !1550
+
+32:                                               ; preds = %30, %23
+  %33 = phi double [ %31, %30 ], [ %29, %23 ]
+  %34 = load ptr, ptr %1, align 8, !dbg !1521, !tbaa !300
+  store double %33, ptr %34, align 8, !dbg !1521, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !1550
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !1550
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1550
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1550
+  ret void, !dbg !1550
+}
+
+I03 pow_op
+define hidden void @prjm_eval_func_pow_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1321 {
+  %3 = alloca double, align 8, !DIAssignID !1331
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1325, metadata !DIExpression(), metadata !1331, metadata ptr %3, metadata !DIExpression()), !dbg !1332
+  %4 = alloca ptr, align 8, !DIAssignID !1333
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1326, metadata !DIExpression(), metadata !1333, metadata ptr %4, metadata !DIExpression()), !dbg !1332
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1323, metadata !DIExpression()), !dbg !1332
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1324, metadata !DIExpression()), !dbg !1332
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1334
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1335, !tbaa !312, !DIAssignID !1336
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1325, metadata !DIExpression(), metadata !1336, metadata ptr %3, metadata !DIExpression()), !dbg !1332
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1337
+  store ptr %3, ptr %4, align 8, !dbg !1338, !tbaa !300, !DIAssignID !1339
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1326, metadata !DIExpression(), metadata !1339, metadata ptr %4, metadata !DIExpression()), !dbg !1332
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1340
+  %6 = load ptr, ptr %5, align 8, !dbg !1340, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1340, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1340, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1340
+  %9 = load ptr, ptr %5, align 8, !dbg !1341, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1341
+  %11 = load ptr, ptr %10, align 8, !dbg !1341, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1341, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1341
+  %13 = load ptr, ptr %1, align 8, !dbg !1342, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1343, !tbaa !312
+  %15 = call fast double @llvm.fabs.f64(double %14), !dbg !1344
+  %16 = fcmp fast olt double %15, 1.000000e-05, !dbg !1345
+  %17 = load ptr, ptr %4, align 8, !dbg !1346, !tbaa !300
+  %18 = load double, ptr %17, align 8, !dbg !1347, !tbaa !312
+  %19 = fcmp fast olt double %18, 0.000000e+00
+  %20 = select i1 %16, i1 %19, i1 false, !dbg !1348
+  br i1 %20, label %21, label %28, !dbg !1348
+
+21:                                               ; preds = %2
+  %22 = fcmp fast oeq double %14, 0.000000e+00, !dbg !1349
+  %23 = call double @llvm.fabs.f64(double %18)
+  %24 = fcmp ueq double %23, 0x7FF0000000000000
+  %25 = or i1 %22, %24, !dbg !1350
+  %26 = call fast double @llvm.pow.f64(double %14, double %18), !dbg !1350
+  %27 = select fast i1 %25, double 0.000000e+00, double %26, !dbg !1350
+  tail call void @llvm.dbg.value(metadata double %27, metadata !1327, metadata !DIExpression()), !dbg !1351
+  br label %30
+
+28:                                               ; preds = %2
+  %29 = call fast double @llvm.pow.f64(double %14, double %18), !dbg !1352
+  tail call void @llvm.dbg.value(metadata double %29, metadata !1330, metadata !DIExpression()), !dbg !1332
+  br label %30, !dbg !1353
+
+30:                                               ; preds = %28, %21
+  %31 = phi double [ %29, %28 ], [ %27, %21 ], !dbg !1332
+  store double %31, ptr %13, align 8, !dbg !1332, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1353
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1353
+  ret void, !dbg !1353
+}
+
+I04 mod
+define hidden void @prjm_eval_func_mod(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !913 {
+  %3 = alloca double, align 8, !DIAssignID !921
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !917, metadata !DIExpression(), metadata !921, metadata ptr %3, metadata !DIExpression()), !dbg !922
+  %4 = alloca double, align 8, !DIAssignID !923
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !918, metadata !DIExpression(), metadata !923, metadata ptr %4, metadata !DIExpression()), !dbg !922
+  %5 = alloca ptr, align 8, !DIAssignID !924
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !919, metadata !DIExpression(), metadata !924, metadata ptr %5, metadata !DIExpression()), !dbg !922
+  %6 = alloca ptr, align 8, !DIAssignID !925
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !920, metadata !DIExpression(), metadata !925, metadata ptr %6, metadata !DIExpression()), !dbg !922
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !915, metadata !DIExpression()), !dbg !922
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !916, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !926
+  store double 0.000000e+00, ptr %3, align 8, !dbg !927, !tbaa !312, !DIAssignID !928
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !917, metadata !DIExpression(), metadata !928, metadata ptr %3, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !929
+  store double 0.000000e+00, ptr %4, align 8, !dbg !930, !tbaa !312, !DIAssignID !931
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !918, metadata !DIExpression(), metadata !931, metadata ptr %4, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !932
+  store ptr %3, ptr %5, align 8, !dbg !933, !tbaa !300, !DIAssignID !934
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !919, metadata !DIExpression(), metadata !934, metadata ptr %5, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !935
+  store ptr %4, ptr %6, align 8, !dbg !936, !tbaa !300, !DIAssignID !937
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !920, metadata !DIExpression(), metadata !937, metadata ptr %6, metadata !DIExpression()), !dbg !922
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !938
+  %8 = load ptr, ptr %7, align 8, !dbg !938, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !938, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !938, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !938
+  %11 = load ptr, ptr %7, align 8, !dbg !939, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !939
+  %13 = load ptr, ptr %12, align 8, !dbg !939, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !939, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !939
+  %15 = load ptr, ptr %5, align 8, !dbg !940, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !940, !tbaa !312
+  %17 = load ptr, ptr %6, align 8, !dbg !940, !tbaa !300
+  %18 = load double, ptr %17, align 8, !dbg !940, !tbaa !312
+  call void @llvm.dbg.value(metadata double %16, metadata !941, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata double %18, metadata !946, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata double 0x43E0000000000000, metadata !947, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata i64 -9223372036854775808, metadata !948, metadata !DIExpression()), !dbg !953
+  %19 = fcmp fast olt double %16, 0xC3E0000000000000
+  %20 = fcmp fast oge double %16, 0x43E0000000000000
+  %21 = select i1 %19, i1 true, i1 %20, !dbg !955
+  %22 = fcmp fast olt double %18, 0xC3E0000000000000
+  %23 = select i1 %21, i1 true, i1 %22, !dbg !955
+  %24 = fcmp fast oge double %18, 0x43E0000000000000
+  %25 = select i1 %23, i1 true, i1 %24, !dbg !955
+  br i1 %25, label %44, label %26, !dbg !955
+
+26:                                               ; preds = %2
+  %27 = fptosi double %16 to i64, !dbg !957
+  call void @llvm.dbg.value(metadata i64 %27, metadata !950, metadata !DIExpression()), !dbg !953
+  %28 = fptosi double %18 to i64, !dbg !958
+  call void @llvm.dbg.value(metadata i64 %28, metadata !951, metadata !DIExpression()), !dbg !953
+  %29 = icmp eq i64 %28, 0, !dbg !959
+  br i1 %29, label %44, label %30, !dbg !961
+
+30:                                               ; preds = %26
+  %31 = icmp eq i64 %27, -9223372036854775808, !dbg !962
+  %32 = icmp eq i64 %28, -1
+  %33 = and i1 %31, %32, !dbg !963
+  br i1 %33, label %44, label %34, !dbg !963
+
+34:                                               ; preds = %30
+  %35 = srem i64 %27, %28, !dbg !964
+  %36 = sitofp i64 %35 to double, !dbg !965
+  call void @llvm.dbg.value(metadata double %36, metadata !952, metadata !DIExpression()), !dbg !953
+  %37 = call fast double @llvm.fabs.f64(double %16), !dbg !966
+  %38 = fcmp fast olt double %37, 0x41E0000000000000, !dbg !967
+  %39 = call fast double @llvm.fabs.f64(double %18)
+  %40 = fcmp fast olt double %39, 0x41E0000000000000
+  %41 = select i1 %38, i1 %40, i1 false, !dbg !968
+  %42 = call fast double @llvm.fabs.f64(double %36), !dbg !968
+  %43 = select fast i1 %41, double %42, double %36, !dbg !968
+  br label %44
+
+44:                                               ; preds = %2, %26, %30, %34
+  %45 = phi double [ 0.000000e+00, %2 ], [ %43, %34 ], [ 0.000000e+00, %30 ], [ 0.000000e+00, %26 ], !dbg !953
+  %46 = load ptr, ptr %1, align 8, !dbg !940, !tbaa !300
+  store double %45, ptr %46, align 8, !dbg !940, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !969
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !969
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !969
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !969
+  ret void, !dbg !969
+}
+
+I04 mod_op
+define hidden void @prjm_eval_func_mod_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1300 {
+  %3 = alloca double, align 8, !DIAssignID !1306
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1304, metadata !DIExpression(), metadata !1306, metadata ptr %3, metadata !DIExpression()), !dbg !1307
+  %4 = alloca ptr, align 8, !DIAssignID !1308
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1305, metadata !DIExpression(), metadata !1308, metadata ptr %4, metadata !DIExpression()), !dbg !1307
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1302, metadata !DIExpression()), !dbg !1307
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1303, metadata !DIExpression()), !dbg !1307
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1309
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1310, !tbaa !312, !DIAssignID !1311
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1304, metadata !DIExpression(), metadata !1311, metadata ptr %3, metadata !DIExpression()), !dbg !1307
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1312
+  store ptr %3, ptr %4, align 8, !dbg !1313, !tbaa !300, !DIAssignID !1314
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1305, metadata !DIExpression(), metadata !1314, metadata ptr %4, metadata !DIExpression()), !dbg !1307
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1315
+  %6 = load ptr, ptr %5, align 8, !dbg !1315, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1315, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1315, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1315
+  %9 = load ptr, ptr %5, align 8, !dbg !1316, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1316
+  %11 = load ptr, ptr %10, align 8, !dbg !1316, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1316, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1316
+  %13 = load ptr, ptr %1, align 8, !dbg !1317, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1317, !tbaa !312
+  %15 = load ptr, ptr %4, align 8, !dbg !1317, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !1317, !tbaa !312
+  call void @llvm.dbg.value(metadata double %14, metadata !941, metadata !DIExpression()), !dbg !1318
+  call void @llvm.dbg.value(metadata double %16, metadata !946, metadata !DIExpression()), !dbg !1318
+  call void @llvm.dbg.value(metadata double 0x43E0000000000000, metadata !947, metadata !DIExpression()), !dbg !1318
+  call void @llvm.dbg.value(metadata i64 -9223372036854775808, metadata !948, metadata !DIExpression()), !dbg !1318
+  %17 = fcmp fast olt double %14, 0xC3E0000000000000
+  %18 = fcmp fast oge double %14, 0x43E0000000000000
+  %19 = select i1 %17, i1 true, i1 %18, !dbg !1320
+  %20 = fcmp fast olt double %16, 0xC3E0000000000000
+  %21 = select i1 %19, i1 true, i1 %20, !dbg !1320
+  %22 = fcmp fast oge double %16, 0x43E0000000000000
+  %23 = select i1 %21, i1 true, i1 %22, !dbg !1320
+  br i1 %23, label %42, label %24, !dbg !1320
+
+24:                                               ; preds = %2
+  %25 = fptosi double %14 to i64, !dbg !1321
+  call void @llvm.dbg.value(metadata i64 %25, metadata !950, metadata !DIExpression()), !dbg !1318
+  %26 = fptosi double %16 to i64, !dbg !1322
+  call void @llvm.dbg.value(metadata i64 %26, metadata !951, metadata !DIExpression()), !dbg !1318
+  %27 = icmp eq i64 %26, 0, !dbg !1323
+  br i1 %27, label %42, label %28, !dbg !1324
+
+28:                                               ; preds = %24
+  %29 = icmp eq i64 %25, -9223372036854775808, !dbg !1325
+  %30 = icmp eq i64 %26, -1
+  %31 = and i1 %29, %30, !dbg !1326
+  br i1 %31, label %42, label %32, !dbg !1326
+
+32:                                               ; preds = %28
+  %33 = srem i64 %25, %26, !dbg !1327
+  %34 = sitofp i64 %33 to double, !dbg !1328
+  call void @llvm.dbg.value(metadata double %34, metadata !952, metadata !DIExpression()), !dbg !1318
+  %35 = call fast double @llvm.fabs.f64(double %14), !dbg !1329
+  %36 = fcmp fast olt double %35, 0x41E0000000000000, !dbg !1330
+  %37 = call fast double @llvm.fabs.f64(double %16)
+  %38 = fcmp fast olt double %37, 0x41E0000000000000
+  %39 = select i1 %36, i1 %38, i1 false, !dbg !1331
+  %40 = call fast double @llvm.fabs.f64(double %34), !dbg !1331
+  %41 = select fast i1 %39, double %40, double %34, !dbg !1331
+  br label %42
+
+42:                                               ; preds = %2, %24, %28, %32
+  %43 = phi double [ 0.000000e+00, %2 ], [ %41, %32 ], [ 0.000000e+00, %28 ], [ 0.000000e+00, %24 ], !dbg !1318
+  store double %43, ptr %13, align 8, !dbg !1317, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1332
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1332
+  ret void, !dbg !1332
+}

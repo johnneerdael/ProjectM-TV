@@ -1,0 +1,14 @@
+{
+  "means_ms": {
+    "before": 2.0818610328703704,
+    "after": 2.1867355361111107
+  },
+  "delta_ms": 0.10487450324074032,
+  "delta_pct": 5.037536203660253,
+  "cycle_delta_pct": [
+    7.593104932504313,
+    5.297177700616262,
+    1.6928140133645408
+  ],
+  "scope": "Three isolated ABBA cycles, original mosaic, frozen source-p17/p18 engine and corrected final-read0 workers; no physical-TV FPS claim"
+}

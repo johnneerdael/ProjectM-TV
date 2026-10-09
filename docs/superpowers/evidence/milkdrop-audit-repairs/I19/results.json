@@ -1,0 +1,47 @@
+{
+  "baseline": "e5dd1b09adb6a44725f45ff894bd41e2d64f95f0",
+  "hypothesis": "6b3162f8a9fd0c376a6c52d09c974962534360cb",
+  "preset": "$$$ Royal - Mashup (103).milk",
+  "native_trails": "Standard",
+  "render": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "frame239_mean_rgb": {
+    "before": 25.9913470936214,
+    "source_cap": 85.38729142554013
+  },
+  "frame239_rgb_mae": 61.21226819701646,
+  "repeats": "all eight captured RGB frames match exactly within each role",
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 6.131301163888886,
+      "p90_ms": 7.078375
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 7.758530899999997,
+      "p90_ms": 10.267333
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 5.7775071833333325,
+      "p90_ms": 6.525459
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 6.29363393055555,
+      "p90_ms": 7.407084
+    }
+  ],
+  "disposition": "owner fidelity-policy decision pending; candidate not accepted for release"
+}

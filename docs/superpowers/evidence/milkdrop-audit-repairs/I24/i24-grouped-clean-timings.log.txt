@@ -1,0 +1,46 @@
+{"issue": "I24-city-c", "cycle": 0, "step": 0, "role": "before", "mean_ms": 6.402768024999991, "p90_ms": 6.849709, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 1, "role": "after", "mean_ms": 5.998532555555554, "p90_ms": 6.385833, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 2, "role": "after", "mean_ms": 6.3384107888888925, "p90_ms": 6.563542, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 3, "role": "before", "mean_ms": 6.1263925805555575, "p90_ms": 6.470917, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 0, "role": "before", "mean_ms": 6.11957660555555, "p90_ms": 6.50325, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 1, "role": "after", "mean_ms": 5.920099905555559, "p90_ms": 6.161291, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 2, "role": "after", "mean_ms": 5.869629858333332, "p90_ms": 6.18525, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 3, "role": "before", "mean_ms": 6.008862280555559, "p90_ms": 6.303, "status": "ok"}
+Traceback (most recent call last):
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/run_i24_grouped_clean_timings.py", line 17, in <module>
+    directory=root/'captures'/('warp-clean-'+issue+'-'+str(cycle)+'-'+str(step)+'-'+role);request=runner.request(name,3840,2160,1280,720,0);request['expectedPresetCount']=9609;m=runner.render(device,i,request,directory,pcm,expected,user)
+                                                                                                                                                                                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/tools/native-trails/run_validation.py", line 163, in render
+    stream.extractall(temporary, filter="data")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 2355, in extractall
+    self._extract_one(tarinfo, path, set_attrs=not tarinfo.isdir(),
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      numeric_owner=numeric_owner,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      filter_function=filter_function)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 2464, in _extract_one
+    self._handle_fatal_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 2458, in _extract_one
+    self._extract_member(tarinfo, os.path.join(path, tarinfo.name),
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         set_attrs=set_attrs,
+                         ^^^^^^^^^^^^^^^^^^^^
+                         numeric_owner=numeric_owner,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         filter_function=filter_function,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         extraction_root=path)
+                         ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 2547, in _extract_member
+    self.makefile(tarinfo, targetpath)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 2604, in makefile
+    copyfileobj(source, target, tarinfo.size, ReadError, bufsize)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/tarfile.py", line 253, in copyfileobj
+    dst.write(buf)
+    ~~~~~~~~~^^^^^
+OSError: [Errno 28] No space left on device

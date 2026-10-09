@@ -1,0 +1,7 @@
+{
+  "base": "ac3 current27 engine",
+  "patch_sha256": "686e516b61c06df50fd86f880ae538ee22b9810ba75d2331938a29a61b7cc4f2",
+  "Border_cpp_sha256": "2c722624d3250a5453fb9e5fc3897ca3fd8b2f578ac69f5cde2897a1947683ff",
+  "canonical_source_changed": false,
+  "counts": "8vertices/8triangles/1elementcall"
+}

@@ -1,0 +1,60 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Preserve original decimal precision of EEL named constants
+
+Follow MilkDrop2 nseel-compiler.c constant expansion: the existing
+$pi/$e/$phi decimals enter the double evaluator without float rounding.
+Remove only the f suffixes from those same decimals in Scanner.l and
+checked-in Scanner.c. Android disables Flex/Bison regeneration, so both
+sources must match. Preserve the original abbreviated e/phi values,
+lone-dot handling, thread-local RNG and later geometry/shader casts.
+No per-frame operation, allocation, render pass or vertex is added.
+
+Original source: milkdrop2 f05b0d8, ns-eel2/nseel-compiler.c:1077.
+
+---
+diff --git a/vendor/projectm-eval/projectm-eval/Scanner.c b/vendor/projectm-eval/projectm-eval/Scanner.c
+index 247b3ca..c57fcd0 100644
+--- a/vendor/projectm-eval/projectm-eval/Scanner.c
++++ b/vendor/projectm-eval/projectm-eval/Scanner.c
+@@ -1423,15 +1423,15 @@ YY_RULE_SETUP
+-	YY_BREAK
++	YY_BREAK
+ case 9:
+ YY_RULE_SETUP
+-{ yylval->NUM = 3.141592653589793f; return NUM; }
++{ yylval->NUM = 3.141592653589793; return NUM; }
+-	YY_BREAK
++	YY_BREAK
+ case 10:
+ YY_RULE_SETUP
+-{ yylval->NUM = 2.71828183f; return NUM; }
++{ yylval->NUM = 2.71828183; return NUM; }
+-	YY_BREAK
++	YY_BREAK
+ case 11:
+ YY_RULE_SETUP
+-{ yylval->NUM = 1.61803399f; return NUM; }
++{ yylval->NUM = 1.61803399; return NUM; }
+-	YY_BREAK
++	YY_BREAK
+ case 12:
+ YY_RULE_SETUP
+diff --git a/vendor/projectm-eval/projectm-eval/Scanner.l b/vendor/projectm-eval/projectm-eval/Scanner.l
+index 10dcad8..209d108 100644
+--- a/vendor/projectm-eval/projectm-eval/Scanner.l
++++ b/vendor/projectm-eval/projectm-eval/Scanner.l
+@@ -63,10 +63,10 @@
+                         return NUM;
+                         }
+ "$'"."'"            { yylval->NUM = *(char*)(yytext + 2); return NUM; }
+-"$"(?i:pi)          { yylval->NUM = 3.141592653589793f; return NUM; }
+-"$"[eE]             { yylval->NUM = 2.71828183f; return NUM; }
+-"$"(?i:phi)         { yylval->NUM = 1.61803399f; return NUM; }
++"$"(?i:pi)          { yylval->NUM = 3.141592653589793; return NUM; }
++"$"[eE]             { yylval->NUM = 2.71828183; return NUM; }
++"$"(?i:phi)         { yylval->NUM = 1.61803399; return NUM; }
+
+ (?i:gmem)           { return GMEM; }
+-
++
+ {FLOAT}             {

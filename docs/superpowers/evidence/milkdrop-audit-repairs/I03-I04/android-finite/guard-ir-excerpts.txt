@@ -1,0 +1,499 @@
+I03 div
+define hidden void @prjm_eval_func_div(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !878 {
+  %3 = alloca double, align 8, !DIAssignID !889
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !882, metadata !DIExpression(), metadata !889, metadata ptr %3, metadata !DIExpression()), !dbg !890
+  %4 = alloca double, align 8, !DIAssignID !891
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !883, metadata !DIExpression(), metadata !891, metadata ptr %4, metadata !DIExpression()), !dbg !890
+  %5 = alloca ptr, align 8, !DIAssignID !892
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !884, metadata !DIExpression(), metadata !892, metadata ptr %5, metadata !DIExpression()), !dbg !890
+  %6 = alloca ptr, align 8, !DIAssignID !893
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !885, metadata !DIExpression(), metadata !893, metadata ptr %6, metadata !DIExpression()), !dbg !890
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !880, metadata !DIExpression()), !dbg !890
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !881, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !894
+  store double 0.000000e+00, ptr %3, align 8, !dbg !895, !tbaa !312, !DIAssignID !896
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !882, metadata !DIExpression(), metadata !896, metadata ptr %3, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !897
+  store double 0.000000e+00, ptr %4, align 8, !dbg !898, !tbaa !312, !DIAssignID !899
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !883, metadata !DIExpression(), metadata !899, metadata ptr %4, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !900
+  store ptr %3, ptr %5, align 8, !dbg !901, !tbaa !300, !DIAssignID !902
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !884, metadata !DIExpression(), metadata !902, metadata ptr %5, metadata !DIExpression()), !dbg !890
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !903
+  store ptr %4, ptr %6, align 8, !dbg !904, !tbaa !300, !DIAssignID !905
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !885, metadata !DIExpression(), metadata !905, metadata ptr %6, metadata !DIExpression()), !dbg !890
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !906
+  %8 = load ptr, ptr %7, align 8, !dbg !906, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !906, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !906, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !906
+  %11 = load ptr, ptr %7, align 8, !dbg !907, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !907
+  %13 = load ptr, ptr %12, align 8, !dbg !907, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !907, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !907
+  %15 = load ptr, ptr %6, align 8, !dbg !908, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !909, !tbaa !312
+  %17 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %16), !dbg !910
+  %18 = fcmp reassoc nsz arcp contract afn olt double %17, 1.000000e-05, !dbg !911
+  br i1 %18, label %19, label %33, !dbg !912
+
+19:                                               ; preds = %2
+  %20 = fcmp reassoc nsz arcp contract afn une double %16, 0.000000e+00, !dbg !913
+  br i1 %20, label %21, label %28, !dbg !914
+
+21:                                               ; preds = %19
+  %22 = load ptr, ptr %5, align 8, !dbg !915, !tbaa !300
+  %23 = load double, ptr %22, align 8, !dbg !915, !tbaa !312
+  %24 = call double @llvm.fabs.f64(double %23), !dbg !915
+  %25 = fcmp ueq double %24, 0x7FF0000000000000, !dbg !915
+  br i1 %25, label %28, label %26, !dbg !916
+
+26:                                               ; preds = %21
+  %27 = fdiv reassoc nsz arcp contract afn double %23, %16, !dbg !917
+  br label %28, !dbg !916
+
+28:                                               ; preds = %19, %21, %26
+  %29 = phi reassoc nsz arcp contract afn double [ %27, %26 ], [ 0.000000e+00, %21 ], [ 0.000000e+00, %19 ], !dbg !916
+  tail call void @llvm.dbg.value(metadata double %29, metadata !886, metadata !DIExpression()), !dbg !918
+  %30 = call double @llvm.fabs.f64(double %29), !dbg !919
+  %31 = fcmp one double %30, 0x7FF0000000000000, !dbg !919
+  %32 = select reassoc nsz arcp contract afn i1 %31, double %29, double 0.000000e+00, !dbg !919
+  br label %37
+
+33:                                               ; preds = %2
+  %34 = load ptr, ptr %5, align 8, !dbg !920, !tbaa !300
+  %35 = load double, ptr %34, align 8, !dbg !920, !tbaa !312
+  %36 = fdiv reassoc nsz arcp contract afn double %35, %16, !dbg !920
+  br label %37, !dbg !921
+
+37:                                               ; preds = %33, %28
+  %38 = phi double [ %36, %33 ], [ %32, %28 ]
+  %39 = load ptr, ptr %1, align 8, !dbg !890, !tbaa !300
+  store double %38, ptr %39, align 8, !dbg !890, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !921
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !921
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !921
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !921
+  ret void, !dbg !921
+}
+
+I03 div_op
+define hidden void @prjm_eval_func_div_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1167 {
+  %3 = alloca double, align 8, !DIAssignID !1176
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1171, metadata !DIExpression(), metadata !1176, metadata ptr %3, metadata !DIExpression()), !dbg !1177
+  %4 = alloca ptr, align 8, !DIAssignID !1178
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1172, metadata !DIExpression(), metadata !1178, metadata ptr %4, metadata !DIExpression()), !dbg !1177
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1169, metadata !DIExpression()), !dbg !1177
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1170, metadata !DIExpression()), !dbg !1177
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1179
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1180, !tbaa !312, !DIAssignID !1181
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1171, metadata !DIExpression(), metadata !1181, metadata ptr %3, metadata !DIExpression()), !dbg !1177
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1182
+  store ptr %3, ptr %4, align 8, !dbg !1183, !tbaa !300, !DIAssignID !1184
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1172, metadata !DIExpression(), metadata !1184, metadata ptr %4, metadata !DIExpression()), !dbg !1177
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1185
+  %6 = load ptr, ptr %5, align 8, !dbg !1185, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1185, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1185, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1185
+  %9 = load ptr, ptr %5, align 8, !dbg !1186, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1186
+  %11 = load ptr, ptr %10, align 8, !dbg !1186, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1186, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1186
+  %13 = load ptr, ptr %4, align 8, !dbg !1187, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1188, !tbaa !312
+  %15 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %14), !dbg !1189
+  %16 = fcmp reassoc nsz arcp contract afn olt double %15, 1.000000e-05, !dbg !1190
+  br i1 %16, label %17, label %31, !dbg !1191
+
+17:                                               ; preds = %2
+  %18 = fcmp reassoc nsz arcp contract afn une double %14, 0.000000e+00, !dbg !1192
+  %19 = load ptr, ptr %1, align 8, !dbg !1193, !tbaa !300
+  br i1 %18, label %20, label %26, !dbg !1194
+
+20:                                               ; preds = %17
+  %21 = load double, ptr %19, align 8, !dbg !1195, !tbaa !312
+  %22 = call double @llvm.fabs.f64(double %21), !dbg !1195
+  %23 = fcmp ueq double %22, 0x7FF0000000000000, !dbg !1195
+  br i1 %23, label %26, label %24, !dbg !1196
+
+24:                                               ; preds = %20
+  %25 = fdiv reassoc nsz arcp contract afn double %21, %14, !dbg !1197
+  br label %26, !dbg !1196
+
+26:                                               ; preds = %17, %20, %24
+  %27 = phi reassoc nsz arcp contract afn double [ %25, %24 ], [ 0.000000e+00, %20 ], [ 0.000000e+00, %17 ], !dbg !1196
+  tail call void @llvm.dbg.value(metadata double %27, metadata !1173, metadata !DIExpression()), !dbg !1198
+  %28 = call double @llvm.fabs.f64(double %27), !dbg !1193
+  %29 = fcmp one double %28, 0x7FF0000000000000, !dbg !1193
+  %30 = select reassoc nsz arcp contract afn i1 %29, double %27, double 0.000000e+00, !dbg !1193
+  store double %30, ptr %19, align 8, !dbg !1193, !tbaa !312
+  br label %35
+
+31:                                               ; preds = %2
+  %32 = load ptr, ptr %1, align 8, !dbg !1199, !tbaa !300
+  %33 = load double, ptr %32, align 8, !dbg !1199, !tbaa !312
+  %34 = fdiv reassoc nsz arcp contract afn double %33, %14, !dbg !1199
+  store double %34, ptr %32, align 8, !dbg !1199, !tbaa !312
+  br label %35, !dbg !1200
+
+35:                                               ; preds = %31, %26
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1200
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1200
+  ret void, !dbg !1200
+}
+
+I03 pow
+define hidden void @prjm_eval_func_pow(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !1512 {
+  %3 = alloca double, align 8, !DIAssignID !1524
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1516, metadata !DIExpression(), metadata !1524, metadata ptr %3, metadata !DIExpression()), !dbg !1525
+  %4 = alloca double, align 8, !DIAssignID !1526
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1517, metadata !DIExpression(), metadata !1526, metadata ptr %4, metadata !DIExpression()), !dbg !1525
+  %5 = alloca ptr, align 8, !DIAssignID !1527
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1518, metadata !DIExpression(), metadata !1527, metadata ptr %5, metadata !DIExpression()), !dbg !1525
+  %6 = alloca ptr, align 8, !DIAssignID !1528
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1519, metadata !DIExpression(), metadata !1528, metadata ptr %6, metadata !DIExpression()), !dbg !1525
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1514, metadata !DIExpression()), !dbg !1525
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1515, metadata !DIExpression()), !dbg !1525
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1529
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1530, !tbaa !312, !DIAssignID !1531
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1516, metadata !DIExpression(), metadata !1531, metadata ptr %3, metadata !DIExpression()), !dbg !1525
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1532
+  store double 0.000000e+00, ptr %4, align 8, !dbg !1533, !tbaa !312, !DIAssignID !1534
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1517, metadata !DIExpression(), metadata !1534, metadata ptr %4, metadata !DIExpression()), !dbg !1525
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !1535
+  store ptr %3, ptr %5, align 8, !dbg !1536, !tbaa !300, !DIAssignID !1537
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1518, metadata !DIExpression(), metadata !1537, metadata ptr %5, metadata !DIExpression()), !dbg !1525
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !1538
+  store ptr %4, ptr %6, align 8, !dbg !1539, !tbaa !300, !DIAssignID !1540
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !1519, metadata !DIExpression(), metadata !1540, metadata ptr %6, metadata !DIExpression()), !dbg !1525
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1541
+  %8 = load ptr, ptr %7, align 8, !dbg !1541, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !1541, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !1541, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !1541
+  %11 = load ptr, ptr %7, align 8, !dbg !1542, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !1542
+  %13 = load ptr, ptr %12, align 8, !dbg !1542, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !1542, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !1542
+  %15 = load ptr, ptr %5, align 8, !dbg !1543, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !1544, !tbaa !312
+  %17 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %16), !dbg !1545
+  %18 = fcmp reassoc nsz arcp contract afn olt double %17, 1.000000e-05, !dbg !1546
+  %19 = load ptr, ptr %6, align 8, !dbg !1547, !tbaa !300
+  %20 = load double, ptr %19, align 8, !dbg !1548, !tbaa !312
+  %21 = fcmp reassoc nsz arcp contract afn olt double %20, 0.000000e+00
+  %22 = select i1 %18, i1 %21, i1 false, !dbg !1549
+  br i1 %22, label %23, label %33, !dbg !1549
+
+23:                                               ; preds = %2
+  %24 = fcmp reassoc nsz arcp contract afn oeq double %16, 0.000000e+00, !dbg !1550
+  %25 = call double @llvm.fabs.f64(double %20)
+  %26 = fcmp ueq double %25, 0x7FF0000000000000
+  %27 = or i1 %24, %26, !dbg !1551
+  %28 = call reassoc nsz arcp contract afn double @llvm.pow.f64(double %16, double %20), !dbg !1551
+  %29 = select reassoc nsz arcp contract afn i1 %27, double 0.000000e+00, double %28, !dbg !1551
+  tail call void @llvm.dbg.value(metadata double %29, metadata !1520, metadata !DIExpression()), !dbg !1552
+  %30 = call double @llvm.fabs.f64(double %29), !dbg !1553
+  %31 = fcmp one double %30, 0x7FF0000000000000, !dbg !1553
+  %32 = select reassoc nsz arcp contract afn i1 %31, double %29, double 0.000000e+00, !dbg !1553
+  br label %37
+
+33:                                               ; preds = %2
+  %34 = call reassoc nsz arcp contract afn double @llvm.pow.f64(double %16, double %20), !dbg !1554
+  tail call void @llvm.dbg.value(metadata double %34, metadata !1523, metadata !DIExpression()), !dbg !1525
+  %35 = fcmp ord double %34, 0.000000e+00, !dbg !1555
+  %36 = select i1 %35, double %34, double 0.000000e+00, !dbg !1555
+  br label %37, !dbg !1556
+
+37:                                               ; preds = %33, %23
+  %38 = phi double [ %36, %33 ], [ %32, %23 ]
+  %39 = load ptr, ptr %1, align 8, !dbg !1525, !tbaa !300
+  store double %38, ptr %39, align 8, !dbg !1525, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !1556
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !1556
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1556
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1556
+  ret void, !dbg !1556
+}
+
+I03 pow_op
+define hidden void @prjm_eval_func_pow_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1323 {
+  %3 = alloca double, align 8, !DIAssignID !1333
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1327, metadata !DIExpression(), metadata !1333, metadata ptr %3, metadata !DIExpression()), !dbg !1334
+  %4 = alloca ptr, align 8, !DIAssignID !1335
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1328, metadata !DIExpression(), metadata !1335, metadata ptr %4, metadata !DIExpression()), !dbg !1334
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1325, metadata !DIExpression()), !dbg !1334
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1326, metadata !DIExpression()), !dbg !1334
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1336
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1337, !tbaa !312, !DIAssignID !1338
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1327, metadata !DIExpression(), metadata !1338, metadata ptr %3, metadata !DIExpression()), !dbg !1334
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1339
+  store ptr %3, ptr %4, align 8, !dbg !1340, !tbaa !300, !DIAssignID !1341
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1328, metadata !DIExpression(), metadata !1341, metadata ptr %4, metadata !DIExpression()), !dbg !1334
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1342
+  %6 = load ptr, ptr %5, align 8, !dbg !1342, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1342, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1342, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1342
+  %9 = load ptr, ptr %5, align 8, !dbg !1343, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1343
+  %11 = load ptr, ptr %10, align 8, !dbg !1343, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1343, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1343
+  %13 = load ptr, ptr %1, align 8, !dbg !1344, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1345, !tbaa !312
+  %15 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %14), !dbg !1346
+  %16 = fcmp reassoc nsz arcp contract afn olt double %15, 1.000000e-05, !dbg !1347
+  %17 = load ptr, ptr %4, align 8, !dbg !1348, !tbaa !300
+  %18 = load double, ptr %17, align 8, !dbg !1349, !tbaa !312
+  %19 = fcmp reassoc nsz arcp contract afn olt double %18, 0.000000e+00
+  %20 = select i1 %16, i1 %19, i1 false, !dbg !1350
+  br i1 %20, label %21, label %31, !dbg !1350
+
+21:                                               ; preds = %2
+  %22 = fcmp reassoc nsz arcp contract afn oeq double %14, 0.000000e+00, !dbg !1351
+  %23 = call double @llvm.fabs.f64(double %18)
+  %24 = fcmp ueq double %23, 0x7FF0000000000000
+  %25 = or i1 %22, %24, !dbg !1352
+  %26 = call reassoc nsz arcp contract afn double @llvm.pow.f64(double %14, double %18), !dbg !1352
+  %27 = select reassoc nsz arcp contract afn i1 %25, double 0.000000e+00, double %26, !dbg !1352
+  tail call void @llvm.dbg.value(metadata double %27, metadata !1329, metadata !DIExpression()), !dbg !1353
+  %28 = call double @llvm.fabs.f64(double %27), !dbg !1354
+  %29 = fcmp one double %28, 0x7FF0000000000000, !dbg !1354
+  %30 = select reassoc nsz arcp contract afn i1 %29, double %27, double 0.000000e+00, !dbg !1354
+  br label %35
+
+31:                                               ; preds = %2
+  %32 = call reassoc nsz arcp contract afn double @llvm.pow.f64(double %14, double %18), !dbg !1355
+  tail call void @llvm.dbg.value(metadata double %32, metadata !1332, metadata !DIExpression()), !dbg !1334
+  %33 = fcmp ord double %32, 0.000000e+00, !dbg !1356
+  %34 = select i1 %33, double %32, double 0.000000e+00, !dbg !1356
+  br label %35, !dbg !1357
+
+35:                                               ; preds = %31, %21
+  %36 = phi double [ %34, %31 ], [ %30, %21 ], !dbg !1334
+  store double %36, ptr %13, align 8, !dbg !1334, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1357
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1357
+  ret void, !dbg !1357
+}
+
+I03 invsqrt
+define hidden void @prjm_eval_func_invsqrt(ptr noundef %0, ptr nocapture noundef readonly %1) #3 !dbg !20 {
+  %3 = alloca ptr, align 8, !DIAssignID !1903
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !60, metadata !DIExpression(), metadata !1903, metadata ptr %3, metadata !DIExpression()), !dbg !1904
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !50, metadata !DIExpression()), !dbg !1904
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !51, metadata !DIExpression()), !dbg !1904
+  %4 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 1, !dbg !1905
+  store double 0.000000e+00, ptr %4, align 8, !dbg !1906, !tbaa !309
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1907
+  store ptr %4, ptr %3, align 8, !dbg !1908, !tbaa !300, !DIAssignID !1909
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !60, metadata !DIExpression(), metadata !1909, metadata ptr %3, metadata !DIExpression()), !dbg !1904
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1910
+  %6 = load ptr, ptr %5, align 8, !dbg !1910, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1910, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1910, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef nonnull %3) #9, !dbg !1910
+  %9 = load ptr, ptr %3, align 8, !dbg !1911, !tbaa !300
+  %10 = load double, ptr %9, align 8, !dbg !1912, !tbaa !312
+  tail call void @llvm.dbg.value(metadata double poison, metadata !61, metadata !DIExpression()), !dbg !1904
+  tail call void @llvm.dbg.value(metadata double %10, metadata !52, metadata !DIExpression()), !dbg !1904
+  %11 = bitcast double %10 to i64, !dbg !1913
+  %12 = lshr i64 %11, 1, !dbg !1914
+  %13 = sub nsw i64 6910469410427058089, %12, !dbg !1915
+  %14 = bitcast i64 %13 to double, !dbg !1916
+  tail call void @llvm.dbg.value(metadata double %14, metadata !52, metadata !DIExpression()), !dbg !1904
+  %15 = fmul reassoc nsz arcp contract afn double %10, 5.000000e-01, !dbg !1917
+  %16 = fmul reassoc nsz arcp contract afn double %14, %14, !dbg !1917
+  %17 = fmul reassoc nsz arcp contract afn double %16, %15, !dbg !1917
+  %18 = fsub reassoc nsz arcp contract afn double 1.500000e+00, %17, !dbg !1918
+  %19 = fmul reassoc nsz arcp contract afn double %18, %14, !dbg !1919
+  tail call void @llvm.dbg.value(metadata double %19, metadata !52, metadata !DIExpression()), !dbg !1904
+  %20 = fcmp ord double %19, 0.000000e+00, !dbg !1920
+  %21 = select i1 %20, double %19, double 0.000000e+00, !dbg !1920
+  %22 = load ptr, ptr %1, align 8, !dbg !1920, !tbaa !300
+  store double %21, ptr %22, align 8, !dbg !1920, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1921
+  ret void, !dbg !1921
+}
+
+I04 mod
+define hidden void @prjm_eval_func_mod(ptr nocapture noundef readonly %0, ptr nocapture noundef readonly %1) #3 !dbg !913 {
+  %3 = alloca double, align 8, !DIAssignID !921
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !917, metadata !DIExpression(), metadata !921, metadata ptr %3, metadata !DIExpression()), !dbg !922
+  %4 = alloca double, align 8, !DIAssignID !923
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !918, metadata !DIExpression(), metadata !923, metadata ptr %4, metadata !DIExpression()), !dbg !922
+  %5 = alloca ptr, align 8, !DIAssignID !924
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !919, metadata !DIExpression(), metadata !924, metadata ptr %5, metadata !DIExpression()), !dbg !922
+  %6 = alloca ptr, align 8, !DIAssignID !925
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !920, metadata !DIExpression(), metadata !925, metadata ptr %6, metadata !DIExpression()), !dbg !922
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !915, metadata !DIExpression()), !dbg !922
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !916, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !926
+  store double 0.000000e+00, ptr %3, align 8, !dbg !927, !tbaa !312, !DIAssignID !928
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !917, metadata !DIExpression(), metadata !928, metadata ptr %3, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !929
+  store double 0.000000e+00, ptr %4, align 8, !dbg !930, !tbaa !312, !DIAssignID !931
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !918, metadata !DIExpression(), metadata !931, metadata ptr %4, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %5) #9, !dbg !932
+  store ptr %3, ptr %5, align 8, !dbg !933, !tbaa !300, !DIAssignID !934
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !919, metadata !DIExpression(), metadata !934, metadata ptr %5, metadata !DIExpression()), !dbg !922
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %6) #9, !dbg !935
+  store ptr %4, ptr %6, align 8, !dbg !936, !tbaa !300, !DIAssignID !937
+  call void @llvm.dbg.assign(metadata ptr %4, metadata !920, metadata !DIExpression(), metadata !937, metadata ptr %6, metadata !DIExpression()), !dbg !922
+  %7 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !938
+  %8 = load ptr, ptr %7, align 8, !dbg !938, !tbaa !368
+  %9 = load ptr, ptr %8, align 8, !dbg !938, !tbaa !300
+  %10 = load ptr, ptr %9, align 8, !dbg !938, !tbaa !344
+  call void %10(ptr noundef nonnull %9, ptr noundef nonnull %5) #9, !dbg !938
+  %11 = load ptr, ptr %7, align 8, !dbg !939, !tbaa !368
+  %12 = getelementptr inbounds ptr, ptr %11, i64 1, !dbg !939
+  %13 = load ptr, ptr %12, align 8, !dbg !939, !tbaa !300
+  %14 = load ptr, ptr %13, align 8, !dbg !939, !tbaa !344
+  call void %14(ptr noundef nonnull %13, ptr noundef nonnull %6) #9, !dbg !939
+  %15 = load ptr, ptr %5, align 8, !dbg !940, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !940, !tbaa !312
+  %17 = load ptr, ptr %6, align 8, !dbg !940, !tbaa !300
+  %18 = load double, ptr %17, align 8, !dbg !940, !tbaa !312
+  call void @llvm.dbg.value(metadata double %16, metadata !941, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata double %18, metadata !946, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata double 0x43E0000000000000, metadata !947, metadata !DIExpression()), !dbg !953
+  call void @llvm.dbg.value(metadata i64 -9223372036854775808, metadata !948, metadata !DIExpression()), !dbg !953
+  %19 = call double @llvm.fabs.f64(double %16), !dbg !955
+  %20 = fcmp ueq double %19, 0x7FF0000000000000, !dbg !955
+  br i1 %20, label %48, label %21, !dbg !957
+
+21:                                               ; preds = %2
+  %22 = call double @llvm.fabs.f64(double %18), !dbg !958
+  %23 = fcmp ueq double %22, 0x7FF0000000000000, !dbg !958
+  %24 = fcmp reassoc nsz arcp contract afn olt double %16, 0xC3E0000000000000
+  %25 = or i1 %24, %23, !dbg !959
+  %26 = fcmp reassoc nsz arcp contract afn oge double %16, 0x43E0000000000000
+  %27 = or i1 %26, %25, !dbg !959
+  %28 = fcmp reassoc nsz arcp contract afn olt double %18, 0xC3E0000000000000
+  %29 = or i1 %28, %27, !dbg !959
+  %30 = fcmp reassoc nsz arcp contract afn oge double %18, 0x43E0000000000000
+  %31 = or i1 %30, %29, !dbg !959
+  br i1 %31, label %48, label %32, !dbg !959
+
+32:                                               ; preds = %21
+  %33 = fptosi double %16 to i64, !dbg !960
+  call void @llvm.dbg.value(metadata i64 %33, metadata !950, metadata !DIExpression()), !dbg !953
+  %34 = fptosi double %18 to i64, !dbg !961
+  call void @llvm.dbg.value(metadata i64 %34, metadata !951, metadata !DIExpression()), !dbg !953
+  %35 = icmp eq i64 %34, 0, !dbg !962
+  br i1 %35, label %48, label %36, !dbg !964
+
+36:                                               ; preds = %32
+  %37 = icmp eq i64 %33, -9223372036854775808, !dbg !965
+  %38 = icmp eq i64 %34, -1
+  %39 = and i1 %37, %38, !dbg !966
+  br i1 %39, label %48, label %40, !dbg !966
+
+40:                                               ; preds = %36
+  %41 = srem i64 %33, %34, !dbg !967
+  %42 = sitofp i64 %41 to double, !dbg !968
+  call void @llvm.dbg.value(metadata double %42, metadata !952, metadata !DIExpression()), !dbg !953
+  %43 = fcmp reassoc nsz arcp contract afn olt double %19, 0x41E0000000000000, !dbg !969
+  %44 = fcmp reassoc nsz arcp contract afn olt double %22, 0x41E0000000000000
+  %45 = and i1 %43, %44, !dbg !970
+  %46 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %42), !dbg !970
+  %47 = select reassoc nsz arcp contract afn i1 %45, double %46, double %42, !dbg !970
+  br label %48
+
+48:                                               ; preds = %2, %21, %32, %36, %40
+  %49 = phi double [ 0.000000e+00, %21 ], [ 0.000000e+00, %2 ], [ %47, %40 ], [ 0.000000e+00, %36 ], [ 0.000000e+00, %32 ], !dbg !953
+  %50 = load ptr, ptr %1, align 8, !dbg !940, !tbaa !300
+  store double %49, ptr %50, align 8, !dbg !940, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %6) #9, !dbg !971
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %5) #9, !dbg !971
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !971
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !971
+  ret void, !dbg !971
+}
+
+I04 mod_op
+define hidden void @prjm_eval_func_mod_op(ptr nocapture noundef readonly %0, ptr noundef %1) #3 !dbg !1302 {
+  %3 = alloca double, align 8, !DIAssignID !1308
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1306, metadata !DIExpression(), metadata !1308, metadata ptr %3, metadata !DIExpression()), !dbg !1309
+  %4 = alloca ptr, align 8, !DIAssignID !1310
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !1307, metadata !DIExpression(), metadata !1310, metadata ptr %4, metadata !DIExpression()), !dbg !1309
+  tail call void @llvm.dbg.value(metadata ptr %0, metadata !1304, metadata !DIExpression()), !dbg !1309
+  tail call void @llvm.dbg.value(metadata ptr %1, metadata !1305, metadata !DIExpression()), !dbg !1309
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %3) #9, !dbg !1311
+  store double 0.000000e+00, ptr %3, align 8, !dbg !1312, !tbaa !312, !DIAssignID !1313
+  call void @llvm.dbg.assign(metadata double 0.000000e+00, metadata !1306, metadata !DIExpression(), metadata !1313, metadata ptr %3, metadata !DIExpression()), !dbg !1309
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %4) #9, !dbg !1314
+  store ptr %3, ptr %4, align 8, !dbg !1315, !tbaa !300, !DIAssignID !1316
+  call void @llvm.dbg.assign(metadata ptr %3, metadata !1307, metadata !DIExpression(), metadata !1316, metadata ptr %4, metadata !DIExpression()), !dbg !1309
+  %5 = getelementptr inbounds %struct.prjm_eval_exptreenode, ptr %0, i64 0, i32 3, !dbg !1317
+  %6 = load ptr, ptr %5, align 8, !dbg !1317, !tbaa !368
+  %7 = load ptr, ptr %6, align 8, !dbg !1317, !tbaa !300
+  %8 = load ptr, ptr %7, align 8, !dbg !1317, !tbaa !344
+  call void %8(ptr noundef nonnull %7, ptr noundef %1) #9, !dbg !1317
+  %9 = load ptr, ptr %5, align 8, !dbg !1318, !tbaa !368
+  %10 = getelementptr inbounds ptr, ptr %9, i64 1, !dbg !1318
+  %11 = load ptr, ptr %10, align 8, !dbg !1318, !tbaa !300
+  %12 = load ptr, ptr %11, align 8, !dbg !1318, !tbaa !344
+  call void %12(ptr noundef nonnull %11, ptr noundef nonnull %4) #9, !dbg !1318
+  %13 = load ptr, ptr %1, align 8, !dbg !1319, !tbaa !300
+  %14 = load double, ptr %13, align 8, !dbg !1319, !tbaa !312
+  %15 = load ptr, ptr %4, align 8, !dbg !1319, !tbaa !300
+  %16 = load double, ptr %15, align 8, !dbg !1319, !tbaa !312
+  call void @llvm.dbg.value(metadata double %14, metadata !941, metadata !DIExpression()), !dbg !1320
+  call void @llvm.dbg.value(metadata double %16, metadata !946, metadata !DIExpression()), !dbg !1320
+  call void @llvm.dbg.value(metadata double 0x43E0000000000000, metadata !947, metadata !DIExpression()), !dbg !1320
+  call void @llvm.dbg.value(metadata i64 -9223372036854775808, metadata !948, metadata !DIExpression()), !dbg !1320
+  %17 = call double @llvm.fabs.f64(double %14), !dbg !1322
+  %18 = fcmp ueq double %17, 0x7FF0000000000000, !dbg !1322
+  br i1 %18, label %46, label %19, !dbg !1323
+
+19:                                               ; preds = %2
+  %20 = call double @llvm.fabs.f64(double %16), !dbg !1324
+  %21 = fcmp ueq double %20, 0x7FF0000000000000, !dbg !1324
+  %22 = fcmp reassoc nsz arcp contract afn olt double %14, 0xC3E0000000000000
+  %23 = or i1 %22, %21, !dbg !1325
+  %24 = fcmp reassoc nsz arcp contract afn oge double %14, 0x43E0000000000000
+  %25 = or i1 %24, %23, !dbg !1325
+  %26 = fcmp reassoc nsz arcp contract afn olt double %16, 0xC3E0000000000000
+  %27 = or i1 %26, %25, !dbg !1325
+  %28 = fcmp reassoc nsz arcp contract afn oge double %16, 0x43E0000000000000
+  %29 = or i1 %28, %27, !dbg !1325
+  br i1 %29, label %46, label %30, !dbg !1325
+
+30:                                               ; preds = %19
+  %31 = fptosi double %14 to i64, !dbg !1326
+  call void @llvm.dbg.value(metadata i64 %31, metadata !950, metadata !DIExpression()), !dbg !1320
+  %32 = fptosi double %16 to i64, !dbg !1327
+  call void @llvm.dbg.value(metadata i64 %32, metadata !951, metadata !DIExpression()), !dbg !1320
+  %33 = icmp eq i64 %32, 0, !dbg !1328
+  br i1 %33, label %46, label %34, !dbg !1329
+
+34:                                               ; preds = %30
+  %35 = icmp eq i64 %31, -9223372036854775808, !dbg !1330
+  %36 = icmp eq i64 %32, -1
+  %37 = and i1 %35, %36, !dbg !1331
+  br i1 %37, label %46, label %38, !dbg !1331
+
+38:                                               ; preds = %34
+  %39 = srem i64 %31, %32, !dbg !1332
+  %40 = sitofp i64 %39 to double, !dbg !1333
+  call void @llvm.dbg.value(metadata double %40, metadata !952, metadata !DIExpression()), !dbg !1320
+  %41 = fcmp reassoc nsz arcp contract afn olt double %17, 0x41E0000000000000, !dbg !1334
+  %42 = fcmp reassoc nsz arcp contract afn olt double %20, 0x41E0000000000000
+  %43 = and i1 %41, %42, !dbg !1335
+  %44 = call reassoc nsz arcp contract afn double @llvm.fabs.f64(double %40), !dbg !1335
+  %45 = select reassoc nsz arcp contract afn i1 %43, double %44, double %40, !dbg !1335
+  br label %46
+
+46:                                               ; preds = %2, %19, %30, %34, %38
+  %47 = phi double [ 0.000000e+00, %19 ], [ 0.000000e+00, %2 ], [ %45, %38 ], [ 0.000000e+00, %34 ], [ 0.000000e+00, %30 ], !dbg !1320
+  store double %47, ptr %13, align 8, !dbg !1319, !tbaa !312
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %4) #9, !dbg !1336
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %3) #9, !dbg !1336
+  ret void, !dbg !1336
+}

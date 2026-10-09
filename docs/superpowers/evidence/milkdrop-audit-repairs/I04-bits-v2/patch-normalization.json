@@ -1,0 +1,8 @@
+{
+  "original_patch_sha256": "9dd800abf251780e26718c8abdeab2dff4e62b2fff34447323edd136cf0693f8",
+  "normalized_patch_sha256": "e087dabf5fcca21bd609f1dda3e15be10f673c3bb87740f120b8b1e439ba45c8",
+  "baseline_source_sha256": "f62f7f1afe154251460f900c8237e4d3c6607f27a5e1c3a7e565420c9abd39ab",
+  "applied_source_sha256": "1ba8f79382e4323817fd4826322190944b0c4868e9084778a953c3bbb7e89a56",
+  "applied_bytes_identical": true,
+  "scope": "Durable review copy only; sealed native worker and ignored raw v2 proposal unchanged."
+}

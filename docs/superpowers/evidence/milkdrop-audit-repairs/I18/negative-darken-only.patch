@@ -1,0 +1,12 @@
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -312,3 +312,3 @@
+     // Done in DrawSprites() in Milkdrop
+-    if (*m_perFrameContext.darken_center > 0)
++    if (*m_perFrameContext.darken_center != 0)
+     {
+@@ -326,3 +326,3 @@
+         geometry->Native();
+-        if (*m_perFrameContext.darken_center > 0) m_darkenCenter.Draw();
++        if (*m_perFrameContext.darken_center != 0) m_darkenCenter.Draw();
+         m_border.Draw(m_perFrameContext);

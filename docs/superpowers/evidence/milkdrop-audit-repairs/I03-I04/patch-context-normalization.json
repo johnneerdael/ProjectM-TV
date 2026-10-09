@@ -1,0 +1,29 @@
+[
+  {
+    "patch": "I03-proposal.patch",
+    "context_lines": 1,
+    "old_patch_sha256": "d90094c9001a0ae057188b7e2d72f367bf885b2bf121917f2e61de69b40eeb84",
+    "normalized_patch_sha256": "15ebc1c645e73c3dc731937f55a261d61bb055099a8ad7eaed0223097db8de4a",
+    "applied_target": "vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+    "applied_sha256": "09df2b4a35d55f41bc391d14ad83f5bc72df2a5171ec6c7d503c90f4afa24610",
+    "applied_bytes_identical": true
+  },
+  {
+    "patch": "I04-proposal.patch",
+    "context_lines": 1,
+    "old_patch_sha256": "7cb42cae67cbb39379a369eb4509d91d6ddf9554c7c27ad6b5f5cfa708b03f40",
+    "normalized_patch_sha256": "f7edc1696d5c61eed0026172edc76335248242726f0a5d218c1759ac41335c0f",
+    "applied_target": "vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+    "applied_sha256": "561feed60dec843ca6eaa33d90ba58052df35c80c554299ef071a643241a086a",
+    "applied_bytes_identical": true
+  },
+  {
+    "patch": "evaluator-finite-source-property-engine.patch",
+    "context_lines": 1,
+    "old_patch_sha256": "ec712c65e505912fd2d18b731a53e82ce218a00e31c2c8f5e9e513b71b9bd3d2",
+    "normalized_patch_sha256": "31d12c8618828dbbc89e28de48e92f0d47a9d7a0a186e77b6c535a7ca484611e",
+    "applied_target": "vendor/projectm-eval/projectm-eval/CMakeLists.txt",
+    "applied_sha256": "9438d4aae9539d3f31c6adeeec5f63c776fda71ea231a250dd24c88f43f7ae50",
+    "applied_bytes_identical": true
+  }
+]

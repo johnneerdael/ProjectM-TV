@@ -1,0 +1,10 @@
+{
+  "raw_sha256": "01f2207a8529c71b8fd4c65812c54f0c62d4c163bc6421ce31be21c5551f90cb",
+  "normalized_sha256": "2b5bb264b9a1da9ee1407508b39a01c753c1765ac02293ac8aab2919596bd404",
+  "context": 1,
+  "applied_source_sha256": {
+    "vendor/projectm-eval/projectm-eval/TreeFunctions.c": "a9b454ae5dd395b3413dce65b053c0fb2d1801cf92be98c9e85b3b43c7be7b2d",
+    "vendor/projectm-eval/projectm-eval/CMakeLists.txt": "fa5bf0e9aeacf1076854066d996332454572c89f1b8dcc19d382b5d09f9d2898"
+  },
+  "frozen_native_patch_unchanged": true
+}

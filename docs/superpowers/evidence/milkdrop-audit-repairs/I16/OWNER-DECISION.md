@@ -1,0 +1,21 @@
+# I16 — defer the stale-map repair while preserving disabled-write optimization
+
+The re-enable bug is confirmed: a disabled frame computes B but leaves A published, so re-enabled motion consumes old A instead of the latest previous B. Keep the current conditional publication policy until a compatible on-demand repair or an explicit eager-write policy is selected. No generic safe lazy reconstruction is qualified. This deferral is about preserving the existing optimization/producer contract, not a demonstrated slowdown in the eager benchmark.
+
+Actual full-pipeline CGL controls pass eight current/eager sequences, covering default and bounded no-discard custom warp, both256×144 and Native3840×2160/reference1280×720 contexts. They trace real MRT publication/texture leases, actual shader endpoints and1617 equation evaluations per48×32 frame. A/B/C/D center fields are separated by.0625; current C reads A, eager C reads B, and both D read C. RG16F/filter-return tolerance6e-4 is explicit; no guessed float32 average or GetUV API is used.
+
+The test-only eager patch continuously writes through the actual existing warp fragment. It preserves discard/output semantics of that producer but replaces the deliberate disabled-frame write optimization. Each disabled frame adds the existing UV payload:3.515625MiB at the actual1280×720 Standard canvas,31.640625MiB only for an actual3840×2160 map. The map is already allocated; these are additional logical writes, not an asserted extra resident allocation or measured bandwidth. This oracle is outside shipping patches.
+
+Twelve new cadence Native4K runs verify6 exact repeat groups and96 selected PNGs. A bounded custom GetPixel warp shows the stale-map effect at red re-enable phases239/479: frame239 changes2,430 pixels/RGB MAE.029522, red coverage3,600→6,000 pixels. Both roles share fixture/PCM/warp/style bytes. The fDecay0 default warp and all-disabled controls are black/identical and establish no visible default impact: the default fragment's decay clears colour, while the declared custom fragment preserves its sampled colour. Preserve those admitted results. This finite cadence is distinct from the earlier five-frame source fixture; no capture has been relabelled.
+
+[Current stale field](native/native-captures/uv-cadence-audit-uv-cadence-bounded-custom-before-0/frame-239.png) · [Latest-previous-field eager oracle](native/native-captures/uv-cadence-audit-uv-cadence-bounded-custom-after-0/frame-239.png).
+
+Twelve isolated all-disabled ABBA jobs verify identities/manifests/96 selected PNGs. Mean1.403056→1.401440ms (-.115%); cycles+3.118%,+.073%,-3.121% show no consistent slowdown on the owned emulator. This black-output default-warp workload is explicitly bounded; it does not certify all custom shaders, physical-TV bandwidth or a generic lazy pass. No new timing acceptance is inferred from the observational CGL instrumentation.
+
+The435 lexical stock candidates remain unconfirmed. The supplied101.milk has audio-dependent toggles; no unchanged source-corrected stock execution or complete bass crossing/field trace is claimed. The finite actual render establishes the bug's visible geometry effect without inventing a stock census or original Windows image.
+
+A compatible lazy repair must retain completed previous vertex buffers and actual bound uniforms/program/texture leases, per-instance generation identity and first-frame/resize/context/transition invalidation before both Native/authored consumers. Current DrawAgain recomputes live state and invalidates attachments, so it cannot recreate the previous frame. Generic UV-only coverage cannot reproduce custom discard or explicit injected UV writes. Re-running fragment/equation work without retained inputs risks fidelity and lifetime violations.
+
+Owner options: retain conditional writes with the documented re-enable deviation; authorize continuous real-fragment publication and its disabled-frame write tradeoff; or pursue a separately qualified on-demand producer contract. Preserve prior rotation/negative-power, prepared replay, Native trails/styles and GL-thread ownership. No universal no-cost lazy repair is available in this packet.
+
+[Native proof](native/native-results.json) · [Costs](uv-eager-cost-results.json) · [Full-pipeline source/ownership limits](FULLPIPELINE-PROPOSAL.md).

@@ -1,0 +1,12 @@
+{"issue": "I03-I04-ordinary", "cycle": 0, "step": 0, "role": "before", "mean_ms": 1.5036343861111119, "p90_ms": 2.079583, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 0, "step": 1, "role": "after", "mean_ms": 1.5707371361111102, "p90_ms": 2.443625, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 0, "step": 2, "role": "after", "mean_ms": 1.5454623888888888, "p90_ms": 2.19925, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 0, "step": 3, "role": "before", "mean_ms": 1.5589482666666672, "p90_ms": 2.227833, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 1, "step": 0, "role": "before", "mean_ms": 1.4553963055555557, "p90_ms": 1.718208, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 1, "step": 1, "role": "after", "mean_ms": 1.5757221722222226, "p90_ms": 2.337416, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 1, "step": 2, "role": "after", "mean_ms": 1.5538072916666663, "p90_ms": 2.096333, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 1, "step": 3, "role": "before", "mean_ms": 1.6163189944444436, "p90_ms": 2.732958, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 2, "step": 0, "role": "before", "mean_ms": 1.5575549583333337, "p90_ms": 2.241083, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 2, "step": 1, "role": "after", "mean_ms": 1.5220347249999997, "p90_ms": 2.143459, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 2, "step": 2, "role": "after", "mean_ms": 1.5514848416666667, "p90_ms": 2.15075, "status": "ok"}
+{"issue": "I03-I04-ordinary", "cycle": 2, "step": 3, "role": "before", "mean_ms": 1.65259513888889, "p90_ms": 2.251292, "status": "ok"}

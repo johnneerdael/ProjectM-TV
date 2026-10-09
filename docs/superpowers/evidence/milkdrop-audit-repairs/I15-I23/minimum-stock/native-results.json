@@ -1,0 +1,75 @@
+{
+  "status": "capture stage passed; source/Native finite proof; arithmetic cost gate not accepted",
+  "runs": 4,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 2,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "minimum-original-Rovastar---Parallelogram-Bin-2-after-0",
+      "preset": "Rovastar - Parallelogram Bin 2.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "78950bfe7297da8d53c15ee58380e62afbaf9c10966b9845cc83669b8401db8a",
+        "a82b42bbdd6abfdb25260c4e04af2ebc133d4b9da23285880a57202dae47c8ef",
+        "0d2c63834e37a9899bd46b7532933f0996cc7a5627ab9a538c60ee1062d5838f",
+        "847094b0cb85e93fce4581cc3651c2c61df73e98ae388c799a7d0bf1ffb8b731",
+        "8984a08d27e08be20f41ec75b5be34d7f6926b8f84bc5831f395190ecd513874",
+        "bb8b4e7f9e255dad330641519acdbde6dfabf36c9fcd93bc8dc79a7089333dda",
+        "af497078823b2e0be56bd392801116871d0f0398fd3f454da9a48a944bdea572",
+        "a7203d26807e7c9c0266f1ed5c565dea016958e06ff561cdb3534cd91dfc0664"
+      ]
+    },
+    {
+      "directory": "minimum-original-Rovastar---Parallelogram-Bin-2-after-1",
+      "preset": "Rovastar - Parallelogram Bin 2.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "78950bfe7297da8d53c15ee58380e62afbaf9c10966b9845cc83669b8401db8a",
+        "a82b42bbdd6abfdb25260c4e04af2ebc133d4b9da23285880a57202dae47c8ef",
+        "0d2c63834e37a9899bd46b7532933f0996cc7a5627ab9a538c60ee1062d5838f",
+        "847094b0cb85e93fce4581cc3651c2c61df73e98ae388c799a7d0bf1ffb8b731",
+        "8984a08d27e08be20f41ec75b5be34d7f6926b8f84bc5831f395190ecd513874",
+        "bb8b4e7f9e255dad330641519acdbde6dfabf36c9fcd93bc8dc79a7089333dda",
+        "af497078823b2e0be56bd392801116871d0f0398fd3f454da9a48a944bdea572",
+        "a7203d26807e7c9c0266f1ed5c565dea016958e06ff561cdb3534cd91dfc0664"
+      ]
+    },
+    {
+      "directory": "minimum-original-Rovastar---Parallelogram-Bin-2-before-0",
+      "preset": "Rovastar - Parallelogram Bin 2.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "e10c18cfd342f81a4a3c9fe8a0bf86d4cb130721ffc79883667f017fda32accf",
+        "816669a7f1548fa0bb8c616bb13a821890484e299b4bde4cb593b47e90ccc1ef",
+        "cd481d7cbd85c4f1916964c3b80f48fc01b66c18b57b9d02bbc1452ee071916f",
+        "2e95bd9cbd480533ad224cdcd6fd5527d93ad596e63c500edfe6b2416f9ad6a7",
+        "7afdcfa7dbedc1dc3f12560a894bcc5bbb969bc73a85131f428cf69b33768174",
+        "d78891d64e3a852237f4b7aeb17d010aecc27d68614cacfe5264688140195524",
+        "022e220107f1ca9ebde7be0b4ad4558b287af56f0e973d9d8ec3478219b92eba",
+        "a85d26cedaa77a154f509ed4286283b09803eac4c00be438019f503727ade154"
+      ]
+    },
+    {
+      "directory": "minimum-original-Rovastar---Parallelogram-Bin-2-before-1",
+      "preset": "Rovastar - Parallelogram Bin 2.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "e10c18cfd342f81a4a3c9fe8a0bf86d4cb130721ffc79883667f017fda32accf",
+        "816669a7f1548fa0bb8c616bb13a821890484e299b4bde4cb593b47e90ccc1ef",
+        "cd481d7cbd85c4f1916964c3b80f48fc01b66c18b57b9d02bbc1452ee071916f",
+        "2e95bd9cbd480533ad224cdcd6fd5527d93ad596e63c500edfe6b2416f9ad6a7",
+        "7afdcfa7dbedc1dc3f12560a894bcc5bbb969bc73a85131f428cf69b33768174",
+        "d78891d64e3a852237f4b7aeb17d010aecc27d68614cacfe5264688140195524",
+        "022e220107f1ca9ebde7be0b4ad4558b287af56f0e973d9d8ec3478219b92eba",
+        "a85d26cedaa77a154f509ed4286283b09803eac4c00be438019f503727ade154"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "scope": "finite division/pow/remainder diagrams; constantgeometry workload retained unchanged"
+    }
+  ]
+}

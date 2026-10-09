@@ -1,0 +1,18 @@
+{
+  "I03-baseline": {
+    "exit_code": 1,
+    "summary": "I03 executed=89 failures=28 unsafe_baseline_skips=0"
+  },
+  "I04-baseline": {
+    "exit_code": 1,
+    "summary": "I04 executed=48 failures=19 unsafe_baseline_skips=16"
+  },
+  "I03-I03": {
+    "exit_code": 0,
+    "summary": "I03 executed=89 failures=0 unsafe_baseline_skips=0"
+  },
+  "I04-I04": {
+    "exit_code": 0,
+    "summary": "I04 executed=64 failures=0 unsafe_baseline_skips=0"
+  }
+}

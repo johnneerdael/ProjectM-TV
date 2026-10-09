@@ -1,0 +1,51 @@
+{
+  "metadata_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a/compile_commands.json",
+  "metadata_sha256": "c142822123c36967fba8a7d78bb76307a9bb66da146d1cc0eb5cb7f1759b3091",
+  "treefunctions_original_command": "/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --sysroot=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DPRJM_F_SIZE=8 -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source/third_party/projectm/vendor/projectm-eval/projectm-eval/.. -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source/third_party/projectm/vendor/projectm-eval/projectm-eval/api -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -ffile-prefix-map=/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source=. -ffile-prefix-map=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724=ndk -fdebug-compilation-dir=. -O3 -ffast-math -o projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeFunctions.c.o -c /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source/third_party/projectm/vendor/projectm-eval/projectm-eval/TreeFunctions.c",
+  "evaluator_flags": [
+    "--target=aarch64-none-linux-android21",
+    "--sysroot=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/sysroot",
+    "-DPRJM_F_SIZE=8",
+    "-g",
+    "-DANDROID",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-funwind-tables",
+    "-fstack-protector-strong",
+    "-no-canonical-prefixes",
+    "-D_FORTIFY_SOURCE=2",
+    "-Wformat",
+    "-Werror=format-security",
+    "-O2",
+    "-g",
+    "-DNDEBUG",
+    "-fPIC",
+    "-fvisibility=hidden",
+    "-ffile-prefix-map=/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/i12-workers/candidate-native/source=.",
+    "-ffile-prefix-map=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724=ndk",
+    "-fdebug-compilation-dir=.",
+    "-O3",
+    "-ffast-math"
+  ],
+  "TreeFunctions_only_append": [
+    "-fno-finite-math-only"
+  ],
+  "test_observer_flags": [
+    "-std=c++17",
+    "-O2"
+  ],
+  "binaries": {
+    "baseline": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/android-finite/baseline/scalar-controls",
+      "sha256": "4b8f0ffc408f427e6f691d1c633fe0fae2d9ffb0c1460947c5d9c7064cc69d1a"
+    },
+    "I03": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/android-finite/I03/scalar-controls",
+      "sha256": "f1efb8de77d2c2fff1c69d1e08eee780928ced6a94bd709baa28c382b90497c0"
+    },
+    "I04": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-proposal/android-finite/I04/scalar-controls",
+      "sha256": "2fec2448481c875e47d269c9fec6e04982054b36882898e3c3d2f929f3cad3b4"
+    }
+  }
+}

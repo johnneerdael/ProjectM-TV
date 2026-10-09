@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "shifter - mosaic mitosis.milk",
+      "preset_sha256": "8a9c95567882bf3fd2644e28cb2e0067b62f52b38cb9d10cc4ada34c90710419",
+      "rgb_hashes": [
+        "1a587ea7395660b43d2ae97f7bd3bb7a02c526a4a4c28bb60c6be3ed731bbf23",
+        "9dc8683512952d00aa832af52a4243a9bf671568cf4f624e1e937f46a5338521",
+        "16dce9279848adf100afe834e8b518fa87727028f82aa4738e084496bd152f58",
+        "46316f36e137237c17792711ae14b6d47b300c7a17ab6b0a5ab6024756d227b3",
+        "d80e679c5ed195a9f6a057ae027e85089aa91a5d9569219af3cb2f3cdfdcce18",
+        "cf7e5ebfef9ca4cb0323c183afea54160b34d4a4f7b024294cc2674db1f22da3",
+        "3f5dc48527144464f1dd719709299a1a494e2b20a1f6bc635e8e7f85fad5113e",
+        "9bcf489b8ee3cdd70e489e50574e22bf7e1d91069ded47aadfb00afd9ad0eaa1"
+      ]
+    },
+    "after": {
+      "preset": "shifter - mosaic mitosis.milk",
+      "preset_sha256": "8a9c95567882bf3fd2644e28cb2e0067b62f52b38cb9d10cc4ada34c90710419",
+      "rgb_hashes": [
+        "586614787db97048aeeb3cb20260903676a160171762b320127efb2519a827b6",
+        "9ece7edd6ba967120325b7bb6b46d81713305370ca0fa647984bd111d5730f68",
+        "088bbd3d97493f94f3860db6a186907066768d24796ee69e0c20421a68f69e4a",
+        "e68bed6f7f090d7a60a8b2a4489e0ceede0115a51ccefe3187dc2a6b80a3b42e",
+        "f97039e5d879e0d40b660d5d76aa08400abc1994c6cca10592d6642c25d796d7",
+        "1161e6aaa24a13c65e460a39497170ce7552a8d98577bfb11f0b0ca6393dd574",
+        "45d3f6204f95f217a06e66adc9b0108cdf301341c50bf87b1a5d4d7226fed01f",
+        "a148848236211215fcfd86d41e04ef6f651349a98c67ef86536093522b08411f"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 0.005269257973251029,
+      "before_rgb_mean": 77.92856626157408,
+      "after_rgb_mean": 77.93101032021605
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 0.04397071116255144,
+      "before_rgb_mean": 77.98716182002315,
+      "after_rgb_mean": 77.98241275237912
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 0.0018137136702674897,
+      "before_rgb_mean": 78.49862959747942,
+      "after_rgb_mean": 78.4999355790252
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 0.003910992155349794,
+      "before_rgb_mean": 78.57274024241255,
+      "after_rgb_mean": 78.57501808449074
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 0.004824057998971194,
+      "before_rgb_mean": 78.81970281153549,
+      "after_rgb_mean": 78.8218116239069
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 0.08782290862911522,
+      "before_rgb_mean": 77.7106814236111,
+      "after_rgb_mean": 77.69074616608796
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 0.010694685570987654,
+      "before_rgb_mean": 78.1708752491641,
+      "after_rgb_mean": 78.17009271315587
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 1.0022253970550412,
+      "before_rgb_mean": 78.29088525591564,
+      "after_rgb_mean": 77.69791976112397
+    }
+  ],
+  "illustrated_frame": 479,
+  "all_selected_before_after_rgb_identical": false
+}

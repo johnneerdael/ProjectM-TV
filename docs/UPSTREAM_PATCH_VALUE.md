@@ -314,3 +314,21 @@ keeps the component inventory and technical notes out of this review page.
 The15 patch sections now have matched comparison evidence. Deeper optimization/lifecycle checks are deferred by agreement; final review and CI remain required before publication.
 The upstream capture admits GLES 3.0; our image workers disable the emulator's broken
 program-binary export. No original Windows/MilkDrop GPU screenshot was produced.
+
+## Current MilkDrop audit candidate
+
+The candidate series retains released patches0001–0016 and audit repairs0017–0028 unchanged, then adds five independently revertible authored-fidelity fixes:
+
+| Patch | Finding | Behavior |
+|---|---|---|
+| 0029 | I19 | Restore original line-wave sample budgets, capped by the reference-equivalent width, with a two-point floor. |
+| 0030 | I22 | Submit authored discrete custom dots without interpolated midpoints; preserve a single-dot NaN sample input. |
+| 0031 | I20 | Restore circle angular spacing and explicit closure before shared smoothing. |
+| 0032 | I24 | Capture evaluated outline thickness per shape instance for authored and Native replay; preserve saved style outside the defined int32 truncation domain. |
+| 0033 | I16 | Publish the actual previous completed warp field while vectors are hidden, preserving real fragment discard/output writes and per-preset ownership. |
+
+The user accepts necessary authored work instead of the historical zero-added-cost gate for these five. I24 uses the small per-instance repair rather than experimental grouped geometry; I16 uses the actual warp producer rather than a synthetic UV-only shortcut. Earlier CPU warp trig, negative power, cached mesh uploads, prepared replay, float values, textures and Native/reference policies remain intact. No new API, dependency, asset or version change is introduced.
+
+The candidate repairs18 audit IDs. Ten retained policies and five other deferred proposals remain as recorded in the immutable [historical audit](superpowers/evidence/milkdrop-audit-repairs/README.md). Its original patch numbers, zero-cost decisions and captures are not relabelled as new acceptance.
+
+[Current qualification](superpowers/evidence/authored-fidelity-followup/README.md) binds the baseline28 and candidate33 source/artifact identities. Source checks pass329 host,63 normal and sanitizer renderer controls,137 JVM and60 capture/helper tests plus24 subtests. Both ARM core-release/debug-APK builds pass. The focused Native run completed76 jobs across19 presets/fixtures;608 selected final-output RGB captures verify and repeat exactly within each role. This is source-derived GLES qualification, not Windows/D3D pixel equivalence, whole-corpus certification or measured physical-TV headroom. Active-canvas lifecycle passes four repeated jobs/120 boundary captures. Isolated combined cost verifies84 jobs/672 selected captures, with a largest overall added time of+.343ms and variable cycle deltas. Final PR review/CI remain open.

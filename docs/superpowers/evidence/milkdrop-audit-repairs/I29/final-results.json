@@ -1,0 +1,45 @@
+{
+  "qualification": "Source-derived GLES final-output proof, not original Windows screenshot",
+  "source_before": "fb23db46",
+  "source_after": "496c58cf",
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "roles": {
+    "before": {
+      "red_x_centroid": 767.5021645021645,
+      "red_y_centroid": 755.5021645021645,
+      "rgb_hashes": [
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b",
+        "e8d84d24b2ba730dfa3b11b5038f35fc19c1e74b81f9f571b5117bd31dfd1e0b"
+      ]
+    },
+    "after": {
+      "red_x_centroid": 3071.4978354978357,
+      "red_y_centroid": 755.5021645021645,
+      "rgb_hashes": [
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111",
+        "93a481a909c7f10cee3ec95a7a2c37c490e43ecb8cc21154b7f6fc97d0f36111"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "explicit_read_zero_checked": true
+}

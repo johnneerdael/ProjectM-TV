@@ -1,0 +1,106 @@
+{
+  "baseline": "960eed2c6cf3badf0dccb97f02d64bdecc851ed5",
+  "branch": "fix/milkdrop-authored-fidelity",
+  "tasks": {
+    "I19": "implemented29; source controls and repeated Native originals qualified",
+    "I22": "implemented30; singleNaN/dots/replay source controls and repeated Native originals/fixtures qualified",
+    "I20": "implemented31; source closure/style controls and repeated Native originals qualified",
+    "I24": "production32; per-instance domain/style/ownership, both-ABI NDK O3-fast guard proof, Native original/finite captures qualified",
+    "I16": "production33; real producer/temporal/ownership controls and actual constructor failures qualified; four active-canvas Native4K JNI lifecycle repeats pass"
+  },
+  "rulings": [
+    {
+      "ruling": "Execute already authorized plan without repeat approval",
+      "reason": "user explicitly requested five fixes through newmerge-readyPR",
+      "cost_if_wrong": "scope correction before publication"
+    },
+    {
+      "ruling": "I24 first uses simple per-instance selection, not grouped VBO optimization",
+      "reason": "user wants qualified production correction, grouping adds independent memory/raster complexity",
+      "cost_if_wrong": "potential additional draw cost, measured in combinedNativeacceptance"
+    },
+    {
+      "ruling": "Circle control line-density expectation159->169 at256width",
+      "reason": "approvedI19caps line at85raw, hence169smoothed; standaloneoldI20packetassumed80raw",
+      "cost_if_wrong": "densityregression caught by independentI19factorycontrols"
+    },
+    {
+      "ruling": "I18 wave-colour submission expectations159/158->41/40",
+      "reason": "its64px mode6 authored control nowusesI19cap21raw; retainallcolor/style/alpha comparisons",
+      "cost_if_wrong": "sample-capandreal submission controls fail independently"
+    },
+    {
+      "ruling": "I24 projection oracle includes unchanged replay fallback per-pass correction",
+      "reason": "baseline28andcandidate preserve correction; test omitted it",
+      "cost_if_wrong": "directNative/noReplayandper-passvertex tests detect projection mismatch"
+    },
+    {
+      "ruling": "I16 grid counter uses publicaccepted8x8,81evals",
+      "reason": "SetMeshSize clamps requested8x6 to8x8; no duplicateproducer found",
+      "cost_if_wrong": "countertestwouldfail acceptedgrid contract"
+    },
+    {
+      "ruling": "Parentharness invokes explicitOpenGLmoduleoverride",
+      "reason": "engine GL_LIBS path bypassesfind_package, leaving parent targetundefined",
+      "cost_if_wrong": "Linuxdiscovery/explicitlink controls catch scope/regression"
+    },
+    {
+      "ruling": "GLES actualRG16F probe usesRGBA/FLOAT insteadRG/FLOAT",
+      "reason": "GLES rejectsRG read format; RGBAreads actualsameattachmentchannels, GLerrorsstillstrict",
+      "cost_if_wrong": "pixel/storageidentityandactualTFendpointprobes fail"
+    },
+    {
+      "ruling": "GLES reference keeps unchanged mediump production shader and independent same-backend reference",
+      "reason": "CPU-trig equality cannot establish mediump GPU outputs; strict producer and counterfactual discrimination retained",
+      "cost_if_wrong": "wrong-Y/source-seam mutants and positive reference assertions fail; universal GPU trig accuracy notclaimed"
+    }
+  ],
+  "checks": {
+    "mac_normal": 63,
+    "mac_sanitizer": 63,
+    "fresh_native_runner_renderer_sanitizer": 63,
+    "host": 329,
+    "jvm": 137,
+    "capture_helpers": 60,
+    "capture_helper_subtests": 24,
+    "linux_normal": 63,
+    "linux_explicit": 63,
+    "linux_sanitizer": "first whole63 run hit30s startup timeouts; unchanged deformation/seam focused controls pass at150s process limit; wholeLinuxsan suite not claimedpassing",
+    "shipping_build": "bothARM ABIs core release and app debug pass",
+    "combined_cost": {
+      "status": "verified",
+      "jobs": 84,
+      "captures": 672,
+      "workloads": 7,
+      "all_outputs_match_focused": true,
+      "largest_overall_added_ms": 0.34264699074074123
+    },
+    "new_pr": "notcreated",
+    "native_focused": {
+      "jobs": 76,
+      "presets": 19,
+      "captures": 608,
+      "all_selected_repeats_match": true
+    },
+    "active_native_lifecycle": {
+      "jobs": 4,
+      "captures": 120,
+      "all_same_protocol_repeats_match": true
+    },
+    "analyzer": {
+      "tests": 206,
+      "source": "current33 normal archive"
+    },
+    "source_review": "10 personas no actionable findings; targeted partial-failure control re-review no findings",
+    "fresh_recursive": "clean pinned recursive source; coreDebug and releaseAPK pass at6a016447",
+    "shader_links": "both unchanged warp variants GLSL ES3.00 pass",
+    "docs": "strict MkDocs passes after final local acceptance updates"
+  },
+  "current_head": "fix/milkdrop-authored-fidelity (resolve live Git ref)",
+  "remaining": [
+    "open new non-draftPR with verified fullscope/cost/release notes",
+    "required current-head external review and CI green; no merge/release"
+  ],
+  "last_turn_progress": "all84 costjobs/672captures verified; integratedaf4b520f; freshrecursive/shaderlink/docs/analyzerchecks pass",
+  "qualified_recursive_source_commit": "6a016447fff92a4691ca5fe656261732926bc2d3"
+}

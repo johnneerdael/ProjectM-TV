@@ -1,0 +1,114 @@
+{
+  "suites": [
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.PlayerSessionFinderTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.UploadQrCodeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.TrackCornerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.CustomPresetPackTest",
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.MusicCategoriesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.PresetPackUploadServerTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.TrackAccessNavigationTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.UpdaterTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "app",
+      "suite": "com.example.projectm.visualizer.TrackWatcherTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "core",
+      "suite": "nl.neerdael.projectm.core.RenderingPolicyTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "core",
+      "suite": "nl.neerdael.projectm.core.RenderMemoryBudgetTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "core",
+      "suite": "nl.neerdael.projectm.core.QualityControllerTest",
+      "tests": 63,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "core",
+      "suite": "nl.neerdael.projectm.core.VisualizerRendererTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "tests": 137,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

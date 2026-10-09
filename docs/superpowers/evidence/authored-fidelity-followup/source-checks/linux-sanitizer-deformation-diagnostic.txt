@@ -1,0 +1,256 @@
+-- Building for OpenGL Embedded Profile
+--
+-- libprojectM v4.2.0
+-- ==============================================
+--
+--     prefix:                      /usr/local
+--     libdir:                      lib
+--     includedir:                  include
+--     bindir:                      bin
+--
+--     compiler:                    /work/cxx-wrapper
+--     cflags:
+--     cxxflags:
+--     ldflags:
+--
+-- Features:
+-- ==============================================
+--
+--     Build shared libraries:      OFF
+--     Filesystem support:          C++17 STL
+--     SDL2:                        OFF
+--     OpenGL ES:                   ON
+--     macOS Framework:             OFF
+--     Emscripten:                  OFF
+--     Use system GLM:              OFF
+--     Use system projectM-eval:    OFF
+--
+-- Targets and applications:
+-- ==============================================
+--
+--     libprojectM:                 (always built)
+--     Playlist library:            OFF
+--     SDL2 Test UI:                OFF
+--     Tests:                       OFF
+--     Documentation:               OFF
+--
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/diagnostic-wrapper
+[1/3] Building CXX object /work/build/projectm/src/libprojectM/CMakeFiles/projectM.dir/work/build/projectm/dummy.cpp.o
+[2/3] Linking CXX static library /work/build/projectm/src/libprojectM/libprojectM-4.a
+[3/3] Linking CXX executable /work/build/warp-rotation-regressions
+before GLContext
+after GLContext
+before LowQualityLite
+after LowQualityLite
+before TextureManager
+before TexImage 1x1
+after TexImage
+before TexImage 256x256
+after TexImage
+before TexImage 255x235
+after TexImage
+before TexImage 32x32
+after TexImage
+before TexImage 256x256
+after TexImage
+before TexImage 256x256
+after TexImage
+before TexImage 256x256
+after TexImage
+after TextureManager
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+GLES warp reference: renderer=llvmpipe (LLVM 20.1.2, 128 bits) version=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4 mediump=15,15/10 highp=127,127/23
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=0 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=1 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+before TexImage 64x48
+after TexImage
+before TexImage 64x48
+after TexImage
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=0 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=1.5 separated=1,1 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=0,0 max-bound-fractions=0,0,0,0
+deformation GLES production/reference path=2 time=17 separated=1,1 max-bound-fractions=0,0,0,0
+legacy/custom/fallback deformation and prepared replay controls pass

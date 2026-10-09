@@ -1,0 +1,2292 @@
+{
+  "status": "retained policy qualified; no engine change",
+  "source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "runs": 40,
+  "frames_per_run": 480,
+  "selected_frames_per_run": 8,
+  "exact_repeat_groups": 20,
+  "stock_pairs_selected_RGB_identical_both_resolutions": 2,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "i01policy-PyroCybin---Computronium-[stahlregens-gelatine-finish]-current-0",
+      "preset": "PyroCybin - Computronium [stahlregens gelatine finish].milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "dcaaaf28a66d78edb07305d1b3349692b04486af81f6d4354abfb56b71d40b18",
+          "pngSha256": "5e551d9ba298403f2723a51742846dd052b2ad07a028e90952aa0b761aac2582",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "aa2ac88697557c8d7185e6eb633bba5d6eea7c59ec450393127b7f0e8a72d4e7",
+          "pngSha256": "2d44d0caebc72c64ed1e9cd45f08ba7d98e862dd063214d6e2336ff8f42a4f56",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "55dfe66ce678a0e42c6c509ad5d1ad668dbe74d30e1e2d8a1e9d708b0677dd40",
+          "pngSha256": "07639b3065f0976b7795a433067b0e36ddfecd59a3687e112367ac5f4b136566",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "e7338ceb50759b4e3018af73cddd8922336de1e185d1d4a2d44c2358aa8e9e6e",
+          "pngSha256": "d603c33a8eeaed3271f24d11f709ab1e77a01cb82227af3aa9c1e45d8b0932fc",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "335ca12af68880c1ae48b860a9ed350b2015c0f0cb18eeb78241f0d0936b5dce",
+          "pngSha256": "bf0a8060e0bc0cf3d76ad8dd231358d8a51c08adb7fa380cb071c8f50e636087",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "8d2a4777840a0e826a2cf54709a36bcea2d9dab01503c88c66b3ed35f0558961",
+          "pngSha256": "6ad9c11be54f78f579f93786c6430c4e7ea4295485153de6a5a305b187a3741b",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "4665b53c23a192a2267b1366a5a8b8006b6421dfc9b2ef8727992eed5358faa0",
+          "pngSha256": "f3d2fb1fcc5658b5d138c9f54b6d3d71b8bf9d6ef002dbdeb7c82bf91c570661",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1330b6881e33d235055da56d584072f5fc492e6461ad79da991ea033c5756857",
+          "pngSha256": "08b57f9bc29926d812aae9e2ea9da9fd3fc0b95038364afcb32150b819ca9df1",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-PyroCybin---Computronium-[stahlregens-gelatine-finish]-current-1",
+      "preset": "PyroCybin - Computronium [stahlregens gelatine finish].milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "dcaaaf28a66d78edb07305d1b3349692b04486af81f6d4354abfb56b71d40b18",
+          "pngSha256": "5e551d9ba298403f2723a51742846dd052b2ad07a028e90952aa0b761aac2582",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "aa2ac88697557c8d7185e6eb633bba5d6eea7c59ec450393127b7f0e8a72d4e7",
+          "pngSha256": "2d44d0caebc72c64ed1e9cd45f08ba7d98e862dd063214d6e2336ff8f42a4f56",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "55dfe66ce678a0e42c6c509ad5d1ad668dbe74d30e1e2d8a1e9d708b0677dd40",
+          "pngSha256": "07639b3065f0976b7795a433067b0e36ddfecd59a3687e112367ac5f4b136566",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "e7338ceb50759b4e3018af73cddd8922336de1e185d1d4a2d44c2358aa8e9e6e",
+          "pngSha256": "d603c33a8eeaed3271f24d11f709ab1e77a01cb82227af3aa9c1e45d8b0932fc",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "335ca12af68880c1ae48b860a9ed350b2015c0f0cb18eeb78241f0d0936b5dce",
+          "pngSha256": "bf0a8060e0bc0cf3d76ad8dd231358d8a51c08adb7fa380cb071c8f50e636087",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "8d2a4777840a0e826a2cf54709a36bcea2d9dab01503c88c66b3ed35f0558961",
+          "pngSha256": "6ad9c11be54f78f579f93786c6430c4e7ea4295485153de6a5a305b187a3741b",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "4665b53c23a192a2267b1366a5a8b8006b6421dfc9b2ef8727992eed5358faa0",
+          "pngSha256": "f3d2fb1fcc5658b5d138c9f54b6d3d71b8bf9d6ef002dbdeb7c82bf91c570661",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1330b6881e33d235055da56d584072f5fc492e6461ad79da991ea033c5756857",
+          "pngSha256": "08b57f9bc29926d812aae9e2ea9da9fd3fc0b95038364afcb32150b819ca9df1",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-0",
+      "preset": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "bc5b3690910ac3269154c132526c107adb2893758fa9794c6360771968358cde",
+          "pngSha256": "a0d96697e4256693af9a5100b808f62a334937b8f0a14bc731492f89bcf64023",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "eb6024dfc1c753dd128901ba626e79ec714c1a2cfb17838529eecb0c9725ba8e",
+          "pngSha256": "3fc2b1808e7bffe0c11379dade43088f5c8039fbbf3cb5b5ac2f24dc20eee10c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "b6c9ff3d36c74b5b8b3e624a685f95103b9e51a40079ccf401c879e6deb3c0e7",
+          "pngSha256": "ba646edd962333bc2af167986bb7c22b9138685d0b32c91b1a46752e3f424704",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9ff05b941de43582db1cdbe48249a427fab49c5fbe38cfaec516f8f780e051a5",
+          "pngSha256": "904f7f7d4fa761a8150fcadc7ad8da7e4187c60f72e2f9c4ef7a1becfbdd807c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6aedc4d92600c218af69281c0dbd2e3db950c0f706aeac1922f7226de6027e39",
+          "pngSha256": "1d0002d25cc140add815e8415c8910f17a5e79f7b4a7d1696cc68949a45cd2eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "de3f5526e421cee4025a37071ed2e6c548bfdb2ff0f281c4bdcc5cf030d4f408",
+          "pngSha256": "a828b276e5e5b65986d563e5e6ecb598c0f4bc9d57dff54d2e331fbeece637a6",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "432db272ec8299adc3ff220a027fba759392c757b09b329a1beafa72643eb579",
+          "pngSha256": "988efd6de667a92dd4e35639bb91bae06538d45cb9e2274bfce6908594a0b47f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1f5649a0a9c6a155cf4b263d6f7e765131e604909ae7ec250fd209fa26b78da5",
+          "pngSha256": "3b17c99c35e35bdcf7995bcf6f861260a3dc7c771f0b020afa7e87368297474d",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1",
+      "preset": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "bc5b3690910ac3269154c132526c107adb2893758fa9794c6360771968358cde",
+          "pngSha256": "a0d96697e4256693af9a5100b808f62a334937b8f0a14bc731492f89bcf64023",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "eb6024dfc1c753dd128901ba626e79ec714c1a2cfb17838529eecb0c9725ba8e",
+          "pngSha256": "3fc2b1808e7bffe0c11379dade43088f5c8039fbbf3cb5b5ac2f24dc20eee10c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "b6c9ff3d36c74b5b8b3e624a685f95103b9e51a40079ccf401c879e6deb3c0e7",
+          "pngSha256": "ba646edd962333bc2af167986bb7c22b9138685d0b32c91b1a46752e3f424704",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9ff05b941de43582db1cdbe48249a427fab49c5fbe38cfaec516f8f780e051a5",
+          "pngSha256": "904f7f7d4fa761a8150fcadc7ad8da7e4187c60f72e2f9c4ef7a1becfbdd807c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6aedc4d92600c218af69281c0dbd2e3db950c0f706aeac1922f7226de6027e39",
+          "pngSha256": "1d0002d25cc140add815e8415c8910f17a5e79f7b4a7d1696cc68949a45cd2eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "de3f5526e421cee4025a37071ed2e6c548bfdb2ff0f281c4bdcc5cf030d4f408",
+          "pngSha256": "a828b276e5e5b65986d563e5e6ecb598c0f4bc9d57dff54d2e331fbeece637a6",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "432db272ec8299adc3ff220a027fba759392c757b09b329a1beafa72643eb579",
+          "pngSha256": "988efd6de667a92dd4e35639bb91bae06538d45cb9e2274bfce6908594a0b47f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1f5649a0a9c6a155cf4b263d6f7e765131e604909ae7ec250fd209fa26b78da5",
+          "pngSha256": "3b17c99c35e35bdcf7995bcf6f861260a3dc7c771f0b020afa7e87368297474d",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-0",
+      "preset": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "dcaaaf28a66d78edb07305d1b3349692b04486af81f6d4354abfb56b71d40b18",
+          "pngSha256": "5e551d9ba298403f2723a51742846dd052b2ad07a028e90952aa0b761aac2582",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "aa2ac88697557c8d7185e6eb633bba5d6eea7c59ec450393127b7f0e8a72d4e7",
+          "pngSha256": "2d44d0caebc72c64ed1e9cd45f08ba7d98e862dd063214d6e2336ff8f42a4f56",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "55dfe66ce678a0e42c6c509ad5d1ad668dbe74d30e1e2d8a1e9d708b0677dd40",
+          "pngSha256": "07639b3065f0976b7795a433067b0e36ddfecd59a3687e112367ac5f4b136566",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "e7338ceb50759b4e3018af73cddd8922336de1e185d1d4a2d44c2358aa8e9e6e",
+          "pngSha256": "d603c33a8eeaed3271f24d11f709ab1e77a01cb82227af3aa9c1e45d8b0932fc",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "335ca12af68880c1ae48b860a9ed350b2015c0f0cb18eeb78241f0d0936b5dce",
+          "pngSha256": "bf0a8060e0bc0cf3d76ad8dd231358d8a51c08adb7fa380cb071c8f50e636087",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "8d2a4777840a0e826a2cf54709a36bcea2d9dab01503c88c66b3ed35f0558961",
+          "pngSha256": "6ad9c11be54f78f579f93786c6430c4e7ea4295485153de6a5a305b187a3741b",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "4665b53c23a192a2267b1366a5a8b8006b6421dfc9b2ef8727992eed5358faa0",
+          "pngSha256": "f3d2fb1fcc5658b5d138c9f54b6d3d71b8bf9d6ef002dbdeb7c82bf91c570661",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1330b6881e33d235055da56d584072f5fc492e6461ad79da991ea033c5756857",
+          "pngSha256": "08b57f9bc29926d812aae9e2ea9da9fd3fc0b95038364afcb32150b819ca9df1",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1",
+      "preset": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "dcaaaf28a66d78edb07305d1b3349692b04486af81f6d4354abfb56b71d40b18",
+          "pngSha256": "5e551d9ba298403f2723a51742846dd052b2ad07a028e90952aa0b761aac2582",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "aa2ac88697557c8d7185e6eb633bba5d6eea7c59ec450393127b7f0e8a72d4e7",
+          "pngSha256": "2d44d0caebc72c64ed1e9cd45f08ba7d98e862dd063214d6e2336ff8f42a4f56",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "55dfe66ce678a0e42c6c509ad5d1ad668dbe74d30e1e2d8a1e9d708b0677dd40",
+          "pngSha256": "07639b3065f0976b7795a433067b0e36ddfecd59a3687e112367ac5f4b136566",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "e7338ceb50759b4e3018af73cddd8922336de1e185d1d4a2d44c2358aa8e9e6e",
+          "pngSha256": "d603c33a8eeaed3271f24d11f709ab1e77a01cb82227af3aa9c1e45d8b0932fc",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "335ca12af68880c1ae48b860a9ed350b2015c0f0cb18eeb78241f0d0936b5dce",
+          "pngSha256": "bf0a8060e0bc0cf3d76ad8dd231358d8a51c08adb7fa380cb071c8f50e636087",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "8d2a4777840a0e826a2cf54709a36bcea2d9dab01503c88c66b3ed35f0558961",
+          "pngSha256": "6ad9c11be54f78f579f93786c6430c4e7ea4295485153de6a5a305b187a3741b",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "4665b53c23a192a2267b1366a5a8b8006b6421dfc9b2ef8727992eed5358faa0",
+          "pngSha256": "f3d2fb1fcc5658b5d138c9f54b6d3d71b8bf9d6ef002dbdeb7c82bf91c570661",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1330b6881e33d235055da56d584072f5fc492e6461ad79da991ea033c5756857",
+          "pngSha256": "08b57f9bc29926d812aae9e2ea9da9fd3fc0b95038364afcb32150b819ca9df1",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]---strict-source-defaults-current-0",
+      "preset": "audit PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "bc5b3690910ac3269154c132526c107adb2893758fa9794c6360771968358cde",
+          "pngSha256": "a0d96697e4256693af9a5100b808f62a334937b8f0a14bc731492f89bcf64023",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "eb6024dfc1c753dd128901ba626e79ec714c1a2cfb17838529eecb0c9725ba8e",
+          "pngSha256": "3fc2b1808e7bffe0c11379dade43088f5c8039fbbf3cb5b5ac2f24dc20eee10c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "b6c9ff3d36c74b5b8b3e624a685f95103b9e51a40079ccf401c879e6deb3c0e7",
+          "pngSha256": "ba646edd962333bc2af167986bb7c22b9138685d0b32c91b1a46752e3f424704",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9ff05b941de43582db1cdbe48249a427fab49c5fbe38cfaec516f8f780e051a5",
+          "pngSha256": "904f7f7d4fa761a8150fcadc7ad8da7e4187c60f72e2f9c4ef7a1becfbdd807c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6aedc4d92600c218af69281c0dbd2e3db950c0f706aeac1922f7226de6027e39",
+          "pngSha256": "1d0002d25cc140add815e8415c8910f17a5e79f7b4a7d1696cc68949a45cd2eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "de3f5526e421cee4025a37071ed2e6c548bfdb2ff0f281c4bdcc5cf030d4f408",
+          "pngSha256": "a828b276e5e5b65986d563e5e6ecb598c0f4bc9d57dff54d2e331fbeece637a6",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "432db272ec8299adc3ff220a027fba759392c757b09b329a1beafa72643eb579",
+          "pngSha256": "988efd6de667a92dd4e35639bb91bae06538d45cb9e2274bfce6908594a0b47f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1f5649a0a9c6a155cf4b263d6f7e765131e604909ae7ec250fd209fa26b78da5",
+          "pngSha256": "3b17c99c35e35bdcf7995bcf6f861260a3dc7c771f0b020afa7e87368297474d",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]---strict-source-defaults-current-1",
+      "preset": "audit PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "bc5b3690910ac3269154c132526c107adb2893758fa9794c6360771968358cde",
+          "pngSha256": "a0d96697e4256693af9a5100b808f62a334937b8f0a14bc731492f89bcf64023",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "eb6024dfc1c753dd128901ba626e79ec714c1a2cfb17838529eecb0c9725ba8e",
+          "pngSha256": "3fc2b1808e7bffe0c11379dade43088f5c8039fbbf3cb5b5ac2f24dc20eee10c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "b6c9ff3d36c74b5b8b3e624a685f95103b9e51a40079ccf401c879e6deb3c0e7",
+          "pngSha256": "ba646edd962333bc2af167986bb7c22b9138685d0b32c91b1a46752e3f424704",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9ff05b941de43582db1cdbe48249a427fab49c5fbe38cfaec516f8f780e051a5",
+          "pngSha256": "904f7f7d4fa761a8150fcadc7ad8da7e4187c60f72e2f9c4ef7a1becfbdd807c",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6aedc4d92600c218af69281c0dbd2e3db950c0f706aeac1922f7226de6027e39",
+          "pngSha256": "1d0002d25cc140add815e8415c8910f17a5e79f7b4a7d1696cc68949a45cd2eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "de3f5526e421cee4025a37071ed2e6c548bfdb2ff0f281c4bdcc5cf030d4f408",
+          "pngSha256": "a828b276e5e5b65986d563e5e6ecb598c0f4bc9d57dff54d2e331fbeece637a6",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "432db272ec8299adc3ff220a027fba759392c757b09b329a1beafa72643eb579",
+          "pngSha256": "988efd6de667a92dd4e35639bb91bae06538d45cb9e2274bfce6908594a0b47f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "1f5649a0a9c6a155cf4b263d6f7e765131e604909ae7ec250fd209fa26b78da5",
+          "pngSha256": "3b17c99c35e35bdcf7995bcf6f861260a3dc7c771f0b020afa7e87368297474d",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-actual-tolerant-current-0",
+      "preset": "audit i01-actual-tolerant.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-actual-tolerant-current-1",
+      "preset": "audit i01-actual-tolerant.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-canonical-positive-current-0",
+      "preset": "audit i01-canonical-positive.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-canonical-positive-current-1",
+      "preset": "audit i01-canonical-positive.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-duplicate-lower-first-current-0",
+      "preset": "audit i01-duplicate-lower-first.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-duplicate-lower-first-current-1",
+      "preset": "audit i01-duplicate-lower-first.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-duplicate-upper-first-current-0",
+      "preset": "audit i01-duplicate-upper-first.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-duplicate-upper-first-current-1",
+      "preset": "audit i01-duplicate-upper-first.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "98160048d583333dd1ee775d38c5af6cd64f6b9251c9b8bcc6c95e2cf11d7892",
+          "pngSha256": "f68222d2fc67bb7c0d742f0ba3098d0112cb33056f222c44641fe25a6f6b561f",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-missing-default-current-0",
+      "preset": "audit i01-missing-default.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-missing-default-current-1",
+      "preset": "audit i01-missing-default.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-strict-source-oracle-current-0",
+      "preset": "audit i01-strict-source-oracle.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-audit-i01-strict-source-oracle-current-1",
+      "preset": "audit i01-strict-source-oracle.milk",
+      "width": 3840,
+      "height": 2160,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "32a3ab780ffe82ec3293fa1ccfb9ec934c04b26b51bbb066828dca8814368920",
+          "pngSha256": "fa70e0d9411299b12b821de23ea39621957f25237e450ec3bbfc78aa8a085c82",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-PyroCybin---Computronium-[stahlregens-gelatine-finish]-current-0",
+      "preset": "PyroCybin - Computronium [stahlregens gelatine finish].milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "4d90ce9cb7e19def51264684bf87e9b37122d2ab5d0e987f9cf17b74b54b8117",
+          "pngSha256": "2434fb0eb0744975021f2da13e37bcd482d7635f4d419aaa80bcc02458fd102e",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "739b94a549aae8d8b0ed8dfd60ceaa1e333d10741152dd6d9e4f1848c2da71c6",
+          "pngSha256": "def55dae24e02df5f97b846f29aeaa01ff4d0cf402ee255f53b56cb882e3df99",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "122d18d982545347caa9faee44dbf34c68b7faa9d3153efb5e3ebc8ca569d18a",
+          "pngSha256": "58055a7d7091e1ba3af2329b6d0f990db38f70a3ece43b7a297321b439bcbdc7",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37b9a7116bb487a539706558e0e17237f7fc134b6b8c35ed9a66826b0bf7e56d",
+          "pngSha256": "c5de847fc27eaf96aa28bf4836e2229243492388da3650cf1f10cfda4cd46c84",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6a16821da110f27a1856770e3278459a2f55731ee6030ca4b8f64c8a82785815",
+          "pngSha256": "61b84ca364c3b396d36ecf5467ec712c49ac7c106016b98defd1553b0c341574",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "07aadb55e6066564c4344ead97dbc7e558f034aa0e4100d444ba621d3dcfe187",
+          "pngSha256": "7974ac7884cb2b3c0ea23a8d5259fef78120519fac23d629b945c17d03612f3d",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "13641445b35d33bc6dbfaa6b22356bf5e8da1de1638ae80da03bff2d53a65cdb",
+          "pngSha256": "70cecd4e3f2e9d1fd47512f7267dea938a72244ccec7646889574895b67e02eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "dcc66115e12cb9282d5320f61a4414d113dfa0a73e1bc6a3b16ff32ac4fecd2f",
+          "pngSha256": "0395c56d4e08dab81721fb44ada9dd34cc73c6ea5cbec3e6ae79c40e45ed94df",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-PyroCybin---Computronium-[stahlregens-gelatine-finish]-current-1",
+      "preset": "PyroCybin - Computronium [stahlregens gelatine finish].milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "4d90ce9cb7e19def51264684bf87e9b37122d2ab5d0e987f9cf17b74b54b8117",
+          "pngSha256": "2434fb0eb0744975021f2da13e37bcd482d7635f4d419aaa80bcc02458fd102e",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "739b94a549aae8d8b0ed8dfd60ceaa1e333d10741152dd6d9e4f1848c2da71c6",
+          "pngSha256": "def55dae24e02df5f97b846f29aeaa01ff4d0cf402ee255f53b56cb882e3df99",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "122d18d982545347caa9faee44dbf34c68b7faa9d3153efb5e3ebc8ca569d18a",
+          "pngSha256": "58055a7d7091e1ba3af2329b6d0f990db38f70a3ece43b7a297321b439bcbdc7",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37b9a7116bb487a539706558e0e17237f7fc134b6b8c35ed9a66826b0bf7e56d",
+          "pngSha256": "c5de847fc27eaf96aa28bf4836e2229243492388da3650cf1f10cfda4cd46c84",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6a16821da110f27a1856770e3278459a2f55731ee6030ca4b8f64c8a82785815",
+          "pngSha256": "61b84ca364c3b396d36ecf5467ec712c49ac7c106016b98defd1553b0c341574",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "07aadb55e6066564c4344ead97dbc7e558f034aa0e4100d444ba621d3dcfe187",
+          "pngSha256": "7974ac7884cb2b3c0ea23a8d5259fef78120519fac23d629b945c17d03612f3d",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "13641445b35d33bc6dbfaa6b22356bf5e8da1de1638ae80da03bff2d53a65cdb",
+          "pngSha256": "70cecd4e3f2e9d1fd47512f7267dea938a72244ccec7646889574895b67e02eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "dcc66115e12cb9282d5320f61a4414d113dfa0a73e1bc6a3b16ff32ac4fecd2f",
+          "pngSha256": "0395c56d4e08dab81721fb44ada9dd34cc73c6ea5cbec3e6ae79c40e45ed94df",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-0",
+      "preset": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "2d3662a98ec06967df1ed62c0cdaa1da87af46166517cc389e5db483119bf1b7",
+          "pngSha256": "121d3c10e1947b04affd40531ce58feba975963733af2bfa09bd2f73836abaee",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "db5e754d930b1e2492941552128bd0f0c628197a9f8b9448d9725162ea29a53f",
+          "pngSha256": "c7c2c8f21e837e2041afcdae11369d91336b6e046eecf5324499da564127abc2",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "7f820ebfd6c3d84d7377c2d01ea871549e2e5bb6823e6f9c0d7c98bca5081e33",
+          "pngSha256": "bc5d2c0144301de40a14fff759c4ef6b972be9e273cdba28f31ad080b892b3e9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "cd44f816a32056afc716e3d987e67214ee16f401cb31b1348d797e2fb504fbc7",
+          "pngSha256": "8bbeeb59d4eb3f9398acbfa16e50f8bf4c7df16a8ed6354a41b10f8cef2da972",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "59516ea2b3cfd2dfbbee49fd08955f4c77e75c2ba27d04d1f8b854f4adc810a5",
+          "pngSha256": "0f24038e35358eeb79d92b08c327c31dc59694e337f0dfd04cabe716847a95d8",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "25d18c61970c7a22dea5d853cd3c2eb2b138636f3c855a443bfa43d487c7a06f",
+          "pngSha256": "30d68237723f3078b4832968bbe4c986bdd17a1c733e0aa4e17cf1d66969f774",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "b8e54b3d599dacf1047d4ef7195cf7387097ab7e1d708a1518199d2e2e823e5a",
+          "pngSha256": "30b5b41b358223191789f2d122223a4d042716a869afa5f9f6a1e5b8f1d96ce4",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "0535b981657b30c42f8d3e12549d10a18df7d7fbcfb228c3558c84b22d70631e",
+          "pngSha256": "6efb6f34cfa4f910434c2a641f68686770589ada970dc676a38ef4da0adc17c4",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1",
+      "preset": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "2d3662a98ec06967df1ed62c0cdaa1da87af46166517cc389e5db483119bf1b7",
+          "pngSha256": "121d3c10e1947b04affd40531ce58feba975963733af2bfa09bd2f73836abaee",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "db5e754d930b1e2492941552128bd0f0c628197a9f8b9448d9725162ea29a53f",
+          "pngSha256": "c7c2c8f21e837e2041afcdae11369d91336b6e046eecf5324499da564127abc2",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "7f820ebfd6c3d84d7377c2d01ea871549e2e5bb6823e6f9c0d7c98bca5081e33",
+          "pngSha256": "bc5d2c0144301de40a14fff759c4ef6b972be9e273cdba28f31ad080b892b3e9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "cd44f816a32056afc716e3d987e67214ee16f401cb31b1348d797e2fb504fbc7",
+          "pngSha256": "8bbeeb59d4eb3f9398acbfa16e50f8bf4c7df16a8ed6354a41b10f8cef2da972",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "59516ea2b3cfd2dfbbee49fd08955f4c77e75c2ba27d04d1f8b854f4adc810a5",
+          "pngSha256": "0f24038e35358eeb79d92b08c327c31dc59694e337f0dfd04cabe716847a95d8",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "25d18c61970c7a22dea5d853cd3c2eb2b138636f3c855a443bfa43d487c7a06f",
+          "pngSha256": "30d68237723f3078b4832968bbe4c986bdd17a1c733e0aa4e17cf1d66969f774",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "b8e54b3d599dacf1047d4ef7195cf7387097ab7e1d708a1518199d2e2e823e5a",
+          "pngSha256": "30b5b41b358223191789f2d122223a4d042716a869afa5f9f6a1e5b8f1d96ce4",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "0535b981657b30c42f8d3e12549d10a18df7d7fbcfb228c3558c84b22d70631e",
+          "pngSha256": "6efb6f34cfa4f910434c2a641f68686770589ada970dc676a38ef4da0adc17c4",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-0",
+      "preset": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "4d90ce9cb7e19def51264684bf87e9b37122d2ab5d0e987f9cf17b74b54b8117",
+          "pngSha256": "2434fb0eb0744975021f2da13e37bcd482d7635f4d419aaa80bcc02458fd102e",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "739b94a549aae8d8b0ed8dfd60ceaa1e333d10741152dd6d9e4f1848c2da71c6",
+          "pngSha256": "def55dae24e02df5f97b846f29aeaa01ff4d0cf402ee255f53b56cb882e3df99",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "122d18d982545347caa9faee44dbf34c68b7faa9d3153efb5e3ebc8ca569d18a",
+          "pngSha256": "58055a7d7091e1ba3af2329b6d0f990db38f70a3ece43b7a297321b439bcbdc7",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37b9a7116bb487a539706558e0e17237f7fc134b6b8c35ed9a66826b0bf7e56d",
+          "pngSha256": "c5de847fc27eaf96aa28bf4836e2229243492388da3650cf1f10cfda4cd46c84",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6a16821da110f27a1856770e3278459a2f55731ee6030ca4b8f64c8a82785815",
+          "pngSha256": "61b84ca364c3b396d36ecf5467ec712c49ac7c106016b98defd1553b0c341574",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "07aadb55e6066564c4344ead97dbc7e558f034aa0e4100d444ba621d3dcfe187",
+          "pngSha256": "7974ac7884cb2b3c0ea23a8d5259fef78120519fac23d629b945c17d03612f3d",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "13641445b35d33bc6dbfaa6b22356bf5e8da1de1638ae80da03bff2d53a65cdb",
+          "pngSha256": "70cecd4e3f2e9d1fd47512f7267dea938a72244ccec7646889574895b67e02eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "dcc66115e12cb9282d5320f61a4414d113dfa0a73e1bc6a3b16ff32ac4fecd2f",
+          "pngSha256": "0395c56d4e08dab81721fb44ada9dd34cc73c6ea5cbec3e6ae79c40e45ed94df",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-PyroCybin---Computronium-[stahlregens-gelatine-finish]---strict-source-defaults-current-1",
+      "preset": "audit PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "4d90ce9cb7e19def51264684bf87e9b37122d2ab5d0e987f9cf17b74b54b8117",
+          "pngSha256": "2434fb0eb0744975021f2da13e37bcd482d7635f4d419aaa80bcc02458fd102e",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "739b94a549aae8d8b0ed8dfd60ceaa1e333d10741152dd6d9e4f1848c2da71c6",
+          "pngSha256": "def55dae24e02df5f97b846f29aeaa01ff4d0cf402ee255f53b56cb882e3df99",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "122d18d982545347caa9faee44dbf34c68b7faa9d3153efb5e3ebc8ca569d18a",
+          "pngSha256": "58055a7d7091e1ba3af2329b6d0f990db38f70a3ece43b7a297321b439bcbdc7",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37b9a7116bb487a539706558e0e17237f7fc134b6b8c35ed9a66826b0bf7e56d",
+          "pngSha256": "c5de847fc27eaf96aa28bf4836e2229243492388da3650cf1f10cfda4cd46c84",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "6a16821da110f27a1856770e3278459a2f55731ee6030ca4b8f64c8a82785815",
+          "pngSha256": "61b84ca364c3b396d36ecf5467ec712c49ac7c106016b98defd1553b0c341574",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "07aadb55e6066564c4344ead97dbc7e558f034aa0e4100d444ba621d3dcfe187",
+          "pngSha256": "7974ac7884cb2b3c0ea23a8d5259fef78120519fac23d629b945c17d03612f3d",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "13641445b35d33bc6dbfaa6b22356bf5e8da1de1638ae80da03bff2d53a65cdb",
+          "pngSha256": "70cecd4e3f2e9d1fd47512f7267dea938a72244ccec7646889574895b67e02eb",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "dcc66115e12cb9282d5320f61a4414d113dfa0a73e1bc6a3b16ff32ac4fecd2f",
+          "pngSha256": "0395c56d4e08dab81721fb44ada9dd34cc73c6ea5cbec3e6ae79c40e45ed94df",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]---strict-source-defaults-current-0",
+      "preset": "audit PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "2d3662a98ec06967df1ed62c0cdaa1da87af46166517cc389e5db483119bf1b7",
+          "pngSha256": "121d3c10e1947b04affd40531ce58feba975963733af2bfa09bd2f73836abaee",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "db5e754d930b1e2492941552128bd0f0c628197a9f8b9448d9725162ea29a53f",
+          "pngSha256": "c7c2c8f21e837e2041afcdae11369d91336b6e046eecf5324499da564127abc2",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "7f820ebfd6c3d84d7377c2d01ea871549e2e5bb6823e6f9c0d7c98bca5081e33",
+          "pngSha256": "bc5d2c0144301de40a14fff759c4ef6b972be9e273cdba28f31ad080b892b3e9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "cd44f816a32056afc716e3d987e67214ee16f401cb31b1348d797e2fb504fbc7",
+          "pngSha256": "8bbeeb59d4eb3f9398acbfa16e50f8bf4c7df16a8ed6354a41b10f8cef2da972",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "59516ea2b3cfd2dfbbee49fd08955f4c77e75c2ba27d04d1f8b854f4adc810a5",
+          "pngSha256": "0f24038e35358eeb79d92b08c327c31dc59694e337f0dfd04cabe716847a95d8",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "25d18c61970c7a22dea5d853cd3c2eb2b138636f3c855a443bfa43d487c7a06f",
+          "pngSha256": "30d68237723f3078b4832968bbe4c986bdd17a1c733e0aa4e17cf1d66969f774",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "b8e54b3d599dacf1047d4ef7195cf7387097ab7e1d708a1518199d2e2e823e5a",
+          "pngSha256": "30b5b41b358223191789f2d122223a4d042716a869afa5f9f6a1e5b8f1d96ce4",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "0535b981657b30c42f8d3e12549d10a18df7d7fbcfb228c3558c84b22d70631e",
+          "pngSha256": "6efb6f34cfa4f910434c2a641f68686770589ada970dc676a38ef4da0adc17c4",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]---strict-source-defaults-current-1",
+      "preset": "audit PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "2d3662a98ec06967df1ed62c0cdaa1da87af46166517cc389e5db483119bf1b7",
+          "pngSha256": "121d3c10e1947b04affd40531ce58feba975963733af2bfa09bd2f73836abaee",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "db5e754d930b1e2492941552128bd0f0c628197a9f8b9448d9725162ea29a53f",
+          "pngSha256": "c7c2c8f21e837e2041afcdae11369d91336b6e046eecf5324499da564127abc2",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "7f820ebfd6c3d84d7377c2d01ea871549e2e5bb6823e6f9c0d7c98bca5081e33",
+          "pngSha256": "bc5d2c0144301de40a14fff759c4ef6b972be9e273cdba28f31ad080b892b3e9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "cd44f816a32056afc716e3d987e67214ee16f401cb31b1348d797e2fb504fbc7",
+          "pngSha256": "8bbeeb59d4eb3f9398acbfa16e50f8bf4c7df16a8ed6354a41b10f8cef2da972",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "59516ea2b3cfd2dfbbee49fd08955f4c77e75c2ba27d04d1f8b854f4adc810a5",
+          "pngSha256": "0f24038e35358eeb79d92b08c327c31dc59694e337f0dfd04cabe716847a95d8",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "25d18c61970c7a22dea5d853cd3c2eb2b138636f3c855a443bfa43d487c7a06f",
+          "pngSha256": "30d68237723f3078b4832968bbe4c986bdd17a1c733e0aa4e17cf1d66969f774",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "b8e54b3d599dacf1047d4ef7195cf7387097ab7e1d708a1518199d2e2e823e5a",
+          "pngSha256": "30b5b41b358223191789f2d122223a4d042716a869afa5f9f6a1e5b8f1d96ce4",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "0535b981657b30c42f8d3e12549d10a18df7d7fbcfb228c3558c84b22d70631e",
+          "pngSha256": "6efb6f34cfa4f910434c2a641f68686770589ada970dc676a38ef4da0adc17c4",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-actual-tolerant-current-0",
+      "preset": "audit i01-actual-tolerant.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-actual-tolerant-current-1",
+      "preset": "audit i01-actual-tolerant.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-canonical-positive-current-0",
+      "preset": "audit i01-canonical-positive.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-canonical-positive-current-1",
+      "preset": "audit i01-canonical-positive.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-duplicate-lower-first-current-0",
+      "preset": "audit i01-duplicate-lower-first.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-duplicate-lower-first-current-1",
+      "preset": "audit i01-duplicate-lower-first.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-duplicate-upper-first-current-0",
+      "preset": "audit i01-duplicate-upper-first.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-duplicate-upper-first-current-1",
+      "preset": "audit i01-duplicate-upper-first.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "9a9597bf65ed6543a28d7d621a10d1e315448c9221e24284f86fe5c34795a147",
+          "pngSha256": "ddd227fc0e19ad9d99444690aa8f6afbdd9b285567ae2d99f55730107f56d397",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-missing-default-current-0",
+      "preset": "audit i01-missing-default.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-missing-default-current-1",
+      "preset": "audit i01-missing-default.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-strict-source-oracle-current-0",
+      "preset": "audit i01-strict-source-oracle.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 0,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    },
+    {
+      "directory": "i01policy-small-audit-i01-strict-source-oracle-current-1",
+      "preset": "audit i01-strict-source-oracle.milk",
+      "width": 256,
+      "height": 144,
+      "repeat": 1,
+      "captures": [
+        {
+          "frame": 120,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 150,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 180,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 210,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 239,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 300,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 390,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        },
+        {
+          "frame": 479,
+          "rgbSha256": "37a4c0d4902a3daf33aa0e30c332a7fdcb65289f27e8e63a26632a439dd559a6",
+          "pngSha256": "e54d0cd9a3c30265f5d4853e5f83a8937ed91383f18bd589f2e126dadaea2ba9",
+          "captureReadFramebufferBinding": 0
+        }
+      ]
+    }
+  ]
+}

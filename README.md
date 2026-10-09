@@ -4,7 +4,7 @@
 
 ProjectM TV is a music visualizer for Android TV. It turns the music another app plays on the TV into MilkDrop visuals, at up to 4K, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It is not a music player itself.
 
-It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 15 patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
+It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 34 ordered patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
 
 > **Install on your TV with the Downloader app: code `4821216`**
 >

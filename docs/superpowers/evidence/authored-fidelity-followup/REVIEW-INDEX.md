@@ -1,0 +1,25 @@
+# Before / after review
+
+Each pair uses the same original preset/fixture, fixed audio, frame239 and Native3840x2160 final output. Repeat0 is shown; repeat1 hashes agree at all eight selected frames. Royal103 becomes substantially brighter under the source-correct sample cap; this does not by itself prove artistic intent or Windows pixel equivalence.
+
+| Preset / fixture | Before | Candidate |
+|---|---|---|
+| $$$ Royal - Mashup (103).milk | [Before](native-captures/authored-followup-$$$-Royal---Mashup-(103)-before-0/frame-239.png) | [After](native-captures/authored-followup-$$$-Royal---Mashup-(103)-after-0/frame-239.png) |
+| $$$ Royal - Mashup (11).milk | [Before](native-captures/authored-followup-$$$-Royal---Mashup-(11)-before-0/frame-239.png) | [After](native-captures/authored-followup-$$$-Royal---Mashup-(11)-after-0/frame-239.png) |
+| $$$ Royal - Mashup (137).milk | [Before](native-captures/authored-followup-$$$-Royal---Mashup-(137)-before-0/frame-239.png) | [After](native-captures/authored-followup-$$$-Royal---Mashup-(137)-after-0/frame-239.png) |
+| 101.milk | [Before](native-captures/authored-followup-101-before-0/frame-239.png) | [After](native-captures/authored-followup-101-after-0/frame-239.png) |
+| Mig_304 - geiss remix 2.milk | [Before](native-captures/authored-followup-Mig_304---geiss-remix-2-before-0/frame-239.png) | [After](native-captures/authored-followup-Mig_304---geiss-remix-2-after-0/frame-239.png) |
+| audit followup audit shape live alternating.milk | [Before](native-captures/authored-followup-audit-followup-audit-shape-live-alternating-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-audit-shape-live-alternating-after-0/frame-239.png) |
+| audit followup audit shape live disjoint-thick.milk | [Before](native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-audit-shape-live-disjoint-thick-after-0/frame-239.png) |
+| audit followup audit shape live overlap-thick.milk | [Before](native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-audit-shape-live-overlap-thick-after-0/frame-239.png) |
+| audit followup dot audit dot ring.milk | [Before](native-captures/authored-followup-audit-followup-dot-audit-dot-ring-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-dot-audit-dot-ring-after-0/frame-239.png) |
+| audit followup dot audit single dot.milk | [Before](native-captures/authored-followup-audit-followup-dot-audit-single-dot-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-dot-audit-single-dot-after-0/frame-239.png) |
+| audit followup dot audit two dots.milk | [Before](native-captures/authored-followup-audit-followup-dot-audit-two-dots-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-dot-audit-two-dots-after-0/frame-239.png) |
+| audit followup uv all-disabled.milk | [Before](native-captures/authored-followup-audit-followup-uv-all-disabled-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-uv-all-disabled-after-0/frame-239.png) |
+| audit followup uv all-enabled.milk | [Before](native-captures/authored-followup-audit-followup-uv-all-enabled-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-uv-all-enabled-after-0/frame-239.png) |
+| audit followup uv custom-feedback.milk | [Before](native-captures/authored-followup-audit-followup-uv-custom-feedback-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-uv-custom-feedback-after-0/frame-239.png) |
+| audit followup uv default-feedback.milk | [Before](native-captures/authored-followup-audit-followup-uv-default-feedback-before-0/frame-239.png) | [After](native-captures/authored-followup-audit-followup-uv-default-feedback-after-0/frame-239.png) |
+| martin - city lights v2 c.milk | [Before](native-captures/authored-followup-martin---city-lights-v2-c-before-0/frame-239.png) | [After](native-captures/authored-followup-martin---city-lights-v2-c-after-0/frame-239.png) |
+| martin - city lights v2(1).milk | [Before](native-captures/authored-followup-martin---city-lights-v2(1)-before-0/frame-239.png) | [After](native-captures/authored-followup-martin---city-lights-v2(1)-after-0/frame-239.png) |
+| phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk | [Before](native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-before-0/frame-239.png) | [After](native-captures/authored-followup-phat-+-EoS---Bass_responce_Red_Movements_Disorienting-nebula3-after-0/frame-239.png) |
+| shifter - mosaic mitosis.milk | [Before](native-captures/authored-followup-shifter---mosaic-mitosis-before-0/frame-239.png) | [After](native-captures/authored-followup-shifter---mosaic-mitosis-after-0/frame-239.png) |

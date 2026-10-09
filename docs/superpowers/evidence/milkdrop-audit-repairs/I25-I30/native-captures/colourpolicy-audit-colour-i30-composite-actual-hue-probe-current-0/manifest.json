@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditcolourpolicy",
+  "pid": 30645,
+  "job": {
+    "expectedPresetCount": 9628,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/audio.u8",
+    "preset": "audit colour i30-composite-actual-hue-probe.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "ee57a9a566addd8cbd07b0530e047abda6d9b3c8c302eeb9a2ef03d248c41d4c",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "f00bf6311fcfc2df3f3b2935faaab969e0efca50d2ffbbb90d51b181a041dfd9",
+      "pngBytes": 331439,
+      "pngSha256": "5efdadb2ae0a2be5b61494c5c480a42f6fcb028e6fe54dea0fc43a3731c151f9",
+      "rgbMean": [
+        224.234775390625,
+        251.23094449266975,
+        218.7395864679784
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e77b77eebcef448a43535c73f70c97df2d5c5294dab2f4bba5b4ee54ccf07320",
+      "pngBytes": 354653,
+      "pngSha256": "567f460d68e99efd3a550381ebf34e7d3cf17db56a3d1130bbda52a8866b7307",
+      "rgbMean": [
+        225.40267927758487,
+        248.89233748070987,
+        221.5933521412037
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "998f7be86409d2223649fa02172f558da298cbcafdcc6609383c1cba9ec3d4d8",
+      "pngBytes": 316169,
+      "pngSha256": "681150379e131a8f86a25c483e4099e2b719a70a5d1c21dc78bccb73371471a2",
+      "rgbMean": [
+        229.01488932291667,
+        247.15697458526233,
+        227.39690333236882
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "fd3d6d4c36e7940b17be8db76a70d11998d9221fb3669462fcbcf6e404562957",
+      "pngBytes": 351708,
+      "pngSha256": "a50b9640122e406bfec49ca55bb7cd3787409f092b699c8acce8aa039c8b5dcf",
+      "rgbMean": [
+        232.4471225163966,
+        242.99595100308642,
+        233.72630232445988
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "92a9b34ff0aca16fc739e296e428a42347ac675c508a2dfcfd654a4f3482ed7d",
+      "pngBytes": 297786,
+      "pngSha256": "134831debe32e79f327f9a53ce00de2319311268a2f47da147485d880f2aabc5",
+      "rgbMean": [
+        229.75559558256174,
+        233.29311089409723,
+        233.8045011091821
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0588a45112c0463aad002640502cd13322b90e7846bac6bb7d91811dfe2f2b1d",
+      "pngBytes": 514622,
+      "pngSha256": "a3b5dd57243ee419d529f4b43663007c754481a570203966ad007a592311949c",
+      "rgbMean": [
+        237.7263195650077,
+        223.91085672260803,
+        240.78025921103395
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "86519d9df74a58a616456e2ce16f629b0b40cc88aa925e329ceca0c62886a0ca",
+      "pngBytes": 428395,
+      "pngSha256": "ef10064de6e46464dd3e3dd4a980254d6826cf2b43760fd997681a0ec855ce78",
+      "rgbMean": [
+        233.29688669463735,
+        204.91236219618057,
+        240.909715470679
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcolourpolicy\/files\/native-trails\/colourpolicy-audit-colour-i30-composite-actual-hue-probe-current-0\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "91391bd6f6236265d4e60b35ae232f9ec0ad3b4974754ddb80939342e6eaea63",
+      "pngBytes": 312181,
+      "pngSha256": "fb8af8e2ffe5dd34bb6ff0a24c91aead9d14fa689b675304d10ba6c6023ffab8",
+      "rgbMean": [
+        244.6941444830247,
+        216.13507269965277,
+        235.92595377604167
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 44241039,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9628,
+  "indexSha256": "5f29ca38f6d27f7efca7d16a60fe171073976915217333d182f17c0bc5c423a8",
+  "presetAssetSha256": "b6cf3788223e575ec9150786e9acb3d4cdf856a35468fdad74f8c4532ecc4000",
+  "forcedPresetPrefix": "audit colour i30-composite-actual-hue-probe.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 17,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 44146,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4184,
+  "pssAfterFramesKB": 72333,
+  "serializedFrameMeanMs": 2.1729011833333325,
+  "serializedFrameP90Ms": 3.293458,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit colour i30-composite-actual-hue-probe.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 4517
+}

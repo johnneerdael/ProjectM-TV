@@ -1,0 +1,728 @@
+{
+  "qualification": "Source-instrumented GLES final-output capture, original preset bytes, exact within-role selected RGB repeats; not Windows rendering or physical-TV performance",
+  "preset": "$$$ Royal - Mashup (103).milk",
+  "all_selected_rgb_repeats_exact": true,
+  "rows": [
+    {
+      "profile": "authored256",
+      "roles": {
+        "before": {
+          "display": [
+            256,
+            144
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 145.9631890190972,
+              "rgb_sha256": "05142bc76ba1f6b6bb8cd2a24c5a2c46d1e65e6c310aa917dd57666b4f0acc2f"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 149.4835250289352,
+              "rgb_sha256": "235d6d9e9dd6e23238657304ceaf135595c4b10b0579281dc87c14174f065ccc"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 132.38786711516204,
+              "rgb_sha256": "0b997578272f2eb7b1d56d6556d4314e9de3c2f0c125756e191b4650000af976"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 154.78160264756943,
+              "rgb_sha256": "8f9085772f213d1671ab84e894df176596965466c0e93f06d51b6b8509390def"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 171.08045789930554,
+              "rgb_sha256": "f24aabf3ee6a07fb550c24f8cbb23a8c2af8095284ca573ee8864941f65088bd"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 155.5048828125,
+              "rgb_sha256": "a305d736507bc6bcecc5daed4da882cbb6dc06391fd6849fa92e3dde2b5e96e7"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 126.39662905092594,
+              "rgb_sha256": "ce13058dbfeab6960fad1703adfe6a5e5fb0ab79a546b83b39acd3a53d1b0849"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 153.0048828125,
+              "rgb_sha256": "0c16dbd5e358763fbdc31de444f776d6e67428d058f2cebf53da39b23572835e"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            256,
+            144
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 122.5134006076389,
+              "rgb_sha256": "cab869eb1a79398daafb76b72ce88e441cc436a79584e9f51df61b56e22cefb8"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 127.50951244212963,
+              "rgb_sha256": "cf036974399a8d88769767cc2cec433583e09e40d70cdd4009c41a6249c0193c"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 116.62423140914352,
+              "rgb_sha256": "63c567c1b40a0c1de734f256c1112e4164d92b8e037e55f0fa6c9b0b4e8c14a8"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 132.05800600405092,
+              "rgb_sha256": "60c944ed1c752eac39421b80c1b3017c1d43189773d4f6a38f3d472830e2c3bb"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 135.550537109375,
+              "rgb_sha256": "cfcea686ef4723634b7fd2ce71d4203fc00f2334bee3254b9d95da262b289445"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 122.19571940104167,
+              "rgb_sha256": "dfdd41f307e41c725832de4a4bc34ad3f4d14ebff8b892640544a0641d418215"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 113.84010597511575,
+              "rgb_sha256": "b342714719cc2a3cc0fd886e1e327a19076f5fcc4129574718619c5cddbee569"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 129.93718352141204,
+              "rgb_sha256": "0f6341cfe2a6655ccbf99d5279a38bf35f442924e39f422c6bd08c8e69952627"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "authored1024",
+      "roles": {
+        "before": {
+          "display": [
+            1024,
+            768
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 52.557839711507164,
+              "rgb_sha256": "b16d7ad82b996fabd390b663f4adbb233a610f8990842d284dad3db5b57125b7"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 55.96371587117513,
+              "rgb_sha256": "64df8aceb8582177d463cb59b839e58f1f3bbc1db21be9bd9686bf7a53db01db"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 77.85894054836696,
+              "rgb_sha256": "a58656a74461c25ec0c120e3c90d7e4b9de0bcb1da2759a26de3b1b2ee176c54"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 102.87998157077364,
+              "rgb_sha256": "36bbfb66aee54f5cb140a7987430c6ec64cdfc7e96e847bea246ffc7307f6123"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 90.76049592759875,
+              "rgb_sha256": "eb242c3740c1e8db354c92a25fa129f482e57f1702df13a9f9e7f49364adf3b0"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 73.17206488715277,
+              "rgb_sha256": "d49724d298a31c59d9e14848cd0af5540117beead452ce43b2f6e53557b67974"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 48.495373196072045,
+              "rgb_sha256": "76eb49dc0b88f147995b7806c2eff271ea650df1bcf9392fb3e6ed67eeb13610"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 98.0146484375,
+              "rgb_sha256": "e6acabad9bcb8ad77b002459340227f4a39eea992bd9ba05fded2fd5376cef98"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            1024,
+            768
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 111.75977155897353,
+              "rgb_sha256": "788a0f89f33c61391f85a1ab8053e05944a6703406d3ce4cd061a0ae0ed02a95"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 103.23868391248914,
+              "rgb_sha256": "54d6b32cdf79414078b345a2983a2697a3bb3f0833bebdf4bcbf93527b1995e9"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 100.09155400594075,
+              "rgb_sha256": "41600a0e9823cd68766866388641843f000567699ccde60c279c1a0cd023608b"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 116.04211256239148,
+              "rgb_sha256": "5c15b872e3123c86214e4192263616b7ce00adffdf851f799f66b250049f40b9"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 154.85207409328885,
+              "rgb_sha256": "dc19c7143e272e34af79979a96dd601e734cb2273a02511863f273d0b8fd16a0"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 114.34855990939671,
+              "rgb_sha256": "5e9114ae36aefbf3b6c458d69a347f391fc32e462d229fde2aa04ea34715ee1f"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 99.15020497639973,
+              "rgb_sha256": "a5318f92778990a46475be03c9af5fdd46bbfbfc9ece314d75e822110bc09665"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 157.83643764919705,
+              "rgb_sha256": "db79219517976b5302296d34530e239b83a6bf18ecd11bb7411cdcf331bc77b6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "authored1280",
+      "roles": {
+        "before": {
+          "display": [
+            1280,
+            720
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 41.38430013020834,
+              "rgb_sha256": "866e240ff73f036615ddb5f3268984f3118dcf4e033862fc223d61e675eb441a"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 41.13965313946759,
+              "rgb_sha256": "c1252cb01a41260c2d1d813c3e6a13ba06883bcb18bbbca53439ce9d1359c11b"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 60.903561197916666,
+              "rgb_sha256": "1b71533effa0c1a2286937f608605f3eb0841c9fc4c298103be0d00df98212d0"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 82.68977756076389,
+              "rgb_sha256": "2a5099fa6f9e723e9798a38e79c8331186701e4a8eeb0f7f39fee413e056e05f"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 63.93463686342593,
+              "rgb_sha256": "9b45292c03643b9a006099d6c454b60114396c34db7444fc3828469ab7fe58b7"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 61.22057400173611,
+              "rgb_sha256": "da29a8b91c50da75034d4d2b882dcbf32ab25e926ae9ed7724c0b95d0a63a742"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 36.39565502025463,
+              "rgb_sha256": "58ab7ba5a0300c61c32e1e31225db292f7654b7de330bcee4d40da809097b37e"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 78.35420319733795,
+              "rgb_sha256": "e9b33c86408edf219cf0573288b9ca7d6c95e1ac8878b2ddd1105ae6b002f023"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            1280,
+            720
+          ],
+          "native_trails_status": "Off",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 113.32957971643519,
+              "rgb_sha256": "8372ae9745a97a5e45a60ceec500d4d9238543cb4f41b9b4add7e46788b8689c"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 103.6642845775463,
+              "rgb_sha256": "93b4f88cdf30a9954db13d865303ef15a73c192de0f3c61fa812ab709808a54e"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 100.04616681134259,
+              "rgb_sha256": "255b733875e3532c8757082533019a275c24c435d2a5e182a049a0d7d7b187a9"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 129.88201461226853,
+              "rgb_sha256": "e83447130dda18075cc6f6aac8e8ff6c81b9e7c67e993728a1ed690339e9273f"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 154.6887311921296,
+              "rgb_sha256": "05587cc6ae2390e1174d3c4a7931b9ef78eb8351a8c4744745646d7346a602a8"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 136.3225535300926,
+              "rgb_sha256": "5c6d8986ef94061c22acd524b6c5410f893909e28821b17aad2e4bb11bcf1887"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 96.36630461516204,
+              "rgb_sha256": "4128addad5ee4fff7412e8c5e11505f24d3fdac20b963263458478c099e581a0"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 158.90446433738427,
+              "rgb_sha256": "a3129e6763f5ca83a5e310cb735e392bd35f2f664d2b9616c521b9138bb83ff6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "fallback720",
+      "roles": {
+        "before": {
+          "display": [
+            1280,
+            720
+          ],
+          "native_trails_status": "Standard \u00b7 inactive (render 720p)",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 46.94470486111111,
+              "rgb_sha256": "8c87c4d86568c5f3bef0b49c4e46bbf9ce92d90f26994cf7a4fcd236020ff4a9"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 49.62034541377315,
+              "rgb_sha256": "04730f35316d0f8b9f15ec98d3d95ce8db880c7cbfffa614af0e5ba7b9414256"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 73.45340856481481,
+              "rgb_sha256": "a11f84add267786aaaaf4cec1e336fd25719822bd385749f68989edeb4326b1f"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 98.18307110821759,
+              "rgb_sha256": "06e825a0c238547c1f87fc84c2dadae27b7f73b55a9f7a73d10093a6c7d2a3cf"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 77.7971878616898,
+              "rgb_sha256": "556305a3466ff97930bf7c0be2b6524e6b3673ea9fcf6de26c8b030ed532a35c"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 73.94101200810185,
+              "rgb_sha256": "9e568358954e0f8ed00009accc97593c0f6a1a002813636085458e7d5f2ce035"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 41.01101743344908,
+              "rgb_sha256": "31e97cbdd5f5969e0462d47bc4ce507da8190c97f13a1377a9935a6769a57501"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 86.96165364583334,
+              "rgb_sha256": "a7a1f79d00e2442a7066a226721033e2268cdd82eda9a1360e17e09d9edd6161"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            1280,
+            720
+          ],
+          "native_trails_status": "Standard \u00b7 inactive (render 720p)",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 120.57266022858796,
+              "rgb_sha256": "88f3759440135fde103a6390dae4c1b3292298d0e8ffa97789c32bda8d23a949"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 132.71012261284721,
+              "rgb_sha256": "447ef44d61bd238195d1ba84f7dcefd6577938467b6e9cdb72e23de55e57864d"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 115.9959450954861,
+              "rgb_sha256": "f3b771e07411f60d61aebe87e32048740c77a49dc5b12d037b50782eaaf28163"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 138.36293619791667,
+              "rgb_sha256": "1257dcc47e7c2be10c2fef63e996b6842b06877d362fe1e7c6c593fc1633eda1"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 156.4056253616898,
+              "rgb_sha256": "822d3ca57dd60af571a0b71f2349d5fdcd5fe9a11511f746ee75149e1680a26d"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 130.19005787037037,
+              "rgb_sha256": "c4152c9966ed683cceaa84c269c35757af6f699dd9340c7e4c1125ad1f023623"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 99.01739945023148,
+              "rgb_sha256": "068e1e84b3a8682f45d06b7ed4758bc425f8e319a4305748384f056b0248ff0d"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 160.28885416666665,
+              "rgb_sha256": "ce05b6337d3b8cb6a269a8f85364de2e9de832757510c0aa3038f3923ed1a7dc"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "fallback1080",
+      "roles": {
+        "before": {
+          "display": [
+            1920,
+            1080
+          ],
+          "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 48.610980742026754,
+              "rgb_sha256": "f9af5d78502f69e177acae37d580213a3f62236cbb679e300938c04cbb50688d"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 51.627134612911526,
+              "rgb_sha256": "91185f2de8a2f793ab57375c9bcf5120e2756753dde69a7e1f669346aad541d2"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 72.60781603652264,
+              "rgb_sha256": "c8621b397dd2a1903ba8c843943a632409d6638e960349e40efcbe713e6c187d"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 96.66538097993828,
+              "rgb_sha256": "266e3c4820c68bc9a8d82d12adbacf06d154134f62a35d50c60c3bd917f77c6a"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 80.29067033179012,
+              "rgb_sha256": "1bb714f78d7dd0ddcda9c57d667540a8abb457abb3af7d4e964c0d4c827a4d40"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 75.90537374614198,
+              "rgb_sha256": "9402bf823c0a87d84e922a464790c81749501d0ea4d1563930be801f55d4a759"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 40.23276234567901,
+              "rgb_sha256": "7fa2849d391e0c2b32aa4ca0f0a0bbcadfc2df9ee258c9708f51130624864f20"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 87.19939043209877,
+              "rgb_sha256": "9cd9f72ec75dc3caa61fd538416ea681a14afadf89896b919fc8b2b36d2ef5b5"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            1920,
+            1080
+          ],
+          "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 120.32632603523662,
+              "rgb_sha256": "2141c0a7d4efc1198245c313b3299f5d74067d15d68f6862e56ca027286f1238"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 131.70038194444444,
+              "rgb_sha256": "e785ce7490cb8c88f360be6c7da11a9d403a9469d706a76766e00c58019a53f7"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 115.12662085262345,
+              "rgb_sha256": "354df7c693f43b808c48ef1e60c215bf2157573ca2bad1e68c0e7c04002c13ae"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 137.0395463605967,
+              "rgb_sha256": "4ebed824394051dd41385f87f60221dbd84a727922144e9f57a55c072a19cc5d"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 156.24554880401234,
+              "rgb_sha256": "a39bac356375c6f283daa4fdb94782a23d2421641ee4a79e12c3016d6a6c34e1"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 125.27380144032922,
+              "rgb_sha256": "a9d4c379bdad70589275a52ee06c043885a29922eb1888c0e679a49ad7b41e00"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 98.79089666923869,
+              "rgb_sha256": "44efb70421d522b1fc32f0efe01f47344562bd80f22ea7f245c626c22a62bdbb"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 160.66872620884774,
+              "rgb_sha256": "97581fd58db46e8da4f88bb338080ef264d02e275a73fd54d709e3972c921745"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "native1440",
+      "roles": {
+        "before": {
+          "display": [
+            2560,
+            1440
+          ],
+          "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 41.347639069733795,
+              "rgb_sha256": "24edb3a89b08b01b3b2b6f2ebfb8973e6da999ecbbaf5b485410a4437c28facb"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 41.16260832609954,
+              "rgb_sha256": "683c23f3e308150325654fee98e8171f1de60f34be693d039290506c02d31ced"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 60.94879882812501,
+              "rgb_sha256": "5c705fc6c802b27bef16e2758d2635d7f33a20905e66d53e46a81ea268876011"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 82.75327320240162,
+              "rgb_sha256": "9584b3d2d4582d429b67d921a3095f2ff5385497fbba853eefa5d7ab48802d39"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 63.87726408781828,
+              "rgb_sha256": "59b445c9c142072ecbba73668d5ade09421d215cee9a9bbdf919bce37cdfd777"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 61.22470865885416,
+              "rgb_sha256": "d84fffdb1dc5473ce58f7e8cfd602043220246529235b3b55a82892f5d6efa43"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 36.45521312572338,
+              "rgb_sha256": "10163274c8193dd92874c3a9a6d2ba0105f804cdaced9ca086fb3a21842b770d"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 78.41428756148727,
+              "rgb_sha256": "92109f7f44fa25938669a6b24aceffc46a739605dbed0148bd08ed5d8733e368"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            2560,
+            1440
+          ],
+          "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 113.40485044126156,
+              "rgb_sha256": "a3b99d05e25fba728b72a2aa0060506fe866ad3c8b0ca1501f2688c26e3b3181"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 103.71362132884838,
+              "rgb_sha256": "df420e54f77e4ef4759f49e48e0ab8b47720b44ce926cec27e7605c2f8b07faf"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 100.06772207754629,
+              "rgb_sha256": "5c170eb1eeb0c3f63b2e33137078c7950431a2616144f9c9ca61d5e10067ddc6"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 129.8804603407118,
+              "rgb_sha256": "53c62783f0e19e3ee991036f8730331824b2b39d13fa7f5638702a9663ec56f3"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 154.68478090639465,
+              "rgb_sha256": "5ba234537e64733eaebe5fb438ba03cf1d594f27910b53cb92b80092051a7f57"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 136.2376900679977,
+              "rgb_sha256": "890d58483d5a5e4896d5f9e84e8de9c0eea5a2772640773483f9fa8f0206cf1f"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 96.37061188874422,
+              "rgb_sha256": "f1fc2ee183f6f0374c938f302c55ccaca69564308b448a7344fac80ae17899fb"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 158.9181531213831,
+              "rgb_sha256": "2a845e34a27a25255398cf30a202d8c543c2b568c9527b93e5a3041a36ff829e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "profile": "native2160",
+      "roles": {
+        "before": {
+          "display": [
+            3840,
+            2160
+          ],
+          "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 41.331248352301955,
+              "rgb_sha256": "565060d0bd33766a31e0fd397f427e1e23b43a4935fdeed3c93b9c27a976f7fd"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 41.13678164384002,
+              "rgb_sha256": "35b8710300c195a4a21bc1802ca51a8859d760357a597c455f86bd03e9b5ed6b"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 60.921736995241766,
+              "rgb_sha256": "15deddda21a600ea041a9c9fe2fa3ce44233655d27f51490d86e1e179a819f90"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 82.73600216210134,
+              "rgb_sha256": "1ca3a439a7bb949101d8b6a19a0237db9b40c34a50fc334b36ed1a31c563e721"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 63.85106963734568,
+              "rgb_sha256": "52036a653fa5294a03feb2ef686e75e4ee5a2cccff9284c522620f93c046d557"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 61.19570666152263,
+              "rgb_sha256": "fda6f0d0de6265433b061fc7769b7cb943258615ea9f759b88728fa041a4f065"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 36.42747383777006,
+              "rgb_sha256": "efb17e84ad4c04899fc5c8d6f9a11f3b7c09169f4c2b8798f5f5ae6215271052"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 78.38641625675155,
+              "rgb_sha256": "d0fedc88c1aa58b4dafd3eddb889570f74636716be59a1811941782f97ade3a4"
+            }
+          ]
+        },
+        "after": {
+          "display": [
+            3840,
+            2160
+          ],
+          "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+          "frames": [
+            {
+              "frame": 120,
+              "rgb_mean": 113.39057866351595,
+              "rgb_sha256": "3bfcf14912988ba7bcb49ca7dc191c7b9a3b3e94353a1d53bab1eecc3f825c7d"
+            },
+            {
+              "frame": 150,
+              "rgb_mean": 103.6649553915895,
+              "rgb_sha256": "7dad757ccb54e49446d6fc47e7e12badd48c1b53d54402d7711c17b79f68301b"
+            },
+            {
+              "frame": 180,
+              "rgb_mean": 100.01224348154578,
+              "rgb_sha256": "d7e20e9b4e80266ca21ff9b54a4e7003970b0b7524ebfcf4be14d23ab01cebc5"
+            },
+            {
+              "frame": 210,
+              "rgb_mean": 129.85937512056327,
+              "rgb_sha256": "7e3ba9dfb8e842ea859e096d841b38ffbd2cde2434ee39d0c2ba694abb29593c"
+            },
+            {
+              "frame": 239,
+              "rgb_mean": 154.71403493119854,
+              "rgb_sha256": "20b4f9ea019103b1a455c1ea97f9e8a3e3264077659d47228476e13b87dcc216"
+            },
+            {
+              "frame": 300,
+              "rgb_mean": 136.229528436857,
+              "rgb_sha256": "52d1c8eedde3544f906d2c9501fef8596b5dbe47625a70b3b5d9f3751da7053a"
+            },
+            {
+              "frame": 390,
+              "rgb_mean": 96.34779650527264,
+              "rgb_sha256": "745a642e6c3f8f17d5ac4994397b8d38f974fec46409baef7c28f5ca7ffca4d4"
+            },
+            {
+              "frame": 479,
+              "rgb_mean": 158.92197382169496,
+              "rgb_sha256": "bb942c8b4e097bd9a64852b2685fcf5b38c8ec1caad629d4ab4b5ea7b09925c6"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

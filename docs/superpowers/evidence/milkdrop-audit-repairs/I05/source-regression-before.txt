@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 6: per-pixel-inverse-aspect
+1/1 Test #6: per-pixel-inverse-aspect .........***Failed    0.26 sec
+per-pixel aspect inputs omit original inverse factors
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.27 sec
+
+The following tests FAILED:
+	  6 - per-pixel-inverse-aspect (Failed)
+Errors while running CTest

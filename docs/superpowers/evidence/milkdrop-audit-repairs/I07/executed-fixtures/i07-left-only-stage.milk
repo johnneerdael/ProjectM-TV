@@ -1,0 +1,15 @@
+MILKDROP_PRESET_VERSION=100
+[preset00]
+fDecay=0
+fGammaAdj=1
+fShader=0
+fWaveAlpha=0
+nWaveMode=0
+ob_size=0
+ob_r=1
+ob_g=0
+ob_b=0
+ob_a=1
+ib_size=0
+mv_a=0
+per_frame_1=q1=1.004740357;ob_size=.03+.03*q1;

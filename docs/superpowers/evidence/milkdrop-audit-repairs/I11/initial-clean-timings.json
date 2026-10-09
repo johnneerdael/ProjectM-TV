@@ -1,0 +1,137 @@
+{
+  "qualification": "12 ordered ABBA Native4K engine runs; no other task-owned builds/analysis/GPU tests during capture; other host activity uncontrolled; not physical-TV FPS",
+  "runs": [
+    {
+      "issue": "I11",
+      "cycle": 0,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.2888413250000017,
+      "p90_ms": 3.62925,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 0,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.2256301972222206,
+      "p90_ms": 3.504666,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 0,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.6855767000000004,
+      "p90_ms": 4.100125,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 0,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.180058447222223,
+      "p90_ms": 3.474041,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 1,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.228489658333334,
+      "p90_ms": 3.5275,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 1,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.433364086111109,
+      "p90_ms": 4.144542,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 1,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.1989594888888897,
+      "p90_ms": 3.512334,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 1,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.203012997222222,
+      "p90_ms": 3.531875,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 2,
+      "step": 0,
+      "role": "before",
+      "mean_ms": 3.268694202777777,
+      "p90_ms": 3.727958,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 2,
+      "step": 1,
+      "role": "after",
+      "mean_ms": 3.21178321111111,
+      "p90_ms": 3.486833,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 2,
+      "step": 2,
+      "role": "after",
+      "mean_ms": 3.5708182833333355,
+      "p90_ms": 4.093292,
+      "status": "ok"
+    },
+    {
+      "issue": "I11",
+      "cycle": 2,
+      "step": 3,
+      "role": "before",
+      "mean_ms": 3.3121233888888852,
+      "p90_ms": 3.824333,
+      "status": "ok"
+    }
+  ],
+  "before_mean_ms": 3.2468700032407405,
+  "after_mean_ms": 3.387688661111111,
+  "delta_ms": 0.1408186578703705,
+  "delta_percent": 4.337058697447627,
+  "cycles": [
+    {
+      "cycle": 0,
+      "before_mean_ms": 3.234449886111112,
+      "after_mean_ms": 3.4556034486111105,
+      "delta_percent": 6.837439759065145
+    },
+    {
+      "cycle": 1,
+      "before_mean_ms": 3.215751327777778,
+      "after_mean_ms": 3.3161617874999996,
+      "delta_percent": 3.122457226554576
+    },
+    {
+      "cycle": 2,
+      "before_mean_ms": 3.290408795833331,
+      "after_mean_ms": 3.391300747222223,
+      "delta_percent": 3.0662436690739536
+    }
+  ]
+}

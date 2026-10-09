@@ -1,0 +1,28 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION=2
+PSVERSION_WARP=2
+PSVERSION_COMP=2
+[preset00]
+fDecay=1
+fGammaAdj=1
+fShader=0
+fVideoEchoAlpha=0
+fWaveAlpha=0
+ob_size=0
+ib_size=0
+mv_a=0
+bDarkenCenter=0
+bBrighten=0
+bDarken=0
+bSolarize=0
+bInvert=0
+wavecode_0_enabled=0
+shapecode_0_enabled=0
+wavecode_1_enabled=0
+shapecode_1_enabled=0
+wavecode_2_enabled=0
+shapecode_2_enabled=0
+wavecode_3_enabled=0
+shapecode_3_enabled=0
+warp_1=`shader_body { ret=float3(0,0,0); }
+comp_1=`shader_body { ret=float3(1.9980000257492065/4,1.1655000448226929/4,0); }

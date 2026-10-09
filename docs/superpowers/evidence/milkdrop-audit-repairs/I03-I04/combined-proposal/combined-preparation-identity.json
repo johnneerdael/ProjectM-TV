@@ -1,0 +1,24 @@
+{
+  "current_source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "ordered_current_patch_count": 27,
+  "source_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm",
+  "baseline_sha256": {
+    "vendor/projectm-eval/projectm-eval/TreeFunctions.c": "f886626367d03d6602a87a2ebf02ec7ca4636fa9560311ffa5461fa1201f817f",
+    "vendor/projectm-eval/projectm-eval/CMakeLists.txt": "e37c655c0bf9254968666591fb85a4ea357cfb1c904808a5baf9ba76a5fdce90"
+  },
+  "candidate_text_sha256": {
+    "vendor/projectm-eval/projectm-eval/TreeFunctions.c": "2bd7bab7cfab7d3332263d9f1182dec368004949cc8895ec1b8fe725c0b8bc10",
+    "vendor/projectm-eval/projectm-eval/CMakeLists.txt": "fa5bf0e9aeacf1076854066d996332454572c89f1b8dcc19d382b5d09f9d2898"
+  },
+  "patch_sha256": "01f2207a8529c71b8fd4c65812c54f0c62d4c163bc6421ce31be21c5551f90cb",
+  "existing_normalized_I03_I04_reference": "I03-proposal.patch and I04-proposal.patch; no copied evaluator build used by the integrated test wrapper",
+  "frozen_prior_runtime_results_sha256": "3bca95f00d811775f2596ede5830687b4a80ce1403704bfcdb794d397eaa1ea3",
+  "status": "new combined proposal only, no build/test/GPU/device/git",
+  "prepared_controls_sha256": "4acabcdf4afa4e62a34d7377d034b796758232a6f55a101f38b37af4191409ba",
+  "prepared_build_helpers_sha256": {
+    "canonical-target.cmake": "a8284e9da520624bf9fedf84253ad44e62635a4adbd2bcd3fc35e43107a76fc6",
+    "integration/CMakeLists.txt": "0d33346a45785061c540c69971faae05e4868db221d4ffb6b5e4058c0acb1c55",
+    "verify_compile_scope.py": "a26fb3b7e09fb9870db2494a5f3748959af17951aaa638cd5bfabdf00e4785b6",
+    "COMBINED_INTEGRATION.md": "0320164e7cad97307e59e09451ea1493375cf48ce02306c28b7f891dab56f78f"
+  }
+}

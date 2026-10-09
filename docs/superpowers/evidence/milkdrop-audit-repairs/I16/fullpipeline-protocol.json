@@ -1,0 +1,73 @@
+{
+  "status": "uncompiled source proposal; no runtime or Native acceptance",
+  "roles": [
+    "current",
+    "eager-oracle"
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "enabled": true,
+      "computed_center_uv": [
+        0.5625,
+        0.5
+      ],
+      "expected_current_motion_endpoint_x": null,
+      "expected_eager_motion_endpoint_x": null
+    },
+    {
+      "frame": 1,
+      "enabled": true,
+      "computed_center_uv": [
+        0.5625,
+        0.5
+      ],
+      "expected_current_motion_endpoint_x": 0.5625,
+      "expected_eager_motion_endpoint_x": 0.5625
+    },
+    {
+      "frame": 2,
+      "enabled": false,
+      "computed_center_uv": [
+        0.625,
+        0.5
+      ],
+      "expected_current_motion_endpoint_x": null,
+      "expected_eager_motion_endpoint_x": null
+    },
+    {
+      "frame": 3,
+      "enabled": true,
+      "computed_center_uv": [
+        0.6875,
+        0.5
+      ],
+      "expected_current_motion_endpoint_x": 0.5625,
+      "expected_eager_motion_endpoint_x": 0.625
+    },
+    {
+      "frame": 4,
+      "enabled": true,
+      "computed_center_uv": [
+        0.75,
+        0.5
+      ],
+      "expected_current_motion_endpoint_x": 0.6875,
+      "expected_eager_motion_endpoint_x": 0.6875
+    }
+  ],
+  "mesh": [
+    48,
+    32
+  ],
+  "per_pixel_evaluations_per_frame": 1617,
+  "minimum_branch_avoided": true,
+  "full_original_oracle": false,
+  "eager_is_test_only_bandwidth_oracle": true,
+  "disabled_write_payload_bytes": {
+    "256x144": 147456,
+    "1280x720": 3686400,
+    "3840x2160": 33177600
+  },
+  "future_lazy_generic_repair_qualified": false
+}

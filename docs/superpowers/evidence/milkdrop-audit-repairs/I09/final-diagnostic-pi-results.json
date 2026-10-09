@@ -1,0 +1,44 @@
+{
+  "qualification": "Source-instrumented exact-native-AAR private diagnostic APK; final-output read framebuffer0; not shipping APK or Windows rendering proof",
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "roles": {
+    "before": {
+      "nonblack_pixels": 1685216,
+      "red_x_centroid": 1919.5,
+      "red_y_centroid": 1079.5,
+      "rgb_hashes": [
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8",
+        "766998fb60eba22f064232f310b512b934b2fbbd5a57123c29ed57effa9030d8"
+      ]
+    },
+    "after": {
+      "nonblack_pixels": 329776,
+      "red_x_centroid": 1919.5,
+      "red_y_centroid": 1079.5,
+      "rgb_hashes": [
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6",
+        "49e5d20e5c29199806e5d34b659f578445da61a9c0a90fca5f8cb5e97b9318e6"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true
+}

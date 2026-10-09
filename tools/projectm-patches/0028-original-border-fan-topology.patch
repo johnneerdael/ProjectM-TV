@@ -1,0 +1,28 @@
+From: ProjectM TV contributors
+Subject: Restore MilkDrop2 border fan triangle coverage
+
+Preserve the four original strip fans when outer/inner border widths invert.
+Only change the eight triangle indices; retain vertices, alpha, blending,
+pass order and one indexed submission. Based on MilkDrop2 milkdropfs.cpp.
+
+--- a/src/libprojectM/MilkdropPreset/Border.cpp
++++ b/src/libprojectM/MilkdropPreset/Border.cpp
+@@ -18,10 +18,10 @@
+     {
+-        0, 1, 4,
+-        1, 4, 5,
+-        2, 3, 6,
+-        3, 7, 6,
+-        2, 0, 6,
+-        0, 4, 6,
+-        3, 7, 5,
+-        1, 3, 5
++        4, 0, 1,
++        4, 1, 5,
++        6, 2, 0,
++        6, 0, 4,
++        7, 3, 2,
++        7, 2, 6,
++        5, 1, 3,
++        5, 3, 7
+     }});

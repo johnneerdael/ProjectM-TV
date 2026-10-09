@@ -1,0 +1,24 @@
+From: ProjectM TV contributors
+Subject: [TEST-ONLY ORACLE] Publish actual motion UV every completed warp
+
+Use only in a separately identified source/candidate copy for temporal
+expectation and added disabled-frame bandwidth qualification. Preserve
+actual fragment/discard execution and current triangle/RG16F semantics.
+This is not an accepted repair, generic lazy implementation or unchanged
+library result; it forfeits disabled-frame UV write savings.
+
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -228,9 +228,8 @@
+     // The u/v map is only read by the next frame's motion vectors, so it is written only while the
+     // preset shows them (the same test as in MotionVectors::Draw()). A full-size write is saved
+     // for most presets; a preset turning them on uses a stale map for that one frame.
+-    bool const writeMotionUV = *m_perFrameContext.mv_a >= 0.0001f &&
+-                               static_cast<int>(*m_perFrameContext.mv_x) > 0 &&
+-                               static_cast<int>(*m_perFrameContext.mv_y) > 0;
++    // TEST-ONLY eager temporal/cost oracle. Not a generic lazy/no-cost production repair.
++    bool const writeMotionUV = true;
+-
++
+     if (writeMotionUV && !detail)
+     {

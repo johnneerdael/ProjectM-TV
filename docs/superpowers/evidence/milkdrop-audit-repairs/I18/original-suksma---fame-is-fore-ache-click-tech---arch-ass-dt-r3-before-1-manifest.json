@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 11909,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/audio.u8",
+    "preset": "suksma - fame is fore ache click tech - arch ass dt r3.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "b212a2f13c4792f7e2fb414789b79770807cce9750c4f09e7bcf11892ef34671",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6d6525ca98391403356a3e799e102a7695ced47ffc554520307f1a87296bd26e",
+      "pngBytes": 8409033,
+      "pngSha256": "e2c2eaed92138f6b0b299cbe79ef7757f8035de1b964313261eda33b9dffc5e2",
+      "rgbMean": [
+        141.80231626157408,
+        63.22308569637346,
+        59.1186986400463
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6a41b7cf92b4a3e4c29ec602591d1d196c41a3d49b78e9d7bf7981ce62fa447a",
+      "pngBytes": 8327161,
+      "pngSha256": "a36d10ac2fc1aa98717296f127d18da8296148cbfcef347cc2d7dd94e6ca6a27",
+      "rgbMean": [
+        124.48302300347223,
+        43.297829378858026,
+        45.01715446566358
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "c04e70772e2389a413551331f633d8dd37e101aefde7303c81291b8dcc4ce17d",
+      "pngBytes": 7173700,
+      "pngSha256": "ffd4f796d4d945251b1720e344cd84f700cdaf09113ea7990226424d3b3d29de",
+      "rgbMean": [
+        100.63587504822532,
+        37.10835479359568,
+        35.96625337577161
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "310c7caaffe53ea607e4879365b139a928ac4414c21eca14e4c2f22d4166a546",
+      "pngBytes": 5171941,
+      "pngSha256": "3a7fd049b5efe3ca3517f41cf5e1df13ab62f011ca3e2684a1bf84af4ae7df8e",
+      "rgbMean": [
+        68.20918921199846,
+        39.56790328414352,
+        37.33019036940586
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "631a786833a1a2796c5960992fa2635e69c39af2df627cc77c0af028e7526f3f",
+      "pngBytes": 8659307,
+      "pngSha256": "0ce4c02824ec9e705c3119799a856d145c4fcbb834a8748f28e6dcc74e6701ae",
+      "rgbMean": [
+        57.590722053433645,
+        70.01812403549383,
+        47.81043294270833
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b27d50e217eec2466b2e68956bb1771d5d6f9eb9d47a36398f95ecefd6b0fcc6",
+      "pngBytes": 8710105,
+      "pngSha256": "c3d3258a84c0a30ab8f1da21cd90d98e7688eff287c4ae343ad0fe4360fa4c04",
+      "rgbMean": [
+        80.82217785493827,
+        55.82306749131944,
+        46.05644483024691
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a1374450e63a1c1de563e22ec1de5ae8974805a0323a381092bcbf009a72e027",
+      "pngBytes": 5278200,
+      "pngSha256": "aba838c350be3d3e27744869d61628d172cf28e7a70a91d04d431e1ddaaeda69",
+      "rgbMean": [
+        49.21259524498457,
+        39.11015395929784,
+        20.86414363908179
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/i18-original-suksma---fame-is-fore-ache-click-tech---arch-ass-dt-r3-before-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a32a21997c6425ade89875d22c4539e1ebf266f4e138b481c91a27b3c590670b",
+      "pngBytes": 6840009,
+      "pngSha256": "5e440c68f4d7197b28c8d2ef25eb092e620844fbe947600a1f37604022df1830",
+      "rgbMean": [
+        63.768478250385805,
+        69.6547868441358,
+        49.21747685185185
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 37670174,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 240,
+      "elapsedRealtimeMs": 37681998,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "66badf826048c016a71ca1f061832a0ca5ac97c575bf7fee5a7ce932940ce3b4",
+  "forcedPresetPrefix": "suksma - fame is fore ache click tech - arch ass dt r3.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 14,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43453,
+  "framesRendered": 480,
+  "renderWallDurationMs": 18867,
+  "pssAfterFramesKB": 72496,
+  "serializedFrameMeanMs": 3.2364552222222227,
+  "serializedFrameP90Ms": 3.69225,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "suksma - fame is fore ache click tech - arch ass dt r3.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 19177
+}

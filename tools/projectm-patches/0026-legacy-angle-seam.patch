@@ -1,0 +1,36 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Preserve original left-axis legacy equation angle seam
+
+Original MilkDrop2 plugin.cpp supplies atan2f(+0,negative)=+pi to
+legacy per-pixel equations. Current physical mapping negates that cached
+angle to -pi at the exact left axis, changing nonperiodic predicates.
+Retain the cached angle only for exact legacy/default/fallback left-axis
+nodes; preserve negation off axis and throughout the actual custom path.
+Copy the signed cached angle rather than normalizing it: a frozen -0
+axis cache pair retains original atan2f(-0,negative)=-pi consumption.
+
+Keep raw radius/angle shader attributes, original coordinates, topology,
+traversal, static cache/upload, CPU rotation trig/signed zoom power,
+point/equation counts and one-producer prepared replay unchanged.
+No epsilon, added atan2, extra evaluation, target, buffer or pass.
+Finite qualification: generated even mesh, positive finite aspect factors.
+Custom-warp VS oracle and nonfinite/unsupported aspect domains are excluded.
+
+Original: vis_milk2/plugin.cpp:2272-2285 and milkdropfs.cpp:1839-1842;
+byte-identical original2.25c and local milkdrop2/src sources.
+
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -281,7 +281,10 @@
+                 *perPixelContext.x = static_cast<double>(curVertex.X() * 0.5f * presetState.renderContext.aspectX + 0.5f);
+                 *perPixelContext.y = static_cast<double>(curVertex.Y() * 0.5f * presetState.renderContext.aspectY + 0.5f);
+                 *perPixelContext.rad = static_cast<double>(curRadiusAngle.radius);
+-                *perPixelContext.ang = static_cast<double>(-curRadiusAngle.angle);
++                // Preserve original atan2 signed-zero seam on the exact legacy left axis.
++                // Keep off-axis mapping and the custom shader/equation producer unchanged.
++                const bool legacyLeftAxis = !m_warpShader && curVertex.X() < 0.0f && curVertex.Y() == 0.0f;
++                *perPixelContext.ang = static_cast<double>(legacyLeftAxis ? curRadiusAngle.angle : -curRadiusAngle.angle);
+                 *perPixelContext.zoom = static_cast<double>(*perFrameContext.zoom);
+                 *perPixelContext.zoomexp = static_cast<double>(*perFrameContext.zoomexp);
+                 *perPixelContext.rot = static_cast<double>(*perFrameContext.rot);

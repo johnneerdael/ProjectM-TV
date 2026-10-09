@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "163.milk",
+      "preset_sha256": "ee1c2c11cc38844dfa185cc64d67afd69f97c2f803262cac94c47eeb416a0b5d",
+      "rgb_hashes": [
+        "16530727208d36e3d8d6054a5b71290272582d20e6e64b6b2e8ac886b8f232f6",
+        "ed8cb0e7455d231974bc78e13ee220e715619084902afe279e53e33f6a95b3c3",
+        "fba2beeb1945672f79b77537083054220b7f76012773edeba6de38b3751c22a6",
+        "63a526dde8149e502fe6efd915f253b245b1c4e551eeb3ad165bb945040b88da",
+        "dc0b2aef9fa29e6251fc868a03467e3076f6e79790b16425bf7c7422ad0d78e5",
+        "96a757daecddca9709eda1db636ba8b58de48a7841a17917a302c5c0425f0fb4",
+        "d5b7f0f785ce7ce6c1e7d6db645f1af6d23136234c95a589e4ecda2a049e3fcf",
+        "324fc630758c22899a3020ba37be0c17980156d67e93e9fc04afb1b65e2dfefe"
+      ]
+    },
+    "after": {
+      "preset": "163.milk",
+      "preset_sha256": "ee1c2c11cc38844dfa185cc64d67afd69f97c2f803262cac94c47eeb416a0b5d",
+      "rgb_hashes": [
+        "c8610c12ee9f93c4b054a7fac06550e873c0bd2f5ab9d531345ce527450b9881",
+        "ac9c5ffe6961ef83701d79a3cfe92f2c3991fd98e71b726f163b93e2973316ce",
+        "8d31eb770cd101fabd30ff5f5d644b6ec32c284ce65289707d1a2c04451c93b5",
+        "1600619b37c922cd86e5ee9dfe610d18235ea77f4eeae094f526c97830466468",
+        "2600232a1d6f6ee8dfebfb329d6c3d57ffce5c201f81df4d57d4c355326b3b9f",
+        "6e3627ac3762e82476d5aea6600c68a70cd11a5a45b33f37988449ea670d5aef",
+        "3c394a65a5df7d44f8d0f9969fee4118e3167c42bbbbe7f9719c4e051ce132d4",
+        "4abf495064407ebcbca9d7fa93c046cc2249753b2060cee185171fe21cddbde0"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 1.4487407166280863,
+      "before_rgb_mean": 3.3932787583590533,
+      "after_rgb_mean": 3.4649594505529837
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 1.5228139467592592,
+      "before_rgb_mean": 2.98590619373714,
+      "after_rgb_mean": 3.036597583912037
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 1.6370718396347737,
+      "before_rgb_mean": 3.5103903436856996,
+      "after_rgb_mean": 2.723005039544753
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 1.1955246913580246,
+      "before_rgb_mean": 4.037744140625,
+      "after_rgb_mean": 3.307234559863683
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 1.1894757908950617,
+      "before_rgb_mean": 4.524205126350308,
+      "after_rgb_mean": 4.556953245563272
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 4.493997235082304,
+      "before_rgb_mean": 8.19781294206533,
+      "after_rgb_mean": 5.218723837770062
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 2.3825150302211933,
+      "before_rgb_mean": 6.534117557227367,
+      "after_rgb_mean": 6.698448431069959
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 2.4077959024562756,
+      "before_rgb_mean": 7.340437564300411,
+      "after_rgb_mean": 7.490992275913066
+    }
+  ],
+  "illustrated_frame": 300,
+  "all_selected_before_after_rgb_identical": false
+}

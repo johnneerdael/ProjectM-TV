@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditi21policy",
+  "pid": 27320,
+  "job": {
+    "expectedPresetCount": 9623,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/audio.u8",
+    "preset": "audit i21 stock-salad-bar-original-alias0.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "6ae410c886148cff2a30bcb9a0f559058cd44a2e853068c1330024b8fbf0f8c2",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b857b1de7f817b29ad16640d7235a30f20a1d8d812b919c279d49a248a55b39f",
+      "pngBytes": 6074671,
+      "pngSha256": "7ab301e10f0c237941eee3a82ae79ed0ff47fc9cb7cbc2426058f60d7f87e025",
+      "rgbMean": [
+        0.002146267361111111,
+        59.847929446373456,
+        131.43709056712962
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "91050d685d05357a2f6488d4a9afdb5909124f59fba653afd37db5887a6efea3",
+      "pngBytes": 6703773,
+      "pngSha256": "8c232567a6eeab668d884a6c77083c25b392fd21035ef79e0917c4c35c9b5598",
+      "rgbMean": [
+        8.943383487654321E-4,
+        58.893706114969135,
+        128.51305639949845
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8d107a6a252da3dd6e860d6b99445463f9862222898c6babaa91077dfc0d81c7",
+      "pngBytes": 8348699,
+      "pngSha256": "1c856d107867e2a353bce649a190dea2570e3dae0428568f3e717858db11b6b0",
+      "rgbMean": [
+        1.8416875241126542,
+        68.55702461902005,
+        119.06982783564816
+      ],
+      "exactBlackFraction": 0.015956187307098767
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "38534274c36a74585a8caae9e27ca8c728751c7cf6d24252baafdf88ed6a36a3",
+      "pngBytes": 7533438,
+      "pngSha256": "99360b1b396c08b464f0a56a28a6e93c6bdfef6627c186cb2e48ab06926d75cc",
+      "rgbMean": [
+        3.7942455150462964,
+        68.87646496431327,
+        124.64148449556328
+      ],
+      "exactBlackFraction": 0.025589674961419753
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "491f93b8d2a79992b17a840536211262d85d70d855378ab32d8d156f5e078ee8",
+      "pngBytes": 6800015,
+      "pngSha256": "140a95908726b4fb4bec9e659ddf3d6b83889a777100a6e3c5112e24612c46ce",
+      "rgbMean": [
+        2.193832103587963,
+        66.08115993923612,
+        124.09626555266203
+      ],
+      "exactBlackFraction": 1.3913001543209877E-4
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "4c1859036c1450a6fc46a20d6a158d732c20c9ab7dbf80a883e157c4ccac57fc",
+      "pngBytes": 5646196,
+      "pngSha256": "72726fe2652fead425411f6e1888a9bb6ca12d9951d08e38cecca2247caa4e90",
+      "rgbMean": [
+        0.7882546055169753,
+        72.56592363522377,
+        110.81548972800925
+      ],
+      "exactBlackFraction": 0.005060161072530864
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8c582569d6df16eb9f6b09748d7ecd550d0ae50763134d948ead2aa098c1e9f0",
+      "pngBytes": 6338219,
+      "pngSha256": "9cb51b65b808e25bb7fddecc8c92779d935661a329d3703da57e2e0fb56e6388",
+      "rgbMean": [
+        1.9046360194830247,
+        55.61884440104166,
+        128.38151114004629
+      ],
+      "exactBlackFraction": 0.016492693865740742
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi21policy\/files\/native-trails\/i21policy-audit-i21-stock-salad-bar-original-alias0-current-0\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "92da4fd3172924729aa5e4f30522a55ef12b0d017bbdf75da3ad2273329d6b7f",
+      "pngBytes": 5560530,
+      "pngSha256": "f6c3471dc51a41254aca760a654afb60a7dcff110afc1e4ac017ff760415517d",
+      "rgbMean": [
+        0.16901692708333332,
+        43.712988884066355,
+        113.7998029996142
+      ],
+      "exactBlackFraction": 3.864052854938272E-4
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 43878898,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 211,
+      "elapsedRealtimeMs": 43890475,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9623,
+  "indexSha256": "590dd743eb19ef8848cf759b0ca321e31b1bbffefbc1d441e2d80a674605fd58",
+  "presetAssetSha256": "a4b92e4765c35b11cc63c8cd028a37bd682b1b249bb83fb0e2b7a17b589767dd",
+  "forcedPresetPrefix": "audit i21 stock-salad-bar-original-alias0.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 18,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43457,
+  "framesRendered": 480,
+  "renderWallDurationMs": 22404,
+  "pssAfterFramesKB": 72328,
+  "serializedFrameMeanMs": 9.511971802777783,
+  "serializedFrameP90Ms": 10.258792,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit i21 stock-salad-bar-original-alias0.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 22772
+}

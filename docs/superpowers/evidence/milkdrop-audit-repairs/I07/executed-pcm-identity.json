@@ -1,0 +1,13 @@
+{
+  "source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "compiler": "Apple clang++ from /usr/bin",
+  "scope": "actual production PCM current FFT plus independent same-FFT averaged/left-only Loudness stage; no GPU/no Windows equivalence",
+  "audio_transport_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "effective_tail_count": 576,
+  "sources": {
+    "PCM.cpp": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07",
+    "Loudness.cpp": "dff2109dbbd94e8d6480184272b6f51a95a766219550ae811f7c3fe934f9069b",
+    "MilkdropFFT.cpp": "598e83b309e43aea1dd6efe41b6f5e8814dc580ac86edeacbc2b56bbb86cc00c",
+    "WaveformAligner.cpp": "87facf421a367a807d6bfb7e0c005a1b7bc5f0adad317fe54db42b7e21b09e82"
+  }
+}

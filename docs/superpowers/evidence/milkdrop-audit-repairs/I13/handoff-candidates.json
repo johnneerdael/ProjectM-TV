@@ -1,0 +1,3345 @@
+[
+  {
+    "name": "172.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/172.milk",
+    "sha256": "ba0984bf978e71c0b374f39f91f9d572880b1b04975444912f074970c7bcb417",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "sy= if(below(y,0.47),if(above(y,0.2),pow(log(ang*time),3)/4,-4),1.1);"
+      }
+    ]
+  },
+  {
+    "name": "173.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/173.milk",
+    "sha256": "061646b5e83a542589749be1480543ddf51803573d17d290709456aba41aa379",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "sy= if(below(y,0.47),if(above(y,0.2),pow(log(ang*time),3)/4,-4),1.1);"
+      }
+    ]
+  },
+  {
+    "name": "299.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/299.milk",
+    "sha256": "87cc6000bad77c98af1a3ef3eebdf25f90100130275a17646f883e2c5f63b915",
+    "trigger_evidence": [
+      {
+        "line": 727,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 728,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 729,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 731,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "99.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/99.milk",
+    "sha256": "b4d280ffb4f408cccfeff09295c2cabff1688990e91e7cb086373c9b8b096201",
+    "trigger_evidence": [
+      {
+        "line": 227,
+        "key": "per_pixel_1",
+        "value": "sy= if(below(y,0.47),if(above(y,0.2),pow(log(ang*time),3)/4,-4),1.1);"
+      }
+    ]
+  },
+  {
+    "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco3.milk",
+    "sha256": "c38467bff2ceff528fa74f1dced27c2824d4b8a40e46d003ccb7df6e1aaefd08",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+    "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexocollie Che Remixed.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexocollie Che Remixed.milk",
+    "sha256": "3fea6f4f0e24983fc30b912aad1c7b6046c2b8a38f1897608487766ca318ad1c",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexocollie Che.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexocollie Che.milk",
+    "sha256": "bf5f0b4de01a1a36db4f60843fde23185e18b4305bc717e9482ca3fa8705379c",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+    "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "BDRV Aderrasi - Potion of Resurrection BDRV et  AL  rmx2 [flexis quasi-psychose mix].milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/BDRV Aderrasi - Potion of Resurrection BDRV et  AL  rmx2 [flexis quasi-psychose mix].milk",
+    "sha256": "740a629861bc60b11bedb43b6928778b3b32715a2c0d3c7364ac53d484a3f6c9",
+    "trigger_evidence": [
+      {
+        "line": 279,
+        "key": "per_pixel_18",
+        "value": "rot = if(above(x,.09),if(below(x,.85),if(above(y,.09),if(below(y,.85),0.1*sin(sin(ang*0.1*ang)+rad*6+q8*.444),0),0),0),0);"
+      }
+    ]
+  },
+  {
+    "name": "Bdrv Aderrasi - Chromatic Voyage bdrv etAL.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bdrv Aderrasi - Chromatic Voyage bdrv etAL.milk",
+    "sha256": "8645c091f2282ef67856abec768036fdb17580917e98d59e167f4e55bec0fa43",
+    "trigger_evidence": [
+      {
+        "line": 315,
+        "key": "per_pixel_21",
+        "value": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;"
+      }
+    ]
+  },
+  {
+    "name": "Bdrv Aderrasi - Negative Sun (Haze Star)BDRV et  AL  rmxmix4.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bdrv Aderrasi - Negative Sun (Haze Star)BDRV et  AL  rmxmix4.milk",
+    "sha256": "f2065b68476a3d6052f8c87d731aa0efa5511aeab40fcf3c9fe2e29c71d7b9a7",
+    "trigger_evidence": [
+      {
+        "line": 314,
+        "key": "per_pixel_15",
+        "value": "disk_shift = if(equal(abs(sin(ang)), if(above(q1,0),0,1)), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Bdrv et AL Aderrasi - Accelerator (Orbital Migraine) bdvr xxx2_1 - mrt sth.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bdrv et AL Aderrasi - Accelerator (Orbital Migraine) bdvr xxx2_1 - mrt sth.milk",
+    "sha256": "fa241f37c6a26f4487a3060d1761f3572c74ba560db6a900d138c2c9a77071bc",
+    "trigger_evidence": [
+      {
+        "line": 330,
+        "key": "per_pixel_53",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 331,
+        "key": "per_pixel_54",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Bmelgren & Krash - Rainbow Orb Peacock (Lonely Signal Gone Mad Mix).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bmelgren & Krash - Rainbow Orb Peacock (Lonely Signal Gone Mad Mix).milk",
+    "sha256": "a420aede5f7bba5c92e76bb2242f0378bd99fd296505c4f29845e7c7ae551537",
+    "trigger_evidence": [
+      {
+        "line": 70,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/sqr(bass_att*1.5));"
+      }
+    ]
+  },
+  {
+    "name": "Bmelgren - Liquirdo 2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bmelgren - Liquirdo 2.milk",
+    "sha256": "7251d5d5c8b8ccaa347ec34ff93c2b4eff24e227f3f6ee587428698ab6479ae7",
+    "trigger_evidence": [
+      {
+        "line": 51,
+        "key": "per_pixel_2",
+        "value": "rot = rot + if(below(y,0.1), 0, if(above(y,0.2), if(below(ang,-0.65), if(above(ang,-2.45), if(above(y,0.6), 0.2*sin(abs(rad-1)*ang*10*time), 0), 0.1), -0.1), if(above(rad,0.4), if(below(ang,1.57), 0.1, -0.1), 0))); "
+      },
+      {
+        "line": 52,
+        "key": "per_pixel_3",
+        "value": "sx = sx + if(below(y,0.2), if(above(rad,0.4), 0.1*sin(rad*ang*2.45*time)+0.1, 0), 0); "
+      },
+      {
+        "line": 53,
+        "key": "per_pixel_4",
+        "value": "sy = sy + if(below(y,0.2), if(above(rad,0.4), 0.02*sin(rad*ang*3.52*time) +0.02, 0), 0);"
+      }
+    ]
+  },
+  {
+    "name": "Bmelgren&krash-rainbo(unknowablemix1).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Bmelgren&krash-rainbo(unknowablemix1).milk",
+    "sha256": "e3f0d4b24c2e11ca871470dac47a69c730bb80570e464165b1ea0fae804ed44f",
+    "trigger_evidence": [
+      {
+        "line": 76,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(tan(ang), q1), rot, tan(q1-rad)/q2);"
+      }
+    ]
+  },
+  {
+    "name": "Che - Barcode Infidelity (Deep Pricelist Mix).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Che - Barcode Infidelity (Deep Pricelist Mix).milk",
+    "sha256": "8876a9f474aac7e73978f200d8586ec676071a3c6c3f8d7742593da7d1513264",
+    "trigger_evidence": [
+      {
+        "line": 102,
+        "key": "per_pixel_8",
+        "value": "dx=if(brdr,.01*sin(.02*q1+x+3*ang+10*y),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Compelling Vision.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Compelling Vision.milk",
+    "sha256": "2903905193d460e39e7d9668562b6f6bcf8a5e4ef950ca7ac9bc3d5aa3e1a847",
+    "trigger_evidence": [
+      {
+        "line": 75,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "EVET - Broken Records.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/EVET - Broken Records.milk",
+    "sha256": "b710279e000ce4a5ef86bb9e8e41522c927c41e2628bbf9c25469f34783ddeff",
+    "trigger_evidence": [
+      {
+        "line": 307,
+        "key": "per_pixel_4",
+        "value": "warp=warp+if(above(rad,.2166),sin(ang*rad),0);"
+      }
+    ]
+  },
+  {
+    "name": "EVET - Jack the Clipper.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/EVET - Jack the Clipper.milk",
+    "sha256": "94a55b6aa329e4ce7bbd375ce6938e43fa70d8d85a8fd1abdece8cae98be201a",
+    "trigger_evidence": [
+      {
+        "line": 247,
+        "key": "per_pixel_1",
+        "value": "zoom=zoom+if(above(rad,.666),rad*.01,rad*.1)+sin(ang+time*.534)*.2;"
+      }
+    ]
+  },
+  {
+    "name": "EoS + phat - trinary 02 - afterlife.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/EoS + phat - trinary 02 - afterlife.milk",
+    "sha256": "9b255a5e2bc87968e43ddad5b1da350e4e55192d6d7df5fa406ea0d9eb45e005",
+    "trigger_evidence": [
+      {
+        "line": 409,
+        "key": "per_pixel_11",
+        "value": "sect_a=above( sin(ang*3), 0.3 );"
+      }
+    ]
+  },
+  {
+    "name": "Flexi, BDRV, Aderrasi et al - Potion of Resurrection [rosswell].milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Flexi, BDRV, Aderrasi et al - Potion of Resurrection [rosswell].milk",
+    "sha256": "463777a6af872de0576e6cdec7637082be6a666011b27d50e5ef25777b6cca3c",
+    "trigger_evidence": [
+      {
+        "line": 302,
+        "key": "per_pixel_18",
+        "value": "rot = if(above(x,.09),if(below(x,.85),if(above(y,.09),if(below(y,.85),0.1*sin(sin(ang*0.1*ang)+rad*6+q8*.444),0),0),0),0);"
+      }
+    ]
+  },
+  {
+    "name": "Goody's Datura Bloom.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Goody's Datura Bloom.milk",
+    "sha256": "54a41dd9c3a93e4912bab58418912b60c75f4e1428a4aa8b71711cacae12e3cd",
+    "trigger_evidence": [
+      {
+        "line": 301,
+        "key": "per_pixel_1",
+        "value": "rot=if(above(bass,.8),atan2(atan2(rot*.1,ang),warp),0);"
+      }
+    ]
+  },
+  {
+    "name": "HALFBREAK - Kinetic Mantra.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/HALFBREAK - Kinetic Mantra.milk",
+    "sha256": "aa5d34b0f82f22c9c7f0b44a08d2f28c56c97839e9a119e43f21b1b7e94d45af",
+    "trigger_evidence": [
+      {
+        "line": 273,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "Halfbreak - Entertaining Eminence .milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Halfbreak - Entertaining Eminence .milk",
+    "sha256": "0f88617eec7bec3eaa0d3804ab79833a3e36b635ca7f1f914fab015e254e8e12",
+    "trigger_evidence": [
+      {
+        "line": 300,
+        "key": "per_pixel_1",
+        "value": "disk_shift = if(equal(abs(sin(ang)), if(above(q1,0),0,1)), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie - Personal Mashup3 [Flexi's portal mix].milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie - Personal Mashup3 [Flexi's portal mix].milk",
+    "sha256": "c2d8f12607be576f98d1f92061ee7725cc8d148a87df0efa82777460cf95a0d3",
+    "trigger_evidence": [
+      {
+        "line": 318,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie - Personal Mashup3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie - Personal Mashup3.milk",
+    "sha256": "8b7798119130369a836e70c6f52eeaee7b08ce3df944eb373c1da673b2118179",
+    "trigger_evidence": [
+      {
+        "line": 314,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+ blazed.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+ blazed.milk",
+    "sha256": "b8bbd4257843b624b791db0c173b17c140c6d5a27b1ee188d12cc15e738d86d5",
+    "trigger_evidence": [
+      {
+        "line": 511,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 512,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+2 my completely thankless job.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+2 my completely thankless job.milk",
+    "sha256": "8287c866991e62e77125bd39d17317742f24c9b4a334946a83d322da4b770129",
+    "trigger_evidence": [
+      {
+        "line": 366,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 367,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell nz+2.milk",
+    "sha256": "5859dab80ee0b4f8796a4aa1cfe2f57d0f5fda9a6cc8e16682a3a54c55e76d48",
+    "trigger_evidence": [
+      {
+        "line": 309,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 310,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell roam3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell roam3.milk",
+    "sha256": "a512db2736a5b11b345ca461b8a8995cfa3181452cfd47d79f01b6e7864ff3c9",
+    "trigger_evidence": [
+      {
+        "line": 292,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 293,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell roams.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell roams.milk",
+    "sha256": "3c5de99ae9140921b91b4e3dad8864ebd8b3efbbb58b6f6d5852bfe25148cb69",
+    "trigger_evidence": [
+      {
+        "line": 329,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 330,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Krash, bdrv, EoS n aderassi - Fractal rebirth - from hell.milk",
+    "sha256": "8f5d7fe0c36ed6f1b7e5af87d7fefb8afc062bc541de3601d50fe80507760af2",
+    "trigger_evidence": [
+      {
+        "line": 292,
+        "key": "per_pixel_18",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 293,
+        "key": "per_pixel_19",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, Shifter, idiot n Tobias wolf boi - Modern classic 1 (Misc AdamFX Shade).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, Shifter, idiot n Tobias wolf boi - Modern classic 1 (Misc AdamFX Shade).milk",
+    "sha256": "f738830d618bc9b761083d416e81049d2a8ad75a70754e0b4a426157b1a9db0d",
+    "trigger_evidence": [
+      {
+        "line": 352,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(tan(ang*2),0),-rot,rad)*sin(time);"
+      }
+    ]
+  },
+  {
+    "name": "Hexcollie, infinitely symbolic + Martin - Take my drugs and watch this.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Hexcollie, infinitely symbolic + Martin - Take my drugs and watch this.milk",
+    "sha256": "480fd1aeaf6253872c6f8f26db0e19d1e5927e45be890f7b090f331f8f83367f",
+    "trigger_evidence": [
+      {
+        "line": 282,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 289,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 290,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 342,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "Illusion & Rovastar - Dotty Mad Space (Jelly).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Illusion & Rovastar - Dotty Mad Space (Jelly).milk",
+    "sha256": "ba01ee4a189ddb10a0ad205df0a419494c82210450672c60a88fa812384beb00",
+    "trigger_evidence": [
+      {
+        "line": 233,
+        "key": "per_pixel_2",
+        "value": "sy = sy +if(above(3.14-ang,0),0.1,-0.1);"
+      }
+    ]
+  },
+  {
+    "name": "Krash + Rovastar - Rainbow Orb 2 Peacock (Bmelgren's Compelling Vision).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Krash + Rovastar - Rainbow Orb 2 Peacock (Bmelgren's Compelling Vision).milk",
+    "sha256": "f8c6187ebeea02e808e8085cdf1e682a3c338c5cfd03c34e64c91819fba180fa",
+    "trigger_evidence": [
+      {
+        "line": 234,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "Krash and Fvese - Molten Indecision (Fvese Remix).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Krash and Fvese - Molten Indecision (Fvese Remix).milk",
+    "sha256": "03830cdc97395a7266a88d2bb619b2ccbaedf4d2645580eea93deee08997e274",
+    "trigger_evidence": [
+      {
+        "line": 107,
+        "key": "per_pixel_3",
+        "value": "rot=if(below(rad,bass_factor),sin(time*.3+ang*8+rad*7.5)*.063,rot);"
+      }
+    ]
+  },
+  {
+    "name": "Krash and Rovastar - Rainbow Orb 2 Peacock (Sumpkin Tweak).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Krash and Rovastar - Rainbow Orb 2 Peacock (Sumpkin Tweak).milk",
+    "sha256": "873bc600a74425ab6aa05e787162e78f90686ccbb7b8d49df45c0e9543ed4e54",
+    "trigger_evidence": [
+      {
+        "line": 223,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "Liquido.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Liquido.milk",
+    "sha256": "bd5473a7565f99c453c2ab9e08eac7a6e2058368a3daf15a87276aea784e5fe5",
+    "trigger_evidence": [
+      {
+        "line": 65,
+        "key": "per_pixel_2",
+        "value": "rot = rot + if(below(y,0.1), 0, if(above(y,0.2), if(below(ang,-0.65), if(above(ang,-2.45), if(above(y,0.6), 0.2*sin(abs(rad-1)*ang*10*time), 0), 0.1), -0.1), if(above(rad,0.4), if(below(ang,1.57), 0.1, -0.1), 0)));"
+      },
+      {
+        "line": 66,
+        "key": "per_pixel_3",
+        "value": "sx = sx + if(below(y,0.2), if(above(rad,0.4), 0.1*sin(rad*ang*2.45*time)+0.1, 0), 0);"
+      },
+      {
+        "line": 67,
+        "key": "per_pixel_4",
+        "value": "sy = sy + if(below(y,0.2), if(above(rad,0.4), 0.02*sin(rad*ang*3.52*time) +0.02, 0), 0);"
+      }
+    ]
+  },
+  {
+    "name": "LuX - Sick I.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuX - Sick I.milk",
+    "sha256": "fd8c46da640b60a2ac990b7a13df22de200aea17c8357ad640685c9b86bf1eaa",
+    "trigger_evidence": [
+      {
+        "line": 319,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      },
+      {
+        "line": 326,
+        "key": "per_pixel_8",
+        "value": "cx=if(below(x,.5)*above(y,.5),.5+.5*sin(ang*q1),.5);"
+      },
+      {
+        "line": 327,
+        "key": "per_pixel_9",
+        "value": "cy=if(below(x,.5)*below(y,.5),.5+.5*sin(ang*q3),.5);"
+      }
+    ]
+  },
+  {
+    "name": "LuX - Sick II.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuX - Sick II.milk",
+    "sha256": "fa569eca71a21fa6305361be0319d857aba99778a603425be68cd884c4908841",
+    "trigger_evidence": [
+      {
+        "line": 319,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      },
+      {
+        "line": 326,
+        "key": "per_pixel_8",
+        "value": "cx=if(below(x,.5)*above(y,.5),.5+.5*sin(ang*q1),.5);"
+      },
+      {
+        "line": 327,
+        "key": "per_pixel_9",
+        "value": "cy=if(below(x,.5)*below(y,.5),.5+.5*sin(ang*q3),.5);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - All That I Am.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - All That I Am.milk",
+    "sha256": "f60b1f1839f202811701c6d9b8184c415207bd2250d3efccad7492aae2619a85",
+    "trigger_evidence": [
+      {
+        "line": 285,
+        "key": "per_pixel_2",
+        "value": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Beat Machina III.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Beat Machina III.milk",
+    "sha256": "e10e8083d95d65324c4d23ca660871960483cc6a2fb0d5b57f733e2d2fc9d8d3",
+    "trigger_evidence": [
+      {
+        "line": 285,
+        "key": "per_pixel_2",
+        "value": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Biohazardous WasteWheel I.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Biohazardous WasteWheel I.milk",
+    "sha256": "add064ff012ab74c369b6b9e2569c90e553b74404cb0787e49ff00068549e7eb",
+    "trigger_evidence": [
+      {
+        "line": 320,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Hurty Eyes I.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Hurty Eyes I.milk",
+    "sha256": "105c01be0dc2e8bcf0c91041c9a01ff251daeb63d501a9e250b66030d5a29c4b",
+    "trigger_evidence": [
+      {
+        "line": 362,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Hurty Eyes II.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Hurty Eyes II.milk",
+    "sha256": "4d863e3323e44be4a63748043ca7fc284107f4bbb39cd121e9ba5f2bee776837",
+    "trigger_evidence": [
+      {
+        "line": 362,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Hurty Soul I.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Hurty Soul I.milk",
+    "sha256": "a2eb91b1fcb3c2be64e27662c0af6f7b7f876f30ac25e8d14b353c7453b18a77",
+    "trigger_evidence": [
+      {
+        "line": 362,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Polariflamitization II.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Polariflamitization II.milk",
+    "sha256": "058f15a686137cc5128404db4a3f0fa5b0b22f14d5f58277f908e6e4be22a7ac",
+    "trigger_evidence": [
+      {
+        "line": 355,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Simple Circuitodes  (wow).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Simple Circuitodes  (wow).milk",
+    "sha256": "a075131394292e3f4f71b95a018cd40ff75ed58dbff8d163c096cae0460c2432",
+    "trigger_evidence": [
+      {
+        "line": 703,
+        "key": "per_pixel_13",
+        "value": "rot = if(above(x,.09),if(below(x,.85),if(above(y,.09),if(below(y,.85),0.1*sin(sin(ang*0.1*ang)+rad*6+q8*.444),0),0),0),0);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - The Next Evolution (spunmonkey).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - The Next Evolution (spunmonkey).milk",
+    "sha256": "3f5cac36de399f139495bba2356fc8f2242f1966c82eea424825434da1d8cf05",
+    "trigger_evidence": [
+      {
+        "line": 328,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "LuxXx - Vegas 1.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/LuxXx - Vegas 1.milk",
+    "sha256": "e22f9b22b295d3a9dee81b0132c892279a465ef77c72de1fe91905729c9b729c",
+    "trigger_evidence": [
+      {
+        "line": 329,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      },
+      {
+        "line": 336,
+        "key": "per_pixel_8",
+        "value": "cx=if(below(x,.5)*above(y,.5),.5+.5*sin(ang*q1),.5);"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_9",
+        "value": "cy=if(below(x,.5)*below(y,.5),.5+.5*sin(ang*q3),.5);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIe6 (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIe6 (by hakanh mash-up).milk",
+    "sha256": "e554b13630575dde96aedec19c35749967e3b788ab16c79b8c96f8e19f4ea2d5",
+    "trigger_evidence": [
+      {
+        "line": 353,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 354,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 355,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 357,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIy (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIy (by hakanh mash-up).milk",
+    "sha256": "d8ca096ecafead7adec21c0d3c0fb9ba3dbafbfe1986d9b9484b29137c4e90e4",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIy2 (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIy2 (by hakanh mash-up).milk",
+    "sha256": "7cc7cf9cc911fddd27fbce68fba5bf09954d1ad00484bc91737991a0b1fd9661",
+    "trigger_evidence": [
+      {
+        "line": 389,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 390,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 391,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 393,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIz (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIz (by hakanh mash-up).milk",
+    "sha256": "e4c4b45dd8d9f22dbc388794fe5e176fac61ff1f75459b266326e5579dd7a124",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIz2 (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIz2 (by hakanh mash-up).milk",
+    "sha256": "c0df16374834840b6c7384cf263b319fe420be01d85effdbbf51638704670405",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIz3 (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIz3 (by hakanh mash-up).milk",
+    "sha256": "bc0691261c8f82327a1adc4f2d9ea72d2d4e3104c3183f47687a9097bacf746a",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIz5 (by hakanh mash-up).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIz5 (by hakanh mash-up).milk",
+    "sha256": "653965b564d53daf412f86b57844185f977fcb49c050ceb30376dfb46e9c01a3",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "Martin - QBikal - Surface Turbulence IIzzzzz hakanh mash-up k FLEXI.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Martin - QBikal - Surface Turbulence IIzzzzz hakanh mash-up k FLEXI.milk",
+    "sha256": "df650374ee8b6c17877f016eab4bd2a7c69405814d85fb70885c93ccfb893bc3",
+    "trigger_evidence": [
+      {
+        "line": 541,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 542,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 543,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 545,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an13.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an13.milk",
+    "sha256": "34964cffe5a18deea6515e4a783c8d92c3d7816e0f89af8318367c9da20b9bab",
+    "trigger_evidence": [
+      {
+        "line": 288,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an24 --- Isosceles edit.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an24 --- Isosceles edit.milk",
+    "sha256": "554ebe88669a5f06013d2e7ace7003de3c0a81a67fc44b301ee2d73184e77cb0",
+    "trigger_evidence": [
+      {
+        "line": 240,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an33.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an33.milk",
+    "sha256": "a0719a20d190a080a82707110b5e86151825316e59277578f06b2bfc8178da5f",
+    "trigger_evidence": [
+      {
+        "line": 364,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an35.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an35.milk",
+    "sha256": "b71c6841e889e54d2b4260e70b0b6200eff7ebc104e9f8988a6bd408229e0a57",
+    "trigger_evidence": [
+      {
+        "line": 295,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an36.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss an36.milk",
+    "sha256": "32c7236c8f03c9cae22f1aa561784bf7ce22d0441a740156da5423d21d83a016",
+    "trigger_evidence": [
+      {
+        "line": 278,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss and3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss and3.milk",
+    "sha256": "0b17f3126317d412d5e3d9582053d67c10d3b2d65e870c0ac1258d5531d53b00",
+    "trigger_evidence": [
+      {
+        "line": 266,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 10.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 10.milk",
+    "sha256": "d257b1286a960f336e1b3bc0ffa9b13bd59665f5a62cc7908241fe7cc8bdc937",
+    "trigger_evidence": [
+      {
+        "line": 238,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 11.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 11.milk",
+    "sha256": "a61b947555606554eb2ad5774b2b56eff7b48adf65f89f4b2c1c8b06bbc6dc49",
+    "trigger_evidence": [
+      {
+        "line": 278,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 12.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 12.milk",
+    "sha256": "3028a8d99e995b2da21dd05b56cbdb19fe748f2f090d4f94f74968ecc1c921c2",
+    "trigger_evidence": [
+      {
+        "line": 295,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 14.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Various 14.milk",
+    "sha256": "87512d7668429297659c47b464cef843bb6dafc539eda34b40269840049984ca",
+    "trigger_evidence": [
+      {
+        "line": 364,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "NeW Adam Master Mashup FX 2 Geiss and Zylot - Reaction Diffusion 3 (Overload Mix 2).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/NeW Adam Master Mashup FX 2 Geiss and Zylot - Reaction Diffusion 3 (Overload Mix 2).milk",
+    "sha256": "9f8004050e84322ff07619e9e657ac4ceed4e71fd1955dafa9c9b77261439196",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "ORB - Toy snakes hectic.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/ORB - Toy snakes hectic.milk",
+    "sha256": "7e6532734b6fe15e56f5a1b18332cd58c489f315102dc2c2943b73110db60bcf",
+    "trigger_evidence": [
+      {
+        "line": 360,
+        "key": "per_pixel_5",
+        "value": "rot = q5*0.05 + below(q5,0)*ang*0.05*q5 - above(q5,0)*ang*0.05*q5;"
+      }
+    ]
+  },
+  {
+    "name": "ORB - Toy snakes sleepy.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/ORB - Toy snakes sleepy.milk",
+    "sha256": "94882c236fb6b93496c004a60d54c57f6dc22c44006c44f474b210e6a4fc0528",
+    "trigger_evidence": [
+      {
+        "line": 351,
+        "key": "per_pixel_5",
+        "value": "rot = q5*0.05 + below(q5,0)*ang*0.05*q5 - above(q5,0)*ang*0.05*q5;"
+      }
+    ]
+  },
+  {
+    "name": "Ondras - Eruptions.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Ondras - Eruptions.milk",
+    "sha256": "dac917a824a19aec4a2b80ad7ac8ad74b748456480986de8ecca93fc70e1637c",
+    "trigger_evidence": [
+      {
+        "line": 78,
+        "key": "per_pixel_4",
+        "value": "uhel=if(below(abs(q2-ang),0.1),1,0);"
+      }
+    ]
+  },
+  {
+    "name": "Rainbow Deflection 2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rainbow Deflection 2.milk",
+    "sha256": "5b6342477eacba960afbbf115b65da8f09a7a16387e25accb5f20a8155999e63",
+    "trigger_evidence": [
+      {
+        "line": 72,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Redi Jedi - Time travling through a traffic jam.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Redi Jedi - Time travling through a traffic jam.milk",
+    "sha256": "08fee3313fd3e401146c38af12ab8b8505d65e766cc546172293806b6411a3e7",
+    "trigger_evidence": [
+      {
+        "line": 261,
+        "key": "per_pixel_6",
+        "value": "rot=if(equal(((ang*10)%10)%2,0),.1*q2,-.1*q6);"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar & Idiot24-7 - Marphet's Shrine.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar & Idiot24-7 - Marphet's Shrine.milk",
+    "sha256": "4892f9ff349d3b890b80e368dbce01309360d729ee22edc132cc1feafa12e0d2",
+    "trigger_evidence": [
+      {
+        "line": 77,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(tan(ang*2),0),-rot,rad)*q1;"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar & Illusion - Further Basic Electronica 2 + cope.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar & Illusion - Further Basic Electronica 2 + cope.milk",
+    "sha256": "727b368a84e2427b2f5ed32e33a823510cde29b4dc52e7fa0de6c841370dcce7",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_1",
+        "value": "sy = sy +if(above(3.14-ang,0),0.1,-0.1);"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+    "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990",
+    "trigger_evidence": [
+      {
+        "line": 236,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar - Blue Shining - mash0001 - cat sneezed, have to do laundry.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar - Blue Shining - mash0001 - cat sneezed, have to do laundry.milk",
+    "sha256": "22810f8304464416fbf5472cb230cc0b3c150d9b1762a6d10523cd7467580295",
+    "trigger_evidence": [
+      {
+        "line": 236,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar - Blue Shining.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar - Blue Shining.milk",
+    "sha256": "a0c928c3002a3594ca12a19dc415aa805dd36aaa572f9448e84f410b80c7d4a8",
+    "trigger_evidence": [
+      {
+        "line": 77,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "Rovastar and Fvese - Hyperspace Nightmare.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Rovastar and Fvese - Hyperspace Nightmare.milk",
+    "sha256": "e76c1474ed497289be9d36ce876b420147c23113090cf832feebba7935230662",
+    "trigger_evidence": [
+      {
+        "line": 80,
+        "key": "per_pixel_3",
+        "value": "rot=if(above(rad,bass_factor),sin(time*.3+(-ang)*8+rad*7.5+bass_factor)*.063,rot);"
+      },
+      {
+        "line": 81,
+        "key": "per_pixel_4",
+        "value": "zoom=if(below(sqrt(2)-(2*rad),bass_factor),1.02-.23*(sqrt(2)-2*rad)*sin(bass_factor+time*.3+(-ang)*8+rad*7.5),zoom);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen & Bmelgren + Geiss + Krash + PieturP + TEcHno + Zylot - MashUp 4.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen & Bmelgren + Geiss + Krash + PieturP + TEcHno + Zylot - MashUp 4.milk",
+    "sha256": "a7b91cb355ca0913705df75f72e74f9eb023d866fd916d7f4c66f42ce6015e0b",
+    "trigger_evidence": [
+      {
+        "line": 285,
+        "key": "per_pixel_1",
+        "value": "zoom = 0.01+if(below(rad,sin(time*1.456)/25+0.18),1.2+sin(time*1.44)/5,zoom + (.07+.03*sin(time*.55))*sin(ang*10+time*8));"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - Eckshack's Eyeball (floater mix) - qlean luchre nz+ olde.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - Eckshack's Eyeball (floater mix) - qlean luchre nz+ olde.milk",
+    "sha256": "12a0cdd493ce3c002eaa3da4f477a99f89d4574d809554909718aa82e54c2d85",
+    "trigger_evidence": [
+      {
+        "line": 367,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 374,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 375,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 427,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - Eckshack's Eyeball (floater mix) - qlean luchre nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - Eckshack's Eyeball (floater mix) - qlean luchre nz+.milk",
+    "sha256": "aaa8ca2961676b96c823909644a6c08b40e3cc19872c09fa7553115b59c693cd",
+    "trigger_evidence": [
+      {
+        "line": 349,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 356,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 357,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 409,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - Windmill (basic ethereal slipstream).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - Windmill (basic ethereal slipstream).milk",
+    "sha256": "54308e8da8980a8acd2fb86a11662898bb9e9728a8f9c87d0822b0505968c034",
+    "trigger_evidence": [
+      {
+        "line": 222,
+        "key": "per_pixel_1",
+        "value": "zoom = 1.01 -.02 +.04*above(sin(6*ang+3*time),0);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - Windmill (basic).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - Windmill (basic).milk",
+    "sha256": "aff3012e1918fcfcb4e9af6283e0c51d5baf255aefffc5a8a50e2605328316c8",
+    "trigger_evidence": [
+      {
+        "line": 222,
+        "key": "per_pixel_1",
+        "value": "zoom = 1.01 -.02 +.04*above(sin(6*ang+3*time),0);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - funky Blur (lotus mix) ectaroutin in mnatur.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - funky Blur (lotus mix) ectaroutin in mnatur.milk",
+    "sha256": "3d8c5c2af8b63ea9cb99455f3c6da2b4ebfdd240a95eeee5cb5a90b08077e628",
+    "trigger_evidence": [
+      {
+        "line": 292,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc nz+.milk",
+    "sha256": "8f3b1f942e7ce9bbb1b85aed22188550fae2c0a3427ede79726bc7af468dc84f",
+    "trigger_evidence": [
+      {
+        "line": 338,
+        "key": "per_pixel_15",
+        "value": "zoom = zoom + if(above(sin(ang*6+1.6),0.4), if(below(sin(ang*6),1), +0.04, 0), 0);"
+      }
+    ]
+  },
+  {
+    "name": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+    "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+    "trigger_evidence": [
+      {
+        "line": 321,
+        "key": "per_pixel_15",
+        "value": "zoom = zoom + if(above(sin(ang*6+1.6),0.4), if(below(sin(ang*6),1), +0.04, 0), 0);"
+      }
+    ]
+  },
+  {
+    "name": "Syst3mFailur - phat - EoS planetfunk-tracers(devilglobe-4).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Syst3mFailur - phat - EoS planetfunk-tracers(devilglobe-4).milk",
+    "sha256": "a436cd926fcbb5e9fc478614d4da63353f3ef774829f1b7eb64f77f0167922a4",
+    "trigger_evidence": [
+      {
+        "line": 580,
+        "key": "per_pixel_18",
+        "value": "dx = if(sw,dx + sin(ang)*mod,1);"
+      },
+      {
+        "line": 581,
+        "key": "per_pixel_19",
+        "value": "dy = if(sw,dy + cos(ang)*mod,1);"
+      }
+    ]
+  },
+  {
+    "name": "Syst3mFailur - phat - EoS planetfunk-tracers(devilglobe-6).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Syst3mFailur - phat - EoS planetfunk-tracers(devilglobe-6).milk",
+    "sha256": "d56246f034a3ae558ef90c2ea951fbc52c9a042641c882c33ca8bdcaee52c1f9",
+    "trigger_evidence": [
+      {
+        "line": 580,
+        "key": "per_pixel_18",
+        "value": "dx = if(sw,dx + sin(ang)*mod,1);"
+      },
+      {
+        "line": 581,
+        "key": "per_pixel_19",
+        "value": "dy = if(sw,dy + cos(ang)*mod,1);"
+      }
+    ]
+  },
+  {
+    "name": "X-pand - quant combines ray - santa klaus vs anile nekrow PAIR rnz r.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/X-pand - quant combines ray - santa klaus vs anile nekrow PAIR rnz r.milk",
+    "sha256": "39ad524635d832ab3bf9195986a94f7e2b451781496473cee60ce820e5bf809e",
+    "trigger_evidence": [
+      {
+        "line": 266,
+        "key": "per_pixel_2",
+        "value": "signal=above(hook+sin(ang),cos(rad*31.4));"
+      },
+      {
+        "line": 268,
+        "key": "per_pixel_4",
+        "value": "rot4=if(above(hook,rad),sqr(sqr(tan(ang*rad*2)))*0.07,rot);"
+      }
+    ]
+  },
+  {
+    "name": "X-pand - quant combines ray - santa klaus vs anile nekrow PAIR rnz.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/X-pand - quant combines ray - santa klaus vs anile nekrow PAIR rnz.milk",
+    "sha256": "c13c929e6330a25442ea6e2f8b5eaefdc1124e0a8c1edde9427767ab96367b29",
+    "trigger_evidence": [
+      {
+        "line": 266,
+        "key": "per_pixel_2",
+        "value": "signal=above(hook+sin(ang),cos(rad*31.4));"
+      },
+      {
+        "line": 268,
+        "key": "per_pixel_4",
+        "value": "rot4=if(above(hook,rad),sqr(sqr(tan(ang*rad*2)))*0.07,rot);"
+      }
+    ]
+  },
+  {
+    "name": "Zylot & Idiot24-7 - Unknown Power Source.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/Zylot & Idiot24-7 - Unknown Power Source.milk",
+    "sha256": "93ba841ab75cba25a94ee1b073fb79ee761113360cf0aad4f84dda546b3a619f",
+    "trigger_evidence": [
+      {
+        "line": 69,
+        "key": "per_pixel_2",
+        "value": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;"
+      }
+    ]
+  },
+  {
+    "name": "animal vd.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/animal vd.milk",
+    "sha256": "2ff5ea730a8992ff88ed2a4e8c926c4853af23558c074b3a3932dd67bd83d4d5",
+    "trigger_evidence": [
+      {
+        "line": 351,
+        "key": "per_pixel_18",
+        "value": "dx = if(sw,dx + sin(ang)*mod,1);"
+      },
+      {
+        "line": 352,
+        "key": "per_pixel_19",
+        "value": "dy = if(sw,dy + cos(ang)*mod,1);"
+      }
+    ]
+  },
+  {
+    "name": "bdrv + al EoS - Pulsecubebdrv etAL  Rmxmix 25 - qabalistic space invading homo-nutrient mouth swish transmuting 9d symbiosis - fed.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bdrv + al EoS - Pulsecubebdrv etAL  Rmxmix 25 - qabalistic space invading homo-nutrient mouth swish transmuting 9d symbiosis - fed.milk",
+    "sha256": "ee0a8e05bc74550db54b1a666606f9726f94d20bd1f65d21698b1f9bf19ffd9f",
+    "trigger_evidence": [
+      {
+        "line": 365,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 366,
+        "key": "per_pixel_63",
+        "value": "zoom = zoom - 0.05*below(y,0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "bdrv + al Telek - Target Practice mx - planck-ton.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bdrv + al Telek - Target Practice mx - planck-ton.milk",
+    "sha256": "3d9aa49320d0bd061774adfc728d527f91ab5cdfd6fae3b2ce269bbe885842e3",
+    "trigger_evidence": [
+      {
+        "line": 239,
+        "key": "per_pixel_6",
+        "value": "zoom=0.991+above((sqr(tan(time*ang*2+asin(x-y-0.1)*y)*sqr(tan(time*cos(time)*2+asin(x*y))*x))*x-0.1)*0.12-0.12,rad)*hook"
+      }
+    ]
+  },
+  {
+    "name": "bdrv + al shifter - feathers (angel wings)_phat_remix4 bdrv et  AL  rmxmix bdrv etAL5.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bdrv + al shifter - feathers (angel wings)_phat_remix4 bdrv et  AL  rmxmix bdrv etAL5.milk",
+    "sha256": "c5aa079f05af3a006caab08acb0f2313c5f841f1be95dea212c9b022576be7fd",
+    "trigger_evidence": [
+      {
+        "line": 418,
+        "key": "per_pixel_8",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 425,
+        "key": "per_pixel_15",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 426,
+        "key": "per_pixel_16",
+        "value": "r=above(y,sin(ang*3+time));"
+      }
+    ]
+  },
+  {
+    "name": "bdrv etAL Aderrasi - Hypothetical Voyage bdrv plagiarising SHIFTER.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bdrv etAL Aderrasi - Hypothetical Voyage bdrv plagiarising SHIFTER.milk",
+    "sha256": "9726a03d36441a94c6b3f6c37d44cdcb31ae5bb5c9e6ec5ce3c7efa8f2ea82ae",
+    "trigger_evidence": [
+      {
+        "line": 335,
+        "key": "per_pixel_37",
+        "value": "disk_shift = if(equal(abs(sin(ang)), if(above(q1,0),0,1)), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "bdrv etAL Aderrasi - Potion Of Spirits rmx.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bdrv etAL Aderrasi - Potion Of Spirits rmx.milk",
+    "sha256": "f5e391c332fc68937c92539b64f70bc3ee510166f3bfa956ff072ae77fb068b7",
+    "trigger_evidence": [
+      {
+        "line": 311,
+        "key": "per_pixel_18",
+        "value": "rot = if(above(x,.09),if(below(x,.85),if(above(y,.09),if(below(y,.85),0.1*sin(sin(ang*0.1*ang)+rad*6+q8*.444),0),0),0),0);"
+      }
+    ]
+  },
+  {
+    "name": "bmelgren - Liqurido2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/bmelgren - Liqurido2.milk",
+    "sha256": "e39748a00f101583dd0ca2d8a50342a992e6571352a46b6291ae9a63815fb8f0",
+    "trigger_evidence": [
+      {
+        "line": 51,
+        "key": "per_pixel_2",
+        "value": "rot = rot + if(below(y,0.1), 0, if(above(y,0.2), if(below(ang,-0.65), if(above(ang,-2.45), if(above(y,0.6), 0.2*sin(abs(rad-1)*ang*10*time), 0), 0.1), -0.1), if(above(rad,0.4), if(below(ang,1.57), 0.1, -0.1), 0))); "
+      },
+      {
+        "line": 52,
+        "key": "per_pixel_3",
+        "value": "sx = sx + if(below(y,0.2), if(above(rad,0.4), 0.1*sin(rad*ang*2.45*time)+0.1, 0), 0); "
+      },
+      {
+        "line": 53,
+        "key": "per_pixel_4",
+        "value": "sy = sy + if(below(y,0.2), if(above(rad,0.4), 0.02*sin(rad*ang*3.52*time) +0.02, 0), 0); "
+      }
+    ]
+  },
+  {
+    "name": "broadweigh.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/broadweigh.milk",
+    "sha256": "f89a0a09de37236e5d3f8ca792896f815866b4654dfd7dfeb4cac1d30cd016fe",
+    "trigger_evidence": [
+      {
+        "line": 734,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 735,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 736,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 738,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "crazed hillbilly presidentials.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/crazed hillbilly presidentials.milk",
+    "sha256": "79db857332ba7cd6d1e0f47be5c569e59ff9634023e0ab10b47d21d02077c5c5",
+    "trigger_evidence": [
+      {
+        "line": 491,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "doqumentalryphilm.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/doqumentalryphilm.milk",
+    "sha256": "b0da8a2e759ed860a065f64dd6d8a67b2d2eca9f4d679a5b1f7a09394983f64b",
+    "trigger_evidence": [
+      {
+        "line": 515,
+        "key": "per_pixel_137",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "drugsincombat - liquifried squid i.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/drugsincombat - liquifried squid i.milk",
+    "sha256": "feba012ab8bfd0b75004c6a6656219ef1beaa7a729cca240988bdb0ade43918b",
+    "trigger_evidence": [
+      {
+        "line": 579,
+        "key": "per_pixel_3",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "fanciful bratwurst engine less.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/fanciful bratwurst engine less.milk",
+    "sha256": "fec8f4294dc3b8f93ae6b419abe09931cfc1bdcd7cbfb258917d067e57748ae1",
+    "trigger_evidence": [
+      {
+        "line": 368,
+        "key": "per_pixel_7",
+        "value": "var2=above(sin(ang*var3+time*2),0.6);"
+      }
+    ]
+  },
+  {
+    "name": "fanciful bratwurst engine.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/fanciful bratwurst engine.milk",
+    "sha256": "321ce45710517bb3ea20882653540e2160e1b1ee4bbc49f94181389f05e4725f",
+    "trigger_evidence": [
+      {
+        "line": 244,
+        "key": "per_pixel_7",
+        "value": "var2=above(sin(ang*var3+time*2),0.6);"
+      }
+    ]
+  },
+  {
+    "name": "farovathe.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/farovathe.milk",
+    "sha256": "21e4da94a9759b2bad549ec96dabe543464865687c5414b8c9069c0ae3d744b5",
+    "trigger_evidence": [
+      {
+        "line": 404,
+        "key": "per_pixel_2",
+        "value": "zoom = zoom - 0.05*above((2*y-1),0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      },
+      {
+        "line": 405,
+        "key": "per_pixel_3",
+        "value": "zoom = zoom - 0.05*below((2*y-1),0.5)*sqr(0.5*cos(ang*time)*0.1*treb_att);"
+      }
+    ]
+  },
+  {
+    "name": "fiShbRaiN - psychotic meltdown (peyote mix).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/fiShbRaiN - psychotic meltdown (peyote mix).milk",
+    "sha256": "215aed35b4550cb03a243fbd4ecc474d5edc8e8db9ee4393c2e7caaa0a3359cd",
+    "trigger_evidence": [
+      {
+        "line": 309,
+        "key": "per_pixel_8",
+        "value": "sy=sy+(above(treb,1.4)*treb*ang*cos(time*2)*.18);"
+      }
+    ]
+  },
+  {
+    "name": "fiberglass-Fvese-remix.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/fiberglass-Fvese-remix.milk",
+    "sha256": "f73cd21fd90695bc9fd8aaa9e97fa3ded6b082acdf6a63e5a560eeb7362f8067",
+    "trigger_evidence": [
+      {
+        "line": 68,
+        "key": "per_pixel_3",
+        "value": "rot=if(below(rad,bass_factor),sin(time*.3+ang*8+rad*7.5)*.063,rot);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth celestially large canary bear movement.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth celestially large canary bear movement.milk",
+    "sha256": "b72bf7e91d7df0d2fff3a04014e79188bb5794c505a8637aae3d94283566978a",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth celestially large canary quantized.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth celestially large canary quantized.milk",
+    "sha256": "66642f6eb83df9d2bb29dcbc30a4fc9bc26a5812ff0c2bea73e1bf3b1963962e",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth celestially large canary s s.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth celestially large canary s s.milk",
+    "sha256": "84c7c6afd4a9283532be9e21388ec613fd5e303cdcccf235cf350027296c7f77",
+    "trigger_evidence": [
+      {
+        "line": 444,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth celestially large canary s.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth celestially large canary s.milk",
+    "sha256": "69202a5d3fc01f8c6c22d5e630e54cbbf49c23d0627c530cda5def74eb2a3a3f",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth celestially large canary.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth celestially large canary.milk",
+    "sha256": "a623daad06308ce97f1c49775ccf083518022172fe33f33d1743eb780573ccad",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth mr map.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth mr map.milk",
+    "sha256": "d3e8da0b6ea5d4a9f05943597bac44e98be59170ec51e1122f667bba17cda5f5",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hard flat snot plane ytian vartime nuggeth.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hard flat snot plane ytian vartime nuggeth.milk",
+    "sha256": "6e32cbce6dca494c9762925492db2b53a68cfccd5e382f457e773f8a0d29d83f",
+    "trigger_evidence": [
+      {
+        "line": 437,
+        "key": "per_pixel_1",
+        "value": "sta=if(above(sin(ang*6+1.55),0.4), if(below(y,1), +1.382, .1), 0.1);"
+      }
+    ]
+  },
+  {
+    "name": "hexcollie - Dizzy Spell4 Hypnotwrilic.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/hexcollie - Dizzy Spell4 Hypnotwrilic.milk",
+    "sha256": "109aacf9220a268cc0805f37db788646ec9bc55cfb99501c52d1300499946784",
+    "trigger_evidence": [
+      {
+        "line": 316,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "idiot - Back in the game.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/idiot - Back in the game.milk",
+    "sha256": "abc65cf56e5dec573612419c6914c2d65dd4c371f802668921730fcd6db7ea9d",
+    "trigger_evidence": [
+      {
+        "line": 240,
+        "key": "per_pixel_1",
+        "value": "zoom = zoom + .1 * sin ((if(above(q1,q2),rad,ang)) * 3.14 / (q1 * q2) * (time * .01));"
+      }
+    ]
+  },
+  {
+    "name": "idiot - Forty Six and 2 (pushit!).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/idiot - Forty Six and 2 (pushit!).milk",
+    "sha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
+    "trigger_evidence": [
+      {
+        "line": 256,
+        "key": "per_pixel_3",
+        "value": "rot_effect = if(equal(q2,0), rad * 3.14 + ang, rad * 3.14 - sin(rad/time));"
+      }
+    ]
+  },
+  {
+    "name": "infinitely symbolic - infinitely finite (zaemngouhlaerapethaee) roam.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/infinitely symbolic - infinitely finite (zaemngouhlaerapethaee) roam.milk",
+    "sha256": "68d8a82a3aac8e079b2f7ab82b47587c68e0e1d0e9c2a47925307b45313a9a81",
+    "trigger_evidence": [
+      {
+        "line": 282,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 289,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 290,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 342,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "infinitely symbolic - infinitely finite (zaemngouhlaerapethaee).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/infinitely symbolic - infinitely finite (zaemngouhlaerapethaee).milk",
+    "sha256": "4da6dc8df1d98bcb9b6132d4d1bc2decfeab6041c126d04786c150fb788a3696",
+    "trigger_evidence": [
+      {
+        "line": 282,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 289,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 290,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 342,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "mbrane i'mplaenth - gross vs fine error in absolute self-defilement via hate love complex mellow drama satanism nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/mbrane i'mplaenth - gross vs fine error in absolute self-defilement via hate love complex mellow drama satanism nz+.milk",
+    "sha256": "6d085eb3638c4e0089409581544c11dcd9f81a097c5dcbbfdbff934e0ebd37ed",
+    "trigger_evidence": [
+      {
+        "line": 419,
+        "key": "per_pixel_28",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "mbrane i'mplaenth - gross vs fine error in absolute self-defilement via hate love complex mellow drama satanism.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/mbrane i'mplaenth - gross vs fine error in absolute self-defilement via hate love complex mellow drama satanism.milk",
+    "sha256": "1150eecd4e807b1883b0066a580460fe8a3c0fe88d46bda5fba723e0c38ed8c7",
+    "trigger_evidence": [
+      {
+        "line": 359,
+        "key": "per_pixel_28",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "mbrane i'mplaenth.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/mbrane i'mplaenth.milk",
+    "sha256": "254c3335d7fb3354519d6c772fe001c42e16a671cc91bd81ce0445509c27ee70",
+    "trigger_evidence": [
+      {
+        "line": 359,
+        "key": "per_pixel_28",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "men in reverse in reverse time born to breath, not much else nz+ right angle turns.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/men in reverse in reverse time born to breath, not much else nz+ right angle turns.milk",
+    "sha256": "eb4dc5ff90a1e6db307015b976626bbca6e9f1a24b905564d3af1ee26729394b",
+    "trigger_evidence": [
+      {
+        "line": 389,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 390,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 391,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 393,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "men in reverse in reverse time born to breath, not much else.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/men in reverse in reverse time born to breath, not much else.milk",
+    "sha256": "5747b9c12b492e2bf053373385171eb51b8629a05088c802c6f568d6852ca767",
+    "trigger_evidence": [
+      {
+        "line": 425,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 426,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 427,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 429,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "oslo.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/oslo.milk",
+    "sha256": "d7922cc82ef9e1c8407d70f98806b0c777b06f73505fb11192f24c8cba3302b7",
+    "trigger_evidence": [
+      {
+        "line": 365,
+        "key": "per_pixel_1",
+        "value": "rot=rot*atan2(-rad,sin(ang*10))*-rot*atan2(rad,sin(ang*10))*sin(above(bass,bass_Att)*time*rad-ang+ang*sin(time)-rad*sin(time));"
+      }
+    ]
+  },
+  {
+    "name": "p wrap twist fold and starch cloning a roundth.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/p wrap twist fold and starch cloning a roundth.milk",
+    "sha256": "7b889ff9bc88242a4ec8bd143c6ea2f9d0987643c2bc3042e27301fc718a1046",
+    "trigger_evidence": [
+      {
+        "line": 369,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "p wrap twist fold and starch fucking out your skin pores.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/p wrap twist fold and starch fucking out your skin pores.milk",
+    "sha256": "4b3441444916731f251cd2cbfb1a4a33d53d23591ec650eb227e259f088eeda9",
+    "trigger_evidence": [
+      {
+        "line": 327,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.5)*above(q2,0)+above(y-cos(ang),.5)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "phinjamain roam.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/phinjamain roam.milk",
+    "sha256": "1d8c18c5b90d34f177543c3b3c8287f11464894e64726b412a58668eb9522718",
+    "trigger_evidence": [
+      {
+        "line": 238,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "phinjamain spinstre ganges-stre.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/phinjamain spinstre ganges-stre.milk",
+    "sha256": "c5dcedfe46125d95b590b00cd77edf34fc7884e3fad51dc5554ec3c5b210d9b0",
+    "trigger_evidence": [
+      {
+        "line": 422,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "phinjamain.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/phinjamain.milk",
+    "sha256": "f3c0ec4b5eec34f58b392f7da440977c43956c3ba21b45facaa5d0cd3816eb90",
+    "trigger_evidence": [
+      {
+        "line": 238,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "schglasmia - danqueer.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/schglasmia - danqueer.milk",
+    "sha256": "37af211378e0e9016f8fe7246f62fb67c424b56d60d0e90f99217e80315c71cb",
+    "trigger_evidence": [
+      {
+        "line": 527,
+        "key": "per_pixel_83",
+        "value": "disk_shift = if(equal(abs(sin(ang)), if(above(q1,0),0,1)), -rot, 0.05);"
+      }
+    ]
+  },
+  {
+    "name": "shadowharlequin - gracefull sunshine smiles roam.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shadowharlequin - gracefull sunshine smiles roam.milk",
+    "sha256": "16abda1a58d9eeb452a61e1dd384e07400f775b45cc30f94f6de8ad4fb0638d2",
+    "trigger_evidence": [
+      {
+        "line": 327,
+        "key": "per_pixel_3",
+        "value": "effect=above(pow(rad-.03*cos(ang*3.14-rad),ang-.03*sin(ang-rad*3.14)),x&y-.03*Sin(x-3.14*ang-rad*ang*x+.1+.2+.3*Sin(q20))*sin(q20));"
+      },
+      {
+        "line": 328,
+        "key": "per_pixel_4",
+        "value": "pick=if(Above(q20,q20),rad,ang);"
+      }
+    ]
+  },
+  {
+    "name": "shadowharlequin - gracefull sunshine smiles.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shadowharlequin - gracefull sunshine smiles.milk",
+    "sha256": "105b6659da68252b0223bc33ab5fd8fe32ced6beac83a6d6280c50c693bae326",
+    "trigger_evidence": [
+      {
+        "line": 327,
+        "key": "per_pixel_3",
+        "value": "effect=above(pow(rad-.03*cos(ang*3.14-rad),ang-.03*sin(ang-rad*3.14)),x&y-.03*Sin(x-3.14*ang-rad*ang*x+.1+.2+.3*Sin(q20))*sin(q20));"
+      },
+      {
+        "line": 328,
+        "key": "per_pixel_4",
+        "value": "pick=if(Above(q20,q20),rad,ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter + flexi - american pie 5 nz+ m3 w3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter + flexi - american pie 5 nz+ m3 w3.milk",
+    "sha256": "2a114033d19bc82f3d51f99751138a8e2041809cb9808ca230be9ed1ad3e7f70",
+    "trigger_evidence": [
+      {
+        "line": 728,
+        "key": "per_pixel_6",
+        "value": "dxe=dx+.01*(sin(vx*50-5*3.14*sin(q1)))*sin(above(q1,q2)-ang*sin(above(q4,q3)))*sin(q5);"
+      },
+      {
+        "line": 729,
+        "key": "per_pixel_7",
+        "value": "dye=dy-.01*(sin(vy*50-5*3.14*sin(q2)))*sin(above(Q2,q1)-ang*sin(abovE(q3,q4)))*sin(Q4);"
+      },
+      {
+        "line": 737,
+        "key": "per_pixel_15",
+        "value": "zoom=zoom+.1*sin(above(vx*50,vy*50-5*3.14*sin(above(Q1,q2))))*sin(above(q2,q3))-ang/2/2/2/2/2*"
+      }
+    ]
+  },
+  {
+    "name": "shifter + flexi - american pie 5 nz+ m3 w4.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter + flexi - american pie 5 nz+ m3 w4.milk",
+    "sha256": "9a1b79c504256d8b3df9182577b12afe8b9a83fb5cfcde30bb6bd5d9147eaaa6",
+    "trigger_evidence": [
+      {
+        "line": 389,
+        "key": "per_pixel_6",
+        "value": "dxe=dx+.01*(sin(vx*50-5*3.14*sin(q1)))*sin(above(q1,q2)-ang*sin(above(q4,q3)))*sin(q5);"
+      },
+      {
+        "line": 390,
+        "key": "per_pixel_7",
+        "value": "dye=dy-.01*(sin(vy*50-5*3.14*sin(q2)))*sin(above(Q2,q1)-ang*sin(abovE(q3,q4)))*sin(Q4);"
+      },
+      {
+        "line": 398,
+        "key": "per_pixel_15",
+        "value": "zoom=zoom+.1*sin(above(vx*50,vy*50-5*3.14*sin(above(Q1,q2))))*sin(above(q2,q3))-ang/2/2/2/2/2*"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spasmic comet neon - bleeding mandellard.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spasmic comet neon - bleeding mandellard.milk",
+    "sha256": "4f693ef6aced2cc049b9c5997da2b6124054b895a672874eaa8c6118a0c9ddf1",
+    "trigger_evidence": [
+      {
+        "line": 583,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spasmic comet neon - hawking radiation.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spasmic comet neon - hawking radiation.milk",
+    "sha256": "8f2c2ac43baa5ed9b15321741e3cb8908ff749be6753c0e01914ba1261bb9825",
+    "trigger_evidence": [
+      {
+        "line": 583,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spasmic comet neon.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spasmic comet neon.milk",
+    "sha256": "9913a4b4b984939644ed11f07dba8a75633a457111b543bcce9321440528b2a9",
+    "trigger_evidence": [
+      {
+        "line": 565,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar - causal mothritis.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar - causal mothritis.milk",
+    "sha256": "42249796c0083f3090fe51409c4e2c79e515cb6ee5b61867d7304f866e2edc02",
+    "trigger_evidence": [
+      {
+        "line": 589,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar - smooth cheese nz.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar - smooth cheese nz.milk",
+    "sha256": "a10a5070c576d717332f93b6e5cb6af01617d8e649852e031b7ff7c71ea280bf",
+    "trigger_evidence": [
+      {
+        "line": 589,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar - smooth cheese.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar - smooth cheese.milk",
+    "sha256": "71f6a72bb105db426ac7a33f9e2f19cda89ea37d674bf0276ab58ce8378a50d3",
+    "trigger_evidence": [
+      {
+        "line": 589,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar nz+ pro fish.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar nz+ pro fish.milk",
+    "sha256": "0afc928587c99cc548e0b0e8be9db07fa90f59a2bf0dfc5f7d24e0eb23e878cd",
+    "trigger_evidence": [
+      {
+        "line": 613,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar nz+.milk",
+    "sha256": "ee4e811c356911e2ee3f7fb5423c225b4af64d6d7bf5ae2b29b8f81067501b3e",
+    "trigger_evidence": [
+      {
+        "line": 613,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "shifter - spun sugar.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/shifter - spun sugar.milk",
+    "sha256": "91394ef836e11bcf450e1be3773d48cddc1845035e56548815e12774f53afb84",
+    "trigger_evidence": [
+      {
+        "line": 574,
+        "key": "per_pixel_3",
+        "value": "an = if(sw,ang,3.1416 - ang);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - adam martin geiss - come into my closet of rot.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - adam martin geiss - come into my closet of rot.milk",
+    "sha256": "8746b2e67a46c1ac5136b502fbd7c780f9260203413883089d0b6a21aba5e43d",
+    "trigger_evidence": [
+      {
+        "line": 346,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 347,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 348,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 350,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - bonnie self.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - bonnie self.milk",
+    "sha256": "f2e83d0b868d7e609588777c03f30dd827dda1753679c1be01d3bd0e6659137e",
+    "trigger_evidence": [
+      {
+        "line": 317,
+        "key": "per_pixel_1",
+        "value": "warp=above(q7,.9)*above(rad,.5)*(rad-.5)*2*25*sqrt(1-q8)*equal((6*(6.2831+ang+q1))%2,0);"
+      },
+      {
+        "line": 318,
+        "key": "per_pixel_2",
+        "value": "dx=above(rad,.25)*above(q7,.7)*below(q8,.15)*(.15-q8)*cos(ang)*.1;"
+      },
+      {
+        "line": 319,
+        "key": "per_pixel_3",
+        "value": "dy=above(rad,.25)*above(q7,.7)*below(q8,.15)*(.15-q8)*sin(ang)*(-.1);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - breaking the beam only to hump the tower --- Isosceles edit.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - breaking the beam only to hump the tower --- Isosceles edit.milk",
+    "sha256": "379898022272696ca71e85fe46d1a75ef230c1451e0b9d467968ae2d042d38f5",
+    "trigger_evidence": [
+      {
+        "line": 470,
+        "key": "per_pixel_4",
+        "value": "warp=warp+if(above(rad,.2166),sin(ang*rad),0);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - breaking the beam only to hump the tower.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - breaking the beam only to hump the tower.milk",
+    "sha256": "0df34628b675c9a0bfc47f4fc9465538047b41e73d126207a5746d5fdabedd0b",
+    "trigger_evidence": [
+      {
+        "line": 470,
+        "key": "per_pixel_4",
+        "value": "warp=warp+if(above(rad,.2166),sin(ang*rad),0);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - cake anyone.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - cake anyone.milk",
+    "sha256": "278fe6820011d87183f6b3e2d9a2dc17b170a59f1172f7aae6ae41608afe78d4",
+    "trigger_evidence": [
+      {
+        "line": 323,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 324,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 325,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 327,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - compelled me to mash, the bastard - drottnar konphlegmgrance.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - compelled me to mash, the bastard - drottnar konphlegmgrance.milk",
+    "sha256": "9c4259c2737aa52605231f4f97248b4a733a8e940f404f95cbfd8d81fd970572",
+    "trigger_evidence": [
+      {
+        "line": 328,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - compelled me to mash, the bastard.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - compelled me to mash, the bastard.milk",
+    "sha256": "608142ce4bacb8f53d28a98fb2abdbb7f3f920ba64e639095d21191dfcc9bed0",
+    "trigger_evidence": [
+      {
+        "line": 328,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - frosh baton shiv.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - frosh baton shiv.milk",
+    "sha256": "dba0372d8d6d48c8b53f7ab6b69552bd730b14bd48e9e3e4dde518f2c240d47d",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - geet techno.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - geet techno.milk",
+    "sha256": "e0061216595e1f7acf6e6755be8beec79609a10f0e4ec8b81a1e5fd96caf5c8d",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - geet techno2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - geet techno2.milk",
+    "sha256": "37b0f69a7655c439de5681158ab08b8b64f59e681c098f1642e0459d4ab260eb",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - hog smell.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - hog smell.milk",
+    "sha256": "f714633799b646ac50e9dbc89278c7160888c401ce13988041c4dcacbdbd63e2",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - log smell.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - log smell.milk",
+    "sha256": "40011dceca6fbf40fe31368f6f5480f7f17be874bca9cdd2354a4c0db3c49925",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries - wedged gadjet.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries - wedged gadjet.milk",
+    "sha256": "39720b3d2d95ad59f10ac283b48d71909df2745b782aaaaec7577254a91847a5",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - dash head 'gainst elemetaries.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - dash head 'gainst elemetaries.milk",
+    "sha256": "fd2d0f587a4fe055c0f92aaaebca29edb7c636cfa3572886ba2f9585d9ae215f",
+    "trigger_evidence": [
+      {
+        "line": 520,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 0), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - escape skelevator.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - escape skelevator.milk",
+    "sha256": "ff736ae6f04a21bad3b44a84a062306dec67e18b383ac58f40ddbb5a5e180025",
+    "trigger_evidence": [
+      {
+        "line": 335,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(tan(ang*2),0),-rot,rad)*sin(time);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - foolish mash.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - foolish mash.milk",
+    "sha256": "25706dd64111eb43fadc59d999de8fa20cf41b0e5097405c9d7fee854cce7109",
+    "trigger_evidence": [
+      {
+        "line": 359,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 360,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 361,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 363,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - glam orbital nag.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - glam orbital nag.milk",
+    "sha256": "4f2e75efcd133d260ee67c88fdad828800294a266d549abd05ec7c3f675f5d65",
+    "trigger_evidence": [
+      {
+        "line": 246,
+        "key": "per_pixel_1",
+        "value": "sy= if(below(y,0.47),if(above(y,0.03),pow(log(ang*time),3)/4,-4),1.1);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - ku pilled - abject abandon loss of poop.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - ku pilled - abject abandon loss of poop.milk",
+    "sha256": "1bcd5934d3fbacaeebc953ed017582268b48868d6fbe9767d19d123eb06d731f",
+    "trigger_evidence": [
+      {
+        "line": 300,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - ku pilled - forgoing utility - j4+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - ku pilled - forgoing utility - j4+.milk",
+    "sha256": "44d8956c1a06aed031c139d48e8884bc6aea0a12ff803d64d6d5f3c5120b6f23",
+    "trigger_evidence": [
+      {
+        "line": 298,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - ku pilled - forgoing utility nz.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - ku pilled - forgoing utility nz.milk",
+    "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c",
+    "trigger_evidence": [
+      {
+        "line": 298,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - ku pilled - forgoing utility.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - ku pilled - forgoing utility.milk",
+    "sha256": "ce1b80db5e7a516751f14165eefc59fe72568a67e5fe21f79ddf6465047c653c",
+    "trigger_evidence": [
+      {
+        "line": 298,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(equal(sin(ang), 1), rot, sin(1-rad)/2);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - moving the bowels of bureaucracy onto the masses.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - moving the bowels of bureaucracy onto the masses.milk",
+    "sha256": "2beb19e5cf5190dc7f74b1948c17a349d4c3cd2827a5806c684a1769e924a94d",
+    "trigger_evidence": [
+      {
+        "line": 418,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.3)*above(q2,0)+above(y-cos(ang),.7)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "suksma - opsolete fraqthal dihmention o'cloque.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - opsolete fraqthal dihmention o'cloque.milk",
+    "sha256": "5afbdc5a78e79fb62fa79b6d957128fd9188ae77a68eba4a5f24c4e910b1126d",
+    "trigger_evidence": [
+      {
+        "line": 418,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.3)*above(q2,0)+above(y-cos(ang),.7)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "suksma - shoot dna into tobacco to mass grow vaccines.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - shoot dna into tobacco to mass grow vaccines.milk",
+    "sha256": "d959d09066f5df5b0c7eaf64d60f9b86eb137c367957ebd75b22d600a0972d2b",
+    "trigger_evidence": [
+      {
+        "line": 346,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 347,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 348,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 350,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - substance incantate lobotomografight --- Isosceles edit.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - substance incantate lobotomografight --- Isosceles edit.milk",
+    "sha256": "88d62f74d546962367b87d57b91b6ca77cf59b6b72fb54ed6e59fa825fc81cb8",
+    "trigger_evidence": [
+      {
+        "line": 418,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.3)*above(q2,0)+above(y-cos(ang),.7)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "suksma - substance incantate lobotomografight.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - substance incantate lobotomografight.milk",
+    "sha256": "d84713249036cf7416c58c0785137e3915f18a18f7e40b271b46e8a112faff48",
+    "trigger_evidence": [
+      {
+        "line": 418,
+        "key": "per_pixel_1",
+        "value": "snee=bnot(above(sin(ang)-x,.3)*above(q2,0)+above(y-cos(ang),.7)*above(q1,0));"
+      }
+    ]
+  },
+  {
+    "name": "suksma - trial by pumpbot - log smell2.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - trial by pumpbot - log smell2.milk",
+    "sha256": "fb10d044bf50ea322a6b127001ae3708ee9270c6181ab0de98aaef6eac5a5eda",
+    "trigger_evidence": [
+      {
+        "line": 271,
+        "key": "per_pixel_1",
+        "value": "rot = rot + if(below(sin(ang), 0), -rot, if(equal(abs(state-3),1),0.05,.1));"
+      },
+      {
+        "line": 272,
+        "key": "per_pixel_2",
+        "value": "zoom=zoom-if(equal(sin(ang),0),0,sin(ang*q1)*rad*.3);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - yin - 100 - Through the ether - Bitcore Tweak - mash0000 - dmt eye rub spher nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - yin - 100 - Through the ether - Bitcore Tweak - mash0000 - dmt eye rub spher nz+.milk",
+    "sha256": "d1800763897f5d269d83712c505815ecd5b4af56d6cb5bd76c4eb2a10b173f6f",
+    "trigger_evidence": [
+      {
+        "line": 319,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 320,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 321,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 323,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - yin - 100 - Through the ether - Bitcore Tweak - mash0000 - dmt eye rub spher.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - yin - 100 - Through the ether - Bitcore Tweak - mash0000 - dmt eye rub spher.milk",
+    "sha256": "1fb7f78f6c36e755e60f8545996d0e5c9ca9e2db5abc1bcbf08de49c61965469",
+    "trigger_evidence": [
+      {
+        "line": 295,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 296,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 297,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 299,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "suksma - you'll forget you had your chance i am sick, so sick (no wit here).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/suksma - you'll forget you had your chance i am sick, so sick (no wit here).milk",
+    "sha256": "5ed1a507b139a2d596e682b4a27e58bd6987e49e825ac2462ef489fbc92a3ce6",
+    "trigger_evidence": [
+      {
+        "line": 429,
+        "key": "per_pixel_2",
+        "value": "zion=if(Above(Rad,.05),rad-.03,ang-rad*3.14);;"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap nz explicit chaos beasth.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap nz explicit chaos beasth.milk",
+    "sha256": "7689358f504d89403af3a195322aa130953dae05a788aa61442703364bc2f616",
+    "trigger_evidence": [
+      {
+        "line": 494,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 501,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 502,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 554,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap nz get the stick.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap nz get the stick.milk",
+    "sha256": "765f4233b159b9cf676c4ec9d7a1ed4bc3ba010562383dc176f94fb0d3d52c4e",
+    "trigger_evidence": [
+      {
+        "line": 460,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 467,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 468,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 520,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap nz.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap nz.milk",
+    "sha256": "197e54f4380bff2646d2e6f6b8ef3f345ab99ecfce20bdd5635f16bf9d8c5c24",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam crazy blanched lips.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap roam crazy blanched lips.milk",
+    "sha256": "eafc4f3f6caf1181d9f3d35a9b9ec062b98b01112f66145a60b3c7d0cc99fbe4",
+    "trigger_evidence": [
+      {
+        "line": 460,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 467,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 468,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 520,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam nz+ window into satan's muiff.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap roam nz+ window into satan's muiff.milk",
+    "sha256": "f2a72265ad1d4bfb9c6d11114ed40a33559842e4da1fe8ee75157776c5588f8c",
+    "trigger_evidence": [
+      {
+        "line": 368,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 375,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 376,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 428,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap roam nz+.milk",
+    "sha256": "eeb167c39af428804a695596a89d985d9639b7db30d413b4787375aad23c4c38",
+    "trigger_evidence": [
+      {
+        "line": 300,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 307,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 308,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 360,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+    "sha256": "598b10f13d4013677062fc5783d0c752ce4aefefb6d37b48ac646d0c37451e55",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap is the trap.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap is the trap.milk",
+    "sha256": "a05e468efa204be491996d69ff5ff123aee160785cc5b47205648a4f1ff3a9f5",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap isn'th the tearing the ass out of me.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap isn'th the tearing the ass out of me.milk",
+    "sha256": "4d8e53e6a758c65d2b3d743ab4f6b9406bb45ea705c0b1e773880d2a842a0e6a",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear - the trap isn'th the trap.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear - the trap isn'th the trap.milk",
+    "sha256": "b699bf411f9508c33456919ce985350cfdc777f7479e42be107a11ad7c88dea5",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear roam3 nz+.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear roam3 nz+.milk",
+    "sha256": "7c75bbf894586012b121f9a2f2094d15d767cf27b0b89cc5c0f4a4790f4e5815",
+    "trigger_evidence": [
+      {
+        "line": 300,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 307,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 308,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 360,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear roam3.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear roam3.milk",
+    "sha256": "a815052ab1200ec4a9d84891bc45bab58c598d6ab3bc27660e05bf5e1be0aa3a",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "to know the reason i am trapped is my own weakness and fear.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/to know the reason i am trapped is my own weakness and fear.milk",
+    "sha256": "9868b8a8190b98dff072a6d55fdc61dfcae3b2df3ac4c0a31409d281a37c1bbc",
+    "trigger_evidence": [
+      {
+        "line": 277,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 337,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "va ultramix - 147_1 ap4+ david firth, here is your oscar emmy and tony, and a grammy for who did your music.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/va ultramix - 147_1 ap4+ david firth, here is your oscar emmy and tony, and a grammy for who did your music.milk",
+    "sha256": "dac2e110e78b33ebd85c9736cdbdeabd592908dbb539d8af8b36831b59ce451f",
+    "trigger_evidence": [
+      {
+        "line": 285,
+        "key": "per_pixel_28",
+        "value": "zoom=1+if(q3,dqv,1)*.1*sin(7*ang+.03*q2);"
+      }
+    ]
+  },
+  {
+    "name": "va ultramix2 - 368_1.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/va ultramix2 - 368_1.milk",
+    "sha256": "2d269d4ca01bf07657dafe65a98c59175f168e0047f546dcdf24eb2ac56b4415",
+    "trigger_evidence": [
+      {
+        "line": 342,
+        "key": "per_pixel_43",
+        "value": "rot = if(above(x,.09),if(below(x,.85),if(above(y,.09),if(below(y,.85),0.1*sin(sin(ang*0.1*ang)+rad*6+q8*.444),0),0),0),0);"
+      }
+    ]
+  },
+  {
+    "name": "various - whirygig03 - flx rigidigeridoolittle' - 2 chokmah wisdom grey zodiac neptune twos.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/various - whirygig03 - flx rigidigeridoolittle' - 2 chokmah wisdom grey zodiac neptune twos.milk",
+    "sha256": "b408657df8965951985731d31ac554226c16affc09406cec988b9d56be4fcf6d",
+    "trigger_evidence": [
+      {
+        "line": 543,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 550,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 551,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 603,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it i.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it i.milk",
+    "sha256": "86bfea0a13aac9fd4a34eaeca21fac4efd648d572141bbaf0b446927f7da800e",
+    "trigger_evidence": [
+      {
+        "line": 543,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 550,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 551,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 603,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it is - 1-ret.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it is - 1-ret.milk",
+    "sha256": "0783a73b3ab92bbb16721c52cce8fdaeba297deb8f86d59659036da433eccc1d",
+    "trigger_evidence": [
+      {
+        "line": 543,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 550,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 551,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 603,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it is.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/various - whirygig03 - flx rigidigeridoolittle' - reconsidering life in terms of loving how bizarre it is.milk",
+    "sha256": "6ce09c5f3ecdfdd71695bb0bb91b5c7192dc3783ea737549c4b5137a8bc6b8df",
+    "trigger_evidence": [
+      {
+        "line": 543,
+        "key": "per_pixel_2",
+        "value": "rot=if(above(q2,q8),.06*sin(rad_cycle-3*Sin(Q3)-x*ang*q3)*equal(Rad,x+y)*sin(Q6)-.3*sin(Q7"
+      },
+      {
+        "line": 550,
+        "key": "per_pixel_9",
+        "value": "d=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 551,
+        "key": "per_pixel_10",
+        "value": "r=above(y,sin(ang*3+time));"
+      },
+      {
+        "line": 603,
+        "key": "per_pixel_62",
+        "value": "zoom = zoom - 0.05*above(y,0.5)*sqr(0.5*sin(ang*time)*0.1*bass_att);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 100 - Through the ether - Bitcore Tweak.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 100 - Through the ether - Bitcore Tweak.milk",
+    "sha256": "e6115b19d2e3fadd7cca785c8c9005eca84ab73897e3c0fa8a37274fc4edebb9",
+    "trigger_evidence": [
+      {
+        "line": 280,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 281,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 282,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 100 - Through the ether - sparse coherence.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 100 - Through the ether - sparse coherence.milk",
+    "sha256": "665f051af054f10658da655299a6a87dbae408c00a1de5ce4920cb040d491c35",
+    "trigger_evidence": [
+      {
+        "line": 283,
+        "key": "per_pixel_1",
+        "value": "dx=dx- if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 284,
+        "key": "per_pixel_2",
+        "value": "dy=dy+if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 285,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 287,
+        "key": "per_pixel_5",
+        "value": "dx=dy+ if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 100 - Through the ether qansre phevre nz+ exhoneration by disassociation.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 100 - Through the ether qansre phevre nz+ exhoneration by disassociation.milk",
+    "sha256": "2f914ff0968d779f2876cb6c9e2bb2f9a33c1e9f2a8f4f94603ac428e9d7a0a1",
+    "trigger_evidence": [
+      {
+        "line": 348,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 349,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 350,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 352,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 100 - Through the ether qansre phevre nz+ if love is so important, maybe we should show it.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 100 - Through the ether qansre phevre nz+ if love is so important, maybe we should show it.milk",
+    "sha256": "4076a79fcc0dbb634e646fe82be2ad7f96672c93c31f56f22249ae23a794e3a2",
+    "trigger_evidence": [
+      {
+        "line": 348,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 349,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 350,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 352,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 100 - Through the ether qansre phevre nz+ phlegmtastiq.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 100 - Through the ether qansre phevre nz+ phlegmtastiq.milk",
+    "sha256": "e36e81ae438ce2b4dacd7155b67627b72cfff60846eb42655350be9ba1a4fdf4",
+    "trigger_evidence": [
+      {
+        "line": 348,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 349,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 350,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 352,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 102 - Through the ether (The separation) - Bitcore Tweak.milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 102 - Through the ether (The separation) - Bitcore Tweak.milk",
+    "sha256": "9e6bfc8f7842d94b35524311ddfc779a839bb5a40d6684dab5d320c74d3ded02",
+    "trigger_evidence": [
+      {
+        "line": 134,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 135,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 136,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 138,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  },
+  {
+    "name": "yin - 102 - Through the ether (The separation).milk",
+    "absolute_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/core/src/main/assets/presets/yin - 102 - Through the ether (The separation).milk",
+    "sha256": "572ca0c54069d2f7c8a23a3e220e8aa3369939f7fe0ecb2d0a2ff0b379dcf5eb",
+    "trigger_evidence": [
+      {
+        "line": 134,
+        "key": "per_pixel_1",
+        "value": "dx= if( below( abs(ang-q1), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q1)),dx);"
+      },
+      {
+        "line": 135,
+        "key": "per_pixel_2",
+        "value": "dy=if( below(abs(ang-q1),.4*sqrt(rad)),dy+(1-q4)*(.02*rad*cos(q1)),dy);"
+      },
+      {
+        "line": 136,
+        "key": "per_pixel_3",
+        "value": "zoom=if(below( abs(ang-q1),.4*sqrt(rad)),zoom+(1-q4)*(.2*rad*bass),zoom);"
+      },
+      {
+        "line": 138,
+        "key": "per_pixel_5",
+        "value": "dx= if( below( abs(ang-q2), .4*sqrt(rad)),dx+(1-q4)*(.02*rad*sin(q2)),dx);"
+      }
+    ]
+  }
+]

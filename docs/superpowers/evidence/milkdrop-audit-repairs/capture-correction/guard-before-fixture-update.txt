@@ -1,0 +1,299 @@
+.................................FF...F..FFFFFF..... [ 91%]
+.....                                                                    [100%]
+=================================== FAILURES ===================================
+_ SummaryTests.test_complete_export_records_all_hashes_and_measured_medium_high_cost _
+
+self = <test_summarize_validation.SummaryTests testMethod=test_complete_export_records_all_hashes_and_measured_medium_high_cost>
+
+    def test_complete_export_records_all_hashes_and_measured_medium_high_cost(self):
+        directory = self.jobs[self.names[0], "high"]
+        manifest = json.loads((directory / "manifest.json").read_text())
+        manifest.update(serializedFrameMeanMs=4, serializedFrameP90Ms=6)
+        summary.runner.write(directory / "manifest.json", manifest)
+        row = json.loads((directory / "row.json").read_text())
+        row.update(frame_mean_ms=4, frame_p90_ms=6)
+        summary.runner.write(directory / "row.json", row)
+        output = self.base / "complete"
+>       result = summary.summarize(self.work, output, preset_root=self.presets, names=self.names)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tools/native-trails/test_summarize_validation.py:240:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools/native-trails/summarize_validation.py:357: in summarize
+    matrix = collect_matrix(work, preset_root, names, partial=partial, legacy_runner=legacy_runner)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/native-trails/summarize_validation.py:158: in collect_matrix
+    manifest = runner.verify(directory, request, sha)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+directory = PosixPath('/private/var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmp3xz84hiy/run/jobs/3046da717b3e6718a46216e517ffa1b6987f3d426f3b45f033a0cd0062972f10')
+request = {'preset': 'witness-00.milk', 'width': 2, 'height': 2, 'referenceWidth': 0, ...}
+expected_hash = '02ba9517189bb4903c03df23baa315cd4e58d64211a57f4dbdf82a6dc6c39942'
+
+    def verify(directory, request, expected_hash):
+        import cv2
+        manifest = json.loads((directory / "manifest.json").read_text())
+        if manifest.get("status") != "ok" or manifest.get("framesRendered") != 480:
+            raise ValueError("Rendering failed: " + str(manifest.get("error", manifest)))
+        if manifest.get("job") != request or manifest.get("requestSha256") != hashlib.sha256((canonical_json(request) + "\n").encode()).hexdigest():
+            raise ValueError("Manifest is from another request")
+        if manifest.get("presetAssetSha256") != expected_hash or manifest.get("verifiedPresetName") != request["preset"]:
+            raise ValueError("Rendered preset identity changed")
+        if manifest.get("glErrorChecks") != 480 or manifest.get("presetNameChecks") != 480:
+            raise ValueError("Incomplete per-frame GL/preset checks")
+        if manifest.get("eligiblePresetCountAfterFrame479") != 1 or manifest.get("presetChangeCounter") != 1:
+            raise ValueError("Exact single-preset invariant failed")
+        if not manifest.get("coreReleased") or not manifest.get("eglDestroyed"):
+            raise ValueError("Core/context cleanup incomplete")
+        if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
+            raise ValueError("Incomplete temporal captures")
+        for capture in manifest["captures"]:
+            if capture.get("captureReadFramebufferBinding") != 0:
+>               raise ValueError("Capture did not verify final-output read framebuffer zero")
+E               ValueError: Capture did not verify final-output read framebuffer zero
+
+tools/native-trails/run_validation.py:123: ValueError
+___________ SummaryTests.test_complete_matrix_has_136_verified_jobs ____________
+
+self = <test_summarize_validation.SummaryTests testMethod=test_complete_matrix_has_136_verified_jobs>
+
+    def test_complete_matrix_has_136_verified_jobs(self):
+>       result = self.collect()
+                 ^^^^^^^^^^^^^^
+
+tools/native-trails/test_summarize_validation.py:138:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools/native-trails/test_summarize_validation.py:129: in collect
+    return summary.collect_matrix(self.work, self.presets, self.names, partial=partial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/native-trails/summarize_validation.py:158: in collect_matrix
+    manifest = runner.verify(directory, request, sha)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+directory = PosixPath('/var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmpys4ugndv/run/jobs/0ea90921824d540570fc882f55991d91598c785f179af16c413cfeb03f84803f')
+request = {'preset': 'witness-00.milk', 'width': 2, 'height': 2, 'referenceWidth': 0, ...}
+expected_hash = '02ba9517189bb4903c03df23baa315cd4e58d64211a57f4dbdf82a6dc6c39942'
+
+    def verify(directory, request, expected_hash):
+        import cv2
+        manifest = json.loads((directory / "manifest.json").read_text())
+        if manifest.get("status") != "ok" or manifest.get("framesRendered") != 480:
+            raise ValueError("Rendering failed: " + str(manifest.get("error", manifest)))
+        if manifest.get("job") != request or manifest.get("requestSha256") != hashlib.sha256((canonical_json(request) + "\n").encode()).hexdigest():
+            raise ValueError("Manifest is from another request")
+        if manifest.get("presetAssetSha256") != expected_hash or manifest.get("verifiedPresetName") != request["preset"]:
+            raise ValueError("Rendered preset identity changed")
+        if manifest.get("glErrorChecks") != 480 or manifest.get("presetNameChecks") != 480:
+            raise ValueError("Incomplete per-frame GL/preset checks")
+        if manifest.get("eligiblePresetCountAfterFrame479") != 1 or manifest.get("presetChangeCounter") != 1:
+            raise ValueError("Exact single-preset invariant failed")
+        if not manifest.get("coreReleased") or not manifest.get("eglDestroyed"):
+            raise ValueError("Core/context cleanup incomplete")
+        if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
+            raise ValueError("Incomplete temporal captures")
+        for capture in manifest["captures"]:
+            if capture.get("captureReadFramebufferBinding") != 0:
+>               raise ValueError("Capture did not verify final-output read framebuffer zero")
+E               ValueError: Capture did not verify final-output read framebuffer zero
+
+tools/native-trails/run_validation.py:123: ValueError
+_______ SummaryTests.test_last_capture_identity_mismatch_is_hard_failure _______
+ValueError: Capture did not verify final-output read framebuffer zero
+
+During handling of the above exception, another exception occurred:
+
+self = <test_summarize_validation.SummaryTests testMethod=test_last_capture_identity_mismatch_is_hard_failure>
+
+    def test_last_capture_identity_mismatch_is_hard_failure(self):
+        directory = self.jobs[self.names[0], "authored_repeat"]
+        image = np.full((2, 2, 3), 100, np.uint8)
+        path = directory / "frame-479.png"
+        cv2.imwrite(str(path), image)
+        manifest = json.loads((directory / "manifest.json").read_text())
+        manifest["captures"][-1].update(pngSha256=summary.file_digest(path),
+                                         rgbSha256=hashlib.sha256(image.tobytes()).hexdigest())
+        summary.runner.write(directory / "manifest.json", manifest)
+        row = json.loads((directory / "row.json").read_text())
+        row["frame_hashes"][-1] = manifest["captures"][-1]["rgbSha256"]
+        summary.runner.write(directory / "row.json", row)
+>       with self.assertRaisesRegex(ValueError, "Identity mismatch"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: "Identity mismatch" does not match "Capture did not verify final-output read framebuffer zero"
+
+tools/native-trails/test_summarize_validation.py:180: AssertionError
+_ SummaryTests.test_missing_job_fails_strict_but_partial_never_claims_completion _
+
+self = <test_summarize_validation.SummaryTests testMethod=test_missing_job_fails_strict_but_partial_never_claims_completion>
+
+    def test_missing_job_fails_strict_but_partial_never_claims_completion(self):
+        shutil.rmtree(self.jobs[self.names[-1], "high"])
+        with self.assertRaisesRegex(ValueError, "Incomplete"):
+            self.collect()
+>       result = self.collect(partial=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tools/native-trails/test_summarize_validation.py:147:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools/native-trails/test_summarize_validation.py:129: in collect
+    return summary.collect_matrix(self.work, self.presets, self.names, partial=partial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/native-trails/summarize_validation.py:158: in collect_matrix
+    manifest = runner.verify(directory, request, sha)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+directory = PosixPath('/var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmprsbxzx2q/run/jobs/118728e5d1f2872e42c99c5f18ca5eea3cb73586ee0891c95362abffe0bec44c')
+request = {'preset': 'witness-00.milk', 'width': 2, 'height': 2, 'referenceWidth': 0, ...}
+expected_hash = '02ba9517189bb4903c03df23baa315cd4e58d64211a57f4dbdf82a6dc6c39942'
+
+    def verify(directory, request, expected_hash):
+        import cv2
+        manifest = json.loads((directory / "manifest.json").read_text())
+        if manifest.get("status") != "ok" or manifest.get("framesRendered") != 480:
+            raise ValueError("Rendering failed: " + str(manifest.get("error", manifest)))
+        if manifest.get("job") != request or manifest.get("requestSha256") != hashlib.sha256((canonical_json(request) + "\n").encode()).hexdigest():
+            raise ValueError("Manifest is from another request")
+        if manifest.get("presetAssetSha256") != expected_hash or manifest.get("verifiedPresetName") != request["preset"]:
+            raise ValueError("Rendered preset identity changed")
+        if manifest.get("glErrorChecks") != 480 or manifest.get("presetNameChecks") != 480:
+            raise ValueError("Incomplete per-frame GL/preset checks")
+        if manifest.get("eligiblePresetCountAfterFrame479") != 1 or manifest.get("presetChangeCounter") != 1:
+            raise ValueError("Exact single-preset invariant failed")
+        if not manifest.get("coreReleased") or not manifest.get("eglDestroyed"):
+            raise ValueError("Core/context cleanup incomplete")
+        if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
+            raise ValueError("Incomplete temporal captures")
+        for capture in manifest["captures"]:
+            if capture.get("captureReadFramebufferBinding") != 0:
+>               raise ValueError("Capture did not verify final-output read framebuffer zero")
+E               ValueError: Capture did not verify final-output read framebuffer zero
+
+tools/native-trails/run_validation.py:123: ValueError
+_____ SummaryTests.test_mutated_capture_cannot_be_hidden_by_a_success_row ______
+ValueError: Capture did not verify final-output read framebuffer zero
+
+During handling of the above exception, another exception occurred:
+
+self = <test_summarize_validation.SummaryTests testMethod=test_mutated_capture_cannot_be_hidden_by_a_success_row>
+
+    def test_mutated_capture_cannot_be_hidden_by_a_success_row(self):
+        (self.jobs[self.names[0], "authored"] / "frame-479.png").write_bytes(b"mutation")
+>       with self.assertRaisesRegex(ValueError, "PNG checksum"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: "PNG checksum" does not match "Capture did not verify final-output read framebuffer zero"
+
+tools/native-trails/test_summarize_validation.py:165: AssertionError
+___ SummaryTests.test_partial_does_not_hide_a_failed_row_without_a_manifest ____
+ValueError: Capture did not verify final-output read framebuffer zero
+
+During handling of the above exception, another exception occurred:
+
+self = <test_summarize_validation.SummaryTests testMethod=test_partial_does_not_hide_a_failed_row_without_a_manifest>
+
+    def test_partial_does_not_hide_a_failed_row_without_a_manifest(self):
+        directory = self.jobs[self.names[0], "high"]
+        (directory / "manifest.json").unlink()
+        row = json.loads((directory / "row.json").read_text())
+        row["status"] = "failed"
+        summary.runner.write(directory / "row.json", row)
+>       with self.assertRaisesRegex(ValueError, "Failed rendering"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: "Failed rendering" does not match "Capture did not verify final-output read framebuffer zero"
+
+tools/native-trails/test_summarize_validation.py:257: AssertionError
+_ SummaryTests.test_partial_output_is_labeled_and_strict_failure_writes_nothing _
+
+self = <test_summarize_validation.SummaryTests testMethod=test_partial_output_is_labeled_and_strict_failure_writes_nothing>
+
+    def test_partial_output_is_labeled_and_strict_failure_writes_nothing(self):
+        shutil.rmtree(self.jobs[self.names[-1], "high"])
+        output = self.base / "evidence"
+        with self.assertRaises(ValueError):
+            summary.summarize(self.work, output, preset_root=self.presets, names=self.names)
+        self.assertFalse(output.exists())
+>       summary.summarize(self.work, output, partial=True, preset_root=self.presets, names=self.names)
+
+tools/native-trails/test_summarize_validation.py:213:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools/native-trails/summarize_validation.py:357: in summarize
+    matrix = collect_matrix(work, preset_root, names, partial=partial, legacy_runner=legacy_runner)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/native-trails/summarize_validation.py:158: in collect_matrix
+    manifest = runner.verify(directory, request, sha)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+directory = PosixPath('/private/var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmpesvwy779/run/jobs/89c33468cb04d242158b54d6d62eeae550baee02b27726a4bb13099518c56c79')
+request = {'preset': 'witness-00.milk', 'width': 2, 'height': 2, 'referenceWidth': 0, ...}
+expected_hash = '02ba9517189bb4903c03df23baa315cd4e58d64211a57f4dbdf82a6dc6c39942'
+
+    def verify(directory, request, expected_hash):
+        import cv2
+        manifest = json.loads((directory / "manifest.json").read_text())
+        if manifest.get("status") != "ok" or manifest.get("framesRendered") != 480:
+            raise ValueError("Rendering failed: " + str(manifest.get("error", manifest)))
+        if manifest.get("job") != request or manifest.get("requestSha256") != hashlib.sha256((canonical_json(request) + "\n").encode()).hexdigest():
+            raise ValueError("Manifest is from another request")
+        if manifest.get("presetAssetSha256") != expected_hash or manifest.get("verifiedPresetName") != request["preset"]:
+            raise ValueError("Rendered preset identity changed")
+        if manifest.get("glErrorChecks") != 480 or manifest.get("presetNameChecks") != 480:
+            raise ValueError("Incomplete per-frame GL/preset checks")
+        if manifest.get("eligiblePresetCountAfterFrame479") != 1 or manifest.get("presetChangeCounter") != 1:
+            raise ValueError("Exact single-preset invariant failed")
+        if not manifest.get("coreReleased") or not manifest.get("eglDestroyed"):
+            raise ValueError("Core/context cleanup incomplete")
+        if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
+            raise ValueError("Incomplete temporal captures")
+        for capture in manifest["captures"]:
+            if capture.get("captureReadFramebufferBinding") != 0:
+>               raise ValueError("Capture did not verify final-output read framebuffer zero")
+E               ValueError: Capture did not verify final-output read framebuffer zero
+
+tools/native-trails/run_validation.py:123: ValueError
+_ SummaryTests.test_repeat_control_cannot_substitute_a_16_bit_png_with_the_same_decoded_rgb8 _
+ValueError: Capture did not verify final-output read framebuffer zero
+
+During handling of the above exception, another exception occurred:
+
+self = <test_summarize_validation.SummaryTests testMethod=test_repeat_control_cannot_substitute_a_16_bit_png_with_the_same_decoded_rgb8>
+
+    def test_repeat_control_cannot_substitute_a_16_bit_png_with_the_same_decoded_rgb8(self):
+        directory = self.jobs[self.names[0], "authored_repeat"]
+        path = directory / "frame-479.png"
+        original = cv2.imread(str(path))
+        cv2.imwrite(str(path), original.astype(np.uint16) * 257)
+        manifest = json.loads((directory / "manifest.json").read_text())
+        manifest["captures"][-1]["pngSha256"] = summary.file_digest(path)
+        summary.runner.write(directory / "manifest.json", manifest)
+>       with self.assertRaisesRegex(ValueError, "RGB\\(A\\)8"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: "RGB\(A\)8" does not match "Capture did not verify final-output read framebuffer zero"
+
+tools/native-trails/test_summarize_validation.py:280: AssertionError
+__________ SummaryTests.test_stale_row_or_unexpected_job_is_rejected ___________
+ValueError: Capture did not verify final-output read framebuffer zero
+
+During handling of the above exception, another exception occurred:
+
+self = <test_summarize_validation.SummaryTests testMethod=test_stale_row_or_unexpected_job_is_rejected>
+
+    def test_stale_row_or_unexpected_job_is_rejected(self):
+        self.change("row.json", {"frame_mean_ms": 99})
+>       with self.assertRaisesRegex(ValueError, "Row differs"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: "Row differs" does not match "Capture did not verify final-output read framebuffer zero"
+
+tools/native-trails/test_summarize_validation.py:185: AssertionError
+=========================== short test summary info ============================
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_complete_export_records_all_hashes_and_measured_medium_high_cost
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_complete_matrix_has_136_verified_jobs
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_last_capture_identity_mismatch_is_hard_failure
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_missing_job_fails_strict_but_partial_never_claims_completion
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_mutated_capture_cannot_be_hidden_by_a_success_row
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_partial_does_not_hide_a_failed_row_without_a_manifest
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_partial_output_is_labeled_and_strict_failure_writes_nothing
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_repeat_control_cannot_substitute_a_16_bit_png_with_the_same_decoded_rgb8
+FAILED tools/native-trails/test_summarize_validation.py::SummaryTests::test_stale_row_or_unexpected_job_is_rejected
+9 failed, 48 passed, 20 subtests passed in 21.68s

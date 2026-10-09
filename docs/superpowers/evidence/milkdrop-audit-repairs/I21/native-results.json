@@ -1,0 +1,856 @@
+{
+  "status": "retained 16-mode policy qualified with actual production controls and matched ARM64 source input; no new patch",
+  "runs": 36,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 18,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-10-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-10-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "ea5c9cccc08ed0986c41803ee78e0254f2e5e7cdd7b996b5f1d767d0180e22b5",
+        "39bce5b8263911667f1f5d60a20969e578ab4ca38bc26c49936b857adb3b005a",
+        "76b4246efd7a760bb71bd03ad72f69d5312a9d8b3f4503e034f1d1ec87e61cec",
+        "093f17511c3dd158c6676bdfc511a51513febe85898b8b7aae60d4c4f2516689",
+        "de9b29f64bf539fe16fea0b8a0c80de667bf76262cb761490c92e4841e502f31",
+        "81054ffa267a4ad211e134ced0e7334c78858b8474b1c580e9c8eb63e71ef205",
+        "251d3ddafdd53ed124214447f4ce80893756f2e3009a1b8fb2ad327a12b86908",
+        "b302ad6b17b7b25d419aa285066fc87a8e4403047389564444bacbe361258211"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-10-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-10-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "ea5c9cccc08ed0986c41803ee78e0254f2e5e7cdd7b996b5f1d767d0180e22b5",
+        "39bce5b8263911667f1f5d60a20969e578ab4ca38bc26c49936b857adb3b005a",
+        "76b4246efd7a760bb71bd03ad72f69d5312a9d8b3f4503e034f1d1ec87e61cec",
+        "093f17511c3dd158c6676bdfc511a51513febe85898b8b7aae60d4c4f2516689",
+        "de9b29f64bf539fe16fea0b8a0c80de667bf76262cb761490c92e4841e502f31",
+        "81054ffa267a4ad211e134ced0e7334c78858b8474b1c580e9c8eb63e71ef205",
+        "251d3ddafdd53ed124214447f4ce80893756f2e3009a1b8fb2ad327a12b86908",
+        "b302ad6b17b7b25d419aa285066fc87a8e4403047389564444bacbe361258211"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-10-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-10-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "4a43e473e5bc9390e1927857706686a12fb6633cbf3af6f32776e1a4da1ed30c",
+        "2ca5242aa6334f664bc49e6e7de059875e679858b688a141b75ff8e4bb4d247d",
+        "557da31f1417a7efca6021a4070afb4c09184ea6d53b61ab53a26e2c5dec219d",
+        "9030572210381ddce712fda7410dce48b7c6ddde071470b269e325c097694661",
+        "be50597227159bf0590189415a34434f958ce2430d8902315e59ec3aac928003",
+        "461069f9b0b01b2d9043859d9543724fceda643c43e49194418150b2db34e0c0",
+        "eca5a014d7698ad31275281ebcc730b5bbd0b70c0bd50525884e85d67dab99d3",
+        "c6c268a917b5145953528b07c0f1102367d6337d61c7221b93719310aed35c50"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-10-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-10-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "4a43e473e5bc9390e1927857706686a12fb6633cbf3af6f32776e1a4da1ed30c",
+        "2ca5242aa6334f664bc49e6e7de059875e679858b688a141b75ff8e4bb4d247d",
+        "557da31f1417a7efca6021a4070afb4c09184ea6d53b61ab53a26e2c5dec219d",
+        "9030572210381ddce712fda7410dce48b7c6ddde071470b269e325c097694661",
+        "be50597227159bf0590189415a34434f958ce2430d8902315e59ec3aac928003",
+        "461069f9b0b01b2d9043859d9543724fceda643c43e49194418150b2db34e0c0",
+        "eca5a014d7698ad31275281ebcc730b5bbd0b70c0bd50525884e85d67dab99d3",
+        "c6c268a917b5145953528b07c0f1102367d6337d61c7221b93719310aed35c50"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-11-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-11-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "8b3452bd4d99c57c214f040f1563d4506c78bf594054b11450f9803998aa99b3",
+        "d6d6a32bfc95f61bfd41ba43f55c0e72292d03a87b436f2ef5436410e3200165",
+        "0bc17bf4eba58e511876f7687d9fb77ca59753764b3574a238b65b5a696ac0be",
+        "5e8e56a88a37d954e02450380b699bee625e99457b6e28c7e6a555c71a353ce1",
+        "a4b782357fec1734ec4cb70ca577fbc02be0adff43c9cf534db64aed236f0724",
+        "7147abb93366b7d6c7854b4af5103b8cd3f5fc9d1494c9d8333831e6940438ff",
+        "496f55b60571dfba282d8ef633fdca831e1830c9ac835b8a56937fe51e38e4d3",
+        "01068fae2acb322a6f274d955c09d240b3207fd8df4f623bb7538e57de476fdc"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-11-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-11-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "8b3452bd4d99c57c214f040f1563d4506c78bf594054b11450f9803998aa99b3",
+        "d6d6a32bfc95f61bfd41ba43f55c0e72292d03a87b436f2ef5436410e3200165",
+        "0bc17bf4eba58e511876f7687d9fb77ca59753764b3574a238b65b5a696ac0be",
+        "5e8e56a88a37d954e02450380b699bee625e99457b6e28c7e6a555c71a353ce1",
+        "a4b782357fec1734ec4cb70ca577fbc02be0adff43c9cf534db64aed236f0724",
+        "7147abb93366b7d6c7854b4af5103b8cd3f5fc9d1494c9d8333831e6940438ff",
+        "496f55b60571dfba282d8ef633fdca831e1830c9ac835b8a56937fe51e38e4d3",
+        "01068fae2acb322a6f274d955c09d240b3207fd8df4f623bb7538e57de476fdc"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-11-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-11-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "acac77d16d2452ce81c26cc11d53287dfd75adb291641e3d6e603a12e0fddee4",
+        "a3f868760dfb6cb628bfb6f497e219edd9f0c0f4eaf37c6775e8be57fa5b5109",
+        "65da8c6773a987ca4934f709a960b244bb73a7b84d28ff620601f7cec259ded3",
+        "8df9d7935ec335f137b324b4182669ce842add54d78b9141510c77346bc06dec",
+        "8d8f788555e01ed83a80f82f80fc2ac2ebf402593f956e192bfe519218ef3236",
+        "1f2bbdd7a6221fca6cf5e4d3d156aa4ea23ef265cbb12c3f40799abb6561a628",
+        "a358825152dc104bfdd5e84d38353032de6d6e4b7bac5f080d323b28ec8853c6",
+        "4a53dd2e4baa6ce8aef814ef19fb9c315c17da3165f08b2d75ee8b946d4ec6ab"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-11-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-11-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "acac77d16d2452ce81c26cc11d53287dfd75adb291641e3d6e603a12e0fddee4",
+        "a3f868760dfb6cb628bfb6f497e219edd9f0c0f4eaf37c6775e8be57fa5b5109",
+        "65da8c6773a987ca4934f709a960b244bb73a7b84d28ff620601f7cec259ded3",
+        "8df9d7935ec335f137b324b4182669ce842add54d78b9141510c77346bc06dec",
+        "8d8f788555e01ed83a80f82f80fc2ac2ebf402593f956e192bfe519218ef3236",
+        "1f2bbdd7a6221fca6cf5e4d3d156aa4ea23ef265cbb12c3f40799abb6561a628",
+        "a358825152dc104bfdd5e84d38353032de6d6e4b7bac5f080d323b28ec8853c6",
+        "4a53dd2e4baa6ce8aef814ef19fb9c315c17da3165f08b2d75ee8b946d4ec6ab"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-12-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-12-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "22bcafdde28343bac46c309be9c96bf55fbd9aca8a58fe7aa70c0b14da4f9354",
+        "1ae5bff0de6b57ea7176ea10eca1d01bc68630e0d34093ce9e60a6648bc25086",
+        "a7ee62821c08985d0ed34daa050fe7b3110c37c8e768461747e326befb4e06d7",
+        "46d83425c78458b068380a16a7f1b06a87bf09d18b960beca30e78ea0759a62f",
+        "7996f7bb7a4891f1783e2df1ffa768d57d950a655fb997a61b51a805a7485275",
+        "735813a6c2bf04b01537801c819e5dcb6d8e2005ea884d231cd7efe4a417e2d7",
+        "0e91a7e56167ddf4e7add743e09d6d9204f93b95d8f7dea3c1061051c49ca298",
+        "40e9921b16e03ad192948308a97c2cf0b0aa73eb0263ae35fdd467583dffcb7e"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-12-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-12-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "22bcafdde28343bac46c309be9c96bf55fbd9aca8a58fe7aa70c0b14da4f9354",
+        "1ae5bff0de6b57ea7176ea10eca1d01bc68630e0d34093ce9e60a6648bc25086",
+        "a7ee62821c08985d0ed34daa050fe7b3110c37c8e768461747e326befb4e06d7",
+        "46d83425c78458b068380a16a7f1b06a87bf09d18b960beca30e78ea0759a62f",
+        "7996f7bb7a4891f1783e2df1ffa768d57d950a655fb997a61b51a805a7485275",
+        "735813a6c2bf04b01537801c819e5dcb6d8e2005ea884d231cd7efe4a417e2d7",
+        "0e91a7e56167ddf4e7add743e09d6d9204f93b95d8f7dea3c1061051c49ca298",
+        "40e9921b16e03ad192948308a97c2cf0b0aa73eb0263ae35fdd467583dffcb7e"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-12-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-12-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "751209ce7265f8fbd89ff69f26c17fd30b8bd40bc69c9b03484da61cac98bfc8",
+        "6461ada9d0c582fa251e44f2f91a5eadeecb7966319da7f1655d0ce1b245aaea",
+        "7e63c56b491dc5f81984a83aeeff5d783027248e2393c02203d4f800147bd79a",
+        "b83a6a29d80faff33600dc7fe910139296cb583d0bcbe81d8e95088446f3811f",
+        "631af8ef633e7917b7349c7cc650638679b249dba97f20acf3d728c42a34d0fc",
+        "89a5b50531e6efe8d7226da974fea8f7778d44037471634f03fd8b2c5774ff61",
+        "f07ec7635be6d0a49a9c36a7e67c3b1aa7f69f224405a20a76fc14b595d691dd",
+        "43d9987038a2e9739bc1299a612df94773722da0bffe29dbf822cb86043a329b"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-12-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-12-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "751209ce7265f8fbd89ff69f26c17fd30b8bd40bc69c9b03484da61cac98bfc8",
+        "6461ada9d0c582fa251e44f2f91a5eadeecb7966319da7f1655d0ce1b245aaea",
+        "7e63c56b491dc5f81984a83aeeff5d783027248e2393c02203d4f800147bd79a",
+        "b83a6a29d80faff33600dc7fe910139296cb583d0bcbe81d8e95088446f3811f",
+        "631af8ef633e7917b7349c7cc650638679b249dba97f20acf3d728c42a34d0fc",
+        "89a5b50531e6efe8d7226da974fea8f7778d44037471634f03fd8b2c5774ff61",
+        "f07ec7635be6d0a49a9c36a7e67c3b1aa7f69f224405a20a76fc14b595d691dd",
+        "43d9987038a2e9739bc1299a612df94773722da0bffe29dbf822cb86043a329b"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-13-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-13-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "f6f884c0c0536857bc334f4d2605649b61575a2ad9e23fd86822fe0a9d29061e",
+        "e1e6dfdc73f98c095de09247e97733dc85940ee448cc5968b0e14a1447c18dfa",
+        "06d289f7942c90952acf402462e882a163ea9669b3a9d0e2ce18f345a0de8f40",
+        "0ca534405554d4bec2151a028d4f0418af5634270a15ca2fddef1cafa019f184",
+        "3c83c89ef0c938c712eeb5c009d4ab066462b293a70cb86947eb1eab4ce5e3f5",
+        "61320dfc14685775fc4b9d57709cfd346f272c128da2af981950b2a847d85ed6",
+        "71bac5f61a4a7dca2204766296df9d535ba0459264d13183ab0643f4918b527e",
+        "c52ff6271e360f8c2eaf6176a736bf30a63f3499f8a271000846902a6835c863"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-13-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-13-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "f6f884c0c0536857bc334f4d2605649b61575a2ad9e23fd86822fe0a9d29061e",
+        "e1e6dfdc73f98c095de09247e97733dc85940ee448cc5968b0e14a1447c18dfa",
+        "06d289f7942c90952acf402462e882a163ea9669b3a9d0e2ce18f345a0de8f40",
+        "0ca534405554d4bec2151a028d4f0418af5634270a15ca2fddef1cafa019f184",
+        "3c83c89ef0c938c712eeb5c009d4ab066462b293a70cb86947eb1eab4ce5e3f5",
+        "61320dfc14685775fc4b9d57709cfd346f272c128da2af981950b2a847d85ed6",
+        "71bac5f61a4a7dca2204766296df9d535ba0459264d13183ab0643f4918b527e",
+        "c52ff6271e360f8c2eaf6176a736bf30a63f3499f8a271000846902a6835c863"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-13-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-13-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "4d5c46694b67dfc96cc268fb90418d2fc7e737259b3bee839ecc0b3a4c7ed413",
+        "769539210ad2628ff76e35ba2ad3069fb0c426cb8911cfcbcc8ac905b595e997",
+        "75bf1a039a99ada23635bf625e958f012a7a188748580d6a4e5d7e0deaa3aced",
+        "5859a6c4d4aa41a4b73839054d69569194b9208b16fc21954d521ab6a34966ee",
+        "4055938fbbf3e635e776fe4cb75c835d26eb08192ab1fad9aa08626c6c05da97",
+        "2013ea51bcf2a3f0bcd0824ee878028a381f80b29d03a157de1c04fc8f01bf80",
+        "bf75f378e771d6b939e8603fa9343a7020bb37bf4a2b1f3ae4a301bacc5743c3",
+        "3eec89b6ab4d78a86865bc2c151e9f0b1d6b862a9a03acd421835fbf05431f66"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-13-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-13-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "4d5c46694b67dfc96cc268fb90418d2fc7e737259b3bee839ecc0b3a4c7ed413",
+        "769539210ad2628ff76e35ba2ad3069fb0c426cb8911cfcbcc8ac905b595e997",
+        "75bf1a039a99ada23635bf625e958f012a7a188748580d6a4e5d7e0deaa3aced",
+        "5859a6c4d4aa41a4b73839054d69569194b9208b16fc21954d521ab6a34966ee",
+        "4055938fbbf3e635e776fe4cb75c835d26eb08192ab1fad9aa08626c6c05da97",
+        "2013ea51bcf2a3f0bcd0824ee878028a381f80b29d03a157de1c04fc8f01bf80",
+        "bf75f378e771d6b939e8603fa9343a7020bb37bf4a2b1f3ae4a301bacc5743c3",
+        "3eec89b6ab4d78a86865bc2c151e9f0b1d6b862a9a03acd421835fbf05431f66"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-14-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-14-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "3cdeac9a4a83c1c0194c6766c233b8d7a4b84c3c220be55e494a0c9ec7abe94a",
+        "394b269fe4715347a5e2c7083dd33e62d8b6861f07fd37ce472ec28c4af83183",
+        "be6a4f0f9a49ae6d04ea10bb16eb4061d031f20ed398ff072e97db75df56c3ec",
+        "770d1fc2fa84bc06bfee32582568a3472755b0ececf5ba5a15f125dea3b72322",
+        "a34f787a8eab97e2256bebce5b288e0526c2df40bc401cd33d12dab8c8daaec6",
+        "3a429a19e7d05e98f7208a250169380d34f509d50c20c91c178e53a9b94b8a45",
+        "227123a81cdc1de9a687afdce69e2e41b85d30964f80bb29fc7a7bfe556567f4",
+        "78bb8e495d4af45d06f3b9991faeb223ccf63d40f701ccc8665ff95bd2415772"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-14-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-14-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "3cdeac9a4a83c1c0194c6766c233b8d7a4b84c3c220be55e494a0c9ec7abe94a",
+        "394b269fe4715347a5e2c7083dd33e62d8b6861f07fd37ce472ec28c4af83183",
+        "be6a4f0f9a49ae6d04ea10bb16eb4061d031f20ed398ff072e97db75df56c3ec",
+        "770d1fc2fa84bc06bfee32582568a3472755b0ececf5ba5a15f125dea3b72322",
+        "a34f787a8eab97e2256bebce5b288e0526c2df40bc401cd33d12dab8c8daaec6",
+        "3a429a19e7d05e98f7208a250169380d34f509d50c20c91c178e53a9b94b8a45",
+        "227123a81cdc1de9a687afdce69e2e41b85d30964f80bb29fc7a7bfe556567f4",
+        "78bb8e495d4af45d06f3b9991faeb223ccf63d40f701ccc8665ff95bd2415772"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-14-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-14-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "7cfc99cc9c7a6d0a6ffb21cb8c21eeed228ccb5480bc32cbb46ebcafa5d41c89",
+        "f5d3b7e97c4447e649a1ed5cf75b8d9a4846e7609dcb8f06dd305240a1277afa",
+        "7bec6aa39129672419b192c95c8de788bdc3ce9c92dbf0d0709ca3925fa26429",
+        "56d71633cf2679b3bcbd3160cd2744ded4f4cc6319e817e30a80ad2158292af1",
+        "3af4c989747517e23dd857d1e831a6ac40d6f4d70f003e4f59123fc6cfd9a525",
+        "9b2f8e1e3d63b254acd819e3d8b6009a62e3e70de0317a6ae5587a15ffd72243",
+        "d953d55f309d8bb649c3dfb28285f431b5334824687e17513dace791e1f459cd",
+        "d525a6d98f5db0be14df184759d351ad4724b51775e3914cf4d7f9153c498fd0"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-14-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-14-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "7cfc99cc9c7a6d0a6ffb21cb8c21eeed228ccb5480bc32cbb46ebcafa5d41c89",
+        "f5d3b7e97c4447e649a1ed5cf75b8d9a4846e7609dcb8f06dd305240a1277afa",
+        "7bec6aa39129672419b192c95c8de788bdc3ce9c92dbf0d0709ca3925fa26429",
+        "56d71633cf2679b3bcbd3160cd2744ded4f4cc6319e817e30a80ad2158292af1",
+        "3af4c989747517e23dd857d1e831a6ac40d6f4d70f003e4f59123fc6cfd9a525",
+        "9b2f8e1e3d63b254acd819e3d8b6009a62e3e70de0317a6ae5587a15ffd72243",
+        "d953d55f309d8bb649c3dfb28285f431b5334824687e17513dace791e1f459cd",
+        "d525a6d98f5db0be14df184759d351ad4724b51775e3914cf4d7f9153c498fd0"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-15-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-15-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "528b439b43f984d71080f3eab044563692a71e310de3399238308dad44843339",
+        "362ba6593fa30e9b8885ef896d2cf55a0ace5a1a1328fa675fcb684da4ad65dd",
+        "dbd67b717792a0ef919caa76fb0d3518cb9976ff40188ed132fa07b35419eb61",
+        "2446fe9e16f27133c0c34d9376004a566030fe7ab3238c0c65813e02ccf7f3e2",
+        "1fd31182f93c08890a8275006f28462b21ebe2c6af91f3106f94ebe492f290b0",
+        "6928cee0795324f0a93be3bd6f67a7fcc9c9fff747b1d64997225f6a463c1703",
+        "09d3df13adb24bee20a2d2250a7d13fa01a58affb092659f5a59e3f0a8ff9b6e",
+        "8f713729367892f39379671667636d1de0c6b1194e525d88a0b7e3e7fe0177b4"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-15-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-15-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "528b439b43f984d71080f3eab044563692a71e310de3399238308dad44843339",
+        "362ba6593fa30e9b8885ef896d2cf55a0ace5a1a1328fa675fcb684da4ad65dd",
+        "dbd67b717792a0ef919caa76fb0d3518cb9976ff40188ed132fa07b35419eb61",
+        "2446fe9e16f27133c0c34d9376004a566030fe7ab3238c0c65813e02ccf7f3e2",
+        "1fd31182f93c08890a8275006f28462b21ebe2c6af91f3106f94ebe492f290b0",
+        "6928cee0795324f0a93be3bd6f67a7fcc9c9fff747b1d64997225f6a463c1703",
+        "09d3df13adb24bee20a2d2250a7d13fa01a58affb092659f5a59e3f0a8ff9b6e",
+        "8f713729367892f39379671667636d1de0c6b1194e525d88a0b7e3e7fe0177b4"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-15-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-15-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "b1614e205be921c7f339c03ff7aff49507636804cf5be5493e32cd76061946ea",
+        "770cca2c0ada4095b5d41708d691ba12d5dfd24c14c07fc850b0013acd8d5da7",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "9a5e018d9900daf8b478b5d156ae7de242c07813f35e2f04bcf92f9789c8ddf7",
+        "3ac8714a5e51092d899a4c37bf2b2402764424ad99be4889ef7c369bb71a279f",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "6deccb655ac8443704bc40eb32c71f9c69dabc2cca39797d6fd504a69a86aac4",
+        "f85db7e2ee81fd5e85fccb1bd26c82c8a4dd07d028a916f801f2caba25362c5c"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-15-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-15-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "b1614e205be921c7f339c03ff7aff49507636804cf5be5493e32cd76061946ea",
+        "770cca2c0ada4095b5d41708d691ba12d5dfd24c14c07fc850b0013acd8d5da7",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "9a5e018d9900daf8b478b5d156ae7de242c07813f35e2f04bcf92f9789c8ddf7",
+        "3ac8714a5e51092d899a4c37bf2b2402764424ad99be4889ef7c369bb71a279f",
+        "5319c5a4fa603cd501927bb6001fa64460eab83705c923c14afec98cf7bfc1bc",
+        "6deccb655ac8443704bc40eb32c71f9c69dabc2cca39797d6fd504a69a86aac4",
+        "f85db7e2ee81fd5e85fccb1bd26c82c8a4dd07d028a916f801f2caba25362c5c"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-8-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-8-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "9be19a987840a04012d6c59d9a7b52deca36d7d0edec6f7f616b98a93066baa1",
+        "d00167f23d2f5ee6bc6d24611a782abee2f64385472b9ab3eaff40438790e7d9",
+        "b34c0c622bbcedd25d719299a53483935950b4d624bf1d9ed583c3445c469304",
+        "937d84874cf61187c62fad1688ed343f03f230f5384054f67d4c366c087c75e5",
+        "cb28cc3d77d1920ec530bbf0b782055a7fd4954c51ce0d96c74ab818760c3e67",
+        "2d3948918813b4e7726a6337936279db94bc8ae1fd25e396c1b4b587364f1228",
+        "a602d2fc19515e7a8d3f0dd7b6e0de5e35c15f56f3523c447d2620ad11bee0db",
+        "1bee8dc4d31ab0c1029a5ee360bf323ed216b9fd932c6d049555449bda44c285"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-8-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-8-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "9be19a987840a04012d6c59d9a7b52deca36d7d0edec6f7f616b98a93066baa1",
+        "d00167f23d2f5ee6bc6d24611a782abee2f64385472b9ab3eaff40438790e7d9",
+        "b34c0c622bbcedd25d719299a53483935950b4d624bf1d9ed583c3445c469304",
+        "937d84874cf61187c62fad1688ed343f03f230f5384054f67d4c366c087c75e5",
+        "cb28cc3d77d1920ec530bbf0b782055a7fd4954c51ce0d96c74ab818760c3e67",
+        "2d3948918813b4e7726a6337936279db94bc8ae1fd25e396c1b4b587364f1228",
+        "a602d2fc19515e7a8d3f0dd7b6e0de5e35c15f56f3523c447d2620ad11bee0db",
+        "1bee8dc4d31ab0c1029a5ee360bf323ed216b9fd932c6d049555449bda44c285"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-8-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-8-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0fc3c37e9be04a3c4ea3d5b62ce03570bed370393728e3f04ba5c239b61fd02d",
+        "4d44a58a4e4e7073663d733176f1e511b17c52b2906203d3f27e6275cbb5e027",
+        "8160f9a9a556b53ec44c6446512613779382182bd4f7b214aaec3b339d504cb6",
+        "e5a3ac4547dd993e11432ff29504089fb1919a4d0395ca42ab58e99e13a3fdc2",
+        "4726fa8b6d14aa7fdb8a6d9c8d527266c42a6d08acef0ce680fe44d4e76f04c3",
+        "67d8b983abec45ddfcf5fe2c7c85a5083c383784187e3c87b921bc85b3b9368d",
+        "b27472f66d8b097531f4648c95af822fa1510723fe5bb0482859aa503a8357af",
+        "4726fa8b6d14aa7fdb8a6d9c8d527266c42a6d08acef0ce680fe44d4e76f04c3"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-8-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-8-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0fc3c37e9be04a3c4ea3d5b62ce03570bed370393728e3f04ba5c239b61fd02d",
+        "4d44a58a4e4e7073663d733176f1e511b17c52b2906203d3f27e6275cbb5e027",
+        "8160f9a9a556b53ec44c6446512613779382182bd4f7b214aaec3b339d504cb6",
+        "e5a3ac4547dd993e11432ff29504089fb1919a4d0395ca42ab58e99e13a3fdc2",
+        "4726fa8b6d14aa7fdb8a6d9c8d527266c42a6d08acef0ce680fe44d4e76f04c3",
+        "67d8b983abec45ddfcf5fe2c7c85a5083c383784187e3c87b921bc85b3b9368d",
+        "b27472f66d8b097531f4648c95af822fa1510723fe5bb0482859aa503a8357af",
+        "4726fa8b6d14aa7fdb8a6d9c8d527266c42a6d08acef0ce680fe44d4e76f04c3"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-9-original-alias-current-0",
+      "preset": "audit i21 diagnostic-mode-9-original-alias.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "52fbb2f7ac1e0b8b286d2543ecb6c57183d574e0174c1fa3024a04c90270fe94",
+        "a5232dc7f8be8c8558aaf8263348cccf7dba8e62e18215c365d55f84aa845b57",
+        "8382e9efe540bc1970b5f83c528d408385a38d3325dddca0d94ff56e687970ac",
+        "33c1cd884b84a1407d70522a7e8ee4fb3d9c87d1e92c1587ede3e1ec839dbaa2",
+        "eaf4bfea0b30fadd8ed27b37050cbce86fa4f26708def1b439e1fa1c2a010e79",
+        "20d71b4d30cacfd06830efbb39333b33dc0228dbbb078883c4b8cde9ffea649a",
+        "dedcb4e2cc7814e50c940681cb01b0ee24f2cb68c4e94d2c1b81ab74dacd0583",
+        "1662db77a38f9c7aeca1d1f68e61e558d9049b6c4f6e40a346bbbd4b00033bf7"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-9-original-alias-current-1",
+      "preset": "audit i21 diagnostic-mode-9-original-alias.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "52fbb2f7ac1e0b8b286d2543ecb6c57183d574e0174c1fa3024a04c90270fe94",
+        "a5232dc7f8be8c8558aaf8263348cccf7dba8e62e18215c365d55f84aa845b57",
+        "8382e9efe540bc1970b5f83c528d408385a38d3325dddca0d94ff56e687970ac",
+        "33c1cd884b84a1407d70522a7e8ee4fb3d9c87d1e92c1587ede3e1ec839dbaa2",
+        "eaf4bfea0b30fadd8ed27b37050cbce86fa4f26708def1b439e1fa1c2a010e79",
+        "20d71b4d30cacfd06830efbb39333b33dc0228dbbb078883c4b8cde9ffea649a",
+        "dedcb4e2cc7814e50c940681cb01b0ee24f2cb68c4e94d2c1b81ab74dacd0583",
+        "1662db77a38f9c7aeca1d1f68e61e558d9049b6c4f6e40a346bbbd4b00033bf7"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-9-retained-current-0",
+      "preset": "audit i21 diagnostic-mode-9-retained.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "e27eb39e093947cd4e0ec5764b0b02a784dc86b76d709fc1a4fa08ae9b59d857",
+        "428a31efc7728169d49219b591606b1d15969d1ce75e39fab511425d156d1e64",
+        "e5da0dafc7001ea738ea4f110fdbf9208dcc53e19095ff0c0bb4e89a2f33d12a",
+        "4152e5ac1b600a05bd1f81727e197752324c7f9d0ade2b62dc7f4441ac20e279",
+        "1f79475fbac16fbabc525631ff1a7b7675c0fd71ca43e01352082f8b4bcad7ca",
+        "0f09995138b0e2b13df5fbea2dcf4e7fdb539d95bcc859aabf6ff94dbab086e0",
+        "2dcc5c245611fc6c4ef234d1770dbf874ebf04c6f025bb936c1313f1e609e4a6",
+        "bdde509f8a9bddc810726298c5f88b3842cf1393855994eddc5925c70382e237"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-diagnostic-mode-9-retained-current-1",
+      "preset": "audit i21 diagnostic-mode-9-retained.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "e27eb39e093947cd4e0ec5764b0b02a784dc86b76d709fc1a4fa08ae9b59d857",
+        "428a31efc7728169d49219b591606b1d15969d1ce75e39fab511425d156d1e64",
+        "e5da0dafc7001ea738ea4f110fdbf9208dcc53e19095ff0c0bb4e89a2f33d12a",
+        "4152e5ac1b600a05bd1f81727e197752324c7f9d0ade2b62dc7f4441ac20e279",
+        "1f79475fbac16fbabc525631ff1a7b7675c0fd71ca43e01352082f8b4bcad7ca",
+        "0f09995138b0e2b13df5fbea2dcf4e7fdb539d95bcc859aabf6ff94dbab086e0",
+        "2dcc5c245611fc6c4ef234d1770dbf874ebf04c6f025bb936c1313f1e609e4a6",
+        "bdde509f8a9bddc810726298c5f88b3842cf1393855994eddc5925c70382e237"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-stock-salad-bar-original-alias0-current-0",
+      "preset": "audit i21 stock-salad-bar-original-alias0.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "b857b1de7f817b29ad16640d7235a30f20a1d8d812b919c279d49a248a55b39f",
+        "91050d685d05357a2f6488d4a9afdb5909124f59fba653afd37db5887a6efea3",
+        "8d107a6a252da3dd6e860d6b99445463f9862222898c6babaa91077dfc0d81c7",
+        "38534274c36a74585a8caae9e27ca8c728751c7cf6d24252baafdf88ed6a36a3",
+        "491f93b8d2a79992b17a840536211262d85d70d855378ab32d8d156f5e078ee8",
+        "4c1859036c1450a6fc46a20d6a158d732c20c9ab7dbf80a883e157c4ccac57fc",
+        "8c582569d6df16eb9f6b09748d7ecd550d0ae50763134d948ead2aa098c1e9f0",
+        "92da4fd3172924729aa5e4f30522a55ef12b0d017bbdf75da3ad2273329d6b7f"
+      ]
+    },
+    {
+      "directory": "i21policy-audit-i21-stock-salad-bar-original-alias0-current-1",
+      "preset": "audit i21 stock-salad-bar-original-alias0.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "b857b1de7f817b29ad16640d7235a30f20a1d8d812b919c279d49a248a55b39f",
+        "91050d685d05357a2f6488d4a9afdb5909124f59fba653afd37db5887a6efea3",
+        "8d107a6a252da3dd6e860d6b99445463f9862222898c6babaa91077dfc0d81c7",
+        "38534274c36a74585a8caae9e27ca8c728751c7cf6d24252baafdf88ed6a36a3",
+        "491f93b8d2a79992b17a840536211262d85d70d855378ab32d8d156f5e078ee8",
+        "4c1859036c1450a6fc46a20d6a158d732c20c9ab7dbf80a883e157c4ccac57fc",
+        "8c582569d6df16eb9f6b09748d7ecd550d0ae50763134d948ead2aa098c1e9f0",
+        "92da4fd3172924729aa5e4f30522a55ef12b0d017bbdf75da3ad2273329d6b7f"
+      ]
+    },
+    {
+      "directory": "i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-0",
+      "preset": "suksma - i'll go ahead and get the salad bar nz+.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "fd77c8fc0aff246c5a366244de073af19acdbfa64bf6ece0b724ef509a74b722",
+        "3e250b56f972c1b7b2134943537e9ae50935e68bc1dd4b63f61ece908a0f4363",
+        "54265e2f53ab5f7f67be3655507845669ab6268d9f620a4baee44648aea60f94",
+        "925f9c91c60cb0528484e66ae5ae2ef7728c11ba57b5a2fb8c9af4196a8931c4",
+        "b1dc883ec635756d15f42ddf15009f877c66fbc5e71e723e555ee83c64dbde87",
+        "346743ef5862413b0c936e4b9d6e14e9c2a43e2b8eade6f350dcddc015c8760c",
+        "61edc2c4baf52acf5129a8db068791f883f6f5bcc1f3c9ebc216817019bb52da",
+        "3eef19db31de0209ae431d47ee001c95ea72605b301418ec4552593cef2de61b"
+      ]
+    },
+    {
+      "directory": "i21policy-suksma---i'll-go-ahead-and-get-the-salad-bar-nz+-current-1",
+      "preset": "suksma - i'll go ahead and get the salad bar nz+.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "fd77c8fc0aff246c5a366244de073af19acdbfa64bf6ece0b724ef509a74b722",
+        "3e250b56f972c1b7b2134943537e9ae50935e68bc1dd4b63f61ece908a0f4363",
+        "54265e2f53ab5f7f67be3655507845669ab6268d9f620a4baee44648aea60f94",
+        "925f9c91c60cb0528484e66ae5ae2ef7728c11ba57b5a2fb8c9af4196a8931c4",
+        "b1dc883ec635756d15f42ddf15009f877c66fbc5e71e723e555ee83c64dbde87",
+        "346743ef5862413b0c936e4b9d6e14e9c2a43e2b8eade6f350dcddc015c8760c",
+        "61edc2c4baf52acf5129a8db068791f883f6f5bcc1f3c9ebc216817019bb52da",
+        "3eef19db31de0209ae431d47ee001c95ea72605b301418ec4552593cef2de61b"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "requested_extended_mode": 8,
+      "original_signed_alias": 0,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.43250634966563783
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.44021745595421813
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.4515406378600823
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.4283510561342593
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.4443236400462963
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.4399856127829218
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.4377676906507202
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.4431787310313786
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 9,
+      "original_signed_alias": 1,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.29778983410493826
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.27907672646604936
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.27905008198302467
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.2763054992926955
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.2804630433384774
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.274487606095679
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.27283034336419754
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.27027456275720163
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 10,
+      "original_signed_alias": 2,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.3066602366255144
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.3080846113040123
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.3078849987139918
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.3067046440972222
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.3054349119084362
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.30785546071244857
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.3062669994212963
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.3050611255787037
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 11,
+      "original_signed_alias": 3,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.3147436021090535
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.3167721997170782
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.30114571277006175
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.32244735403806585
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.31768454218106995
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.3146193013760288
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.333852237654321
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.31614719971707816
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 12,
+      "original_signed_alias": 4,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.21924101401748972
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.21708313239454732
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.20636823238168725
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.21150483056841562
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.20138820569701646
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.2019506333590535
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.20623914930555556
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.2018682886445473
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 13,
+      "original_signed_alias": 5,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.27149763695987655
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.27430475180041153
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.2699995579346708
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.270516975308642
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.2678849987139918
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.2728051456404321
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.27259624967849794
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.26738884066358026
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 14,
+      "original_signed_alias": 6,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.54037109375
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.5495315313143004
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.5656647456918724
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.5590207047325103
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.5533259387860082
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.5454856288580247
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.5687146749614198
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.5472950022505144
+        }
+      ]
+    },
+    {
+      "requested_extended_mode": 15,
+      "original_signed_alias": 7,
+      "selected_images": [
+        {
+          "frame": 120,
+          "RGB_MAE": 0.38988964441872426
+        },
+        {
+          "frame": 150,
+          "RGB_MAE": 0.42557074652777777
+        },
+        {
+          "frame": 180,
+          "RGB_MAE": 0.35888503086419754
+        },
+        {
+          "frame": 210,
+          "RGB_MAE": 0.3883514580118313
+        },
+        {
+          "frame": 239,
+          "RGB_MAE": 0.3986039576903292
+        },
+        {
+          "frame": 300,
+          "RGB_MAE": 0.3575970132458848
+        },
+        {
+          "frame": 390,
+          "RGB_MAE": 0.4215145158179012
+        },
+        {
+          "frame": 479,
+          "RGB_MAE": 0.4017607863940329
+        }
+      ]
+    }
+  ]
+}

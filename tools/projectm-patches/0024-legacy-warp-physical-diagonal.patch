@@ -1,0 +1,97 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Select original physical diagonal for actual legacy warp
+
+I11: preserve released0016 mesh caching/static upload efficiency and extend
+its cache key with aspect and compiled-path identity. Select AD only in
+legacy/default/fallback, retaining custom BC, winding/quadrant order,
+existing buffers, vertex/index/triangle counts and prepared replay.
+Dynamic equations and uploads retain the released policy.
+
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+@@ -143,6 +143,8 @@
+-
++
+     int m_gridSizeX{}; //!< Warp mesh X resolution.
+     int m_gridSizeY{}; //!< Warp mesh Y resolution.
++    float m_meshAspectX{}, m_meshAspectY{}; //!< Static radius/angle cache inputs.
++    bool m_legacyIndices{false}; //!< Diagonal selected for the actual compiled warp path.
+-
++
+     int m_viewportWidth{};  //!< Last known viewport width.
+     int m_viewportHeight{}; //!< Last known viewport height.
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -1,4 +1,6 @@
+ #include "PerPixelMesh.hpp"
++
++#include <array>
+-
++
+ #include "MilkdropShader.hpp"
+ #include "MilkdropStaticShaders.hpp"
+@@ -149,7 +151,10 @@
+         m_warpMesh.Indices().Resize(m_gridSizeX * m_gridSizeY * 6);
+     }
+     else if (m_viewportWidth == presetState.renderContext.viewportSizeX &&
+-             m_viewportHeight == presetState.renderContext.viewportSizeY)
++             m_viewportHeight == presetState.renderContext.viewportSizeY &&
++             m_meshAspectX == presetState.renderContext.aspectX &&
++             m_meshAspectY == presetState.renderContext.aspectY &&
++             m_legacyIndices == !m_warpShader)
+     {
+         // Nothing changed, just go on to the dynamic calculation.
+         return;
+@@ -157,6 +162,8 @@
+-
++
+     const float aspectX = presetState.renderContext.aspectX;
+     const float aspectY = presetState.renderContext.aspectY;
++    m_meshAspectX = aspectX;
++    m_meshAspectY = aspectY;
+-
++
+     // Remember what the static mesh data is built for, so it is only rebuilt and uploaded again
+     // when the viewport or the grid changes, not every frame.
+@@ -189,6 +196,14 @@
+             vertexIndex++;
+         }
+     }
++
++    // Match original physical legacy diagonal, preserving custom topology.
++    // Released0016 marks this rebuilt static mesh dirty for the next upload.
++    m_legacyIndices = !m_warpShader;
++    const uint32_t stride = m_gridSizeX + 1;
++    const std::array<uint32_t, 6> offsets = m_legacyIndices
++        ? std::array<uint32_t, 6>{0, 1, stride + 1, 0, stride, stride + 1}
++        : std::array<uint32_t, 6>{0, 1, stride, 1, stride, stride + 1};
+-
++
+     // Generate triangle lists for drawing the main warp mesh
+     int vertexListIndex{0};
+@@ -212,15 +227,12 @@
+-
++
+                 int const vertex = xReference + yReference * (m_gridSizeX + 1);
+-
++
+-                // 0 - 1      3
+-                //   /      /
+-                // 2      4 - 5
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex;
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex + 1;
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex + m_gridSizeX + 1;
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex + 1;
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex + m_gridSizeX + 1;
+-                m_warpMesh.Indices()[vertexListIndex++] = vertex + m_gridSizeX + 2;
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[0];
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[1];
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[2];
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[3];
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[4];
++                m_warpMesh.Indices()[vertexListIndex++] = vertex + offsets[5];
+             }
+         }
+     }

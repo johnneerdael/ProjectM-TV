@@ -1,0 +1,103 @@
+[
+  {
+    "name": "$$$ Royal - Mashup (114).milk",
+    "sha256": "41d5e38b54fcaef5f0426b38e16012e715eace41e83ff64aa3ab681e69508437",
+    "copy": "originals/$$$ Royal - Mashup (114).milk",
+    "trigger_evidence": [
+      [
+        {
+          "line": 398,
+          "key": "wavecode_3_g",
+          "value": "0.300"
+        },
+        {
+          "line": 399,
+          "key": "wavecode_3_b",
+          "value": "0.100"
+        }
+      ],
+      [
+        {
+          "line": 7,
+          "key": "fGammaAdj",
+          "value": "0.160"
+        },
+        {
+          "line": 10,
+          "key": "fVideoEchoAlpha",
+          "value": "0.500"
+        },
+        {
+          "line": 34,
+          "key": "fShader",
+          "value": "0.000"
+        }
+      ]
+    ],
+    "runtime_or_visual_impact": "unconfirmed"
+  },
+  {
+    "name": "39.milk",
+    "sha256": "c82d8fe2c9da3bbab1dd643b21624be3923d8665ec7cf245dd97fca60c89d7f5",
+    "copy": "originals/39.milk",
+    "trigger_evidence": [
+      [
+        {
+          "line": 400,
+          "key": "shapecode_2_r",
+          "value": "0.500"
+        }
+      ],
+      [
+        {
+          "line": 7,
+          "key": "fGammaAdj",
+          "value": "0.160"
+        },
+        {
+          "line": 10,
+          "key": "fVideoEchoAlpha",
+          "value": "0.500"
+        },
+        {
+          "line": 34,
+          "key": "fShader",
+          "value": "0.000"
+        }
+      ]
+    ],
+    "runtime_or_visual_impact": "unconfirmed"
+  },
+  {
+    "name": "va ultramix - 05_2.milk",
+    "sha256": "8f1380a3c7a64c76573f3a1f533ee59d8e7b646230d79d8ba59b31625c75e920",
+    "copy": "originals/va ultramix - 05_2.milk",
+    "trigger_evidence": [
+      [
+        {
+          "line": 224,
+          "key": "shapecode_2_border_a",
+          "value": "0.100000"
+        }
+      ],
+      [
+        {
+          "line": 3,
+          "key": "fGammaAdj",
+          "value": "0.900000"
+        },
+        {
+          "line": 6,
+          "key": "fVideoEchoAlpha",
+          "value": "0.000000"
+        },
+        {
+          "line": 34,
+          "key": "fShader",
+          "value": "0.000000"
+        }
+      ]
+    ],
+    "runtime_or_visual_impact": "unconfirmed"
+  }
+]

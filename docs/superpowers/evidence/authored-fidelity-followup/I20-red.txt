@@ -1,0 +1,169 @@
+FAIL 256x256 time=0.000000 audio=0 pre-smoothing closure count
+FAIL 256x256 time=0.000000 audio=0 smoothed closure count
+FAIL 256x256 time=0.000000 audio=0 explicit endpoint must draw as strip
+FAIL 256x256 time=0.000000 audio=0 point120 denominator239
+FAIL 256x256 time=0.000000 audio=0 exact raw duplicate
+FAIL 256x256 time=0.000000 audio=0 exact smoothed duplicate
+FAIL 256x256 time=0.000000 audio=0 Native strip segment count
+raw120=-2.87431e+27,4.57749e+24 count=240 smoothed=479
+FAIL 256x256 time=0.000000 audio=1 pre-smoothing closure count
+FAIL 256x256 time=0.000000 audio=1 smoothed closure count
+FAIL 256x256 time=0.000000 audio=1 explicit endpoint must draw as strip
+FAIL 256x256 time=0.000000 audio=1 point120 denominator239
+FAIL 256x256 time=0.000000 audio=1 exact raw duplicate
+FAIL 256x256 time=0.000000 audio=1 exact smoothed duplicate
+FAIL 256x256 time=0.000000 audio=1 Native strip segment count
+FAIL 256x256 time=1.500000 audio=0 pre-smoothing closure count
+FAIL 256x256 time=1.500000 audio=0 smoothed closure count
+FAIL 256x256 time=1.500000 audio=0 explicit endpoint must draw as strip
+FAIL 256x256 time=1.500000 audio=0 point120 denominator239
+FAIL 256x256 time=1.500000 audio=0 exact raw duplicate
+FAIL 256x256 time=1.500000 audio=0 exact smoothed duplicate
+FAIL 256x256 time=1.500000 audio=0 Native strip segment count
+FAIL 256x256 time=1.500000 audio=1 pre-smoothing closure count
+FAIL 256x256 time=1.500000 audio=1 smoothed closure count
+FAIL 256x256 time=1.500000 audio=1 explicit endpoint must draw as strip
+FAIL 256x256 time=1.500000 audio=1 point120 denominator239
+FAIL 256x256 time=1.500000 audio=1 exact raw duplicate
+FAIL 256x256 time=1.500000 audio=1 exact smoothed duplicate
+FAIL 256x256 time=1.500000 audio=1 Native strip segment count
+FAIL 256x144 time=0.000000 audio=0 pre-smoothing closure count
+FAIL 256x144 time=0.000000 audio=0 smoothed closure count
+FAIL 256x144 time=0.000000 audio=0 explicit endpoint must draw as strip
+FAIL 256x144 time=0.000000 audio=0 point120 denominator239
+FAIL 256x144 time=0.000000 audio=0 exact raw duplicate
+FAIL 256x144 time=0.000000 audio=0 exact smoothed duplicate
+FAIL 256x144 time=0.000000 audio=0 Native strip segment count
+FAIL 256x144 time=0.000000 audio=1 pre-smoothing closure count
+FAIL 256x144 time=0.000000 audio=1 smoothed closure count
+FAIL 256x144 time=0.000000 audio=1 explicit endpoint must draw as strip
+FAIL 256x144 time=0.000000 audio=1 point120 denominator239
+FAIL 256x144 time=0.000000 audio=1 exact raw duplicate
+FAIL 256x144 time=0.000000 audio=1 exact smoothed duplicate
+FAIL 256x144 time=0.000000 audio=1 Native strip segment count
+FAIL 256x144 time=1.500000 audio=0 pre-smoothing closure count
+FAIL 256x144 time=1.500000 audio=0 smoothed closure count
+FAIL 256x144 time=1.500000 audio=0 explicit endpoint must draw as strip
+FAIL 256x144 time=1.500000 audio=0 point120 denominator239
+FAIL 256x144 time=1.500000 audio=0 exact raw duplicate
+FAIL 256x144 time=1.500000 audio=0 exact smoothed duplicate
+FAIL 256x144 time=1.500000 audio=0 Native strip segment count
+FAIL 256x144 time=1.500000 audio=1 pre-smoothing closure count
+FAIL 256x144 time=1.500000 audio=1 smoothed closure count
+FAIL 256x144 time=1.500000 audio=1 explicit endpoint must draw as strip
+FAIL 256x144 time=1.500000 audio=1 point120 denominator239
+FAIL 256x144 time=1.500000 audio=1 exact raw duplicate
+FAIL 256x144 time=1.500000 audio=1 exact smoothed duplicate
+FAIL 256x144 time=1.500000 audio=1 Native strip segment count
+FAIL 3840x2160 time=0.000000 audio=0 pre-smoothing closure count
+FAIL 3840x2160 time=0.000000 audio=0 smoothed closure count
+FAIL 3840x2160 time=0.000000 audio=0 explicit endpoint must draw as strip
+FAIL 3840x2160 time=0.000000 audio=0 point120 denominator239
+FAIL 3840x2160 time=0.000000 audio=0 exact raw duplicate
+FAIL 3840x2160 time=0.000000 audio=0 exact smoothed duplicate
+FAIL 3840x2160 time=0.000000 audio=0 Native strip segment count
+FAIL 3840x2160 time=0.000000 audio=1 pre-smoothing closure count
+FAIL 3840x2160 time=0.000000 audio=1 smoothed closure count
+FAIL 3840x2160 time=0.000000 audio=1 explicit endpoint must draw as strip
+FAIL 3840x2160 time=0.000000 audio=1 point120 denominator239
+FAIL 3840x2160 time=0.000000 audio=1 exact raw duplicate
+FAIL 3840x2160 time=0.000000 audio=1 exact smoothed duplicate
+FAIL 3840x2160 time=0.000000 audio=1 Native strip segment count
+FAIL 3840x2160 time=1.500000 audio=0 pre-smoothing closure count
+FAIL 3840x2160 time=1.500000 audio=0 smoothed closure count
+FAIL 3840x2160 time=1.500000 audio=0 explicit endpoint must draw as strip
+FAIL 3840x2160 time=1.500000 audio=0 point120 denominator239
+FAIL 3840x2160 time=1.500000 audio=0 exact raw duplicate
+FAIL 3840x2160 time=1.500000 audio=0 exact smoothed duplicate
+FAIL 3840x2160 time=1.500000 audio=0 Native strip segment count
+FAIL 3840x2160 time=1.500000 audio=1 pre-smoothing closure count
+FAIL 3840x2160 time=1.500000 audio=1 smoothed closure count
+FAIL 3840x2160 time=1.500000 audio=1 explicit endpoint must draw as strip
+FAIL 3840x2160 time=1.500000 audio=1 point120 denominator239
+FAIL 3840x2160 time=1.500000 audio=1 exact raw duplicate
+FAIL 3840x2160 time=1.500000 audio=1 exact smoothed duplicate
+FAIL 3840x2160 time=1.500000 audio=1 Native strip segment count
+FAIL 3840x2160 time=0.000000 audio=0 pre-smoothing closure count
+FAIL 3840x2160 time=0.000000 audio=0 smoothed closure count
+FAIL 3840x2160 time=0.000000 audio=0 explicit endpoint must draw as strip
+FAIL 3840x2160 time=0.000000 audio=0 point120 denominator239
+FAIL 3840x2160 time=0.000000 audio=0 exact raw duplicate
+FAIL 3840x2160 time=0.000000 audio=0 exact smoothed duplicate
+FAIL 3840x2160 time=0.000000 audio=0 Native strip segment count
+FAIL 3840x2160 time=0.000000 audio=1 pre-smoothing closure count
+FAIL 3840x2160 time=0.000000 audio=1 smoothed closure count
+FAIL 3840x2160 time=0.000000 audio=1 explicit endpoint must draw as strip
+FAIL 3840x2160 time=0.000000 audio=1 point120 denominator239
+FAIL 3840x2160 time=0.000000 audio=1 exact raw duplicate
+FAIL 3840x2160 time=0.000000 audio=1 exact smoothed duplicate
+FAIL 3840x2160 time=0.000000 audio=1 Native strip segment count
+FAIL 3840x2160 time=1.500000 audio=0 pre-smoothing closure count
+FAIL 3840x2160 time=1.500000 audio=0 smoothed closure count
+FAIL 3840x2160 time=1.500000 audio=0 explicit endpoint must draw as strip
+FAIL 3840x2160 time=1.500000 audio=0 point120 denominator239
+FAIL 3840x2160 time=1.500000 audio=0 exact raw duplicate
+FAIL 3840x2160 time=1.500000 audio=0 exact smoothed duplicate
+FAIL 3840x2160 time=1.500000 audio=0 Native strip segment count
+FAIL 3840x2160 time=1.500000 audio=1 pre-smoothing closure count
+FAIL 3840x2160 time=1.500000 audio=1 smoothed closure count
+FAIL 3840x2160 time=1.500000 audio=1 explicit endpoint must draw as strip
+FAIL 3840x2160 time=1.500000 audio=1 point120 denominator239
+FAIL 3840x2160 time=1.500000 audio=1 exact raw duplicate
+FAIL 3840x2160 time=1.500000 audio=1 exact smoothed duplicate
+FAIL 3840x2160 time=1.500000 audio=1 Native strip segment count
+FAIL 144x256 time=0.000000 audio=0 pre-smoothing closure count
+FAIL 144x256 time=0.000000 audio=0 smoothed closure count
+FAIL 144x256 time=0.000000 audio=0 explicit endpoint must draw as strip
+FAIL 144x256 time=0.000000 audio=0 point120 denominator239
+FAIL 144x256 time=0.000000 audio=0 exact raw duplicate
+FAIL 144x256 time=0.000000 audio=0 exact smoothed duplicate
+FAIL 144x256 time=0.000000 audio=0 Native strip segment count
+FAIL 144x256 time=0.000000 audio=1 pre-smoothing closure count
+FAIL 144x256 time=0.000000 audio=1 smoothed closure count
+FAIL 144x256 time=0.000000 audio=1 explicit endpoint must draw as strip
+FAIL 144x256 time=0.000000 audio=1 point120 denominator239
+FAIL 144x256 time=0.000000 audio=1 exact raw duplicate
+FAIL 144x256 time=0.000000 audio=1 exact smoothed duplicate
+FAIL 144x256 time=0.000000 audio=1 Native strip segment count
+FAIL 144x256 time=1.500000 audio=0 pre-smoothing closure count
+FAIL 144x256 time=1.500000 audio=0 smoothed closure count
+FAIL 144x256 time=1.500000 audio=0 explicit endpoint must draw as strip
+FAIL 144x256 time=1.500000 audio=0 point120 denominator239
+FAIL 144x256 time=1.500000 audio=0 exact raw duplicate
+FAIL 144x256 time=1.500000 audio=0 exact smoothed duplicate
+FAIL 144x256 time=1.500000 audio=0 Native strip segment count
+FAIL 144x256 time=1.500000 audio=1 pre-smoothing closure count
+FAIL 144x256 time=1.500000 audio=1 smoothed closure count
+FAIL 144x256 time=1.500000 audio=1 explicit endpoint must draw as strip
+FAIL 144x256 time=1.500000 audio=1 point120 denominator239
+FAIL 144x256 time=1.500000 audio=1 exact raw duplicate
+FAIL 144x256 time=1.500000 audio=1 exact smoothed duplicate
+FAIL 144x256 time=1.500000 audio=1 Native strip segment count
+FAIL 256x256 time=2.000000 audio=1 pre-smoothing closure count
+FAIL 256x256 time=2.000000 audio=1 smoothed closure count
+FAIL 256x256 time=2.000000 audio=1 explicit endpoint must draw as strip
+FAIL 256x256 time=2.000000 audio=1 point120 denominator239
+FAIL 256x256 time=2.000000 audio=1 exact raw duplicate
+FAIL 256x256 time=2.000000 audio=1 exact smoothed duplicate
+FAIL 256x256 time=2.000000 audio=1 Native strip segment count
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+FAIL circle production closure/dot/segment submission
+failures=167

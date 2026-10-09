@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify the frozen 17×8 Native trails matrix and export diagnostic evidence."""
 import argparse
+import ast
 import csv
 import hashlib
 import html
@@ -11,6 +12,7 @@ import os
 from pathlib import Path
 import shutil
 import zipfile
+from typing import Callable
 
 import cv2
 import numpy as np
@@ -53,7 +55,8 @@ def user_scope(protocol, legacy_runner=None):
         require(legacy_runner is None, "Use legacy source only with historical schema1")
         user_id = runner.validate_user_id(protocol.get("user_id"))
         require(protocol["runner_sha256"] == file_digest(Path(runner.__file__)), "Frozen runner changed")
-        return {"mode": "explicit-user", "user_id": user_id, "runner_sha256": protocol["runner_sha256"]}
+        return {"mode": "explicit-user", "user_id": user_id, "runner_sha256": protocol["runner_sha256"],
+                "capture_read_target": "verified final-output read framebuffer zero"}
     require(legacy_runner is not None, "Historical schema1 requires explicit --legacy-runner source; it did not freeze the Android user")
     require("user_id" not in protocol and protocol["runner_sha256"] == LEGACY_RUNNER_SHA256,
             "Unknown legacy user scope/source")
@@ -61,7 +64,25 @@ def user_scope(protocol, legacy_runner=None):
     require(file_digest(legacy_runner) == LEGACY_RUNNER_SHA256, "Frozen legacy runner checksum differs")
     return {"mode": "historical-user-zero", "user_id": 0, "runner_sha256": LEGACY_RUNNER_SHA256,
             "original_validator_source": str(legacy_runner), "source_commit": LEGACY_SOURCE_COMMIT,
+            "capture_read_target": "unrecorded historical read framebuffer; final-output capture not certified",
             "limitation": "Static verification of previously verified user0 captures; original runtime commands were unscoped and schema1 did not capture the active user"}
+
+
+def historical_verifier(source: Path) -> Callable[[Path, dict, str], dict]:
+    """Load only the original stateless verification function from pinned bytes."""
+    content = source.read_bytes()
+    require(hashlib.sha256(content).hexdigest() == LEGACY_RUNNER_SHA256,
+            "Frozen legacy runner checksum differs")
+    tree = ast.parse(content, filename=str(source))
+    functions = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "verify"]
+    require(len(functions) == 1, "Frozen legacy runner must contain one verify function")
+    # Never import the archived module: its top level assumes a checkout path,
+    # and its runtime helpers issue obsolete unscoped device commands.
+    namespace = {"json": json, "hashlib": hashlib, "canonical_json": canonical_json,
+                 "file_digest": file_digest, "CAPTURES": runner.CAPTURES}
+    module = ast.Module(body=functions, type_ignores=[])
+    exec(compile(module, str(source), "exec"), namespace)
+    return namespace["verify"]
 
 
 def verify_worker(identity, presets):
@@ -124,6 +145,8 @@ def collect_matrix(work, preset_root, names, partial=False, legacy_runner=None):
     """Missing work is diagnostic only with partial; corrupted work always fails."""
     protocol = verify_protocol(work, preset_root, names, legacy_runner)
     scope = user_scope(protocol, legacy_runner)
+    verify_capture = (historical_verifier(Path(scope["original_validator_source"]))
+                      if protocol["schema"] == 1 else runner.verify)
     protocol_sha = digest(protocol)
     expected = {}
     for preset, sha in protocol["presets"].items():
@@ -155,7 +178,7 @@ def collect_matrix(work, preset_root, names, partial=False, legacy_runner=None):
         request = dict(runner.request(preset, width, height, rw, rh, level),
                        pcmPath=private + "/audio.u8", outputDir=private + "/output")
         require(read(directory / "request.json") == request, "Frozen request differs: " + key)
-        manifest = runner.verify(directory, request, sha)
+        manifest = verify_capture(directory, request, sha)
         for capture in manifest["captures"]:
             require((capture["width"], capture["height"]) == (width, height), "Capture metadata dimensions differ")
             # IMREAD_COLOR alone normalizes 16-bit inputs to RGB8. Retain the
@@ -379,7 +402,7 @@ def summarize(work, output, partial=False, preset_root=None, names=None, legacy_
                                    "sharpness": "OpenCV default 3x3 Laplacian variance on native-size normalized luma; resolution-dependent",
                                    "near_black_floor": DARK_FLOOR, "regularized_ratio": "(luma+.001)/(authored_luma+.001)",
                                    "acceptance": "No fixed numeric acceptance threshold; all images require visual review"},
-                limitations=[protocol["limitations"], TIMING_SCOPE,
+                limitations=[protocol["limitations"], TIMING_SCOPE, matrix["user_scope"]["capture_read_target"],
                              "Guest process PSS excludes some host GPU allocations; correlated observations, not all GPU memory",
                              "Only eight selected RGB hashes, not all 480 frames; chaotic divergence can inflate MAE",
                              "Authored profile renders at1280x720; metrics downsample all profiles to1182x665; historical numbers may use different authored sizes",
@@ -407,8 +430,9 @@ def summarize(work, output, partial=False, preset_root=None, names=None, legacy_
         '<h1>%s</h1><p>%d/136 verified jobs. Preview rows: frame120,300,479; columns: Authored, old Native, Standard, Medium, High. '
         'Same normalized center-quarter crop in every profile. Frame300 full PNGs are self-contained; other full links use retained raw captures.</p>'
         '<p>Metrics are diagnostics, not acceptance. Near-black and chaotic presets need visual review. Timings are serialized emulator engine work; '
-        'guest PSS excludes some host GPU allocations.</p><p><a href="summary.json">JSON evidence</a> · <a href="per-preset.csv">Per-preset CSV</a></p>%s' %
-        (html.escape(title), html.escape(title), matrix["verified_jobs"], gallery))
+        'guest PSS excludes some host GPU allocations.</p><p>Capture read target: %s.</p><p><a href="summary.json">JSON evidence</a> · <a href="per-preset.csv">Per-preset CSV</a></p>%s' %
+        (html.escape(title), html.escape(title), matrix["verified_jobs"],
+         html.escape(matrix["user_scope"]["capture_read_target"]), gallery))
     return data
 
 

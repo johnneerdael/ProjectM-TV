@@ -1,0 +1,57 @@
+# I15/I23 retained Native style packet — source-only
+
+No configure/build, GPU/device, Git or canonical/helper change occurred. The standalone source and CMake wrapper are uncompiled proposals until the parent runs them. Retain current visibility, Native/reference scaling, styles, diffusion, prepared replay and waveform/shape policies. No global Native4K rollback or shipping patch is proposed.
+
+## I15 source arithmetic and ownership
+
+Original milkdropfs.cpp1299 uses threshold1/width. Current MotionVectors.cpp computes sqrt((1.25/W)^2+(1.25/H)^2) and passes it through DiffusionMotionVectorMinimum: multiply by max(1,LineScale) only when diffusion is active. Current aspect-aware base predates TV patches; the diffusion correction is retained TV policy.
+
+These values are **thresholds**, not zero-vector segment lengths. For exactly zero displacement, source assigns each normalized endpoint component offset(min,min), so normalized segment length=sqrt(2)*min. For nonzero displacement below threshold, source preserves its direction and rescales to threshold; sufficiently long displacement remains unchanged. Pixel components of the zero fallback are(W*min,H*min), not one isotropic pixel. At256×144 without diffusion: original(min,min)=(.00390625,.00390625) gives(1,.5625) pixel components; current min≈.009959614 gives(2.549661,1.434184). Same width at square256 makes current pixel components≈(1.767767,1.767767), while original remains(1,1).
+
+At Native3840×2160/reference1280×720, scale3:
+
+- Native diffusion off: current threshold≈.0006639743, zero pixel components≈(2.549661,1.434184).
+- Native diffusion on: threshold≈.0019919227, components≈(7.648983,4.302553).
+- Separate authored1280×720 draw: references0/diffusion false, threshold≈.0019919227, components≈(2.549661,1.434184) at that target; later presentation scaling is separate.
+
+Detail-active code normally disables native feedback diffusion and explicitly disables it for authored motion drawing; do not assume both passes receive the same boolean/minimum. Record actual active/fallback status. The standalone Draw(...,diffusion) controls prove this parameter's production calculation, not that the full renderer chose it correctly.
+
+Motion sampling uses the **previous field texture**, at(x,1−y), before current-frame warp refresh. The proposed CGL control supplies owned uniform RG16F2×2 maps with exact-half values and explicit previous/next labels. Grid2×2 plus offsets(.3,−.3) admits one start(.5,.5); maps(.5,.5),(.50048828125,.5),(.75,.5) isolate zero/small/long displacement. It verifies actual selected texture ID and actual vertex-shader endpoints. Creating a distinct next map must not replace the explicitly passed previous map; passing next explicitly changes the result. This is API/texture-ownership proof, not full MilkdropPreset generation swapping or I16 stale re-enable qualification. Parent must separately capture frame-n consumption of generation(n−1), resize/context/preset behavior and first-frame admission in the actual renderer.
+
+Zero-alpha motion returns false and submits no draw. Positive-alpha admitted point submits one indexed GL_LINES/count2 below reference or one Native instanced GL_TRIANGLE_STRIP/count4/instances1 (two triangles). The minimum changes endpoint positions, not primitive counts. Long displacement(.25,0) stays unchanged across both minimum policies and diffusion settings.
+
+## I23 source-versus-source offset boundary
+
+Original milkdropfs.cpp2455 and2738 use clip-coordinate increments(2/W,2/H), giving one pixel per axis in a matched target. Current custom waves use(1/W,1/W), giving(.5,H/(2W)) pixel magnitudes; shape outlines use(1/W,1/H), giving(.5,.5). The source comments explicitly retain ±1 offsets as the upstream rendering policy. Normalized increments occur before the existing projection; current negative-Y projection makes positive source Y offsets negative clip Y. Compare pass deltas, not a casually labelled absolute screen-coordinate sign.
+
+At matched256×144, custom extra-pass magnitudes are(.5,.28125) versus original(1,1); shape(.5,.5) versus original(1,1). The four-pass schedule remains(0,0),(dx,0),(dx,dy),(0,dy). Native LineStyleFor multiplies current increments by scale and widens its band: at3840×2160/reference1280×720, custom offsets(1.5,.84375) pixels and shape(1.5,1.5), half-width1.5px. Authored1280×720 target uses current unscaled offsets(.5,.28125)/(.5,.5). Main wave retains a different2/W,2/H policy and is excluded from I23 rollback.
+
+Current shapes also have a common half-destination-pixel projection phase. Keep it in all current/reference traces; it cancels when computing relative pass deltas. Do not confuse that common bias with thick offsets or remove it incidentally. Shape/custom-wave float color transport and point equations remain unchanged.
+
+## Actual-production CGL control proposal
+
+`motion_style_controls.cpp` invokes production MotionVectors, CustomWaveform and CustomShape with real compiled shaders and geometry. It reads actual minimum/length/half-width/pass-offset uniforms, selected texture, submitted alpha, primitive/instance counts and GL viewport/target, then captures **production vertex-shader gl_Position** using transform feedback. The test-only link observer adds gl_Position capture metadata before forwarding actual links. Required varying/link status must exist; a fallback/binary-cache path does not silently qualify.
+
+For array/instanced draws, the actual production call is forwarded once under rasterizer discard/TF. For indexed lines, the hook verifies actual continuous uint32 indices, forwards production DrawElements once, then performs an explicitly test-only DrawArrays shadow through the same production program/VAO for TF because indexed TF admission differs across GL versions. Shadow calls do not count as production draws or performance work. No replacement vertex shader or CPU-cloned endpoint producer is used. Native quad TF emits two triangles; averaging its two end corners recovers the actual line endpoint center. CGL has zero LineTieBias; the proposal is deliberately CGL-only and does not pretend to qualify GLES tie bias, program binaries or capture admission.
+
+The custom-wave finite control has2 authored points,3 smoothed points and2 segments; actual EEL frame/point counters must be1/2 even under two-target replay. Thin/thick authored submits1/4 indexed GL_LINE_STRIP/count3; Native replay submits1/4 instanced triangle strips/count4/instances2. Shape has4 corners,1 fill fan/count6, and1/4 authored GL_LINE_LOOP/count4 outlines; Native replay1/4 strips/count4/instances4. Shape frame counter remains1. Source-only assertions verify current offsets/widths and deltas between actual captured vertex positions rather than relying solely on the style helper.
+
+Alpha0 caveats are deliberate: custom waves still submit transparent line passes; shape border alpha0 removes outline calls but retains its transparent fill fan. Motion alpha0 alone guarantees no draw. The observer counts shape fills separately and checks exact current schedules. Color/alpha suppression optimizations are not added by this packet.
+
+The CGL targets allocate actual3840×2160 and1280×720 buffers for production context/GeometryTargets replay, but TF/raster-discard capture is a stage test, not a final Native presentation/feedback screenshot. It also does not implement the whole engine's audio/clock/pressure lifecycle. Parent must freeze source/compiler/GL identity, run only the requested target, retain its output, and perform separate final Native captures/cost. Instrumented GL mapping/TF timings are not shipping performance evidence.
+
+## Finite diagnostic/oracle design
+
+New I15 finite live presets use finite identity warp parameters, explicit vectors and no other geometry. Their compiled warp preserves feedback with GetPixel(uv): motion vectors draw before warp, so a constant-black warp would erase them and invalidate a final-image witness. Start from a verified black field, retain identity feedback, and record actual prior-field ownership/initialization. mv_l0 guarantees the zero minimum branch on a valid finite prior map; use at least the second completed frame. Alpha0, long-displacement and diffusion-off/on conditions require separate controlled map/renderer-stage records; a standalone .milk cannot force the diffusion engine boolean or inject a prior UV map. Explicit endpoint-vector oracle siblings use a custom two-point wave over black instead, with current/original source-derived offsets embedded. They illustrate endpoint arithmetic only; their line renderer/color/feedback policies are not a full original motion-vector oracle.
+
+New I23 finite live siblings isolate one thick two-point custom wave or one4-corner thick outline over constant-black feedback. Native/current and original-offset oracle designs are separated in diagnostics.json. At a matched256×144 target, an original-offset surrogate uses four thin copies offset by source-normalized(2/W,2/H); source per-point y increases in the opposite direction from clip y, so its normalized texture-position y shift is−1/H. Preserve this sign/phase. A Native/reference oracle based on original one-reference-pixel increments would scale to3 physical pixels; it is a labelled reference-policy surrogate, not proof of Windows Native4K semantics. Do not apply that3px oracle globally or confuse it with original one-physical-pixel behavior at an independently declared4K target.
+
+## Originals, source identities and limitations
+
+I15 strong source candidate: `Rovastar - Parallelogram Bin 2.milk`, SHA256f9d50349cd553c96ebfb395bcbd715246c63333a218057a6cf4ce746a252d86e, vectors64×48/mv_l0/mv_a1 and wave_a0. Its per-pixel sin(.../x),cos(.../y) equations have undefined/nonfinite original axis behavior. Do not manufacture a cleaned full-original oracle by substituting zeros. Capture actual finite interior stage values and current unchanged-preset Native output; source-minimum diagnostics remain independent. The research's98 static zero-length cases are a conditional inventory, not an affected census.
+
+I23 wave source candidate: `$$$ Royal - Mashup (113).milk`, SHA2565a15da0f2d10a9f4d1221170b47238a676f216204c1933f4cd094d2e200c78e9: waves0/1 are enabled, nondot, thick with positive file alpha; audio/time-driven point code still needs execution qualification. The handoff shortlist's Royal(10) wave3 is dots, so its thick flag cannot by itself witness line-offset passes. No confirmed unchanged shape-outline original is supplied here; finite shape controls cover that source path. identities.json retains exact bytes/trigger lines and exclusions. The4951 broad lexical handoff matches are not verified active thick-line cases.
+
+Retention introduces no new shipping work. Current four passes, Native instance/triangle counts, per-preset resources and reference/diffusion policies remain. Root owns actual CGL success, ABI-bound Native screenshots, repeat/cost and final disposition. This packet does not close either ID.
+
+Parent executed corrected actual-production CGL controls successfully and44Native4K runs. All22 repeat groups/352 PNGchecks pass. The firstpreparedbuild neededtheactualWave initAPI frameargument; empty equationarrays causedreplaycounterfailure untilState.Initialize(parser) was added. I14samplerqueryprofilefailure isseparate. Source/imageoracle scope review remainsopen; no fulloriginalappearance orretainedpolicycompletion claim yet.

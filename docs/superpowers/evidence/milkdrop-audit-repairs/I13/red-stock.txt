@@ -1,0 +1,3 @@
+stock_file_default_stage left-axis sy=1.0999 expected=0.8999 raw_angle=3.14159
+failures=1
+FAIL exact stock per-pixel code at file-default left-axis stage

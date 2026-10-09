@@ -1,0 +1,11 @@
+{
+  "engine": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9",
+  "engine_sources": {
+    "BlurTexture.cpp": "e3c50d8dd46f8e3217a31bf42b9ca7877315e35d318dfa07485cc12283c32103",
+    "MilkdropShader.cpp": "3e658e0856ab36518b41ee59afebf82b5f5de136abfa3ddd713f338b5b71de9b",
+    "Shaders/PresetShaderHeaderGlsl330.inc": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b"
+  },
+  "retained_patch_sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a",
+  "original_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+  "status": "retained policy/source packet; root screenshots pending"
+}

@@ -1,0 +1,12 @@
+--- a/vendor/projectm-eval/projectm-eval/CMakeLists.txt
++++ b/vendor/projectm-eval/projectm-eval/CMakeLists.txt
+@@ -81,2 +81,8 @@
+-
++
++# Keep explicit NaN/Inf guards in TreeFunctions.c under evaluator fast-math.
++# Source options follow directory/target options, overriding finite-only assumptions.
++if(CMAKE_C_COMPILER_ID MATCHES "^(Clang|AppleClang|GNU)$")
++    set_property(SOURCE TreeFunctions.c APPEND PROPERTY COMPILE_OPTIONS -fno-finite-math-only)
++endif()
++
+ set_target_properties(projectM_eval PROPERTIES

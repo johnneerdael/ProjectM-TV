@@ -1,0 +1,45 @@
+[0/1] Re-running CMake...
+-- Git revision: 6f64807467e312034883a4389e6aa80a675458bc
+-- Building for OpenGL Core Profile
+-- 
+-- libprojectM v4.2.0
+-- ==============================================
+-- 
+--     prefix:                      /usr/local
+--     libdir:                      lib
+--     includedir:                  include
+--     bindir:                      bin
+-- 
+--     compiler:                    /usr/bin/c++
+--     cflags:                      
+--     cxxflags:                    
+--     ldflags:                     
+-- 
+-- Features:
+-- ==============================================
+-- 
+--     Build shared libraries:      OFF
+--     Filesystem support:          C++17 STL
+--     SDL2:                        OFF
+--     OpenGL ES:                   OFF
+--     macOS Framework:             OFF
+--     Emscripten:                  OFF
+--     Use system GLM:              OFF
+--     Use system projectM-eval:    OFF
+-- 
+-- Targets and applications:
+-- ==============================================
+-- 
+--     libprojectM:                 (always built)
+--     Playlist library:            OFF
+--     SDL2 Test UI:                OFF
+--     Tests:                       OFF
+--     Documentation:               OFF
+-- 
+-- Configuring done (0.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/extended-mode-proposal/cgl-normal
+[1/5] Building CXX object production-controls/projectm/src/libprojectM/CMakeFiles/projectM.dir/__/__/dummy.cpp.o
+[2/5] Linking CXX static library production-controls/projectm/src/libprojectM/libprojectM-4d.a
+[3/5] Building CXX object CMakeFiles/extended-mode-controls.dir/extended_mode_controls.cpp.o
+[4/5] Linking CXX executable extended-mode-controls

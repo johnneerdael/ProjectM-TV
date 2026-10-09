@@ -1,0 +1,8 @@
+[1/4] Building CXX object engine/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelMesh.cpp.o
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/angle-seam-proposal/source/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp:380:22: warning: unused variable 'attachments' [-Wunused-variable]
+  380 |         const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+      |                      ^~~~~~~~~~~
+1 warning generated.
+[2/4] Linking CXX static library engine/src/libprojectM/libprojectM-4d.a
+[3/4] Building CXX object CMakeFiles/angle-seam-controls.dir/angle_seam_controls.cpp.o
+[4/4] Linking CXX executable angle-seam-controls

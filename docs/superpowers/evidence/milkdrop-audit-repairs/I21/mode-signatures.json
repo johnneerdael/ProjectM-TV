@@ -1,0 +1,114 @@
+[
+  {
+    "mode": 0,
+    "factory": "Circle",
+    "signature": "one circular loop",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Circle.cpp",
+    "sha256": "65abde3d8814ce3f9ebf2cbce017c58e212298168c04759b78f9e2b0b08294ac"
+  },
+  {
+    "mode": 1,
+    "factory": "XYOscillationSpiral",
+    "signature": "one XY spiral open strip; retained1.25 alpha boost",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp",
+    "sha256": "e5932144b3dcd454d92b88d8b1020c388faa2dde941025e1f7cba6716a1234fb"
+  },
+  {
+    "mode": 2,
+    "factory": "CenteredSpiro",
+    "signature": "centered spiro; mode-adjusted alpha",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/CenteredSpiro.cpp",
+    "sha256": "3e76d5107bc272965f2eaeabdeccd0ab8c4c561895b8dbb6a3548a85012a59af"
+  },
+  {
+    "mode": 3,
+    "factory": "CenteredSpiro",
+    "signature": "same geometry as2; independent replacement opacity",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/CenteredSpiro.cpp",
+    "sha256": "3e76d5107bc272965f2eaeabdeccd0ab8c4c561895b8dbb6a3548a85012a59af"
+  },
+  {
+    "mode": 4,
+    "factory": "DerivativeLine",
+    "signature": "one derivative line",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp",
+    "sha256": "c991b71f4fd61330be7ec3f9df0f170e95a22b2a8513a4ee111560bd512d5be7"
+  },
+  {
+    "mode": 5,
+    "factory": "ExplosiveHash",
+    "signature": "explosive hash",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/ExplosiveHash.cpp",
+    "sha256": "2cf76a73679d56a17f879692d336ae28f5503f35901013ace0be47affe248963"
+  },
+  {
+    "mode": 6,
+    "factory": "Line",
+    "signature": "one adjustable PCM line",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp",
+    "sha256": "8f41f0c641604f150fd174a401a21d06a52316e912fdf610c923bbd29162c508"
+  },
+  {
+    "mode": 7,
+    "factory": "DoubleLine",
+    "signature": "two separated PCM lines",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp",
+    "sha256": "036ce31bb3d44a0eb8462c6e55d78730e1cfff91c7daa74a58ef0542a5ea7442"
+  },
+  {
+    "mode": 8,
+    "factory": "SpectrumLine",
+    "signature": "one logarithmic spectrum line,256 samples",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/SpectrumLine.cpp",
+    "sha256": "fbc6d291d38e4d9e7197420eb3604809c7b236cf48565c10ed80891fa62f04b3"
+  },
+  {
+    "mode": 9,
+    "factory": "Milkdrop2077Wave9",
+    "signature": "line-like left PCM.35 amplitude; second vector resized but not populated by this producer",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave9.cpp",
+    "sha256": "3d3b57c766522be1f9533e93ed6c52b55df8c111540851afacb3e6066d286d83"
+  },
+  {
+    "mode": 10,
+    "factory": "Milkdrop2077WaveX",
+    "signature": "two angled left/right PCM.35 strips",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveX.cpp",
+    "sha256": "3f08849cb0e7f389c27b711d0b4c381d303c50401e475fc507129500e1dd1509"
+  },
+  {
+    "mode": 11,
+    "factory": "Milkdrop2077Wave11",
+    "signature": "two left/right PCM.35 strips, horizontal\u00b1.45 offsets",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave11.cpp",
+    "sha256": "37bc3892696d3fbb9220beba5dc0d19317ba6c5d54b813be595135963aaadf7e"
+  },
+  {
+    "mode": 12,
+    "factory": "Milkdrop2077WaveSkewed",
+    "signature": "one240-sample skewed polar strip, alpha participates in X angle",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveSkewed.cpp",
+    "sha256": "5979d936ec8c126b9ac0a4563dfb32738acb2fc11b0290ec4982ca3936ee87c5"
+  },
+  {
+    "mode": 13,
+    "factory": "Milkdrop2077WaveStar",
+    "signature": "one241-entry star loop; bounded altered sample offset",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveStar.cpp",
+    "sha256": "b7c50cb0d91efe06f3f7313f7de63595718ebb38a93a35f8a3bb5d83f7266c14"
+  },
+  {
+    "mode": 14,
+    "factory": "Milkdrop2077WaveFlower",
+    "signature": "one241-entry flower loop, altered polar angles/center",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveFlower.cpp",
+    "sha256": "4236ccdf91c971bf355f654922f4790ef7b8d619b4a097299b4b3dc9ba1aecb2"
+  },
+  {
+    "mode": 15,
+    "factory": "Milkdrop2077WaveLasso",
+    "signature": "one240-sample lasso strip with tan(time/angle)",
+    "source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveLasso.cpp",
+    "sha256": "2aae0ee8de69f9ba1483dad5056036f9231e0799e65f7017c9ffa908e5a6f64b"
+  }
+]

@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditcirclediagafter",
+  "pid": 7036,
+  "job": {
+    "expectedPresetCount": 9609,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/audio.u8",
+    "preset": "audit i20-circle-thick.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "de3cae15b06088cebec5e9b6c1f21d6c56ae8a7ed1d5169d53621e66be2308bc",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "84a6bf243c8f6c57012b968bdc750e034d54cbf2ab3384ff7478ae32b7023aef",
+      "pngBytes": 378984,
+      "pngSha256": "c99537b36577577ae7653ad531eb11fb9656a09ea298c1d741f2f617c8bbd749",
+      "rgbMean": [
+        17.98111340181327,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9166335117669753
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ba6898841a3b4add91e88adb6d4cfa124bb72e5153440a2feb9c3aab0dec24f7",
+      "pngBytes": 280357,
+      "pngSha256": "0d00d8e3e18ff7b73dfdb0ce4ad7194c07f795b562dc6577194a4415eafd5a5c",
+      "rgbMean": [
+        12.390010850694445,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.942738353587963
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "835a3be597f0dd1c86385d548d5d87b2489965362229c70b7f158fc9f562f95f",
+      "pngBytes": 206472,
+      "pngSha256": "525670772db042f151398bbe00d6fcfacd205aaf3033f1b0a468082fbd3d14ea",
+      "rgbMean": [
+        8.341591194058642,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9611766975308642
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3fe3952091ca8d0809cc3198ec8e2bbd9586cf2cb129c265b5c61bda7f092e77",
+      "pngBytes": 345525,
+      "pngSha256": "697ff02aeceac4d0ddd6979e1f57ebe741cd71a5eac5128f8876aeac12654e2d",
+      "rgbMean": [
+        12.663748673804012,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9409212239583333
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "1009702d732f7f81cfa22d125ae34c7824e46f3fa8878f143e7792e6930093bc",
+      "pngBytes": 461364,
+      "pngSha256": "ab731e2ff44de68785a9a8d4d43d6ac0efbeed295bfee63bbae34362f3727742",
+      "rgbMean": [
+        17.571029972029322,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.918467399691358
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "d91d0ebf52cb990a6d8207a4f666fefc0f8d2113997d6050f3b9d0135cb91c13",
+      "pngBytes": 343756,
+      "pngSha256": "d8ea9a536a16132786d8fb05de385f410f0760bb0b7e892d6b15d4780ef8db2f",
+      "rgbMean": [
+        12.984726200810185,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9394170765817901
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "a751b932bb44c8f095b7ee4c7e253029f3ba74c80b8cf03fb313ddb77a7401fa",
+      "pngBytes": 426990,
+      "pngSha256": "ff40c9cd3621c961ae8fd4d6f6f4bc06d385d4fa09feb9727f97efbb96d28571",
+      "rgbMean": [
+        17.42266396604938,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9188730951003087
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditcirclediagafter\/files\/native-trails\/circlediag-audit-i20-circle-thick-after-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b559279459c656a3af2a671c96cf1b97b3fead25311ba45b9fd8f1dba7a085a2",
+      "pngBytes": 413573,
+      "pngSha256": "01a26c9158e3161c2672b410d1df41d884b7398e730e9713ca5c21e9dc74407d",
+      "rgbMean": [
+        19.72708381558642,
+        0,
+        0
+      ],
+      "exactBlackFraction": 0.9084789737654321
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 31872288,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9609,
+  "indexSha256": "b8ae5d7094d72f923bf6b569bfe85c5733762f4a47c05a3975784194d2f2e57c",
+  "presetAssetSha256": "8275b1d69f3040f9fba7dd384234fc0b7eecbe74fc544730cc3356ca1330d923",
+  "forcedPresetPrefix": "audit i20-circle-thick.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 16,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43209,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4135,
+  "pssAfterFramesKB": 71322,
+  "serializedFrameMeanMs": 1.7976236444444431,
+  "serializedFrameP90Ms": 2.239084,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "audit i20-circle-thick.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 4460
+}

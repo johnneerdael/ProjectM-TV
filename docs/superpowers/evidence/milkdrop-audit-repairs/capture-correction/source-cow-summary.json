@@ -1,0 +1,7 @@
+{
+  "method": "APFS copy-on-write clones; content SHA256 verified before and after; independent writes preserved",
+  "logical_bytes_shared": 4148404489,
+  "file_count": 108720,
+  "journal_sha256": "a5c6911f5768701042f22160b2ab194bcffa64d69dacf3bac3a84d83a2f88eda",
+  "qualification": "Task-owned source/doc/asset copies only; every content hash verified before/after, APFS independent-write behavior probed. Frozen native/source contents preserved."
+}
