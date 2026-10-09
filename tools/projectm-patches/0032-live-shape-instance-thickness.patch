@@ -1,0 +1,119 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Preserve evaluated custom-shape thickness per instance
+
+Follow MilkDrop2 evaluated int-nonzero flags within the defined int32
+truncation domain. Capture style once per instance for authored and
+Native replay. Preserve saved style outside that domain and raw values.
+Keep existing batches, fill/order/sampler/float/half-pixel policies; no
+grouping, extra buffer or repeated equation evaluation.
+
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -112,10 +112,11 @@
+     struct InstanceDraw {
+         bool additive{false};
+         bool textured{false};
++        bool thick{false}; //!< Evaluated instance flag, retained for Native replay.
+         int sides{0};
+         GLint fillFirst{0};      //!< First fill vertex (a triangle fan of sides + 2 vertices).
+         GLint borderFirst{0};    //!< First outline vertex (borderIterations line loops of sides vertices).
+-        int borderIterations{0}; //!< 0 without outline; GL lines: 4 for a thick outline, else 1; quad lines: 1 (passes in m_borderStyle).
++        int borderIterations{0}; //!< 0 without outline; GL lines: 4 for a thick outline, else 1; quad lines: 1 (passes derived from thick).
+         LineBatch::Strip borderStrip; //!< The outline in m_lineBatch (quad lines).
+     };
+
+@@ -133,7 +134,6 @@
+     LineBatch m_lineBatch;                                     //!< Outlines of the current batch (quad lines).
+     std::vector<ColoredPoint> m_borderPoints; //!< One outline, for the line batch.
+     bool m_quadBorders{false};                                 //!< This frame draws outlines as quads (reference size set, line program usable).
+-    LineStyle m_borderStyle;                                   //!< Outline width, passes and pass offsets this frame (quad lines).
+     bool m_linesBegun{false};                                  //!< LineRenderer::Begin() called for this batch.
+     Renderer::Sampler::Ptr m_mainTextureSampler{std::make_shared<Renderer::Sampler>(GL_REPEAT, GL_LINEAR)}; //!< The main-textured shape sampling contract.
+     Renderer::TextureSamplerDescriptor m_imageTexture; //!< The "image" texture, looked up once per frame.
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -10,10 +10,44 @@
+
+ #include <cassert>
+ #include <cmath>
++#include <cstdint>
++#include <cstring>
++#include <limits>
++#include <type_traits>
+ #include <vector>
+
+ namespace libprojectM {
+ namespace MilkdropPreset {
++namespace {
++// MilkDrop truncates the evaluated flag to int per instance. Match its defined
++// int32 domain without a float-to-int cast or finite comparisons: fast-math can
++// erase floating-point NaN checks. IEEE binary64 magnitudes sort as unsigned bits.
++// Values outside that domain retain the saved parsed style; leave the raw equation
++// variable unchanged. The negative bound allows -2147483648.5 -> INT_MIN.
++auto EvaluatedShapeThickness(PRJM_EVAL_F value, bool savedStyle) -> bool
++{
++    static_assert(std::is_same<PRJM_EVAL_F, double>::value &&
++                  sizeof(PRJM_EVAL_F) == sizeof(std::uint64_t) &&
++                  std::numeric_limits<PRJM_EVAL_F>::is_iec559 &&
++                  std::numeric_limits<PRJM_EVAL_F>::radix == 2 &&
++                  std::numeric_limits<PRJM_EVAL_F>::digits == 53 &&
++                  std::numeric_limits<PRJM_EVAL_F>::max_exponent == 1024,
++                  "Shape thickness requires IEEE binary64 evaluator values");
++    static_assert(std::numeric_limits<int>::digits == 31,
++                  "Shape thickness requires MilkDrop's signed int32 domain");
++    std::uint64_t bits{};
++    std::memcpy(&bits, &value, sizeof(bits));
++    const auto magnitude = bits & UINT64_C(0x7fffffffffffffff);
++    const auto exclusiveBound = (bits & UINT64_C(0x8000000000000000))
++        ? UINT64_C(0x41e0000000200000)  // abs(-2147483649)
++        : UINT64_C(0x41e0000000000000); // +2147483648
++    if (magnitude >= exclusiveBound)
++    {
++        return savedStyle;
++    }
++    return magnitude >= UINT64_C(0x3ff0000000000000); // abs(value) >= 1
++}
++} // namespace
+
+ CustomShape::CustomShape(PresetState& presetState)
+     : m_presetState(presetState)
+@@ -152,8 +186,6 @@
+     const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
+                                       m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
+     m_quadBorders = lineScale > 0.0f && m_presetState.lineRenderer.Usable();
+-    m_borderStyle = LineStyleFor(LineKind::ShapeBorder, m_thickOutline, lineScale,
+-                                 m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+     m_lineBatch.Clear();
+
+     // Need to use +/- 1.0 here instead of 2.0 used in Milkdrop to achieve the same rendering result.
+@@ -179,9 +211,10 @@
+         draw.additive = static_cast<int>(*m_perFrameContext.additive) != 0;
+         draw.textured = static_cast<int>(*m_perFrameContext.textured) != 0;
+         draw.sides = sides;
++        draw.thick = EvaluatedShapeThickness(*m_perFrameContext.thick, m_thickOutline);
+         // GL lines: a thick outline is drawn four times with slight offsets. Quad lines: one strip per
+-        // outline; LineRenderer draws m_borderStyle's passes (four offset passes when thick).
+-        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (m_thickOutline ? 4 : 1)) : 0;
++        // outline; LineRenderer draws the captured instance style's passes (four offset passes when thick).
++        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (draw.thick ? 4 : 1)) : 0;
+
+         const size_t neededVertices = static_cast<size_t>(sides + 2 + (m_quadBorders ? 0 : draw.borderIterations * sides));
+         const size_t neededLinePoints = (m_quadBorders || m_geometryTargets) && draw.borderIterations > 0 ? static_cast<size_t>(sides + 3) : 0;
+@@ -357,8 +390,6 @@
+     const float scale=LineScale(context.viewportSizeX,context.viewportSizeY,
+                                 context.lineReferenceWidth,context.lineReferenceHeight);
+     const bool quadBorders=nativePass ? scale>0 && m_presetState.lineRenderer.Usable() : m_quadBorders;
+-    const auto style=nativePass ? LineStyleFor(LineKind::ShapeBorder,m_thickOutline,scale,
+-                                              context.viewportSizeX,context.viewportSizeY) : m_borderStyle;
+     if (quadBorders && !m_lineBatch.Points().empty()) m_presetState.lineRenderer.Upload(m_lineBatch);
+     m_linesBegun=false;
+     for (const auto& draw : m_draws)
+@@ -422,6 +453,8 @@
+                 lines.Begin(shapeProjection, m_presetState.renderContext);
+                 m_linesBegun = true;
+             }
++            const auto style = LineStyleFor(LineKind::ShapeBorder, draw.thick, scale,
++                                            context.viewportSizeX, context.viewportSizeY);
+             lines.Draw(draw.borderStrip, style);
+         }
+         else if (draw.borderIterations > 0)
