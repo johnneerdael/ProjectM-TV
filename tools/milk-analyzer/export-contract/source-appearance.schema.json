@@ -1520,7 +1520,12 @@
                           "depth",
                           "appearance_guaranteed",
                           "unknown_reasons",
-                          "conditions"
+                          "conditions",
+                          "polar_to_sample_matrix",
+                          "sample_offset_uv",
+                          "sample_offset_expressions",
+                          "sample_offset_controls",
+                          "sample_offset_audio_routes"
                         ],
                         "properties": {
                           "policy": {
@@ -1530,7 +1535,8 @@
                             "enum": [
                               "not_recognized",
                               "unresolved",
-                              "separable_angle_depth"
+                              "separable_angle_depth",
+                              "mixed_angle_depth"
                             ]
                           },
                           "coordinate_lanes": {
@@ -1672,6 +1678,62 @@
                             "type": "array",
                             "items": {
                               "type": "string"
+                            }
+                          },
+                          "polar_to_sample_matrix": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "sample_offset_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            }
+                          },
+                          "sample_offset_expressions": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": [
+                                "object",
+                                "null"
+                              ]
+                            }
+                          },
+                          "sample_offset_controls": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "sample_offset_audio_routes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
                             }
                           }
                         }
@@ -1827,7 +1889,12 @@
                           "depth",
                           "appearance_guaranteed",
                           "unknown_reasons",
-                          "conditions"
+                          "conditions",
+                          "polar_to_sample_matrix",
+                          "sample_offset_uv",
+                          "sample_offset_expressions",
+                          "sample_offset_controls",
+                          "sample_offset_audio_routes"
                         ],
                         "properties": {
                           "policy": {
@@ -1837,7 +1904,8 @@
                             "enum": [
                               "not_recognized",
                               "unresolved",
-                              "separable_angle_depth"
+                              "separable_angle_depth",
+                              "mixed_angle_depth"
                             ]
                           },
                           "coordinate_lanes": {
@@ -1979,6 +2047,62 @@
                             "type": "array",
                             "items": {
                               "type": "string"
+                            }
+                          },
+                          "polar_to_sample_matrix": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "sample_offset_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            }
+                          },
+                          "sample_offset_expressions": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": [
+                                "object",
+                                "null"
+                              ]
+                            }
+                          },
+                          "sample_offset_controls": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "sample_offset_audio_routes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
                             }
                           }
                         }

@@ -149,6 +149,9 @@ consumer spatial context without claiming screen speed or dominance.
 Supported polar lookup records describe reciprocal/logarithmic depth and angular
 wrapping, with shared-centre/metric checks and source repetition rates. They keep
 small authored numerical differences rather than claiming perfect symmetry.
+Mixed polar records also describe constant matrices that combine angle and depth
+into both texture axes. Axis swaps retain the authored angle orientation while
+proving the unchanged radius; literal matrix argument order is preserved.
 These parameters help an approximation choose a radial layout; texture contents,
 colour weights and feedback still decide whether it looks like a visible tunnel
 or kaleidoscope.

@@ -41,24 +41,46 @@ def _plane_program(plane):
     return expression if expression is not None and expression['complete'] else None
 
 
-def _atom_affine(field,atom):
+def _atoms_affine(field,atoms):
     from source_appearance import _canonical_lane,_typed_control_identity
     from source_sampling import affine_uv_map
-    identity=_typed_control_identity(atom,required=True);memo={}
-    marker=Field('member',(Field('input',dtype='float2',detail={'name':':polar-atom'}),),
-                 'float',{'field':'x','swizzle':True})
+    identities=[_typed_control_identity(atom,required=True) for atom in atoms];memo={}
+    markers=[Field('member',(Field('input',dtype='float4',detail={'name':':polar-atoms'}),),
+                   'float',{'field':'xyzw'[i],'swizzle':True}) for i in range(len(atoms))]
     def replace(node,depth=0):
         if depth>64 or len(memo)>=4096:raise ValueError('polar substitution budget exceeded')
         if id(node) in memo:return memo[id(node)]
         canonical=_canonical_lane(node)
-        if node is atom or canonical.op==atom.op and canonical.dtype==atom.dtype and _typed_control_identity(canonical)==identity:
-            result=marker
-        else:result=Field(node.op,tuple(replace(a,depth+1) for a in node.args),node.dtype,node.detail)
+        for atom,identity,marker in zip(atoms,identities,markers):
+            if node is atom or canonical.op==atom.op and canonical.dtype==atom.dtype and _typed_control_identity(canonical)==identity:
+                memo[id(node)]=marker;return marker
+        result=Field(node.op,tuple(replace(a,depth+1) for a in node.args),node.dtype,node.detail)
         memo[id(node)]=result;return result
+    matrix,offsets=affine_uv_map(replace(field),basis_name=':polar-atoms')
+    if np.any(matrix[:,len(atoms):]!=0):raise ValueError('polar expression includes another spatial basis')
+    return matrix[:,:len(atoms)],offsets
+
+
+def _atom_affine(field,atom):
     zero=Field('constant',dtype='float',detail={'value':0.})
-    matrix,offsets=affine_uv_map(Field('components',(replace(field),zero),'float2'),basis_name=':polar-atom')
-    if np.any(matrix[0,1:]!=0) or np.any(matrix[1]!=0):raise ValueError('polar expression includes another spatial basis')
+    matrix,offsets=_atoms_affine(Field('components',(field,zero),'float2'),(atom,))
+    if np.any(matrix[1]!=0):raise ValueError('polar scalar projection is unresolved')
     return float(matrix[0,0]),offsets[0]
+
+
+def _plane_radius_key(program):
+    """Axis permutation preserves length; retain angle's ordered plane separately."""
+    from source_appearance import _digest
+    memo={}
+    def key(index,depth=0):
+        if depth>64:raise ValueError('polar plane identity budget exceeded')
+        if index in memo:return memo[index]
+        node=program['nodes'][index]
+        result=_digest({'op':node['op'],'dtype':node['dtype'],'detail':node['detail'],
+                        'args':[key(i,depth+1) for i in node['args']]})
+        memo[index]=result;return result
+    root=program['nodes'][program['root']]
+    return _digest({'radius_axes':sorted(key(i) for i in root['args'])})
 
 
 def _anchor(node):
@@ -84,7 +106,7 @@ def _anchor(node):
     except (ValueError,RecursionError):
         from effect_families import SPATIAL
         if not any(n.op=='input' and n.detail.get('name') in SPATIAL for n,p in _nodes(plane)):return None
-        return kind,_digest({'plane_program':program}),{'kind':'authored_plane_program',
+        return kind,_plane_radius_key(program),{'kind':'authored_plane_program',
             'plane_expression':program,'matrix_uv4':None,'offset_uv':None,'basis':None,
             'centre_in_basis_uv':None,'conditions':['The angle and radius share this exact source plane program; its nonlinear/dynamic metric and centre remain unresolved']}
 
@@ -93,7 +115,7 @@ def _anchor(node):
     programs=[_expression(o) for o in offsets]
     # Unexportable offsets cannot establish equivalent spatial anchors.
     if any(o is None for o in programs):return None
-    identity=_digest({'matrix':matrix.tolist(),'offsets':[v if v is not None else p for v,p in zip(constants,programs)]})
+    identity=_digest({'radius_axes':sorted(_digest({'matrix_row':row.tolist(),'offset':v if v is not None else p}) for row,v,p in zip(matrix,constants,programs))})
     xy=bool(np.any(matrix[:,:2]!=0));zw=bool(np.any(matrix[:,2:]!=0))
     basis='mixed_uv' if xy and zw else 'shader_uv' if xy else 'original_uv'
     result={'kind':'authored_affine_plane','plane_expression':program,'matrix_uv4':matrix.tolist(),
@@ -198,10 +220,36 @@ def _depth_profile(field,atom,analysis):
     result.update(_offset(offset,'depth_output_offset',analysis,'source texture UV'));return result
 
 
+def _mixed_projection(field,angle,radius,analysis):
+    from source_motion import motion_control
+    from source_appearance import _expression,_phase_literal,_routes
+    kernels=[n for n,path in _nodes(field) if n.op=='divide' or
+             n.op=='domain_checked' and n.args[0].op in {'log','log2','log10'}]+[radius]
+    for kernel in kernels:
+        try:
+            depth=_depth_profile(kernel,radius,analysis)
+            matrix,offsets=_atoms_affine(field,(angle,kernel))
+            if not np.any(matrix[:,0]!=0) or not np.any(matrix[:,1]!=0):continue
+            if not math.isfinite(depth['radial_derivative']['coefficient']):continue
+            angular=_angle_profile(angle,angle,analysis)
+        except (ValueError,RecursionError):continue
+        routes=[]
+        for axis,offset in zip('xy',offsets):routes+=_routes('polar_sample_offset_'+axis,'source texture UV',offset,analysis)
+        return {'kind':'mixed_angle_depth','coordinate_lanes':None,'angle':angular,'depth':depth,
+                'polar_to_sample_matrix':matrix.tolist(),'sample_offset_uv':[_phase_literal(o) for o in offsets],
+                'sample_offset_expressions':[_expression(o) for o in offsets],
+                'sample_offset_controls':[motion_control(o,'polar_sample_offset_'+axis,'source texture UV',
+                    application='mixed polar texture sampling offset') for axis,o in zip('xy',offsets)],
+                'sample_offset_audio_routes':routes}
+    return None
+
+
 def _polar_projection(field,analysis):
     from effect_families import _parts
     result={'policy':'source-separable-polar-projection-v1','kind':'not_recognized',
             'coordinate_lanes':None,'shared_anchor':None,'angle':None,'depth':None,
+            'polar_to_sample_matrix':None,'sample_offset_uv':None,'sample_offset_expressions':None,
+            'sample_offset_controls':[],'sample_offset_audio_routes':[],
             'appearance_guaranteed':False,'unknown_reasons':[],
             'conditions':['Source projection needs selected RGB contribution, valid domains and appropriate sampling; authored atan2 excludes an undefined zero vector',
                           'No dominant tunnel, spiral, visible symmetry or feedback-layer count is certified']}
@@ -237,11 +285,15 @@ def _polar_projection(field,analysis):
                     values=[angular['input_scale'],depth['output_scale'],depth['radius_scale'],depth['radius_bias'],depth['radial_derivative']['coefficient']]
                     values+=[angular[k] for k in ('angular_period_rad','cycles_per_turn_nominal','turn_span_uv') if angular[k] is not None]
                     if not all(math.isfinite(v) for v in values):raise ValueError('polar coefficients are nonfinite')
-                except (ValueError,RecursionError):continue
+                except (ValueError,RecursionError):
+                    mixed=_mixed_projection(field,angle,radius,analysis)
+                    if mixed is not None:
+                        result.update(mixed);result['shared_anchor']=a[2];return result
+                    continue
                 result.update(kind='separable_angle_depth',coordinate_lanes=['angle','depth'] if angle_index==0 else ['depth','angle'],
                               shared_anchor=a[2],angle=angular,depth=depth)
                 return result
-    result['unknown_reasons']=['no supported separable angle/depth formulas with the same proved spatial anchor']
+    result['unknown_reasons']=['no supported angle/depth formulas with the same proved spatial anchor']
     return result
 
 
@@ -250,5 +302,7 @@ def polar_projection(field,analysis):
     except (ValueError,RecursionError) as error:
         return {'policy':'source-separable-polar-projection-v1','kind':'unresolved',
                 'coordinate_lanes':None,'shared_anchor':None,'angle':None,'depth':None,
+            'polar_to_sample_matrix':None,'sample_offset_uv':None,'sample_offset_expressions':None,
+            'sample_offset_controls':[],'sample_offset_audio_routes':[],
                 'appearance_guaranteed':False,'unknown_reasons':[str(error)],
                 'conditions':['Polar descriptor budget/input uncertainty does not establish a visible effect']}

@@ -133,3 +133,35 @@ def test_polar_traversal_does_not_erase_existing_descriptor_on_complex_preset():
     from test_source_appearance import appearance
     description=appearance(read((PRESETS/'flexi - grind my glitch up [191].milk').read_bytes()))
     assert 'sampling_geometry' in description
+
+
+def test_swapped_atan2_axes_keep_radius_metric_but_preserve_angle_orientation():
+    p=maps('float2 p=uv-.5;ret=GetPixel(float2(atan2(p.x,p.y),1/length(p)));')[0]['polar_projection']
+    assert p['kind']=='separable_angle_depth'
+    assert p['shared_anchor']['matrix_uv4']==[[0,1,0,0],[1,0,0,0]]
+
+
+def test_constant_mix_of_angle_and_depth_exports_a_two_basis_matrix():
+    p=maps('float2 p=uv-.5;float a=atan2(p.x,p.y);float d=.003/length(p);'
+        'ret=GetPixel(float2(.7*a-.7*d+time,.7*a+.7*d));')[0]['polar_projection']
+    assert p['kind']=='mixed_angle_depth'
+    import numpy as np
+    assert np.array(p['polar_to_sample_matrix'])==pytest.approx(np.array([[.7,-.7],[.7,.7]]),abs=2e-7)
+    assert p['depth']['output_scale']==pytest.approx(.003,abs=2e-7)
+    assert p['sample_offset_controls'][0]['signed_linear_rate_per_second']==1
+
+
+def test_matching_native_angle_and_depth_can_be_mixed_but_not_with_extra_spatial_input():
+    p=maps('ret=GetPixel(float2(ang+1/rad,ang-1/rad));')[0]['polar_projection']
+    assert p['kind']=='mixed_angle_depth'
+    assert p['polar_to_sample_matrix']==[[1,1],[1,-1]]
+    p=maps('ret=GetPixel(float2(ang+1/rad+uv.x,ang-1/rad));')[0]['polar_projection']
+    assert p['kind']=='unresolved'
+
+
+def test_xtramartin_original_has_parameterized_mixed_polar_sample():
+    from test_effect_families import read,PRESETS
+    from test_source_appearance import appearance
+    result=appearance(read((PRESETS/'xtramartin (454).milk').read_bytes()))
+    records=result['sampling_geometry']['stages']['composite']
+    assert any(m['polar_projection']['kind']=='mixed_angle_depth' for m in records)

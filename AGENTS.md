@@ -151,7 +151,11 @@ feature area is not screen coverage, copy count or visible motion.
 with proved matching native or authored affine spatial anchors. Retain target
 log(abs) and domain guards, nominal unrounded angular periods, shared-metric
 checks and unresolved dynamic scales/image offsets. Radial derivatives describe
-source sampling density, not visible speed or guaranteed tunnel/symmetry.
+source sampling density, not visible speed or guaranteed tunnel/symmetry. Mixed
+polar maps retain their explicit angle/depth-to-texture matrix and offset programs.
+Axis-permutation radius proof must preserve the angle's ordered plane. Literal
+matrix folding uses existing typed matrix rules and rejects every input/resource/
+effect/loop even when native unbound defaults exist; vector/matrix order matters.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

@@ -536,3 +536,32 @@ The creator's [authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_pre
 describes warp/composite UV and wrap/clamp sampling. Target log handling comes
 from source31 `vendor/hlslparser/src/GLSLGenerator.cpp:1028-1043`; original
 MilkDrop2 D3DX intent is kept separate from this patched target policy.
+
+## Mixed polar layouts and literal matrices
+
+`polar_projection.kind=mixed_angle_depth` retains a two-basis texture lookup
+`sample_uv = polar_to_sample_matrix * [theta, depth(r)] + sample_offset`.
+The angle profile describes raw theta; the depth profile describes the selected
+reciprocal/logarithmic/radial kernel. The matrix therefore owns the subsequent
+angular/depth weighting and mixing. The two sample-offset programs retain known
+values, time curves and band-specific audio routes. This layout can describe
+rotated/slanted radial texture repetitions without falsely requiring the final
+texture axes to stay separately angular and radial. It does not count visible
+repetitions or prove source visibility. Other spatial terms, dynamic matrix
+coefficients, quantized maps and unsupported kernels remain unresolved.
+
+A swap of the authored plane's two axes leaves Euclidean radius unchanged. The
+shared-radius proof may use that identity while the angle retains its original
+ordered plane, including its atan2 argument order. Different centres or metrics
+remain separate. Dynamic planes compare typed scalar-axis program identities;
+constant-affine planes compare the corresponding rows and offsets. This is a
+nominal norm equivalence, not a generic rewrite or exact GPU-arithmetic proof.
+
+Constant matrix/vector products are expanded through the existing typed matrix
+arithmetic in `field_math`, with explicit vector*matrix versus matrix*vector
+argument order. Matrix graphs containing any input, sample, unresolved storage,
+effect or loop are rejected even if native bindings have zero defaults. Only
+literal matrix expressions are folded; no audio, texture, equation frame or
+preset shader is executed. Nonfinite or unsupported constant operations abstain.
+The sampled source coordinate basis, wrap/filter, domain and visibility conditions
+from the preceding sections still apply.

@@ -3,6 +3,40 @@ import math
 import numpy as np
 
 
+def _constant_matrix_vector_parts(field):
+    """Expand a literal-matrix/vector product using existing typed matrix policy."""
+    from shader_fields import Field
+    from effect_families import _parts
+    from field_math import evaluate,numeric_layout
+    if field.op not in {'mul','matrix_product'} or len(field.args)!=2:return None
+    layouts=[numeric_layout(arg.dtype)[1] for arg in field.args]
+    if sorted(map(len,layouts))!=[1,2]:return None
+    matrix_index=0 if len(layouts[0])==2 else 1
+    matrix=field.args[matrix_index];vector=field.args[1-matrix_index]
+    pending=[matrix];seen=set()
+    while pending:
+        node=pending.pop()
+        if id(node) in seen:continue
+        if len(seen)>=4096:return None
+        seen.add(id(node))
+        if node.op in {'input','sample','unknown','uninitialized','sequence'} or node.op.startswith('loop_'):return None
+        pending.extend(node.args)
+    try:values=np.asarray(evaluate(matrix))
+    except (ValueError,RecursionError):return None
+    if values.ndim!=2 or not np.all(np.isfinite(values)):return None
+    parts=_parts(vector)
+    if len(parts)!=(values.shape[1] if matrix_index==0 else values.shape[0]):return None
+    weights=values if matrix_index==0 else values.T
+    result=[]
+    for row in weights:
+        terms=[Field('multiply',(part,Field('constant',dtype='float',detail={'value':float(coefficient)})),'float')
+               for part,coefficient in zip(parts,row)]
+        total=terms[0]
+        for term in terms[1:]:total=Field('add',(total,term),'float')
+        result.append(total)
+    return tuple(result)
+
+
 def affine_uv_map(field,*,basis_name='_uv'):
     """Split two coordinates into constant _uv coefficients and uniform offsets.
 
@@ -45,7 +79,7 @@ def affine_uv_map(field,*,basis_name='_uv'):
                 weights=np.zeros(4);weights[SWIZZLE[node.detail['field']]]=1.
                 return weights,zero
             if parent.op!='input':
-                lane=SWIZZLE[node.detail['field']];parts=_parts(parent)
+                lane=SWIZZLE[node.detail['field']];parts=_constant_matrix_vector_parts(parent) or _parts(parent)
                 if lane<len(parts):
                     projected=parts[lane]
                     if not (projected.op=='member' and projected.args and projected.args[0] is parent):

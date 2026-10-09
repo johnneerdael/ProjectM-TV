@@ -107,3 +107,16 @@ def test_scalar_swizzles_of_vector_arithmetic_keep_affine_map():
     m=maps('float2 p=(uv-float2(.3,.7))*float2(2,1);ret=GetPixel(float2(p.y,p.x));')[0]
     assert m['matrix_uv4']==[[0,1,0,0],[2,0,0,0]]
     assert m['offset_uv']==pytest.approx([-.7,-.6],abs=2e-7)
+
+
+def test_constant_matrix_lookup_respects_vector_matrix_argument_order():
+    left=maps('ret=GetPixel(mul(uv,float2x2(1,2,3,4)));')[0]
+    right=maps('ret=GetPixel(mul(float2x2(1,2,3,4),uv));')[0]
+    assert left['matrix_uv4']==[[1,3,0,0],[2,4,0,0]]
+    assert right['matrix_uv4']==[[1,2,0,0],[3,4,0,0]]
+
+
+def test_dynamic_matrix_lookup_cannot_be_folded_from_unbound_input_defaults():
+    m=maps('ret=GetPixel(mul(uv,float2x2(_qa)));')[0]
+    assert m['matrix_uv4'] is None
+    assert m['unknown_reasons']

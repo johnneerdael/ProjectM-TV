@@ -140,3 +140,12 @@ and offsets/audio/time routes, preserving patched log(abs) and domain handling.
 Do not equate contributing polar math with a dominant tunnel or visible symmetry;
 prove common metrics before supplying shared geometry. Use synthetic numeric
 controls and the same fixed100 originals to measure extraction coverage.
+
+## Real-preset mixed-layout gap
+
+The fixed sample's xtramartin454 rotates/mixes angular and reciprocal-depth
+coordinates after using swapped atan2 arguments. Add a norm-invariant axis-swap
+proof preserving angle orientation, and a constant2x2 polar-to-sample matrix with
+offset/audio/time programs. Expand literal matrix/vector products using the
+existing target typed arithmetic, never native defaults for dynamic inputs.
+Keep real-file regression controls and the same frozen100 coverage check.
