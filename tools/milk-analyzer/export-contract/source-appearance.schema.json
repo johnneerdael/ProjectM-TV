@@ -290,7 +290,10 @@
                         }
                       },
                       "shader_time_wrap_seconds": {
-                        "const": 10000
+                        "enum": [
+                          null,
+                          10000
+                        ]
                       },
                       "visible_flash_frequency_hz": {
                         "type": "null"
@@ -310,6 +313,20 @@
                             "string",
                             "null"
                           ]
+                        }
+                      },
+                      "clock_kinds_rgb": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "enum": [
+                              "shader_time_wrapped",
+                              "native_render_time_float32"
+                            ]
+                          }
                         }
                       }
                     }
@@ -2549,6 +2566,46 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "time_oscillators": {
+              "type": "object",
+              "required": [
+                "policy",
+                "native_clock_input",
+                "clock_basis",
+                "observed_runtime_binding",
+                "uniforms",
+                "conditions"
+              ],
+              "properties": {
+                "policy": {
+                  "const": "source31-native-time-oscillators-v1"
+                },
+                "native_clock_input": {
+                  "const": ":native-render-time-f32"
+                },
+                "clock_basis": {
+                  "type": "string"
+                },
+                "observed_runtime_binding": {
+                  "const": false
+                },
+                "uniforms": {
+                  "type": "object",
+                  "required": [
+                    "_c8",
+                    "_c9",
+                    "_c10",
+                    "_c11"
+                  ]
                 },
                 "conditions": {
                   "type": "array",

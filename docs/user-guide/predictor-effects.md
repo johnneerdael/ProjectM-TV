@@ -180,6 +180,12 @@ These coefficients help explain colour mixing and contrast operations. They do
 not certify a final palette, softness or sharpness: image history, coordinates,
 clipping and later passes still matter.
 
+Native roam/slow-roam inputs now carry their sine/cosine formulas and clock
+identity into source programs. Their unwrapped float32 render clock remains
+separate from wrapped shader time. These can explain modulation without
+simulation, though combined final colour programs may still lack a complete
+palette-cycle or flash description.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

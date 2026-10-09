@@ -36,7 +36,7 @@ def affine_time_parameters(field):
                 value=child.detail.get('value')
                 if type(value) is int and -(2**31)<value<2**31:return (0.,float(-value))
             return None
-        if op=='input' and node.dtype=='float' and node.detail.get('name')=='time':return (1.,0.)
+        if op=='input' and node.dtype=='float' and node.detail.get('name') in {'time',':native-render-time-f32'}:return (1.,0.)
         if op=='member' and node.dtype=='float' and node.detail.get('swizzle'):
             parent=node.args[0]
             if (node.detail.get('field') in {'x','r'} and parent.op=='input' and
@@ -72,22 +72,32 @@ def affine_shader_time_rate(field):
     return None if pair is None else pair[0]
 
 
+def clock_kinds(field):
+    from source_appearance import _packed_reads
+    from effect_families import _deps
+    names=_deps(field);result=[]
+    if 'time' in names or 0 in _packed_reads(field).get('_c2',set()):result.append('shader_time_wrapped')
+    if ':native-render-time-f32' in names:result.append('native_render_time_float32')
+    return result
+
+
 def oscillator_timing(oscillators):
     """Three RGB oscillator estimates; masks/storage/visibility remain separate."""
     rates=[affine_shader_time_rate(o['phase_expression']) for o in oscillators]
+    clocks=[clock_kinds(o['phase_expression']) for o in oscillators]
     frequencies=[None if r is None else abs(r)/math.tau for r in rates]
     periods=[None if r in {None,0} else math.tau/abs(r) for r in rates]
     slopes=[None if r is None else abs(r*o['amplitude']) for r,o in zip(rates,oscillators)]
     # Very small/large finite source coefficients can overflow derived estimates.
     def finite(values):return [v if v is None or math.isfinite(v) else None for v in values]
     return {'policy':'nominal-affine-shader-time-v1',
-        'scope':'unmasked source RGB oscillators between shader-clock wraps',
+        'scope':'unmasked source RGB oscillators within declared clock continuity domains' if any('native_render_time_float32' in c for c in clocks) else 'unmasked source RGB oscillators between shader-clock wraps',
         'angular_rate_rad_per_second_rgb':finite(rates),
         'cycle_frequency_hz_rgb':finite(frequencies),'period_seconds_rgb':finite(periods),
         'unmasked_component_slope_rgb_per_second':finite(slopes),
         'channel_status':['unknown' if r is None else 'constant' if r==0 else 'computed' for r in rates],
-        'shader_time_wrap_seconds':10000,'visible_flash_frequency_hz':None,
-        'conditions':['Source31 shader time advances in seconds and resets at10000seconds',
+        'clock_kinds_rgb':clocks,'shader_time_wrap_seconds':10000 if any('shader_time_wrapped' in c for c in clocks) else None,'visible_flash_frequency_hz':None,
+        'conditions':['Shader time resets at10000seconds; native roaming inputs use float32 render time before that wrapping',
                       'Nominal formula rates omit float32 quantization, discrete frame sampling and wrap discontinuities',
                       'Masks, textures, blend/storage and visibility can change final brightness behaviour'],
         'unknown_reasons_rgb':[None if r is not None else

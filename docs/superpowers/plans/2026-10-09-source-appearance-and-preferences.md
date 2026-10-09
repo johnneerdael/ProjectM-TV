@@ -188,3 +188,11 @@ and dynamic/nonlinear/quantized abstention; no final palette/sharpness or
 whole-loop claim. Native warp vertex inputs must not leak into composite hue.
 Use real HueBurst warp and focusedcontrols plus the same fixed100coverage/
 retention check; keep the existing main-only feedback contract unchanged.
+
+## Native clock formula extension
+
+Expose sixteen source31roaming components as symbolic scalarfloat programs with
+float32 coefficients and an explicit unwrapped native-render-time input. Keep
+shader clock wrapping distinct, respect binding precedence/local shadows and
+retain unknown complex palettes. Measure actualconsumption separately from
+formula availability or completepalette timing in the same fixed100 sample.

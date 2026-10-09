@@ -61,7 +61,7 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,global_input_policy='strict-v1',array_initializer_policy='legacy-layout-v1'):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,known_uniform_component_fields=None,global_input_policy='strict-v1',array_initializer_policy='legacy-layout-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
@@ -73,6 +73,10 @@ class ShaderFields:
         self.known_uniforms=known_uniforms or {}
         self.known_uniform_components=known_uniform_components or {}
         self.known_uniform_component_domains=known_uniform_component_domains or {}
+        self.known_uniform_component_fields=known_uniform_component_fields or {}
+        if any(not isinstance(field,Field) or field.dtype!='float' or type(i) is not int or not 0<=i<4
+               for fields in self.known_uniform_component_fields.values() for i,field in fields.items()):
+            raise ValueError('uniform component fields require scalar float lanes0..3')
         self.case_constraints={}
         self.domain_guards={}
         if global_input_policy not in {'strict-v1','projectmtv-implicit-extern-zero-v1'}:
@@ -408,13 +412,14 @@ class ShaderFields:
                     elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
                         value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
                                     'basis':'explicit source/context uniform binding'})
-                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and (name in self.known_uniform_components or name in self.known_uniform_component_domains):
+                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and (name in self.known_uniform_components or name in self.known_uniform_component_domains or name in self.known_uniform_component_fields):
                         packed=Field('input',dtype=dtype,detail={'name':name})
                         lanes=self.known_uniform_components.get(name,{})
                         domains=self.known_uniform_component_domains.get(name,{})
+                        fields=self.known_uniform_component_fields.get(name,{})
                         value=Field('components',tuple(
                             Field('constant',dtype='float',detail={'value':lanes[i],
-                                'basis':'explicit source/context uniform component binding'}) if i in lanes else
+                                'basis':'explicit source/context uniform component binding'}) if i in lanes else fields[i] if i in fields else
                             Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True,
                                 **({'source_domain':domains[i]} if i in domains else {})})
                             for i in range(4)),dtype)

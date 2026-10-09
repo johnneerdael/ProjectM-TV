@@ -373,7 +373,7 @@ def _colour(field,*,allow_shared_multiplier=True):
                 common_phase_expression=_expression(oscillators[0]['variable_phase_expression']),
                 temporal=oscillator_timing(oscillators),
                 depends_on_time=int(any(uses_input_components(o['phase_expression'],'_c2',{0}) or
-                                       'time' in o['phase_dependencies'] for o in oscillators)))
+                                       bool(o['phase_dependencies']&{'time',':native-render-time-f32'}) for o in oscillators)))
             result['conditions'].append('the common phase varies sufficiently; coefficients/phases are source forms, not a measured hue histogram')
             return result
     if len(oscillators)==3 and all(o is not None for o in oscillators) and len({o['phase_key'] for o in oscillators})>1:
@@ -383,7 +383,7 @@ def _colour(field,*,allow_shared_multiplier=True):
             oscillator_function_codes=[o['oscillator_function_code'] for o in oscillators],
             temporal=oscillator_timing(oscillators),
             depends_on_time=int(any(uses_input_components(o['phase_expression'],'_c2',{0}) or
-                                   'time' in o['phase_dependencies'] for o in oscillators)))
+                                   bool(o['phase_dependencies']&{'time',':native-render-time-f32'}) for o in oscillators)))
         result['conditions'].append('independent channel phases vary; no common cycle period or measured colour diversity established')
         return result
     if any(n.op=='sample' for n,p in _walk(field)):

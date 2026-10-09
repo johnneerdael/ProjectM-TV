@@ -179,6 +179,11 @@ and uniform offsets via shared affine/substitution code. Norms hold locations
 fixed; signed main/blur mixture labels include all participating sample weights.
 No sharpness, final palette, whole-loop gain or mood certainty follows. Warp
 vertex substitution stays warp-only, retaining unknown RGB and known alpha.
+Source native roam inputs (_c8–_c11) use typed symbolic uniform components and
+private :native-render-time-f32, before shader-time wrapping. Preserve numeric
+binding precedence/local shadows and clock_kinds_rgb; only actual wrapped-clock
+reads get10000-second wrap metadata. Formula rates are nominal, not CPU/GPU-bit
+identity, visible flash frequency or calibrated mood/colour confidence.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

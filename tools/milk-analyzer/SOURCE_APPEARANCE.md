@@ -718,3 +718,35 @@ only known consumed lanes. Dynamic decay keeps RGB unknown and alpha one;
 composite hue/vertex colours are never replaced with warp decay. Source stages
 and native binding inputs retain their qualification/context obligations. This
 model does not replace the main-only feedback-transfer or47numeric contracts.
+
+## Native roaming-time inputs
+
+`native_input_bindings.time_oscillators`, policy
+`source31-native-time-oscillators-v1`, describes the sixteen native components
+behind roam_cos, roam_sin, slow_roam_cos and slow_roam_sin (_c8–_c11). Each is
+`.5+.5*cos(rate*t+phase)` or its sine counterpart with float32 coefficients.
+The private input `:native-render-time-f32` represents float32(renderContext.time)
+before the separately wrapped shader time. The clock origin/resets/jumps are
+caller context, not inferred preset elapsed time. It is not a fixed zero clock.
+
+The source formulas are injected only into float4 uniform declarations via
+`known_uniform_component_fields`. Explicit numeric bindings retain precedence,
+and authored local shadows remain local. Numeric component fields, component
+domains and symbolic component fields remain distinct. Only scalarfloat lane
+indices0–3 are supported. No native code or shader/audio/frame execution is
+required to expose the formulas. observed_runtime_binding staysfalse.
+
+Palette timing adds `clock_kinds_rgb`: shader_time_wrapped or
+native_render_time_float32 per channel. `shader_time_wrap_seconds` is10000only
+when a phase actually consumes the wrapped shader clock; native-only formulas
+do not inherit that reset. Native/mixed clock timing uses a continuity-domain
+scope while the previous shader-only scope remains unchanged. Rates, periods
+and component slopes are nominal algebra, excluding CPU float32 rounding/FMA,
+transcendental approximation, GPU/interpolation, sampling and clock discontinuity.
+No visible flash frequency or calibrated brightness/mood claim follows.
+
+Source31 MilkdropShader.cpp247–268 and original MilkDrop2.25c
+milkdropfs.cpp3975–3994 supply the same roaming rates, offsets and functions.
+The target's uniform binding/dataflow policy stays authoritative. Single-
+oscillator channel recognition remains limited: combined oscillators, texture
+masks and nonlinear final colour may still leave a palette description unknown.
