@@ -169,7 +169,7 @@ Broad claims can agree while fine detail differs. The audit report explicitly re
 
 The score also does not validate aesthetic quality, a music genre, a viewer's preference, no flashing for all future audio, longer timelines, 4K detail or another driver. Successful parsing/loading alone gives no appearance credit, and the unchanged JNI does not directly expose every stage's custom-versus-fallback shader identity. Those are separate qualification questions.
 
-The research branch’s **47-field export** is another separate result: it stores features and provenance for downstream scoring, with explicit unknown values. Completing a source-only corpus simulation—even thousands of presets at 60 frames/15fps/480p—does not add new reference comparisons or establish a new visual-accuracy percentage.
+The research branch’s [**47-field export**](../predictor-export.md) is another separate result: it stores features and provenance for downstream scoring, with explicit unknown values. Completing a source-only corpus simulation—even thousands of presets at 60 frames/15fps/480p—does not add new reference comparisons or establish a new visual-accuracy percentage.
 
 A useful result statement reports both closeness and acceptance: **“Mean behavioural agreement was 86.95/100 across all 100 selected presets, or 98.8068/100 among the 88 completed forecasts; 85/100 passed the ≥95 gate in the declared core 2.3.11 context.”** For a current accuracy claim, publish a new frozen comparison against the current engine, along with coverage, score distribution, critical misses and the same context details.
 

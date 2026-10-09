@@ -95,3 +95,13 @@ If preset behaviour can be predicted from source, the same machinery can in prin
 ## What to expect
 
 When it lands, the result should be moods that explain themselves and new presets that can be placed without rendering. It should also leave much more room to make collections your own.
+
+
+## Use the predictor output in another tool
+
+The [predictor export contract](predictor-export.md) documents the feature envelope,
+all 47 simulated fields, strict extraction, provenance and unknowns, with downloadable
+JSON Schema, catalog and real examples. It also describes the limits of using
+these measurements for a Rust/wgpu adaptation and the additional semantic
+information needed for effect-family recognition or generation. The contract is a
+research checkpoint, separate from the accuracy rubric and shipped collections.

@@ -79,7 +79,9 @@ nav:
       - Rendering MilkDrop at 4K: engine/resolution.md
       - How a frame reaches your TV: engine/pipeline.md
       - Validation and evidence: engine/validation.md
-  - Road ahead: predictor.md
+  - Predictor:
+      - Road ahead: predictor.md
+      - Export contract: predictor-export.md
   - Build and test: development.md
 not_in_nav: |
   /dance.md
