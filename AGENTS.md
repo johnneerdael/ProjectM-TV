@@ -253,6 +253,8 @@ python3 -m unittest discover -s .github/scripts/tests -v
 | `mkdocs build --strict` (after `pip install -r docs/site-requirements.txt`) | user guide | Verified migration strict build, no warnings; also verified 2026-10-04 |
 | `./gradlew -PpresetLabDeviceTest :app:assembleDebug :app:assembleDebugAndroidTest`, then `adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmtv.presettest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation` | music-category behavior on a TV ([development guide](docs/user-guide/development.md)) | needs a TV; not validated in this pass |
 
+**Review-fix loops (user rule, 2026-10-09):** run the full local validation once before opening a PR. After that, for each review fix run only a quick check aimed at the changed code (the affected JVM test class, a compile, or one focused control), then push. Reviewed-PR CI (`pr-builds.yml`) runs the full native suite on Linux (including the GLES-only paths macOS cannot exercise), the JVM tests, both ARM builds, Preset Lab and the strict guide build. Do not rerun the ~20-minute `run_native_tests.sh` or repeat full device passes for every review round.
+
 **What to run when:**
 
 - JNI, `native-lib.cpp`, transitions, skip list: native tests, JVM tests, a build, and a TV check for rendering/audio/frame rate.
