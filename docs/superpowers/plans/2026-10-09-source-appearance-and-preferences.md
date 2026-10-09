@@ -130,3 +130,13 @@ orientation reversal and local area ratio. Retain sample identity/wrap/filter an
 unknown nonlinear, mixed-basis and quantized maps. These source matrices are not
 visible trajectories, repeated-layer counts, pixel coverage or a full recurrence.
 Validate numerical controls, then freeze the same fixed100 census before review.
+
+## Polar projection extension
+
+Export per-sample separable angle/depth programs and parameters, including native
+or authored matching coordinate anchors, reciprocal/logarithmic depth, radial
+derivatives and angular frac/triangular wrapping. Keep actual source constants
+and offsets/audio/time routes, preserving patched log(abs) and domain handling.
+Do not equate contributing polar math with a dominant tunnel or visible symmetry;
+prove common metrics before supplying shared geometry. Use synthetic numeric
+controls and the same fixed100 originals to measure extraction coverage.

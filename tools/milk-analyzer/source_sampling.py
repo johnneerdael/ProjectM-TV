@@ -3,7 +3,7 @@ import math
 import numpy as np
 
 
-def affine_uv_map(field):
+def affine_uv_map(field,*,basis_name='_uv'):
     """Split two coordinates into constant _uv coefficients and uniform offsets.
 
     This is algebra on the source graph, not floating-point shader execution.
@@ -20,7 +20,7 @@ def affine_uv_map(field):
     def uniform(node):
         for child,path in _walk(node):
             if child.op in {'sample','unknown','uninitialized'} or child.op.startswith('loop_'):return False
-            if child.op=='input' and child.detail.get('name') in {'_uv','_uv_orig','_rad_ang','_vDiffuse','x','y','rad','ang'}:return False
+            if child.op=='input' and child.detail.get('name') in {basis_name,'_uv','_uv_orig','_rad_ang','_vDiffuse','x','y','rad','ang'}:return False
         return True
 
     def scale(pair,k):
@@ -41,9 +41,15 @@ def affine_uv_map(field):
     def calculate(node,depth):
         if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
             parent=node.args[0]
-            if parent.op=='input' and parent.dtype in {'float2','float4'} and parent.detail.get('name')=='_uv':
+            if parent.op=='input' and parent.dtype in {'float2','float4'} and parent.detail.get('name')==basis_name:
                 weights=np.zeros(4);weights[SWIZZLE[node.detail['field']]]=1.
                 return weights,zero
+            if parent.op!='input':
+                lane=SWIZZLE[node.detail['field']];parts=_parts(parent)
+                if lane<len(parts):
+                    projected=parts[lane]
+                    if not (projected.op=='member' and projected.args and projected.args[0] is parent):
+                        return visit(projected,depth+1)
         if uniform(node):return np.zeros(4),node
         if node.dtype!='float':raise ValueError('spatial coordinate conversion is not continuous float arithmetic')
         if node.op in {'cast','narrow','construct','components'} and len(node.args)==1:
@@ -74,6 +80,7 @@ def sampling_geometry(analysis):
     from effect_families import _walk
     from source_appearance import _phase_literal,_expression,_routes
     from source_motion import motion_control
+    from source_polar import polar_projection
     stages={};statuses={}
     for stage in ('warp','composite'):
         field=analysis.outputs.get(stage)
@@ -91,7 +98,8 @@ def sampling_geometry(analysis):
                 'audio_routes':[],'basis':None,'native_mesh_transform_precedes_basis':None,
                 'determinant':None,'orientation_reversed':None,'inverse_matrix':None,
                 'inverse_offset_uv':None,'nominal_feature_area_ratio':None,
-                'visible_screen_motion':None,'unknown_reasons':[]}
+                'visible_screen_motion':None,'unknown_reasons':[],
+                'polar_projection':polar_projection(node.args[0],analysis)}
             try:
                 matrix,offsets=affine_uv_map(node.args[0])
                 result['matrix_uv4']=matrix.tolist()

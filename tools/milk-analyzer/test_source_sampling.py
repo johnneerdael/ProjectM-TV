@@ -101,3 +101,9 @@ def test_affine_map_matches_inverse_at_independent_coordinate_points():
         source=matrix@p+offset
         assert inverse@source+inv_offset==pytest.approx(p,abs=2e-7)
     assert m['nominal_feature_area_ratio']==pytest.approx(1/6.5)
+
+
+def test_scalar_swizzles_of_vector_arithmetic_keep_affine_map():
+    m=maps('float2 p=(uv-float2(.3,.7))*float2(2,1);ret=GetPixel(float2(p.y,p.x));')[0]
+    assert m['matrix_uv4']==[[0,1,0,0],[2,0,0,0]]
+    assert m['offset_uv']==pytest.approx([-.7,-.6],abs=2e-7)

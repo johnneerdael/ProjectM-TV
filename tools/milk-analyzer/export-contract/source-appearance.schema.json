@@ -1394,7 +1394,8 @@
                       "inverse_offset_uv",
                       "nominal_feature_area_ratio",
                       "visible_screen_motion",
-                      "unknown_reasons"
+                      "unknown_reasons",
+                      "polar_projection"
                     ],
                     "properties": {
                       "matrix_uv4": {
@@ -1506,6 +1507,173 @@
                         "type": "array",
                         "items": {
                           "type": "string"
+                        }
+                      },
+                      "polar_projection": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "kind",
+                          "coordinate_lanes",
+                          "shared_anchor",
+                          "angle",
+                          "depth",
+                          "appearance_guaranteed",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-separable-polar-projection-v1"
+                          },
+                          "kind": {
+                            "enum": [
+                              "not_recognized",
+                              "unresolved",
+                              "separable_angle_depth"
+                            ]
+                          },
+                          "coordinate_lanes": {
+                            "enum": [
+                              null,
+                              [
+                                "angle",
+                                "depth"
+                              ],
+                              [
+                                "depth",
+                                "angle"
+                              ]
+                            ]
+                          },
+                          "shared_anchor": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          "angle": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "function": {
+                                "enum": [
+                                  "affine",
+                                  "frac",
+                                  "triangular_frac"
+                                ]
+                              },
+                              "input_scale": {
+                                "type": "number"
+                              },
+                              "output_scale": {
+                                "type": "number"
+                              },
+                              "angular_period_rad": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "cycles_per_turn_nominal": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "exact_closed_turn_symmetry": {
+                                "type": "null"
+                              },
+                              "turn_span_uv": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "audio_routes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          },
+                          "depth": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "function": {
+                                "enum": [
+                                  "reciprocal",
+                                  "log",
+                                  "log2",
+                                  "log10",
+                                  "affine_radius"
+                                ]
+                              },
+                              "radius_scale": {
+                                "type": "number"
+                              },
+                              "radius_bias": {
+                                "type": "number"
+                              },
+                              "output_scale": {
+                                "type": "number"
+                              },
+                              "input_absolute": {
+                                "type": "boolean"
+                              },
+                              "domain_guard_retained": {
+                                "type": "boolean"
+                              },
+                              "radial_derivative": {
+                                "type": "object",
+                                "required": [
+                                  "coefficient",
+                                  "radius_scale",
+                                  "radius_bias",
+                                  "denominator_power"
+                                ],
+                                "properties": {
+                                  "coefficient": {
+                                    "type": "number"
+                                  },
+                                  "radius_scale": {
+                                    "type": "number"
+                                  },
+                                  "radius_bias": {
+                                    "type": "number"
+                                  },
+                                  "denominator_power": {
+                                    "enum": [
+                                      0,
+                                      1,
+                                      2
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "appearance_guaranteed": {
+                            "const": false
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -1533,7 +1701,8 @@
                       "inverse_offset_uv",
                       "nominal_feature_area_ratio",
                       "visible_screen_motion",
-                      "unknown_reasons"
+                      "unknown_reasons",
+                      "polar_projection"
                     ],
                     "properties": {
                       "matrix_uv4": {
@@ -1645,6 +1814,173 @@
                         "type": "array",
                         "items": {
                           "type": "string"
+                        }
+                      },
+                      "polar_projection": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "kind",
+                          "coordinate_lanes",
+                          "shared_anchor",
+                          "angle",
+                          "depth",
+                          "appearance_guaranteed",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-separable-polar-projection-v1"
+                          },
+                          "kind": {
+                            "enum": [
+                              "not_recognized",
+                              "unresolved",
+                              "separable_angle_depth"
+                            ]
+                          },
+                          "coordinate_lanes": {
+                            "enum": [
+                              null,
+                              [
+                                "angle",
+                                "depth"
+                              ],
+                              [
+                                "depth",
+                                "angle"
+                              ]
+                            ]
+                          },
+                          "shared_anchor": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          "angle": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "function": {
+                                "enum": [
+                                  "affine",
+                                  "frac",
+                                  "triangular_frac"
+                                ]
+                              },
+                              "input_scale": {
+                                "type": "number"
+                              },
+                              "output_scale": {
+                                "type": "number"
+                              },
+                              "angular_period_rad": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "cycles_per_turn_nominal": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "exact_closed_turn_symmetry": {
+                                "type": "null"
+                              },
+                              "turn_span_uv": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "audio_routes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          },
+                          "depth": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "function": {
+                                "enum": [
+                                  "reciprocal",
+                                  "log",
+                                  "log2",
+                                  "log10",
+                                  "affine_radius"
+                                ]
+                              },
+                              "radius_scale": {
+                                "type": "number"
+                              },
+                              "radius_bias": {
+                                "type": "number"
+                              },
+                              "output_scale": {
+                                "type": "number"
+                              },
+                              "input_absolute": {
+                                "type": "boolean"
+                              },
+                              "domain_guard_retained": {
+                                "type": "boolean"
+                              },
+                              "radial_derivative": {
+                                "type": "object",
+                                "required": [
+                                  "coefficient",
+                                  "radius_scale",
+                                  "radius_bias",
+                                  "denominator_power"
+                                ],
+                                "properties": {
+                                  "coefficient": {
+                                    "type": "number"
+                                  },
+                                  "radius_scale": {
+                                    "type": "number"
+                                  },
+                                  "radius_bias": {
+                                    "type": "number"
+                                  },
+                                  "denominator_power": {
+                                    "enum": [
+                                      0,
+                                      1,
+                                      2
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "appearance_guaranteed": {
+                            "const": false
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }

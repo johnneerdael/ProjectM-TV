@@ -146,6 +146,13 @@ centre makes an isolated feature half as wide. Wrap, clipping, colour weights an
 feedback still determine how many copies become visible. These records give a
 consumer spatial context without claiming screen speed or dominance.
 
+Supported polar lookup records describe reciprocal/logarithmic depth and angular
+wrapping, with shared-centre/metric checks and source repetition rates. They keep
+small authored numerical differences rather than claiming perfect symmetry.
+These parameters help an approximation choose a radial layout; texture contents,
+colour weights and feedback still decide whether it looks like a visible tunnel
+or kaleidoscope.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

@@ -147,6 +147,11 @@ warp mesh/original UV columns plus spatially uniform offset programs, audio
 routes and time curves. Keep typed quantization, image/interpolated-colour
 offsets, dynamic scales and mixed/singular inverses unresolved. Local inverse
 feature area is not screen coverage, copy count or visible motion.
+`source_polar.py` adds conditional per-sample separable angle/depth parameters
+with proved matching native or authored affine spatial anchors. Retain target
+log(abs) and domain guards, nominal unrounded angular periods, shared-metric
+checks and unresolved dynamic scales/image offsets. Radial derivatives describe
+source sampling density, not visible speed or guaranteed tunnel/symmetry.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

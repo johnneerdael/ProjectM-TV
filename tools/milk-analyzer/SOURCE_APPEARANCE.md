@@ -488,3 +488,51 @@ feature motion follows the inverse and can differ from final scene movement.
 The basis distinction matches [MilkDrop's authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html)
 and original MilkDrop2 `vis_milk2/plugin.cpp:3486-3491`; the target patched
 source31 binds the same macros in `MilkdropPreset/MilkdropShader.cpp:573-580`.
+
+## Polar projection parameters
+
+Each sample's `polar_projection` describes supported separable angular/radial
+texture lookups. It is `not_recognized`, `unresolved`, or `separable_angle_depth`.
+`coordinate_lanes` preserves whether angle is texture x or y. The producer must
+prove that both use the same native `_rad_ang` input or the same authored affine
+plane, including scale, shear and offset programs. A dynamic/nonlinear authored
+plane may retain an exact canonical typed plane program with unknown matrix and
+centre; it does not become a resolved screen metric. Equal centres with different
+radius metrics do not count as a shared anchor. An authored plane exports its
+2-by-4 matrix and offset programs; `centre_in_basis_uv` is known only for an
+invertible single basis with constant offsets. Native radius/angle retain their
+projection/aspect/interpolation obligations and no direct shader-UV centre metric.
+
+For `angle.function=affine`, the angle output is
+`input_scale*theta + offset`. `turn_span_uv=abs(input_scale)*2*pi` is its nominal
+span across a turn. `frac` describes `output_scale*frac(input_scale*theta+phase)
++output_offset`. `triangular_frac` describes
+`output_scale*abs(2*frac(input_scale*theta+phase)-1)+output_offset`. Phase/offset
+programs include available time curves and band-specific audio routes with units.
+Wrapped angular period is `1/abs(input_scale)` radians; cycles per turn is
+`abs(input_scale)*2*pi`. These use the authored numerical divisor rather than a
+rounded sector count. `exact_closed_turn_symmetry` remains null: finite precision,
+atan2 seams, input transformations and later sampling can break exact symmetry.
+
+Let `u=radius_scale*r+radius_bias`. The depth functions are
+`output_scale/u+offset`, `output_scale*log(u)+offset`, corresponding log2/log10
+forms, or a linear radius form. The patched translator uses absolute input for
+logarithms; `input_absolute=true` then means log(abs(u)), with
+`domain_guard_retained=true`. Reciprocal requires u!=0; log(abs(u)) also requires
+u!=0. These domains are explicit conditions, not proven reachable-radius bounds.
+Dynamic radius coefficients, image/spatial offsets and unsupported nonlinear
+functions remain unresolved. `appearance_guaranteed` is always false.
+
+`radial_derivative` provides nominal `coefficient / u**denominator_power`,
+using -output_scale*radius_scale and power2 for reciprocal,
+output_scale*radius_scale/ln(base) and power1 for log base, and the linear slope
+with power0 for affine radius. This describes how sampling density changes with
+radius; it is not pixel speed, dominance, trail intensity or final ring spacing.
+Authored atan2/radius also require a usable plane and valid origin/domain handling.
+
+This adds reconstruction parameters to a contributing construction without
+certifying a dominant tunnel, spiral, number of visible layers or kaleidoscope.
+The creator's [authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html)
+describes warp/composite UV and wrap/clamp sampling. Target log handling comes
+from source31 `vendor/hlslparser/src/GLSLGenerator.cpp:1028-1043`; original
+MilkDrop2 D3DX intent is kept separate from this patched target policy.
