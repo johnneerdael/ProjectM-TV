@@ -36,6 +36,10 @@ CORE_2331_ENGINE = {
     'commit': '6f64807467e312034883a4389e6aa80a675458bc',
     'patches_sha256': '78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321',
 }
+CORE_2334_ENGINE = {
+    'commit': '6f64807467e312034883a4389e6aa80a675458bc',
+    'patches_sha256': 'a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df',
+}
 CORE_2331_LEGACY_WARP = 'projectmtv-core-2.3.31-authored-legacy-warp-v1'
 CORE_2331_DISPLAY = 'projectmtv-core-2.3.31-authored-display-v1'
 CORE_2331_MOTION = 'projectmtv-core-2.3.31-continuous-motion-v1'
@@ -56,8 +60,18 @@ LEGACY_WAVE = 'legacy-static-wave-controls-v1'
 
 
 def matches(engine, expected=None):
-    targets=(CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE) if expected is None else (expected,)
+    targets=(CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE,CORE_2334_ENGINE) if expected is None else (expected,)
     return any(all(engine.get(key)==value for key,value in target.items()) for target in targets)
+
+
+def math_matches(engine, expected=None):
+    """Admit known source-math lineage without relabeling artifact identity.
+
+    The complete prepared34 source delta from31 contains only program-cache
+    control/API files. This admits established math policies, not GPU behavior,
+    observed bindings, AAR byte equivalence or transferred runtime evidence.
+    """
+    return matches(engine,expected) or (expected==CORE_2331_ENGINE and matches(engine,CORE_2334_ENGINE))
 
 
 def select_policy(engine, requested, *, current, legacy):

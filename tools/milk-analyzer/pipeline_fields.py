@@ -19,7 +19,7 @@ from spatial import sample2d
 from blur import blur_bank,native_ranges,pass_dimensions
 from feedback_field import unorm8
 from engine_profiles import (LEGACY_BLUR,CORE_2315_BLUR,LEGACY_DISPLAY,CORE_2315_DISPLAY,
-                             CORE_2331_ENGINE,CORE_2331_DISPLAY,CORE_2331_MOTION,matches)
+                             CORE_2331_ENGINE,CORE_2331_DISPLAY,CORE_2331_MOTION,math_matches)
 
 LEGACY_MOTION='legacy-visible-motion-v1'
 
@@ -129,7 +129,7 @@ class SourcePipeline:
         self.shader_work_policy=shader_work_policy
         if motion_map_policy not in {LEGACY_MOTION,CORE_2331_MOTION}:
             raise ValueError('unsupported motion map policy')
-        if motion_map_policy==CORE_2331_MOTION and not matches(source_engine or {},CORE_2331_ENGINE):
+        if motion_map_policy==CORE_2331_MOTION and not math_matches(source_engine or {},CORE_2331_ENGINE):
             raise ValueError('continuous motion source engine identity mismatch')
         self.motion_map_policy=motion_map_policy
         self.motion_uv_backend=motion_uv_backend or ('conditional' if motion_map_policy==CORE_2331_MOTION else 'rg16f')
@@ -232,8 +232,8 @@ class SourcePipeline:
         if 'source_engine' in kwargs and kwargs['source_engine']!=engine:
             raise ValueError('motion source engine identity differs from parser')
         kwargs['source_engine']=engine
-        kwargs.setdefault('motion_map_policy',CORE_2331_MOTION if matches(engine,CORE_2331_ENGINE) else LEGACY_MOTION)
-        if kwargs['motion_map_policy']==CORE_2331_MOTION and not matches(engine,CORE_2331_ENGINE):
+        kwargs.setdefault('motion_map_policy',CORE_2331_MOTION if math_matches(engine,CORE_2331_ENGINE) else LEGACY_MOTION)
+        if kwargs['motion_map_policy']==CORE_2331_MOTION and not math_matches(engine,CORE_2331_ENGINE):
             raise ValueError('continuous motion source engine identity mismatch')
         if kwargs.get('motion_uv_backend')=='rg16ui-half-words' and profile!='gles300':
             raise ValueError('packed motion requires GLES300')

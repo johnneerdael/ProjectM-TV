@@ -290,6 +290,17 @@ uses an empty active-band list; unknown radius uses null. Nonfinite coefficient
 or derivative estimates remain unknown, and
 `visible_bass_response_strength` stays null.
 
+### Reader identity during source34 migration
+
+The static exporter supports an explicit source34 reader as well as the
+qualified source31 reference. Its run identity comes from a minimal parser
+preflight, and each record retains the actual reader, engine and archive hashes.
+`engine_profiles.matches` compares exact identities; `math_matches` separately
+admits the known source31-to34 math lineage. Source34 changes only cache/API
+files in the prepared snapshot. This does not transfer published-AAR runtime,
+actual sampler binding or appearance evidence. Defaults remain source31 until
+the candidate v2.3.34 runtime qualification passes.
+
 ## Logical composition and sampler flow
 
 `composition`, policy `source-logical-composition-v1`, explains the logical normal

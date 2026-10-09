@@ -60,10 +60,10 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
 
 def source_shape_thickness(source,index,attributes):
     """Resolve the evaluated binary64 flag without modifying authored values."""
-    from engine_profiles import CORE_2331_ENGINE,matches
+    from engine_profiles import CORE_2331_ENGINE,math_matches
     from native_values import native_scalar
     saved=bool(_scalar(source_settings(source),f'shapecode_{index}_thickOutline',0,'bool'))
-    if not matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):return saved
+    if not math_matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):return saved
     if 'thick' not in attributes:return saved
     value=native_scalar(attributes['thick'],allow_ieee=True)
     if not np.isfinite(value) or not -2147483649<value<2147483648:return saved

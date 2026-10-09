@@ -16,11 +16,11 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
     vertex aspect, parameters and equation outputs remain those of the scene.
     """
     width,height=scene['viewport'];grid_x,grid_y=scene['mesh_size']
-    from engine_profiles import LEGACY_WARP,CORE_2331_LEGACY_WARP,CORE_2331_ENGINE,matches
+    from engine_profiles import LEGACY_WARP,CORE_2331_LEGACY_WARP,CORE_2331_ENGINE,math_matches
     legacy_policy=scene.get('legacy_warp_policy',LEGACY_WARP)
     if legacy_policy not in {LEGACY_WARP,CORE_2331_LEGACY_WARP}:raise ValueError('unsupported legacy warp policy')
     legacy=legacy_policy==CORE_2331_LEGACY_WARP
-    if legacy and not matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):
+    if legacy and not math_matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE):
         raise ValueError('legacy warp engine identity mismatch')
     if output_size is not None and (
             not isinstance(output_size,(tuple,list)) or len(output_size)!=2 or

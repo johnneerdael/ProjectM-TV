@@ -1,0 +1,36 @@
+{
+  "repository": "johnneerdael/ProjectM-TV",
+  "release": "v2.3.34",
+  "release_commit": "984bfe19e408bed374647e4bdea8c053f0922a15",
+  "asset": "projectM-TV-core-2.3.34.aar",
+  "aar_sha256": "a2af1e99f81e6130c77167c11460b0bc9a02306b5fac7fc1b0a1d8c1e33b73a3",
+  "native_arm64_sha256": "b04caf83c2d4b89015a727899225ecba970a9b732afc7997760e584dcc367013",
+  "native_armv7_sha256": "e0a6bb6927f8f44a93ab82665b7bf99faf0e801f3b4b38f3c2148946ffcb3596",
+  "classes_jar_sha256": "a4e3f33e655a784551d064b4a16ce9c43ced202bc24103892b1fc861c3d2ff92",
+  "rendering_policy": "native",
+  "source_engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "source_engine_archive_sha256": "9dbe2f4d472eeea9809706104bea64133a07dda4be4f5da4531b0a7d899fb197",
+  "asset_counts": {
+    "presets": 9606,
+    "textures": 74
+  },
+  "asset_inventory_sha256": "f383541e45c684b20fa1f60c60fe195cdffb35d099e82a7678a8238135eadfe7",
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.34",
+  "profile_status": "candidate-runtime-unqualified",
+  "qualification": {
+    "published_bytes_verified": true,
+    "repository_assets_equal_published": true,
+    "source_policy_controls_passed": true,
+    "published_runtime_numerical_controls_passed": false,
+    "appearance_certified": false,
+    "runtime_scope": "Not run: task-owned API34 emulator exits SIGILL in host init_cache_info before guest startup and AAR loading",
+    "source_scope": "18 source34 identity/contract/wave/audio/noise/static/forecast controls; no unchanged-AAR runtime credit"
+  },
+  "math_policy_reference_engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+  }
+}

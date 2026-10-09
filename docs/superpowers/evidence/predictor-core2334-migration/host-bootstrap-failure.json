@@ -1,0 +1,34 @@
+{
+  "scope": "Task-owned isolated emulator launch failed before guest startup or AAR loading",
+  "command_avd": "projectmtv-predictor-core234",
+  "serial": "emulator-5688",
+  "exit_code": 132,
+  "emulator_version": "37.1.11.0",
+  "crash_report_sha256": "b07ea219082725a852b0a1c868233310aaf5c9b24bb41e48332d575e87e3e261",
+  "exception": {
+    "codes": "0x0000000000000001, 0x00000000d53b0029",
+    "rawCodes": [
+      1,
+      3577413673
+    ],
+    "type": "EXC_BAD_INSTRUCTION",
+    "signal": "SIGILL"
+  },
+  "termination": {
+    "flags": 0,
+    "code": 4,
+    "namespace": "SIGNAL",
+    "indicator": "Illegal instruction: 4",
+    "byProc": "exc handler",
+    "byPid": 32747
+  },
+  "faulting_function": {
+    "imageOffset": 4611040,
+    "symbol": "init_cache_info",
+    "symbolLocation": 52,
+    "imageIndex": 0
+  },
+  "native_aar_loaded": false,
+  "runtime_qualification": false,
+  "retry_without_fix": false
+}

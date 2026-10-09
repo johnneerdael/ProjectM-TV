@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 
 from sampling_policy import texture_settings
-from engine_profiles import CORE_2331_ENGINE
+from engine_profiles import CORE_2331_ENGINE,CORE_2334_ENGINE
 
 
 POLICY = 'projectmtv-random-slot-inputs-v1'
@@ -67,7 +67,7 @@ CORE_2331_SOURCE_FILES = {**SOURCE_FILES,
 }
 
 
-def native_contract(engine: Path):
+def native_contract(engine: Path,*,identity=None):
     """Stamp recognized source bodies; older/changed implementations fail closed."""
     hashes = {}
     try:
@@ -81,9 +81,12 @@ def native_contract(engine: Path):
     except (OSError, ValueError, UnicodeError):
         return None
     if hashes == BODY_HASHES and files == SOURCE_FILES:
+        if identity in (CORE_2331_ENGINE,CORE_2334_ENGINE):return None
         return {'policy': POLICY, 'body_sha256': hashes, 'file_sha256': files}
     if hashes == CORE_2331_BODY_HASHES and files == CORE_2331_SOURCE_FILES:
-        return {'policy': POLICY, 'engine': dict(CORE_2331_ENGINE),
+        selected=CORE_2331_ENGINE if identity is None else identity
+        if selected not in (CORE_2331_ENGINE,CORE_2334_ENGINE):return None
+        return {'policy': POLICY, 'engine': dict(selected),
                 'body_sha256': hashes, 'file_sha256': files}
     return None
 
@@ -91,7 +94,7 @@ def native_contract(engine: Path):
 def recognized(value):
     if not isinstance(value, dict) or value.get('policy') != POLICY:
         return False
-    if value.get('engine') == CORE_2331_ENGINE:
+    if value.get('engine') in (CORE_2331_ENGINE,CORE_2334_ENGINE):
         return (value.get('body_sha256') == CORE_2331_BODY_HASHES and
                 value.get('file_sha256') == CORE_2331_SOURCE_FILES)
     return ('engine' not in value and value.get('body_sha256') == BODY_HASHES and
@@ -124,10 +127,10 @@ def verified_contract(source, *, stage, profile, compatibility):
             translation.get('engine_archive_sha256') != archive or
             translation.get('sampler_reference_body_sha256') != BODY_HASHES['MilkdropShader.GetReferencedSamplers']):
         return None
-    if contract.get('engine') == CORE_2331_ENGINE:
-        if parser.get('engine') != CORE_2331_ENGINE or translation.get('engine') != CORE_2331_ENGINE:
+    if contract.get('engine') in (CORE_2331_ENGINE,CORE_2334_ENGINE):
+        if parser.get('engine') != contract['engine'] or translation.get('engine') != contract['engine']:
             return None
-    elif parser.get('engine') == CORE_2331_ENGINE or translation.get('engine') == CORE_2331_ENGINE:
+    elif parser.get('engine') in (CORE_2331_ENGINE,CORE_2334_ENGINE) or translation.get('engine') in (CORE_2331_ENGINE,CORE_2334_ENGINE):
         return None
     request = compatibility.get('request', {})
     if not isinstance(request, dict):
@@ -202,5 +205,7 @@ def verified_contract(source, *, stage, profile, compatibility):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, required=True)
+    parser.add_argument('--identity-file',type=Path)
     args = parser.parse_args()
-    print(json.dumps(native_contract(args.engine), sort_keys=True))
+    identity=None if args.identity_file is None else json.loads(args.identity_file.read_text())
+    print(json.dumps(native_contract(args.engine,identity=identity), sort_keys=True))

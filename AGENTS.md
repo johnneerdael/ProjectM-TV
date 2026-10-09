@@ -922,6 +922,19 @@ that detail through component projection and explicit scalar source casts.
 Literal folding must not erase overflowing terms as double-valued cancellation.
 See `tools/milk-analyzer/SOURCE_APPEARANCE.md` and `test_source_temporal.py`.
 
+Source34 preparation (2026-10-10): the exact full published v2.3.34 AAR is
+hash-verified locally. Matching source34 adapters retain their own commit,
+35-patch identity and archive hashes. `engine_profiles.matches` remains strict;
+`math_matches` admits only the explicit source31-to34 math lineage, without AAR
+byte equivalence, observed-binding or runtime credit. Random contracts require
+matching actual parser/translator/contract identities; cold audio/RNG policies
+use separate34 names. Static export accepts an explicit source34 reader and
+preflights its actual identity. Defaults remain source31/published33 until the
+candidate runtime gate passes. `candidate-core-v2.3.34.json` is unqualified.
+The isolated SDK emulator failed SIGILL in host `init_cache_info` before loading
+the AAR; do not retry unchanged or operate shared devices. See
+`docs/superpowers/evidence/predictor-core2334-migration/README.md`.
+
 The numerical corpus now defaults to source31 with a separate full published-AAR
 and profile identity. Latest publication output suffix `-core2333` prevents
 relabeling historical31/29 rows; the `core2331` target names the unchanged engine

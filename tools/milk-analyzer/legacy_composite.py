@@ -10,10 +10,10 @@ from native_values import native_scalar
 
 def source_tint_amount(source):
     """PR57's static PresetState fShader; historical engines keep full tint."""
-    from engine_profiles import CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE,matches
+    from engine_profiles import CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE,math_matches
     from scene_equations import source_settings
     engine=source.get('parser_inputs',{}).get('engine',{})
-    if not any(matches(engine,identity) for identity in (CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
+    if not any(math_matches(engine,identity) for identity in (CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
         return None
     return _scalar(source_settings(source),'fShader',0,'float')
 

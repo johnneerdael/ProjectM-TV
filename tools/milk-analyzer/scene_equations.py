@@ -69,14 +69,14 @@ class CaseInsensitiveSettings(dict):
 
 def source_settings(source):
     """Restore the declared native lookup contract after JSON serialization."""
-    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE, matches
+    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE, math_matches
     inputs=source.get('parser_inputs',{})
     if 'setting_lookup_policy' not in inputs:
         return source['values']
     if inputs['setting_lookup_policy']!='native-case-insensitive-v1':
         raise ValueError('unknown setting lookup policy')
     engine=inputs.get('engine',{})
-    if not any(matches(engine,target) for target in (CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
+    if not any(math_matches(engine,target) for target in (CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
         raise ValueError('native setting lookup policy engine identity mismatch')
     if any(not isinstance(key,str) or key!=key.lower() for key in source['values']):
         raise ValueError('native lowercase setting payload required')
@@ -144,8 +144,8 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     """
     if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not np.isfinite(timeout_seconds) or not 0<timeout_seconds<=3600:
         raise ValueError('finite equation timeout in (0,3600] seconds required')
-    from engine_profiles import CORE_2331_ENGINE,CORE_2331_LEGACY_WARP,LEGACY_WARP,matches
-    current=matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
+    from engine_profiles import CORE_2331_ENGINE,CORE_2331_LEGACY_WARP,LEGACY_WARP,math_matches
+    current=math_matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
     if legacy_warp_policy not in {LEGACY_WARP,CORE_2331_LEGACY_WARP}:
         raise ValueError('unsupported legacy warp policy')
     if legacy_warp_policy==CORE_2331_LEGACY_WARP and not current:

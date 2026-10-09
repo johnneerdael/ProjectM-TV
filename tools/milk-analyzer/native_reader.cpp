@@ -83,7 +83,7 @@ json executeEquations(const json& request) {
     ParserDiagnostics diagnostics;
     const auto engine=json::parse(kEngineIdentity);
     const bool originalCustomWave = engine.at("commit")=="6f64807467e312034883a4389e6aa80a675458bc" &&
-        engine.at("patches_sha256")=="78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321";
+        (engine.at("patches_sha256")=="78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321" || engine.at("patches_sha256")=="a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df");
     PRJM_EVAL_F registers[100]{};
     std::map<std::string,std::shared_ptr<EquationContext>> scopes;
     std::map<std::string,std::unique_ptr<EquationProgram>> programs;

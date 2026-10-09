@@ -1,0 +1,14 @@
+{
+  "policy": "published-aar-reproduced-dex-v1",
+  "classes_jar_sha256": "a4e3f33e655a784551d064b4a16ce9c43ced202bc24103892b1fc861c3d2ff92",
+  "aar_sha256": "a2af1e99f81e6130c77167c11460b0bc9a02306b5fac7fc1b0a1d8c1e33b73a3",
+  "dex_sha256": "d13566d8506a3f88c4b6c017301abf0ba39aa6080c6c5b1284bbf5d38c8fbfae",
+  "reconstructed_dex_sha256": "d13566d8506a3f88c4b6c017301abf0ba39aa6080c6c5b1284bbf5d38c8fbfae",
+  "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+  "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+  "helper_classes_sha256": {
+    "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "a7a90e31531ef1d631f021f04b1036091bc39dc0a7e6487e08e11af5c9a12409"
+  },
+  "min_api": 21,
+  "proof_sha256": "aef8675ee85814405388e9631de27966103f243e21bfa2a6db675b496e4f2870"
+}

@@ -1,0 +1,11 @@
+{
+  "native-build/projectm/src/libprojectM/libprojectM-4.a": "9dbe2f4d472eeea9809706104bea64133a07dda4be4f5da4531b0a7d899fb197",
+  "adapters/milk-audio-inputs": "14e1954195a26dd089786f234815fdfd6665064f558292d3a180c12bc0d51f8f",
+  "adapters/milk-composite-inputs": "55fa6965db0eeb600415b4e2b6071c429051ce4c2cbf8ff880deca997a44a7a4",
+  "adapters/milk-image-inputs": "2f8392fed3e2a718cda7faf961e6d57738e1b676c0ee0d2dc0c808046e6bd59b",
+  "adapters/milk-native-reader": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "adapters/milk-noise-inputs": "3535bbef0b12477b7cbba5b9b03462f486566059e8e361396a9cdf1795456479",
+  "adapters/milk-shader-random": "b3a959fc450f7e0955ec022265fe18435b068c900ac814c37322f259f6e6443a",
+  "adapters/milk-shader-translate": "0529d199f6e7bf2f2a8db89c6d0e69531e23fbee9705f641d533cd32b5845665",
+  "adapters/milk-wave-inputs": "699784f395259054b25ae09ff150df48c0bb9c684ed726d38447c6b2f959ebac"
+}

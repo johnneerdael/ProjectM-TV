@@ -8,7 +8,7 @@ import ctypes
 from functools import lru_cache
 from scene_equations import source_settings,_scalar
 from primitives import colour_modulo
-from engine_profiles import CORE_2331_ENGINE, matches
+from engine_profiles import CORE_2331_ENGINE, math_matches
 
 DEFAULT_SMOOTHING='separate-float32-v1'
 FMA_SMOOTHING='float32-fma-first-v1'
@@ -50,7 +50,7 @@ def source_custom_waves(source,scene,*,smoothing_profile=DEFAULT_SMOOTHING):
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
     width,height=scene['viewport'];values=source_settings(source)
-    original_dots=matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
+    original_dots=math_matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
     ax=np.float32(min(1,width/height));ay=np.float32(min(1,height/width))
     inverse=np.array([np.float32(1)/ax,np.float32(1)/ay],dtype=np.float64)
     results=[]

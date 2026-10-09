@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from scene_equations import source_settings,_scalar
 from quad_lines import PROFILE
-from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, CORE_2331_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
+from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, CORE_2331_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, math_matches, select_policy
 from native_values import live_wave_mode,native_scalar
 
 
@@ -33,7 +33,7 @@ _CORE2310_ENGINE = {
 
 def _colour(source,main,frame,mode,alpha,width,height,*,mode1_alpha_boost=False):
     values=source_settings(source);base=np.float32(alpha);result=base
-    original=matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
+    original=math_matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
     largest=max(width,height)
     if mode in {2,5}:
         result*=np.float32(.07 if largest<=256 else .09 if largest<=512 else .11 if largest<=1024 else .13 if largest<=2048 else .15)
@@ -75,7 +75,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     if len(scene['frames'])!=len(audio['frames']):raise ValueError('wave/audio frame schedule mismatch')
     values=source_settings(source);width,height=scene['viewport']
     engine=source.get('parser_inputs',{}).get('engine',{})
-    original=matches(engine,CORE_2331_ENGINE)
+    original=math_matches(engine,CORE_2331_ENGINE)
     if original:
         control_policy=CORE_2315_WAVE if control_policy is None else control_policy
         if control_policy not in {CORE_2315_WAVE,LEGACY_WAVE}:
@@ -96,7 +96,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     any_dots=any(flag(f['main'],'wave_usedots','bWaveDots') for i,f in enumerate(scene['frames'])
                  if not live or live_modes[i] is not None)
     if any_dots and line_rendering_profile==PROFILE:
-        if not any(all(engine.get(key)==value for key,value in expected.items())
+        if not any(math_matches(engine,expected)
                    for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE]):
             raise ValueError('GLES builtin dot engine identity mismatch')
         if width<=0 or height<=0 or width*height>1024*768 or height>1330:
@@ -145,8 +145,8 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
         offsets=[[0,0]] if scaled_dots or not thick else [[0,0],[1/width,0],[1/width,-1/height],[0,-1/height]]
         frame_mode=geometry.get('mode',native['mode'])
         omitted=bool(geometry.get('omitted',False)) if live else False
-        rgba=[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=(matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE)))
-        if matches(engine,CORE_2331_ENGINE) and np.float32(rgba[3])<np.float32(.004):omitted=True
+        rgba=[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=(math_matches(engine,CORE_2325_ENGINE) or math_matches(engine,CORE_2327_ENGINE) or math_matches(engine,CORE_2329_ENGINE)))
+        if math_matches(engine,CORE_2331_ENGINE) and np.float32(rgba[3])<np.float32(.004):omitted=True
         waves=[]
         for vertices in ([] if omitted else geometry['vertex_waves']):
             if not vertices:waves.append([]);continue

@@ -6,10 +6,11 @@ from pathlib import Path
 import sys
 import time
 import subprocess
+import tempfile
 
 from corpus_store import RunStore,atomic_json,digest,discover,file_hash
 from effect_families import analyze_families,POLICY,_IMPORT_MODEL_HASHES as _FAMILY_IMPORT_HASHES
-from engine_profiles import CORE_2331_ENGINE
+from engine_profiles import CORE_2331_ENGINE,CORE_2334_ENGINE
 from forecast import model_file_hashes,read_source,_MODEL_IMPORT_HASHES
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -43,8 +44,8 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
         raise ValueError('preset changed during static family analysis')
     if source['reader_sha256']!=identity['reader_sha256']:
         raise ValueError('parser changed during static family analysis')
-    if source['parser_inputs']['engine']!=CORE_2331_ENGINE:
-        raise ValueError('static export requires exact published31 source reader')
+    if source['parser_inputs']['engine'] not in (CORE_2331_ENGINE,CORE_2334_ENGINE):
+        raise ValueError('static export requires exact supported published31/34 source reader')
     source['numbered_source']=raw.decode('utf-8',errors='replace')
     analysis=analyze_families(source,profile=profile,compatibility=compatibility)
     if model_file_hashes()!=models or file_hash(reader)!=identity['reader_sha256'] or file_hash(path)!=source_sha:
@@ -77,9 +78,14 @@ def main(argv=None):
             cases=[{'relative_path':args.source.name,'name':args.source.name,
                     'path':str(args.source.resolve()),'sha256':file_hash(args.source)}]
         else:cases=discover(args.source)
+        with tempfile.TemporaryDirectory(prefix='static-reader-identity-') as folder:
+            probe=Path(folder)/'identity.milk';probe.write_text('[preset00]\nfDecay=1\n')
+            engine=read_source(probe,reader=reader)['parser_inputs']['engine']
+        if engine not in (CORE_2331_ENGINE,CORE_2334_ENGINE):
+            raise ValueError('static export reader engine is not supported')
         identity={'export_kind':'preset-effect-families','policy':POLICY,
                   'reader_sha256':file_hash(reader),'model_modules':loaded_model_hashes(),
-                  'profile':args.profile,'source_engine':CORE_2331_ENGINE,
+                  'profile':args.profile,'source_engine':engine,
                   'simulation':False,'AI_involved':False}
         cache=args.cache or args.output/'cache'
         with RunStore(args.output,identity,cases,batch_size=args.batch_size) as store:
