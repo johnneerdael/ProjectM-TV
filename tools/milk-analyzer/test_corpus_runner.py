@@ -90,3 +90,58 @@ def test_frozen_manifest_validator_and_assets_reject_drift(tmp_path):
     with pytest.raises(ValueError,match='texture'):verify_frozen(config)
     asset.write_text('asset');(inputs/'manifest.json').write_text('{}')
     with pytest.raises(ValueError,match='manifest'):verify_frozen(config)
+
+
+def test_main_reports_exception_type_when_message_is_empty(monkeypatch,capsys,tmp_path):
+    import preset_corpus
+    from types import SimpleNamespace
+    monkeypatch.setattr(preset_corpus,'parse_args',lambda:SimpleNamespace(output=tmp_path))
+    def fail(args):raise MemoryError()
+    monkeypatch.setattr(preset_corpus,'run',fail)
+    assert preset_corpus.main()==1
+    assert 'MemoryError' in capsys.readouterr().err
+    import json
+    files=list(tmp_path.glob('controller-error-*.json'));assert len(files)==1
+    report=json.loads(files[0].read_text())
+    assert report['error_type']=='MemoryError'
+    assert 'MemoryError' in report['traceback']
+
+
+def test_diagnostic_write_failure_does_not_hide_original_error(monkeypatch,capsys,tmp_path):
+    import preset_corpus
+    from types import SimpleNamespace
+    monkeypatch.setattr(preset_corpus,'parse_args',lambda:SimpleNamespace(output=tmp_path))
+    def fail(args):raise MemoryError()
+    def cannot_format(*args,**kwargs):raise MemoryError()
+    monkeypatch.setattr(preset_corpus,'run',fail)
+    monkeypatch.setattr(preset_corpus.traceback,'format_exception',cannot_format)
+    assert preset_corpus.main()==1
+    assert 'Corpus runner stopped: MemoryError' in capsys.readouterr().err
+
+
+def test_memory_limit_failure_has_no_fake_feature_record():
+    from preset_corpus import memory_failure
+    result=memory_failure(7*2**30,6*2**30)
+    assert result['status']=='error' and result['stage']=='worker_memory'
+    assert result['error_type']=='MemoryLimitExceeded' and result['feature_record'] is None
+    assert result['peak_worker_bytes']==7*2**30 and result['memory_limit_bytes']==6*2**30
+
+
+def test_worker_memory_budget_is_positive_finite():
+    from preset_corpus import parse_args
+    assert parse_args([]).memory_limit_gib==6
+    import pytest
+    for value in ['0','-1','nan','inf']:
+        with pytest.raises(SystemExit):parse_args(['--memory-limit-gib',value])
+
+
+def test_fatal_diagnostics_do_not_overwrite_another_controller(monkeypatch,tmp_path):
+    import preset_corpus
+    from types import SimpleNamespace
+    saved=tmp_path/'controller-error-existing.json';saved.write_text('original')
+    monkeypatch.setattr(preset_corpus,'parse_args',lambda:SimpleNamespace(output=tmp_path))
+    def locked(args):raise RuntimeError('corpus controller already running')
+    monkeypatch.setattr(preset_corpus,'run',locked)
+    assert preset_corpus.main()==1
+    assert saved.read_text()=='original'
+    assert len(list(tmp_path.glob('controller-error-*.json')))==2

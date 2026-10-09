@@ -1,0 +1,30 @@
+{
+  "preset": "$$$ Royal - Mashup (255) --- Isosceles edit.milk",
+  "source_sha256": "f854c5342b32c64da82253f489d457983752b4a164933422652005e95c38359f",
+  "frames": 60,
+  "fps": 15,
+  "width": 854,
+  "height": 480,
+  "status": "computed",
+  "elapsed_seconds": 315.2160185829998,
+  "peak_physical_footprint_bytes": 2939114872,
+  "limit_bytes": 6442450944,
+  "default300s_deadline_pass": false,
+  "all47_prefix_feature_objects_equal": true,
+  "cache_nodes_before": [
+    96,
+    148,
+    4030,
+    2047,
+    6141,
+    3735
+  ],
+  "cache_nodes_after": [
+    96,
+    148,
+    1130,
+    1121,
+    1879,
+    2625
+  ]
+}

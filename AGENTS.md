@@ -729,3 +729,14 @@ output folder is required for the changed code identity. The prepared isolated
 source29 adapters read-only; keep those dependencies during execution. See
 `CORPUS_EXPORT.md` for the restart procedure. No AAR, presets or native numerical
 producer code changes are part of this fix.
+
+
+Predictor memory repair (2026-10-09): evaluation cache/binding/contexts and local
+input/sampler references are released in finally; exact read-only lane/state
+contexts are interned, with loop updates retaining unique epochs. Keep pixel
+arithmetic, domain guards and caller ownership unchanged. `process_memory.py`
+monitors only worker-owned groups, using Darwin physical footprint/Linux resident
+plus swap; ps queries have a2s timeout. Corpus memory budget failures retain null
+features and explicit errors. Fatal diagnostics use unique timestamp/PID JSON
+files. These are sampled resource safeguards, not a universal memory/performance
+bound. No unchanged failing full-corpus retry is required to verify the fix.

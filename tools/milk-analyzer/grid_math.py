@@ -49,14 +49,23 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
         raise UnresolvedMath('positive explicit grid dimensions required')
     inputs=inputs or {};size=int(np.prod(batch_shape));cache={};bound={}
     contexts=[np.arange(size,dtype=np.int64)]
-    states=[{}];loop_cache={};stored_cache={};loop_steps=0
+    states=[{}];loop_cache={};stored_cache={};loop_steps=0;context_keys={}
     nan_coordinates=False
 
     def convert(value,dtype,count,**kwargs):
         return _convert(value,dtype,count,allow_nan=nan_coordinates,allow_infinity=highp,**kwargs)
 
     def context(indices,parent,update=None):
-        contexts.append(indices);states.append({**states[parent],**(update or {})});return len(contexts)-1
+        if update is None:
+            # Expressions are pure within one immutable loop-state snapshot.
+            # Reusing an exact lane sequence avoids exponential recomputation of
+            # the same predecessor graph through component/select branches.
+            state=states[parent];key=(id(state),indices.tobytes())
+            if key in context_keys:return context_keys[key]
+            contexts.append(indices);states.append(state)
+            result=len(contexts)-1;context_keys[key]=result;return result
+        # A loop update establishes a distinct state epoch even for equal lanes.
+        contexts.append(indices);states.append({**states[parent],**update});return len(contexts)-1
 
     def bind(name,dtype,ctx,*,unbound_default=None):
         key=(name,dtype)
@@ -365,3 +374,11 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
     except UnresolvedMath:raise
     except (KeyError,IndexError,TypeError,ValueError) as error:
         raise UnresolvedMath('unsupported grid expression: '+str(error)) from error
+    finally:
+        # Recursive evaluator closures form cycles. NumPy buffers can dwarf the
+        # object count that triggers cyclic GC, so release their per-call state
+        # deterministically on success and on every failure. Returned arrays keep
+        # their own NumPy storage references; caller dictionaries are not mutated.
+        cache.clear();bound.clear();stored_cache.clear();loop_cache.clear()
+        contexts.clear();states.clear();context_keys.clear()
+        inputs=None;sample=None;on_sample=None

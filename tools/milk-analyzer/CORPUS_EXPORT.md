@@ -156,3 +156,31 @@ This starts all 9,606 presets from the beginning in the new folder. Later repeat
 resume this new run. No files in the original output folder are deleted. The
 prepared environment/adapters are shared read-only from `predictor-visual-loop`;
 retain both worktrees and the referenced build dependencies.
+
+
+## Memory repair and fatal diagnostics
+
+The memory-repair runner releases shader evaluation arrays/callbacks after every
+call and shares exact read-only lane/state contexts. Texture callbacks are pure
+lookups; `on_sample` observes uncached evaluations, not an exhaustive native
+texture-instruction trace. Loop state updates keep separate epochs.
+
+`--memory-limit-gib` defaults to6GiB per owned worker process group. On macOS the
+measurement includes compressed memory via physical footprint; Linux uses
+resident plus swapped memory. Sampling is once per second, so this is a monitored
+budget with possible short overshoot, not a hard OS quota. An exceeded budget
+stops that worker group and records `MemoryLimitExceeded`/null features. A monitor
+query is bounded at2seconds; failure stops the controller with diagnostics.
+
+Fatal messages include the exception type even when its message is empty.
+`controller-error-<timestamp>-<pid>.json` preserves the traceback; its unique name
+prevents another controller's report from being overwritten. Keep the diagnostic
+when reporting a failure. Completed preset records remain separate from fatal
+controller diagnostics.
+
+A repaired single-case check of Royal255completed60frames/15fps/854×480 in315s
+with an observed2.74GiB peak. That proves neither every preset's memory bound nor
+completion inside the default300s deadline. For a fresh controlled run, start with
+two workers; `--timeout 600` admits this particular observed duration while still
+bounding slow cases. More workers require measured throughput and peak-memory
+checks, not only free CPU cores.

@@ -11,6 +11,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import traceback
 
 from corpus_store import RunStore,atomic_json,discover,file_hash
 
@@ -54,11 +55,19 @@ def verify_frozen(configuration):
     verify_inputs(inputs,json.loads(path.read_text()))
 
 
+def memory_failure(footprint,limit):
+    return {'status':'error','stage':'worker_memory','feature_record':None,
+        'error_type':'MemoryLimitExceeded','error':'owned worker group exceeded declared memory budget',
+        'peak_worker_bytes':footprint,'memory_limit_bytes':limit}
+
+
 def finish_process(task,*,timed_out=False):
     process=task['process'];process.wait(timeout=10)
     task['stdout'].close();task['stderr'].close()
     result_path=task['result']
-    if timed_out:
+    if task.get('memory_exceeded'):
+        result=memory_failure(task['peak_worker_bytes'],task['configuration']['memory_limit_bytes'])
+    elif timed_out:
         result={'status':'timeout','stage':'worker','feature_record':None,'error':'per-preset deadline exceeded'}
     elif process.returncode!=0 or not result_path.exists():
         result={'status':'error','stage':'worker','feature_record':None,
@@ -71,6 +80,7 @@ def finish_process(task,*,timed_out=False):
         result['stderr_tail']=task['stderr_path'].read_text(errors='replace')[-12000:]
         result['stdout_tail']=task['stdout_path'].read_text(errors='replace')[-2000:]
     result['elapsed_seconds']=time.monotonic()-task['started']
+    result['observed_peak_worker_bytes']=task.get('peak_worker_bytes') if task.get('memory_sample_count') else None
     result.setdefault('simulation',task['configuration']['simulation'])
     result['uses_rendered_reference']=False;result['appearance_accuracy_verified']=False
     return result
@@ -88,6 +98,7 @@ def parse_args(argv=None):
     p.add_argument('--workers',type=int,default=2);p.add_argument('--batch-size',type=int,default=100)
     p.add_argument('--timeout',type=float,default=300);p.add_argument('--equation-timeout',type=float,default=60)
     p.add_argument('--seed',type=int,default=12345);p.add_argument('--pcm',type=Path)
+    p.add_argument('--memory-limit-gib',type=float,default=6,help='maximum owned worker group footprint; monitored every second')
     p.add_argument('--limit',type=int);p.add_argument('--check',action='store_true',help='prepare/verify inputs and print inventory without simulating')
     args=p.parse_args(argv)
     if not 1<=args.workers<=32:p.error('workers must be1..32')
@@ -95,6 +106,7 @@ def parse_args(argv=None):
         p.error('positive dimensions/frames within the currently supported reference area required')
     if not 0<=args.seed<2**32 or args.batch_size<1 or not math.isfinite(args.timeout) or args.timeout<=0 or not math.isfinite(args.equation_timeout) or not 0<args.equation_timeout<=3600:
         p.error('invalid seed, batch size or deadlines')
+    if not math.isfinite(args.memory_limit_gib) or args.memory_limit_gib<=0:p.error('positive finite worker memory budget required')
     if args.limit is not None and args.limit<1:p.error('positive limit required')
     return args
 
@@ -103,6 +115,7 @@ def run(args):
     # Imports happen after argument validation; the launcher selects the prepared Python environment.
     from forecast import model_file_hashes
     from corpus_inputs import prepare_inputs,verify_inputs
+    from process_memory import policy,group_bytes,exceeded
     args.output=args.output.expanduser().resolve();args.output.mkdir(parents=True,exist_ok=True)
     lock=(args.output/'controller.lock').open('a+')
     try:
@@ -123,7 +136,8 @@ def run(args):
             'seed':args.seed,'signal_policy':'fixed-kick-chord-hat-v1' if args.pcm is None else 'supplied-mono-f32',
             'pcm_sha256':None if args.pcm is None else file_hash(args.pcm),
             'textures':str(args.textures.resolve()),'equation_timeout':args.equation_timeout,
-            'worker_timeout':args.timeout,'sampling_profile':'apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1'}
+            'worker_timeout':args.timeout,'memory_limit_bytes':int(args.memory_limit_gib*2**30),
+            'memory_measurement_policy':policy(),'sampling_profile':'apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1'}
         # Input preparation is durable, bounded and separate from the exported result ZIPs.
         inputs=args.output/'inputs';manifest_path=inputs/'manifest.json'
         old_manifest=args.output/'run-manifest.json'
@@ -162,11 +176,16 @@ def run(args):
                             process=subprocess.Popen([sys.executable,str(worker),'--job',str(job),'--output',str(result)],
                                 stdout=stdout,stderr=stderr,start_new_session=True,env=worker_env)
                             active[process.pid]={'process':process,'case':case,'result':result,'stdout':stdout,'stderr':stderr,
-                                'stdout_path':stdout_path,'stderr_path':stderr_path,'started':time.monotonic(),'configuration':configuration}
+                                'stdout_path':stdout_path,'stderr_path':stderr_path,'started':time.monotonic(),'configuration':configuration,'last_memory_check':0,'peak_worker_bytes':0,'memory_sample_count':0}
                         progressed=False
                         for pid,task in list(active.items()):
                             timed_out=time.monotonic()-task['started']>args.timeout
-                            if task['process'].poll() is None and not timed_out:continue
+                            if task['process'].poll() is None and time.monotonic()-task['last_memory_check']>=1:
+                                footprint=group_bytes(task['process'].pid);task['last_memory_check']=time.monotonic()
+                                task['memory_sample_count']+=1
+                                task['peak_worker_bytes']=max(task['peak_worker_bytes'],footprint)
+                                task['memory_exceeded']=exceeded(footprint,configuration['memory_limit_bytes'])
+                            if task['process'].poll() is None and not timed_out and not task.get('memory_exceeded'):continue
                             stop_process(task['process'])
                             result=finish_process(task,timed_out=timed_out)
                             if result.get('stage')=='identity':
@@ -191,8 +210,25 @@ def run(args):
 
 
 def main():
-    try:return run(parse_args())
+    args=None
+    try:
+        args=parse_args()
+        return run(args)
     except Exception as error:
-        print('Corpus runner stopped: '+str(error),file=sys.stderr);return 1
+        kind=type(error).__name__
+        print('Corpus runner stopped: '+kind+(': '+str(error) if str(error) else ''),file=sys.stderr)
+        # Preserve fatal diagnostics when a Terminal window is closed. Reporting
+        # failure must not replace the original exception/exit status.
+        if args is not None:
+            try:
+                detail=''.join(traceback.format_exception(error))
+                path=args.output.expanduser()/f'controller-error-{time.time_ns()}-{os.getpid()}.json'
+                atomic_json(path,{
+                    'error_type':kind,'message':str(error),'traceback':detail,
+                    'timestamp_unix':time.time(),'pid':os.getpid()})
+                print('Controller diagnostics: '+str(path),file=sys.stderr)
+            except Exception as diagnostic_error:
+                print('Could not save controller diagnostics: '+type(diagnostic_error).__name__,file=sys.stderr)
+        return 1
 
 if __name__=='__main__':raise SystemExit(main())
