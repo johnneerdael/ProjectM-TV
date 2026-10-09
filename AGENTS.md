@@ -129,6 +129,11 @@ drawing order and typed source sampler reads. Keep detail/blur ages/render conte
 unresolved without inputs; retain stale-composite feedback from possible warp
 discard. Typed constant zero masks must prune data dependencies consistently while
 execution/domain obligations stay separate. This graph is not scene completeness.
+`source_material.py` reuses the qualified primitive colour-modulo helper for shape
+vertex RGBA, gradient/border and int-style blending/texture flags. Keep raw values,
+per-channel unknowns, raw border-alpha enable gating, source texture requests and
+unverified fallback/binding status. Perimeter/border/texture audio routes must not
+invent visibility or final palette verification; prune known unused style controls.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

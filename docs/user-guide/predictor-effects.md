@@ -119,6 +119,14 @@ and effective texture bindings remain conditional. Warp discard can retain stale
 composite pixels, so the record does not promise that display operations can never
 affect later feedback. This is useful pipeline context, not a finished scene graph.
 
+Shape materials now describe centre-to-edge RGBA gradients, border colours,
+source-alpha blend style and texture requests. Dynamic colour channels retain
+their formulas and unknown values. Colours use the TV engine's wrapping conversion,
+so values above1or below0are not simply saturated. Named-image requests retain
+unverified binding/hash fields and the previous-main fallback. These inputs help
+an independent approximation choose a fill/material; later shaders still determine
+the final palette. Audio routes also cover edge, border and texture controls.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

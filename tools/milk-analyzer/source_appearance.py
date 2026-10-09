@@ -23,7 +23,11 @@ SHAPE_CONTROLS={'x':('position_x','milkdrop shape coordinate'),'y':('position_y'
     'rad':('radius','milkdrop shape radius'),'ang':('rotation','rad'),
     'r':('colour_r','encoded RGB component'),'g':('colour_g','encoded RGB component'),
     'b':('colour_b','encoded RGB component'),'a':('opacity','source opacity'),
-    'border_a':('outline_opacity','source opacity')}
+    'r2':('perimeter_colour_r','encoded RGB component'),'g2':('perimeter_colour_g','encoded RGB component'),
+    'b2':('perimeter_colour_b','encoded RGB component'),'a2':('perimeter_opacity','source opacity'),
+    'border_r':('border_colour_r','encoded RGB component'),'border_g':('border_colour_g','encoded RGB component'),
+    'border_b':('border_colour_b','encoded RGB component'),'border_a':('outline_opacity','source opacity'),
+    'tex_zoom':('texture_zoom','source texture zoom ratio'),'tex_ang':('texture_rotation','rad')}
 MESH_CONTROLS={'zoom':('zoom','source zoom ratio'),'zoomexp':('radial_zoom','source zoom exponent'),
     'rot':('rotation','rad/feedback step'),'dx':('translation_x','source UV displacement'),
     'dy':('translation_y','source UV displacement'),'sx':('scale_x','source UV scale'),
@@ -417,11 +421,16 @@ def appearance_from_analysis(analysis):
     for identity,controls in getattr(analysis,'component_controls',{}).items():
         if identity not in elements:continue #later composite disconnected this drawing
         from source_geometry import shape_geometry
+        from source_material import shape_material
         elements[identity]['geometry']=shape_geometry(controls,elements[identity]['parameters']['instances'])
+        elements[identity]['material']=shape_material(controls,analysis.values.get('shapecode_'+identity.removeprefix('shape_')+'_image',''))
         elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
             application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():
             if name in controls:
+                material=elements[identity]['material']
+                if name in {'tex_zoom','tex_ang'} and material['texture']['role']=='untextured_vertex_gradient':continue
+                if name in {'border_r','border_g','border_b'} and material['border_draw_enabled'] is False:continue
                 value=controls[name];elements[identity]['parameters'][name]=_number(value)
                 elements[identity]['audio_routes']+=_routes(control,unit,value,analysis)
     from shader_fields import uses_input_components

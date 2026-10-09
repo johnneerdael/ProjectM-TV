@@ -151,6 +151,42 @@ without an invariant. `state:<section>:<name>` inputs identify those unresolved
 state slots; shared-register inputs use `shared:<name>`. Frozen older outputs are
 not relabelled with corrected bindings.
 
+### Shape vertex materials and texture requests
+
+Shape elements add `material`, policy `source-custom-shape-material-v1`.
+`source_rgba` keeps raw centre/perimeter/border source values; per-channel nulls
+remain for dynamic/unresolved expressions. `channel_expressions` preserves their
+programs. `centre_vertex_rgba`, `perimeter_vertex_rgba` and `border_vertex_rgba`
+apply the existing qualified native float32 Euclidean colour modulo256/255.
+These are vertex attributes before texture multiplication, fragment blending and
+storage; modulo can approach256/255 rather than saturating to1. Do not treat them
+as verified final pixel colours or a complete palette.
+
+The fill is a triangle fan interpolating centre RGBA toward perimeter RGBA;
+the border uses its own RGBA. `border_draw_enabled` follows raw source border_a
+greater than the float32 literal0.0001f (about0.00009999999747), exported as
+`border_enable_threshold`. A double equation assignment.0001 is above that limit,
+while a float32 configuration value.0001 is equal and disabled. Negative border_a can wrap positive in the colour conversion
+while still disabling the border. Blend style truncates a finite source value to
+native int32, then tests nonzero: `source_alpha_additive` uses source-alpha/one,
+`source_alpha_over` uses source-alpha/one-minus-source-alpha; unknown flags stay null.
+
+`texture.role` is untextured vertex gradient, named image request, previous main,
+or unresolved style. Requested names are author inputs, not observed successful
+bindings; `actual_asset_sha256` stays null and `actual_binding_verified=false`.
+Named lookup failure falls back to previous main under the selected render path.
+The source31 geometry path uses previous-main/authored history, not a newly
+observed image. Texture zoom/angle values and programs are retained in source
+units. Perimeter UV is centred on.5,.5, with half-radius divided by tex_zoom and
+angle `2*pi*j/sides+tex_ang+pi/4`; horizontal radius uses aspectY for main fallback
+and1for a successfully resolved named image. Texture/image history and sampling
+policy still require their context before reconstruction.
+
+Additional audio routes identify perimeter/border colour, perimeter opacity and
+texture zoom/rotation. Known untextured texture controls and disabled border RGB
+are not exported as live material responses. Final palette verification and visible
+colour contribution remain false/null; later shaders and opacity can hide them.
+
 ## Logical composition and sampler flow
 
 `composition`, policy `source-logical-composition-v1`, explains the logical normal

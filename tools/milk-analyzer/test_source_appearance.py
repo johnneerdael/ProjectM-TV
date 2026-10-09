@@ -716,6 +716,95 @@ def test_scalar_float_narrowing_removes_a_rounded_zero_mask(cast):
     assert result['composition']['shader_sample_reads']['composite']==[]
 
 
+def test_shape_material_exports_fill_gradient_border_and_blend():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_additive=1\n'
+        'shapecode_0_r=1\nshapecode_0_g=0\nshapecode_0_b=0\nshapecode_0_a=.8\n'
+        'shapecode_0_r2=0\nshapecode_0_g2=1\nshapecode_0_b2=0\nshapecode_0_a2=.2\n'
+        'shapecode_0_border_r=0\nshapecode_0_border_g=0\nshapecode_0_border_b=1\nshapecode_0_border_a=.3\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['centre_vertex_rgba']==pytest.approx([1,0,0,.8],abs=2e-7)
+    assert material['perimeter_vertex_rgba']==pytest.approx([0,1,0,.2],abs=2e-7)
+    assert material['border_vertex_rgba']==pytest.approx([0,0,1,.3],abs=2e-7)
+    assert material['blend_mode']=='source_alpha_additive'
+    assert material['texture']['role']=='untextured_vertex_gradient'
+    assert material['final_palette_verified'] is False
+
+
+def test_material_colour_wrap_uses_existing_native_modulo_policy():
+    from primitives import colour_modulo
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=r=1.2;g=-.2;\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['centre_vertex_rgba'][:2]==pytest.approx(colour_modulo([1.2,-.2]).tolist())
+    assert material['centre_vertex_rgba'][0]<.3
+
+
+def test_dynamic_material_channel_remains_unknown_without_hiding_other_colours():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=r=bass*.2;\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['centre_vertex_rgba'][0] is None
+    assert material['centre_vertex_rgba'][1:]==pytest.approx([0,0,1],abs=2e-7)
+
+
+def test_named_shape_texture_is_request_with_fallback_not_observed_binding():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_textured=1\n'
+        'shapecode_0_image=my-colours\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['texture']['requested_name']=='my-colours'
+    assert material['texture']['role']=='named_image_request'
+    assert material['texture']['fallback_role']=='previous_main'
+    assert material['texture']['actual_asset_sha256'] is None
+
+
+def test_textured_shape_without_name_uses_previous_main_role():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_textured=1\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['texture']['role']=='previous_main'
+
+
+def test_fractional_material_style_flags_follow_native_integer_conversion():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=textured=.9;additive=.9;\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['blend_mode']=='source_alpha_over'
+    assert material['texture']['role']=='untextured_vertex_gradient'
+
+
+def test_negative_border_alpha_can_wrap_positive_but_outline_stays_disabled():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=border_a=-.2;\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['border_vertex_rgba'][3]>.7
+    assert material['border_draw_enabled'] is False
+
+
+def test_audio_routes_cover_edge_border_and_texture_material_controls():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_border_a=.5\n'
+        'shape_0_per_frame1=r2=bass*.2;border_b=treb*.3;a2=mid*.1;tex_ang=bass_att*.4;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    routes={(r['control'],r['input_code']) for r in element['audio_routes']}
+    assert {('perimeter_colour_r',1),('border_colour_b',3),('perimeter_opacity',2),('texture_rotation',4)}<=routes
+
+
+def test_unused_texture_and_disabled_border_colour_routes_are_not_live():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=tex_ang=bass;border_r=mid;border_a=-.2;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert not any(r['control'] in {'texture_rotation','border_colour_r'} for r in element['audio_routes'])
+
+
+def test_border_enable_threshold_uses_native_float_literal_against_double_equation_value():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=border_a=.0001;border_r=mid;\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    assert element['material']['border_draw_enabled'] is True
+    assert any(r['control']=='border_colour_r' and r['input_code']==2 for r in element['audio_routes'])
+
+
+def test_configured_border_threshold_is_float32_equal_and_disabled():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_border_a=.0001\n')
+    material=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')['material']
+    assert material['border_draw_enabled'] is False
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

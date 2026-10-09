@@ -802,6 +802,157 @@
                     }
                   }
                 }
+              },
+              "material": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "gradient_kind",
+                  "source_rgba",
+                  "centre_vertex_rgba",
+                  "perimeter_vertex_rgba",
+                  "border_vertex_rgba",
+                  "border_draw_enabled",
+                  "channel_expressions",
+                  "colour_conversion",
+                  "blend_mode",
+                  "texture",
+                  "final_palette_verified",
+                  "visible_colour_contribution",
+                  "conditions",
+                  "unknown_reasons"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-material-v1"
+                  },
+                  "gradient_kind": {
+                    "const": "centre_to_perimeter_triangle_fan_vertex_rgba"
+                  },
+                  "source_rgba": {
+                    "type": "object"
+                  },
+                  "centre_vertex_rgba": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "perimeter_vertex_rgba": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "border_vertex_rgba": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "border_draw_enabled": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "channel_expressions": {
+                    "type": "object"
+                  },
+                  "colour_conversion": {
+                    "type": "string"
+                  },
+                  "blend_mode": {
+                    "enum": [
+                      null,
+                      "source_alpha_additive",
+                      "source_alpha_over"
+                    ]
+                  },
+                  "texture": {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "enum": [
+                          "unresolved_textured_style",
+                          "untextured_vertex_gradient",
+                          "named_image_request",
+                          "previous_main"
+                        ]
+                      },
+                      "requested_name": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "actual_asset_sha256": {
+                        "type": "null"
+                      },
+                      "actual_binding_verified": {
+                        "const": false
+                      },
+                      "tex_zoom_source": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "tex_angle_source_rad": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "final_palette_verified": {
+                    "const": false
+                  },
+                  "visible_colour_contribution": {
+                    "type": "null"
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "border_enable_threshold": {
+                    "type": "number"
+                  },
+                  "source_blend_factor": {
+                    "const": "source_alpha"
+                  },
+                  "destination_blend_factor": {
+                    "enum": [
+                      null,
+                      "one",
+                      "one_minus_source_alpha"
+                    ]
+                  }
+                }
               }
             }
           }

@@ -88,6 +88,9 @@ contract documentation and review. The numerical47-field export stays unchanged.
 - Logical composition/source-sampler flow is implemented;100/100sample records
   describe conditional pipeline context,77have blur reads and2retain unresolved
   stage reads. This is not an executable/material scene graph or recurrence.
+- Shape material records are implemented;35/100presets have known centre/edgeRGB
+  across64shapes. Vertex/material colours remain separate from the finalpalette;
+  source texture requests are not observed bindings.
 - Spatial/image motion, feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 
