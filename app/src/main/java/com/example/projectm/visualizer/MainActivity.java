@@ -139,6 +139,8 @@ public class MainActivity extends Activity {
     private AudioMeterView audioMeter;
     private TextView audioStatus;
     private OptionRow skippedRow;
+    private OptionRow lastExitRow;
+    private List<ExitDiagnostics.Exit> recentExits;
     private OptionRow musicCategoryRow;
     private OptionRow nativeTrailsRow;
     private String requestedMusicCategory = "all";
@@ -604,10 +606,9 @@ public class MainActivity extends Activity {
                 });
 
         // Exit records of earlier processes do not change while this one runs: read them once.
-        List<ExitDiagnostics.Exit> exits = ExitDiagnostics.recentExits(this);
-        OptionRow lastExit = findViewById(R.id.row_last_exit);
-        lastExit.setupAction("Last exit", ExitDiagnostics.summary(exits, Build.VERSION.SDK_INT >= 30,
-                System.currentTimeMillis()), () -> showExitReport(exits));
+        recentExits = ExitDiagnostics.recentExits(this);
+        lastExitRow = findViewById(R.id.row_last_exit);
+        lastExitRow.setupAction("Last exit", lastExitSummary(), () -> showExitReport(recentExits));
 
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
@@ -816,6 +817,10 @@ public class MainActivity extends Activity {
         if (resumed && menu != Menu.NONE) handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
     }
 
+    private String lastExitSummary() {
+        return ExitDiagnostics.summary(recentExits, Build.VERSION.SDK_INT >= 30, System.currentTimeMillis());
+    }
+
     /** Settings › Advanced › Last exit: the latest exits and what the engine was doing then. */
     private void showExitReport(List<ExitDiagnostics.Exit> exits) {
         String header = String.format(Locale.US, "%s %s, Android %s (API %d)%nGPU: %s%nBackground compile %s, shader binary cache %s%n",
@@ -863,6 +868,7 @@ public class MainActivity extends Activity {
             refreshTrackInfoRow();  // access may have been granted meanwhile
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
+            lastExitRow.setActionValue(lastExitSummary());  // keeps its age current
             setText(diagnostics, String.format(Locale.US,
                     "Render  %dx%d (%s)%nRAM     %s%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nTrails  %s%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM%nGPU     %s",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
