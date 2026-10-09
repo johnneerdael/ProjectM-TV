@@ -68,7 +68,7 @@ The predictor is tested by writing down **20 observable claims** per preset befo
 - the 12 it could not complete hit numeric domains the analyser could not resolve at that checkpoint: mostly undefined powers (such as negative bases), plus division, dot-product and nonfinite-coordinate cases which were retained as unresolved in that audit;
 - the audit's own target is 100 of 100 presets at 95 or more, so this run did not pass it (mean 86.95 when unanalysable presets count as 0). It used the published 2.3.11 engine, before the projectM 4.2 rebase.
 
-These are historical behavioural-rubric grades, not a universal “97% accurate” claim. [How the score is measured](authoring/testing.md#how-are-you-measuring-97-accurate) explains the 20-claim arithmetic, a real 97.5 example, the 5% numerical tolerance, visual assessment and the difference between 85/100 and 85/88. Later repairs and source-only corpus exports do not retroactively increase this audit's accuracy.
+These are historical behavioural-rubric grades. Average agreement measures closeness; the pass rate depends separately on the chosen gate. [How the score is measured](authoring/testing.md#how-are-you-measuring-97-accurate) explains the 20-claim arithmetic, a real 97.5 example, the 5% numerical tolerance, visual assessment and the difference between 85/100 and 85/88. Later repairs and source-only corpus exports do not retroactively increase this audit's accuracy.
 
 ## What remains before it replaces today's moods
 

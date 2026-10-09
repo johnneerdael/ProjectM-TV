@@ -66,12 +66,27 @@ The **source forecaster**, being developed on the [predictor branch](https://git
 
 ### How are you measuring “97% accurate”?
 
-**We report a behavioural agreement score and a sample pass rate, not one universal accuracy percentage.** A statement such as “97% accurate” is incomplete without the run, denominator, grading rules and render settings. In particular, these two numbers mean different things:
+**Here, behavioural accuracy means agreement with 20 frozen observable claims.** A score of **97.5/100**, or **97.5% of the available claim credit**, measures how closely one forecast matched those claims under the declared test conditions. It is an operational accuracy measure: it does not mean 97.5% of pixels matched or a future prediction has a calibrated 97.5% probability of being correct.
 
-- **97.5/100 for one preset:** the forecast earned 97.5 points on the declared 20-claim rubric.
-- **85/88 ≈ 96.6%, rounded to 97%:** in the historical 100-preset audit, 85 of the 88 completed predictions passed the ≥95 gate. Including the 12 unresolved predictions, the pass rate was **85/100 = 85%**.
+Keep three quantities separate:
 
-Neither number means 97% of pixels matched, 97% of MilkDrop programs are understood, or a future preset has a calibrated 97% probability of being correct.
+| Quantity | What it answers |
+|---|---|
+| Per-preset agreement score | How closely did this prediction match its 20 claims? |
+| Average agreement score | How closely did the predictions match on average, across the stated sample? |
+| Gate pass rate | How many predictions met the chosen threshold and critical checks? |
+
+**An 85% pass rate does not contradict 97% average accuracy.** For illustration, assume no critical failures and a sample with 85 scores of 100 and 15 scores of 80:
+
+```text
+average agreement = (85×100 + 15×80) / 100 = 97/100
+pass rate at a ≥95 gate = 85/100 = 85%
+pass rate at a ≥80 gate = 100/100 = 100%
+```
+
+Changing the gate changes the pass rate; it does not change the predictions, their grades or the 97/100 average. This illustration is not our recorded audit distribution. The actual audit results and their denominators are given below. Likewise, **85/88 ≈ 96.6%** in that audit is a conditional pass rate, not its average accuracy.
+
+Neither a high agreement score nor a high pass rate establishes the percentage of MilkDrop programs fully understood, pixel identity, or a guarantee for an unseen preset.
 
 ### What is compared, and when?
 
@@ -156,7 +171,7 @@ The score also does not validate aesthetic quality, a music genre, a viewer's pr
 
 The research branch’s **47-field export** is another separate result: it stores features and provenance for downstream scoring, with explicit unknown values. Completing a source-only corpus simulation—even thousands of presets at 60 frames/15fps/480p—does not add new reference comparisons or establish a new visual-accuracy percentage.
 
-A useful result statement is therefore: **“85 of 100 selected presets passed the frozen ≥95/100 behavioural rubric in the declared core 2.3.11 context; 12 predictions remained unresolved.”** For a current accuracy claim, publish a new frozen comparison against the current engine, along with coverage, score distribution, critical misses and the same context details.
+A useful result statement reports both closeness and acceptance: **“Mean behavioural agreement was 86.95/100 across all 100 selected presets, or 98.8068/100 among the 88 completed forecasts; 85/100 passed the ≥95 gate in the declared core 2.3.11 context.”** For a current accuracy claim, publish a new frozen comparison against the current engine, along with coverage, score distribution, critical misses and the same context details.
 
 ### What source analysis cannot settle
 

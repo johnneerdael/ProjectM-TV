@@ -542,7 +542,7 @@ GPU certification.
 
 Predictor accuracy documentation (2026-10-09): `docs/user-guide/authoring/testing.md`
 section5 separates20-claim behavioural grades, full-sample versus conditional
-pass rates, numerical tolerances, visual judgment and independent reference
+pass rates (which do not replace average agreement), numerical tolerances, visual judgment and independent reference
 qualification. Its worked97.5example and100-case totals cite immutable predictor
 commit `b3737a564f4b937bd33959e17bb61dbe4eb11304`. Keep historical unknowns in the
 original denominator; do not describe the47-field source export or a completed
