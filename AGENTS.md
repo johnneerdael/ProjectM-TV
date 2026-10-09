@@ -538,3 +538,23 @@ evidence, as selected by the user. All16 patches apply in an isolated export.
 macOS OpenGL and strict MkDocs pass. The separate EGL transition-overlay check
 was not run on macOS. These checks do not turn the frozen images into16-patch
 GPU certification.
+
+
+Predictor accuracy documentation (2026-10-09): `docs/user-guide/authoring/testing.md`
+section5 separates20-claim behavioural grades, full-sample versus conditional
+pass rates (which do not replace average agreement), numerical tolerances, visual judgment and independent reference
+qualification. Its worked97.5example and100-case totals cite immutable predictor
+commit `b3737a564f4b937bd33959e17bb61dbe4eb11304`. Keep historical unknowns in the
+original denominator; do not describe the47-field source export or a completed
+corpus simulation as a fresh visual-accuracy audit. The predictor overview links
+to this explanation. No predictor/app/AAR behavior is changed by this guide update.
+
+
+Predictor contract guide publication (2026-10-09): `predictor-export.md` and
+`assets/predictor-export/` copy the documented2026-10-08research checkpoint from
+predictor commit `fdfd09e2`, with download bytes preserved and a main-guide status
+notice. The Predictor navigation links both research direction and export
+reference. Commands on the contract page require the experimental implementation
+branch and prepared inputs; publishing this guide does not merge that engine.
+Validate example/schema/manifest hashes and the strict MkDocs build when changing
+those downloads. The accuracy explanation links this separate export reference.
