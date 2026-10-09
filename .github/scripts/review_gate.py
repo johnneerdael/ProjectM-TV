@@ -8,11 +8,37 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from urllib.parse import quote
 
 CONTEXT = "Reviewed PR builds"
 WORKFLOW = "pr-builds.yml"
 CODEX = "chatgpt-codex-connector[bot]"
+CLAUDE = "claude[bot]"
 TRUSTED = {"OWNER", "MEMBER", "COLLABORATOR"}
+
+
+def writer(api, login):
+    return api.get(f"collaborators/{quote(login, safe='')}/permission")["permission"] in {"admin", "maintain", "write"}
+
+
+def claude_result(review):
+    user = review["user"]
+    if user["login"] not in {CLAUDE, "github-actions[bot]"} or user.get("type") != "Bot":
+        return None
+    body = review.get("body") or ""
+    marker = re.search(r"^\*\*Reviewed commit:\*\* `([0-9a-f]{40})`$", body, re.M)
+    result = re.search(r"^\*\*Result:\*\* (RUNNING|APPROVED|FINDINGS|INCOMPLETE)$", body, re.M)
+    run = re.search(r"^\*\*Workflow run:\*\* ([1-9][0-9]*)$", body, re.M)
+    if (not body.startswith("## Claude Review\n") or not marker or not result or not run
+            or marker[1] != review.get("commit_id") or not review.get("submitted_at")):
+        return None
+    # The trusted publisher signs off with a native approval, authenticated below
+    # against its dedicated workflow run rather than the marker alone.
+    if result[1] == "APPROVED" and review["state"] != "APPROVED":
+        return None
+    if review["state"] == "DISMISSED":
+        return None
+    return result[1], run[1]
 
 
 def reviewed_commit_matches(record, written, head):
@@ -44,6 +70,8 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
     head = pr["head"]["sha"]
     completed = False
     requests, completions = {}, {}
+    claude_completed = None
+    codex_running = []
 
     def completed_at(kind, value):
         if value:
@@ -52,13 +80,23 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
 
     for comment in comments:
         user = comment["user"]["login"]
-        trusted = user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
-        request = re.match(r"^@codex\s+(security\s+)?review\b", (comment.get("body") or "").strip(), re.I)
+        trusted = (user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
+                   or comment.get("_claude_authorized") is True)
+        request = re.match(r"^@(codex|claude)\s+(security\s+)?review\b", (comment.get("body") or "").strip(), re.I)
         requested_at = comment.get("updated_at") or comment.get("created_at")
         if trusted and request and requested_at:
-            kind = "security" if request[1] else "code"
+            provider = request[1].lower()
+            if provider == "claude" and (request[2] or not re.fullmatch(r"@claude\s+review", (comment.get("body") or "").strip(), re.I)):
+                continue
+            if provider == "claude" and comment.get("_claude_authorized") is not True:
+                continue
+            kind = "security" if request[2] else "code"
             timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00")).replace(microsecond=0)
-            requests[kind] = max(timestamp, requests.get(kind, timestamp))
+            previous = requests.get(kind)
+            if previous is None or timestamp > previous[1]:
+                requests[kind] = (provider, timestamp)
+            elif timestamp == previous[1] and provider != previous[0]:
+                return False, "Review commands are ambiguous; request one reviewer again"
     for comment in comments:
         if comment["user"]["login"] != CODEX or comment["user"].get("type") != "Bot":
             continue
@@ -73,15 +111,35 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
                     date = re.search(r'datetime="([^"]+)"', row)
                     completed_at(kind, date[1] if date else None)
                 elif "**Completed**" not in row and (not commit or reviewed_commit_matches(comment, commit[1], head)):
-                    # A running review of this revision keeps the gate closed,
-                    # even when an older thumbs-up remains on the PR.
-                    return False, "Waiting for Codex review to finish"
+                    # Defer until the latest manual provider selection is known.
+                    date = re.search(r'datetime="([^"]+)"', row)
+                    started = date[1] if date else comment.get("updated_at") or comment.get("created_at")
+                    codex_running.append(("security" if "**Security Review**" in row else "code", started))
         else:
             commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{7,40})`", body)
             if commit and reviewed_commit_matches(comment, commit[1], head) and re.search(r"\bCodex(?: Security)? Review\b", body):
                 kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
                 completed_at(kind, comment.get("created_at"))
+    claude_runs = {}
+    claude_findings = None
     for review in reviews:
+        receipt = claude_result(review)
+        if receipt and review["commit_id"] == head and review.get("_workflow_verified") is True:
+            result, run = receipt
+            claude_runs[run] = review
+            if result == "RUNNING" and review.get("_workflow_event") == "workflow_dispatch":
+                timestamp = datetime.fromisoformat(review["_workflow_started_at"].replace("Z", "+00:00")).replace(microsecond=0)
+                previous = requests.get("code")
+                if previous is None or timestamp > previous[1]:
+                    requests["code"] = ("claude", timestamp)
+                elif timestamp == previous[1] and previous[0] != "claude":
+                    return False, "Review commands are ambiguous; request one reviewer again"
+            if result == "APPROVED" and not review.get("_workflow_active", False):
+                timestamp = datetime.fromisoformat(review["submitted_at"].replace("Z", "+00:00")).replace(microsecond=0)
+                claude_completed = max(timestamp, claude_completed or timestamp)
+            elif result == "FINDINGS":
+                timestamp = datetime.fromisoformat(review["submitted_at"].replace("Z", "+00:00")).replace(microsecond=0)
+                claude_findings = max(timestamp, claude_findings or timestamp)
         user = review["user"]
         # Bot replies can create empty COMMENTED review records at the new head
         # even when their inline reply concerns an older commit. Require an actual
@@ -93,7 +151,7 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
         if marker:
             codex_review = codex_review and review.get("commit_id", "").startswith(marker[1])
         trusted = codex_review or (
-            user.get("type") == "User" and user["login"] not in {CODEX, pr["user"]["login"]}
+            user.get("type") == "User" and user["login"] not in {CODEX, CLAUDE, "github-actions[bot]", pr["user"]["login"]}
             and review.get("author_association") in TRUSTED)
         if (codex_review and review["commit_id"] == head and review.get("submitted_at")
                 and review["state"] in {"APPROVED", "COMMENTED"}):
@@ -110,12 +168,34 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
               for reaction in reactions if reaction["user"]["login"] == CODEX
               and reaction.get("content") == "+1" and reaction.get("created_at")]
     codex_approved = (bool(completions) and any(thumb >= max(completions.values()) for thumb in thumbs))
-    completed = completed or codex_approved
-    if requests and (not codex_approved or any(kind not in completions or completions[kind] <= timestamp
-                                              for kind, timestamp in requests.items())):
-        return False, "Waiting for requested Codex reviews to finish"
+    if claude_findings is not None:
+        if claude_completed is None or claude_completed <= claude_findings:
+            claude_completed = None
+        if completions.get("code") is None or completions["code"] <= claude_findings:
+            codex_approved = False
+        if not claude_completed and not codex_approved:
+            return False, "Waiting for a clean review after Claude findings"
+    completed = completed or codex_approved or claude_completed is not None
+    for kind, started in codex_running:
+        switched = requests.get("code")
+        timestamp = datetime.fromisoformat(started.replace("Z", "+00:00")).replace(microsecond=0) if started else None
+        if kind == "security" or not switched or switched[0] != "claude" or timestamp is None or switched[1] <= timestamp:
+            return False, "Waiting for Codex review to finish"
+    for review in claude_runs.values():
+        if review.get("_workflow_active", claude_result(review)[0] == "RUNNING"):
+            switched = requests.get("code")
+            started = datetime.fromisoformat(review.get("_workflow_started_at", review["submitted_at"]).replace("Z", "+00:00")).replace(microsecond=0)
+            if not switched or switched[0] != "codex" or switched[1] <= started:
+                return False, "Waiting for Claude review to finish"
+    for kind, (provider, timestamp) in requests.items():
+        if provider == "claude":
+            fulfilled = claude_completed is not None and claude_completed > timestamp
+        else:
+            fulfilled = codex_approved and kind in completions and completions[kind] > timestamp
+        if not fulfilled:
+            return False, f"Waiting for requested {provider.title()} {kind} review to finish"
     if not completed:
-        return False, "Waiting for current Codex thumbs-up approval or a qualified review"
+        return False, "Waiting for current Claude/Codex approval or a qualified review"
     if pr.get("mergeable") is not True or not pr.get("merge_commit_sha"):
         return False, "Waiting for a mergeable PR and its test merge commit"
     return True, "Review complete; no outstanding findings"
@@ -175,7 +255,48 @@ class GitHub:
         pr["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         reviews = self.pages(f"pulls/{number}/reviews?per_page=100")
         comments = self.pages(f"issues/{number}/comments?per_page=100")
+        claude_permissions = {}
+        for comment in comments:
+            if not re.fullmatch(r"@claude\s+review", (comment.get("body") or "").strip(), re.I):
+                continue
+            user = comment["user"]
+            if user.get("type") != "User":
+                comment["_claude_authorized"] = False
+                continue
+            if user["login"] not in claude_permissions:
+                claude_permissions[user["login"]] = writer(self, user["login"])
+            comment["_claude_authorized"] = claude_permissions[user["login"]]
         reactions = self.pages(f"issues/{number}/reactions?per_page=100")
+        claude_workflows = {}
+        for review in reviews:
+            receipt = claude_result(review)
+            if not receipt or review["commit_id"] != pr["head"]["sha"]:
+                continue
+            if receipt[1] not in claude_workflows:
+                claude_workflows[receipt[1]] = self.get(f"actions/runs/{receipt[1]}")
+            run = claude_workflows[receipt[1]]
+            target = (run.get("event") == "pull_request_target"
+                      and any(item["number"] == number and item["base"]["ref"] == "main"
+                              and item["head"]["sha"] == review["commit_id"]
+                              for item in run.get("pull_requests", [])))
+            manual = run.get("event") in {"issue_comment", "workflow_dispatch"} and run.get("head_branch") == "main"
+            review["_workflow_active"] = run["status"] != "completed"
+            review["_workflow_started_at"] = run["created_at"]
+            review["_workflow_event"] = run.get("event")
+            submitted = datetime.fromisoformat(review["submitted_at"].replace("Z", "+00:00"))
+            created = datetime.fromisoformat(run["created_at"].replace("Z", "+00:00"))
+            updated = datetime.fromisoformat(run["updated_at"].replace("Z", "+00:00"))
+            review["_workflow_verified"] = (run.get("path", "").split("@")[0] == ".github/workflows/claude-code-review.yml"
+                                            and (target or manual) and created <= submitted
+                                            and (review["_workflow_active"] or submitted <= updated))
+            if receipt[0] == "APPROVED":
+                started = any(claude_result(item) == ("RUNNING", receipt[1])
+                              and item["user"]["login"] == "github-actions[bot]"
+                              and item["commit_id"] == review["commit_id"]
+                              and created <= datetime.fromisoformat(item["submitted_at"].replace("Z", "+00:00")) <= submitted
+                              for item in reviews)
+                review["_workflow_verified"] = (review["_workflow_verified"] and started
+                                                and run.get("conclusion") == "success" and not review["_workflow_active"])
         resolved = {}
         for record in comments:
             if record["user"]["login"] != CODEX or record["user"].get("type") != "Bot":

@@ -63,6 +63,135 @@ def legacy_completion(sha=HEAD, login=BOT):
                 body=f"Codex Review: No findings.\n\n**Reviewed commit:** `{sha}`")
 
 
+def claude_review(result="APPROVED", sha=HEAD, login="claude[bot]", timestamp="2026-10-05T12:00:00Z"):
+    return dict(state="APPROVED" if result == "APPROVED" else "COMMENTED", commit_id=sha,
+                submitted_at=timestamp, user=dict(login=login, type="Bot"), _workflow_verified=True,
+                body=f"## Claude Review\n\n**Reviewed commit:** `{sha}`\n**Result:** {result}\n**Workflow run:** 123")
+
+
+class ClaudeEligibilityTests(unittest.TestCase):
+    def setUp(self):
+        self.gate = load_gate()
+
+    def check(self, reviews=(), comments=(), reactions=(), pr=None, threads=()):
+        return self.gate.eligibility(pr or snapshot(), reviews, comments, threads, reactions)[0]
+
+    def test_current_clean_claude_review_can_sign_off_without_codex(self):
+        self.assertTrue(self.check([claude_review()]))
+
+    def test_claude_completion_findings_stale_or_spoofed_never_sign_off(self):
+        for result in ["RUNNING", "FINDINGS", "INCOMPLETE"]:
+            self.assertFalse(self.check([claude_review(result)]))
+        for login in ["author", "claude"]:
+            self.assertFalse(self.check([claude_review(login=login)]))
+        self.assertTrue(self.check([claude_review(login="github-actions[bot]")]))
+        for sha in [BASE, HEAD[:10]]:
+            self.assertFalse(self.check([claude_review(sha=sha)]))
+        report = claude_review()
+        report["body"] = report["body"].replace(HEAD, BASE)
+        self.assertFalse(self.check([report]))
+        report = claude_review()
+        report["user"]["type"] = "User"
+        self.assertFalse(self.check([report]))
+
+    def test_latest_code_command_selects_only_one_provider(self):
+        codex = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        claude = dict(user=dict(login="new-writer"), author_association="NONE", _claude_authorized=True,
+                      body="@claude review", created_at="2026-10-05T11:00:00Z")
+        self.assertTrue(self.check([claude_review()], [codex, claude]))
+        self.assertFalse(self.check([claude_review()], [claude, dict(codex, created_at="2026-10-05T13:00:00Z")]))
+        completed = summary()
+        set_summary_time(completed, "2026-10-05T14:00:00Z")
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T14:01:00Z")
+        self.assertTrue(self.check([claude_review()], [claude, dict(codex, created_at="2026-10-05T13:00:00Z"), completed], [thumb]))
+
+    def test_claude_request_requires_later_current_approval_and_security_stays_separate(self):
+        request = dict(user=dict(login="author"), _claude_authorized=True, body="@claude review", created_at="2026-10-05T12:00:00Z")
+        self.assertFalse(self.check([claude_review()], [request]))
+        request["created_at"] = "2026-10-05T11:00:00Z"
+        self.assertTrue(self.check([claude_review()], [request]))
+        security = dict(request, body="@codex security review", created_at="2026-10-05T09:00:00Z")
+        self.assertFalse(self.check([claude_review()], [security, request]))
+
+    def test_unknown_claude_command_does_not_block_a_valid_review(self):
+        request = dict(user=dict(login="stranger"), author_association="NONE", body="@claude review", created_at="2026-10-05T13:00:00Z")
+        self.assertTrue(self.check([claude_review()], [request]))
+
+    def test_claude_running_review_blocks_codex_until_terminal_or_run_finished(self):
+        running = claude_review("RUNNING", login="github-actions[bot]")
+        running["_workflow_active"] = True
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T14:00:00Z")
+        self.assertFalse(self.check([running], [summary()], [thumb]))
+        running["_workflow_active"] = False
+        self.assertTrue(self.check([running], [summary()], [thumb]))
+        running["_workflow_active"] = True
+        self.assertTrue(self.check([running, claude_review()], [summary()], [thumb]))
+
+    def test_claude_approval_does_not_bypass_unresolved_threads(self):
+        self.assertFalse(self.check([claude_review()], threads=[dict(isResolved=False)]))
+
+    def test_later_findings_revoke_earlier_claude_signoff_until_new_review(self):
+        finding = claude_review("FINDINGS", timestamp="2026-10-05T13:00:00Z")
+        finding["body"] = finding["body"].replace("123", "124")
+        self.assertFalse(self.check([claude_review(), finding]))
+        self.assertTrue(self.check([finding, claude_review(timestamp="2026-10-05T14:00:00Z")]))
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T14:01:00Z")
+        completed = summary()
+        self.assertFalse(self.check([finding], [completed], [thumb]))
+        set_summary_time(completed, "2026-10-05T14:00:00Z")
+        self.assertTrue(self.check([finding], [completed], [thumb]))
+
+    def test_security_review_cannot_clear_claude_code_findings(self):
+        finding = claude_review("FINDINGS", timestamp="2026-10-05T13:00:00Z")
+        completed = summary()
+        completed["body"] += (f'\n| **Security Review** | **Completed** '
+                              f'<relative-time datetime="2026-10-05T14:00:00Z">14:00</relative-time> | `{HEAD}` | Manual request |')
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T16:00:00Z")
+        self.assertFalse(self.check([finding], [completed], [thumb]))
+        # A fresh full code review, rather than security-only completion, clears it.
+        completed["body"] = completed["body"].replace("2026-10-05T10:00:00Z", "2026-10-05T15:00:00Z")
+        self.assertTrue(self.check([finding], [completed], [thumb]))
+
+    def test_unverified_or_still_running_workflow_cannot_supply_approval(self):
+        report = claude_review()
+        report["_workflow_verified"] = False
+        self.assertFalse(self.check([report]))
+        report["_workflow_verified"] = True
+        report["_workflow_active"] = True
+        self.assertFalse(self.check([report]))
+
+    def test_later_selected_codex_can_finish_while_older_claude_run_is_active(self):
+        running = claude_review("RUNNING", login="github-actions[bot]")
+        running["_workflow_active"] = True
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T13:00:00Z")
+        completed = summary()
+        set_summary_time(completed, "2026-10-05T14:00:00Z")
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T14:01:00Z")
+        self.assertTrue(self.check([running], [request, completed], [thumb]))
+
+    def test_trusted_dispatch_selects_claude_over_an_older_codex_command(self):
+        running = claude_review("RUNNING", login="github-actions[bot]", timestamp="2026-10-05T11:00:01Z")
+        running.update(_workflow_event="workflow_dispatch", _workflow_started_at="2026-10-05T11:00:00Z", _workflow_active=False)
+        codex = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        self.assertTrue(self.check([running, claude_review()], [codex]))
+        self.assertFalse(self.check([running], [codex, summary()]))
+
+    def test_later_claude_selection_supersedes_older_running_codex_code_review(self):
+        running = summary("Running")
+        request = dict(user=dict(login="author"), _claude_authorized=True, body="@claude review", created_at="2026-10-05T11:00:00Z")
+        self.assertTrue(self.check([claude_review()], [running, request]))
+        self.assertFalse(self.check([claude_review()], [running]))
+        running["body"] = running["body"].replace("**Code Review**", "**Security Review**")
+        self.assertFalse(self.check([claude_review()], [running, request]))
+
+
+    def test_external_author_cannot_select_claude_without_workflow_authorization(self):
+        request = dict(user=dict(login="author"), body="@claude review", created_at="2026-10-05T13:00:00Z")
+        self.assertTrue(self.check([claude_review()], [request]))
+        request["_claude_authorized"] = True
+        self.assertFalse(self.check([claude_review()], [request]))
+
+
 class EligibilityTests(unittest.TestCase):
     def setUp(self):
         self.gate = load_gate()
@@ -269,8 +398,14 @@ class SnapshotTests(unittest.TestCase):
                 self.reactions = []
                 self.resolved = HEAD
                 self.resolution_error = None
+                self.permission = "write"
 
             def get(self, path):
+                if path.startswith("collaborators/"):
+                    return dict(permission=self.permission)
+                if path == "actions/runs/123":
+                    return dict(path=".github/workflows/claude-code-review.yml", head_branch="main", event="issue_comment",
+                                status="completed", conclusion="success", created_at="2026-10-05T11:00:00Z", updated_at="2026-10-05T12:00:01Z")
                 if path.startswith("git/matching-refs/"):
                     return []
                 if path.startswith("commits/"):
@@ -338,6 +473,57 @@ class SnapshotTests(unittest.TestCase):
         self.api.parents = [MERGE, HEAD]
         _, (ready, _) = self.api.snapshot(42)
         self.assertFalse(ready)
+
+    def test_claude_approval_requires_authentic_workflow_and_start_receipt(self):
+        started = claude_review("RUNNING", login="github-actions[bot]", timestamp="2026-10-05T11:01:00Z")
+        self.api.reviews = [started, claude_review()]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertTrue(ready)
+        self.api.reviews = [claude_review()]
+        self.api.main = [BASE, BASE]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
+
+    def test_initial_target_workflow_reports_pr_branch_and_still_authenticates(self):
+        started = claude_review("RUNNING", login="github-actions[bot]", timestamp="2026-10-05T11:01:00Z")
+        self.api.reviews = [started, claude_review()]
+        original = self.api.get
+        def get(path):
+            result = original(path)
+            if path == "actions/runs/123":
+                result.update(event="pull_request_target", head_branch="feature", head_sha=BASE,
+                              pull_requests=[dict(number=42, base=dict(ref="main"), head=dict(sha=HEAD))])
+            return result
+        with patch.object(self.api, "get", get):
+            _, (ready, _) = self.api.snapshot(42)
+            self.assertTrue(ready)
+
+    def test_snapshot_checks_the_same_writer_permission_as_the_claude_workflow(self):
+        request = dict(user=dict(login="author", type="User"), body="@claude review", created_at="2026-10-05T11:00:00Z")
+        self.api.comments = [request]
+        self.api.permission = "read"
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertTrue(ready)
+        self.api.permission = "write"
+        self.api.main = [BASE, BASE]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
+
+    def test_claude_approval_from_other_workflow_or_after_run_end_cannot_qualify(self):
+        started = claude_review("RUNNING", login="github-actions[bot]", timestamp="2026-10-05T11:01:00Z")
+        self.api.reviews = [started, claude_review()]
+        original = self.api.get
+        for field, value in [("path", ".github/workflows/claude.yml"), ("head_branch", "feature"),
+                             ("conclusion", "failure"), ("updated_at", "2026-10-05T11:30:00Z")]:
+            def get(path):
+                result = original(path)
+                if path == "actions/runs/123":
+                    result[field] = value
+                return result
+            with self.subTest(field=field), patch.object(self.api, "get", get):
+                self.api.main = [BASE, BASE]
+                _, (ready, _) = self.api.snapshot(42)
+                self.assertFalse(ready)
 
 
 class ReactionApprovalTests(unittest.TestCase):

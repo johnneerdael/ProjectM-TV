@@ -11,7 +11,7 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
-    workflows: [Reviewed PR validation, PR review signal]
+    workflows: [Reviewed PR validation, PR review signal, Claude Code Review]
     types: [completed]
   workflow_dispatch:
     inputs:
