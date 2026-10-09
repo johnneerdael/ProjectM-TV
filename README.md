@@ -24,7 +24,7 @@ It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualize
 **[johnneerdael.github.io/ProjectM-TV](https://johnneerdael.github.io/ProjectM-TV/)** covers:
 
 - **Using the app:** installation, remote controls, every setting, [preset moods](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/), custom packs, picture quality and troubleshooting.
-- **[ProjectM TV Engine](https://johnneerdael.github.io/ProjectM-TV/engine/):** every patch with before/after proof images, and how 4K rendering keeps the authored look (including the resolution-scaling part of [projectM #682](https://github.com/projectM-visualizer/projectm/issues/682)), and how a frame reaches the TV.
+- **[ProjectM TV Engine](https://johnneerdael.github.io/ProjectM-TV/engine/):** the patch catalog with before/after proof images and measured benefits, how 4K rendering keeps the authored look (including the resolution-scaling part of [projectM #682](https://github.com/projectM-visualizer/projectm/issues/682)), and how a frame reaches the TV.
 - **[Writing presets](https://johnneerdael.github.io/ProjectM-TV/authoring/):** a source-level guide to how `.milk` presets execute, drawn from MilkDrop 2's code and the analysis of thousands of presets.
 
 ## Highlights

@@ -1,8 +1,10 @@
-# What our current projectM patches change
+# Earlier projectM patch comparison checkpoint
 
-This page shows what our library changes compared with upstream projectM 4.2
-development, using images and short explanations. The16 current patches are
-listed in build order; older patch history is kept in the evidence archive.
+This page preserves the earlier 16-patch comparison checkpoint against upstream
+projectM 4.2 development. Its images and source identities remain frozen. The
+[current 34-patch catalog](https://johnneerdael.github.io/ProjectM-TV/engine/patches/)
+includes the later audit repairs, measured benefits and isolated real-preset
+close-ups. Older patch history remains in the evidence archive.
 
 ## Single-page comparison overview
 
@@ -11,7 +13,7 @@ audio, time and seed. Zooms enlarge the same pixels without changing brightness.
 A middle column, where present, removes one patch to isolate its effect. Generated
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
-Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
+Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the recorded 14-patch
 snapshot `41ec3fc1`. The image-comparison checkpoint stays frozen at main `120547f3`, including0015; main’s later0016 is documented from its separate performance evidence. Earlier captures retain their original snapshot identities;Reference lines and0003,0011 and0015 now have locked15-patch comparisons.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).

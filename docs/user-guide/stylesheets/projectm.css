@@ -110,8 +110,11 @@
 .md-typeset figure.patch-comparison figcaption { display: block; max-width: none; font-style: normal; margin: 0.6rem 0 0; font-size: 0.72rem; line-height: 1.6; text-align: left; }
 .patch-zooms { margin-top: 0.7rem; }
 .patch-crop { display: block; position: relative; overflow: hidden; aspect-ratio: var(--crop-ratio); background: #000; }
-.md-typeset .patch-crop img { position: absolute; max-width: none; width: var(--image-width); height: auto; left: var(--image-left); top: var(--image-top); image-rendering: pixelated; }
+.md-typeset .patch-crop img { position: absolute; max-width: none; width: var(--image-width); height: auto; left: var(--image-left); top: var(--image-top); image-rendering: pixelated; aspect-ratio: 16 / 9; }
 @media screen and (max-width: 35em) {
   .patch-panels { gap: 0.3rem; }
   .patch-panel > strong { font-size: 0.56rem; }
 }
+
+/* New witnesses load exact lossless crops; their full 4K sources stay clickable. */
+.md-typeset .patch-panel img.patch-detail { image-rendering: pixelated; }
