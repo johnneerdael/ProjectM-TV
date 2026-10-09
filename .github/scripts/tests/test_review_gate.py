@@ -141,6 +141,17 @@ class ClaudeEligibilityTests(unittest.TestCase):
         set_summary_time(completed, "2026-10-05T14:00:00Z")
         self.assertTrue(self.check([finding], [completed], [thumb]))
 
+    def test_security_review_cannot_clear_claude_code_findings(self):
+        finding = claude_review("FINDINGS", timestamp="2026-10-05T13:00:00Z")
+        completed = summary()
+        completed["body"] += (f'\n| **Security Review** | **Completed** '
+                              f'<relative-time datetime="2026-10-05T14:00:00Z">14:00</relative-time> | `{HEAD}` | Manual request |')
+        thumb = dict(user=dict(login=BOT), content="+1", created_at="2026-10-05T16:00:00Z")
+        self.assertFalse(self.check([finding], [completed], [thumb]))
+        # A fresh full code review, rather than security-only completion, clears it.
+        completed["body"] = completed["body"].replace("2026-10-05T10:00:00Z", "2026-10-05T15:00:00Z")
+        self.assertTrue(self.check([finding], [completed], [thumb]))
+
     def test_unverified_or_still_running_workflow_cannot_supply_approval(self):
         report = claude_review()
         report["_workflow_verified"] = False

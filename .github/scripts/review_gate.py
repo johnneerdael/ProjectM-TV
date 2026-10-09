@@ -171,7 +171,7 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
     if claude_findings is not None:
         if claude_completed is None or claude_completed <= claude_findings:
             claude_completed = None
-        if not completions or max(completions.values()) <= claude_findings:
+        if completions.get("code") is None or completions["code"] <= claude_findings:
             codex_approved = False
         if not claude_completed and not codex_approved:
             return False, "Waiting for a clean review after Claude findings"
