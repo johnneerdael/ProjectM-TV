@@ -469,8 +469,8 @@ class SnapshotTests(unittest.TestCase):
         def get(path):
             result = original(path)
             if path == "actions/runs/123":
-                result.update(event="pull_request_target", head_branch="feature", head_sha=HEAD,
-                              pull_requests=[dict(number=42, base=dict(ref="main"))])
+                result.update(event="pull_request_target", head_branch="feature", head_sha=BASE,
+                              pull_requests=[dict(number=42, base=dict(ref="main"), head=dict(sha=HEAD))])
             return result
         with patch.object(self.api, "get", get):
             _, (ready, _) = self.api.snapshot(42)

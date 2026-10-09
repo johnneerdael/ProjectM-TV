@@ -256,8 +256,9 @@ class GitHub:
             if receipt[1] not in claude_workflows:
                 claude_workflows[receipt[1]] = self.get(f"actions/runs/{receipt[1]}")
             run = claude_workflows[receipt[1]]
-            target = (run.get("event") == "pull_request_target" and run.get("head_sha") == review["commit_id"]
+            target = (run.get("event") == "pull_request_target"
                       and any(item["number"] == number and item["base"]["ref"] == "main"
+                              and item["head"]["sha"] == review["commit_id"]
                               for item in run.get("pull_requests", [])))
             manual = run.get("event") in {"issue_comment", "workflow_dispatch"} and run.get("head_branch") == "main"
             review["_workflow_active"] = run["status"] != "completed"
