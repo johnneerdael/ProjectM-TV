@@ -256,13 +256,13 @@ final class ExitDiagnostics {
             if (exit.pssKb > 0 || exit.rssKb > 0) {
                 out.append(String.format(Locale.US, "\n  memory: %d MB PSS, %d MB RSS", exit.pssKb / 1024, exit.rssKb / 1024));
             }
-            // The switches of the process that ended, from its own trail (today's settings may differ).
+            // The switches of the process that ended, from its newest trail line (today's settings may differ).
+            TrailLine newest = null;
             for (int i = 0; i < lines.size(); i++) {
-                if (owners[i] == e && lines.get(i).switches != null) {
-                    out.append("\n  switches: ").append(lines.get(i).switches);
-                    break;
-                }
+                TrailLine line = lines.get(i);
+                if (owners[i] == e && line.switches != null && (newest == null || line.timeMs > newest.timeMs)) newest = line;
             }
+            if (newest != null) out.append("\n  switches: ").append(newest.switches);
             for (int i = 0; i < lines.size(); i++) {
                 if (owners[i] != e) continue;
                 TrailLine line = lines.get(i);

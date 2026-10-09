@@ -1309,6 +1309,7 @@ struct Engine {
     double createdAt = 0;
     bool firstPresetLogged = false;
     bool prewarmerStarted = false;  // background compile thread running (follows backgroundCompile)
+    int trailSwitches = -1;         // troubleshooting switch states last seen by the render thread
     bool texturesApplied = false;
     std::vector<std::string> texturePaths;
     double lastFrameAt = 0;
@@ -2159,6 +2160,16 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
         return;
     }
     ApplyBackgroundCompile();
+    {
+        // A switch change is recorded at once, so the trail never shows stale states for a crash.
+        int switches = (projectmtv::TrailCacheOn().load() ? 1 : 0) | (projectmtv::TrailCompileOn().load() ? 2 : 0);
+        if (switches != g_engine.trailSwitches) {
+            if (g_engine.trailSwitches >= 0)
+                projectmtv::WriteTrail(projectmtv::kTrailRender, "troubleshooting switches changed while showing '%s'",
+                                       g_engine.current.c_str());
+            g_engine.trailSwitches = switches;
+        }
+    }
     if (g_texturePoolFlush.exchange(false) && g_engine.texturePoolLimit > 0) {
         projectm_opengl_set_texture_pool_limit(0);
         g_engine.texturePoolLimit = 0;

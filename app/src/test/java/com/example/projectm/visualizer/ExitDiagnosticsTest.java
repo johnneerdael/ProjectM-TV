@@ -102,6 +102,17 @@ public class ExitDiagnosticsTest {
     }
 
     @Test
+    public void switchesComeFromTheNewestLineOfTheProcess() {
+        // The render line is older; a switch changed before the prewarm line was written.
+        String trail = pad("render pid=4321 ms=" + (NOW - 63_000) + " cache=on compile=on showing 'a.milk' (transition done)")
+                + pad("prewarm pid=4321 ms=" + (NOW - 61_000) + " cache=off compile=on compiling 'b.milk'");
+        ExitDiagnostics.Exit crash = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
+                NOW - 60_000, 0, 0, "");
+        String report = ExitDiagnostics.report(Collections.singletonList(crash), true, trail, NOW, "");
+        assertTrue(report, report.contains("  switches: shader binary cache off, background compile on\n"));
+    }
+
+    @Test
     public void reportWithoutExitRecordsStillShowsTheTrail() {
         String report = ExitDiagnostics.report(Collections.emptyList(), false, TRAIL, NOW, "");
         assertTrue(report, report.contains("Android 11 or later is needed"));

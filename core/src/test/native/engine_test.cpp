@@ -896,6 +896,9 @@ int main(int argc, char** argv) {
     frame();
     CHECK(g_prewarmStarts == starts + 1 && g_engine.prewarmerStarted);
     CHECK(g_prewarmLists.size() == requests + 1);  // prepares the upcoming presets right away
+    text = trail();  // the render thread records the change on its next frame, with the new states
+    CHECK(text.substr(0, projectmtv::kTrailLineBytes).find(
+              " cache=on compile=on troubleshooting switches changed while showing '" + current() + "'") != std::string::npos);
     // A long preset name is cut to the line, which stays fixed-size and newline-terminated.
     projectmtv::WriteTrail(projectmtv::kTrailRender, "loading '%s'", std::string(1000, 'x').c_str());
     text = trail();
