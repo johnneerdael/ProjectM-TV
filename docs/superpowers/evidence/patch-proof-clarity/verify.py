@@ -16,10 +16,32 @@ from guide_bindings import Fragment
 EXPECTED_PAIRS={('escape','0028'),('crush','0021'),('carnival','0021'),
                 ('swirl','0023'),('nebula','0030'),('city-alt','0032'),('salad','0033')}
 FROZEN_RECEIPT_SHA256='d6bbf19c6d02434168b290e8ea24d0d9b0877b40fd8a87e7dda179f035b5bd42'
+TOOLING_COMMIT='8a15996e8510533113a44e26feaddc3a7d6e85f5'
+OBSERVER_COMMIT='b3fe686c7190a046f8c91e6cab5333f1ccc57f5f'
 
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
+
+
+def expected_harness(repo):
+    def archived(commit,path):
+        return subprocess.check_output(['git','-C',str(repo),'show',commit+':'+path])
+    native='tools/preset-lab/src/preset_lab/native/'
+    observer='docs/superpowers/evidence/i31-benefit/image-harness/'
+    files={name:archived(TOOLING_COMMIT,native+name) for name in
+           ('CMakeLists.txt','analysis_hooks.hpp','vendor/json.hpp','vendor/LICENSE.json')}
+    files['CMakeLists.txt']+=b'\nif(CATALOG_TV)\n target_compile_definitions(preset-lab-worker PRIVATE CATALOG_TV)\nendif()\n'
+    files['gl_capture.hpp']=archived(OBSERVER_COMMIT,observer+'gl_capture.hpp')
+    worker=archived(OBSERVER_COMMIT,observer+'worker.cpp').decode()
+    assert worker.count('if (frame == 119 || frame == 239 || frame == 479) {')==1
+    assert worker.count('int error_frames = 0;')==1
+    worker=worker.replace('if (frame == 119 || frame == 239 || frame == 479) {',
+                          'if (std::find(selected.begin(), selected.end(), frame) != selected.end()) {')
+    worker=worker.replace('int error_frames = 0;',
+                         'auto selected = cfg.at("selected_frames").get<std::vector<int>>();\n        int error_frames = 0;')
+    files['worker.cpp']=worker.encode()
+    return {name:sha(data) for name,data in files.items()}
 
 
 def main():
@@ -33,6 +55,8 @@ def main():
             {'roles':{role:{key:r[key] for key in ('identity_ref','asset_sha256','rgb_sha256','runs')}
                       for role,r in p['roles'].items()}} for p in gallery]}
     assert sha(json.dumps(frozen,sort_keys=True,separators=(',',':'),allow_nan=False).encode())==FROZEN_RECEIPT_SHA256
+    harness=expected_harness(repo)
+    assert all(worker['harness']==harness for worker in workers.values())
     full=json.loads((repo/'docs/superpowers/evidence/patch-visual-catalog/patched-source-tree.json').read_text())
     assert workers['full']['source_tree']==full
     allowed={'0021':{'CustomWaveform.cpp','PerPixelContext.cpp','WaveformPerPointContext.cpp','WaveformPerPointContext.hpp'},
