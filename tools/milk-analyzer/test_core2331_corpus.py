@@ -14,15 +14,35 @@ from forecast import CORE_2329_EQUATION_RNG_POLICY, CORE_2331_EQUATION_RNG_POLIC
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_cli_defaults_bind31_without_reusing_historical_output():
+def test_cli_defaults_bind_latest32_bytes_without_reusing_historical_output():
     args = preset_corpus.parse_args([])
     assert args.binaries == ROOT / 'build/preset-corpus/source31/adapters'
-    assert args.aar == ROOT / 'build/preset-corpus/published31/projectM-TV-core-2.3.31.aar'
-    assert args.engine_profile == ROOT / 'tools/milk-analyzer/profiles/published-core-v2.3.31.json'
-    assert args.output.name.endswith('-core2331')
+    assert args.aar == ROOT / 'build/preset-corpus/published32/projectM-TV-core-2.3.32.aar'
+    assert args.engine_profile == ROOT / 'tools/milk-analyzer/profiles/published-core-v2.3.32.json'
+    assert args.output.name.endswith('-core2332')
     assert args.target == 'core2331'
     explicit = preset_corpus.parse_args(['--aar', '/tmp/one.aar', '--engine-profile', '/tmp/profile.json'])
     assert explicit.aar == Path('/tmp/one.aar') and explicit.engine_profile == Path('/tmp/profile.json')
+
+
+def test_latest32_publication_has_identical_full_bytes_and_qualified_source_engine():
+    args=preset_corpus.parse_args([])
+    profile=json.loads(args.engine_profile.read_text())
+    old=ROOT/'build/preset-corpus/published31/projectM-TV-core-2.3.31.aar'
+    assert profile['release']=='v2.3.32'
+    assert args.aar.read_bytes()==old.read_bytes()
+    assert profile['byte_equivalence']['equivalent_release']=='v2.3.31'
+    assert profile['source_engine']==CORE_2331_ENGINE
+    identity=preset_corpus.target_identity(args,args.binaries)
+    assert identity['published_aar']==str(args.aar.resolve())
+    assert identity['source_engine_archive_sha256']==preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256
+
+
+def test_explicit_historical31_publication_is_not_relabelled_latest32():
+    args=preset_corpus.parse_args(['--aar',str(ROOT/'build/preset-corpus/published31/projectM-TV-core-2.3.31.aar'),
+        '--engine-profile',str(ROOT/'tools/milk-analyzer/profiles/published-core-v2.3.31.json')])
+    identity=preset_corpus.target_identity(args,args.binaries)
+    assert json.loads(Path(identity['engine_profile']).read_text())['release']=='v2.3.31'
 
 
 def test_historical_direct_config_keeps29_without_relabeling():

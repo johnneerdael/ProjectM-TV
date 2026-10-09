@@ -6,7 +6,7 @@ feedback flow, recognized fractal recurrences, waves and point/shape primitives.
 This path constructs no display frames and consumes no audio signal.
 
 !!! note "Feature branch"
-    This work is on `feat/predictor-static-effect-families`. It has not changed
+    PR67 merged into the experimental `bug/predictor-grid-memory` branch. It has not changed
     the app's shipped mood collections. Reproduction requires that branch's
     prepared source31 parser and Python environment.
 
@@ -59,8 +59,8 @@ genre matching needs motion, flashing, palette and response-strength evidence,
 alongside editable audience assumptions. This export leaves `mood_labels` and
 `genre_labels` empty.
 
-The [complete field/API reference](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/tools/milk-analyzer/EFFECT_FAMILIES.md)
-and [primary-source research with exact witnesses](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/research/2026-10-09-static-effect-families.md)
+The [complete field/API reference](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/tools/milk-analyzer/EFFECT_FAMILIES.md)
+and [primary-source research with exact witnesses](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/docs/superpowers/research/2026-10-09-static-effect-families.md)
 describe the supported constructions and boundaries.
 
 ## Reducing numerical work
@@ -77,7 +77,7 @@ affected program. Texture-history metadata remains update-specific. The initial
 fixed100-source check matched172 contributing graphs across five updates and
 reduced lowering time by4×. Complete short forecasts had mixed timing results,
 so this remains opt-in and is not a claimed corpus speedup. See the
-[program-reuse evidence](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/evidence/predictor-program-reuse/README.md).
+[program-reuse evidence](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/docs/superpowers/evidence/predictor-program-reuse/README.md).
 
 A separate uniform final-expression primitive can calculate colour and sampled
 flashing descriptors without constructing display frames. Its caller must prove
@@ -90,4 +90,4 @@ None of the fixed100 sources in the initial dependency census qualified for
 that narrow final-expression route. Its synthetic speedup therefore cannot be
 applied to the pack. General feedback and spatial shaders still require broader
 reasoning or execution. See the
-[controls and measurement scope](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/evidence/predictor-uniform-descriptors/README.md).
+[controls and measurement scope](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/docs/superpowers/evidence/predictor-uniform-descriptors/README.md).

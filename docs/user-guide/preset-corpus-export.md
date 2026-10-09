@@ -15,7 +15,7 @@ Defaults: all bundled `.milk` files, **60 frames at 15fps, 854×480**, two isola
 workers, five-minute per-preset deadline, 100 completed cases per ZIP. Output:
 
 ```text
-~/Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2331/
+~/Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2332/
   run-manifest.json
   progress.sqlite
   progress.json
@@ -83,8 +83,12 @@ Missing images/prefix matches remain unsupported rather than silently replaced.
 
 The simulator uses the declared Apple GLES numerical/raster profile modeled by
 this predictor. It runs on the CPU; that declaration does not certify an arbitrary
-GPU. The default run pins the full published 2.3.31 AAR and release profile
+GPU. The default run pins the full published2.3.32 AAR and release profile
 separately from the exact34-patch source archive and current predictor code.
+The complete32AAR is byte-identical to31 by downloaded-byte comparison and
+SHA256; engine/JNI source is unchanged. Existing source31 controls are retained,
+not rerun or relabeled as new captures. The `core2331` target denotes that
+unchanged engine source policy. Historical publication inputs remain explicit.
 Both controller and worker reject changed publication/profile/source identities.
 The canonical source31 run requires the separately qualified host CPU archive
 `997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8`;

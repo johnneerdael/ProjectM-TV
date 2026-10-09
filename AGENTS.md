@@ -767,8 +767,9 @@ features and explicit errors. Fatal diagnostics use unique timestamp/PID JSON
 files. These are sampled resource safeguards, not a universal memory/performance
 bound. No unchanged failing full-corpus retry is required to verify the fix.
 
-Source31 migration checkpoint (2026-10-09): remain in `predictor-memory-repair`
-on `feat/predictor-static-effect-families` (based on `bug/predictor-grid-memory`);
+Source31 migration checkpoint (2026-10-09): remain in `predictor-memory-repair`.
+PR67 merged into `bug/predictor-grid-memory` as6680a910; continuation is on
+`feat/predictor-static-output-bounds` in the same worktree;
 do not create another worktree or merge the
 experimental predictor to main. The complete published2.3.31 AAR, both libraries
 and 9,606 preset/74 texture bytes are hash-verified; source31 adapters live under
@@ -776,8 +777,10 @@ and 9,606 preset/74 texture bytes are hash-verified; source31 adapters live unde
 adapters. New `test_core2331_*.py` controls cover the18 release patches using
 versioned actual-path policies. Full published-AAR runtime/appearance qualification
 remains separate. Explicit conditional/packed motion backends must not inherit
-Apple float-path evidence. The old corpus configuration stays source29 until
-integration is qualified. See the analyzer README, published-core-v2.3.31 profile
+Apple float-path evidence. Historical configurations retain their source29 identity.
+Published2.3.32 is byte-identical to2.3.31 (fresh download, SHA256 and direct
+comparison verified); use the32 publication/profile with the same qualified
+source31 adapters. See the analyzer README, published-core-v2.3.32 profile
 and `docs/superpowers/plans/2026-10-09-source31-static-families.md`. Source-based
 effect-family research is available with its separately versioned detector/export.
 
@@ -791,7 +794,9 @@ it is timing evidence, not corpus classification accuracy. Read
 `tools/milk-analyzer/EFFECT_FAMILIES.md` and the guide's `predictor-effects.md`.
 
 The numerical corpus now defaults to source31 with a separate full published-AAR
-and profile identity. New output suffix `-core2331` prevents mixing old rows.
+and profile identity. Latest publication output suffix `-core2332` prevents
+relabeling historical31/29 rows; the `core2331` target names the unchanged engine
+source policy, not the publication filename.
 `corpus_worker.py` keeps47 numeric fields and separately exports `effect_analysis`,
 including explicit failures. Exact source31 noise admission retains all six
 byte-identical source29 generators. No full numerical corpus rerun was started.

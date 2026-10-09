@@ -23,7 +23,7 @@ def test_defaults_are_requested_corpus_settings_and_unsupported_sizes_reject():
     from preset_corpus import parse_args
     args=parse_args([])
     assert (args.frames,args.fps,args.width,args.height,args.batch_size)==(60,15,854,480,100)
-    assert args.output.name=='ProjectM-TV-preset-corpus-15fps-480p-core2331'
+    assert args.output.name=='ProjectM-TV-preset-corpus-15fps-480p-core2332'
     with pytest.raises(SystemExit):parse_args(['--width','1280','--height','720'])
     with pytest.raises(SystemExit):parse_args(['--workers','0'])
 
