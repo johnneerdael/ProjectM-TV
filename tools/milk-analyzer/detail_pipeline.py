@@ -98,4 +98,9 @@ class DetailPipeline:
             native_size=[self.native.width,self.native.height],feedback_detail_alpha=self.alpha,
             feedback_detail_scale=self.scale,authored_feedback_is_independent=True,
             authored_warp_blur_source_frame=low.history['warp_blur_source_frame'])
+        # Native replay consumes the previous authored map and does not publish.
+        # Keep that native flag while reporting the actual producer separately.
+        result.history.update(authored_motion_uv_written=low.history['motion_uv_written'],
+            authored_motion_uv_frame=self.authored.motion_uv_frame,
+            authored_motion_uv_contract=copy.deepcopy(low.history['motion_uv_contract']))
         return result

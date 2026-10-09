@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from scene_equations import source_settings,_scalar
 from quad_lines import PROFILE
-from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
+from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, CORE_2331_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
 from native_values import live_wave_mode,native_scalar
 
 
@@ -33,22 +33,37 @@ _CORE2310_ENGINE = {
 
 def _colour(source,main,frame,mode,alpha,width,height,*,mode1_alpha_boost=False):
     values=source_settings(source);base=np.float32(alpha);result=base
+    original=matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
     largest=max(width,height)
     if mode in {2,5}:
         result*=np.float32(.07 if largest<=256 else .09 if largest<=512 else .11 if largest<=1024 else .13 if largest<=2048 else .15)
     elif mode==3:
-        result*=np.float32(.075 if largest<=256 else .15 if largest<=512 else .22 if largest<=1024 else .33 if largest<=2048 else .44)
+        coefficient=np.float32(.075 if largest<=256 else .15 if largest<=512 else .22 if largest<=1024 else .33 if largest<=2048 else .44)
+        result=coefficient if original else result*coefficient
         result*=np.float32(1.3);result*=np.float32(frame['treb'])**np.float32(2)
+    if original and mode==1:result*=np.float32(1.25)
     if _scalar(values,'bModWaveAlphaByVolume',0,'bool'):
         start=_scalar(values,'fModWaveAlphaStart',.75,'float');end=_scalar(values,'fModWaveAlphaEnd',.95,'float')
         volume=np.float32(frame['vol'])
-        if volume<=start:result=np.float32(0)
+        if original:
+            denominator=np.float32(end)-np.float32(start)
+            if denominator==0 or not np.all(np.isfinite([volume,start,end])):
+                raise ValueError('unresolved waveform colour/opacity domain')
+            result*=((volume-np.float32(start))/denominator)
+        elif volume<=start:result=np.float32(0)
         elif volume>=end:result=base
         else:result=base*((volume-np.float32(start))/(np.float32(end)-np.float32(start)))
-    if mode1_alpha_boost and mode==1:result*=np.float32(1.25)
-    rgb=np.asarray([main['wave_'+channel] for channel in 'rgb'],dtype=np.float32)
-    if main['wave_brighten']>0 and np.max(rgb)>.01:rgb=rgb/np.max(rgb)
-    rgba=np.concatenate((rgb,[np.clip(result,0,1)])).astype(np.float32)
+    if not original and mode1_alpha_boost and mode==1:result*=np.float32(1.25)
+    rgb=np.asarray([native_scalar(main['wave_'+channel],allow_ieee=True) for channel in 'rgb'],dtype=np.float32)
+    if original:
+        # Ordered native comparisons preserve NaN rather than replacing it.
+        rgb[rgb<0]=np.float32(0);rgb[rgb>1]=np.float32(1)
+        brighten=native_scalar(main['wave_brighten'],allow_ieee=True)!=0
+    else:brighten=main['wave_brighten']>0
+    if brighten and np.max(rgb)>np.float32(.01):rgb=rgb/np.max(rgb)
+    if result<0:result=np.float32(0)
+    if result>1:result=np.float32(1)
+    rgba=np.concatenate((rgb,[result])).astype(np.float32)
     if not np.all(np.isfinite(rgba)):raise ValueError('unresolved waveform colour/opacity domain')
     return rgba.tolist()
 
@@ -60,7 +75,12 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     if len(scene['frames'])!=len(audio['frames']):raise ValueError('wave/audio frame schedule mismatch')
     values=source_settings(source);width,height=scene['viewport']
     engine=source.get('parser_inputs',{}).get('engine',{})
-    control_policy=select_policy(engine,control_policy,current=CORE_2315_WAVE,legacy=LEGACY_WAVE)
+    original=matches(engine,CORE_2331_ENGINE)
+    if original:
+        control_policy=CORE_2315_WAVE if control_policy is None else control_policy
+        if control_policy not in {CORE_2315_WAVE,LEGACY_WAVE}:
+            raise ValueError('unsupported source math policy: '+str(control_policy))
+    else:control_policy=select_policy(engine,control_policy,current=CORE_2315_WAVE,legacy=LEGACY_WAVE)
     live=control_policy==CORE_2315_WAVE
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown builtin wave line rendering profile')
@@ -77,7 +97,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
                  if not live or live_modes[i] is not None)
     if any_dots and line_rendering_profile==PROFILE:
         if not any(all(engine.get(key)==value for key,value in expected.items())
-                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE]):
+                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE]):
             raise ValueError('GLES builtin dot engine identity mismatch')
         if width<=0 or height<=0 or width*height>1024*768 or height>1330:
             raise ValueError('GLES builtin dot profile requires viewport within reference area')
@@ -125,21 +145,24 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
         offsets=[[0,0]] if scaled_dots or not thick else [[0,0],[1/width,0],[1/width,-1/height],[0,-1/height]]
         frame_mode=geometry.get('mode',native['mode'])
         omitted=bool(geometry.get('omitted',False)) if live else False
+        rgba=[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=(matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE)))
+        if matches(engine,CORE_2331_ENGINE) and np.float32(rgba[3])<np.float32(.004):omitted=True
         waves=[]
-        for vertices in geometry['vertex_waves']:
+        for vertices in ([] if omitted else geometry['vertex_waves']):
             if not vertices:waves.append([]);continue
             points=np.asarray(vertices,dtype=np.float32)
             # Native builtin wave uses orthogonalProjectionFlipped (normal Y).
             screen=points*np.array([.5,-.5],dtype=np.float32)+np.float32(.5)
             waves.append(screen.tolist())
-        result.append({'positions':waves,'clip_positions':geometry['vertex_waves'],
-                       'rgba':[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=(matches(engine,CORE_2325_ENGINE) or (matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE)))),
+        result.append({'positions':waves,'clip_positions':[] if omitted else geometry['vertex_waves'],
+                       'rgba':rgba,
                        'draw_mode':'points' if dot else 'loop' if geometry['closed_loop'] else 'strip',
                        'point_size':2 if scaled_dots else 1,'thick':bool(thick),
                        'additive':flag(frame['main'],'wave_additive','bAdditiveWaves'),'copy_offsets':offsets})
         if live:result[-1].update(mode=frame_mode,omitted=omitted)
     return {'basis':native['basis'],'mode':native['mode'],'frames':result,'source_hashes':native['source_hashes'],
             'control_policy':control_policy,
+            'appearance_policy':'projectmtv-core-2.3.31-original-wave-appearance-v1' if original else 'legacy-wave-appearance-v1',
             'adapter_sha256':native['adapter_sha256'],
             'native_binary_sha256':binary_sha,
             'engine_archive_sha256':native['engine_archive_sha256'],'uses_rendered_reference':False,

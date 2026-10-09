@@ -1,0 +1,31 @@
+{
+  "repository": "johnneerdael/ProjectM-TV",
+  "release": "v2.3.31",
+  "release_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+  "asset": "projectM-TV-core-2.3.31.aar",
+  "aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+  "native_arm64_sha256": "b2d4f95563d485987b8c8b6f14333782755b73133e9758834cbb231e6e0e8f2d",
+  "native_armv7_sha256": "c438a47d224868f7bc5e38000e97cf61ccf25c8e4e1383d3dc651a6d167439b8",
+  "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+  "rendering_policy": "native",
+  "source_engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+  },
+  "assets_sha256": "7bce5d57a89ffe3e01d3a009e695fe248587deeb77daa0d469a2a1893a048395",
+  "asset_counts": {
+    "presets": 9606,
+    "textures": 74
+  },
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.31",
+  "qualification": {
+    "published_bytes_verified": true,
+    "repository_assets_equal_published": true,
+    "jni_declarations_checked": false,
+    "source_policy_controls_passed": true,
+    "published_runtime_numerical_controls_passed": false,
+    "appearance_certified": false,
+    "runtime_scope": "No published-AAR execution in this migration checkpoint; host source adapters and per-policy tests are separate evidence.",
+    "source_scope": "Prepared historical+release31 suite:1834 tests+92 subtests; additive authored motion provenance follow-up:35 focused tests. Host CPU source modeling, not AAR runtime."
+  }
+}

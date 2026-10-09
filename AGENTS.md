@@ -740,3 +740,17 @@ plus swap; ps queries have a2s timeout. Corpus memory budget failures retain nul
 features and explicit errors. Fatal diagnostics use unique timestamp/PID JSON
 files. These are sampled resource safeguards, not a universal memory/performance
 bound. No unchanged failing full-corpus retry is required to verify the fix.
+
+Source31 migration checkpoint (2026-10-09): remain in `predictor-memory-repair`
+on `feat/predictor-static-effect-families` (based on `bug/predictor-grid-memory`);
+do not create another worktree or merge the
+experimental predictor to main. The complete published2.3.31 AAR, both libraries
+and 9,606 preset/74 texture bytes are hash-verified; source31 adapters live under
+`build/preset-corpus/source31/adapters`, separate from immutable historical
+adapters. New `test_core2331_*.py` controls cover the18 release patches using
+versioned actual-path policies. Full published-AAR runtime/appearance qualification
+remains separate. Explicit conditional/packed motion backends must not inherit
+Apple float-path evidence. The old corpus configuration stays source29 until
+integration is qualified. See the analyzer README, published-core-v2.3.31 profile
+and `docs/superpowers/plans/2026-10-09-source31-static-families.md`. Source-based
+effect-family research is available; detector/export work remains pending.

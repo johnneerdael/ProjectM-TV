@@ -14,7 +14,32 @@ from field_math import GLES_HIGHP_INFINITY
 from spatial import sample2d
 from blur import blur_bank,native_ranges,pass_dimensions
 from feedback_field import unorm8
-from engine_profiles import LEGACY_BLUR,CORE_2315_BLUR,LEGACY_DISPLAY,CORE_2315_DISPLAY
+from engine_profiles import (LEGACY_BLUR,CORE_2315_BLUR,LEGACY_DISPLAY,CORE_2315_DISPLAY,
+                             CORE_2331_ENGINE,CORE_2331_DISPLAY,CORE_2331_MOTION,matches)
+
+LEGACY_MOTION='legacy-visible-motion-v1'
+
+
+def pack_motion_uv(uv):
+    """Model RG16UI's two half words, with host half rounding unqualified on GLES."""
+    from motion_vectors import motion_uv_surface
+    decoded=motion_uv_surface(uv)
+    return decoded.astype(np.float16).view(np.uint16).copy()
+
+
+def decode_motion_uv(words):
+    """Decode integer texels before any filtering; preserve signed zero/range."""
+    values=np.asarray(words)
+    if values.dtype!=np.uint16 or values.ndim!=3 or values.shape[-1]!=2 or min(values.shape[:2])<=0:
+        raise ValueError('nonempty RG16UI motion half words required')
+    decoded=np.ascontiguousarray(values).view(np.float16).astype(np.float32)
+    if not np.all(np.isfinite(decoded)):raise ValueError('nonfinite decoded motion half words')
+    return decoded
+
+
+def sample_packed_motion_uv(words,coordinates):
+    """Logical packed consumer: decode texels, then clamp/manual bilinear."""
+    return sample2d(decode_motion_uv(words),coordinates,wrap=False,linear=True,origin='bottom')
 
 
 @dataclass(frozen=True)
@@ -40,18 +65,46 @@ class SourcePipeline:
 
     def requires_warp_uv(self,*,frame_wrap,motion_state):
         from motion_vectors import motion_active
-        if self.warp_tree is None or motion_active(motion_state):return True
-        _,expression=self._lower_stage(self.warp_tree,'warp',frame_wrap)
-        return uses_input_components(expression,'_uv',{0,1})
+        if self.warp_tree is None:return True
+        continuous=self.motion_map_policy==CORE_2331_MOTION
+        if not continuous and motion_active(motion_state):return True
+        model,expression=self._lower_stage(self.warp_tree,'warp',frame_wrap)
+        if uses_input_components(expression,'_uv',{0,1}):return True
+        return continuous and uses_input_components(self._motion_expression(model),'_uv',{0,1})
+
+    @staticmethod
+    def _motion_expression(model):
+        motion=model.environment.get('_mv_tex_coords')
+        if motion is None:raise UnresolvedMath('custom warp motion output is missing')
+        # The generated output's z/w lanes are uninitialized. Select explicit
+        # components before dependency inspection so overwritten xy does not
+        # inherit either those lanes or the original generated UV input.
+        motion=(Field('components',motion.args[:2],'float2') if motion.op=='components' else
+                Field('member',(motion,),'float2',{'field':'xy','swizzle':True}))
+        if model.effects:motion=Field('sequence',tuple(model.effects)+(motion,),'float2')
+        return motion
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None,motion_map_policy=LEGACY_MOTION,source_engine=None,motion_uv_backend=None):
+        if motion_map_policy not in {LEGACY_MOTION,CORE_2331_MOTION}:
+            raise ValueError('unsupported motion map policy')
+        if motion_map_policy==CORE_2331_MOTION and not matches(source_engine or {},CORE_2331_ENGINE):
+            raise ValueError('continuous motion source engine identity mismatch')
+        self.motion_map_policy=motion_map_policy
+        self.motion_uv_backend=motion_uv_backend or ('conditional' if motion_map_policy==CORE_2331_MOTION else 'rg16f')
+        if self.motion_uv_backend not in {'conditional','rg16f','rg16ui-half-words'}:
+            raise ValueError('unsupported motion UV backend')
+        if self.motion_uv_backend=='rg16ui-half-words' and motion_map_policy!=CORE_2331_MOTION:
+            raise ValueError('packed motion requires release31 continuous policy')
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
         if motion_raster_subpixel_bits is not None and (type(motion_raster_subpixel_bits) is not int or not 4<=motion_raster_subpixel_bits<=16):
             raise ValueError('motion raster subpixel bits must be an integer within4..16')
-        from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
+        from motion_vectors import PORTABLE_STORAGE,PORTABLE_SAMPLING,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
+        if self.motion_uv_backend in {'conditional','rg16ui-half-words'} and (
+                motion_uv_storage_profile!=PORTABLE_STORAGE or motion_uv_sampling_profile!=PORTABLE_SAMPLING):
+            raise ValueError('conditional/packed motion requires portable decoded-half profiles; float-path evidence is insufficient')
         if motion_uv_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
             raise ValueError('unknown motion UV storage profile')
         from blur import ARITHMETIC_PROFILES
@@ -108,7 +161,7 @@ class SourcePipeline:
         main_sampler_bindings([],stage='warp',frame_wrap=None,policy=main_binding_policy)
         self.main_binding_policy=main_binding_policy
         if blur_range_policy not in {LEGACY_BLUR,CORE_2315_BLUR}:raise ValueError('unsupported blur range policy')
-        if legacy_control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy control policy')
+        if legacy_control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY,CORE_2331_DISPLAY}:raise ValueError('unsupported legacy control policy')
         self.blur_range_policy=blur_range_policy;self.legacy_control_policy=legacy_control_policy
         self.legacy_tint_amount=legacy_tint_amount
         self.height,self.width=field.shape[:2]
@@ -134,6 +187,17 @@ class SourcePipeline:
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
         from quad_lines import PROFILE as quad_profile
         from motion_vectors import PORTABLE_STORAGE
+        engine=source.get('parser_inputs',{}).get('engine',{})
+        if 'source_engine' in kwargs and kwargs['source_engine']!=engine:
+            raise ValueError('motion source engine identity differs from parser')
+        kwargs['source_engine']=engine
+        kwargs.setdefault('motion_map_policy',CORE_2331_MOTION if matches(engine,CORE_2331_ENGINE) else LEGACY_MOTION)
+        if kwargs['motion_map_policy']==CORE_2331_MOTION and not matches(engine,CORE_2331_ENGINE):
+            raise ValueError('continuous motion source engine identity mismatch')
+        if kwargs.get('motion_uv_backend')=='rg16ui-half-words' and profile!='gles300':
+            raise ValueError('packed motion requires GLES300')
+        if kwargs['motion_map_policy']==CORE_2331_MOTION and profile=='glsl330':
+            kwargs.setdefault('motion_uv_backend','rg16f')
         if kwargs.get('shader_arithmetic_profile','separate-float32-v1')!='separate-float32-v1' and profile!='gles300':
             raise ValueError('shader arithmetic profile requires GLES300')
         if kwargs.get('blur_arithmetic_profile','separate-float32-v1')!='separate-float32-v1' and profile!='gles300':
@@ -259,7 +323,9 @@ class SourcePipeline:
             raise ValueError('choose source motion state or explicit callback, not both')
         if type(write_motion_uv) is not bool:raise ValueError('boolean motion UV write required')
         draw_motion=motion_state is not None and motion_active(motion_state)
-        write_motion=draw_motion and write_motion_uv
+        write_motion=write_motion_uv and (draw_motion or self.motion_map_policy==CORE_2331_MOTION)
+        if write_motion and self.motion_map_policy==CORE_2331_MOTION and supplied_warp is not None:
+            raise UnresolvedMath('supplied warp color lacks actual producer motion output; replay must disable motion publication')
         motion_source_frame=None
         pending_motion_uv=uv
         if draw_motion and not self.first_frame:
@@ -321,10 +387,7 @@ class SourcePipeline:
             trace=None if on_sample is None else lambda detail,uv,lanes:on_sample(name,detail,uv,lanes)
             output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
             if name=='warp' and write_motion:
-                motion=model.environment.get('_mv_tex_coords')
-                if motion is None:raise UnresolvedMath('custom warp motion output is missing')
-                motion=Field('member',(motion,),'float2',{'field':'xy','swizzle':True})
-                if model.effects:motion=Field('sequence',tuple(model.effects)+(motion,),'float2')
+                motion=self._motion_expression(model)
                 pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
             return output
 
@@ -336,7 +399,13 @@ class SourcePipeline:
             if diffuse is None:raise UnresolvedMath('fixed warp requires live decay')
             warped=self._store(self._sample_main(previous,uv,wrap=frame_wrap>.0001,linear=True)*diffuse)
         else:warped=self._rgba(stage(self.warp_tree,'warp',previous,old_blur,warp_coordinates,warp_polar))
-        pending_motion_uv=motion_uv_surface(pending_motion_uv,storage_profile=self.motion_uv_storage_profile) if write_motion else None
+        if write_motion:
+            if self.motion_uv_backend=='rg16ui-half-words':
+                # State shared by authored/native consumers holds decoded half
+                # texels, never integer words that could accidentally filter.
+                pending_motion_uv=decode_motion_uv(pack_motion_uv(pending_motion_uv))
+            else:pending_motion_uv=motion_uv_surface(pending_motion_uv,storage_profile=self.motion_uv_storage_profile)
+        else:pending_motion_uv=None
         new_blur=(supplied_blur[1] if supplied_blur is not None else
                   update_blur() if self.warp_reads_blur else old_blur)
         base=warped.copy() if before_geometry is None else self._store(before_geometry(warped.copy()))
@@ -370,6 +439,17 @@ class SourcePipeline:
         history['reported_shader_canvas']=list(self.shader_canvas_size)
         history['composite_evaluated']=render_composite
         history['motion_vector_source_frame']=motion_source_frame
+        history['motion_map_policy']=self.motion_map_policy
+        history['motion_uv_written']=write_motion
+        history['motion_uv_contract']={
+            'storage':self.motion_uv_backend,'logical_state':'decoded-half-texels',
+            'consumer':'decode-half-before-manual-bilinear' if self.motion_uv_backend=='rg16ui-half-words' else
+                       'conditional-float-filter-or-decoded-half-manual-bilinear' if self.motion_uv_backend=='conditional' else 'float-texture-filter',
+            'capability_selection_verified':False,'final_wrapper_compile_verified':False,
+            'native_driver_verified':False,'fragment_discard_modeled':False,
+            'custom_output':'final-authored-_mv_tex_coords.xy',
+            'packing_rounding':'host-numpy-half-nearest; GLES ties unverified' if self.motion_uv_backend!='rg16f' else None,
+            'target_fallback':'separate-native-driver-evidence-required'}
         history['shader_arithmetic_profile']=self.shader_arithmetic_profile
         history['blur_arithmetic_profile']=self.blur_arithmetic_profile
         history['motion_uv_storage_profile']=self.motion_uv_storage_profile

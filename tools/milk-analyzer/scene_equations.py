@@ -69,14 +69,14 @@ class CaseInsensitiveSettings(dict):
 
 def source_settings(source):
     """Restore the declared native lookup contract after JSON serialization."""
-    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, matches
+    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE, matches
     inputs=source.get('parser_inputs',{})
     if 'setting_lookup_policy' not in inputs:
         return source['values']
     if inputs['setting_lookup_policy']!='native-case-insensitive-v1':
         raise ValueError('unknown setting lookup policy')
     engine=inputs.get('engine',{})
-    if not (matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE) or (matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE))):
+    if not any(matches(engine,target) for target in (CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE,CORE_2331_ENGINE)):
         raise ValueError('native setting lookup policy engine identity mismatch')
     if any(not isinstance(key,str) or key!=key.lower() for key in source['values']):
         raise ValueError('native lowercase setting payload required')
@@ -135,7 +135,8 @@ def _frame_input(frame):
 def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,height:int=72,
                    mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
                    equation_loader_policy='strict-raw-v1',expected_reader_sha256:str|None=None,
-                   initial_shader_canvas:tuple[int,int]|list[int]|None=None)->dict:
+                   initial_shader_canvas:tuple[int,int]|list[int]|None=None,
+                   legacy_warp_policy='legacy-custom-shared-warp-v1')->dict:
     """Execute one scene; only main init can report a different shader canvas.
 
     Actual aspect and frame pixels come from width/height. Native custom contexts
@@ -143,6 +144,13 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     """
     if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not np.isfinite(timeout_seconds) or not 0<timeout_seconds<=3600:
         raise ValueError('finite equation timeout in (0,3600] seconds required')
+    from engine_profiles import CORE_2331_ENGINE,CORE_2331_LEGACY_WARP,LEGACY_WARP,matches
+    current=matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2331_ENGINE)
+    if legacy_warp_policy not in {LEGACY_WARP,CORE_2331_LEGACY_WARP}:
+        raise ValueError('unsupported legacy warp policy')
+    if legacy_warp_policy==CORE_2331_LEGACY_WARP and not current:
+        raise ValueError('legacy warp engine identity mismatch')
+    legacy=current and legacy_warp_policy==CORE_2331_LEGACY_WARP
     from equation_loading import select_equation
     def code(name):return _code(source,name,equation_loader_policy)
     def tree(name):return select_equation(source.get('sections',{}).get(name),name,policy=equation_loader_policy)['tree']
@@ -174,7 +182,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     legacy_motion=_scalar(values,'bMotionVectorsOn',0,'bool')
     defaults['mv_a']=_scalar(values,'mv_a',legacy_motion,'float')
     aspect_x=float(np.float32(min(1,width/height)));aspect_y=float(np.float32(min(1,height/width)))
-    mesh=mesh_inputs(mesh_x,mesh_y,aspect_x=aspect_x,aspect_y=aspect_y)
+    mesh=mesh_inputs(mesh_x,mesh_y,aspect_x=aspect_x,aspect_y=aspect_y,legacy_angle_seam=legacy)
     pixel_code=code('per_pixel_')
     has_pixel_code=pixel_code!='0;'
     defaults.update(meshx=mesh_x,meshy=mesh_y,pixelsx=width,pixelsy=height,
@@ -235,14 +243,18 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
             # Read-only inputs are loaded before main code; Q is copied after it.
             # Q/custom/memory changes then carry through vertices, in row order.
             append({'program':'pixel_inputs','variables':{**inputs,'meshx':mesh_x,'meshy':mesh_y,
-                    'pixelsx':width,'pixelsy':height,'aspectx':aspect_x,'aspecty':aspect_y,
+                    'pixelsx':width,'pixelsy':height,
+                    'aspectx':defaults['aspectx'] if current else aspect_x,
+                    'aspecty':defaults['aspecty'] if current else aspect_y,
                     **{q:{'program':'main_frame','variable':q} for q in Q}}})
             coordinates={name:mesh[key].ravel() for name,key in
                          [('x','equation_x'),('y','equation_y'),('rad','radius'),('ang','equation_ang')]}
-            for vertex in range((mesh_x+1)*(mesh_y+1)):
+            vertices=(range(y*(mesh_x+1),(y+1)*(mesh_x+1))
+                      for y in (range(mesh_y,-1,-1) if legacy else range(mesh_y+1)))
+            for vertex in (v for row in vertices for v in row):
                 append({'program':'pixel','variables':{**{k:float(v[vertex]) for k,v in coordinates.items()},
                         **{k:{'program':'main_frame','variable':k} for k in WARP}},
-                        'capture':list(WARP)},(frame_index,'mesh'))
+                        'capture':list(WARP)},(frame_index,'mesh',vertex))
         for index,shape in shapes.items():
             if not _scalar(values,f'shapecode_{index}_enabled',0,'bool') or shape['num_inst']<=0:continue
             count=shape['num_inst']
@@ -262,6 +274,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
                     'capture':list(wave)+Q+T+sorted(frame_custom)},(frame_index,'wave_frame',index))
             spectrum=bool(_scalar(values,f'wavecode_{index}_bSpectrum',0,'bool'))
             settings={'frame_program':frame_program,'spectrum':spectrum,
+                      'dots':bool(_scalar(values,f'wavecode_{index}_bUseDots',0,'bool')),
                       'separation':_scalar(values,f'wavecode_{index}_sep',0,'int'),
                       'scaling':_scalar(values,f'wavecode_{index}_scaling',1,'float'),
                       'smoothing':_scalar(values,f'wavecode_{index}_smoothing',.5,'float'),
@@ -270,7 +283,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
                       'right':audio_frames[frame_index]['spectrum_right' if spectrum else 'waveform_right']}
             point_custom=_variables(tree(f'wave_{index}_per_point'))-set(READONLY)-set(Q)-set(T)-set('rgba')-{'sample','value1','value2','x','y'}
             append({'program':point_program,'variables':{
-                        **{name:{'program':'main_frame','variable':name} for name in READONLY},
+                        **(inputs if current else {name:{'program':'main_frame','variable':name} for name in READONLY}),
                         **{name:{'program':frame_program,'variable':name} for name in Q+T}},
                     'wave_points':settings,'capture':['x','y','r','g','b','a','sample','value1','value2']+sorted(point_custom)},
                    (frame_index,'wave_points',index))
@@ -296,7 +309,10 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
         if kind=='main':
             result[frame_index]['main']={k:v for k,v in rows[0].items() if k not in custom}
             result[frame_index]['main_custom']={k:v for k,v in rows[0].items() if k in custom}
-        elif kind=='mesh':result[frame_index]['mesh']+=rows
+        elif kind=='mesh':
+            if not result[frame_index]['mesh']:
+                result[frame_index]['mesh']=[None]*((mesh_x+1)*(mesh_y+1))
+            result[frame_index]['mesh'][tail[0]]=rows[0]
         elif kind=='wave_frame':result[frame_index]['waves'].append({'index':tail[0],'frame':rows[0]})
         elif kind=='wave_points':
             target=next(w for w in result[frame_index]['waves'] if w['index']==tail[0]);target.update(rows[0])
@@ -316,6 +332,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
             'reader_sha256':reader_sha256,
             'equation_rng_seed':seed,
             'equation_loader_policy':equation_loader_policy,
+            'legacy_warp_policy':legacy_warp_policy,
             'equation_warnings':warnings,
             'viewport':[width,height],'mesh_size':[mesh_x,mesh_y],
             'appearance_prediction_complete':False,'remaining':['drawing/runtime precision']}

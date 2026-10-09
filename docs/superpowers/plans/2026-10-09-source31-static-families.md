@@ -1,0 +1,76 @@
+# Core2.3.31 and static effect-family implementation plan
+
+> For agentic workers: execute in the existing predictor-memory-repair worktree.
+> Use executing-plans for inline implementation; research is separately delegated
+> without code edits or new worktrees.
+
+**Goal:** First qualify the predictor against the latest published patched core,
+then export source-grounded common effect-family descriptors cheaply enough to
+avoid full-frame simulation where static interpretation suffices.
+
+**Architecture:** Retain separate immutable engine/AAR identities and versioned
+math policies. Reconcile release31's18 authored changes with existing predictor
+semantics, using originalMilkDrop2source and focused controls. A semantic analysis
+pass consumes actual active parsed equations and typed shader field graphs,
+returns multiple family/mechanism descriptors with causal output evidence,
+conditions and uncertainty, and exports them separately from the47-field record.
+
+**Tech stack:** Existing Python/native source adapters, AST/Field/LoopPlan graph,
+JSON and pytest; no new rendering foundation or classifier API.
+
+## Requirements and verification
+
+- [x] Inspect current worktree/uncommitted changes, latest release and active jobs.
+- [x] Gracefully stop only the identified old29controller before code changes;
+  retain its completed rows and partial ZIPs. No duplicate full-corpus render.
+- [x] Download and hash-verify full published2.3.31AAR; bind extracted native
+  library identities, releasecommit and34-patch source digest separately.
+- [x] Prepare isolated source31CPU adapters without mutating old adapters.
+- [ ] Reconcile every new patch0017–0034 with predictor behavior; preserve already
+  MilkDrop-correct behavior and actual custom/default stage distinctions.
+- [ ] Cover opacity/RGB clamp, audio windows/sample caps/customdots/circle,
+  per-pixel aspect/order/legacy deformation/seam, gamma/echo/borders,
+  per-instance style and continuous motion-map semantics with focused controls.
+- [ ] Record supported GPU/storage scope, source/shader compilation versus actual
+  rendering, and incompatible/fallback boundaries; no generic allowlist bypass.
+- [ ] Run prepared suite and bounded published-AAR/source controls appropriate to
+  changes. Attribute new issues correctly; native defects get separate Downloads
+  handoffs, not silently modified presets or fake passing outputs.
+- [x] Research primary graphical-math/authoring sources and actual pack examples;
+  rank candidates by frequency but never label from filenames/regex alone.
+- [ ] Implement static family inference for explicit primitives/waves, tunnel/
+  radial depth feedback, angular folding/kaleidoscope, flow/swirl, recognized
+  iterative/feedback fractal constructions and particle-like mechanisms.
+- [ ] Trace outputs, stage reachability, alpha/zero masks and time/audio/resource
+  conditions. Distinguish a detected mechanism from guaranteed visible output.
+- [ ] Use exact positive fixtures and mutation/unused-code negative controls;
+  mixed families/unknowns remain explicit. No native-image inspection required.
+- [ ] Export source hashes, location/path evidence, family-specific parameters,
+  support/status and conditions in a versioned semantic record with an AI-free
+  single-file/batch CLI. Keep47-field numeric exports backward-compatible.
+- [ ] Integrate cheap recognition/caching into corpus exports, benchmark cold/
+  cached static runs, and demonstrate no60-frame simulation on that path.
+- [ ] Update user guide/export contract/README/AGENTS in this worktree. Validate,
+  review and push regular checkpoints, respecting the no-main-merge predictor
+  acceptance gate. Leave goal active until all requested work is verified.
+
+## Concrete test cases
+
+Migration: nonunit-volume wave opacity; RGB>1before brighten; asymmetric left/
+right PCM windows; circle closing point and authored dot counts; oddnegativeecho;
+stateful per-pixel traversal and inverseaspect; geometry-free moving warp UV;
+per-instance outline style. Negative controls retain wrong-engine policy guards.
+
+Recognition: Julia z-from-UV/c-from-uniform vs Mandelbrot z=0/c-from-UV;
+complex maps sampled through previous-frame textures; conditional/dead fractal
+code; angular folding whose output is discarded; zoom-only non-tunnel control;
+dotted waveform vs independent particle motion; zero-alpha/static hidden shape;
+combined fractal+tunnel source. Named mathematical forms must be normalized
+through temporaries and helper functions; unsupported forms abstain.
+
+## Sequence
+
+Library preparation/reconciliation is the first implementation milestone.
+Research may progress independently during preparation. Family implementation
+starts only after the target engine profile is established. The full corpus
+remains stopped; later runs require their own immutable identity.

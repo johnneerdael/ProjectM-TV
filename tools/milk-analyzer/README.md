@@ -58,7 +58,38 @@ extractor CLI option. It requires GLES300 at source entry points; strict remains
 the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
 nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
 
-## Latest source migration: published 2.3.27
+## Source migration in progress: published 2.3.31
+
+`profiles/published-core-v2.3.31.json` identifies the full published Native AAR,
+both native libraries, Java classes, all 9,606 presets and 74 textures, and the
+separate 34-patch source engine. Repository preset/texture bytes match the AAR.
+Host source adapters are numerical producers; they do not execute the AAR or
+establish Android appearance parity. Keep those qualification fields separate.
+
+The new exact identity selects authored waveform opacity/RGB, custom input
+windows/dot counts, line caps/circle closure, fresh point inputs and inverse
+per-pixel aspects. Legacy gamma pass counts and negative odd echo orientation
+have a distinct display policy. Actual default/fallback warp alone selects
+reversed oscillator Y, AD triangles, descending equation rows and the exact
+left-axis angle seam. Accepted custom warp retains its existing path. Shape
+outlines consume the captured instance flag in the defined int32 domain.
+
+Continuous motion coordinates are published on successful producer frames even
+while vectors are hidden. Vectors consume the previous completed map. The new
+`motion_uv_backend` domain value is `conditional`, `rg16f`, or
+`rg16ui-half-words`; conditional/packed use portable numerical profiles only.
+Packed-half decoding precedes interpolation. Source modeling does not establish
+the actual GLES capability probe, wrapper compilation, fallback selection or
+hardware rounding. An observed float-path operator cannot certify the packed path.
+
+`test_core2331_*.py` preserves historical controls alongside new behavior.
+The existing corpus launcher remains on its immutable source29 configuration
+until the separate corpus integration is qualified; do not relabel its rows.
+Common effect-family detection is the next milestone and is not implemented by
+these migration policies. See the [implementation plan](../../docs/superpowers/plans/2026-10-09-source31-static-families.md)
+and [source research](../../docs/superpowers/research/2026-10-09-static-effect-families.md).
+
+## Historical source migration: published 2.3.27
 
 `profiles/published-core-v2.3.27.json` pins the full published AAR, both native
 libraries, Java classes and exact 15-patch source. Its negative zoom path executes
