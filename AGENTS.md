@@ -163,6 +163,12 @@ native shader varying bases; shader globals named x/y/rad/ang are ordinary unifo
 radius/area is not visible coverage. Reject known rank<2, nonspatial, dead/alpha-only
 and fully saturated cases; retain nonlinear mapping, reciprocal and later-mask
 conditions. These are fields in a mapping plane, not independent particle IDs.
+`source_advection.py` exports direct per-sample RGBA-to-UV matrices and a
+location-held-fixed row-sum norm, sharing _affine_basis_map with source_sampling.
+Conditional[0,1]sample boxes are premises, not certified texture/blur ranges.
+Retain nested-coordinate dependencies, unknown full sensitivity/screen motion,
+64sample/4096node budgets and source-only binding status. Dot constantweights
+can be expanded; shader x/y globals are uniform offsets, not EEL coordinates.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

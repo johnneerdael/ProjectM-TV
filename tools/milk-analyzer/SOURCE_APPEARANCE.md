@@ -606,3 +606,47 @@ defines the radial magnitude. The target translator maps frac to fract in
 source31 `vendor/hlslparser/src/GLSLGenerator.cpp:1217-1219`. Original MilkDrop2
 compiles authored HLSL through D3DX; this source construction needs no repaired
 preset, texture label or rendered-frame observation.
+
+## Direct sampled-colour coordinate response
+
+Each texture lookup's `sampled_coordinate_response`, policy
+`source-direct-sampled-coordinate-response-v1`, decomposes supported coordinates
+into `base_matrix_uv4 * input_uv4 + uniform_offset + sum(M_i * sample_i.rgba)`.
+`sample_contributions` retains each input sample's site, sampler/texture name,
+coordinate program, sampling policy and2-by-4 `matrix_uv_rgba`. The native UV
+bases remain distinct as in the preceding sampling-geometry contract. Source
+RGBA samples are opaque inputs; no texture is loaded or pixel inspected.
+
+`direct_sample_gain_norm` is the maximum output-axis sum of absolute per-site/
+channel coefficients. It bounds direct coordinate sensitivity to independently
+perturbed sample values with their locations fixed. Source dot products with
+constant channel weights are expanded into scalar coefficients. Ordinary shader
+globals x/y remain uniform offsets; EEL coordinate names do not create shader
+spatial inputs. Nonlinear/quantized products and dynamic coefficients abstain.
+
+`conditional_sample_offset_range_uv` sums negative coefficients for each lower
+bound and positive coefficients for each upper bound. Its explicit premise is
+that each directly sampled RGBA component independently lies in[0,1]. This is
+not certified by source and excludes base UV and uniform offsets. Samples may
+be correlated, which tightens the range. GetBlur decoding, HDR/external textures
+and resource configuration must not be assumed to meet this premise.
+
+`coordinate_sample_dependency` records whether a directly sampled input's own
+lookup coordinates read other samples; unresolved loops/storage retain null
+when no affirmative nested dependency is known. That indirect route can add
+nonlinear response. `full_coordinate_sensitivity` and `visible_motion_speed`
+remain null. A pure UV map may have direct sample gain0 while its content still
+moves strongly through time/audio, native mesh or feedback. None of these
+coefficients is a bass-response, screen-motion, flashing or mood score.
+
+The analysis has64direct-sample and4096node budgets; exhaustion remains unknown
+and does not imply an inactive preset. Generated input names are outside HLSL
+identifier syntax. `observed_runtime_bindings=false`: this is source causality,
+not an observed texture binding. Full source/parser/model/target identities stay
+attached to the outer export.
+
+[HLSL dot](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-dot)
+defines the channel-weighted dot product. The target source31 header's lum macro
+uses(.32,.49,.29), whose weights sum to1.10. Original MilkDrop2's D3DX authored
+semantics remain a separate reference. Matrix/layout/floating-storage policies
+follow the qualified ProjectM TV target rather than generic shader assumptions.

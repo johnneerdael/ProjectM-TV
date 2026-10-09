@@ -163,6 +163,12 @@ identical repeated formulas may share one, so this is not a layer count. This he
 mathematically generated spot fields from sampled images or independent particles.
 Local core area does not establish visible screen coverage or final brightness.
 
+Supported image-driven flow records now quantify how sampled colour changes
+lookup coordinates, retaining individual positive/negative channel weights and
+conditional displacement ranges. This explains gradient and feedback-flow math
+without reading an image. Nested image lookups can add nonlinear response, so
+these direct coefficients do not establish visible movement speed or intensity.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

@@ -37,7 +37,7 @@ def _constant_matrix_vector_parts(field):
     return tuple(result)
 
 
-def affine_uv_map(field,*,basis_name='_uv'):
+def _affine_basis_map(field,bases):
     """Split two coordinates into constant _uv coefficients and uniform offsets.
 
     This is algebra on the source graph, not floating-point shader execution.
@@ -50,11 +50,12 @@ def affine_uv_map(field,*,basis_name='_uv'):
     from source_appearance import _canonical_lane,_phase_literal
     zero=Field('constant',dtype='float',detail={'value':0.})
     memo={};active=set()
+    width=4*len(bases);columns={name:4*i for i,name in enumerate(bases)}
 
     def uniform(node):
         for child,path in _walk(node):
             if child.op in {'sample','unknown','uninitialized'} or child.op.startswith('loop_'):return False
-            if child.op=='input' and child.detail.get('name') in {basis_name,'_uv','_uv_orig','_rad_ang','_vDiffuse','x','y','rad','ang'}:return False
+            if child.op=='input' and child.detail.get('name') in set(bases)|{'_uv','_rad_ang','_vDiffuse'}:return False
         return True
 
     def scale(pair,k):
@@ -75,8 +76,8 @@ def affine_uv_map(field,*,basis_name='_uv'):
     def calculate(node,depth):
         if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
             parent=node.args[0]
-            if parent.op=='input' and parent.dtype in {'float2','float4'} and parent.detail.get('name')==basis_name:
-                weights=np.zeros(4);weights[SWIZZLE[node.detail['field']]]=1.
+            if parent.op=='input' and parent.dtype in {'float2','float4'} and parent.detail.get('name') in columns:
+                weights=np.zeros(width);weights[columns[parent.detail['name']]+SWIZZLE[node.detail['field']]]=1.
                 return weights,zero
             if parent.op!='input':
                 lane=SWIZZLE[node.detail['field']];parts=_constant_matrix_vector_parts(parent) or _parts(parent)
@@ -84,11 +85,21 @@ def affine_uv_map(field,*,basis_name='_uv'):
                     projected=parts[lane]
                     if not (projected.op=='member' and projected.args and projected.args[0] is parent):
                         return visit(projected,depth+1)
-        if uniform(node):return np.zeros(4),node
+        if uniform(node):return np.zeros(width),node
         if node.dtype!='float':raise ValueError('spatial coordinate conversion is not continuous float arithmetic')
         if node.op in {'cast','narrow','construct','components'} and len(node.args)==1:
             if node.args[0].dtype!='float':raise ValueError('spatial numeric conversion is unresolved')
             return visit(node.args[0],depth+1)
+        if node.op=='dot' and len(node.args)==2:
+            a,b=map(_parts,node.args)
+            if len(a)!=len(b):raise ValueError('dot dimensions are unresolved')
+            coefficients=[_phase_literal(v) for v in a];terms=b
+            if any(c is None for c in coefficients):coefficients=[_phase_literal(v) for v in b];terms=a
+            if any(c is None for c in coefficients):raise ValueError('dot coefficients are not constant')
+            weights=np.zeros(width);offset=zero
+            for term,coefficient in zip(terms,coefficients):
+                w,o=scale(visit(term,depth+1),coefficient);weights+=w;offset=Field('add',(offset,o),'float')
+            return weights,offset
         if node.op=='negate' or node.op=='unary' and node.detail.get('operator')==0:
             return scale(visit(node.args[0],depth+1),-1.)
         if node.op=='unary' and node.detail.get('operator')==1:return visit(node.args[0],depth+1)
@@ -110,11 +121,17 @@ def affine_uv_map(field,*,basis_name='_uv'):
     return np.array([v[0] for v in values]),[v[1] for v in values]
 
 
+def affine_uv_map(field,*,basis_name='_uv'):
+    """Existing UV-only contract; sampled colour remains unsupported here."""
+    return _affine_basis_map(field,(basis_name,))
+
+
 def sampling_geometry(analysis):
     from effect_families import _walk
     from source_appearance import _phase_literal,_expression,_routes
     from source_motion import motion_control
     from source_polar import polar_projection
+    from source_advection import sampled_coordinate_response
     stages={};statuses={}
     for stage in ('warp','composite'):
         field=analysis.outputs.get(stage)
@@ -133,7 +150,8 @@ def sampling_geometry(analysis):
                 'determinant':None,'orientation_reversed':None,'inverse_matrix':None,
                 'inverse_offset_uv':None,'nominal_feature_area_ratio':None,
                 'visible_screen_motion':None,'unknown_reasons':[],
-                'polar_projection':polar_projection(node.args[0],analysis)}
+                'polar_projection':polar_projection(node.args[0],analysis),
+                'sampled_coordinate_response':sampled_coordinate_response(node.args[0])}
             try:
                 matrix,offsets=affine_uv_map(node.args[0])
                 result['matrix_uv4']=matrix.tolist()

@@ -1508,7 +1508,8 @@
                       "nominal_feature_area_ratio",
                       "visible_screen_motion",
                       "unknown_reasons",
-                      "polar_projection"
+                      "polar_projection",
+                      "sampled_coordinate_response"
                     ],
                     "properties": {
                       "matrix_uv4": {
@@ -1847,6 +1848,129 @@
                             "type": "array",
                             "items": {
                               "type": "object"
+                            }
+                          }
+                        }
+                      },
+                      "sampled_coordinate_response": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "source_model",
+                          "base_matrix_uv4",
+                          "sample_contributions",
+                          "direct_sample_gain_norm",
+                          "conditional_sample_offset_range_uv",
+                          "range_premise",
+                          "coordinate_sample_dependency",
+                          "full_coordinate_sensitivity",
+                          "visible_motion_speed",
+                          "observed_runtime_bindings",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-direct-sampled-coordinate-response-v1"
+                          },
+                          "source_model": {
+                            "enum": [
+                              "unknown",
+                              "affine_uv_and_sample_values"
+                            ]
+                          },
+                          "base_matrix_uv4": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 4,
+                              "maxItems": 4,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "sample_contributions": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "sample_site_index",
+                                "canonical_texture",
+                                "matrix_uv_rgba",
+                                "coordinate_expression",
+                                "sampling_policy"
+                              ],
+                              "properties": {
+                                "matrix_uv_rgba": {
+                                  "type": "array",
+                                  "minItems": 2,
+                                  "maxItems": 2,
+                                  "items": {
+                                    "type": "array",
+                                    "minItems": 4,
+                                    "maxItems": 4,
+                                    "items": {
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "direct_sample_gain_norm": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0
+                          },
+                          "conditional_sample_offset_range_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "coordinate_sample_dependency": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "full_coordinate_sensitivity": {
+                            "type": "null"
+                          },
+                          "visible_motion_speed": {
+                            "type": "null"
+                          },
+                          "observed_runtime_bindings": {
+                            "const": false
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
                             }
                           }
                         }
@@ -1877,7 +2001,8 @@
                       "nominal_feature_area_ratio",
                       "visible_screen_motion",
                       "unknown_reasons",
-                      "polar_projection"
+                      "polar_projection",
+                      "sampled_coordinate_response"
                     ],
                     "properties": {
                       "matrix_uv4": {
@@ -2216,6 +2341,129 @@
                             "type": "array",
                             "items": {
                               "type": "object"
+                            }
+                          }
+                        }
+                      },
+                      "sampled_coordinate_response": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "source_model",
+                          "base_matrix_uv4",
+                          "sample_contributions",
+                          "direct_sample_gain_norm",
+                          "conditional_sample_offset_range_uv",
+                          "range_premise",
+                          "coordinate_sample_dependency",
+                          "full_coordinate_sensitivity",
+                          "visible_motion_speed",
+                          "observed_runtime_bindings",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-direct-sampled-coordinate-response-v1"
+                          },
+                          "source_model": {
+                            "enum": [
+                              "unknown",
+                              "affine_uv_and_sample_values"
+                            ]
+                          },
+                          "base_matrix_uv4": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 4,
+                              "maxItems": 4,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "sample_contributions": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "sample_site_index",
+                                "canonical_texture",
+                                "matrix_uv_rgba",
+                                "coordinate_expression",
+                                "sampling_policy"
+                              ],
+                              "properties": {
+                                "matrix_uv_rgba": {
+                                  "type": "array",
+                                  "minItems": 2,
+                                  "maxItems": 2,
+                                  "items": {
+                                    "type": "array",
+                                    "minItems": 4,
+                                    "maxItems": 4,
+                                    "items": {
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "direct_sample_gain_norm": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0
+                          },
+                          "conditional_sample_offset_range_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "coordinate_sample_dependency": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "full_coordinate_sensitivity": {
+                            "type": "null"
+                          },
+                          "visible_motion_speed": {
+                            "type": "null"
+                          },
+                          "observed_runtime_bindings": {
+                            "const": false
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
                             }
                           }
                         }

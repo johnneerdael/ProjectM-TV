@@ -158,3 +158,14 @@ coordinate programs and phase/audio routes. Keep multiple layers separate and
 reject known nonspatial/rank-one/uniform/dead constructs. Distinguish a generator
 plane from final visible spots, particles, colour or coverage. Use real xtramartin
 regressions, positive/negative math controls and the same fixed100 census.
+
+## Image-driven coordinate response
+
+Image-driven advection affects53/100fixed cases. Quantify supported constant
+RGBA-to-UV coefficient matrices, direct sensitivity with sample locations fixed
+and explicitly conditional range boxes. Preserve nested-image-coordinate
+nonlinearity, unknown/dynamic coefficients and pure-UV zero-sample cases without
+claiming stillness. Share the existing affine parser, expand constant-weight dot
+products, retain shader/EEL namespace distinctions and bound working memory.
+Use independent formula controls, original xtramartin gradient and fixed100
+coverage/retention checks; do not infer screen motion or mood from this norm.
