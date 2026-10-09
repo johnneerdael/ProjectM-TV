@@ -625,3 +625,5 @@ reference. Commands on the contract page require the experimental implementation
 branch and prepared inputs; publishing this guide does not merge that engine.
 Validate example/schema/manifest hashes and the strict MkDocs build when changing
 those downloads. The accuracy explanation links this separate export reference.
+
+Authored followup final local acceptance (2026-10-09): integrated docs-only mainaf4b520f and retained all33 patch bytes. Isolated seven-workload84-job ABBA verifies672 selected final-output captures against focused witnesses. Largest overall measured added timeRoyal103 +.343ms/+6.96%; other workloads-.190 to+.135ms, with varied cycle deltas. User-approved necessary authored work keeps all five fixes; no physical-TV headroom or summed-percent claim. Fresh clean recursive coreDebug/releaseAPK build at6a016447,206 source-analyzer tests, both production warp GLSL ES3 links and strict MkDocs pass. New PR/current-head GitHub review/CI remain open; do not merge/publish as part of this task. See [combined cost](docs/superpowers/evidence/authored-fidelity-followup/combined-cost/README.md).

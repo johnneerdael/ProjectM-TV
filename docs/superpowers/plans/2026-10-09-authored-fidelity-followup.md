@@ -65,7 +65,7 @@ Approach/pattern: InstanceDraw captures flag; derive LineStyle per draw; existin
 Execution note: test-first.
 Verification: alternating/static/dynamic/fractional/negative/no-assignment/invalid fallback, borderalpha/textures/overlap/batchflush/linefallback/AA/aspects, once-only equations/replay, actualtwo city-lights originals.
 - [x] Prepare bounded production repair and independent tests.
-- [ ] Verify RED/GREEN, sanitizers/resources/Native/cost; integrate after qualification.
+- [x] Verify RED/GREEN, sanitizers/resources/Native/cost; integrate after qualification.
 
 ### 5. I16 field freshness
 
@@ -75,15 +75,15 @@ Approach/pattern: actual real-fragment publication/lifecycle and existing owner 
 Execution note: characterization plus failing temporal controls.
 Verification: on/off/on, multiple disabled, count/alpha off, A=B, default/custom/fallback/discard/output-write, native/authored consumers, resize/context/detail/presets/transition, GLstate/equation/RNG counts, visibleNative fixture with valid feedback.
 - [x] Trace current lifecycle and choose qualified production policy.
-- [ ] Verify RED/GREEN/full ownership controls and integrate.
+- [x] Verify RED/GREEN/full ownership controls and integrate.
 
 ### 6. Combined acceptance/newPR
 
 Files: docs/evidence/new followup; AGENTS.md; THIRD_PARTY.md; finalPRbody.
 Interfaces: all five source patches and controls; frozenbaseline960eed2c plusfinalcandidate.
-- [ ] Freeze/artifact-build exactbaseline/candidate; validate original/finite/unaffectedNative repeats and captures.
-- [ ] Measure isolated combined ABBA on relevant original/structural workloads; report absolute/relative cost and selected appearance.
-- [ ] Fresh normal/sanitizer/host/JVM/bothABI/recursive/docs/helpers/analyzer and Linux/Mesa bothlinkroutes; shaderlink when required.
+- [x] Freeze/artifact-build exactbaseline/candidate; validate original/finite/unaffectedNative repeats and captures.
+- [x] Measure isolated combined ABBA on relevant original/structural workloads; report absolute/relative cost and selected appearance.
+- [x] Fresh normal/sanitizer/host/JVM/bothABI/recursive/docs/helpers/analyzer and Linux/Mesa bothlinkroutes; shaderlink when required.
 - [ ] Fullce:review/autofix, resolvefindings, finalhead checks; newPRrelease notes and monitoring/rollback plan.
 - [ ] RequiredGitHubCI/review green; PRnon-draft/merge-ready, without merging/releasing.
 

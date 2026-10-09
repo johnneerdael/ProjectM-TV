@@ -295,7 +295,7 @@ Each custom shape captures the evaluated thickness for that instance and reuses 
 
 The actual warp updates the previous completed motion field even while vectors are hidden. A later active consumer uses that compatible previous field, respecting fragment discard/output writes, first-frame guards, context/size changes and per-preset ownership. This adds intentional UV-write work rather than a synthetic UV-only pass.
 
-The user accepts necessary authored-work cost for patches0029–0033. [Focused Native4K captures, source controls and active-canvas lifecycle evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/authored-fidelity-followup/README.md) identify the tested inputs and limits. Isolated combined-cost and final PR CI qualification remain separate. These observations do not certify every preset, Windows pixels or physical-TV headroom.
+The user accepts necessary authored-work cost for patches0029–0033. [Focused Native4K captures, source controls and active-canvas lifecycle evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/authored-fidelity-followup/README.md) identify the tested inputs and limits. Isolated combined-cost qualification covers seven workloads and reports absolute/cycle deltas; physical-TV headroom remains unmeasured. Final PR CI remains separate. These observations do not certify every preset, Windows pixels or physical-TV headroom.
 
 ## Known remaining differences from MilkDrop 2
 

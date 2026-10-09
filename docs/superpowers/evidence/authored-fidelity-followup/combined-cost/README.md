@@ -1,0 +1,9 @@
+# Isolated combined authored-work cost
+
+Compare the complete33-patch candidate against the28-patch baseline across seven workloads, three ABBA cycles per workload, six runs per role. All84 jobs and672 selected captures verify; every run's selected RGB hashes match the independently repeated focused witness for the same role. Sources, artifacts, driver, PCM/seed/clock, mesh and dimensions are fixed. All task compilers/tests/GPU work were terminal before timing; one scoped device-session lock excludes other corpus workers. The raw host process snapshot remains local and is not published.
+
+Each job renders480 frames at fixed frame/30 clock and measures360 warmed frames through onDrawFrame plus glFinish. Capture/PNG I/O is excluded. Native output3840x2160, Standard1280x720 reference, mesh48x32, seed12345, API34ARM64/Apple M4 Pro/GLES3. The largest overall measured increase isRoyal103 +.343ms/+6.96%; individual cycle changes are+20.07%,+.03%,+.28%. The other overall deltas range from-.190ms to+.135ms, with varied cycle signs. These observations do not establish universal speedups, statistical significance, normal app FPS or physical-TV headroom. Prior single-patch percentages are not added.
+
+The user accepts necessary authored work and each of the five followups remains separately revertible. All five are retained in this candidate; the measured emulator deltas do not reinstate the historical zero-added-cost gate. Additional PC benchmarking and physical-TV headroom are separate future work.
+
+Exact84-row means/cycle deltas, identities and manifest/request hashes are inresults.json andtable.md. This archive contains all requests/manifests, not all672 PNGs; original PNGs remain in the ignored frozen producer directories. Frozen helper copies require their original producer paths/context for reproduction. Shipping build hashes remain separate from source-instrumented timing workers.

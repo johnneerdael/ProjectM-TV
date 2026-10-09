@@ -1,0 +1,10 @@
+Verified84 jobs and 672 captures; all matched frozen focused witness
+| Preset / workload | Before ms | Candidate ms | Delta ms | Delta % | Cycle deltas % |
+|---|---:|---:|---:|---:|---|
+| $$$ Royal - Mashup (103).milk | 4.926 | 5.269 | +0.343 | +6.96 | +20.07, +0.03, +0.28 |
+| shifter - mosaic mitosis.milk | 2.094 | 2.090 | -0.004 | -0.21 | +1.61, -0.74, -1.38 |
+| $$$ Royal - Mashup (137).milk | 1.919 | 1.943 | +0.024 | +1.27 | -8.40, +5.23, +8.10 |
+| martin - city lights v2 c.milk | 7.840 | 7.650 | -0.190 | -2.43 | -4.76, -0.75, -1.70 |
+| martin - city lights v2(1).milk | 7.976 | 7.977 | +0.001 | +0.01 | +0.16, +0.29, -0.41 |
+| audit followup uv custom-feedback.milk | 2.181 | 2.186 | +0.004 | +0.20 | -1.30, +0.28, +1.61 |
+| audit followup uv all-disabled.milk | 1.709 | 1.844 | +0.135 | +7.91 | +5.73, +18.98, -0.16 |

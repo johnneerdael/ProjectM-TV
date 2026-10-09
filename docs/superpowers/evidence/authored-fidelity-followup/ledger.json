@@ -2,11 +2,11 @@
   "baseline": "960eed2c6cf3badf0dccb97f02d64bdecc851ed5",
   "branch": "fix/milkdrop-authored-fidelity",
   "tasks": {
-    "I19": "implemented29; 63 host/sanitizer controls; Native Royal103 repeated before/after captured, verification in progress",
-    "I22": "implemented30; authored dots/singleNaN/replay controls pass; Native76jobrun in progress",
-    "I20": "implemented31; sourceclosure geometry controls pass; repeated Royal137/11 captured, verification in progress",
-    "I24": "production32 simple per-instance style; host/style/domain/original controls and NDKarm64 O3fast guard verified; Native/context/cost gates in progress",
-    "I16": "production33 continuous real-warp MRT; five ownership/lifecycle hostgroups pass; Nativefeedback captured, private JNIcontext qualification next"
+    "I19": "implemented29; source controls and repeated Native originals qualified",
+    "I22": "implemented30; singleNaN/dots/replay source controls and repeated Native originals/fixtures qualified",
+    "I20": "implemented31; source closure/style controls and repeated Native originals qualified",
+    "I24": "production32; per-instance domain/style/ownership, both-ABI NDK O3-fast guard proof, Native original/finite captures qualified",
+    "I16": "production33; real producer/temporal/ownership controls and actual constructor failures qualified; four active-canvas Native4K JNI lifecycle repeats pass"
   },
   "rulings": [
     {
@@ -67,7 +67,42 @@
     "linux_explicit": 63,
     "linux_sanitizer": "initial30s timeouts isolated to built-innoise setup; diagnostic in progress",
     "shipping_build": "bothARM ABIs core release and app debug pass",
-    "combined_cost": "seven-workload84jobABBA prepared notstarted",
-    "new_pr": "notcreated"
-  }
+    "combined_cost": {
+      "status": "verified",
+      "jobs": 84,
+      "captures": 672,
+      "workloads": 7,
+      "all_outputs_match_focused": true,
+      "largest_overall_added_ms": 0.34264699074074123
+    },
+    "new_pr": "notcreated",
+    "native_focused": {
+      "jobs": 76,
+      "presets": 19,
+      "captures": 608,
+      "all_selected_repeats_match": true
+    },
+    "active_native_lifecycle": {
+      "jobs": 4,
+      "captures": 120,
+      "all_same_protocol_repeats_match": true
+    },
+    "analyzer": {
+      "tests": 206,
+      "source": "current33 normal archive"
+    },
+    "source_review": "10 personas no actionable findings; targeted partial-failure control re-review no findings",
+    "fresh_recursive": "clean pinned recursive source; coreDebug and releaseAPK pass at6a016447",
+    "shader_links": "both unchanged warp variants GLSL ES3.00 pass",
+    "docs": "strict MkDocs pass; final updated docs recheck pending"
+  },
+  "current_head": "34da568c",
+  "remaining": [
+    "final updated docs consistency/strictcheck",
+    "newPR body currentfullscope and actualcost",
+    "push newbranch/opennewnon-draftPR",
+    "required current-head code-review/CIgreen; no merge"
+  ],
+  "last_turn_progress": "confirmed live main stilldocs-only af4b520f; verified running exactcostsession66197",
+  "latest_main_verified": "af4b520f3ad0e0ed02ad3c91300e16062708ebeb"
 }

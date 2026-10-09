@@ -1,0 +1,2 @@
+build/authored-followup/shader-link/custom-contract.vert
+build/authored-followup/shader-link/custom-contract.frag
