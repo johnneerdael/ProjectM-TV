@@ -151,6 +151,39 @@ without an invariant. `state:<section>:<name>` inputs identify those unresolved
 state slots; shared-register inputs use `shared:<name>`. Frozen older outputs are
 not relabelled with corrected bindings.
 
+## Logical composition and sampler flow
+
+`composition`, policy `source-logical-composition-v1`, explains the logical normal
+engine path. Previous main goes through warp, drawings/filters and retained main;
+display reads an orientation/diffusion exact copy through the final composite.
+It is not a complete executable scene graph or a certified recurrence.
+
+`configured_drawing_order` lists candidate shapes0…3, custom waves0…3 and the
+built-in wave, preserving native order. Opacity, audio, compilation, termination
+and projection remain conditions. `display_elements` links retained description
+IDs; an independent composite can hide those drawings while the engine still
+draws them into feedback. These lists do not prove prominence or actual visibility.
+Motion vectors may modify previous main before warp; darken-center and borders
+follow the drawing stages.
+
+`shader_sample_reads` records contributing/conditional source samples by stage:
+sampler/canonical texture, logical source role, coordinate/extra-argument DAGs,
+intrinsic/LOD, source site/path and sampling policy. Native fixed/legacy stages
+record their implicit main input. An unresolved stage has null reads rather than
+an empty list. Dead data samples disappear, while execution/domain obligations
+remain separate. Typed integer zero masks use the same constant rules as the
+effect-family and contribution traversal.
+
+`frame_age` remains null: blur timing and authored/native detail histories depend
+on effective render context. `render_context_resolved=false`, conditional detail
+path and discard/incomplete-write fields prevent a fixed physical-buffer claim.
+Normally the composite changes display only; warp discard can preserve stale
+backing pixels containing a previous composite, giving an indirect feedback path.
+The record retains that caveat universally instead of promising unconditional
+composite/feedback separation. Sampling policies are source interpretations,
+not certified runtime units/assets. No complete blend/material graph, recurrence
+solution, screen coverage or reconstruction readiness follows from these edges.
+
 ## Colour modes
 
 | `colour.mode_code` | Interpretation |

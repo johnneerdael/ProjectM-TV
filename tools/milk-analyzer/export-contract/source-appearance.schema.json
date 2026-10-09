@@ -821,6 +821,131 @@
         "record_sha256": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
+        },
+        "composition": {
+          "type": "object",
+          "required": [
+            "policy",
+            "render_context_resolved",
+            "normal_feedback_flow",
+            "normal_display_flow",
+            "configured_drawing_order",
+            "display_elements",
+            "shader_sample_reads",
+            "stage_read_status",
+            "feedback_detail_path",
+            "warp_discard_or_incomplete_write",
+            "composite_feedback_influence",
+            "conditions",
+            "unknown_reasons"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-logical-composition-v1"
+            },
+            "render_context_resolved": {
+              "const": false
+            },
+            "normal_feedback_flow": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "normal_display_flow": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "configured_drawing_order": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "display_elements": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "shader_sample_reads": {
+              "type": "object",
+              "properties": {
+                "warp": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "frame_age": {
+                        "type": "null"
+                      },
+                      "coordinate_expression": {
+                        "type": [
+                          "object",
+                          "null"
+                        ]
+                      },
+                      "source_role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "composite": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "frame_age": {
+                        "type": "null"
+                      },
+                      "coordinate_expression": {
+                        "type": [
+                          "object",
+                          "null"
+                        ]
+                      },
+                      "source_role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "stage_read_status": {
+              "type": "object"
+            },
+            "feedback_detail_path": {
+              "const": "conditional_on_render_context"
+            },
+            "warp_discard_or_incomplete_write": {
+              "type": "string"
+            },
+            "composite_feedback_influence": {
+              "const": "normally_display_only_but_stale_pixels_may_feed_back"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },

@@ -49,14 +49,37 @@ def _strip(value):
 
 def _number(value):
     cache = _CACHE.get()
-    value = _strip(value)
     key = ('number', id(value))
     if cache is not None and key in cache and cache[key][0] is value:
         return cache[key][1]
-    result = _number_uncached(value)
+    # Typed scalar constants must be folded before any representation stripping:
+    # int(.8) is zero, not .8, and can disconnect a source output completely.
+    from source_appearance import _phase_literal
+    result=_phase_literal(value)
+    if result is None:
+        converts_base=(value.op in {'cast','narrow'} and value.args and
+            re.match(r'[A-Za-z]+',value.dtype)[0]!=re.match(r'[A-Za-z]+',value.args[0].dtype)[0])
+        if converts_base:
+            source=_number(value.args[0])
+            result=None if source is None else _uniform_scalar_conversion(source,value.dtype)
+        else:result=_number_uncached(value)
     if cache is not None:
         cache[key] = (value, result)
     return result
+
+
+def _uniform_scalar_conversion(number,dtype):
+    """Convert a proved uniform scalar/vector literal without erasing its type."""
+    base=re.match(r'[A-Za-z]+',dtype)[0]
+    if base=='int':
+        if not -(2**31)-1<number<2**31:return None
+        return float(math.trunc(number))
+    if base=='bool':return float(number!=0)
+    if base=='float':
+        from field_math import typed
+        result=float(typed(number,'float'))
+        return result if math.isfinite(result) else None
+    return None
 
 
 def _number_uncached(value):
@@ -72,7 +95,7 @@ def _number_uncached(value):
     if value.op in {'construct', 'components'} and value.args:
         numbers = [_number(arg) for arg in value.args]
         if all(n is not None and n == numbers[0] for n in numbers):
-            return numbers[0]
+            return _uniform_scalar_conversion(numbers[0],value.dtype)
     if value.op in {'add', 'subtract', 'multiply', 'divide'} and len(value.args) == 2:
         a, b = map(_number, value.args)
         if value.op == 'multiply' and (a == 0 or b == 0):

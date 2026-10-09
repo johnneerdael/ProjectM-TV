@@ -124,6 +124,11 @@ environment merging. None of these facts establishes image or mood accuracy.
 Keep source-time units, ranges and signed coefficients separate from visible
 motion. Constant mesh controls apply each feedback step; zero derivative is not
 zero image speed. Audio/state/nonlinear curves remain unknown without support.
+`source_composition.py` adds conditional logical feedback/display flow, configured
+drawing order and typed source sampler reads. Keep detail/blur ages/render context
+unresolved without inputs; retain stale-composite feedback from possible warp
+discard. Typed constant zero masks must prune data dependencies consistently while
+execution/domain obligations stay separate. This graph is not scene completeness.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

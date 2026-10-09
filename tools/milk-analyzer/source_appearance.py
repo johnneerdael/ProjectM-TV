@@ -209,6 +209,11 @@ def _phase_literal_uncached(value,depth,memo):
         if a is None or b is None or value.op=='divide' and b==0:return None
         result={'add':lambda:a+b,'subtract':lambda:a-b,'multiply':lambda:a*b,'divide':lambda:a/b}[value.op]()
     else:return None
+    if value.dtype=='float' and value.op in {'cast','narrow','construct'}:
+        # These are explicit typed shader conversions. Plain EEL constants and
+        # arithmetic remain double-valued; do not round every symbolic literal.
+        import numpy as np
+        with np.errstate(over='ignore',invalid='ignore'):result=float(np.float32(result))
     if not math.isfinite(result):return None
     if value.dtype=='int':
         if not -(2**31)<=result<2**31:return None
@@ -386,6 +391,7 @@ def _colour(field,*,allow_shared_multiplier=True):
 def appearance_from_analysis(analysis):
     from effect_families import _parts,_number,_walk
     from source_motion import motion_control
+    from source_composition import composition_from_analysis
     elements={}
     for family in analysis.families:
         identity=family['component'] or ('mesh_warp' if family['stage']=='mesh_warp' else 'shader_'+family['stage'])
@@ -451,7 +457,8 @@ def appearance_from_analysis(analysis):
         palette_candidate=any(e['colour'].get('mode_code') in {3,5} for e in elements.values())
     psychedelic=any(7 in e['family_codes'] for e in elements.values()) and palette_candidate
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
-        'elements':list(elements.values()),'execution_unknowns':list(analysis.unknowns),
+        'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
+        'execution_unknowns':list(analysis.unknowns),
         'uses_rendered_images':False,'uses_shader_execution':False,
         'uses_equation_execution':False,'appearance_match_accuracy':None,
         'activity':{'flashing':{'value':None,'status':'unknown'},'motion_intensity':{'value':None,'status':'unknown'}},

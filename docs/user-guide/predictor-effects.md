@@ -112,6 +112,13 @@ abstain. A constant feedback rotation is applied each feedback step and may keep
 moving the picture; zero change in its control value is not a still-image claim.
 These source rates do not yet establish perceived screen movement or a mood score.
 
+The composition record explains normal feedback versus display paths, candidate
+drawing order and source texture reads. It preserves hidden feedback drawings
+when a composite replaces the displayed image. Blur ages, native/authored detail
+and effective texture bindings remain conditional. Warp discard can retain stale
+composite pixels, so the record does not promise that display operations can never
+affect later feedback. This is useful pipeline context, not a finished scene graph.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

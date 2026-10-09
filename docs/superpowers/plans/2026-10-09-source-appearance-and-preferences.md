@@ -85,6 +85,9 @@ contract documentation and review. The numerical47-field export stays unchanged.
 - Named motion-control curves are implemented;20/100presets have55known
   nonconstant time curves. These are source control rates, not visible motion.
   Per-pixel bindings/state and mesh-role aliasing were corrected before counting.
+- Logical composition/source-sampler flow is implemented;100/100sample records
+  describe conditional pipeline context,77have blur reads and2retain unresolved
+  stage reads. This is not an executable/material scene graph or recurrence.
 - Spatial/image motion, feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 

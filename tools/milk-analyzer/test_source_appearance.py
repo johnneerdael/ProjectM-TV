@@ -644,6 +644,78 @@ def test_per_pixel_readonly_writes_can_accumulate_across_vertices():
     assert control['curve_kind']=='unknown'
 
 
+def test_composition_separates_feedback_draws_from_display_composite():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'PSVERSION_COMP=2\ncomp_1=`shader_body {ret=GetPixel(uv)*2;}\n'))
+    composition=result['composition']
+    assert composition['normal_feedback_flow']==['previous_main','warp','drawing_and_filters','retained_main']
+    assert composition['normal_display_flow']==['retained_main','flip_or_diffusion_exact_copy','composite','display']
+    assert composition['display_elements'][0]=='shape_0'
+    assert composition['shader_sample_reads']['composite'][0]['source_role']=='current_warp_with_draws'
+    assert composition['render_context_resolved'] is False
+
+
+def test_composite_constant_hides_draws_without_claiming_no_feedback_producers():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'PSVERSION_COMP=2\ncomp_1=`shader_body {ret=0;}\n'))
+    composition=result['composition']
+    assert 'shape_0' not in composition['display_elements']
+    assert composition['configured_drawing_order']==['shape_0']
+    assert composition['shader_sample_reads']['composite']==[]
+
+
+def test_blur_read_age_remains_unknown_without_render_context():
+    result=appearance(shader('shader_body {ret=GetBlur1(uv);}'))
+    read=result['composition']['shader_sample_reads']['composite'][0]
+    assert read['source_role']=='blur_history'
+    assert read['frame_age'] is None
+    assert result['composition']['feedback_detail_path']=='conditional_on_render_context'
+
+
+def test_dead_sampler_does_not_create_a_composition_read():
+    result=appearance(shader('shader_body {float3 unused=GetPixel(uv);ret=0;}'))
+    assert result['composition']['shader_sample_reads']['composite']==[]
+
+
+def test_warp_clip_keeps_stale_composite_influence_unresolved():
+    result=appearance(shader('shader_body {clip(uv.x-.5);ret=0;}',stage='warp'))
+    composition=result['composition']
+    assert composition['warp_discard_or_incomplete_write']=='possible_or_unresolved'
+    assert composition['composite_feedback_influence']=='normally_display_only_but_stale_pixels_may_feed_back'
+
+
+@pytest.mark.parametrize('mask',['int(.8)','int(.8)+int(-.8)'])
+def test_typed_zero_masks_remove_composition_reads_and_upstream_display(mask):
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nPSVERSION_COMP=2\n'
+        'comp_1=`shader_body {float2 p=uv-.5;ret=GetPixel(float2(atan2(p.y,p.x),1/length(p)))*('+mask+');}\n')
+    result=appearance(source)
+    assert result['composition']['shader_sample_reads']['composite']==[]
+    assert result['composition']['display_elements']==[]
+    assert not any(5 in e['family_codes'] for e in result['elements'])
+
+
+def test_typed_nonzero_integer_mask_retains_composition_read():
+    result=appearance(shader('shader_body {ret=GetPixel(uv)*int(1.8);}'))
+    assert len(result['composition']['shader_sample_reads']['composite'])==1
+
+
+def test_uniform_integer_vector_zero_mask_removes_feedback_dependency():
+    result=appearance(shader('shader_body {ret=GetPixel(uv)*int3(.8,.8,.8);}'))
+    assert result['composition']['shader_sample_reads']['composite']==[]
+
+
+def test_dead_data_slice_keeps_loop_execution_obligation():
+    result=appearance(shader('shader_body {for(int n=0;n<2;n++){}ret=GetPixel(uv)*int(.8);}'))
+    assert result['composition']['shader_sample_reads']['composite']==[]
+    assert result['execution_unknowns']
+
+
+@pytest.mark.parametrize('cast',['float(16777217)','(float)16777217'])
+def test_scalar_float_narrowing_removes_a_rounded_zero_mask(cast):
+    result=appearance(shader('shader_body {ret=GetPixel(uv)*('+cast+'-16777216.0);}'))
+    assert result['composition']['shader_sample_reads']['composite']==[]
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'
