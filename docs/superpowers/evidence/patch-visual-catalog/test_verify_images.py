@@ -1,10 +1,12 @@
 """Bounded regressions for exchanging or dropping catalog run receipts."""
 import copy
 import importlib.util
+import io
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from PIL import Image
 
 EVIDENCE = Path(__file__).resolve().parent
 REPO = EVIDENCE.parents[3]
@@ -14,7 +16,7 @@ spec.loader.exec_module(verifier)
 
 
 class RunReceiptBinding(unittest.TestCase):
-    def check(self, change=None, overrides=None, image_swap=None):
+    def check(self, change=None, overrides=None, image_swap=None, image_overrides=None):
         overrides = overrides or {}
         def write_override(path, value):
             if value is None:
@@ -49,11 +51,14 @@ class RunReceiptBinding(unittest.TestCase):
             presets.mkdir(parents=True)
             (presets / 'presets').symlink_to(REPO / 'core/src/main/assets/presets', target_is_directory=True)
             originals = REPO / 'docs/user-guide/images/patches/audit'
-            if image_swap:
+            if image_swap or image_overrides:
                 (assets / 'audit').mkdir()
                 for path in originals.glob('*.png'):
-                    source_name = (image_swap[1] if path.name == image_swap[0] else
-                                   image_swap[0] if path.name == image_swap[1] else path.name)
+                    if image_overrides and path.name in image_overrides:
+                        (assets / 'audit' / path.name).write_bytes(image_overrides[path.name])
+                        continue
+                    source_name = (image_swap[1] if image_swap and path.name == image_swap[0] else
+                                   image_swap[0] if image_swap and path.name == image_swap[1] else path.name)
                     (assets / 'audit' / path.name).symlink_to(originals / source_name)
             else:
                 (assets / 'audit').symlink_to(originals, target_is_directory=True)
@@ -144,6 +149,18 @@ class RunReceiptBinding(unittest.TestCase):
     def test_preserved_pcm_tamper_fails(self):
         with self.assertRaisesRegex(AssertionError, 'PCM bytes'):
             self.check(overrides={'audio/frozen-240-frames.f32': ''})
+
+    def test_same_area_reshape_with_matching_metadata_fails(self):
+        name = 'I31-upstream.png'
+        images = json.loads((EVIDENCE / 'images.json').read_text())
+        with Image.open(REPO / 'docs/user-guide/images/patches/audit' / name) as image:
+            reshaped = Image.frombytes('RGB', (640, 1440), image.tobytes())
+        payload = io.BytesIO()
+        reshaped.save(payload, format='PNG')
+        data = payload.getvalue()
+        images[name].update(width=640, height=1440, png_sha256=verifier.sha(data))
+        with self.assertRaisesRegex(AssertionError, 'image dimensions'):
+            self.check(overrides={'images.json': images}, image_overrides={name: data})
 
 
 if __name__ == '__main__':

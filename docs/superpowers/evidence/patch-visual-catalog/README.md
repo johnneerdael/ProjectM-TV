@@ -75,3 +75,5 @@ Repeat/fixture custody: run-manifests.json now retains all104 original independe
 The two shared240/480-frame float32 PCM files are also retained byte-for-byte under audio/ and checked against each case hash. They were copied from existing runs, not regenerated from the formula. Sixteen focused custody checks now include canonical audio tampering. This preserves replay bytes across Python/numpy platform differences.
 
 Benefit claims:18 repair IDs do not mean18 proven user-visible improvements. Source parity, visible effect and practical benefit are separate claims. I31 is explicitly correctness-verified with practical benefit unproven: it removes a draw, but its valid timing ranges overlap and its isolated visual effect is negligible. Visible differences also need an authored/reference or user-accepted outcome to establish benefit.
+
+Dimension binding: published PNG metadata must also equal its capture width/height. A same-area reshaping with unchanged flat RGB bytes and updated PNG metadata is rejected. Seventeen bounded custody controls pass; the published PNGs are unchanged.

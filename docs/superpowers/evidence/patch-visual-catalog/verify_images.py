@@ -42,6 +42,7 @@ def verify(repo):
             assert image.mode == 'RGB' and image.size == (info['width'], info['height']), name
             assert sha(image.tobytes()) == info['raw_rgb_sha256'], name
         record = json.loads((evidence / 'captures' / f"{info['case']}.json").read_text())
+        assert (info['width'], info['height']) == (record['width'], record['height']), f'image dimensions: {name}'
         role = record['roles'][info['role']]
         assert role['repeat_equal'] is True
         assert len(role['frame_sha256']) == record['frames']
