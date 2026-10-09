@@ -75,6 +75,27 @@ public class ExitDiagnosticsTest {
     }
 
     @Test
+    public void reusedPidsGetTheTrailOnlyAtTheFirstExitAfterIt() {
+        // Android reused PID 4321: an older exit before the trail was written, a later one after it.
+        ExitDiagnostics.Exit older = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_LOW_MEMORY, 0, 100,
+                NOW - 3_600_000, 0, 0, "");
+        ExitDiagnostics.Exit crash = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
+                NOW - 60_000, 0, 0, "");
+        ExitDiagnostics.Exit later = new ExitDiagnostics.Exit(4321, 10, 0, 100, NOW - 1_000, 0, 0, "");
+        List<ExitDiagnostics.Exit> exits = Arrays.asList(later, crash, older);  // newest first, as Android lists them
+        for (ExitDiagnostics.TrailLine line : ExitDiagnostics.parseTrail(TRAIL)) {
+            assertEquals(1, ExitDiagnostics.exitForLine(exits, line));
+        }
+        String report = ExitDiagnostics.report(exits, true, TRAIL, NOW, "");
+        assertEquals(report.indexOf("render:"), report.lastIndexOf("render:"));
+        assertTrue(report, report.indexOf("render:") > report.indexOf("crashed (native code)"));
+        assertTrue(report, report.indexOf("render:") < report.indexOf("killed for low memory"));
+        // A trail newer than every exit belongs to the running process: attached to none.
+        assertEquals(-1, ExitDiagnostics.exitForLine(Arrays.asList(older),
+                ExitDiagnostics.parseTrail(TRAIL).get(0)));
+    }
+
+    @Test
     public void reportWithoutExitRecordsStillShowsTheTrail() {
         String report = ExitDiagnostics.report(Collections.emptyList(), false, TRAIL, NOW, "");
         assertTrue(report, report.contains("Android 11 or later is needed"));

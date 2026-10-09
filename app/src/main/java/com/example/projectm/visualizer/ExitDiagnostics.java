@@ -88,9 +88,13 @@ final class ExitDiagnostics {
 
     private ExitDiagnostics() {}
 
-    /** From {@code Application.onCreate}: keeps the earlier trail, then hands the file to the engine. */
+    /**
+     * From {@code Application.onCreate}: keeps the earlier trail, then hands the file to the engine.
+     * The file lives in no-backup storage, so preset names never leave the TV through Android backup
+     * or device transfer, and a restored device cannot show another device's trail.
+     */
     static void start(Context context) {
-        File file = new File(context.getFilesDir(), TRAIL_FILE);
+        File file = new File(context.getNoBackupFilesDir(), TRAIL_FILE);
         previousTrail = read(file);
         ProjectMJNI.setDiagnosticsFile(file.getAbsolutePath());
     }
@@ -205,16 +209,33 @@ final class ExitDiagnostics {
         return "None recorded";
     }
 
+    /**
+     * The exit each trail line belongs to: the earliest exit of the same PID at or after the line was
+     * written, or -1. Android reuses PIDs, so a PID alone could also match an older, unrelated exit.
+     */
+    static int exitForLine(List<Exit> exits, TrailLine line) {
+        int best = -1;
+        for (int i = 0; i < exits.size(); i++) {
+            Exit exit = exits.get(i);
+            if (exit.pid != line.pid || exit.timestampMs < line.timeMs) continue;
+            if (best < 0 || exit.timestampMs < exits.get(best).timestampMs) best = i;
+        }
+        return best;
+    }
+
     /** The full report for the Last exit dialog. */
     static String report(List<Exit> exits, boolean supported, String trail, long nowMs, String header) {
         StringBuilder out = new StringBuilder(header);
         List<TrailLine> lines = parseTrail(trail);
+        int[] owners = new int[lines.size()];
+        for (int i = 0; i < lines.size(); i++) owners[i] = exitForLine(exits, lines.get(i));
         if (!supported) {
             out.append("\nAndroid 11 or later is needed for exit records.\n");
         } else if (exits.isEmpty()) {
             out.append("\nNo exits recorded yet.\n");
         }
-        for (Exit exit : exits) {
+        for (int e = 0; e < exits.size(); e++) {
+            Exit exit = exits.get(e);
             out.append('\n').append(age(nowMs, exit.timestampMs)).append(": ")
                     .append(reasonLabel(exit.reason, exit.status))
                     .append(exit.wasVisible() ? ", on screen" : ", in the background");
@@ -222,11 +243,11 @@ final class ExitDiagnostics {
             if (exit.pssKb > 0 || exit.rssKb > 0) {
                 out.append(String.format(Locale.US, "\n  memory: %d MB PSS, %d MB RSS", exit.pssKb / 1024, exit.rssKb / 1024));
             }
-            for (TrailLine line : lines) {
-                if (line.pid != exit.pid) continue;
-                out.append("\n  ").append(line.thread).append(": ").append(line.message);
-                long before = (exit.timestampMs - line.timeMs) / 1000;
-                if (before >= 0) out.append(" (").append(before).append(" s before)");
+            for (int i = 0; i < lines.size(); i++) {
+                if (owners[i] != e) continue;
+                TrailLine line = lines.get(i);
+                out.append("\n  ").append(line.thread).append(": ").append(line.message)
+                        .append(" (").append((exit.timestampMs - line.timeMs) / 1000).append(" s before)");
             }
             out.append('\n');
         }
