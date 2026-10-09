@@ -5,16 +5,8 @@ import json
 import os
 from pathlib import Path
 import re
-from urllib.parse import quote
-
-from review_gate import GitHub
-
-WRITERS = {"admin", "maintain", "write"}
+from review_gate import GitHub, writer
 REVIEWERS = {"claude[bot]", "github-actions[bot]"}
-
-
-def writer(api, login):
-    return api.get(f"collaborators/{quote(login, safe='')}/permission")["permission"] in WRITERS
 
 
 def ready(pr):

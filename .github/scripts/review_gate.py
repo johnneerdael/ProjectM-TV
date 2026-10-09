@@ -8,12 +8,17 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from urllib.parse import quote
 
 CONTEXT = "Reviewed PR builds"
 WORKFLOW = "pr-builds.yml"
 CODEX = "chatgpt-codex-connector[bot]"
 CLAUDE = "claude[bot]"
 TRUSTED = {"OWNER", "MEMBER", "COLLABORATOR"}
+
+
+def writer(api, login):
+    return api.get(f"collaborators/{quote(login, safe='')}/permission")["permission"] in {"admin", "maintain", "write"}
 
 
 def claude_result(review):
@@ -75,12 +80,15 @@ def eligibility(pr, reviews, comments, threads, reactions=()):
 
     for comment in comments:
         user = comment["user"]["login"]
-        trusted = user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
+        trusted = (user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
+                   or comment.get("_claude_authorized") is True)
         request = re.match(r"^@(codex|claude)\s+(security\s+)?review\b", (comment.get("body") or "").strip(), re.I)
         requested_at = comment.get("updated_at") or comment.get("created_at")
         if trusted and request and requested_at:
             provider = request[1].lower()
             if provider == "claude" and (request[2] or not re.fullmatch(r"@claude\s+review", (comment.get("body") or "").strip(), re.I)):
+                continue
+            if provider == "claude" and comment.get("_claude_authorized") is not True:
                 continue
             kind = "security" if request[2] else "code"
             timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00")).replace(microsecond=0)
@@ -247,6 +255,17 @@ class GitHub:
         pr["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         reviews = self.pages(f"pulls/{number}/reviews?per_page=100")
         comments = self.pages(f"issues/{number}/comments?per_page=100")
+        claude_permissions = {}
+        for comment in comments:
+            if not re.fullmatch(r"@claude\s+review", (comment.get("body") or "").strip(), re.I):
+                continue
+            user = comment["user"]
+            if user.get("type") != "User":
+                comment["_claude_authorized"] = False
+                continue
+            if user["login"] not in claude_permissions:
+                claude_permissions[user["login"]] = writer(self, user["login"])
+            comment["_claude_authorized"] = claude_permissions[user["login"]]
         reactions = self.pages(f"issues/{number}/reactions?per_page=100")
         claude_workflows = {}
         for review in reviews:

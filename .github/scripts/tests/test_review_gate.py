@@ -96,7 +96,8 @@ class ClaudeEligibilityTests(unittest.TestCase):
 
     def test_latest_code_command_selects_only_one_provider(self):
         codex = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
-        claude = dict(user=dict(login="author"), body="@claude review", created_at="2026-10-05T11:00:00Z")
+        claude = dict(user=dict(login="new-writer"), author_association="NONE", _claude_authorized=True,
+                      body="@claude review", created_at="2026-10-05T11:00:00Z")
         self.assertTrue(self.check([claude_review()], [codex, claude]))
         self.assertFalse(self.check([claude_review()], [claude, dict(codex, created_at="2026-10-05T13:00:00Z")]))
         completed = summary()
@@ -105,7 +106,7 @@ class ClaudeEligibilityTests(unittest.TestCase):
         self.assertTrue(self.check([claude_review()], [claude, dict(codex, created_at="2026-10-05T13:00:00Z"), completed], [thumb]))
 
     def test_claude_request_requires_later_current_approval_and_security_stays_separate(self):
-        request = dict(user=dict(login="author"), body="@claude review", created_at="2026-10-05T12:00:00Z")
+        request = dict(user=dict(login="author"), _claude_authorized=True, body="@claude review", created_at="2026-10-05T12:00:00Z")
         self.assertFalse(self.check([claude_review()], [request]))
         request["created_at"] = "2026-10-05T11:00:00Z"
         self.assertTrue(self.check([claude_review()], [request]))
@@ -166,11 +167,18 @@ class ClaudeEligibilityTests(unittest.TestCase):
 
     def test_later_claude_selection_supersedes_older_running_codex_code_review(self):
         running = summary("Running")
-        request = dict(user=dict(login="author"), body="@claude review", created_at="2026-10-05T11:00:00Z")
+        request = dict(user=dict(login="author"), _claude_authorized=True, body="@claude review", created_at="2026-10-05T11:00:00Z")
         self.assertTrue(self.check([claude_review()], [running, request]))
         self.assertFalse(self.check([claude_review()], [running]))
         running["body"] = running["body"].replace("**Code Review**", "**Security Review**")
         self.assertFalse(self.check([claude_review()], [running, request]))
+
+
+    def test_external_author_cannot_select_claude_without_workflow_authorization(self):
+        request = dict(user=dict(login="author"), body="@claude review", created_at="2026-10-05T13:00:00Z")
+        self.assertTrue(self.check([claude_review()], [request]))
+        request["_claude_authorized"] = True
+        self.assertFalse(self.check([claude_review()], [request]))
 
 
 class EligibilityTests(unittest.TestCase):
@@ -379,8 +387,11 @@ class SnapshotTests(unittest.TestCase):
                 self.reactions = []
                 self.resolved = HEAD
                 self.resolution_error = None
+                self.permission = "write"
 
             def get(self, path):
+                if path.startswith("collaborators/"):
+                    return dict(permission=self.permission)
                 if path == "actions/runs/123":
                     return dict(path=".github/workflows/claude-code-review.yml", head_branch="main", event="issue_comment",
                                 status="completed", conclusion="success", created_at="2026-10-05T11:00:00Z", updated_at="2026-10-05T12:00:01Z")
@@ -475,6 +486,17 @@ class SnapshotTests(unittest.TestCase):
         with patch.object(self.api, "get", get):
             _, (ready, _) = self.api.snapshot(42)
             self.assertTrue(ready)
+
+    def test_snapshot_checks_the_same_writer_permission_as_the_claude_workflow(self):
+        request = dict(user=dict(login="author", type="User"), body="@claude review", created_at="2026-10-05T11:00:00Z")
+        self.api.comments = [request]
+        self.api.permission = "read"
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertTrue(ready)
+        self.api.permission = "write"
+        self.api.main = [BASE, BASE]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
 
     def test_claude_approval_from_other_workflow_or_after_run_end_cannot_qualify(self):
         started = claude_review("RUNNING", login="github-actions[bot]", timestamp="2026-10-05T11:01:00Z")
