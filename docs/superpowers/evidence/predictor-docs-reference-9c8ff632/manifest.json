@@ -1,0 +1,50 @@
+{
+  "source_checkpoint": "9c8ff6324c919188a1f6c4ddc48c5e19fc60cc82",
+  "scope": "Reference documentation only; no executable implementation or raw corpus artifacts.",
+  "files": [
+    {
+      "source_path": "tools/milk-analyzer/EFFECT_FAMILIES.md",
+      "sha256": "4337ef22b98a099216cd4f20036971a6b87c207a602094ff2b5d94c636030030"
+    },
+    {
+      "source_path": "tools/milk-analyzer/SOURCE_APPEARANCE.md",
+      "sha256": "fdc6a7db9d691ec48890ae42462234bb7835acccf7024c0ec45b3e23c456a7a5"
+    },
+    {
+      "source_path": "tools/milk-analyzer/export-contract/source-appearance.schema.json",
+      "sha256": "11e303ea3541adcd5a9295ee16d7d4693b8f67cf0d90f97d74c60d892f2b74b8"
+    },
+    {
+      "source_path": "tools/milk-analyzer/profiles/published-core-v2.3.33.json",
+      "sha256": "5a459cded07b9c999038ed30f97368db70c371cf783b680d37be32b4e6774198"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-sampling-geometry-2026-10-09/README.md",
+      "sha256": "d73301fe82b977335335b15324545a11e03971fe073411a784c71b6499b19fc9"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-blur-bindings-2026-10-09/README.md",
+      "sha256": "165dc369b4334ea8a6acfc7c30d122489dd9cbe358557e98348258f4cc0ae845"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-colour-mix-2026-10-09/README.md",
+      "sha256": "017340b67e203c71d34302942c992ba58d50dce446eaabbd479ceb45ee6e5232"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-native-time-2026-10-09/README.md",
+      "sha256": "3bffbd88c3d6217b4a07e95abae67aca09661df3f44b63cdeaa7c79425bfa9ae"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-composite-hue-2026-10-10/README.md",
+      "sha256": "421e0c66b801970a323cac5a1a5d6c423b31c48f66731f0da25ea0a2cbc36ceb"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-polar-mixed-2026-10-09/README.md",
+      "sha256": "53f6f80a2b70b52f8defd54903f8484d866a7f18c63f9a29348510057c7c1740"
+    },
+    {
+      "source_path": "docs/superpowers/evidence/source-radial-grid-2026-10-09/README.md",
+      "sha256": "8acb8ace26bb5ffcb97813aa922fde60d86e13583eb810f0e40ca98dd8fd4706"
+    }
+  ]
+}
