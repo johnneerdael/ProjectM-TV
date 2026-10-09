@@ -267,6 +267,39 @@ class GuideRoleBinding(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'guide role reference'):
             self.verify(changed)
 
+    def test_identical_zoom_accessible_names_fail(self):
+        changed = self.source.replace('Open original full-resolution Before · upstream master frame for zoom',
+                                      'Open original full-resolution frame for zoom').replace(
+                                      'Open original full-resolution After · ProjectM TV frame for zoom',
+                                      'Open original full-resolution frame for zoom')
+        with self.assertRaisesRegex(AssertionError, 'guide accessible role name'):
+            self.verify(changed)
+
+    def test_swapped_zoom_accessible_role_names_fail(self):
+        before = 'Open original full-resolution Before · upstream master frame for zoom'
+        after = 'Open original full-resolution After · ProjectM TV frame for zoom'
+        changed = self.source.replace(before, 'ARIA-SWAP').replace(after, before).replace('ARIA-SWAP', after)
+        with self.assertRaisesRegex(AssertionError, 'guide accessible role name'):
+            self.verify(changed)
+
+    def test_wrong_full_frame_accessible_role_name_fails(self):
+        changed = self.source.replace('Open full-resolution Before · upstream master image',
+                                      'Open full-resolution After · ProjectM TV image', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide accessible role name'):
+            self.verify(changed)
+
+    def test_overridden_zoom_accessible_name_fails(self):
+        changed = self.source.replace('class="patch-crop" href=',
+                                      'class="patch-crop" aria-labelledby="other-role" href=', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide accessible role name'):
+            self.verify(changed)
+
+    def test_zoom_link_removed_from_keyboard_order_fails(self):
+        changed = self.source.replace('class="patch-crop" href=',
+                                      'class="patch-crop" tabindex="-1" href=', 1)
+        with self.assertRaisesRegex(AssertionError, 'guide keyboard link'):
+            self.verify(changed)
+
     def test_guide_same_but_wrong_crop_fails(self):
         changed = self.source.replace('--image-top:-75.000000000%;', '--image-top:-74.000000000%;')
         with self.assertRaisesRegex(AssertionError, 'guide crop rectangle'):

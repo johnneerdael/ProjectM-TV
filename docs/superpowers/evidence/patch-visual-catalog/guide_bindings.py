@@ -95,6 +95,13 @@ def verify_guide(source, gallery, captures):
             assert normalized(strong[0].text()) == label, f'guide role label: {case}/{role}'
             target = f'../../images/patches/audit/{case}-{role}.png'
             assert links[0].attrs.get('href') == imgs[0].attrs.get('src') == target, f'guide role reference: {case}/{role}'
+            source_label = 'Before · upstream master' if role == 'upstream' else 'After · ProjectM TV'
+            accessible_name = (f'Open original full-resolution {source_label} frame for zoom' if zoom
+                               else f'Open full-resolution {source_label} image')
+            assert links[0].attrs.get('aria-label') == accessible_name, f'guide accessible role name: {case}/{role}'
+            assert ('aria-labelledby' not in links[0].attrs and
+                    links[0].attrs.get('aria-hidden', 'false') == 'false'), f'guide accessible role name: {case}/{role}'
+            assert links[0].attrs.get('tabindex', '0') == '0', f'guide keyboard link: {case}/{role}'
             expected_alt = ('Matched crop of ' if zoom else '') + preset + ' — ' + label
             assert imgs[0].attrs.get('alt') == expected_alt, f'guide image label: {case}/{role}'
             assert all('style' not in node.attrs for node in [panel, *panel.nodes()]
