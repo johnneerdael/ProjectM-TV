@@ -41,6 +41,7 @@ jobs:
       contents: read
       pull-requests: read
       issues: read  # PR-body reactions for trusted preflight/final review checks
+      actions: read  # Authenticate Claude review workflow receipts
       statuses: write
     outputs:
       ready: ${{ steps.review.outcome == 'success' }}
@@ -90,6 +91,7 @@ jobs:
       contents: read
       pull-requests: read
       issues: read  # PR-body reactions for trusted preflight/final review checks
+      actions: read  # Authenticate Claude review workflow receipts
       statuses: write
     concurrency:
       group: pr-review-controller
