@@ -85,3 +85,5 @@ Independent anchors: the upstream955-file source inventory is independently reco
 The independent source guard applies symmetrically to upstream and patched roles. The patched987-file inventory is separately reconstructed from engine6f648074/evaluator22fb0cfd, all34 ordered8a15996e patches and frozen instrumentation, matching original build/published bytes. Joint inventory/worker-digest drift rejects for either role.
 
 Caption verification includes the full normalized descriptive text, source-bound preset label, frame/dimension prefix and exact generated crop note. Swapped or edited descriptions reject even when image references remain valid; whitespace-only presentation changes remain allowed. No guide facts or images changed.
+
+The complete original RGB corpus is independently anchored from all104 preserved result sequences across26 cases/41,280 frames before mutable metadata comparisons. This includes unpublished frames. Coordinated capture/repeat hash edits, even with a matching edited receipt, reject; no observed sequence or image was replaced.

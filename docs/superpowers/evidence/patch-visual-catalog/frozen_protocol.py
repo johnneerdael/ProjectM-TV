@@ -10,6 +10,10 @@ FROZEN_SOURCE_TREES = {
     'patched': '5e48da2b8a47f160a1884a648cae19127d833e69f5b5f3c55ffb5c64eff66533',
 }
 
+# Independently recovered from all104 original result.json RGB sequences, before
+# consulting capture/run crosschecks. See rgb-corpus-anchor.json for the receipt.
+FROZEN_RGB_CORPUS_SHA256 = 'a4b97d4017466cd29bcd4b1d62699a107fb0358741c767f2a59bdb948159c465'
+
 FROZEN_PCM = {
     240: '3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad',
     480: '46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd',

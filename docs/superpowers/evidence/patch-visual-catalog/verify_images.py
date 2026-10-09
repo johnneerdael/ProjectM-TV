@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 from guide_bindings import verify_guide
-from frozen_protocol import FROZEN_PCM, FROZEN_SOURCE_TREES
+from frozen_protocol import FROZEN_PCM, FROZEN_SOURCE_TREES, FROZEN_RGB_CORPUS_SHA256
 
 
 def sha(data):
@@ -16,6 +16,19 @@ def sha(data):
 def inventory_digest(value):
     return sha(json.dumps(value, sort_keys=True, separators=(',', ':'),
                           ensure_ascii=False, allow_nan=False).encode('utf-8'))
+
+
+def frame_hash_corpus(runs):
+    """Canonicalize independently observed per-run streams, excluding annotations."""
+    corpus = {}
+    for case, records in runs.items():
+        corpus[case] = {}
+        for record in records:
+            role, repeat = record['role'], str(record['repeat'])
+            repeats = corpus[case].setdefault(role, {})
+            assert repeat not in repeats, f'duplicate run: {case}/{role}/{repeat}'
+            repeats[repeat] = record['frame_sha256']
+    return corpus
 
 
 def verify_request(record, capture, canonical, case):
@@ -89,6 +102,7 @@ def verify(repo):
         assert role['identity']['source_commit'] == '8a15996e8510533113a44e26feaddc3a7d6e85f5'
         cases.add(info['case'])
     runs = json.loads((evidence / 'run-manifests.json').read_text())
+    assert inventory_digest(frame_hash_corpus(runs)) == FROZEN_RGB_CORPUS_SHA256, 'frozen RGB frame corpus anchor'
     captures = {p.stem: json.loads(p.read_text()) for p in (evidence / 'captures').glob('*.json')}
     workers = json.loads((evidence / 'workers.json').read_text())
     textures = json.loads((evidence / 'textures.json').read_text())

@@ -81,7 +81,7 @@ class RunReceiptBinding(unittest.TestCase):
             self.check(exchange)
 
     def test_missing_unpublished_capture_case_fails(self):
-        with self.assertRaisesRegex(AssertionError, 'case sets differ'):
+        with self.assertRaisesRegex(AssertionError, 'frozen RGB frame corpus anchor'):
             self.check(lambda runs: runs.pop('I17'))
 
     def test_wrong_role_worker_identity_fails(self):
@@ -153,8 +153,33 @@ class RunReceiptBinding(unittest.TestCase):
             self.check(overrides={'gallery.json': gallery})
 
     def test_stale_repeat_flag_cannot_hide_hash_difference(self):
-        with self.assertRaisesRegex(AssertionError, 'repeat frame hashes'):
+        with self.assertRaisesRegex(AssertionError, 'frozen RGB frame corpus anchor'):
             self.check(lambda runs: runs['I16'][1]['frame_sha256'].__setitem__(17, '0' * 64))
+
+    def check_coordinated_frame_corpus_drift(self, change_receipt=False):
+        runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
+        capture = json.loads((EVIDENCE / 'captures/I16.json').read_text())
+        # Frame17 is absent from every published PNG selection. Change both
+        # independent repeats and the shared capture list coherently.
+        for record in runs['I16']:
+            if record['role'] == 'upstream':
+                record['frame_sha256'][17] = '0' * 64
+        capture['roles']['upstream']['frame_sha256'][17] = '0' * 64
+        overrides = {'captures/I16.json': capture}
+        if change_receipt:
+            receipt = json.loads((EVIDENCE / 'rgb-corpus-anchor.json').read_text())
+            receipt['canonical_rgb_sequences_sha256'] = verifier.inventory_digest(verifier.frame_hash_corpus(runs))
+            overrides['rgb-corpus-anchor.json'] = receipt
+        def change(current):
+            current['I16'] = runs['I16']
+        with self.assertRaisesRegex(AssertionError, 'frozen RGB frame corpus anchor'):
+            self.check(change, overrides)
+
+    def test_coordinated_unpublished_capture_and_both_repeats_drift_fails(self):
+        self.check_coordinated_frame_corpus_drift()
+
+    def test_coordinated_frame_corpus_and_receipt_drift_fails(self):
+        self.check_coordinated_frame_corpus_drift(change_receipt=True)
 
     def test_preserved_fixture_tamper_fails(self):
         fixture = 'fixtures/audit negative echo.milk'
