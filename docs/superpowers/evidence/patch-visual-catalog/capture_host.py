@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 import argparse
+from frozen_protocol import FROZEN_PCM, frozen_pcm
 
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -25,24 +26,22 @@ parser.add_argument('--repo',type=Path,required=True)
 parser.add_argument('--work',type=Path,required=True)
 parser.add_argument('--name',required=True)
 parser.add_argument('--preset',type=Path,required=True)
-parser.add_argument('--frames',type=int,default=480)
+parser.add_argument('--frames',type=int,default=480,choices=[240,480])
 parser.add_argument('--width',type=int,default=1280,choices=[1280,3840])
 args=parser.parse_args()
 repo=args.repo.resolve();root=args.work.resolve()
 frames=args.frames
-if frames<=0 or frames>480:parser.error('frames must be1..480')
 w=args.width;h=w*9//16
 name=args.name;preset=args.preset.resolve()
 if not name or '/' in name or name in ('.','..'):parser.error('name must be a simple label')
 jobdir=root/'captures'/name
+audio=frozen_pcm(repo/'docs/superpowers/evidence/patch-visual-catalog',frames)
 jobdir.mkdir(parents=True,exist_ok=False)
-t=np.arange(frames*1470)/44100
-signal=((.4+.3*np.sin(2*np.pi*1.7*t)**2)*(.45*np.sin(2*np.pi*80*t)+.15*np.sin(2*np.pi*440*t)+.10*np.sin(2*np.pi*1600*t))).astype('<f4')
-pcm=jobdir/'audio.f32';pcm.write_bytes(signal.tobytes())
+pcm=jobdir/'audio.f32';pcm.write_bytes(audio)
 selected={29,59,119,150,180,210,239,300,390,479}&set(range(frames))
 textures=repo/'core/src/main/assets/textures'
 inventory=texture_inventory(textures)
-summary={'name':name,'preset_path':str(preset),'preset_sha256':sha(preset.read_bytes()),'pcm_sha256':sha(pcm.read_bytes()),'texture_root':str(textures),'texture_inventory':inventory,'texture_inventory_sha256':texture_inventory_digest(inventory),'width':w,'height':h,'frames':frames,'seed':12345,'roles':{}}
+summary={'name':name,'preset_path':str(preset),'preset_sha256':sha(preset.read_bytes()),'pcm_sha256':FROZEN_PCM[frames],'texture_root':str(textures),'texture_inventory':inventory,'texture_inventory_sha256':texture_inventory_digest(inventory),'width':w,'height':h,'frames':frames,'seed':12345,'roles':{}}
 for role in ['upstream','patched']:
  identity=json.loads((root/role/'identity.json').read_text())
  if sha(Path(identity['worker']).read_bytes())!=identity['worker_sha256']:raise SystemExit('worker identity mismatch: '+role)

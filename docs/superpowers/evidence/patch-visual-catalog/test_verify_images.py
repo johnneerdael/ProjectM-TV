@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import subprocess
+import sys
 from PIL import Image
 
 EVIDENCE = Path(__file__).resolve().parent
@@ -107,6 +109,14 @@ class RunReceiptBinding(unittest.TestCase):
         source[next(iter(source))] = '0' * 64
         with self.assertRaisesRegex(AssertionError, 'source inventory'):
             self.check(overrides={'upstream-source-tree.json': source})
+
+    def test_joint_upstream_inventory_and_worker_digest_drift_fails(self):
+        source = json.loads((EVIDENCE / 'upstream-source-tree.json').read_text())
+        source['src/libprojectM/MilkdropPreset/VideoEcho.cpp'] = '0' * 64
+        workers = json.loads((EVIDENCE / 'workers.json').read_text())
+        workers['upstream']['source_tree_sha256'] = verifier.inventory_digest(source)
+        with self.assertRaisesRegex(AssertionError, 'frozen upstream source anchor'):
+            self.check(overrides={'upstream-source-tree.json': source, 'workers.json': workers})
 
     def test_frozen_worker_record_tamper_fails(self):
         workers = json.loads((EVIDENCE / 'workers.json').read_text())
@@ -286,6 +296,37 @@ class GuideRoleBinding(unittest.TestCase):
         changed = self.source + '\n![Wrong After](../../images/patches/audit/I17-4k-upstream.png)\n'
         with self.assertRaisesRegex(AssertionError, 'unbound audit image'):
             self.verify(changed)
+
+
+class FrozenCaptureAudio(unittest.TestCase):
+    def test_preserved_pcm_bytes_pass_both_workloads(self):
+        from frozen_protocol import frozen_pcm, FROZEN_PCM
+        for frames in (240, 480):
+            with self.subTest(frames=frames):
+                payload = frozen_pcm(EVIDENCE, frames)
+                self.assertEqual(verifier.sha(payload), FROZEN_PCM[frames])
+
+    def test_capture_rejects_altered_audio_before_either_worker(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            evidence = root / 'docs/superpowers/evidence/patch-visual-catalog/audio'
+            evidence.mkdir(parents=True)
+            data = bytearray((EVIDENCE / 'audio/frozen-240-frames.f32').read_bytes())
+            data[0] ^= 1
+            (evidence / 'frozen-240-frames.f32').write_bytes(data)
+            work = root / 'new-work'
+            result = subprocess.run([sys.executable, str(EVIDENCE / 'capture_host.py'),
+                                     '--repo', str(root), '--work', str(work), '--name', 'negative',
+                                     '--preset', str(root / 'unused.milk'), '--frames', '240'],
+                                    capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('frozen PCM bytes changed', result.stderr)
+            self.assertFalse(work.exists(), 'audio must reject before capture setup or worker launch')
+
+    def test_unsupported_frame_count_rejects(self):
+        from frozen_protocol import frozen_pcm
+        with self.assertRaisesRegex(ValueError, '240 or 480'):
+            frozen_pcm(EVIDENCE, 120)
 
 
 if __name__ == '__main__':

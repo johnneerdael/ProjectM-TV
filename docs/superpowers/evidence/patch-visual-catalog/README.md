@@ -52,7 +52,7 @@ python3 docs/superpowers/evidence/patch-visual-catalog/capture_host.py \
   --width 3840 --frames 240
 ```
 
-The original evidence uses the same algorithm; the portable adapter adds CLI arguments, refuses overwrite and checks the worker hash before/after capture. Python, compiler and package differences need new local worker/capture identities rather than reuse of these hashes.
+The adapter copies the committed 240/480-frame PCM, verifies its independent hash and byte length before worker setup, and checks it before/after each run. It rejects other frame counts rather than silently changing the waveform. It refuses overwrite and checks worker bytes before/after capture. New compilers/backends need their own worker/runtime identities while these PCM bytes remain fixed.
 
 Run the bounded artifact/document checks with Pillow available:
 
@@ -79,3 +79,5 @@ Benefit claims: 18 repair IDs do not mean 18 visual improvements. Source parity,
 Dimension binding: published PNG metadata must also equal its capture width/height. A same-area reshaping with unchanged flat RGB bytes and updated PNG metadata is rejected. Seventeen bounded custody controls pass; the published PNGs are unchanged.
 
 Complete guide/request binding: all104 original full job requests are retained and checked against the frozen controls, timing, inputs and identities. The verifier reads the actual23 HTML figures in the published guide source, validating each role label, image/link, selected-frame caption and matched crop rectangle. Wrong references, captions, controls, crop coordinates and brightness styles reject. No gallery image was rerendered or edited.
+
+Independent anchors: the upstream955-file source inventory is independently reconstructed from exact e98fca85/evaluator22fb0cfd and frozen8a15996e instrumentation, with no TV patches. The verifier pins that observed digest independently of workers.json. Committed PCM files have independent240/480-frame byte/hash anchors. Coordinated source-inventory/worker-digest drift and altered PCM before worker launch reject.

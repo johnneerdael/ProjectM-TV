@@ -19,6 +19,10 @@ PATCH = "0019-gamma-only-pass-epsilon.patch"
 # Frozen identities observed at execution, independent of mutable receipt labels.
 CATALOG_SOURCE_SHA256 = "5e48da2b8a47f160a1884a648cae19127d833e69f5b5f3c55ffb5c64eff66533"
 ENGINE_VIDEO_SHA256 = "56d7ab07f064c3addd5d71a6e7dac07d1d51f51f8af50bc02bf42379c106403b"
+# Established independently from all 80 preserved original result.json files,
+# then cross-checked against the decoded compressed corpus. Never derive this
+# expected value from the artifact under verification or its analysis output.
+TIMED_CORPUS_SHA256 = "2f5263bb1a3e52d4b434050ebc225d528f3b88fab6e906119b5a3c20157446a1"
 INPUTS_SHA256 = "d5afb472ed0801641c9f2c76919207918e417b0768b668f04537ed944e52f7d6"
 TIMED_WORKERS = {"with-0019": "6ed77578216c4774c00bb6eafdbe19605b87801f5289afeac9ce3ee1031f9693",
                  "without-0019": "25c13aae8b2c2b03903b3c6a510da091e993bc077c225343ea850d4c8866e4eb"}
@@ -204,6 +208,7 @@ def verify(root=ROOT, repo=REPO, *, data=None, visuals=True):
     else:
         with gzip.open(root / "timed-runs.json.gz", "rt") as stream:
             runs = json.load(stream)
+    assert digest(runs) == custody["timed_corpus_sha256"] == TIMED_CORPUS_SHA256, "frozen original timed corpus"
     assert schedule == schedule_recipe(), "balanced canonical case/profile/schedule"
     assert set(runs) == set(requests["requests"]) == {job["name"] for job in schedule}, "complete run/request set"
     assert custody["schema_version"] == requests["schema_version"] == 1

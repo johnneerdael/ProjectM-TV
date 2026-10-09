@@ -6,6 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 from guide_bindings import verify_guide
+from frozen_protocol import FROZEN_PCM, UPSTREAM_SOURCE_TREE_SHA256
 
 
 def sha(data):
@@ -103,6 +104,8 @@ def verify(repo):
     for role, worker in workers.items():
         source_tree = json.loads((evidence / f'{role}-source-tree.json').read_text())
         assert inventory_digest(source_tree) == worker['source_tree_sha256'], f'source inventory: {role}'
+        if role == 'upstream':
+            assert inventory_digest(source_tree) == UPSTREAM_SOURCE_TREE_SHA256, 'frozen upstream source anchor'
         assert texture_digest == worker['texture_inventory_sha256'], 'texture inventory mismatch'
         assert worker['evaluator_commit'] == '22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a'
         patches = [(p['filename'], p['sha256']) for p in worker['ordered_patches']]
@@ -122,6 +125,7 @@ def verify(repo):
         pcm_file = repo / capture['pcm_relative_path']
         assert pcm_file.is_file(), f'PCM file missing: {case}'
         assert sha(pcm_file.read_bytes()) == capture['pcm_sha256'], f'PCM bytes: {case}'
+        assert capture['frames'] in FROZEN_PCM and capture['pcm_sha256'] == FROZEN_PCM[capture['frames']], f'frozen PCM anchor: {case}'
         assert pcm_file.stat().st_size == capture['frames'] * 1470 * 4, f'PCM frame length: {case}'
         assert capture['texture_inventory_sha256'] == texture_digest, f'textures: {case}'
         assert set(capture['roles']) == set(canonical)

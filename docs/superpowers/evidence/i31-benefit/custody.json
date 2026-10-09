@@ -13,5 +13,7 @@
     "without-0019.cpp": "f00ec81945628e63f0db2eb84a10b78f660155e8a2555bfbe4ac8cf3d6f56b06",
     "0019.patch": "6f24dd462fdbcd5dbb50337703a731a4adb45218c4503650880e57dde0c2798a",
     "engine-base.cpp": "56d7ab07f064c3addd5d71a6e7dac07d1d51f51f8af50bc02bf42379c106403b"
-  }
+  },
+  "timed_corpus_sha256": "2f5263bb1a3e52d4b434050ebc225d528f3b88fab6e906119b5a3c20157446a1",
+  "timed_corpus_provenance": "Canonical SHA256 (sorted keys, compact JSON, allow_nan=false) established from all 80 independently preserved original runs/<schedule-name>/result.json files. Every original object exactly equals its decoded timed-runs.json.gz record. No timings or analysis were regenerated or edited."
 }

@@ -7,7 +7,7 @@ import shutil
 import tempfile
 import unittest
 
-from benchmark import digest
+from benchmark import analyze, digest
 from verify import ROOT, REPO, verify, verify_visual
 
 class CustodyTests(unittest.TestCase):
@@ -31,6 +31,27 @@ class CustodyTests(unittest.TestCase):
 
     def test_valid_frozen_batch_and_analysis(self):
         self.assertEqual(verify(data=self.data, visuals=False), 28800)
+
+    def change_timings_and_reanalyze(self):
+        for run in self.data["runs"].values():
+            if run["identity"]["role"] == "with-0019":
+                for sample in run["samples"]:
+                    if sample["measured"]:
+                        sample["gpu_ns"] = int(sample["gpu_ns"] * 0.9)
+                        sample["complete_ms"] *= 0.9
+                        sample["submit_ms"] *= 0.9
+        self.data["analysis.json"] = analyze(self.data["schedule.json"], self.data["runs"])
+
+    def test_correlated_timing_and_rederived_analysis_edit(self):
+        self.change_timings_and_reanalyze()
+        self.reject()
+
+    def test_correlated_timing_analysis_and_receipt_edit(self):
+        self.change_timings_and_reanalyze()
+        # Even coherently updating the adjacent receipt cannot replace the
+        # independently fixed expected corpus digest in the verifier.
+        self.data["custody.json"]["timed_corpus_sha256"] = digest(self.data["runs"])
+        self.reject()
 
     def test_wrong_profile(self):
         self.data["runs"][self.name]["config"]["feedback_detail"] = 0.0
