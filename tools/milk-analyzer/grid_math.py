@@ -38,7 +38,7 @@ def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False,allow_infinit
     return result
 
 
-def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC,work_policy='full-grid-v1',work=None):
+def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC,work_policy='full-grid-v1',work=None,sample_detail=None):
     if work_policy not in {'full-grid-v1','uniform-proof-v1'}:raise UnresolvedMath('unsupported shader work policy')
     if work is not None and not isinstance(work,dict):raise ValueError('shader work dictionary required')
     if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_MIX_FMA):raise UnresolvedMath('unsupported shader arithmetic profile')
@@ -255,10 +255,12 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if right.shape!=(int(needed.sum()),):raise UnresolvedMath('vector logical grid RHS not implemented')
                 raw[needed]=right.astype(bool)
         elif op=='sample':
-            if sample is None:raise UnresolvedMath('texture function not supplied: '+node.detail['sampler'])
-            if len(node.args)!=1 and not (len(node.args)==2 and node.detail.get('lod_effect')=='base level only'
-                    and node.detail.get('sampling_policy',{}).get('mipmapped') is False
-                    and node.detail.get('sampling_policy',{}).get('base_level')==0):
+            detail=node.detail if sample_detail is None else sample_detail(node.detail)
+            if not isinstance(detail,dict):raise ValueError('sample detail binding must return a dictionary')
+            if sample is None:raise UnresolvedMath('texture function not supplied: '+detail['sampler'])
+            if len(node.args)!=1 and not (len(node.args)==2 and detail.get('lod_effect')=='base level only'
+                    and detail.get('sampling_policy',{}).get('mipmapped') is False
+                    and detail.get('sampling_policy',{}).get('base_level')==0):
                 raise UnresolvedMath('texture grid overload not implemented')
             prior=nan_coordinates
             try:
@@ -269,13 +271,13 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if not np.all(np.isfinite(visit(argument,ctx))):raise UnresolvedMath('nonfinite texture argument')
             if np.any(np.isinf(coordinates)):raise UnresolvedMath('nonfinite texture coordinates')
             if np.any(np.isnan(coordinates)):
-                policy=node.detail.get('sampling_policy',{})
+                policy=detail.get('sampling_policy',{})
                 if coordinates.shape[-1]!=2 or type(policy.get('wrap')) is not bool:
                     raise UnresolvedMath('NaN sampler addressing policy unresolved')
                 # Observed Apple addressing, not a change to shader arithmetic.
                 coordinates=np.where(np.isnan(coordinates),0 if policy['wrap'] else 1,coordinates)
-            if on_sample is not None:on_sample(node.detail,coordinates.copy(),lanes.copy())
-            raw=np.asarray(sample(node.detail,coordinates))
+            if on_sample is not None:on_sample(detail,coordinates.copy(),lanes.copy())
+            raw=np.asarray(sample(detail,coordinates))
             _,shape=_layout(node.dtype)
             if raw.shape==shape:raw=np.broadcast_to(raw,(count,)+shape)
         elif op=='multiply' and node.detail.get('zero_guard') and not nan_coordinates and all(maskable_math(a,inputs) for a in node.args):
@@ -417,4 +419,4 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 work.update(work_counts,uniform_proof_nodes=uniform.nodes,
                             uniform_proof_budget_exceeded=uniform.budget_exceeded)
             uniform.release()
-        inputs=None;sample=None;on_sample=None
+        inputs=None;sample=None;on_sample=None;sample_detail=None

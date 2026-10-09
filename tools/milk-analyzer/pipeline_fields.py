@@ -6,6 +6,10 @@ external/procedural texture functions must be supplied faithfully. No native
 rendered frames are consumed. Discard/unsupported language remains unresolved.
 """
 from dataclasses import dataclass
+import copy
+import hashlib
+import json
+import pickle
 import numpy as np
 from shader_fields import ShaderFields,Field,uses_input_components
 from grid_math import evaluate_grid
@@ -53,14 +57,46 @@ class PipelineResult:
 
 class SourcePipeline:
     def _lower_stage(self,tree,name,frame_wrap):
-        model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
+        if frame_wrap is not None and not np.isfinite(frame_wrap):raise ValueError('finite frame wrap required')
+        key=None
+        if self.shader_lowering_policy=='cached-program-v1':
+            # Only the warp unit0 sampler consumes this threshold. Keep all
+            # other lowering inputs in the source key and retain one entry
+            # per stage; callers may edit their source/context between updates.
+            wrap=(None if frame_wrap is None else frame_wrap>.0001) if name=='warp' else None
+            context=[tree,name,wrap,self.warp_reads_blur,self.main_binding_policy,
+                self.known_uniforms,self.known_uniform_components,self.known_uniform_component_domains,
+                self.global_input_policies.get(name,'strict-v1'),
+                self.array_initializer_policies.get(name,'legacy-layout-v1'),
+                self.language_extensions.get(name,[]),self.native_samplers.get(name,{})]
+            try:
+                # JSON checks the supported finite data domain, but its key
+                # coercion conflates component index0 with string "0". Pickle
+                # preserves Python key/value types for this in-memory identity.
+                # These bytes are never saved or deserialized.
+                json.dumps(context,sort_keys=True,separators=(',',':'),allow_nan=False)
+                key=hashlib.sha256(pickle.dumps(context,protocol=5)).hexdigest()
+            except (ValueError,TypeError,RecursionError,pickle.PicklingError):
+                self._program_work['uncacheable_contexts']+=1;self._program_cache.pop(name,None)
+            saved=self._program_cache.get(name)
+            if key is not None and saved is not None and saved['key']==key:
+                self._program_work['hits']+=1
+                return saved['model'],saved['expression']
+        options=dict(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
                            main_binding_policy=self.main_binding_policy,known_uniforms=self.known_uniforms,known_uniform_components=self.known_uniform_components,
                            known_uniform_component_domains=self.known_uniform_component_domains,
                            global_input_policy=self.global_input_policies.get(name,'strict-v1'),
                            array_initializer_policy=self.array_initializer_policies.get(name,'legacy-layout-v1'))
-        expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
-                               native_samplers=self.native_samplers.get(name,{}))
+        lower_options=dict(language_extensions=self.language_extensions.get(name,[]),native_samplers=self.native_samplers.get(name,{}))
+        if key is not None:
+            # Literal values/domains must not retain externally mutable lists,
+            # including a detached context later replaced by an equal mapping.
+            options,lower_options=copy.deepcopy((options,lower_options))
+        model=ShaderFields(**options)
+        expression=model.lower(tree,**lower_options)
+        self._program_work['lowerings']+=1
         if not model.complete:raise UnresolvedMath('unsupported source shader: '+'; '.join(model.unknown))
+        if key is not None:self._program_cache[name]={'key':key,'model':model,'expression':expression}
         return model,expression
 
     def requires_warp_uv(self,*,frame_wrap,motion_state):
@@ -85,7 +121,10 @@ class SourcePipeline:
         return motion
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None,motion_map_policy=LEGACY_MOTION,source_engine=None,motion_uv_backend=None,shader_work_policy="full-grid-v1"):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None,motion_map_policy=LEGACY_MOTION,source_engine=None,motion_uv_backend=None,shader_work_policy="full-grid-v1",shader_lowering_policy='per-frame-v1'):
+        if shader_lowering_policy not in {'per-frame-v1','cached-program-v1'}:raise ValueError('unsupported shader lowering policy')
+        self.shader_lowering_policy=shader_lowering_policy
+        self._program_cache={};self._program_work={'lowerings':0,'hits':0,'uncacheable_contexts':0}
         if shader_work_policy not in {'full-grid-v1','uniform-proof-v1'}:raise ValueError('unsupported shader work policy')
         self.shader_work_policy=shader_work_policy
         if motion_map_policy not in {LEGACY_MOTION,CORE_2331_MOTION}:
@@ -370,6 +409,16 @@ class SourcePipeline:
         def stage(tree,name,main,blur,coordinates,polar,colour=None):
             nonlocal pending_motion_uv
             model,expression=self._lower_stage(tree,name,frame_wrap)
+            details={};detail_copy_memo={}
+            def bind_detail(detail):
+                # Memo per stage invocation preserves shared observer/sampler
+                # edits within an update without changing the static template.
+                if id(detail) not in details:
+                    bound=copy.deepcopy(detail,detail_copy_memo)
+                    if bound.get('frame') is not None:bound['frame']+=self.frame-model.frame
+                    details[id(detail)]=bound
+                return details[id(detail)]
+            detail_binding=bind_detail if self.shader_lowering_policy=='cached-program-v1' else None
             values={**uniforms,**stage_uniforms.get(name,{}),**lowlevel,'_uv':coordinates}
             if name=='warp' and diffuse is not None:values['_vDiffuse']=diffuse
             if colour is not None:values['_vDiffuse']=colour
@@ -389,11 +438,11 @@ class SourcePipeline:
                 return external_sample(detail,sample_uv)
             trace=None if on_sample is None else lambda detail,uv,lanes:on_sample(name,detail,uv,lanes)
             counters={}
-            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy,work=counters)
+            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy,work=counters,sample_detail=detail_binding)
             shader_work[name]=counters
             if name=='warp' and write_motion:
                 motion=self._motion_expression(model)
-                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy)
+                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy,sample_detail=detail_binding)
             return output
 
         warp_coordinates=np.concatenate((uv,original),axis=-1)
@@ -446,6 +495,8 @@ class SourcePipeline:
         history['motion_vector_source_frame']=motion_source_frame
         history['shader_work_policy']=self.shader_work_policy
         history['shader_work']=shader_work
+        history['shader_lowering_policy']=self.shader_lowering_policy
+        history['shader_program_work']={**self._program_work,'retained_stages':len(self._program_cache)}
         history['motion_map_policy']=self.motion_map_policy
         history['motion_uv_written']=write_motion
         history['motion_uv_contract']={

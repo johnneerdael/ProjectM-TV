@@ -96,6 +96,14 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 
 ## Codebase navigation and knowledge tools
 
+`SourcePipeline` has opt-in `shader_lowering_policy='cached-program-v1'`,
+forwarded from the forecast domain; default is `per-frame-v1`. Reuse only static
+lowered programs with complete tree/context/type identity, one entry per stage.
+Do not retain runtime tensors or loop state. Preserve update-specific sample
+history and per-invocation shared sampler-policy aliases before grid domain
+checks and callbacks. See `docs/superpowers/evidence/predictor-program-reuse/README.md`.
+Mixed short-forecast timings do not justify automatic corpus enablement.
+
 Experimental uniform final-expression reduction lives in
 `tools/milk-analyzer/uniform_source_descriptors.py` and `uniform_descriptors.py`.
 It is opt-in and not an automatic corpus route. Require selected final-stage,

@@ -70,6 +70,15 @@ shader policy evaluates spatially independent subexpressions once per update,
 while retaining spatial and texture-dependent work. It remains opt-in; it does
 not change the exported metric definitions.
 
+The separate `shader_lowering_policy: cached-program-v1` reuses static shader
+programs instead of lowering their source again each update. Runtime inputs,
+state and texture reads still execute; source/context changes rebuild the
+affected program. Texture-history metadata remains update-specific. The initial
+fixed100-source check matched172 contributing graphs across five updates and
+reduced lowering time by4×. Complete short forecasts had mixed timing results,
+so this remains opt-in and is not a claimed corpus speedup. See the
+[program-reuse evidence](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-effect-families/docs/superpowers/evidence/predictor-program-reuse/README.md).
+
 A separate uniform final-expression primitive can calculate colour and sampled
 flashing descriptors without constructing display frames. Its caller must prove
 that this is the selected complete final composite and supply matching inputs

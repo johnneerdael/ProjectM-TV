@@ -108,5 +108,9 @@ into static analysis. This additional work keeps the goal active.
 - [ ] Establish selected-stage/admission proofs and complete-preset speed evidence
   before replacing the full forecast. The zero-candidate census makes broader
   shared-work reuse and feedback/loop proofs higher priorities than this route.
+- [x] Add opt-in static shader-program reuse with complete context/type keys and
+  rebased sample-history metadata.20controls and independent review;172 exact
+  source graphs match across five updates. Lowering phase improves4×; short
+  whole-forecast times are mixed, so corpus defaults remain unchanged.
 - [ ] Add conservative no-flash/invariance bounds as separate evidence where
   whole-program/context proofs support them. Preserve uncertain cases.
