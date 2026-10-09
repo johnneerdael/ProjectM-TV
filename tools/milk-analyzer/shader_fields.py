@@ -268,7 +268,10 @@ class ShaderFields:
         if value.op=='uninitialized':
             return tuple(Field('uninitialized',dtype=base,detail={**value.detail,'component':i}) for i in range(count))
         if value.op=='select':
-            yes=self.parts(value.args[1]);no=self.parts(value.args[2])
+            # HLSL promotes a scalar branch to the declared vector result.
+            # Split the promoted branches, otherwise zip silently drops lanes.
+            yes=self.parts(self.coerce(value.args[1],value.dtype))
+            no=self.parts(self.coerce(value.args[2],value.dtype))
             return tuple(Field('select',(value.args[0],y,n),base) for y,n in zip(yes,no))
         if re.fullmatch(r'float[2-4]',value.dtype) and value.op in ELEMENTWISE|{'add','subtract','multiply','divide','remainder','unary'}:
             arguments=[self.parts(arg) for arg in value.args]
