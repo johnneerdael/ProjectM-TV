@@ -184,6 +184,11 @@ private :native-render-time-f32, before shader-time wrapping. Preserve numeric
 binding precedence/local shadows and clock_kinds_rgb; only actual wrapped-clock
 reads get10000-second wrap metadata. Formula rates are nominal, not CPU/GPU-bit
 identity, visible flash frequency or calibrated mood/colour confidence.
+`source_hue.py` emits native composite hue recipes (generatorcode10, separate
+from familycodes) only for consumed _vDiffuseRGB. Preserve per-corner max
+normalization, unknown preset random phases, vertex-position blend followed by
+triangle interpolation, red-only usage and alpha/dead/warp exclusions. Nominal
+[2/3,1]input bounds are not a final palette or exact per-fragment bilinear claim.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

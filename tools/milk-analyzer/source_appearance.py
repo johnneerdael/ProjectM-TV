@@ -400,6 +400,7 @@ def appearance_from_analysis(analysis):
     from source_feedback import feedback_transfer
     from source_colour_processing import colour_processing
     from source_colour_mix import texture_colour_transfer
+    from source_hue import composite_hue_recipe
     elements={}
     for family in analysis.families:
         identity=family['component'] or ('mesh_warp' if family['stage']=='mesh_warp' else 'shader_'+family['stage'])
@@ -423,6 +424,10 @@ def appearance_from_analysis(analysis):
         element=elements.setdefault(identity,{'id':identity,'stage':stage,'family_codes':[],'mechanisms':[],
             'parameters':{},'colour':None,'audio_routes':[],'approximate_screen_coverage':None,'conditions':[],'evidence':[]})
         element['colour']=_colour(field)
+        if stage=='composite':
+            hue=composite_hue_recipe(field)
+            if hue is not None:
+                element['native_colour_generators']=[hue]
         for channel,value in zip('rgb',_parts(_data_return(field))[:3]):element['audio_routes']+=_routes('colour_'+channel,'encoded RGB component',value,analysis)
     for identity,controls in getattr(analysis,'component_controls',{}).items():
         if identity not in elements:continue #later composite disconnected this drawing

@@ -750,3 +750,41 @@ milkdropfs.cpp3975–3994 supply the same roaming rates, offsets and functions.
 The target's uniform binding/dataflow policy stays authoritative. Single-
 oscillator channel recognition remains limited: combined oscillators, texture
 masks and nonlinear final colour may still leave a palette description unknown.
+
+## Native composite hue recipe
+
+A composite element that consumes _vDiffuse RGB (including the hue_shader macro)
+may include `native_colour_generators`. Generator code10, policy
+`source31-native-composite-hue-v1`, describes the engine's four-corner colour
+recipe; this is a separate generator dictionary, not familycode10. Only actual
+consumed RGB lanes are listed. Alpha-only, source-dead and warp-decay uses do not
+create this record. A red-only grayscale return therefore does not acquire a
+guaranteed multicolour scene.
+
+For corner i and channel c, raw colour is
+`bias_c + amplitude_c*sin(time*30*rate_constant_c + base_phase_c +
+i*corner_step_c + preset_random_phase[index_c])`. Exported coefficients retain
+float32 constants and the native operation order. Each corner normalizes its
+channels using `.5+.5*(raw_channel/max(raw_rgb))`. Channels are coupled by this
+maximum, so they are not independent output sinusoids. Preset random phases are
+explicitly unknown, with preset-instance lifetime; no values are guessed.
+
+The nominal native input RGB range is[2/3,1] per channel, subject to finite valid
+phase inputs and excluding CPU/transcendental/interpolation error. At mesh
+vertices, weights are xy,(1-x)y,x(1-y),(1-x)(1-y), with
+x=vertex_position.x*.5+.5,y=vertex_position.y*.5+.5. GPU triangle interpolation
+then determines fragment colour. This is not exact per-fragment bilinear
+evaluation, and shader texture UV is not substituted for mesh position.
+
+`actual_palette` staysnull, `final_multicolour_guaranteed=false` and
+`observed_runtime_binding=false`. Later powers, permutations, masks, sampled
+colours and feedback can make the final scene darker, monochrome, vivid or partly
+hidden. No brightness, warm/cold preference, flash or dominance classification
+follows solely from this recipe. Clock/context and grid/projection obligations
+remain explicit. This record helps reconstruct a source colour ingredient, not
+a complete final image.
+
+Source31 FinalComposite.cpp328–375, PresetState.cpp25–28 and
+PresetCompVertexShaderGlsl330.vert establish generation, random lifetime and
+interpolation. Original MilkDrop2.25c milkdropfs.cpp4408–4450 uses the same
+corner-generation/max-normalization construction.

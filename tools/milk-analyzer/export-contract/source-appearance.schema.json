@@ -1084,6 +1084,72 @@
                     }
                   }
                 }
+              },
+              "native_colour_generators": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "policy",
+                    "generator_code",
+                    "consumed_rgb_components",
+                    "raw_corner",
+                    "normalization",
+                    "corner_count",
+                    "corner_weights",
+                    "spatial_interpolation",
+                    "fragment_bilinear_evaluation_is_exact",
+                    "random_phase_values",
+                    "nominal_input_range_rgb",
+                    "actual_palette",
+                    "final_multicolour_guaranteed",
+                    "observed_runtime_binding",
+                    "conditions"
+                  ],
+                  "properties": {
+                    "policy": {
+                      "const": "source31-native-composite-hue-v1"
+                    },
+                    "generator_code": {
+                      "const": 10
+                    },
+                    "consumed_rgb_components": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 3,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2
+                      }
+                    },
+                    "corner_count": {
+                      "const": 4
+                    },
+                    "fragment_bilinear_evaluation_is_exact": {
+                      "const": false
+                    },
+                    "random_phase_values": {
+                      "type": "null"
+                    },
+                    "actual_palette": {
+                      "type": "null"
+                    },
+                    "final_multicolour_guaranteed": {
+                      "const": false
+                    },
+                    "observed_runtime_binding": {
+                      "const": false
+                    },
+                    "conditions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
             }
           }

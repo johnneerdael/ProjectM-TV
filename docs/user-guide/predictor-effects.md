@@ -186,6 +186,11 @@ separate from wrapped shader time. These can explain modulation without
 simulation, though combined final colour programs may still lack a complete
 palette-cycle or flash description.
 
+Presets that consume the native hue input now describe its four time-driven
+corner colours, shared-channel normalization and mesh interpolation. Random
+phases remain explicit inputs. This adds a colour ingredient to the mental map
+without claiming the shader's final palette; red-only use can still be grayscale.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain
