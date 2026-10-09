@@ -1,0 +1,9 @@
+{
+  "query": "hw.cachelinesize",
+  "return_code": -1,
+  "errno": 1,
+  "value": 0,
+  "interpretation": "EPERM denies cache-size query; installed emulator falls back to unsupported CTR_EL0 instruction before guest startup",
+  "aar_runtime_tested": false,
+  "sdk_modified": false
+}

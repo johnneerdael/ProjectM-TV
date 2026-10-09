@@ -1,0 +1,36 @@
+
+/Users/jneerdael/Library/Android/sdk/emulator/qemu/darwin-aarch64/qemu-system-aarch64-headless:	file format mach-o arm64
+
+Disassembly of section __TEXT,__text:
+
+0000000100465bac <_init_cache_info>:
+100465bac: d10083ff    	sub	sp, sp, #0x20
+100465bb0: a9017bfd    	stp	x29, x30, [sp, #0x10]
+100465bb4: 910043fd    	add	x29, sp, #0x10
+100465bb8: 52800108    	mov	w8, #0x8                ; =8
+100465bbc: f90003e8    	str	x8, [sp]
+100465bc0: 90009aa0    	adrp	x0, 0x1017b9000 <__ZN8crashpad12_GLOBAL__N_119kCompletedDirectoryE+0x57a0d>
+100465bc4: 912c7800    	add	x0, x0, #0xb1e
+100465bc8: 910023e1    	add	x1, sp, #0x8
+100465bcc: 910003e2    	mov	x2, sp
+100465bd0: d2800003    	mov	x3, #0x0                ; =0
+100465bd4: d2800004    	mov	x4, #0x0                ; =0
+100465bd8: 944aef75    	bl	0x1017219ac <dyld_stub_binder+0x1017219ac>
+100465bdc: 34000100    	cbz	w0, 0x100465bfc <_init_cache_info+0x50>
+100465be0: d53b0029    	mrs	x9, CTR_EL0
+100465be4: 12000d28    	and	w8, w9, #0xf
+100465be8: 5280008a    	mov	w10, #0x4               ; =4
+100465bec: 1ac82148    	lsl	w8, w10, w8
+100465bf0: 53104d29    	ubfx	w9, w9, #16, #4
+100465bf4: 1ac92149    	lsl	w9, w10, w9
+100465bf8: 14000004    	b	0x100465c08 <_init_cache_info+0x5c>
+100465bfc: b9400be8    	ldr	w8, [sp, #0x8]
+100465c00: aa0803e9    	mov	x9, x8
+100465c04: 34fffee8    	cbz	w8, 0x100465be0 <_init_cache_info+0x34>
+100465c08: d000cf4a    	adrp	x10, 0x101e4f000 <_prom_envs+0x2f8>
+100465c0c: b9094548    	str	w8, [x10, #0x944]
+100465c10: d000cf48    	adrp	x8, 0x101e4f000 <_prom_envs+0x2f8>
+100465c14: b9094909    	str	w9, [x8, #0x948]
+100465c18: a9417bfd    	ldp	x29, x30, [sp, #0x10]
+100465c1c: 910083ff    	add	sp, sp, #0x20
+100465c20: d65f03c0    	ret

@@ -92,3 +92,22 @@ retried, and shared devices were not operated. Upstream
 [QEMU cache detection](https://raw.githubusercontent.com/qemu/qemu/master/util/cacheflush.c)
 uses a separate Darwin path because Apple does not expose CTR_EL0; that context
 does not by itself prove the exact SDK build defect or authorize binary changes.
+
+## Confirmed bootstrap failure path
+
+Bounded disassembly of the installed ARM64 executable now identifies the
+failure path. `_init_cache_info` first makes its cache-size query; a failed query
+or zero size branches to address0x100465be0, instruction0xd53b0029:
+`mrs x9, CTR_EL0`. That is the exact instruction recorded in the crash.
+A read-only `sysctlbyname("hw.cachelinesize")` check in this execution
+environment returns-1/errno1(EPERM). Thus the denied host query selects the
+unsupported fallback before Android or the AAR runs.
+
+`cache-query.json`, `init-cache-info.asm.txt` and
+`emulator-binary-identity.json` bind that evidence. The SDK, host permissions,
+running shared emulator and devices remain unchanged. No replacement emulator
+binary was found in the bounded local artifact search. Finish the prepared
+controls in an execution environment where the host query succeeds or with a
+vendor emulator that handles its failure safely; do not repeat the same launch.
+This is a host/tooling restriction and fallback defect, not a ProjectM-TV AAR
+bug report. Source-only work can continue while that runtime gate is pending.

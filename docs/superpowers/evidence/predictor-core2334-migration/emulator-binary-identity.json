@@ -1,0 +1,6 @@
+{
+  "path": "/Users/jneerdael/Library/Android/sdk/emulator/qemu/darwin-aarch64/qemu-system-aarch64-headless",
+  "sha256": "ff5a697873a495b59f1676fd757c3c81dfb76aacaa3e11c02b004635b5fadc6b",
+  "disassembly_sha256": "ec259a4dd3e17045db54a600cdad292ca04a24d047c4a8c50917b351c57b2a2e",
+  "scope": "Read-only bounded host initialization disassembly; no SDK modifications"
+}
