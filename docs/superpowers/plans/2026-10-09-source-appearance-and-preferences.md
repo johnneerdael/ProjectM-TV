@@ -214,3 +214,10 @@ share composition gate and keep dynamic/unsupported cases open. Preserve valid
 data alongside nonfinite control narrowing and uninvestigated extended storage.
 Measure the fixed100 and verify against source/known controls before claiming
 shape, coverage or whole-preset accuracy.
+
+## Literal vector colour projection correction
+
+Resolve source constant RGB through typed vector members without crossing input/
+sample uncertainty or discarding int conversions. Preserve nested swizzles,
+local shadows, deadlanes and bounded recursion. Measure raw-colour coverage and
+retention on the same100, keeping finalpalette/mood validation separate.

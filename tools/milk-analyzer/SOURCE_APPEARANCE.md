@@ -838,3 +838,18 @@ References: source31 Waveform.cpp90–110/246–295, WaveformMode.hpp, Waveforms
 and mode-specific GenerateVertices bodies. These are patched TV source rules,
 including16modes and authored-reference sample limits; original MilkDrop2's
 legacy wave math remains a separate reference.
+
+## Literal vector component projection
+
+Source constant folding now follows supported single-component vector members
+through constructors, typed conversions and literal arithmetic. Nested swizzles
+retain their declared channel order; int-vector truncation remains before float
+output. Input/sample vectors, unsupported projections, nonfinite results and
+exhausted recursion budgets stay unknown. A discarded fourth lane does not
+prevent literal RGB from resolving. This corrects raw-colour extraction, not
+shader execution or final palette/visibility certification.
+
+For example, a local float4(.2,.3,.4,.5).rgb can expose its declared RGB values
+even when shadowing a native uniform name. Lexical lowering already preserved
+that source value; the former opaque colour was a descriptor-folding gap. Source/
+target/context conditions and downstream shading/storage still apply.

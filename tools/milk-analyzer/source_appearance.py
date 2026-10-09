@@ -203,6 +203,17 @@ def _phase_literal(value,depth=0,*,_memo=None):
 def _phase_literal_uncached(value,depth,memo):
     if value.op=='constant' and type(value.detail.get('value')) in {int,float}:
         result=float(value.detail['value'])
+    elif value.op=='member' and value.detail.get('swizzle') and len(value.detail.get('field',''))==1:
+        from effect_families import _parts
+        from field_math import SWIZZLE
+        value=_canonical_lane(value);parent=value.args[0];lane=SWIZZLE[value.detail['field']]
+        if parent.op=='input' or parent.op=='sample':return None
+        parts=_parts(parent)
+        if lane>=len(parts):return None
+        projected=parts[lane]
+        if projected.op=='member' and projected.args and projected.args[0] is parent:return None
+        result=_phase_literal(projected,depth+1,_memo=memo)
+        if result is None:return None
     elif value.op in {'cast','narrow','construct','unary','negate'} and len(value.args)==1:
         result=_phase_literal(value.args[0],depth+1,_memo=memo)
         if result is None:return None

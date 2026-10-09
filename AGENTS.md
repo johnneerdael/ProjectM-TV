@@ -195,6 +195,10 @@ source_composition: wave_a=0 cannot exclude mode3 or dynamicmode because native
 mode3replacesalpha with treble²/reference scaling. Keep input channels distinct
 from stems, waveform data/context/visibility unknown and extended mode9 secondary
 storage behaviour open. Nonfinite narrowing must preserve other descriptor data.
+Source appearance literal folding supports typed single-lane projections of
+constructors/arithmetic/nested swizzles; preserve integer conversion/channel
+order, input/sample unknowns, nonfinite/depth guards and discarded-lane demand.
+This improves raw source colour extraction, not final palette certification.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.
