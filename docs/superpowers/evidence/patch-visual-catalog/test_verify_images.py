@@ -14,7 +14,8 @@ spec.loader.exec_module(verifier)
 
 
 class RunReceiptBinding(unittest.TestCase):
-    def check(self, change=None):
+    def check(self, change=None, overrides=None):
+        overrides = overrides or {}
         runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
         if change:
             change(runs)
@@ -23,7 +24,19 @@ class RunReceiptBinding(unittest.TestCase):
             evidence = root / 'docs/superpowers/evidence/patch-visual-catalog'
             evidence.mkdir(parents=True)
             for path in EVIDENCE.iterdir():
-                if path.name != 'run-manifests.json':
+                if path.name == 'run-manifests.json':
+                    continue
+                if path.name in overrides:
+                    (evidence / path.name).write_text(json.dumps(overrides[path.name]))
+                elif path.name == 'captures' and any(name.startswith('captures/') for name in overrides):
+                    (evidence / 'captures').mkdir()
+                    for child in path.iterdir():
+                        key = 'captures/' + child.name
+                        if key in overrides:
+                            (evidence / key).write_text(json.dumps(overrides[key]))
+                        else:
+                            (evidence / key).symlink_to(child)
+                else:
                     (evidence / path.name).symlink_to(path, target_is_directory=path.is_dir())
             (evidence / 'run-manifests.json').write_text(json.dumps(runs))
             assets = root / 'docs/user-guide/images/patches'
@@ -58,6 +71,33 @@ class RunReceiptBinding(unittest.TestCase):
     def test_wrong_audio_hash_fails(self):
         with self.assertRaisesRegex(AssertionError, 'I16'):
             self.check(lambda runs: runs['I16'][0]['inputs'].update(pcm_sha256='0' * 64))
+
+    def test_texture_inventory_tamper_fails(self):
+        textures = json.loads((EVIDENCE / 'textures.json').read_text())
+        textures[next(iter(textures))] = '0' * 64
+        with self.assertRaisesRegex(AssertionError, 'texture inventory mismatch'):
+            self.check(overrides={'textures.json': textures})
+
+    def test_source_inventory_tamper_fails(self):
+        source = json.loads((EVIDENCE / 'upstream-source-tree.json').read_text())
+        source[next(iter(source))] = '0' * 64
+        with self.assertRaisesRegex(AssertionError, 'source inventory'):
+            self.check(overrides={'upstream-source-tree.json': source})
+
+    def test_frozen_worker_record_tamper_fails(self):
+        workers = json.loads((EVIDENCE / 'workers.json').read_text())
+        workers['upstream']['worker_sha256'] = '0' * 64
+        with self.assertRaisesRegex(AssertionError, 'canonical worker'):
+            self.check(overrides={'workers.json': workers})
+
+    def test_joint_capture_and_run_worker_drift_fails(self):
+        capture = json.loads((EVIDENCE / 'captures/I16.json').read_text())
+        capture['roles']['upstream']['identity']['worker_sha256'] = '0' * 64
+        def drift(runs):
+            for record in runs['I16'][:2]:
+                record['manifest']['identity']['worker_sha256'] = '0' * 64
+        with self.assertRaisesRegex(AssertionError, 'canonical worker'):
+            self.check(drift, {'captures/I16.json': capture})
 
 
 if __name__ == '__main__':

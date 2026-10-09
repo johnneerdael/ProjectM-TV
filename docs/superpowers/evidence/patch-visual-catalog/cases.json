@@ -6,7 +6,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I05-control",
@@ -15,7 +16,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 1280,
     "height": 720,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I06",
@@ -24,7 +26,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I06-control",
@@ -33,7 +36,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 1280,
     "height": 720,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I08",
@@ -42,7 +46,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I08-4k",
@@ -51,7 +56,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 3840,
     "height": 2160,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I09",
@@ -60,7 +66,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I10",
@@ -69,7 +76,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I11",
@@ -78,7 +86,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I12",
@@ -87,7 +96,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I13",
@@ -96,7 +106,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I16",
@@ -105,7 +116,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 1280,
     "height": 720,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I17",
@@ -114,7 +126,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I17-4k",
@@ -123,7 +136,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 3840,
     "height": 2160,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I18",
@@ -132,7 +146,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I19",
@@ -141,7 +156,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I19-4k",
@@ -150,7 +166,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 3840,
     "height": 2160,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I20",
@@ -159,7 +176,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I22",
@@ -168,7 +186,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I22-4k",
@@ -177,7 +196,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 3840,
     "height": 2160,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I22-control",
@@ -186,7 +206,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 1280,
     "height": 720,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I24",
@@ -195,7 +216,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I24-control",
@@ -204,7 +226,8 @@
     "pcm_sha256": "3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad",
     "width": 1280,
     "height": 720,
-    "frames": 240
+    "frames": 240,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I29",
@@ -213,7 +236,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "I31",
@@ -222,7 +246,8 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   },
   {
     "name": "M02",
@@ -231,6 +256,7 @@
     "pcm_sha256": "46e958627945f0f44683fc6223876636c46a3de7ec128328e8f705982254b1fd",
     "width": 1280,
     "height": 720,
-    "frames": 480
+    "frames": 480,
+    "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68"
   }
 ]

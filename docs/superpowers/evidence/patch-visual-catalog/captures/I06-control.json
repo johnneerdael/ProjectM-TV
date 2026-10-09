@@ -568,5 +568,7 @@
       "mae": 0.13762080439814814,
       "changed_pixels": 2574
     }
-  }
+  },
+  "texture_inventory_sha256": "d4f10614d7ba11233fc20eb2c0a823aedb89f85b979dbff6893abb3724a1be68",
+  "texture_inventory_provenance": "retained post-batch inventory; matches fresh frozen8a15996e checkout; not a retroactive per-run filesystem observation"
 }

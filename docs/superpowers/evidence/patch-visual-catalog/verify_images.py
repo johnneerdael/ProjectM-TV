@@ -11,6 +11,11 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def inventory_digest(value):
+    return sha(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                          ensure_ascii=False, allow_nan=False).encode('utf-8'))
+
+
 def verify(repo):
     evidence = repo / 'docs/superpowers/evidence/patch-visual-catalog'
     images = json.loads((evidence / 'images.json').read_text())
@@ -43,6 +48,21 @@ def verify(repo):
         cases.add(info['case'])
     runs = json.loads((evidence / 'run-manifests.json').read_text())
     captures = {p.stem: json.loads(p.read_text()) for p in (evidence / 'captures').glob('*.json')}
+    workers = json.loads((evidence / 'workers.json').read_text())
+    textures = json.loads((evidence / 'textures.json').read_text())
+    texture_digest = inventory_digest(textures)
+    assert set(workers) == {'upstream', 'patched'}
+    canonical = {}
+    supplementary = {'source_tree_sha256', 'texture_inventory_sha256',
+                     'evaluator_commit', 'ordered_patches'}
+    for role, worker in workers.items():
+        source_tree = json.loads((evidence / f'{role}-source-tree.json').read_text())
+        assert inventory_digest(source_tree) == worker['source_tree_sha256'], f'source inventory: {role}'
+        assert texture_digest == worker['texture_inventory_sha256'], 'texture inventory mismatch'
+        assert worker['evaluator_commit'] == '22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a'
+        patches = [(p['filename'], p['sha256']) for p in worker['ordered_patches']]
+        assert inventory_digest(patches) == worker['engine']['patches_sha256'], f'patch inventory: {role}'
+        canonical[role] = {key: value for key, value in worker.items() if key not in supplementary}
     inputs = json.loads((evidence / 'cases.json').read_text())
     indexed = {entry['name']: entry for entry in inputs}
     assert len(indexed) == len(inputs) == 26
@@ -51,6 +71,10 @@ def verify(repo):
         capture = captures[case]
         assert capture['name'] == case
         assert all(capture[key] == value for key, value in indexed[case].items()), case
+        assert capture['texture_inventory_sha256'] == texture_digest, f'textures: {case}'
+        assert set(capture['roles']) == set(canonical)
+        for role in canonical:
+            assert capture['roles'][role]['identity'] == canonical[role], f'canonical worker: {case}/{role}'
         observed = set()
         for record in records:
             manifest = record['manifest']
@@ -62,7 +86,8 @@ def verify(repo):
             assert (manifest['width'], manifest['height']) == (capture['width'], capture['height']), case
             assert manifest['fps'] == 30 and manifest['seed'] == capture['seed'] == 12345
             assert manifest['identity'] == capture['roles'][role]['identity'], f'worker mismatch: {case}/{role}'
-            assert record['inputs'] == {key: capture[key] for key in ('preset_sha256', 'pcm_sha256')}, case
+            assert record['inputs'] == {key: capture[key] for key in
+                                       ('preset_sha256', 'pcm_sha256', 'texture_inventory_sha256')}, case
             assert manifest['status'] == 'success' and manifest['gl_error_frames'] == 0
             assert manifest['gl_renderer'] == 'Apple M4 Pro'
         assert observed == {(role, repeat) for role in ('upstream', 'patched') for repeat in (0, 1)}, case
