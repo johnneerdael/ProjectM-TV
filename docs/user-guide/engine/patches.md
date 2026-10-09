@@ -1,6 +1,6 @@
 # Patch catalog
 
-ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **15 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
+ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **33 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
 
 Most patches are about **MilkDrop 2 authenticity**. projectM is a clean-room reimplementation of MilkDrop on OpenGL, and over the years small differences crept in: in how equation code is accepted, how HLSL becomes GLSL, where Direct3D 9 and OpenGL put pixel centres, and which per-frame variables are actually read. Each entry below names what projectM did differently, what MilkDrop 2 does (citing its released source where we checked it), what the patch changes, and the preset that shows it.
 
@@ -28,13 +28,24 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0013](#0013-composite-reads-the-exact-feedback-texel) | Exact texel reads in custom composites | `DemonLD_-_Toxic_water_diffusion …` |
 | [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
 | [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) | CPU-defined negative nested powers beyond authored exponent one | synthetic nested-unit, square and cube controls |
-| [0016](#0016-built-in-wave-opacity) | Mode opacity, volume amplification and faint-wave threshold | `Happening.milk`, source controls and repeated Native 4K captures |
-| [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | `Mig_304 - geiss remix 2.milk`, input controls and repeated Native4K captures |
-| [0018](#0018-discrete-custom-dots) | Authored custom dot counts; finite single-dot programs | source controls; Native4K acceptance pending |
-| [0019](#0019-gamma-only-pass-count) | Original gamma-only epsilon; echo unchanged | boundary controls; Native4K acceptance pending |
-| [0020](#0020-named-eel-constants) | Original double decimal precision of named constants | scalar controls; synthetic4K proof pending |
-| [0021](#0021-original-equation-inputs) | Inverse per-pixel aspect; fresh wave-point host input snapshot | source controls; Native4K acceptance pending |
-| [0022](#0022-negative-odd-echo-orientation) | Horizontal flip for signed negative odd echo | known-edge source controls;4K pending |
+| [0016](#0016-cached-static-warp-uploads) | Retain the static mesh until size/aspect/producer changes | `cache controls` |
+| [0017](#0017-built-in-wave-opacity) | Original mode alpha and volume amplification | `Happening.milk` |
+| [0018](#0018-custom-wave-input-windows) | Centered and separated valid audio windows | `Mig_304 - geiss remix 2.milk` |
+| [0019](#0019-gamma-only-pass-count) | Separate original gamma-only epsilon | `boundary controls` |
+| [0020](#0020-named-eel-constants) | Original double decimal inputs | `finite controls` |
+| [0021](#0021-original-equation-inputs) | Inverse aspect and fresh wave-point inputs | `source/original controls` |
+| [0022](#0022-negative-odd-echo-orientation) | Signed nonzero horizontal flip | `known-edge controls` |
+| [0023](#0023-legacy-oscillator-y) | Original physical Y in built-in warp deformation | `original/finite/custom controls` |
+| [0024](#0024-legacy-mesh-diagonal) | Original physical triangle diagonal | `mesh/cache controls` |
+| [0025](#0025-legacy-per-pixel-traversal) | Original physical row evaluation order | `stateful equation controls` |
+| [0026](#0026-legacy-angle-seam) | Original signed-zero negative-X seam | `actual CPU/GPU controls` |
+| [0027](#0027-wave-colour-clamp) | Clamp local RGB before nonzero brightening | `palette controls` |
+| [0028](#0028-border-fan-topology) | Original border strip-fan coverage | `finite/original controls` |
+| [0029](#0029-original-line-sample-caps) | Reference-width cap on original line budgets | `Royal - Mashup (103)` |
+| [0030](#0030-discrete-custom-dots) | Authored dots without interpolated midpoints | `mosaic mitosis; finite dots` |
+| [0031](#0031-circle-spacing-and-closure) | Original angular spacing and closure before smoothing | `Royal - Mashup (137)/(11)` |
+| [0032](#0032-live-shape-thickness) | Evaluated style captured per instance and replay | `city lights v2 witnesses` |
+| [0033](#0033-latest-previous-motion-field) | Refresh actual warp UV while vectors are hidden | `default/custom feedback fixtures` |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -212,35 +223,79 @@ These separate proof images use full published v2.3.25 and candidate AARs at 256
 
 The exact **Great Tulip Majesty (txtr wrap)** witness has 33 fractional-domain NaNs per frame in both the original CPU expression and GPU path. Its30-frame original/repeat AAR replay is byte-identical after this correction. NaN/Inf are retained, with no epsilon or absolute-value substitution. Invalid interpolation and sampling observations are backend-bound, so the source predictor's unresolved guard remains appropriate. [Source, IEEE bits and capture evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md).
 
-## 0016 — Built-in wave opacity
+## 0016 — Cached static warp uploads
 
-MilkDrop multiplies the mode-adjusted alpha by an unbounded volume ramp, then clamps the result. Mode 3 replaces its starting alpha with the canvas coefficient times `1.3 × treb²`; mode 1 retains its `1.25` multiplier. ProjectM TV now preserves these operations and skips built-in waves below final alpha `0.004`, including the Native quad path. Existing reference-size buckets, above-reference line/dot sizing and Native geometry replay remain in use. A matched mode-2 control changes alpha from `0.4` to `0.028`. Repeated Native Standard 4K captures confirm the effect on `Happening.milk`, with no observed slowdown in that witness. See the [audit evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
+Static warp coordinates, radius/angle and topology are uploaded only when their size, aspect or producer changes. Dynamic attributes and equations still update each frame. This preserves the released mesh-cache fix and prepared replay; see the [cache evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/mesh-init-cache/README.md).
 
-## 0017 — Custom wave input windows
+## 0017 — Built-in wave opacity
 
-MilkDrop centers a custom oscilloscope’s requested window and shifts its two channels in opposite directions by `sep/2`. ProjectM’s prefix sampling ignored those offsets. ProjectM TV now restores the offsets when both complete windows fit the 480-sample input. Oversized requests retain upstream resampling; invalid original offsets retain the safe prefix fallback. Spectrum sampling, point counts, smoothing and Native prepared replay remain unchanged. The finite two-point ramp control changes the first input from 0 to `239/480 × .004`, and passes with signed separation and safe-bound controls. Repeated Native Standard4K captures confirm the separated-channel loop effect in Mig304, with no consistent slowdown in the measured witness. See [I08](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
+MilkDrop multiplies mode-adjusted alpha by the volume ramp before clamping. Mode3 replaces its starting alpha with the canvas coefficient times 1.3 × treb²; mode1 retains its 1.25 multiplier. Final alpha below .004 skips the draw. Existing Native/reference styles remain. [I17 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
 
-The separate I19 source sample-cap proposal is preserved with real 4K before/expected captures, outside the shipping patch series. Brightness relative to the previous 4K output alone does not prove fidelity loss; matched authored and resolution-band comparisons remain in progress in [I19](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
+## 0018 — Custom wave input windows
 
-## 0018 — Discrete custom dots
-
-Custom dots retain their authored point/color count, following MilkDrop’s distinction between points and smoothed lines. The old library inserted smoothing midpoints into point waves. A finite two-point control now submits two points in both authored and Native draws; ordinary lines retain their smoothing. One-dot programs may emit finite positions/colors while the undefined normalized sample input remains NaN. Invalid appearance derived from that NaN is not promised. Source controls and40 normal renderer checks pass; Native4K acceptance remains pending in [I22](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I22/README.md).
+Valid custom oscilloscope windows are centered in the480-sample input and the channels shift in opposite directions by sep/2. Invalid original windows retain the safe prefix fallback; oversized requests retain resampling. Spectrum inputs and Native prepared replay remain. [I08 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
 
 ## 0019 — Gamma-only pass count
 
-MilkDrop’s gamma-only output uses a `.001` epsilon, while echo redraws use `.0001`. Candidate0019 restores that distinction and can remove one redundant fullscreen pass near integer gamma. Per-pass weight/count controls and42 normal renderer checks pass; actual Native4K output may remain visually identical. Float diffuse precision and echo/tint behavior remain unchanged. [I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
+Gamma-only output uses the original .001 pass-count epsilon; echo redraws retain .0001. Float diffuse precision, live tint and echo policies remain. [I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
 
 ## 0020 — Named EEL constants
 
-The original named pi/e/phi decimal expansions now enter the double evaluator without intermediate float rounding. Both lexer source and the checked-in scanner are updated; e/phi retain the original abbreviated decimals. Later geometry/shader casts, RNG and lone-dot handling remain unchanged. No stock named-constant reference was found; a synthetic4K diagnostic is pending. [I09 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
+Named pi/e/phi decimals enter the double evaluator without intermediate float rounding. The original abbreviated e/phi decimals, later geometry/shader casts and RNG remain. [I09 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
 
 ## 0021 — Original equation inputs
 
-Per-pixel equations receive inverse aspect factors, matching the original input contract while keeping the TV shader canvas. Custom-wave points receive fresh wave-frame time/audio inputs before wave-frame code; main-equation writes remain local to that main context. Q/T propagation and Native one-evaluation replay are preserved. Source controls and45 normal checks pass; Native4K qualification is pending in [I05](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I05/README.md) and [I06](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I06/README.md).
+Per-pixel equations receive inverse aspect factors. Custom-wave points receive a fresh host-input snapshot before wave-frame code, then Q/T propagate normally. Main equation writes remain local, and Native replay does not evaluate equations again. [I05/I06 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/README.md).
 
 ## 0022 — Negative odd echo orientation
 
-Finite negative odd echo orientations flip horizontally, matching the original signed nonzero-remainder test. Modulo4, vertical flip, zoom/alpha and gamma/tint policies remain unchanged. A known-edge textured GL regression fails before and passes after;46 normal checks pass. No literal-negative stock orientation was found; a finite4K diagnostic remains pending. [I29 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I29/README.md).
+Finite negative odd echo orientations flip horizontally using the original signed nonzero-remainder test. Modulo4, vertical flip, zoom/mix, tint and gamma remain. [I29 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I29/README.md).
+
+## 0023 — Legacy oscillator Y
+
+The built-in and fallback warp oscillators use MilkDrop’s physical Y convention. The retained custom-shader coordinate contract and prepared replay remain. [I10 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I10/README.md).
+
+## 0024 — Legacy mesh diagonal
+
+Legacy warp triangles use the original physical diagonal. Custom topology and same-size static upload caching remain. [I11 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I11/README.md).
+
+## 0025 — Legacy per-pixel traversal
+
+Legacy stateful per-pixel equations visit physical rows in the original order. Custom traversal and once-only prepared replay remain. [I12 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I12/README.md).
+
+## 0026 — Legacy angle seam
+
+At the exact negative-X axis, legacy equation angles retain the original signed-zero atan2 seam. Off-axis and custom inputs remain; independent CPU trig and actual GPU controls verify the consequence. [I13 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I13/README.md).
+
+## 0027 — Wave colour clamp
+
+Local built-in wave RGB is clamped before nonzero brightening. Raw equation values and float colour/alpha submission remain; a separate negative-darken activation is outside this repair. [I18 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I18/README.md).
+
+## 0028 — Border fan topology
+
+Eight triangle indices restore the original border strip-fan coverage. Current float colour/alpha and Native rendering policies remain. [M02 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/M02/README.md).
+
+## 0029 — Original line sample caps
+
+Line modes4/6/7 use their original raw sample budgets, capped by one third of the reference-equivalent width with a two-point safety floor. Native/reference scaling and extended modes remain. This can substantially change feedback brightness, as in Royal103; brightness relative to the previous build alone does not establish authored Windows appearance.
+
+## 0030 — Discrete custom dots
+
+Custom dots submit their authored points without line-interpolation midpoints. Ordinary lines retain smoothing. A one-dot program can produce finite coordinates/colour while its undefined normalized sample input remains NaN; that raw input is preserved.
+
+## 0031 — Circle spacing and closure
+
+Circles use the original angular spacing and duplicate the first endpoint before shared smoothing. Native styles, equation execution and the TV transition composition remain.
+
+## 0032 — Live shape thickness
+
+Each custom shape captures the evaluated thickness for that instance and reuses it in authored and Native draws. Defined int32 truncation values follow the original nonzero flag; values outside that domain retain the saved parsed style without changing the raw equation value. No grouped-geometry optimization is introduced.
+
+## 0033 — Latest previous motion field
+
+The actual warp updates the previous completed motion field even while vectors are hidden. A later active consumer uses that compatible previous field, respecting fragment discard/output writes, first-frame guards, context/size changes and per-preset ownership. This adds intentional UV-write work rather than a synthetic UV-only pass.
+
+The user accepts necessary authored-work cost for patches0029–0033. [Focused Native4K captures, source controls and active-canvas lifecycle evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/authored-fidelity-followup/README.md) identify the tested inputs and limits. Isolated combined-cost and final PR CI qualification remain separate. These observations do not certify every preset, Windows pixels or physical-TV headroom.
 
 ## Known remaining differences from MilkDrop 2
 
@@ -255,10 +310,9 @@ Finite negative odd echo orientations flip horizontally, matching the original s
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
 - HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing.
 - Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
-- Line modes 4/6/7 retain projectM’s divided-budget sample policy pending I19 qualification. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
+- Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
 - `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.
-- Per-pixel code visits mesh rows in the opposite vertical order, so stateful per-pixel code can differ; the animated warp sine pattern is vertically mirrored.
 - No Windows reference renders exist in this project's evidence, so identical Windows appearance is never claimed.
 
 These differences were found by auditing the [source predictor](../predictor.md) against MilkDrop 2's code; they are candidates for future engine patches.
