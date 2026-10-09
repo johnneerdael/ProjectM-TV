@@ -230,6 +230,11 @@ Native fixed warp uses `min(float32(decay),1)` as a diagonal main-colour gain.
 Custom warp receives its authored returned RGB; configured decay is not silently
 multiplied unless the program uses the supplied colour factor. Supported custom
 expressions are constant-affine combinations of previous-main RGB samples.
+`vertex_colour_binding.rgba` describes the native warp input `_vDiffuse`:
+RGB is `min(float32(main-frame decay),1)` and alpha is one. Unsupported dynamic
+or nonfinite decay leaves the RGB entries null while alpha remains known. The
+binding is a source contract (`observed_runtime_binding=false`), not a captured
+GPU value. It applies to warp only; unused factors do not multiply custom output.
 `matrix_rgb` sums channel-mixing coefficients across sample sites and
 `constant_offset_rgb` records a source injection. `sample_contributions` keeps
 each site's matrix, coordinate program and sampling policy, so different spatial

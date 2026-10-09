@@ -139,6 +139,9 @@ absolute coefficient norms with coordinates fixed. Fixed decay and custom return
 RGB stay distinct. Ideal positive scalar half-life is not actual trail persistence;
 retain coordinate-feedback, storage/drawing/detail/discard and domain conditions.
 Unknown/nonlinear/blur transfers cannot become low-reactivity or Chill evidence.
+Warp `_vDiffuse` is the source-bound vec4 of capped float32 main decay in RGB
+and one in alpha. Dynamic/nonfinite decay remains null; this is not an observed
+runtime binding and must not leak into composite or multiply unused custom RGB.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

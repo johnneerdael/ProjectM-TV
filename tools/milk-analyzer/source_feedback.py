@@ -19,6 +19,13 @@ def feedback_transfer(analysis):
                       'Nominal half life excludes UNORM storage/rounding, clipping, source injection, blur, motion vectors and authored/native detail',
                       'Composite/display gain is not included; stale/discard feedback remains unresolved'],
         'uses_rendered_images':False,'uses_equation_execution':False,'uses_shader_execution':False}
+    decay=getattr(analysis,'main',{}).get('decay');known_decay=None if decay is None else _phase_literal(decay)
+    if known_decay is not None:
+        with np.errstate(over='ignore',invalid='ignore'):known_decay=float(np.float32(known_decay))
+        known_decay=min(known_decay,1.) if math.isfinite(known_decay) else None
+    result['vertex_colour_binding']={'rgba':[known_decay,known_decay,known_decay,1.],
+        'basis':'source31 warp vertex shader emits vec4(min(float32(main-frame decay),1), same, same,1)',
+        'observed_runtime_binding':False}
     selection=analysis.stages['warp'];field=analysis.outputs.get('warp')
     if selection['kind']=='fixed_warp':
         decay=getattr(analysis,'main',{}).get('decay');value=None if decay is None else _phase_literal(decay)
@@ -46,6 +53,10 @@ def feedback_transfer(analysis):
             if literal is not None:return literal,{}
             if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
                 parent=node.args[0];lane=SWIZZLE[node.detail['field']]
+                if parent.op=='input' and parent.detail.get('name')=='_vDiffuse' and parent.dtype=='float4':
+                    coefficient=1. if lane==3 else known_decay
+                    if coefficient is None:raise ValueError('native vertex colour decay is not a supported constant')
+                    return coefficient,{}
                 if parent.op=='sample' and parent.detail.get('canonical_texture')=='main' and lane<3:
                     site=parent.detail.get('site_index')
                     if site is None:raise ValueError('main sample site identity unresolved')

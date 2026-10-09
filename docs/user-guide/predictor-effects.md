@@ -134,6 +134,9 @@ stored pixels need not follow that decay because rounding and new drawings matte
 Image-driven coordinate maps can add nonlinear feedback response and remain
 outside that persistence estimate. These source coefficients help describe
 feedback character, while actual trail lifetime and mood confidence remain unknown.
+Custom warp programs that explicitly use the engine's supplied vertex colour
+also receive its known decay factor. Dynamic factors remain unknown; this does
+not add decay to programs that omit it or claim a measured GPU binding.
 
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and

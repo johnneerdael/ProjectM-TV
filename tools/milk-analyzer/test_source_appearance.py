@@ -905,6 +905,38 @@ def test_missing_custom_stage_has_unknown_processing_not_fabricated_shader_chain
     assert stage['unknown_reasons']
 
 
+def test_warp_transfer_resolves_supplied_vertex_decay_factor():
+    source=read('fWaveAlpha=0\nfDecay=.9\nPSVERSION_WARP=2\n'
+        'warp_1=`shader_body {ret=GetPixel(uv)*_vDiffuse.rgb;}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==pytest.approx(.9,abs=2e-7)
+    assert feedback['vertex_colour_binding']['rgba']==pytest.approx([.9,.9,.9,1],abs=2e-7)
+
+
+def test_dynamic_vertex_decay_does_not_invent_constant_transfer():
+    source=read('fWaveAlpha=0\nper_frame_1=decay=.8+.1*bass;\nPSVERSION_WARP=2\n'
+        'warp_1=`shader_body {ret=GetPixel(uv)*_vDiffuse.rgb;}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain'] is None
+    assert feedback['vertex_colour_binding']['rgba']==[None,None,None,1]
+    assert feedback['unknown_reasons']==['native vertex colour decay is not a supported constant']
+
+
+def test_custom_vertex_alpha_is_one_and_does_not_apply_decay_twice():
+    source=read('fWaveAlpha=0\nfDecay=.9\nPSVERSION_WARP=2\n'
+        'warp_1=`shader_body {ret=GetPixel(uv)*_vDiffuse.a;}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==1
+
+
+def test_supplied_vertex_decay_is_capped_before_custom_warp_use():
+    source=read('fWaveAlpha=0\nfDecay=1.5\nPSVERSION_WARP=2\n'
+        'warp_1=`shader_body {ret=GetPixel(uv)*_vDiffuse.r;}\n')
+    feedback=appearance(source)['feedback_transfer']
+    assert feedback['uniform_diagonal_gain']==1
+    assert feedback['vertex_colour_binding']['rgba']==[1,1,1,1]
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'
