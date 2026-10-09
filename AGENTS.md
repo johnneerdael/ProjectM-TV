@@ -772,3 +772,12 @@ byte-identical source29 generators. No full numerical corpus rerun was started.
 Three full published-AAR/public-JNI30frame128×72 controls pass at RGB8errors0/1/0;
 see `docs/superpowers/evidence/predictor-source31`. Do not claim whole-preset or
 whole-corpus appearance certification from those controls.
+
+Uniform reduction experiment (2026-10-09): forecast domain
+`shader_work_policy=uniform-proof-v1` hoists statically uniform pure shader DAGs
+using the same one-lane numerical interpreter; default remains `full-grid-v1`.
+Do not hoist sampler coordinate roots/consumers, loop state, effects or unknown
+operations. Keep mutable callback/cache ownership and selected domains intact.
+The next metric-routing work must preserve47field meanings and nulls; geometry
+speed must never stand in for optical-flow speed. Read the static-metric-routes
+research and `docs/superpowers/evidence/predictor-uniform-reduction/README.md`.

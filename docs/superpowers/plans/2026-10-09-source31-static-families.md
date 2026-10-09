@@ -86,3 +86,22 @@ remains stopped; later runs require their own immutable identity.
 - CLI produced verified100preset pairedZIP in Downloads;99records have supported mechanisms,91have explicit unknowns (mostly missing target compatibility). These are conditional source constructs, not verified visible families.
 - Corpus check inventories9606presets at60frames/15Hz/854×480 against source31/fullAAR/profile; no full numerical run started. Bounded1frame worker retains47fields plus separately cached static metadata.
 - Documentation synced from main for the existing contract/testing reference, then extended in the feature branch. Downloads includes independent static-contractZIP and both runnablelaunchers. Main merge remains held.
+
+
+## Further static reduction requested after the initial delivery
+
+The user subsequently requested moving more expensive simulation requirements
+into static analysis. This additional work keeps the goal active.
+
+- [x] Audit every47field and distinguish exact formulas, bounds, scalar/geometry
+  execution and optical-flow estimation. Research:static-metric-routes.md.
+- [x] Implement opt-in uniform DAG reduction with same numerical interpreter,
+  mutable sampler boundaries, loop/domain guards and bounded proofs.
+- [x] Check pixel bits and all47feature objects on two128p and one480p authored
+  source-model controls; equal. Expression-level synthetic speedups18x/3x.
+- [ ] Implement verified uniform-output descriptor reduction without constructing
+  full display fields, preserving the existing47metric definitions/null rules.
+- [ ] Measure real preset eligibility and actual complete-preset speedups before
+  enabling automatic routes; do not infer corpus gains from synthetic kernels.
+- [ ] Add conservative no-flash/invariance bounds as separate evidence where
+  whole-program/context proofs support them. Preserve uncertain cases.

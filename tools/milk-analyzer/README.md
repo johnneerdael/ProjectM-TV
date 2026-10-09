@@ -67,6 +67,16 @@ nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOUR
 
 ## Source target: published 2.3.31
 
+An additional opt-in forecast domain `shader_work_policy=uniform-proof-v1`
+statically identifies pure uniform shader subgraphs and computes them once with
+the same interpreter rather than per pixel. `full-grid-v1` stays the default.
+Work counters/provenance remain explicit; sample coordinate mutation, selected
+domains and loop state retain their original contracts. Source-model pixel bits
+and all47feature objects match in focused authored controls. Synthetic shader
+speedups are not complete-preset or corpus claims. Uniform-output metric routing
+is further work; see the static-metric-routes research and uniform-reduction
+evidence under `docs/superpowers/`.
+
 `profiles/published-core-v2.3.31.json` identifies the full published Native AAR,
 both native libraries, Java classes, all 9,606 presets and 74 textures, and the
 separate 34-patch source engine. Repository preset/texture bytes match the AAR.

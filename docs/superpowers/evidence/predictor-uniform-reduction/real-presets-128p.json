@@ -1,0 +1,31 @@
+{
+  "scope": "two fixed authored presets,3sourceframes128x72, full vsreduced numericalmodel, not native capture orwhole-corpus speedup",
+  "rows": [
+    {
+      "preset": "Geiss - Confetti (Kaleidoscope Mix).milk",
+      "preset_sha256": "319d04bf16ff3d00bd06840d32256f5652163031575646001df0b2fea24d8392",
+      "frames": 3,
+      "width": 128,
+      "height": 72,
+      "bit_equal": true,
+      "all47_feature_objects_equal": true,
+      "seconds": {
+        "full-grid-v1": 0.2577306250022957,
+        "uniform-proof-v1": 0.2238779999970575
+      }
+    },
+    {
+      "preset": "flexi - a julia fractal for hexcollie.milk",
+      "preset_sha256": "80c573e6a7b19baf7127292bf1ee3f53ae61c3ccbfd78dc66139db5fec022a66",
+      "frames": 3,
+      "width": 128,
+      "height": 72,
+      "bit_equal": true,
+      "all47_feature_objects_equal": true,
+      "seconds": {
+        "full-grid-v1": 0.1976490000015474,
+        "uniform-proof-v1": 0.19283466700289864
+      }
+    }
+  ]
+}

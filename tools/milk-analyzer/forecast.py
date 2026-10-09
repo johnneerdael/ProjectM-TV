@@ -376,7 +376,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         composite_centre_policy=composite_centre_policy,
         shader_canvas_size=None if detail_context is None else detail_context['authored_size'],
         line_reference_size=None if detail_context is None else detail_context['authored_size'])
-    for key in ('motion_map_policy','motion_uv_backend'):
+    for key in ('motion_map_policy','motion_uv_backend','shader_work_policy'):
         if key in domain:pipeline_arguments[key]=domain[key]
     pipeline=SourcePipeline.from_source(source,profile=domain['profile'],compatibility=compatibility,**pipeline_arguments)
     actual_legacy=matches(engine,CORE_2331_ENGINE) and pipeline.warp_tree is None
@@ -612,6 +612,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     report['provenance']['motion_uv_sampling_profile']=motion_sampling_profile
     report['provenance']['motion_map_policy']=pipeline.motion_map_policy
     report['provenance']['motion_uv_backend']=pipeline.motion_uv_backend
+    report['provenance']['shader_work_policy']=pipeline.shader_work_policy
     report['prediction_basis']='independent-source-math'
     if motion_uv_sampler is not None:
         report['prediction_basis']='source-with-measured-operator'

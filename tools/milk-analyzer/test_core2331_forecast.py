@@ -28,7 +28,8 @@ def audio(tmp_path,count=3):
     return json.loads(output.read_text())
 
 
-def test_source31_default_forecast_exports_migrated_policies(tmp_path):
+@pytest.mark.parametrize('work_policy',['full-grid-v1','uniform-proof-v1'])
+def test_source31_default_and_opt_in_forecast_export_migrated_policies(tmp_path,work_policy):
     from forecast import forecast_source,read_source as declared_read
     path=tmp_path/'legacy.milk'
     path.write_text('[preset00]\nwarp=.8\nfWaveAlpha=0\nfDecay=1\nfGammaAdj=1.0005\n'
@@ -38,6 +39,7 @@ def test_source31_default_forecast_exports_migrated_policies(tmp_path):
             'initial_rgba':[.1,.2,.3,1],'hue_offsets':[0]*4,'equation_seed':0x4141f00d,
             'equation_rng_policy':'projectmtv-core-2.3.31-cold-thread-v1',
             'blur_levels':0,'quantize':True}
+    if work_policy!='full-grid-v1':domain['shader_work_policy']=work_policy
     result=forecast_source(source,audio=audio(tmp_path),binaries=BINARIES,domain=domain,compatibility={})
     assert result['status']=='computed'
     assert result['uses_rendered_reference'] is False
@@ -48,6 +50,7 @@ def test_source31_default_forecast_exports_migrated_policies(tmp_path):
     assert result['provenance']['motion_map_policy']=='projectmtv-core-2.3.31-continuous-motion-v1'
     assert result['provenance']['motion_uv_backend']=='conditional'
     assert len(result['source_features']['features'])==47
+    assert result['provenance']['shader_work_policy']==work_policy
 
 
 def test_source31_named_constants_are_double_legacy_values(tmp_path):

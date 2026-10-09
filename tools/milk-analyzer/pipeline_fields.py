@@ -85,7 +85,9 @@ class SourcePipeline:
         return motion
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None,motion_map_policy=LEGACY_MOTION,source_engine=None,motion_uv_backend=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None,shader_canvas_size=None,line_reference_size=None,motion_map_policy=LEGACY_MOTION,source_engine=None,motion_uv_backend=None,shader_work_policy="full-grid-v1"):
+        if shader_work_policy not in {'full-grid-v1','uniform-proof-v1'}:raise ValueError('unsupported shader work policy')
+        self.shader_work_policy=shader_work_policy
         if motion_map_policy not in {LEGACY_MOTION,CORE_2331_MOTION}:
             raise ValueError('unsupported motion map policy')
         if motion_map_policy==CORE_2331_MOTION and not matches(source_engine or {},CORE_2331_ENGINE):
@@ -364,6 +366,7 @@ class SourcePipeline:
                   'texsize_main':[canvas_width,canvas_height,1/canvas_width,1/canvas_height],
                   '_c13':[low[1],high[1],low[2],high[2]]}
 
+        shader_work={}
         def stage(tree,name,main,blur,coordinates,polar,colour=None):
             nonlocal pending_motion_uv
             model,expression=self._lower_stage(tree,name,frame_wrap)
@@ -385,10 +388,12 @@ class SourcePipeline:
                 if external_sample is None:raise UnresolvedMath('external texture input missing: '+texture)
                 return external_sample(detail,sample_uv)
             trace=None if on_sample is None else lambda detail,uv,lanes:on_sample(name,detail,uv,lanes)
-            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
+            counters={}
+            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy,work=counters)
+            shader_work[name]=counters
             if name=='warp' and write_motion:
                 motion=self._motion_expression(model)
-                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
+                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile,work_policy=self.shader_work_policy)
             return output
 
         warp_coordinates=np.concatenate((uv,original),axis=-1)
@@ -439,6 +444,8 @@ class SourcePipeline:
         history['reported_shader_canvas']=list(self.shader_canvas_size)
         history['composite_evaluated']=render_composite
         history['motion_vector_source_frame']=motion_source_frame
+        history['shader_work_policy']=self.shader_work_policy
+        history['shader_work']=shader_work
         history['motion_map_policy']=self.motion_map_policy
         history['motion_uv_written']=write_motion
         history['motion_uv_contract']={

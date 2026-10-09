@@ -1,0 +1,33 @@
+{
+  "scope": "two synthetic854x480 single-frame expression comparisons;4timings median; not preset/corpus speedup",
+  "rows": {
+    "uniform": {
+      "median_seconds": {
+        "full-grid-v1": 0.04304720850268495,
+        "uniform-proof-v1": 0.0023495829991588835
+      },
+      "ratio": 18.32121211214723,
+      "bit_equal": true,
+      "work": {
+        "uniform_subgraphs": 1,
+        "math_lanes_avoided": 409919,
+        "uniform_proof_nodes": 25,
+        "uniform_proof_budget_exceeded": false
+      }
+    },
+    "mixed": {
+      "median_seconds": {
+        "full-grid-v1": 0.0593472295004176,
+        "uniform-proof-v1": 0.019965583000157494
+      },
+      "ratio": 2.9724766614603464,
+      "bit_equal": true,
+      "work": {
+        "uniform_subgraphs": 4,
+        "math_lanes_avoided": 1639676,
+        "uniform_proof_nodes": 32,
+        "uniform_proof_budget_exceeded": false
+      }
+    }
+  }
+}
