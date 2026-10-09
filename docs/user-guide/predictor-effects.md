@@ -138,6 +138,14 @@ Custom warp programs that explicitly use the engine's supplied vertex colour
 also receive its known decay factor. Dynamic factors remain unknown; this does
 not add decay to programs that omit it or claim a measured GPU binding.
 
+Texture lookup records now describe supported scaled, translated, reflected
+and sheared image copies with matrices and inverse feature placement. They keep
+the warp mesh separate from original coordinates, and link supported offsets to
+audio bands or time curves. For example, sampling at twice the distance from the
+centre makes an isolated feature half as wide. Wrap, clipping, colour weights and
+feedback still determine how many copies become visible. These records give a
+consumer spatial context without claiming screen speed or dominance.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

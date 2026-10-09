@@ -446,3 +446,45 @@ generators, relationships and matching declared audio/time/resource context.
 This first descriptor does not yet export every geometry map, state recurrence,
 shader morph, blob contour, spatial layout or measured response curve. Expand
 those obligations based on failed baseline descriptions, not fabricated values.
+
+## Texture sampling geometry
+
+`sampling_geometry`, policy `source-affine-sampling-geometry-v1`, explains the
+source's two-dimensional texture lookup maps. Each live RGB-dependent sample
+keeps its sampler, canonical texture, site identity, coordinate program and
+wrap/filter policy. No texture is loaded or shader executed. Native/unresolved
+stages have null sample lists rather than a fabricated identity shader.
+
+`matrix_uv4` is a 2-by-4 matrix with columns `_uv.x`, `_uv.y`, `_uv.z`, `_uv.w`.
+For supported expressions, `sample_uv = matrix_uv4 * input_uv4 + offset`.
+Offsets retain independent source programs, known constants (null otherwise),
+nominal time curves and specific audio routes. The matrix uses constant
+coefficients; dynamic scales/rotations, nonlinear/quantized maps, image-driven
+offsets and interpolated vertex-colour offsets abstain. Calculations describe
+nominal real-valued algebra, not exact GPU interpolation/rounding.
+
+In warp, xy is the native mesh-transformed UV and zw is the original UV. A
+`shader_uv` basis therefore inherits the native mesh; `original_uv` bypasses it.
+Composite `uv` and `uv_orig` both alias xy. `mixed_uv` retains all four columns
+but cannot have a single-basis inverse. `uniform_lookup` has zero spatial
+coefficients and likewise does not receive an inverse.
+
+For an invertible single-basis 2-by-2 map M, `inverse_matrix=M^-1` and a known
+constant b yields `inverse_offset_uv=-M^-1*b`. A consumer locates an isolated
+source feature at s using `p=M^-1*s-M^-1*b`. This reverses the lookup direction:
+`(uv-.5)*2+.5` makes a feature half as wide around .5, with local area ratio .25.
+`determinant` and `orientation_reversed` describe coordinate handedness; singular
+maps have no inverse/area ratio and no orientation-reversal assertion.
+`nominal_feature_area_ratio=abs(1/det(M))` is in that coordinate basis, not pixel
+area, coverage or final visible size.
+
+Sampling wrap can introduce repeated feature copies; clamp can stretch edge
+values. Clipping, masks, source colour weights, texture contents, feedback
+history, native mesh and subsequent stages determine which features appear.
+Neither repeated-layer count nor `visible_screen_motion` is certified. A bass
+route on sample_offset_x means texture lookup shifts along x; apparent isolated
+feature motion follows the inverse and can differ from final scene movement.
+
+The basis distinction matches [MilkDrop's authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html)
+and original MilkDrop2 `vis_milk2/plugin.cpp:3486-3491`; the target patched
+source31 binds the same macros in `MilkdropPreset/MilkdropShader.cpp:573-580`.

@@ -98,6 +98,10 @@ contract documentation and review. The numerical47-field export stays unchanged.
 - Ordered perRGB shader tone suffixes are implemented;47/100sample presets
   have known gain/bias/inversion/power/guard operations. Bases/resources and
   finalpalette/recognizable wholelook remain unresolved.
+- Constant-affine texture sampling geometry is implemented;89/100presets have
+  supported maps and61have nonidentity transformations. Inverse feature placement
+  and offset/audio/time programs remain conditional on the declared coordinate
+  basis and sampling/composition inputs; they are not visible motion evidence.
 - Spatial/image motion, full feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 
@@ -114,3 +118,15 @@ prospectively; successful extraction, control tests or simulation agreement alon
 do not prove independent reconstruction usefulness. Keep unresolved properties
 visible and retain frozen prior review outputs. The user does not require pixel
 identity or an exported shader program.
+
+## Sampling geometry extension
+
+Use the existing live shader graph to separate each two-dimensional texture
+lookup into a constant 2-by-4 `_uv` matrix plus spatially uniform offsets. Keep
+warp mesh and original-UV columns separate; composite aliases both to xy. Export
+constant offsets, source offset programs, audio routes and nominal time curves.
+For a single invertible coordinate basis, provide inverse feature placement,
+orientation reversal and local area ratio. Retain sample identity/wrap/filter and
+unknown nonlinear, mixed-basis and quantized maps. These source matrices are not
+visible trajectories, repeated-layer counts, pixel coverage or a full recurrence.
+Validate numerical controls, then freeze the same fixed100 census before review.

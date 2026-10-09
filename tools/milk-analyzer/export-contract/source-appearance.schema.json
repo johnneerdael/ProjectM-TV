@@ -12,7 +12,8 @@
         "elements",
         "activity",
         "mood_matches",
-        "record_sha256"
+        "record_sha256",
+        "sampling_geometry"
       ],
       "properties": {
         "schema_version": {
@@ -1341,6 +1342,326 @@
             },
             "final_palette_verified": {
               "const": false
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sampling_geometry": {
+          "type": "object",
+          "required": [
+            "policy",
+            "stages",
+            "stage_status",
+            "input_column_order",
+            "coordinate_unit",
+            "conditions"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-affine-sampling-geometry-v1"
+            },
+            "stages": {
+              "type": "object",
+              "required": [
+                "warp",
+                "composite"
+              ],
+              "properties": {
+                "warp": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "sample_site_index",
+                      "canonical_texture",
+                      "sampling_policy",
+                      "coordinate_expression",
+                      "matrix_uv4",
+                      "offset_uv",
+                      "offset_expressions",
+                      "offset_controls",
+                      "audio_routes",
+                      "basis",
+                      "inverse_matrix",
+                      "inverse_offset_uv",
+                      "nominal_feature_area_ratio",
+                      "visible_screen_motion",
+                      "unknown_reasons"
+                    ],
+                    "properties": {
+                      "matrix_uv4": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "array",
+                          "minItems": 4,
+                          "maxItems": 4,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "inverse_matrix": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "offset_uv": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "inverse_offset_uv": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "basis": {
+                        "enum": [
+                          null,
+                          "shader_uv",
+                          "original_uv",
+                          "mixed_uv",
+                          "uniform_lookup"
+                        ]
+                      },
+                      "native_mesh_transform_precedes_basis": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "determinant": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "orientation_reversed": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "nominal_feature_area_ratio": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "visible_screen_motion": {
+                        "type": "null"
+                      },
+                      "offset_controls": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "audio_routes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "unknown_reasons": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "composite": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "sample_site_index",
+                      "canonical_texture",
+                      "sampling_policy",
+                      "coordinate_expression",
+                      "matrix_uv4",
+                      "offset_uv",
+                      "offset_expressions",
+                      "offset_controls",
+                      "audio_routes",
+                      "basis",
+                      "inverse_matrix",
+                      "inverse_offset_uv",
+                      "nominal_feature_area_ratio",
+                      "visible_screen_motion",
+                      "unknown_reasons"
+                    ],
+                    "properties": {
+                      "matrix_uv4": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "array",
+                          "minItems": 4,
+                          "maxItems": 4,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "inverse_matrix": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "offset_uv": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "inverse_offset_uv": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "basis": {
+                        "enum": [
+                          null,
+                          "shader_uv",
+                          "original_uv",
+                          "mixed_uv",
+                          "uniform_lookup"
+                        ]
+                      },
+                      "native_mesh_transform_precedes_basis": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "determinant": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "orientation_reversed": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "nominal_feature_area_ratio": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "visible_screen_motion": {
+                        "type": "null"
+                      },
+                      "offset_controls": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "audio_routes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "unknown_reasons": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "input_column_order": {
+              "const": [
+                "_uv.x",
+                "_uv.y",
+                "_uv.z",
+                "_uv.w"
+              ]
+            },
+            "coordinate_unit": {
+              "const": "source texture UV"
             },
             "conditions": {
               "type": "array",

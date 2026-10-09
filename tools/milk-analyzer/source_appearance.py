@@ -396,6 +396,7 @@ def appearance_from_analysis(analysis):
     from effect_families import _parts,_number,_walk
     from source_motion import motion_control
     from source_composition import composition_from_analysis
+    from source_sampling import sampling_geometry
     from source_feedback import feedback_transfer
     from source_colour_processing import colour_processing
     elements={}
@@ -470,6 +471,7 @@ def appearance_from_analysis(analysis):
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback_transfer(analysis),
+        'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),
         'execution_unknowns':list(analysis.unknowns),
         'uses_rendered_images':False,'uses_shader_execution':False,

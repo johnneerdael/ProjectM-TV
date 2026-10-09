@@ -142,6 +142,11 @@ Unknown/nonlinear/blur transfers cannot become low-reactivity or Chill evidence.
 Warp `_vDiffuse` is the source-bound vec4 of capped float32 main decay in RGB
 and one in alpha. Dynamic/nonfinite decay remains null; this is not an observed
 runtime binding and must not leak into composite or multiply unused custom RGB.
+`source_sampling.py` exports nominal constant-affine 2D sample matrices over
+warp mesh/original UV columns plus spatially uniform offset programs, audio
+routes and time curves. Keep typed quantization, image/interpolated-colour
+offsets, dynamic scales and mixed/singular inverses unresolved. Local inverse
+feature area is not screen coverage, copy count or visible motion.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.
