@@ -1,26 +1,93 @@
-# Preset predictor export contract
+# Preset predictor exports
 
-Contract: **source feature record schema 1**. Developer reference for the experimental predictor. Documentation snapshot: 2026-10-08,
-producer source checkpoint `587e3f53`, with guide synchronized from remote main
-`af164a97896646427f971ecbed8161f8d35c2fec` before this page was added.
+Two separate contracts now serve different needs:
 
-This reference documents the **existing output**, not a new renderer or scene
-format. It is intended for a Rust/wgpu consumer that makes a semantic adaptation:
-use supported behavior as a visual brief, then choose an original native-4K scene.
-The 47 simulated features provide a useful behavioral brief. A faithful adaptation
-of a particular preset also needs semantic element/effect descriptors; it does
-not require exporting the original shader program or pixel-identical geometry.
+- **Static source description:** conditional constructions, geometry/material
+  ingredients and audio-to-element control routes, without executing equations,
+  shaders, audio or display frames. This is the current development priority.
+- **Numerical feature record:** the preserved 2026-10-08 checkpoint with 47
+  simulated statistics (plus a distinct 11-feature strict extractor). It still
+  requires its declared inputs and numerical execution.
 
-!!! note "Research contract, separately published documentation"
-    This page documents the predictor branch's **2026-10-08 checkpoint**. Publishing the reference and downloadable examples does not merge the experimental predictor into the app or change the shipped mood collections. Reproduction commands require the [predictor implementation branch](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-visual-loop), its prepared source adapters and declared inputs.
+Publishing this reference does not merge the experimental predictor or change the
+[shipped mood collections](predictive-collections.md). The
+[predictor overview](predictor.md) explains the direction and current evidence.
 
-    For the meaning of an accuracy score, see [how behavioural accuracy is measured](authoring/testing.md#how-are-you-measuring-97-accurate). The feature-export contract and reference-render validation answer different questions.
+## Static source-description contract
+
+Implementation checkpoint: `9c8ff632`, 2026-10-10, experimental
+[`feat/predictor-static-output-bounds`](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-static-output-bounds).
+Use `effect_family_export.py` from that prepared checkout:
+
+```sh
+build/preset-lab-venv/bin/python tools/milk-analyzer/effect_family_export.py path/to/preset.milk --output ~/Downloads/ProjectM-TV-static-single
+```
+
+The CLI requires the prepared hash-identified source31 native parser and Python
+environment. It consumes no PCM, frame schedule, dimensions or GPU render. Omit
+the preset argument for the bundled pack, or supply a folder. Results retain
+relative filenames, exact `.milk` bytes and matched JSON, with a ZIP every 100
+completed attempts and a final partial batch. Failures retain `analysis: null`
+and their reason. Resume/cache reuse requires matching source, parser, model and
+profile identities; use a fresh process and output folder after code changes.
+
+| JSON location | Meaning |
+|---|---|
+| `export_kind` | `preset-effect-families`; separate from numerical feature records. |
+| `preset` and `provenance` | Exact preset metadata and parser/model/target identities. |
+| `analysis.schema_version`, `analysis.analysis_policy` | Semantic schema 1; `source-effect-families-v1`. |
+| `analysis.families`, `analysis.stages`, `analysis.unknowns` | Supported contributing mechanisms, selected/conditional stages and interpretation gaps. |
+| `analysis.visual_description` | Structured baseline traits, schema 1, policy `source-appearance-and-control-traits-v1`. |
+| `analysis.visual_description.elements` | Source component IDs, numeric construction/colour codes, supported parameters, materials and audio routes. |
+| Other description members | Conditional logical composition, sample transforms, colour processing/mixtures and feedback inputs. |
+| Execution flags | `uses_equation_execution`, `uses_shader_execution`, `uses_rendered_images`: false. |
+| Appearance qualification | `appearance_accuracy_verified`: false; `appearance_match_accuracy`: null. Successful extraction is not a visual certificate. |
+| Semantic `record_sha256` members | Canonical content digests at their respective nested record scopes; not signatures or confidence values. |
+
+This table locates the contracts; it is not a complete example record. Read the
+[full mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/EFFECT_FAMILIES.md),
+[appearance fields and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
+and [appearance JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
+for exact object shape, enum meanings, units and unknown variants. The schema
+alone does not verify hashes, source truth, visibility or reconstruction readiness.
+
+Source audio routes name a component and changed control, engine band, supported
+source gain/formula and conditions. They do not isolate vocals/instruments or
+measure visible bass-response strength. Source-time rates describe control math;
+constant feedback rotation can keep rotating the picture on every feedback step.
+Selected images, random phases, initial feedback, audio and clock values are
+additional inputs when a consumer needs an exact instance. Approximate baseline
+traits can still be useful without them. Final prominence, flash events and
+complete feedback interpretation remain open implementation and validation work.
+
+A consumer can select an original Rust/wgpu implementation for a supported
+construction and preserve its known parameters. It must keep unknowns and its own
+defaults separate. Recognizable whole-preset reconstruction, final palette and
+calibrated mood/genre assignment are pending validation, not proven impossible.
+Current bounded expression support and work budgets are extendable implementation
+choices. Join source and numerical
+records by exact preset SHA-256 and compatible target/input context, retaining
+both kinds of evidence rather than relabeling simulated statistics as static.
+
+## Preserved numerical feature-record contract
+
+The remainder documents the **2026-10-08 numerical checkpoint**, producer
+`587e3f53`. Its guide was synchronized from remote main
+`af164a97896646427f971ecbed8161f8d35c2fec` at that time. These historical examples,
+counts and reproduction commands retain their original contexts; they have not
+been regenerated against the newer source-description implementation.
+
+The 47 simulated fields provide a statistical behavioral brief, not a unique
+scene description. The newer semantic export adds some of the construction and
+control information that this older format lacks. The full forecast diagnostic
+return remains unversioned; use the explicitly versioned exports for interchange.
+For historical fidelity scores, see
+[how behavioral accuracy was measured](authoring/testing.md#how-are-you-measuring-97-accurate).
 
 ## 1. Choose the export
 
-The newer [static effect-mechanism export](predictor-effects.md) is a separate
-versioned record. It adds causal construction evidence without simulating display
-frames; it does not replace or change this47-field checkpoint contract.
+The static contract above is separate. It does not replace or change this
+47-field numerical checkpoint contract.
 
 | Producer | Result | Schema/version | Current contents |
 |---|---|---|---|
@@ -353,11 +420,11 @@ behavior rather than requiring pixel-identical reuse. Test the adaptation's
 own motion, brightness and response targets separately. No Rust/wgpu backend is
 implemented by this documentation.
 
-### What a stronger semantic render-plan export would need (proposal only)
+### Information needed for a complete semantic render plan
 
-To preserve the *particular* preset's effect family and response while optimizing
-its rendering, add a separately versioned export in future; do not disguise it
-as existing schema1. At minimum it would need:
+The static source-description export now covers supported subsets of the
+following information. Full coverage and independently recognizable reconstruction
+remain unverified. Keep this separate from the numerical feature schema:
 
 1. Component identity/type, geometry or generators and drawing order.
 2. Portable coordinate systems, transforms and time/audio parameter curves.
@@ -442,7 +509,9 @@ produce useful personalized presets before arbitrary-library recognition is
 complete. Semantic recognition is important for learning/reusing the existing
 library and preserving its effect families, but a universal classifier is not a
 prerequisite for generation from a deliberately restricted, understood grammar.
-No such semantic exporter or generator is implemented by this documentation.
+The static semantic exporter described above exists on the experimental branch.
+It is partial; no complete render-plan exporter or production generator is
+certified by this documentation.
 
 ## 7. Reproduce and inspect the examples
 
@@ -488,7 +557,8 @@ not the later .97. Preserve its original bytes and declared identities.
 
 ## 8. Authority and compatibility
 
-This document and companion schema describe producers at the stated checkpoint.
+This numerical section and its companion schema describe producers at the
+2026-10-08 checkpoint; the separate static contract has its own current references.
 The schema has no independent runtime enforcement in `source_extract.py`; producer
 and existing consumer guards are the authority. Additive fields should not break
 a consumer, while changed meaning/units/basis require explicit migration. No
