@@ -86,10 +86,17 @@ def main():
                 assert request['identity']==manifest['identity']=={'worker_ref':role}
                 assert manifest['status']=='success' and manifest['gl_error_frames']==0
                 assert manifest['frames']==cfg['measurement_seconds']*30
+                selected=cfg['selected_frames']
+                assert selected==sorted(set(selected))
+                assert all(type(frame) is int and 0<=frame<manifest['frames'] for frame in selected)
+                assert set(result['rgb_sha256'])=={str(frame) for frame in selected}
+                states=manifest['readback_states']
+                assert len(states)==len(selected)
+                assert [state['frame'] for state in states]==selected
                 preset=Path(request['preset_path']).name
                 assert sha((repo/'core/src/main/assets/presets'/preset).read_bytes())==pair['inputs']['preset_sha256']
                 assert sha((repo/'docs/superpowers/evidence/patch-visual-catalog/audio'/Path(request['pcm_path']).name).read_bytes())==pair['inputs']['pcm_sha256']
-                for state in manifest['readback_states']:
+                for state in states:
                     for key in ('read_framebuffer','read_buffer','pack_alignment'):
                         assert state['before_'+key]==state['after_'+key]
                 sequences.append(result['rgb_sha256'])

@@ -118,3 +118,5 @@ when changing harness/source inputs; recorded workers must remain immutable.
 The guide figures must match the retained generated HTML exactly. Required PR
 review, CI and deployed-site verification remain separate from local artifact
 checks.
+
+Review guard follow-up: preparation resolves repository/cache/work paths before changing a child process’s directory. Verification requires exact requested-frame hash keys and readback-state count/order, including non-displayed frames. Relative-path preparation/resumption and an absolute-path private-source reversal dry run pass. Four scoped fault controls reject missing states, omitted hashes, relabelled hashes and duplicate state frames. Existing seven-pair verification passes; no source worker or capture was changed.

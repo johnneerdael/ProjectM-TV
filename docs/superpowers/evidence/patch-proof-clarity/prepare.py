@@ -25,6 +25,8 @@ def main():
     parser.add_argument('--repo', type=Path, required=True)
     parser.add_argument('--work', type=Path, required=True)
     args = parser.parse_args()
+    for name in ('catalog', 'repo', 'work'):
+        setattr(args, name, getattr(args, name).expanduser().resolve())
     if args.work.exists() and not (args.work / 'harness').is_dir():
         raise ValueError('Existing directory is not a prepared run')
     original = json.loads((args.catalog / 'patched/identity.json').read_text())
