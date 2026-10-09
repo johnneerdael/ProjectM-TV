@@ -42,12 +42,17 @@ public class ExitDiagnosticsTest {
 
     @Test
     public void namesReasonsAndSignals() {
-        assertEquals("crashed (native code)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_CRASH_NATIVE, 11));
-        assertEquals("killed by signal 11 (SIGSEGV)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_SIGNALED, 11));
-        assertEquals("killed by signal 6 (SIGABRT)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_SIGNALED, 6));
-        assertEquals("killed for low memory", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_LOW_MEMORY, 0));
-        assertEquals("stopped: app updated", ExitDiagnostics.reasonLabel(16, 0));
-        assertEquals("unknown reason", ExitDiagnostics.reasonLabel(99, 0));
+        assertEquals("crashed (native code)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_CRASH_NATIVE, 11, 30));
+        assertEquals("killed by signal 11 (SIGSEGV)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_SIGNALED, 11, 30));
+        assertEquals("killed by signal 6 (SIGABRT)", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_SIGNALED, 6, 30));
+        assertEquals("killed for low memory", ExitDiagnostics.reasonLabel(ExitDiagnostics.REASON_LOW_MEMORY, 0, 30));
+        assertEquals("stopped: app updated", ExitDiagnostics.reasonLabel(16, 0, 30));
+        assertEquals("unknown reason", ExitDiagnostics.reasonLabel(99, 0, 30));
+        // Before Android 14, reason 10 also covered app updates and component changes.
+        assertEquals("stopped by request (force stop, Recents, app update or component change)",
+                ExitDiagnostics.reasonLabel(10, 0, 30));
+        assertEquals("stopped by the user (force stop or removed from Recents)", ExitDiagnostics.reasonLabel(10, 0, 34));
+        assertEquals("stopped: its Android user was stopped", ExitDiagnostics.reasonLabel(11, 0, 30));
         assertTrue(ExitDiagnostics.isProblem(ExitDiagnostics.REASON_ANR));
         assertFalse(ExitDiagnostics.isProblem(10));
     }
@@ -58,9 +63,9 @@ public class ExitDiagnosticsTest {
         ExitDiagnostics.Exit crash = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
                 NOW - 60_000, 300 * 1024, 410 * 1024, "crash");
         assertEquals("Crashed (native code)  ·  60 s ago",
-                ExitDiagnostics.summary(Arrays.asList(background, crash), true, NOW));
-        assertEquals("None recorded", ExitDiagnostics.summary(Collections.singletonList(background), true, NOW));
-        assertEquals("Needs Android 11", ExitDiagnostics.summary(Collections.emptyList(), false, NOW));
+                ExitDiagnostics.summary(Arrays.asList(background, crash), 30, NOW));
+        assertEquals("None recorded", ExitDiagnostics.summary(Collections.singletonList(background), 30, NOW));
+        assertEquals("Needs Android 11", ExitDiagnostics.summary(Collections.emptyList(), 29, NOW));
     }
 
     @Test
@@ -68,7 +73,7 @@ public class ExitDiagnosticsTest {
         ExitDiagnostics.Exit crash = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
                 NOW - 60_000, 300 * 1024, 410 * 1024, "crash");
         ExitDiagnostics.Exit other = new ExitDiagnostics.Exit(4000, 10, 0, 100, NOW - 7_200_000, 0, 0, "");
-        String report = ExitDiagnostics.report(Arrays.asList(crash, other), true, TRAIL, NOW, "Device\n");
+        String report = ExitDiagnostics.report(Arrays.asList(crash, other), 30, TRAIL, NOW, "Device\n");
         assertTrue(report, report.startsWith("Device\n"));
         assertTrue(report, report.contains("60 s ago: crashed (native code), on screen\n  crash\n"
                 + "  memory: 300 MB PSS, 410 MB RSS\n"
@@ -76,7 +81,7 @@ public class ExitDiagnosticsTest {
                 + "  render: blending into 'Geiss - Spiral.milk' (auto, 7 s, 1152x648) (3 s before)\n"
                 + "  prewarm: compiling 'Martin - liquid arrows.milk' (2 s before)\n"));
         // The trail belongs to process 4321 only.
-        assertTrue(report, report.contains("2 h ago: stopped on request, on screen\n"));
+        assertTrue(report, report.contains("2 h ago: stopped by request (force stop, Recents, app update or component change), on screen\n"));
         assertEquals(report.indexOf("render:"), report.lastIndexOf("render:"));
     }
 
@@ -92,7 +97,7 @@ public class ExitDiagnosticsTest {
         for (ExitDiagnostics.TrailLine line : ExitDiagnostics.parseTrail(TRAIL)) {
             assertEquals(1, ExitDiagnostics.exitForLine(exits, line));
         }
-        String report = ExitDiagnostics.report(exits, true, TRAIL, NOW, "");
+        String report = ExitDiagnostics.report(exits, 30, TRAIL, NOW, "");
         assertEquals(report.indexOf("render:"), report.lastIndexOf("render:"));
         assertTrue(report, report.indexOf("render:") > report.indexOf("crashed (native code)"));
         assertTrue(report, report.indexOf("render:") < report.indexOf("killed for low memory"));
@@ -108,18 +113,18 @@ public class ExitDiagnosticsTest {
                 + pad("prewarm pid=4321 ms=" + (NOW - 61_000) + " cache=off compile=on compiling 'b.milk'");
         ExitDiagnostics.Exit crash = new ExitDiagnostics.Exit(4321, ExitDiagnostics.REASON_CRASH_NATIVE, 11, 100,
                 NOW - 60_000, 0, 0, "");
-        String report = ExitDiagnostics.report(Collections.singletonList(crash), true, trail, NOW, "");
+        String report = ExitDiagnostics.report(Collections.singletonList(crash), 30, trail, NOW, "");
         assertTrue(report, report.contains("  switches: shader binary cache off, background compile on\n"));
     }
 
     @Test
     public void reportWithoutExitRecordsStillShowsTheTrail() {
-        String report = ExitDiagnostics.report(Collections.emptyList(), false, TRAIL, NOW, "");
+        String report = ExitDiagnostics.report(Collections.emptyList(), 29, TRAIL, NOW, "");
         assertTrue(report, report.contains("Android 11 or later is needed"));
         assertTrue(report, report.contains("Last render: blending into 'Geiss - Spiral.milk'"));
         assertTrue(report, report.contains("Last prewarm: compiling"));
         assertTrue(report, report.contains("(shader binary cache off, background compile on)"));
-        assertTrue(ExitDiagnostics.report(Collections.emptyList(), true, "", NOW, "").contains("No exits recorded yet."));
+        assertTrue(ExitDiagnostics.report(Collections.emptyList(), 30, "", NOW, "").contains("No exits recorded yet."));
     }
 
     @Test

@@ -1236,6 +1236,7 @@ struct Inputs {
     // Troubleshooting switches (Settings › Advanced) for GPU drivers that fail with a second EGL
     // context or with program binaries moved between contexts.
     std::atomic<bool> backgroundCompile{true};
+    std::atomic<bool> programCache{true};  // Shader binary cache, applied on the GL thread
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
     std::atomic<bool> settingsDirty{true};
@@ -1994,6 +1995,18 @@ void TrackTransition(double now, double frameCpuSeconds) {
     g_engine.transitionScaled = false;
 }
 
+// GL thread: applies Settings › Advanced › Shader binary cache. Turning it off waits for binary calls
+// the prewarm thread has under way, so this must never run on the UI thread.
+void ApplyProgramCache() {
+    static bool applied = true;  // projectM's default
+    bool enabled = g_inputs.programCache.load();
+    if (enabled == applied) return;
+    projectm_opengl_set_program_cache_enabled(enabled);
+    projectmtv::TrailCacheOn() = enabled;
+    applied = enabled;
+    LOGI("Shader binary cache %s", enabled ? "on" : "off");
+}
+
 void StartPrewarmer() {
     g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
     g_engine.prewarmerStarted = true;
@@ -2106,6 +2119,7 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     std::lock_guard<std::mutex> lock(g_engineMutex);
     // A new EGL context invalidates all GL objects of a previous instance.
     DestroyEngineLocked(false);
+    ApplyProgramCache();  // before projectM compiles its first programs
     g_engine.pm = projectm_create();
     if (!g_engine.pm) {
         LOGE("projectm_create failed");
@@ -2163,6 +2177,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
         g_inputs.settingsDirty = true;
         return;
     }
+    ApplyProgramCache();
     ApplyBackgroundCompile();
     {
         // A switch change is recorded at once, so the trail never shows stale states for a crash.
@@ -2314,8 +2329,7 @@ JNIEXPORT void JNICALL JNI_FN(setBackgroundCompile)(JNIEnv*, jclass, jboolean en
 // Settings › Advanced › Shader binary cache: reuse linked programs as binaries across instances and
 // contexts (on), or always compile from source (off; patch 0035).
 JNIEXPORT void JNICALL JNI_FN(setShaderBinaryCache)(JNIEnv*, jclass, jboolean enabled) {
-    projectmtv::TrailCacheOn() = enabled;
-    projectm_opengl_set_program_cache_enabled(enabled);
+    g_inputs.programCache = enabled;  // applied on the GL thread: disabling may wait for a driver call
 }
 
 // File in which the engine records what it was last doing (see diagnostics_trail.h).

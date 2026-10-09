@@ -818,7 +818,7 @@ public class MainActivity extends Activity {
     }
 
     private String lastExitSummary() {
-        return ExitDiagnostics.summary(recentExits, Build.VERSION.SDK_INT >= 30, System.currentTimeMillis());
+        return ExitDiagnostics.summary(recentExits, Build.VERSION.SDK_INT, System.currentTimeMillis());
     }
 
     /** Settings › Advanced › Last exit: the latest exits and what the engine was doing then. */
@@ -828,7 +828,7 @@ public class MainActivity extends Activity {
                 renderer.getGlRenderer().isEmpty() ? "unknown" : renderer.getGlRenderer(),
                 prefs.getBoolean(PREF_BACKGROUND_COMPILE, true) ? "on" : "off",
                 prefs.getBoolean(PREF_SHADER_BINARY_CACHE, true) ? "on" : "off");
-        String report = ExitDiagnostics.report(exits, Build.VERSION.SDK_INT >= 30,
+        String report = ExitDiagnostics.report(exits, Build.VERSION.SDK_INT,
                 ExitDiagnostics.previousTrail(), System.currentTimeMillis(), header);
         Log.i(TAG, "Exit report:\n" + report);
         handler.removeCallbacks(hideMenu);

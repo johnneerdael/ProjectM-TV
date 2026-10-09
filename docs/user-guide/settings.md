@@ -71,7 +71,7 @@ Opening **Advanced** also shows a **Diagnostics** card beside it with live value
 
 Selecting **Advanced › Last exit** opens **Recent exits**: the device, Android version, GPU and the current state of the two troubleshooting switches (*Now:*), then up to five recent exits of the app, newest first. Each exit shows:
 
-- how long ago and why it ended, as Android recorded it: for example *crashed (native code)*, *killed for low memory*, *killed by signal 11 (SIGSEGV)*, *stopped by the system* or *force stopped*;
+- how long ago and why it ended, as Android recorded it: for example *crashed (native code)*, *killed for low memory*, *killed by signal 11 (SIGSEGV)*, *stopped by the system* or *stopped: app updated* (before Android 14, Android reports updates as *stopped by request*);
 - whether the app was *on screen* or only running *in the background* (for example for track titles);
 - Android's description and the memory the app used at that moment, when Android provides them;
 - for the last process that showed visuals, the **switches** it ran with (which can differ from today's settings) and what the engine was doing: the **render** line (*loading*, *blending into*, *showing* a preset, with its size) and the **prewarm** line (*compiling* a preset in the background, or *idle*), each with the seconds before the exit.

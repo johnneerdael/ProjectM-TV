@@ -105,7 +105,8 @@ public final class ProjectMJNI {
     /**
      * Reuses linked shader programs as binaries across projectM instances and contexts (on, the
      * default), or always compiles them from source (off). A troubleshooting switch for GPU
-     * drivers whose program binaries fail when moved between contexts.
+     * drivers whose program binaries fail when moved between contexts. Applied on the GL thread,
+     * which waits there for binary calls already under way; the caller never blocks.
      */
     public static native void setShaderBinaryCache(boolean enabled);
     /**

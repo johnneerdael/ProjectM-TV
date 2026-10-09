@@ -162,7 +162,8 @@ final class ExitDiagnostics {
         return lines;
     }
 
-    static String reasonLabel(int reason, int status) {
+    /** Labels follow ApplicationExitInfo; {@code sdk} matters because Android 14 split reason 10. */
+    static String reasonLabel(int reason, int status, int sdk) {
         switch (reason) {
             case 1: return "closed itself (status " + status + ")";
             case REASON_SIGNALED: return "killed by signal " + status + signalName(status);
@@ -173,12 +174,13 @@ final class ExitDiagnostics {
             case REASON_INITIALIZATION_FAILURE: return "failed to start";
             case 8: return "stopped: permission changed";
             case REASON_EXCESSIVE_RESOURCE_USAGE: return "killed for excessive resource use";
-            case 10: return "stopped on request";
-            case 11: return "force stopped";
+            case 10: return sdk >= 34 ? "stopped by the user (force stop or removed from Recents)"
+                    : "stopped by request (force stop, Recents, app update or component change)";
+            case 11: return "stopped: its Android user was stopped";
             case 12: return "stopped: a dependency died";
             case 13: return "stopped by the system";
-            case 14: return "frozen";
-            case 15: return "stopped: package state changed";
+            case 14: return "killed by the app freezer";
+            case 15: return "stopped: app disabled or a component changed";
             case 16: return "stopped: app updated";
             default: return "unknown reason";
         }
@@ -211,11 +213,11 @@ final class ExitDiagnostics {
     }
 
     /** Value of the Last exit row: the latest exit while the app was on screen. */
-    static String summary(List<Exit> exits, boolean supported, long nowMs) {
-        if (!supported) return "Needs Android 11";
+    static String summary(List<Exit> exits, int sdk, long nowMs) {
+        if (sdk < 30) return "Needs Android 11";
         for (Exit exit : exits) {
             if (exit.wasVisible()) {
-                String label = reasonLabel(exit.reason, exit.status);
+                String label = reasonLabel(exit.reason, exit.status, sdk);
                 return Character.toUpperCase(label.charAt(0)) + label.substring(1) + "  ·  " + age(nowMs, exit.timestampMs);
             }
         }
@@ -237,7 +239,8 @@ final class ExitDiagnostics {
     }
 
     /** The full report for the Last exit dialog. */
-    static String report(List<Exit> exits, boolean supported, String trail, long nowMs, String header) {
+    static String report(List<Exit> exits, int sdk, String trail, long nowMs, String header) {
+        boolean supported = sdk >= 30;
         StringBuilder out = new StringBuilder(header);
         List<TrailLine> lines = parseTrail(trail);
         int[] owners = new int[lines.size()];
@@ -250,7 +253,7 @@ final class ExitDiagnostics {
         for (int e = 0; e < exits.size(); e++) {
             Exit exit = exits.get(e);
             out.append('\n').append(age(nowMs, exit.timestampMs)).append(": ")
-                    .append(reasonLabel(exit.reason, exit.status))
+                    .append(reasonLabel(exit.reason, exit.status, sdk))
                     .append(exit.wasVisible() ? ", on screen" : ", in the background");
             if (!exit.description.isEmpty()) out.append("\n  ").append(exit.description);
             if (exit.pssKb > 0 || exit.rssKb > 0) {

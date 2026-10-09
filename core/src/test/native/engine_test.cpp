@@ -874,8 +874,9 @@ int main(int argc, char** argv) {
     int stops = g_prewarmStops, starts = g_prewarmStarts;
     Java_nl_neerdael_projectm_core_ProjectMJNI_setBackgroundCompile(nullptr, nullptr, false);
     Java_nl_neerdael_projectm_core_ProjectMJNI_setShaderBinaryCache(nullptr, nullptr, false);
-    CHECK(!g_programCacheEnabled);
+    CHECK(g_programCacheEnabled);  // never applied on the calling (UI) thread
     frame();
+    CHECK(!g_programCacheEnabled);
     CHECK(g_prewarmStops == stops + 1 && !g_engine.prewarmerStarted && g_prewarmStarts == starts);
     size_t requests = g_prewarmLists.size();
     Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
@@ -892,8 +893,8 @@ int main(int argc, char** argv) {
     CHECK(text.find(" cache=off compile=off background compile off") != std::string::npos);
     Java_nl_neerdael_projectm_core_ProjectMJNI_setBackgroundCompile(nullptr, nullptr, true);
     Java_nl_neerdael_projectm_core_ProjectMJNI_setShaderBinaryCache(nullptr, nullptr, true);
-    CHECK(g_programCacheEnabled);
     frame();
+    CHECK(g_programCacheEnabled);
     CHECK(g_prewarmStarts == starts + 1 && g_engine.prewarmerStarted);
     CHECK(g_prewarmLists.size() == requests + 1);  // prepares the upcoming presets right away
     text = trail();  // the render thread records the change on its next frame, with the new states
