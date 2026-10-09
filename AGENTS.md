@@ -96,6 +96,16 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 
 ## Codebase navigation and knowledge tools
 
+The user's current source-description priority is structured approximate baseline
+appearance and audio→element-control relationships for mood/user-preference
+matching and eventual reconstruction, not complete47-field replacement.
+`source_appearance.py` feeds `analysis.visual_description`; see
+`tools/milk-analyzer/SOURCE_APPEARANCE.md` and its export-contract schema.
+Preserve numeric category IDs, units, nulls, causal live RGB/control slices,
+complete32slot main/shape Q reload semantics, resource identities and explicit
+unresolved context. Source control gains are not screen response strengths;
+colourful/fractal candidates do not grant flash permission or calibrated confidence.
+
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;
 a well-formed self-reported hash is insufficient. See the corpus export guide

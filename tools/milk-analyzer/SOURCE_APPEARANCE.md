@@ -1,0 +1,169 @@
+# Structured source appearance contract
+
+`analysis.visual_description` extends the existing static effect-family record.
+Schema1, policy `source-appearance-and-control-traits-v1`. It describes approximate
+baseline constructions and per-element audio controls for preference matching
+and future reconstruction. It does not replace the47-field numerical contract.
+No equations, shaders, images or display frames are executed by this producer.
+Machine shape schema: `export-contract/source-appearance.schema.json`; source,
+context, digest and reconstruction-readiness checks remain separate.
+
+## Produce and locate
+
+Use `effect_family_export.py` as documented in `EFFECT_FAMILIES.md`. Each paired
+`.milk`/JSON result contains `analysis.visual_description`. The outer analysis
+and envelope identify exact preset/source/parser/model/profile/compatibility
+hashes. Use a fresh process and new output folder after code changes.
+
+The descriptor has its own `record_sha256`: canonical JSON with sorted keys,
+compact separators, no NaN, and only that hash key omitted. It is a content
+identity, not a signature or calibrated confidence. `schema_version` and
+`policy` identify the interpretation contract.
+
+## Top-level fields
+
+| Field | Meaning |
+|---|---|
+| `elements` | Stable source component/layer IDs, approximate forms, colour and control links |
+| `execution_unknowns` | Unresolved loading, branches, loops/domains and interpretation conditions; these are not rendered failures |
+| `uses_rendered_images`, `uses_shader_execution`, `uses_equation_execution` | All false for this source-only producer |
+| `appearance_match_accuracy` | Null until separately validated; do not infer it from a successful parse/test |
+| `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
+| `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
+| `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
+| `limitations` | Consumer-relevant boundaries |
+
+An appearance-specific work-budget failure may instead return schema1,
+`status:"unknown"`, and `unknown_reasons`, preserving the outer family record.
+Consumers must handle that variant before reading `elements`.
+
+## Element identity and baseline forms
+
+IDs: `shape_0`…`shape_3`, custom `wave_0`…`wave_3`, `builtin_wave`,
+`shader_warp`, `shader_composite`, and `mesh_warp`. IDs refer to source roles;
+they are not tracked particle identities. A later RGB-independent composite
+removes disconnected earlier elements. Position, radius or other dynamic
+parameters remain null when no source constant is established.
+
+| Family code | Approximate construction |
+|---:|---|
+| 1 | Built-in/custom line waveform |
+| 2 | Points/point cloud; independent particles are not established |
+| 3 | Polygon/custom-shape primitive |
+| 4 | Circular/radial curve or band |
+| 5 | Polar-depth image sampling: tunnel candidate |
+| 6 | Angular/cartesian mirror construction: kaleidoscope/symmetry candidate |
+| 7 | Recognized complex quadratic or iterated folding recurrence: fractal construction |
+| 8 | Feedback transport, rotation, scaling, advection or nonlinear transformation |
+
+Multiple codes can coexist. Read `mechanisms`, `parameters` and `conditions`
+before choosing a reconstruction. An empty list means no supported construction
+was recorded for this element, not a proven absence of interesting appearance.
+`approximate_screen_coverage` is currently null. Dominance, shape location,
+layer density, exact palette and full image reconstruction remain incomplete.
+
+Existing parameters include polygon sides/instances, complex recurrence subtype
+(`julia_style`, `mandelbrot_style`, `unclassified`), bailout evidence, depth-map
+kind and sampling scales where proved. Preserve nulls and original units.
+
+## Colour modes
+
+| `colour.mode_code` | Interpretation |
+|---:|---|
+| 0 | Source-constant RGB, clipped to0…1; actual store/profile remains a condition |
+| 1 | All RGB lanes share one signal: monochrome construction |
+| 2 | One signal multiplied by a fixed RGB tint; nonnegative/nonsaturating domain required for fixed chromaticity |
+| 3 | Shared-phase sin/cos RGB oscillator with distinct channel phase offsets |
+| 4 | Colour depends on sampled image/feedback contents |
+| 5 | RGB oscillators have independent phase programs/rates; read all three exported programs |
+| null | This colour construction is not sufficiently recognized |
+
+Mode3 describes `bias_rgb + amplitude_rgb*cos(common_phase + phase_offsets_rad)`.
+`common_phase_expression` exports the shared variable argument without the
+constant phase offsets; evaluate that program before adding the RGB offsets.
+Sine is expressed as cosine with a−π/2 offset. Arrays are RGB ordered, offsets
+are radians, and coefficients follow the parsed source values. A common scalar
+mask/feedback multiplier is retained in `shared_multiplier_expressions` and its
+visibility condition. Statically zero masks or fully clipped white/black
+oscillators cannot establish a varied generated palette.
+Mode5 retains each **full** oscillator argument in `channel_phase_expressions`.
+`oscillator_function_codes` are1=cos,2=sin; evaluate the corresponding function
+on that argument. Its `phase_offsets_rad` are descriptive normalized offsets,
+already represented by those programs/functions; do not add them again. There
+is no implied shared period or hue count.
+
+`distinct_channel_phases` is a source-form count, not rendered hue entropy.
+`depends_on_time` is1/0 when identified, not a measured rate; FPS/frame input is
+not automatically time. `palette_diversity` remains null. Generated colour plus
+fractal structure supports psychedelic **potential**; speed, flashing permission,
+dominance and user taste remain separate. `guaranteed_visible` remains false.
+
+## Audio routes
+
+Each `audio_routes[]` entry links one input code to one control of its containing
+element. There are no stem/instrument/vocal claims.
+
+| Input code | Engine input |
+|---:|---|
+| 1 | bass |
+| 2 | mid |
+| 3 | treb/high band |
+| 4 | bass_att |
+| 5 | mid_att |
+| 6 | treb_att |
+| 7 | vol: derived band aggregate |
+| 8 | vol_att: attenuated aggregate |
+
+Input units are the engine's declared band/attenuated values, not normalized song
+volume, dB, an identified kick/vocal or PCM amplitude. Cold start, input level and
+history can change them. Explicit Q bridges connect packed shader lanes to main
+equation expressions; shape per-frame Q reads use the complete main frame-Q
+snapshot, replacing shape-init Q values. Local shape frame writes still override.
+
+Controls: `position_x/y`, `radius`, `rotation`, `colour_r/g/b`, `opacity`,
+`outline_opacity`, `zoom`, `radial_zoom`, `translation_x/y`, `scale_x/y`,
+`deformation`. Shape coordinates/radius retain MilkDrop source units. Shape
+rotation is radians; mesh rotation is radians per feedback step. Zoom/exponent,
+UV translation/scale and warp are source controls, not visible speeds.
+
+`linear_gain` is the coefficient of a directly proved linear input term. Unit is
+`control_unit / declared audio input unit`. It is null for nonlinear, threshold,
+stateful or not-yet-composed relationships. `visible_response_strength` remains
+null: an authored gain does not establish screen area, clipping or perceived
+reactivity. `has_threshold_or_clamp` identifies contributing conditional/clamping
+code; it is not a measured flash event.
+
+## Control expression DAG
+
+`expression` and `q_bridge_expressions` use `{root,nodes,complete,resources_resolved}`.
+Node indexes start at0. Each node has `op`, `dtype`, `args` (node indexes) and
+`detail`. This is a bounded authored control formula, not an exported GPU shader.
+At most256 nodes are exported; budget exhaustion returns null.
+
+Common operations: constant/input, arithmetic, negate/unary, construct/components,
+cast, member/swizzle, comparisons/select, clamp/saturate, sin/cos and other
+recognized source operations. `dtype` preserves source IR type information;
+native EEL versus shader arithmetic/profile comes from the control's source
+stage/evidence. It must not be inferred as one universal floating-point policy.
+
+Unexpanded loops carry `unresolved_loop_plan:true` and `complete:false`.
+Direct sample nodes retain sampler/canonical texture, surface/frame, sampling
+policy, intrinsic and coordinate convention. Sampled/hidden-loop resource contexts
+set `resources_resolved:false`; selected image contents/lifetime, actual bindings,
+initial feedback and random inputs must be supplied separately. Consumers must
+not execute unresolved DAGs as though they were closed formulas.
+
+## Example interpretation
+
+A shape route with input1, control`radius`, gain.05 says:
+"The authored radius grows by.05 MilkDrop radius units per extra bass-input unit,
+provided its branch/visibility and later composition retain that change."
+It does not promise a5% screen-size increase. A source recurrence7 plus mode3
+with RGB phase offsets[0,2,4] suggests a colourful fractal construction; it does
+not certify one exact rendered frame or calm viewing.
+
+Future reconstruction should combine element forms, source parameters, palette
+generators, relationships and matching declared audio/time/resource context.
+This first descriptor does not yet export every geometry map, state recurrence,
+shader morph, blob contour, spatial layout or measured response curve. Expand
+those obligations based on failed baseline descriptions, not fabricated values.

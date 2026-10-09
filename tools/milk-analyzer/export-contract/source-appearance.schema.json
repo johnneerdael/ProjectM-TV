@@ -1,0 +1,418 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjectM TV structured source appearance v1",
+  "description": "Documentation shape schema. Hashes, source/context support and reconstruction readiness require producer/consumer checks. Not a calibrated image or mood predictor.",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "policy",
+        "status",
+        "elements",
+        "activity",
+        "mood_matches",
+        "record_sha256"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "policy": {
+          "const": "source-appearance-and-control-traits-v1"
+        },
+        "status": {
+          "const": "conditional source description"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "stage",
+              "family_codes",
+              "mechanisms",
+              "parameters",
+              "colour",
+              "audio_routes",
+              "conditions",
+              "evidence"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "stage": {
+                "enum": [
+                  "warp",
+                  "composite",
+                  "drawing",
+                  "mesh_warp"
+                ]
+              },
+              "family_codes": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                }
+              },
+              "parameters": {
+                "type": "object"
+              },
+              "colour": {
+                "type": "object",
+                "properties": {
+                  "mode_code": {
+                    "enum": [
+                      null,
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ]
+                  },
+                  "palette_diversity": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_channel_phases": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "depends_on_time": {
+                    "enum": [
+                      null,
+                      0,
+                      1
+                    ]
+                  },
+                  "constant_rgb": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "bias_rgb": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "amplitude_rgb": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "phase_offsets_rad": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "tint_rgb": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "channel_phase_expressions": {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "required": [
+                        "root",
+                        "nodes",
+                        "complete",
+                        "resources_resolved"
+                      ],
+                      "properties": {
+                        "root": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "nodes": {
+                          "type": "array",
+                          "maxItems": 256,
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "op",
+                              "dtype",
+                              "args",
+                              "detail"
+                            ],
+                            "properties": {
+                              "op": {
+                                "type": "string"
+                              },
+                              "dtype": {
+                                "type": "string"
+                              },
+                              "args": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer",
+                                  "minimum": 0
+                                }
+                              },
+                              "detail": {
+                                "type": "object"
+                              }
+                            }
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean"
+                        },
+                        "resources_resolved": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                }
+              },
+              "audio_routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "input_code",
+                    "control",
+                    "control_unit",
+                    "linear_gain",
+                    "expression",
+                    "visible_response_strength",
+                    "q_bridge_expressions"
+                  ],
+                  "properties": {
+                    "input_code": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 8
+                    },
+                    "control": {
+                      "type": "string"
+                    },
+                    "control_unit": {
+                      "type": "string"
+                    },
+                    "linear_gain": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "visible_response_strength": {
+                      "type": "null"
+                    },
+                    "expression": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "required": [
+                        "root",
+                        "nodes",
+                        "complete",
+                        "resources_resolved"
+                      ],
+                      "properties": {
+                        "root": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "nodes": {
+                          "type": "array",
+                          "maxItems": 256,
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "op",
+                              "dtype",
+                              "args",
+                              "detail"
+                            ],
+                            "properties": {
+                              "op": {
+                                "type": "string"
+                              },
+                              "dtype": {
+                                "type": "string"
+                              },
+                              "args": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer",
+                                  "minimum": 0
+                                }
+                              },
+                              "detail": {
+                                "type": "object"
+                              }
+                            }
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean"
+                        },
+                        "resources_resolved": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "q_bridge_expressions": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "required": [
+                          "root",
+                          "nodes",
+                          "complete",
+                          "resources_resolved"
+                        ],
+                        "properties": {
+                          "root": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "nodes": {
+                            "type": "array",
+                            "maxItems": 256,
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "op",
+                                "dtype",
+                                "args",
+                                "detail"
+                              ],
+                              "properties": {
+                                "op": {
+                                  "type": "string"
+                                },
+                                "dtype": {
+                                  "type": "string"
+                                },
+                                "args": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                  }
+                                },
+                                "detail": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          },
+                          "complete": {
+                            "type": "boolean"
+                          },
+                          "resources_resolved": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "has_threshold_or_clamp": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "appearance_match_accuracy": {
+          "type": "null"
+        },
+        "uses_rendered_images": {
+          "const": false
+        },
+        "uses_shader_execution": {
+          "const": false
+        },
+        "uses_equation_execution": {
+          "const": false
+        },
+        "record_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "status",
+        "unknown_reasons"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "status": {
+          "const": "unknown"
+        },
+        "unknown_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

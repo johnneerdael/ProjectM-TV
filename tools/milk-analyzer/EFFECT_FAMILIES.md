@@ -72,6 +72,7 @@ The result contains these fields:
 | `preset_sha256`, `parsed_source_sha256` | Exact `.milk` bytes when supplied; parsed values/sections/parser identity |
 | `profile`, `compatibility_sha256`, `stages` | Declared target and source-bound actual/conditional stage selection |
 | `families` | Multiple mechanism descriptors; a preset can contain several |
+| `visual_description` | Separate versioned structured baseline/colour/audio-control descriptor; see `SOURCE_APPEARANCE.md` |
 | `unknowns` | Unsupported live forms, unresolved stages and explicit complexity limits |
 | `analysis_work` | Deterministic symbolic-work counts and declared finite budgets |
 | `uses_shader_execution`, `uses_equation_execution`, `uses_rendered_images` | All false |

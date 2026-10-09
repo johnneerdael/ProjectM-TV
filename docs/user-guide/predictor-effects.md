@@ -63,6 +63,30 @@ The [complete field/API reference](https://github.com/johnneerdael/ProjectM-TV/b
 and [primary-source research with exact witnesses](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/docs/superpowers/research/2026-10-09-static-effect-families.md)
 describe the supported constructions and boundaries.
 
+## Structured baseline and audio controls
+
+The continued experimental branch adds `analysis.visual_description` alongside
+the mechanism record. It gives source component IDs, numeric form/colour codes,
+parameters, contributing transformations and per-element bass/mid/treble control
+routes. It is intended for editable preference matching and future approximate
+reconstruction of the preset's characteristic look.
+
+Generated RGB phase palettes are described with channel coefficients and control
+programs. Inherited image/feedback colours remain conditional. A recognised
+fractal plus a generated varied palette can support psychedelic potential;
+flashing permission and calm viewing remain separate. Exact positions, screen
+coverage, perceived response magnitude and match confidence can still be null.
+
+Each route identifies the changed control—for example shape radius or rotation,
+feedback zoom, or one RGB component—with its source unit, available linear gain,
+formula/Q bridge and branch/clipping/resource conditions. These are engine
+bands and volume inputs, not isolated instruments or vocals.
+
+The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
+and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
+explain how to read every field. Successful source extraction is not a calibrated
+image match, a complete scene graph or a confident Chill recommendation.
+
 ## Reducing numerical work
 
 Static proof can also reduce execution. The experimental `uniform-proof-v1`

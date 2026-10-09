@@ -731,12 +731,16 @@ class _Analysis:
     def main_equations(self):
         environment = {name: _constant(_scalar(self.values, key, default, kind))
                        for name, (key, default, kind) in MAIN.items()}
+        # The native preset owns a zero-initialized complete Q snapshot.
+        # Init writes then establish values reloaded before main frame code.
+        environment.update({f'q{i}':_constant(0) for i in range(1,33)})
         init = self.equation('per_frame_init_', environment)
         # Frame-written values can depend on previous state. Treat those as inputs,
         # except immediate source constants established by an initializer.
         frame = self.equation('per_frame_', init.environment)
         self.main = frame.environment
         mesh = self.equation('per_pixel_', frame.environment)
+        self.mesh_controls=mesh.environment
         for name in ('rot', 'zoom', 'zoomexp', 'sx', 'sy', 'dx', 'dy', 'warp'):
             value = mesh.environment.get(name, _constant(0))
             if _has(value, 'unknown'):
@@ -757,6 +761,7 @@ class _Analysis:
                          conditions=['native mesh sampling coordinates survive the custom shader'])
 
     def primitives(self):
+        self.component_controls={}
         alpha = self.main['wave_a']; mode = _number(self.main['wave_mode'])
         if _number(alpha) != 0:
             dots = _number(self.main['wave_usedots'])
@@ -809,7 +814,12 @@ class _Analysis:
                     env = {name: _constant(_scalar(self.values, prefix+name, default, dtype))
                            for name, (default, dtype) in SHAPE.items()}
                     init = self.equation(f'shape_{index}_init', env)
-                    frame = self.equation(f'shape_{index}_per_frame', init.environment)
+                    # ShapePerFrameContext::LoadState reloads the main frameQ
+                    # snapshot before shape equations; init Q writes do not
+                    # persist here. Explicit per-frame local writes still win.
+                    shape_inputs={**init.environment,**{f'q{i}':self.main.get(f'q{i}',Field('unknown'))
+                                  for i in range(1,33)}}
+                    frame = self.equation(f'shape_{index}_per_frame', shape_inputs)
                     env = frame.environment
                     count = _number(env['num_inst'])
                     if all(_number(env[name]) == 0 for name in ('a', 'a2', 'border_a')) or _number(env['rad']) == 0 or count is not None and count <= 0:
@@ -818,6 +828,7 @@ class _Analysis:
                     if _has(geometry, 'unknown'):
                         self.unknowns.append({'section': f'shape_{index}_per_frame', 'reason': 'shape geometry is statically unresolved'})
                         continue
+                    self.component_controls[f'shape_{index}']=env
                     self.add('polygon_shape_primitive', f'shape_{index}_per_frame', geometry,
                              'enabled shape with possible fill/border and nonzero radius', component=f'shape_{index}',
                              parameters={'sides': _number(env['sides']), 'instances': _number(env['num_inst'])},
@@ -1170,6 +1181,11 @@ def analyze_families(source, *, profile='gles300', compatibility=None):
                 analysis.families = analysis.families[:start] if phase != 'pipeline' else []
                 analysis.outputs.pop({'warp_': 'warp', 'comp_': 'composite'}.get(phase), None)
                 analysis.unknowns.append({'section': phase, 'reason': 'static analysis unresolved: ' + str(error)})
+        from source_appearance import appearance_from_analysis
+        try:visual_description=appearance_from_analysis(analysis)
+        except (_SemanticBudget,RecursionError,ValueError,IndexError) as error:
+            budget_exhausted |= isinstance(error,_SemanticBudget)
+            visual_description={'schema_version':1,'status':'unknown','unknown_reasons':[str(error)]}
         work = {'field_visits': work_cache.get('field_visits', 0),
                 'normalized_term_nodes': work_cache.get('normalized_term_nodes', 0),
                 'max_field_visits': MAX_FIELD_VISITS, 'max_normalized_terms': MAX_NORMALIZED_TERMS,
@@ -1185,6 +1201,7 @@ def analyze_families(source, *, profile='gles300', compatibility=None):
         'uses_rendered_images': False, 'stages': analysis.stages,
         'families': sorted(analysis.families, key=lambda row: (row['stage'], row['component'] or '', row['mechanism'], _digest(row['parameters']))),
         'unknowns': analysis.unknowns,
+        'visual_description':visual_description,
         'analysis_work': work,
         'appearance_prediction_complete': False, 'mood_labels': [], 'genre_labels': [],
         'limitations': ['Recognized program mechanisms do not guarantee visible or dominant families',
