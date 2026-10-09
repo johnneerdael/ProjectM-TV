@@ -100,3 +100,18 @@
 .md-typeset .grid.pm-two {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
 }
+
+/* Source-bound patch comparisons: identical panels and pixel-preserving zooms. */
+.md-typeset figure.patch-comparison { text-align: left; margin: 1.2rem 0 1.8rem; }
+.patch-panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.6rem; }
+.patch-panel { min-width: 0; text-align: left; }
+.patch-panel > strong { display: block; margin: 0 0 0.3rem; font-size: 0.68rem; }
+.md-typeset .patch-panel img { display: block; width: 100%; height: auto; border-radius: 0; }
+.md-typeset figure.patch-comparison figcaption { display: block; max-width: none; font-style: normal; margin: 0.6rem 0 0; font-size: 0.72rem; line-height: 1.6; text-align: left; }
+.patch-zooms { margin-top: 0.7rem; }
+.patch-crop { display: block; position: relative; overflow: hidden; aspect-ratio: var(--crop-ratio); background: #000; }
+.md-typeset .patch-crop img { position: absolute; max-width: none; width: var(--image-width); height: auto; left: var(--image-left); top: var(--image-top); image-rendering: pixelated; }
+@media screen and (max-width: 35em) {
+  .patch-panels { gap: 0.3rem; }
+  .patch-panel > strong { font-size: 0.56rem; }
+}

@@ -1,0 +1,14 @@
+MILKDROP_PRESET_VERSION=100
+[preset00]
+fDecay=0
+fGammaAdj=1
+fShader=0
+fWaveAlpha=0
+mv_a=0
+ob_size=1.5
+ob_a=0.5
+ob_r=1
+ob_g=1
+ob_b=1
+ib_size=0
+ib_a=0

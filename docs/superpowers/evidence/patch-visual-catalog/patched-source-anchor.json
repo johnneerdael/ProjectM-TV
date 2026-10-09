@@ -1,0 +1,14 @@
+{
+  "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+  "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+  "patch_and_instrumentation_source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+  "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+  "ordered_patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321",
+  "patch_count": 34,
+  "builder_sha256": "8c1ce46880b6b8d4c93889fb28fae8605b7c9bfa30135a8547325fe939832e13",
+  "source_tree_sha256": "5e48da2b8a47f160a1884a648cae19127d833e69f5b5f3c55ffb5c64eff66533",
+  "file_count": 987,
+  "observed_original_equals_reconstructed": true,
+  "published_inventory_equals_reconstructed": true,
+  "method": "Archive frozen Preset Lab tooling and all 34 ordered patches from exact 8a15996e; prepare_engine independently archives 6f648074 and its evaluator, applies all patches and shared deterministic instrumentation. Compare reconstructed per-file hashes with both original build source and published inventory. No compilation or rendering."
+}

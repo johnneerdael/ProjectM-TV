@@ -1,0 +1,28 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Use MilkDrop gamma-only pass-count epsilon
+
+Follow MilkDrop 2.25c milkdropfs.cpp:4245: gamma-only pass count uses
+.001f, distinct from echo redraws' .0001f. Preserve echo behavior,
+live gamma values, tint repair0014, float diffuse policy and blends.
+At loaded gamma1.0005 this removes a redundant fullscreen pass; at
+2.001 it restores two passes with the original final weight instead
+of three. Do not quantize diffuse attributes as part of this change.
+
+Original source: milkdrop2 f05b0d8, milkdropfs.cpp SHA256
+68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.cpp b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+index 139af7b7a..99d5f00a1 100644
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+@@ -210,7 +210,8 @@ void VideoEcho::DrawGammaAdjustment(const PerFrameContext& perFrameContext)
+     Renderer::BlendMode::Set(true, Renderer::BlendMode::Function::One, Renderer::BlendMode::Function::Zero);
+
+     auto const gammaAdj = static_cast<float>(*perFrameContext.gamma);
+-    int const redrawCount = static_cast<int>(gammaAdj - 0.0001f) + 1;
++    // MilkDrop's gamma-only path has a distinct epsilon from echo redraws.
++    int const redrawCount = static_cast<int>(gammaAdj - 0.001f) + 1;
+
+     for (int redraw = 0; redraw < redrawCount; redraw++)
+     {

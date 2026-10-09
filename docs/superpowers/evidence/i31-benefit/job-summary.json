@@ -1,0 +1,1682 @@
+[
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b00-p0-without-0019",
+    "submit_ms": 0.6992260527777778,
+    "complete_ms": 2.786140033333333,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b00-p1-with-0019",
+    "submit_ms": 0.6235813944444445,
+    "complete_ms": 2.3094406277777777,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b00-p2-with-0019",
+    "submit_ms": 0.6165061583333333,
+    "complete_ms": 2.297224425,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b00-p3-without-0019",
+    "submit_ms": 0.6890318222222221,
+    "complete_ms": 2.783765266666667,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b01-p0-with-0019",
+    "submit_ms": 0.6076192194444444,
+    "complete_ms": 2.317279261111111,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b01-p1-without-0019",
+    "submit_ms": 0.6846181611111111,
+    "complete_ms": 2.786036925,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b01-p2-without-0019",
+    "submit_ms": 0.6815931944444446,
+    "complete_ms": 2.776299675,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b01-p3-with-0019",
+    "submit_ms": 0.6169434944444444,
+    "complete_ms": 2.316017008333333,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b02-p0-without-0019",
+    "submit_ms": 0.6924161805555556,
+    "complete_ms": 2.7838231666666666,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b02-p1-with-0019",
+    "submit_ms": 0.6215119472222222,
+    "complete_ms": 2.291238919444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b02-p2-with-0019",
+    "submit_ms": 0.6142511277777778,
+    "complete_ms": 2.2823452444444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b02-p3-without-0019",
+    "submit_ms": 0.66147685,
+    "complete_ms": 2.733327516666667,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b03-p0-with-0019",
+    "submit_ms": 0.5995511722222222,
+    "complete_ms": 2.2887666944444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b03-p1-without-0019",
+    "submit_ms": 0.6894004638888889,
+    "complete_ms": 2.7473134,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b03-p2-without-0019",
+    "submit_ms": 0.6643460444444445,
+    "complete_ms": 2.750427986111111,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b03-p3-with-0019",
+    "submit_ms": 0.6034735250000001,
+    "complete_ms": 2.300734513888889,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 4,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b04-p0-without-0019",
+    "submit_ms": 0.679354875,
+    "complete_ms": 2.7296038416666666,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 4,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b04-p1-with-0019",
+    "submit_ms": 0.6165342638888889,
+    "complete_ms": 2.2991846055555554,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 4,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b04-p2-with-0019",
+    "submit_ms": 0.6041669111111111,
+    "complete_ms": 2.287501625,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 4,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b04-p3-without-0019",
+    "submit_ms": 0.6813427333333334,
+    "complete_ms": 2.7444879944444445,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 5,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b05-p0-with-0019",
+    "submit_ms": 0.6128325138888889,
+    "complete_ms": 2.295154872222222,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 5,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b05-p1-without-0019",
+    "submit_ms": 0.6717566916666666,
+    "complete_ms": 2.739987516666667,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 5,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b05-p2-without-0019",
+    "submit_ms": 0.675744325,
+    "complete_ms": 2.7430313583333334,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 5,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b05-p3-with-0019",
+    "submit_ms": 0.6005524027777778,
+    "complete_ms": 2.280451147222222,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 6,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b06-p0-without-0019",
+    "submit_ms": 0.6756598527777778,
+    "complete_ms": 2.7275626305555556,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 6,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b06-p1-with-0019",
+    "submit_ms": 0.64051145,
+    "complete_ms": 2.316722811111111,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 6,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b06-p2-with-0019",
+    "submit_ms": 0.6465563861111111,
+    "complete_ms": 2.322700919444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 6,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b06-p3-without-0019",
+    "submit_ms": 0.7130767361111111,
+    "complete_ms": 2.796609586111111,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 7,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b07-p0-with-0019",
+    "submit_ms": 0.6301629694444444,
+    "complete_ms": 2.3561240666666667,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 7,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b07-p1-without-0019",
+    "submit_ms": 0.7179282499999999,
+    "complete_ms": 2.8382931694444444,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 7,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b07-p2-without-0019",
+    "submit_ms": 0.6868682861111111,
+    "complete_ms": 2.8302522999999997,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-classic",
+    "profile": "classic",
+    "block": 7,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-classic-b07-p3-with-0019",
+    "submit_ms": 0.6240458111111111,
+    "complete_ms": 2.3526426916666665,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 0,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b00-p0-without-0019",
+    "submit_ms": 0.806957038888889,
+    "complete_ms": 2.713357980555555,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 0,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b00-p1-with-0019",
+    "submit_ms": 0.6858908305555556,
+    "complete_ms": 2.215490283333333,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 0,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b00-p2-with-0019",
+    "submit_ms": 0.7258363666666667,
+    "complete_ms": 2.228983313888889,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 0,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b00-p3-without-0019",
+    "submit_ms": 0.7931314916666666,
+    "complete_ms": 2.6838373000000004,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 1,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b01-p0-with-0019",
+    "submit_ms": 0.7291781222222222,
+    "complete_ms": 2.246323263888889,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 1,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b01-p1-without-0019",
+    "submit_ms": 0.8065263861111112,
+    "complete_ms": 2.716078586111111,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 1,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b01-p2-without-0019",
+    "submit_ms": 0.807633375,
+    "complete_ms": 2.6963356000000003,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 1,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b01-p3-with-0019",
+    "submit_ms": 0.728445361111111,
+    "complete_ms": 2.233806336111111,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 2,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b02-p0-without-0019",
+    "submit_ms": 0.8076931194444442,
+    "complete_ms": 2.705814211111111,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 2,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b02-p1-with-0019",
+    "submit_ms": 0.7308512833333333,
+    "complete_ms": 2.237672680555556,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 2,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b02-p2-with-0019",
+    "submit_ms": 0.7330312666666666,
+    "complete_ms": 2.230111827777778,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 2,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b02-p3-without-0019",
+    "submit_ms": 0.7967152555555556,
+    "complete_ms": 2.7064994972222225,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 3,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b03-p0-with-0019",
+    "submit_ms": 0.733915038888889,
+    "complete_ms": 2.2482217638888886,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 3,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b03-p1-without-0019",
+    "submit_ms": 0.8062157361111111,
+    "complete_ms": 2.6894279861111112,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 3,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b03-p2-without-0019",
+    "submit_ms": 0.8073868027777776,
+    "complete_ms": 2.7000007083333335,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 3,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b03-p3-with-0019",
+    "submit_ms": 0.7397110055555555,
+    "complete_ms": 2.25028405,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 4,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b04-p0-without-0019",
+    "submit_ms": 0.8285315944444446,
+    "complete_ms": 2.776126369444444,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 4,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b04-p1-with-0019",
+    "submit_ms": 0.7377752555555556,
+    "complete_ms": 2.262314725,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 4,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b04-p2-with-0019",
+    "submit_ms": 0.7206872444444444,
+    "complete_ms": 2.227630075,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 4,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b04-p3-without-0019",
+    "submit_ms": 0.8094450416666666,
+    "complete_ms": 2.7059751249999997,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 5,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b05-p0-with-0019",
+    "submit_ms": 0.7428076527777777,
+    "complete_ms": 2.2516747805555553,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 5,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b05-p1-without-0019",
+    "submit_ms": 0.8111032222222222,
+    "complete_ms": 2.692136102777778,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 5,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b05-p2-without-0019",
+    "submit_ms": 0.7955907555555557,
+    "complete_ms": 2.687240383333333,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 5,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b05-p3-with-0019",
+    "submit_ms": 0.7655202277777778,
+    "complete_ms": 2.261217558333333,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 6,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b06-p0-without-0019",
+    "submit_ms": 0.8038564833333333,
+    "complete_ms": 2.6914731527777778,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 6,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b06-p1-with-0019",
+    "submit_ms": 0.739286588888889,
+    "complete_ms": 2.23920765,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 6,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b06-p2-with-0019",
+    "submit_ms": 0.7310674750000001,
+    "complete_ms": 2.243895558333333,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 6,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b06-p3-without-0019",
+    "submit_ms": 0.8191902055555556,
+    "complete_ms": 2.708764622222222,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 7,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b07-p0-with-0019",
+    "submit_ms": 0.7312928027777778,
+    "complete_ms": 2.2333773055555555,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 7,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b07-p1-without-0019",
+    "submit_ms": 0.7908339249999999,
+    "complete_ms": 2.6732435527777776,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 7,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b07-p2-without-0019",
+    "submit_ms": 0.8086502916666667,
+    "complete_ms": 2.7256386888888886,
+    "gamma_draws": [
+      3
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "original-standard",
+    "profile": "standard",
+    "block": 7,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "original.milk",
+    "name": "original-standard-b07-p3-with-0019",
+    "submit_ms": 0.7300068083333334,
+    "complete_ms": 2.2481301944444443,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.000999927520752
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b00-p0-without-0019",
+    "submit_ms": 0.6021858916666667,
+    "complete_ms": 2.32173415,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b00-p1-with-0019",
+    "submit_ms": 0.6150486166666667,
+    "complete_ms": 2.3378225777777777,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b00-p2-with-0019",
+    "submit_ms": 0.5987908416666667,
+    "complete_ms": 2.305926944444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 0,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b00-p3-without-0019",
+    "submit_ms": 0.592611238888889,
+    "complete_ms": 2.298910211111111,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b01-p0-with-0019",
+    "submit_ms": 0.603731813888889,
+    "complete_ms": 2.339980097222222,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b01-p1-without-0019",
+    "submit_ms": 0.598599675,
+    "complete_ms": 2.32006355,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b01-p2-without-0019",
+    "submit_ms": 0.6149276527777777,
+    "complete_ms": 2.316095008333333,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 1,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b01-p3-with-0019",
+    "submit_ms": 0.6222495444444445,
+    "complete_ms": 2.3358352166666667,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 0,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b02-p0-without-0019",
+    "submit_ms": 0.6027053861111111,
+    "complete_ms": 2.3070940944444445,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 1,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b02-p1-with-0019",
+    "submit_ms": 0.6412806555555556,
+    "complete_ms": 2.3482154916666667,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 2,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b02-p2-with-0019",
+    "submit_ms": 0.6106280416666667,
+    "complete_ms": 2.3173766444444444,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 2,
+    "position": 3,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b02-p3-without-0019",
+    "submit_ms": 0.6109924666666667,
+    "complete_ms": 2.3250508055555557,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 0,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b03-p0-with-0019",
+    "submit_ms": 0.5947526666666666,
+    "complete_ms": 2.2974520861111114,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 1,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b03-p1-without-0019",
+    "submit_ms": 0.5940577472222223,
+    "complete_ms": 2.3192216444444447,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 2,
+    "role": "without-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b03-p2-without-0019",
+    "submit_ms": 0.5911238055555555,
+    "complete_ms": 2.318576738888889,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  },
+  {
+    "case": "inactive-classic",
+    "profile": "classic",
+    "block": 3,
+    "position": 3,
+    "role": "with-0019",
+    "preset": "inactive-gamma2.milk",
+    "name": "inactive-classic-b03-p3-with-0019",
+    "submit_ms": 0.5984400666666667,
+    "complete_ms": 2.307256963888889,
+    "gamma_draws": [
+      2
+    ],
+    "gamma_invocations": [
+      1
+    ],
+    "gamma": [
+      2.0
+    ],
+    "gpu_timer_valid": true
+  }
+]

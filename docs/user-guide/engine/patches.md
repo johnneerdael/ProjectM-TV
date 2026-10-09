@@ -9,6 +9,11 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 !!! info "How the images were made"
     The images for 0001–0014 come from the [current-patch proof](https://github.com/johnneerdael/ProjectM-TV/pull/55). A preset is rendered by real libprojectM on a GPU-accelerated Android TV emulator: GLES 3.0, frozen audio, seed 12345, a frame/30 clock, frames 0–119, each role captured twice with byte-identical results. *Without* means the full series minus only that patch (a single-patch ablation); *with* is the full series at that recorded 14-patch checkpoint. Images are unbrightened and rendered at 512×288 (some at 256×144) with quad lines and Native trails off. They establish cause and effect for that preset on that GPU. They are not Windows reference renders, and they do not certify every preset or every TV.
 
+!!! info "New comparisons for the 18 audit repairs"
+    Images in 0017–0033 compare **unmodified upstream master [`e98fca85`](https://github.com/projectM-visualizer/projectm/commit/e98fca85e57802d27a6d11499642de2a1d5e994e)** with **ProjectM TV [`8a15996e`](https://github.com/johnneerdael/ProjectM-TV/commit/8a15996e8510533113a44e26feaddc3a7d6e85f5), all 34 patches**. These are new native Apple M4 Pro GPU captures: OpenGL 4.1 over Metal, matching preset bytes, fixed float32 mono audio, seed 12345, 48×32 mesh and 30 Hz clock. Every RGB frame repeats byte for byte within each role, with no reported GL errors. Originals run 480 frames; small supplementary diagnostics and 4K pairs run 240. Each caption identifies actual dimensions and the selected frame.
+
+    Both engines use actual output dimensions, classic lines, antialiasing off and TV feedback detail off. **These full-engine pairs include all earlier fixes; they are not single-patch ablations or production Native Standard-trails screenshots.** The linked issue controls establish each repair's cause. These are 18 retained repair IDs; visible effects and measured performance benefits have separate evidence. Synthetic diagnostics are explicitly marked, affected-preset counts remain unconfirmed, and the gamma repair has no demonstrated visible improvement in its isolated original witness; its separate native-M4 benchmark now demonstrates lower rendering cost. Click any image for the lossless full-resolution frame. Matching zooms crop the original browser image without editing its brightness or pixels. [Capture records and reproduction](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/patch-visual-catalog/README.md) include exact identities and limits. Desktop images do not certify Windows/D3D appearance or TV performance.
+
 ## At a glance
 
 | Patch | What it fixes | Witness |
@@ -31,21 +36,21 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0016](#0016-cached-static-warp-uploads) | Retain the static mesh until size/aspect/producer changes | `cache controls` |
 | [0017](#0017-built-in-wave-opacity) | Original mode alpha and volume amplification | `Happening.milk` |
 | [0018](#0018-custom-wave-input-windows) | Centered and separated valid audio windows | `Mig_304 - geiss remix 2.milk` |
-| [0019](#0019-gamma-only-pass-count) | Separate original gamma-only epsilon | `boundary controls` |
-| [0020](#0020-named-eel-constants) | Original double decimal inputs | `finite controls` |
-| [0021](#0021-original-equation-inputs) | Inverse aspect and fresh wave-point inputs | `source/original controls` |
-| [0022](#0022-negative-odd-echo-orientation) | Signed nonzero horizontal flip | `known-edge controls` |
-| [0023](#0023-legacy-oscillator-y) | Original physical Y in built-in warp deformation | `original/finite/custom controls` |
-| [0024](#0024-legacy-mesh-diagonal) | Original physical triangle diagonal | `mesh/cache controls` |
-| [0025](#0025-legacy-per-pixel-traversal) | Original physical row evaluation order | `stateful equation controls` |
-| [0026](#0026-legacy-angle-seam) | Original signed-zero negative-X seam | `actual CPU/GPU controls` |
-| [0027](#0027-wave-colour-clamp) | Clamp local RGB before nonzero brightening | `palette controls` |
-| [0028](#0028-border-fan-topology) | Original border strip-fan coverage | `finite/original controls` |
-| [0029](#0029-original-line-sample-caps) | Reference-width cap on original line budgets | `Royal - Mashup (103)` |
-| [0030](#0030-discrete-custom-dots) | Authored dots without interpolated midpoints | `mosaic mitosis; finite dots` |
-| [0031](#0031-circle-spacing-and-closure) | Original angular spacing and closure before smoothing | `Royal - Mashup (137)/(11)` |
-| [0032](#0032-live-shape-thickness) | Evaluated style captured per instance and replay | `city lights v2 witnesses` |
-| [0033](#0033-latest-previous-motion-field) | Refresh actual warp UV while vectors are hidden | `default/custom feedback fixtures` |
+| [0019](#0019-gamma-only-pass-count) | Separate original gamma-only epsilon | `suksma - type o negative - world coming down.milk` |
+| [0020](#0020-named-eel-constants) | Original double decimal inputs | `audit pi precision.milk · synthetic` |
+| [0021](#0021-original-equation-inputs) | Inverse aspect and fresh wave-point inputs | `163; Carnival` |
+| [0022](#0022-negative-odd-echo-orientation) | Signed nonzero horizontal flip | `audit negative echo.milk · synthetic` |
+| [0023](#0023-legacy-oscillator-y) | Original physical Y in built-in warp deformation | `BrainStain-fish on.milk` |
+| [0024](#0024-legacy-mesh-diagonal) | Original physical triangle diagonal | `07.milk` |
+| [0025](#0025-legacy-per-pixel-traversal) | Original physical row evaluation order | `audit legacy physical traversal.milk · synthetic` |
+| [0026](#0026-legacy-angle-seam) | Original signed-zero negative-X seam | `Liquido.milk` |
+| [0027](#0027-wave-colour-clamp) | Clamp local RGB before nonzero brightening | `Geiss - Blur Mix 3.milk` |
+| [0028](#0028-border-fan-topology) | Original border strip-fan coverage | `audit border inverted.milk · synthetic` |
+| [0029](#0029-original-line-sample-caps) | Reference-width cap on original line budgets | `$$$ Royal - Mashup (103).milk` |
+| [0030](#0030-discrete-custom-dots) | Authored dots without interpolated midpoints | `phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk` |
+| [0031](#0031-circle-spacing-and-closure) | Original angular spacing and closure before smoothing | `$$$ Royal - Mashup (11).milk` |
+| [0032](#0032-live-shape-thickness) | Evaluated style captured per instance and replay | `martin - city lights v2 c.milk` |
+| [0033](#0033-latest-previous-motion-field) | Refresh actual warp UV while vectors are hidden | `audit followup uv default-feedback.milk · synthetic` |
 | [0034](#0034-gles-motion-field-storage) | Compatible continuous UV on GLES without float render targets | capability, integer storage and decoder controls |
 
 ## 0001 — TV rendering and preset compatibility
@@ -232,71 +237,235 @@ Static warp coordinates, radius/angle and topology are uploaded only when their 
 
 MilkDrop multiplies mode-adjusted alpha by the volume ramp before clamping. Mode3 replaces its starting alpha with the canvas coefficient times 1.3 × treb²; mode1 retains its 1.25 multiplier. Final alpha below .004 skips the draw. Existing Native/reference styles remain. [I17 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I17-4k-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I17-4k-upstream.png" alt="Happening.milk — Before · upstream master" width="3840" height="2160" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I17-4k-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I17-4k-patched.png" alt="Happening.milk — After · ProjectM TV" width="3840" height="2160" loading="lazy"></a></div></div>
+<figcaption><strong>Happening.milk</strong> · 3840×2160, frame 239 at 30 Hz.<br>Before, many streaks wash toward white. After, green, pink and blue remain distinct. This full-engine comparison also includes the legacy warp repairs.</figcaption>
+</figure>
+
 ## 0018 — Custom wave input windows
 
 Valid custom oscilloscope windows are centered in the480-sample input and the channels shift in opposite directions by sep/2. Invalid original windows retain the safe prefix fallback; oversized requests retain resampling. Spectrum inputs and Native prepared replay remain. [I08 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I08-4k-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I08-4k-upstream.png" alt="Mig_304 - geiss remix 2.milk — Before · upstream master" width="3840" height="2160" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I08-4k-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I08-4k-patched.png" alt="Mig_304 - geiss remix 2.milk — After · ProjectM TV" width="3840" height="2160" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I08-4k-upstream.png" style="--crop-ratio:1152/864;--image-width:333.333333333%;--image-left:-116.666666667%;--image-top:-75.000000000%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I08-4k-upstream.png" alt="Matched crop of Mig_304 - geiss remix 2.milk — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I08-4k-patched.png" style="--crop-ratio:1152/864;--image-width:333.333333333%;--image-left:-116.666666667%;--image-top:-75.000000000%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I08-4k-patched.png" alt="Matched crop of Mig_304 - geiss remix 2.milk — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>Mig_304 - geiss remix 2.milk</strong> · 3840×2160, frame 239 at 30 Hz.<br>The centered, separated audio windows change the small blue custom-wave trace. The matched zoom makes its changed geometry easier to inspect. Zoom rectangle: (1344, 648), 1152×864 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
+
 ## 0019 — Gamma-only pass count
 
-Gamma-only output uses the original .001 pass-count epsilon; echo redraws retain .0001. Float diffuse precision, live tint and echo policies remain. [I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
+Gamma-only output uses MilkDrop's original .001 pass-count epsilon; echo redraws retain .0001. At the admitted boundary, I31 removes a fullscreen gamma draw while preserving the checked image. Float diffuse precision, live tint and echo policies remain.
+
+**Proven benefit: lower rendering cost with unchanged checked images.** An isolated 3840×2160 benchmark compares the full engine with its exact 0019 ablation on the Apple M4 Pro. In the Standard profile:
+
+| Measurement | Without I31 | With I31 | Reduction |
+|---|---:|---:|---:|
+| Gamma draws per frame | 3 | 2 | One fullscreen draw |
+| GPU elapsed time | 2.307 ms | 1.847 ms | 19.9% |
+| Completed-frame time | 2.704 ms | 2.241 ms | 17.1% |
+
+All eight balanced blocks favor I31. The gamma-2.0 inactive control retains two draws and its GPU/completed-frame intervals include zero change. Separate frames 119, 239 and 479 are RGB-identical across roles and repeats in both tested profiles. These are rendering-cost measurements, not app FPS; TV gains depend on its bottlenecks and remain unmeasured. [Full benefit proof and replay](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/i31-benefit/README.md) · [Historical I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I31-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I31-upstream.png" alt="suksma - type o negative - world coming down.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I31-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I31-patched.png" alt="suksma - type o negative - world coming down.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>suksma - type o negative - world coming down.milk</strong> · 1280×720, frame 119 at 30 Hz.<br>This full upstream-master/main pair illustrates near-unchanged appearance and includes other patches. The separate single-patch 4K benchmark above proves a rendering-cost benefit; it does not depend on a visible improvement in this picture.</figcaption>
+</figure>
 
 ## 0020 — Named EEL constants
 
 Named pi/e/phi decimals enter the double evaluator without intermediate float rounding. The original abbreviated e/phi decimals, later geometry/shader casts and RNG remain. [I09 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I09-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I09-upstream.png" alt="audit pi precision.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I09-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I09-patched.png" alt="audit pi precision.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>audit pi precision.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>This diagnostic deliberately amplifies the float-rounding error in $pi. Upstream makes an oversized red border; the double input restores the narrow border requested by the expression.</figcaption>
+</figure>
+
 ## 0021 — Original equation inputs
 
 Per-pixel equations receive inverse aspect factors. Custom-wave points receive a fresh host-input snapshot before wave-frame code, then Q/T propagate normally. Main equation writes remain local, and Native replay does not evaluate equations again. [I05/I06 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/README.md).
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I05-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I05-upstream.png" alt="163.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I05-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I05-patched.png" alt="163.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>163.milk</strong> · 1280×720, frame 300 at 30 Hz.<br>Inverse aspect inputs change the feedback displacement in this original. The separate synthetic drift example below makes the equation-input effect easier to see.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I05-control-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I05-control-upstream.png" alt="audit inverse aspect.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I05-control-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I05-control-patched.png" alt="audit inverse aspect.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I05-control-upstream.png" style="--crop-ratio:600/300;--image-width:213.333333333%;--image-left:-33.333333333%;--image-top:-75.000000000%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I05-control-upstream.png" alt="Matched crop of audit inverse aspect.milk (synthetic) — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I05-control-patched.png" style="--crop-ratio:600/300;--image-width:213.333333333%;--image-left:-33.333333333%;--image-top:-75.000000000%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I05-control-patched.png" alt="Matched crop of audit inverse aspect.milk (synthetic) — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>audit inverse aspect.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>Synthetic inverse-aspect drift: the same red square is displaced using dx=aspecty/10. Zoom rectangle: (200, 225), 600×300 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I06-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I06-upstream.png" alt="Shreyas - Carnival loavthephysyq.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I06-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I06-patched.png" alt="Shreyas - Carnival loavthephysyq.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>Shreyas - Carnival loavthephysyq.milk</strong> · 1280×720, frame 479 at 30 Hz.<br>Fresh host time changes the colour pattern in the custom waves. It does not mean every preset should become brighter or darker.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I06-control-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I06-control-upstream.png" alt="audit fresh wave time.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I06-control-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I06-control-patched.png" alt="audit fresh wave time.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I06-control-upstream.png" style="--crop-ratio:250/320;--image-width:512.000000000%;--image-left:-90.000000000%;--image-top:-62.500000000%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I06-control-upstream.png" alt="Matched crop of audit fresh wave time.milk (synthetic) — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I06-control-patched.png" style="--crop-ratio:250/320;--image-width:512.000000000%;--image-left:-90.000000000%;--image-top:-62.500000000%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I06-control-patched.png" alt="Matched crop of audit fresh wave time.milk (synthetic) — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>audit fresh wave time.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>Synthetic fresh-time input: main time is slowed to one tenth; wave-point time must still use the host clock. Zoom rectangle: (225, 200), 250×320 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
 
 ## 0022 — Negative odd echo orientation
 
 Finite negative odd echo orientations flip horizontally using the original signed nonzero-remainder test. Modulo4, vertical flip, zoom/mix, tint and gamma remain. [I29 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I29/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I29-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I29-upstream.png" alt="audit negative echo.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I29-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I29-patched.png" alt="audit negative echo.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>audit negative echo.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>Negative odd echo orientation moves the orange square from the left to the right by applying the authored horizontal mirror.</figcaption>
+</figure>
+
 ## 0023 — Legacy oscillator Y
 
 The built-in and fallback warp oscillators use MilkDrop’s physical Y convention. The retained custom-shader coordinate contract and prepared replay remain. [I10 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I10/README.md).
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I10-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I10-upstream.png" alt="BrainStain-fish on.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I10-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I10-patched.png" alt="BrainStain-fish on.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>BrainStain-fish on.milk</strong> · 1280×720, frame 150 at 30 Hz.<br>The legacy oscillator uses the original physical Y direction, changing the curved feedback geometry. Custom warp-shader coordinates keep their separate contract.</figcaption>
+</figure>
 
 ## 0024 — Legacy mesh diagonal
 
 Legacy warp triangles use the original physical diagonal. Custom topology and same-size static upload caching remain. [I11 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I11/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I11-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I11-upstream.png" alt="07.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I11-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I11-patched.png" alt="07.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>07.milk</strong> · 1280×720, frame 150 at 30 Hz.<br>The physical triangle diagonal changes interpolation within the legacy warp mesh. The original radial feedback makes that difference accumulate into a different pattern.</figcaption>
+</figure>
+
 ## 0025 — Legacy per-pixel traversal
 
 Legacy stateful per-pixel equations visit physical rows in the original order. Custom traversal and once-only prepared replay remain. [I12 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I12/README.md).
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I12-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I12-upstream.png" alt="audit legacy physical traversal.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I12-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I12-patched.png" alt="audit legacy physical traversal.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>audit legacy physical traversal.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>The equation increments q1 at each mesh point. Restoring physical row order changes its coloured shear; this control makes stateful traversal visible.</figcaption>
+</figure>
 
 ## 0026 — Legacy angle seam
 
 At the exact negative-X axis, legacy equation angles retain the original signed-zero atan2 seam. Off-axis and custom inputs remain; independent CPU trig and actual GPU controls verify the consequence. [I13 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I13/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I13-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I13-upstream.png" alt="Liquido.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I13-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I13-patched.png" alt="Liquido.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I13-upstream.png" style="--crop-ratio:640/288;--image-width:200.000000000%;--image-left:0.000000000%;--image-top:-75.000000000%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I13-upstream.png" alt="Matched crop of Liquido.milk — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I13-patched.png" style="--crop-ratio:640/288;--image-width:200.000000000%;--image-left:0.000000000%;--image-top:-75.000000000%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I13-patched.png" alt="Matched crop of Liquido.milk — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>Liquido.milk</strong> · 1280×720, frame 180 at 30 Hz.<br>This original branches on ang at the exact left axis. The original seam value selects the intended branch; feedback then propagates the changed deformation. Zoom rectangle: (0, 216), 640×288 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
+
 ## 0027 — Wave colour clamp
 
 Local built-in wave RGB is clamped before nonzero brightening. Raw equation values and float colour/alpha submission remain; a separate negative-darken activation is outside this repair. [I18 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I18/README.md).
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I18-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I18-upstream.png" alt="Geiss - Blur Mix 3.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I18-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I18-patched.png" alt="Geiss - Blur Mix 3.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I18-upstream.png" style="--crop-ratio:1024/158;--image-width:125.000000000%;--image-left:-12.500000000%;--image-top:-182.278481013%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I18-upstream.png" alt="Matched crop of Geiss - Blur Mix 3.milk — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I18-patched.png" style="--crop-ratio:1024/158;--image-width:125.000000000%;--image-left:-12.500000000%;--image-top:-182.278481013%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I18-patched.png" alt="Matched crop of Geiss - Blur Mix 3.milk — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>Geiss - Blur Mix 3.milk</strong> · 1280×720, frame 239 at 30 Hz.<br>The brightened built-in waveform uses clamped colour channels before normalization. Inspect the narrow central wave in the matched zoom; the full pair includes the other wave repairs too. Zoom rectangle: (128, 288), 1024×158 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
 
 ## 0028 — Border fan topology
 
 Eight triangle indices restore the original border strip-fan coverage. Current float colour/alpha and Native rendering policies remain. [M02 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/M02/README.md).
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/M02-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/M02-upstream.png" alt="audit border inverted.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/M02-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/M02-patched.png" alt="audit border inverted.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>audit border inverted.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>An intentionally oversized, translucent border exposes overlapping coverage. Restored strip-fan indices change that coverage. The neutral colour also reflects earlier patch 0014 honoring fShader=0; it is not caused by the border topology repair.</figcaption>
+</figure>
+
 ## 0029 — Original line sample caps
 
 Line modes4/6/7 use their original raw sample budgets, capped by one third of the reference-equivalent width with a two-point safety floor. Native/reference scaling and extended modes remain. This can substantially change feedback brightness, as in Royal103; brightness relative to the previous build alone does not establish authored Windows appearance.
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I19-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I19-upstream.png" alt="$$$ Royal - Mashup (103).milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I19-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I19-patched.png" alt="$$$ Royal - Mashup (103).milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>$$$ Royal - Mashup (103).milk</strong> · 1280×720, frame 239 at 30 Hz.<br>At 1280×720, the original width-dependent cap changes submitted waveform geometry and this witness becomes brighter. That direction is not universal: the uncapped 4K pair below is nearly unchanged.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I19-4k-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I19-4k-upstream.png" alt="$$$ Royal - Mashup (103).milk — Before · upstream master" width="3840" height="2160" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I19-4k-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I19-4k-patched.png" alt="$$$ Royal - Mashup (103).milk — After · ProjectM TV" width="3840" height="2160" loading="lazy"></a></div></div>
+<figcaption><strong>$$$ Royal - Mashup (103).milk</strong> · 3840×2160, frame 239 at 30 Hz.<br>The same original at 3840×2160 with actual-width sampling and TV feedback detail off. Both width budgets reach the full raw sample count, so the cap itself is inactive here.</figcaption>
+</figure>
 
 ## 0030 — Discrete custom dots
 
 Custom dots submit their authored points without line-interpolation midpoints. Ordinary lines retain smoothing. A one-dot program can produce finite coordinates/colour while its undefined normalized sample input remains NaN; that raw input is preserved.
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I22-4k-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I22-4k-upstream.png" alt="phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk — Before · upstream master" width="3840" height="2160" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I22-4k-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I22-4k-patched.png" alt="phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk — After · ProjectM TV" width="3840" height="2160" loading="lazy"></a></div></div>
+<figcaption><strong>phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk</strong> · 3840×2160, frame 239 at 30 Hz.<br>The custom wave describes 42 stars. Discrete dots retain authored samples instead of inserting line-interpolation dots. A synthetic zoom below isolates an extra dot that disappears.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I22-control-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I22-control-upstream.png" alt="audit followup dot audit dot ring.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I22-control-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I22-control-patched.png" alt="audit followup dot audit dot ring.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I22-control-upstream.png" style="--crop-ratio:40/40;--image-width:3200.000000000%;--image-left:-425.000000000%;--image-top:-850.000000000%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I22-control-upstream.png" alt="Matched crop of audit followup dot audit dot ring.milk (synthetic) — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I22-control-patched.png" style="--crop-ratio:40/40;--image-width:3200.000000000%;--image-left:-425.000000000%;--image-top:-850.000000000%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I22-control-patched.png" alt="Matched crop of audit followup dot audit dot ring.milk (synthetic) — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>audit followup dot audit dot ring.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>Synthetic 12-sample dot ring. This nearest-neighbour crop surrounds one interpolated dot: it is present upstream and absent after the repair. The original full frames remain available by clicking. Zoom rectangle: (170, 340), 40×40 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
+
 ## 0031 — Circle spacing and closure
 
 Circles use the original angular spacing and duplicate the first endpoint before shared smoothing. Native styles, equation execution and the TV transition composition remain.
 
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I20-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I20-upstream.png" alt="$$$ Royal - Mashup (11).milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I20-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I20-patched.png" alt="$$$ Royal - Mashup (11).milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>$$$ Royal - Mashup (11).milk</strong> · 1280×720, frame 119 at 30 Hz.<br>Original circle spacing and exact closure change the accumulating circular feedback. This is the full preset result, not a close-up proof that every changed pixel lies at the closing seam.</figcaption>
+</figure>
+
 ## 0032 — Live shape thickness
 
 Each custom shape captures the evaluated thickness for that instance and reuses it in authored and Native draws. Defined int32 truncation values follow the original nonzero flag; values outside that domain retain the saved parsed style without changing the raw equation value. No grouped-geometry optimization is introduced.
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I24-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I24-upstream.png" alt="martin - city lights v2 c.milk — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I24-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I24-patched.png" alt="martin - city lights v2 c.milk — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<figcaption><strong>martin - city lights v2 c.milk</strong> · 1280×720, frame 239 at 30 Hz.<br>The four overlay shape instances can use their evaluated thick outlines while the other 45 remain thin. This busy original also contains other repaired features; the disjoint-square diagnostic below isolates live thickness.</figcaption>
+</figure>
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I24-control-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I24-control-upstream.png" alt="audit followup audit shape live disjoint-thick.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I24-control-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I24-control-patched.png" alt="audit followup audit shape live disjoint-thick.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I24-control-upstream.png" style="--crop-ratio:70/70;--image-width:1828.571428571%;--image-left:-392.857142857%;--image-top:-185.714285714%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I24-control-upstream.png" alt="Matched crop of audit followup audit shape live disjoint-thick.milk (synthetic) — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I24-control-patched.png" style="--crop-ratio:70/70;--image-width:1828.571428571%;--image-left:-392.857142857%;--image-top:-185.714285714%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I24-control-patched.png" alt="Matched crop of audit followup audit shape live disjoint-thick.milk (synthetic) — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>audit followup audit shape live disjoint-thick.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>Synthetic disjoint shape instances, with thin saved style and live thick=1. The matched corner crop exposes the evaluated border width. Zoom rectangle: (275, 130), 70×70 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
 
 ## 0033 — Latest previous motion field
 
 The actual warp updates the previous completed motion field even while vectors are hidden. A later active consumer uses that compatible previous field, respecting fragment discard/output writes, first-frame guards, context/size changes and per-preset ownership. This adds intentional UV-write work rather than a synthetic UV-only pass.
 
 The user accepts necessary authored-work cost for patches0029–0033. [Focused Native4K captures, source controls and active-canvas lifecycle evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/authored-fidelity-followup/README.md) identify the tested inputs and limits. Isolated combined-cost qualification covers seven workloads and reports absolute/cycle deltas; physical-TV headroom remains unmeasured. Final PR CI remains separate. These observations do not certify every preset, Windows pixels or physical-TV headroom.
+
+<figure class="patch-comparison">
+<div class="patch-panels"><div class="patch-panel"><strong>Before · upstream master</strong><a href="../../images/patches/audit/I16-upstream.png" aria-label="Open full-resolution Before · upstream master image"><img src="../../images/patches/audit/I16-upstream.png" alt="audit followup uv default-feedback.milk (synthetic) — Before · upstream master" width="1280" height="720" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · ProjectM TV</strong><a href="../../images/patches/audit/I16-patched.png" aria-label="Open full-resolution After · ProjectM TV image"><img src="../../images/patches/audit/I16-patched.png" alt="audit followup uv default-feedback.milk (synthetic) — After · ProjectM TV" width="1280" height="720" loading="lazy"></a></div></div>
+<div class="patch-panels patch-zooms"><div class="patch-panel"><strong>Before · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I16-upstream.png" style="--crop-ratio:320/28;--image-width:400.000000000%;--image-left:-75.000000000%;--image-top:-1242.857142857%;" aria-label="Open original full-resolution Before · upstream master frame for zoom"><img src="../../images/patches/audit/I16-upstream.png" alt="Matched crop of audit followup uv default-feedback.milk (synthetic) — Before · same zoom" loading="lazy"></a></div>
+<div class="patch-panel"><strong>After · same zoom</strong><a class="patch-crop" href="../../images/patches/audit/I16-patched.png" style="--crop-ratio:320/28;--image-width:400.000000000%;--image-left:-75.000000000%;--image-top:-1242.857142857%;" aria-label="Open original full-resolution After · ProjectM TV frame for zoom"><img src="../../images/patches/audit/I16-patched.png" alt="Matched crop of audit followup uv default-feedback.milk (synthetic) — After · same zoom" loading="lazy"></a></div></div>
+<figcaption><strong>audit followup uv default-feedback.milk (synthetic)</strong> · 1280×720, frame 239 at 30 Hz.<br>The motion field changes while vectors are hidden for one frame. When the red vectors return, they use the latest completed field. The matched zoom shows the changed segment; this is a diagnostic, not a confirmed stock-preset census. Zoom rectangle: (240, 348), 320×28 source pixels; identical crop and nearest-neighbour display, with no brightness adjustment.</figcaption>
+</figure>
 
 ## Known remaining differences from MilkDrop 2
 

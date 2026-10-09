@@ -1,0 +1,26 @@
+{
+  "with-0019": {
+    "observer_worker_sha256": "a225930be2ec56136dd06bf7921fb18cd96fc699f5021efd8108f606ccb31b96",
+    "engine_library_sha256": "37109ee97c61b3c0b2bfc230edf77596ce2674cdad0f8f3b157e39bd9c8f4628",
+    "harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "aa1b506ddbd6be842e692895f87c634c6a9977c5b63bf9c47f7a94798ccc497a",
+      "gl_capture.hpp": "b8046ba28fe1540c63908d3bff9a94ef2cb548182325cf412ab3a7c172a13b23",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  },
+  "without-0019": {
+    "observer_worker_sha256": "51823fcb49326deefa987ee7dea22bbd598a35a054f824549702700cbf071218",
+    "engine_library_sha256": "1d937835e9a060989a77d5e4f9d9425f8d8d6122faa5ab199d607fa8c088b393",
+    "harness": {
+      "CMakeLists.txt": "1da807579fb72ba3c60ae6297b39167c15f109275415d016384530d14dda6b9e",
+      "worker.cpp": "aa1b506ddbd6be842e692895f87c634c6a9977c5b63bf9c47f7a94798ccc497a",
+      "gl_capture.hpp": "b8046ba28fe1540c63908d3bff9a94ef2cb548182325cf412ab3a7c172a13b23",
+      "analysis_hooks.hpp": "4cb9091ffefbb4b1891cf77bccd1b3c354c41bae62df6732b162c542b9086907",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+      "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    }
+  }
+}

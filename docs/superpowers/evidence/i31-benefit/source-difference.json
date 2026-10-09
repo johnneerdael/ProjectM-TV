@@ -1,0 +1,8 @@
+{
+  "changed_files": [
+    "src/libprojectM/MilkdropPreset/VideoEcho.cpp"
+  ],
+  "only_production_delta": "exact reversal of0019",
+  "shared_observation": "gamma draw/call/value counters",
+  "harness_identical": true
+}

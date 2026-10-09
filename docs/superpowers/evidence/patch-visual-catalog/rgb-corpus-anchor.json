@@ -1,0 +1,10 @@
+{
+  "canonical_rgb_sequences_sha256": "a4b97d4017466cd29bcd4b1d62699a107fb0358741c767f2a59bdb948159c465",
+  "case_count": 26,
+  "run_count": 104,
+  "frame_count": 41280,
+  "observation_source": "Enumerate all 104 preserved build/catalog-host/captures/*/{upstream,patched}-{0,1}/result.json files directly. Derive case/role/repeat from original paths and read independently observed frame_sha256 lists before comparison with any published metadata; then compare every sequence with run-manifests.json and capture role lists.",
+  "canonical_payload": "case name -> engine role -> decimal repeat index string -> ordered complete RGB-frame SHA256 list; UTF8 JSON with sorted keys, compact separators, ensure_ascii=False and allow_nan=False",
+  "all_original_results_equal_published_sequences": true,
+  "scope": "Every frame in all 26 cases and both repeats of both roles, including unpublished frames/cases. Excludes mutable request/source annotations, timings and manifests. No rendering or artifact rewrite."
+}

@@ -1,0 +1,12 @@
+{
+  "engine_commit": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+  "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+  "instrumentation_source_commit": "8a15996e8510533113a44e26feaddc3a7d6e85f5",
+  "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+  "builder_sha256": "8c1ce46880b6b8d4c93889fb28fae8605b7c9bfa30135a8547325fe939832e13",
+  "source_tree_sha256": "cbd3e22aae01abde85c6ae6af80e63b01196c4c2a15f269b75aa88b89cd0fa62",
+  "file_count": 955,
+  "observed_original_equals_reconstructed": true,
+  "published_inventory_equals_reconstructed": true,
+  "method": "Archive frozen Preset Lab tooling from 8a15996e; prepare_engine independently archives e98fca85 and its evaluator then applies shared deterministic instrumentation, without any TV patches. Compare reconstructed per-file hashes with both original build source and published inventory. No compilation or rendering."
+}
