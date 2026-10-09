@@ -2010,6 +2010,7 @@ void ApplyProgramCache() {
 void StartPrewarmer() {
     g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
     g_engine.prewarmerStarted = true;
+    projectmtv::TrailCompileOn() = true;  // the trail's compile= says whether the worker runs
 }
 
 // GL thread, once presets are showing: starts or stops the background compile thread (and with it
@@ -2025,6 +2026,7 @@ void ApplyBackgroundCompile() {
     } else {
         g_prewarmer.Stop();  // waits for a compile in progress
         g_engine.prewarmerStarted = false;
+        projectmtv::TrailCompileOn() = false;
         projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "background compile off");
     }
     LOGI("PREWARM background compile %s", enabled ? "on" : "off");
@@ -2042,6 +2044,7 @@ void DestroyEngineLocked(bool contextAlive) {
     }
     g_prewarmer.Stop();
     g_engine.prewarmerStarted = false;
+    projectmtv::TrailCompileOn() = false;
     ReleaseScaledTarget(contextAlive);
     // The presets destroyed below may still add their textures to the pool: empty it afterwards.
     struct PoolRelease {
@@ -2322,8 +2325,7 @@ JNIEXPORT void JNICALL JNI_FN(release)(JNIEnv*, jclass) {
 // Settings › Advanced › Background compile: compile upcoming presets on a second thread and EGL
 // context (on), or only on the render thread at the switch (off). Applied on the GL thread.
 JNIEXPORT void JNICALL JNI_FN(setBackgroundCompile)(JNIEnv*, jclass, jboolean enabled) {
-    g_inputs.backgroundCompile = enabled;
-    projectmtv::TrailCompileOn() = enabled;
+    g_inputs.backgroundCompile = enabled;  // the trail follows once the GL thread starts/stops the worker
 }
 
 // Settings › Advanced › Shader binary cache: reuse linked programs as binaries across instances and

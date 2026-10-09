@@ -24,8 +24,9 @@ inline std::atomic<int>& TrailFd() {
     return fd;
 }
 
-// The troubleshooting switches as last set (Shader binary cache, Background compile), written into
-// every line: an exit report must show the states of the process that ended, not today's settings.
+// The troubleshooting states as applied on the GL thread (Shader binary cache on, background compile
+// worker running), written into every line: an exit report must show the states of the process
+// that ended, not today's settings or a request not yet applied.
 inline std::atomic<bool>& TrailCacheOn() {
     static std::atomic<bool> on{true};
     return on;
