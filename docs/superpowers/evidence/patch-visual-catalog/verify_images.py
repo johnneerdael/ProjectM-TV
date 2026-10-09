@@ -79,6 +79,9 @@ def verify(repo):
         preset_file = repo / capture['preset_relative_path']
         assert preset_file.is_file(), f'preset file missing: {case}'
         assert sha(preset_file.read_bytes()) == capture['preset_sha256'], f'preset bytes: {case}'
+        pcm_file = repo / capture['pcm_relative_path']
+        assert pcm_file.is_file(), f'PCM file missing: {case}'
+        assert sha(pcm_file.read_bytes()) == capture['pcm_sha256'], f'PCM bytes: {case}'
         assert capture['texture_inventory_sha256'] == texture_digest, f'textures: {case}'
         assert set(capture['roles']) == set(canonical)
         for role in canonical:

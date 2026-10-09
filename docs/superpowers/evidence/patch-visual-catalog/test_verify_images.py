@@ -141,6 +141,10 @@ class RunReceiptBinding(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'preset file missing'):
             self.check(overrides={'fixtures/audit negative echo.milk': None})
 
+    def test_preserved_pcm_tamper_fails(self):
+        with self.assertRaisesRegex(AssertionError, 'PCM bytes'):
+            self.check(overrides={'audio/frozen-240-frames.f32': ''})
+
 
 if __name__ == '__main__':
     unittest.main()
