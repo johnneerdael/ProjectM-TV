@@ -901,6 +901,17 @@ not arbitrary hot reload. The100-preset cold/cache benchmark is25.61s/.704s;
 it is timing evidence, not corpus classification accuracy. Read
 `tools/milk-analyzer/EFFECT_FAMILIES.md` and the guide's `predictor-effects.md`.
 
+Source temporal maintenance (2026-10-10): `source_temporal.py` derives nominal
+affine-time rates through typed scalar vector projections. Preserve lane order,
+explicit constant float32 conversion and unknown dynamic integer/sample/state
+inputs. Failed nonfinite literal narrowing must not use the pre-conversion
+double value; uniform literal folding in `effect_families.py` returns unknown
+on the typed evaluator's `UnresolvedMath`, without changing runtime math.
+Authored shader arithmetic carries `numeric_domain=shader-float32`; preserve
+that detail through component projection and explicit scalar source casts.
+Literal folding must not erase overflowing terms as double-valued cancellation.
+See `tools/milk-analyzer/SOURCE_APPEARANCE.md` and `test_source_temporal.py`.
+
 The numerical corpus now defaults to source31 with a separate full published-AAR
 and profile identity. Latest publication output suffix `-core2333` prevents
 relabeling historical31/29 rows; the `core2331` target names the unchanged engine

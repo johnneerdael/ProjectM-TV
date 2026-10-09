@@ -97,7 +97,8 @@ def _expression(field):
         if len(nodes)>=256:raise ValueError('control expression export budget exceeded')
         index=len(nodes);ids[id(node)]=index;nodes.append(None)
         detail={key:value for key,value in node.detail.items() if key in {'value','name','field','operator','target_type','reason','index',
-            'sampler','canonical_texture','surface','frame','site_index','sampling_policy','coordinate_convention','intrinsic','lod_effect'}}
+            'sampler','canonical_texture','surface','frame','site_index','sampling_policy','coordinate_convention','intrinsic','lod_effect',
+            'numeric_domain','explicit_source_cast'}}
         nodes[index]={'op':node.op,'dtype':node.dtype,'args':[visit(arg) for arg in node.args],'detail':detail}
         if node.op.startswith('loop_'):nodes[index]['unresolved_loop_plan']=True
         return index
@@ -224,7 +225,8 @@ def _phase_literal_uncached(value,depth,memo):
         if a is None or b is None or value.op=='divide' and b==0:return None
         result={'add':lambda:a+b,'subtract':lambda:a-b,'multiply':lambda:a*b,'divide':lambda:a/b}[value.op]()
     else:return None
-    if value.dtype=='float' and value.op in {'cast','narrow','construct'}:
+    if value.dtype=='float' and (value.op in {'cast','narrow','construct'} or
+            value.detail.get('numeric_domain')=='shader-float32'):
         # These are explicit typed shader conversions. Plain EEL constants and
         # arithmetic remain double-valued; do not round every symbolic literal.
         import numpy as np

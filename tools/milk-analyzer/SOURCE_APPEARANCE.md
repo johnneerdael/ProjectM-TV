@@ -126,6 +126,24 @@ range `[b-abs(A),b+abs(A)]` and maximum absolute control derivative `abs(A*w)`.
 `rate_unit` is `control_unit/source-time second`; rates are continuous nominal
 formula values, excluding clock jumps, rounding, rasterization and frame sampling.
 
+Scalar time phases may select a lane from a constructed vector, nested swizzle
+or supported componentwise arithmetic. For example, `float2(time*2+.25,bass).x`
+has nominal rate 2 radians/second when used as a trigonometric phase; the unused
+bass lane does not change that rate. Dynamic integer conversions, unknown inputs,
+texture samples and unexpanded cross-lane operations remain unresolved. Explicit
+constant float32 narrowing is preserved, including abstention on overflow; a
+failed constant conversion cannot fall back to its unconverted double value.
+The projection follows [HLSL component selection](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-per-component-math)
+through the existing typed graph rather than executing shader values.
+
+Authored shader add/subtract/multiply/divide nodes carry
+`detail.numeric_domain="shader-float32"` in exported expression graphs. Literal
+folding narrows each such operation to float32, preserves explicit scalar casts,
+and rejects nonfinite conversions. Untagged EEL arithmetic retains its double
+domain. This distinction prevents overflowing shader expressions from falsely
+cancelling to zero and hiding texture dependencies. It does not certify GPU
+constant folding, fused operations or bit-identical runtime values.
+
 Shape x/y units are authored coordinates, radius is the source radius/NDC unit,
 and angle is radians. Mesh rotation's control unit is radians per feedback step;
 its time derivative changes that per-step amount. `application` explicitly marks

@@ -268,6 +268,8 @@ class ShaderFields:
         shape=self.shape(value.dtype)
         if shape is None:return (self.unsupported('component type not understood',dtype=value.dtype),)
         base,count=shape
+        if count==1 and value.op=='cast' and value.detail.get('explicit_source_cast'):
+            return (value,)
         if value.op=='components':return value.args
         if value.op=='uninitialized':
             return tuple(Field('uninitialized',dtype=base,detail={**value.detail,'component':i}) for i in range(count))
@@ -763,13 +765,17 @@ class ShaderFields:
                 elif source[1]<target[1]:parts=parts+(Field('constant',dtype=target[0],detail={'value':0}),)*(target[1]-source[1])
                 parts=tuple(self.coerce(part,target[0]) for part in parts[:target[1]])
                 result=parts[0] if target[1]==1 else Field('components',parts,dtype)
-            else:result=self.coerce(value,dtype)
+            else:
+                result=self.coerce(value,dtype)
+                if result is value and source and target and target[1]==1:
+                    result=Field('cast',(value,),dtype,{'target_type':dtype,'explicit_source_cast':True})
             return result if defer_read else self.read(result)
         if kind=="unary":
             if node['operator'] in {3,4,5,6}:
                 previous=self.expression(node['operand'])
                 one=Field('constant',dtype=dtype,detail={'value':1})
-                updated=Field('add' if node['operator'] in {3,5} else 'subtract',(self.coerce(previous,dtype),one),dtype)
+                detail={'numeric_domain':'shader-float32'} if dtype.startswith('float') and 'x' not in dtype else {}
+                updated=Field('add' if node['operator'] in {3,5} else 'subtract',(self.coerce(previous,dtype),one),dtype,detail)
                 stored=self.write(node['operand'],updated)
                 return stored if node['operator'] in {3,4} else previous
             if node['operator'] not in {0,1,2}:return self.unsupported('bitwise unary operator not lowered',dtype=dtype)
@@ -804,7 +810,9 @@ class ShaderFields:
                 value=self.coerce(self.expression(node["right"],defer_read=deferred),dtype)
                 # GLSL compound *= is emitted directly; only bare * uses mult0.
                 # Keep its domains and integer arithmetic out of the float helper path.
-                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype)
+                if op!=16:
+                    detail={'numeric_domain':'shader-float32'} if not matrix_product and dtype.startswith('float') and 'x' not in dtype else {}
+                    value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype,detail)
                 return self.write(destination,value)
             args=(self.expression(node['left'],defer_read=defer_read),self.expression(node['right'],defer_read=defer_read))
             if op in {2,3,4,5,6}:
@@ -826,8 +834,10 @@ class ShaderFields:
                 elif op in {7,8,9,10,11,12}:
                     if names[0] in {'float','uint','int','bool'}:args=(self.coerce(args[0],names[1]),args[1])
                     elif names[1] in {'float','uint','int','bool'}:args=(args[0],self.coerce(args[1],names[0]))
-            return Field('matrix_product' if matrix_product else BINARY[op],args,dtype,
-                         {'zero_guard':True} if op==4 and not matrix_product else {})
+            detail={'zero_guard':True} if op==4 and not matrix_product else {}
+            if not matrix_product and op in {2,3,4,5} and dtype.startswith('float'):
+                detail['numeric_domain']='shader-float32'
+            return Field('matrix_product' if matrix_product else BINARY[op],args,dtype,detail)
         if kind=="call":
             name=node["function"];arguments=node.get("args",[])
             # GLSL330/GLES300 evaluate call arguments once, left to right.

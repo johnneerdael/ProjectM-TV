@@ -57,9 +57,7 @@ def _number(value):
     from source_appearance import _phase_literal
     result=_phase_literal(value)
     if result is None:
-        converts_base=(value.op in {'cast','narrow'} and value.args and
-            re.match(r'[A-Za-z]+',value.dtype)[0]!=re.match(r'[A-Za-z]+',value.args[0].dtype)[0])
-        if converts_base:
+        if value.op in {'cast','narrow'} and len(value.args)==1:
             source=_number(value.args[0])
             result=None if source is None else _uniform_scalar_conversion(source,value.dtype)
         else:result=_number_uncached(value)
@@ -76,8 +74,11 @@ def _uniform_scalar_conversion(number,dtype):
         return float(math.trunc(number))
     if base=='bool':return float(number!=0)
     if base=='float':
-        from field_math import typed
-        result=float(typed(number,'float'))
+        import numpy as np
+        from field_math import typed,UnresolvedMath
+        try:
+            with np.errstate(over='ignore',invalid='ignore'):result=float(typed(number,'float'))
+        except UnresolvedMath:return None
         return result if math.isfinite(result) else None
     return None
 
@@ -103,6 +104,8 @@ def _number_uncached(value):
         if a is not None and b is not None and not (value.op == 'divide' and b == 0):
             result = {'add': lambda: a+b, 'subtract': lambda: a-b,
                       'multiply': lambda: a*b, 'divide': lambda: a/b}[value.op]()
+            if value.detail.get('numeric_domain')=='shader-float32':
+                return _uniform_scalar_conversion(result,value.dtype)
             return result if math.isfinite(result) else None
     if value.op in {'less', 'greater', 'less_equal', 'greater_equal', 'equal', 'not_equal'}:
         a, b = map(_number, value.args)

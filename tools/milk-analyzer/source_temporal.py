@@ -8,7 +8,7 @@ def affine_time_parameters(field):
     Arithmetic describes the authored real-valued formula, not float32 rounding
     or shader-clock wrap events. Reject dynamic casts, state and other inputs.
     """
-    from source_appearance import _canonical_lane
+    from source_appearance import _canonical_lane,_phase_literal
     memo={};active=set()
 
     def visit(node,depth=0):
@@ -25,6 +25,8 @@ def affine_time_parameters(field):
     def calculate(node,depth):
         node=_canonical_lane(node)
         op=node.op
+        literal=_phase_literal(node)
+        if literal is not None:return (0.,literal)
         if op=='constant':
             value=node.detail.get('value')
             if isinstance(value,(int,float)) and not isinstance(value,bool):
@@ -42,11 +44,24 @@ def affine_time_parameters(field):
             if (node.detail.get('field') in {'x','r'} and parent.op=='input' and
                     parent.dtype=='float4' and parent.detail.get('name')=='_c2'):
                 return (1.,0.)
+            if parent.op not in {'input','sample'} and len(node.detail.get('field',''))==1:
+                from effect_families import _parts
+                from field_math import SWIZZLE
+                parts=_parts(parent);index=SWIZZLE[node.detail['field']]
+                if index<len(parts):
+                    projected=parts[index]
+                    if not (projected.op=='member' and projected.args and projected.args[0] is parent):
+                        return visit(projected,depth+1)
             return None
         if node.dtype!='float':return None
         if op in {'cast','narrow','construct','components'} and len(node.args)==1:
             # Dynamic int/bool casts remain rejected by their own typed node.
-            return visit(node.args[0],depth+1)
+            pair=visit(node.args[0],depth+1)
+            if pair is not None and pair[0]==0 and op in {'cast','narrow','construct'}:
+                import numpy as np
+                with np.errstate(over='ignore',invalid='ignore'):offset=float(np.float32(pair[1]))
+                return (0.,offset) if math.isfinite(offset) else None
+            return pair
         if op in {'negate','unary'} and len(node.args)==1:
             pair=visit(node.args[0],depth+1)
             if pair is None:return None
