@@ -1,6 +1,6 @@
 # Patch catalog
 
-ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **33 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
+ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **34 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
 
 Most patches are about **MilkDrop 2 authenticity**. projectM is a clean-room reimplementation of MilkDrop on OpenGL, and over the years small differences crept in: in how equation code is accepted, how HLSL becomes GLSL, where Direct3D 9 and OpenGL put pixel centres, and which per-frame variables are actually read. Each entry below names what projectM did differently, what MilkDrop 2 does (citing its released source where we checked it), what the patch changes, and the preset that shows it.
 
@@ -46,6 +46,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0031](#0031-circle-spacing-and-closure) | Original angular spacing and closure before smoothing | `Royal - Mashup (137)/(11)` |
 | [0032](#0032-live-shape-thickness) | Evaluated style captured per instance and replay | `city lights v2 witnesses` |
 | [0033](#0033-latest-previous-motion-field) | Refresh actual warp UV while vectors are hidden | `default/custom feedback fixtures` |
+| [0034](#0034-gles-motion-field-storage) | Compatible continuous UV on GLES without float render targets | capability, integer storage and decoder controls |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -318,3 +319,7 @@ The user accepts necessary authored-work cost for patches0029–0033. [Focused N
 These differences were found by auditing the [source predictor](../predictor.md) against MilkDrop 2's code; they are candidates for future engine patches.
 
 The full assessment, including upstream contribution notes, is [`docs/UPSTREAM_PATCH_VALUE.md`](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/UPSTREAM_PATCH_VALUE.md).
+
+## 0034 — GLES motion-field storage
+
+Before allocating a float motion map, the engine checks core/extension capability and the actual mixed framebuffer. Contexts without compatible float rendering use required RG16UI storage containing half-float words. Both consumers decode before bilinear interpolation; primary color, dithering and actual fragment clipping remain. Capable RG16F shader paths are unchanged. The correction adds no per-frame capability query or new render exception.
