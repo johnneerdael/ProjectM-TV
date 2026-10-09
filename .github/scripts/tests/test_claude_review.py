@@ -1,5 +1,7 @@
 """Claude routing and publication must fail closed at the current PR revision."""
 import importlib.util
+import io
+from contextlib import redirect_stdout
 from pathlib import Path
 import sys
 import unittest
@@ -151,4 +153,16 @@ class ClaudeReviewTests(unittest.TestCase):
             with patch.object(sys, "argv", ["claude_review.py", "read", "--path", "contents/x?ref=" + HEAD, "--method", "POST"]):
                 with self.assertRaises(SystemExit):
                     self.script.main()
+        self.assertEqual(self.api.writes, [])
+
+    def test_source_wrapper_decodes_text_for_the_reviewer(self):
+        import base64
+        source = "# café\ndef inspect():\n    return True\n"
+        result = dict(encoding="base64", content=base64.b64encode(source.encode()).decode())
+        output = io.StringIO()
+        with patch.dict("os.environ", GITHUB_REPOSITORY="owner/repo"), patch.object(self.script, "GitHub", return_value=self.api), \
+                patch.object(self.api, "get", return_value=result), redirect_stdout(output), \
+                patch.object(sys, "argv", ["claude_review.py", "read", "--path", "contents/test.py?ref=" + HEAD]):
+            self.script.main()
+        self.assertEqual(output.getvalue(), source + "\n")
         self.assertEqual(self.api.writes, [])

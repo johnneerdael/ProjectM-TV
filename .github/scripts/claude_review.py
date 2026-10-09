@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Trusted Claude review routing and current-head native review publication."""
 import argparse
+import base64
 import json
 import os
 from pathlib import Path
@@ -103,7 +104,11 @@ def main():
         # Keep inspection read-only even though feedback uses a write-capable App token.
         if not args.path or not re.match(r"^(contents/|git/trees/|git/blobs/|commits/)", args.path):
             raise ValueError("Only repository source/commit read endpoints are supported")
-        print(json.dumps(api.get(args.path)))
+        value = api.get(args.path)
+        if isinstance(value, dict) and value.get("encoding") == "base64" and isinstance(value.get("content"), str):
+            print(base64.b64decode(value["content"]).decode("utf-8"))
+        else:
+            print(json.dumps(value))
         return
     if args.mode == "prepare":
         event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
