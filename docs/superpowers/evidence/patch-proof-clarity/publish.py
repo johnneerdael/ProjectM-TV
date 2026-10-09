@@ -68,6 +68,10 @@ def main():
         record={'name':name,'patch':patch,'frame':frame,'crop':crop,'caption':caption,
                 'inputs':comparison['inputs'],'roles':{}}
         for role in ('without-'+patch,'full'):
+            identity=comparison['roles'][role]['identity']
+            if role in workers and workers[role]!=identity:
+                raise ValueError('Conflicting frozen worker identity: '+role)
+            workers[role]=identity
             run=capture/f'{role}-0'
             path=run/f'frame-{frame:03d}.png'
             image=Image.open(path).convert('RGB')
@@ -78,7 +82,6 @@ def main():
             x,y,w,h=crop
             closeup=assets/f'{name}-{role}-crop.png'
             image.crop((x,y,x+w,y+h)).save(closeup)
-            workers[role]=comparison['roles'][role]['identity']
             record['roles'][role]={'asset_sha256':sha(asset.read_bytes()),'rgb_sha256':hashes[str(frame)],'crop_sha256':sha(closeup.read_bytes()),
                 'identity_ref':role,'runs':[]}
             for repeat in range(2):
