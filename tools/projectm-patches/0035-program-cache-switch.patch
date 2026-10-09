@@ -4,8 +4,10 @@ Subject: [PATCH] Allow the program binary cache to be switched off
 Add projectm_opengl_set_program_cache_enabled. Disabled, every shader program is
 compiled and linked from source in the context that uses it: the binary-retrievable
 hint is not set, no binary is exported or loaded with glProgramBinary, and cached
-entries are dropped (also when a program finishes exporting after the switch).
-Enabled again, the cache starts empty. Default and enabled behaviour are unchanged.
+entries are dropped. Every driver binary call (hint, export, load) is admitted
+only while the cache is enabled, and disabling waits for admitted calls on other
+threads to finish, so none runs after the switch returns. Enabled again, the
+cache starts empty. Default and enabled behaviour are unchanged.
 
 TV-only diagnostic control: ProjectM TV exposes it as an Advanced setting to test
 GPU drivers (first reported on a PowerVR GE9215 Fire TV Stick) whose program
@@ -14,10 +16,10 @@ program cache itself is TV-only (patch 0001).
 
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
-index 5d0f09f01..95271c89b 100644
+index 5d0f09f01..67f123478 100644
 --- a/src/api/include/projectM-4/render_opengl.h
 +++ b/src/api/include/projectM-4/render_opengl.h
-@@ -74,6 +74,18 @@ PROJECTM_EXPORT void projectm_opengl_burn_texture(projectm_handle instance, uint
+@@ -74,6 +74,19 @@ PROJECTM_EXPORT void projectm_opengl_burn_texture(projectm_handle instance, uint
   */
  PROJECTM_EXPORT void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses);
  
@@ -26,8 +28,9 @@ index 5d0f09f01..95271c89b 100644
 + *
 + * Disabled, every program is compiled and linked from source in the context that uses it: no
 + * program binary is requested, exported or loaded with glProgramBinary, and cached entries are
-+ * dropped. For drivers whose program binaries fail when moved between contexts. Thread-safe;
-+ * applies to programs compiled after the call.
++ * dropped. For drivers whose program binaries fail when moved between contexts. Thread-safe:
++ * disabling waits for binary calls already under way on other threads, so none runs after it
++ * returns; applies to programs compiled after the call.
 + *
 + * @param enabled true to cache program binaries, false to always compile.
 + */
@@ -53,37 +56,101 @@ index 1b7f17a4b..93fba2ee0 100644
  {
      auto projectMInstance = handle_to_instance(instance);
 diff --git a/src/libprojectM/Renderer/Shader.cpp b/src/libprojectM/Renderer/Shader.cpp
-index e9769c474..81ea041a3 100644
+index e9769c474..4a287da8e 100644
 --- a/src/libprojectM/Renderer/Shader.cpp
 +++ b/src/libprojectM/Renderer/Shader.cpp
-@@ -32,9 +32,35 @@ public:
+@@ -4,6 +4,7 @@
+ #include <glm/gtc/type_ptr.hpp>
+ 
+ #include <atomic>
++#include <condition_variable>
+ #include <list>
+ #include <mutex>
+ #include <vector>
+@@ -32,9 +33,91 @@ public:
          return cache;
      }
  
 +    /**
 +     * Off: programs are always compiled and never exported or loaded as binaries (for drivers
-+     * whose program binaries cannot be trusted across contexts). Turning it off drops all entries.
++     * whose program binaries cannot be trusted across contexts). Turning it off drops all entries
++     * and waits for binary calls already under way on other threads, so none runs after it returns.
 +     */
 +    void SetEnabled(bool enabled)
 +    {
-+        std::lock_guard<std::mutex> lock(m_mutex);
++        std::unique_lock<std::mutex> lock(m_mutex);
 +        m_enabled = enabled;
 +        if (!enabled)
 +        {
 +            m_entries.clear();
 +            m_bytes = 0;
++            m_idle.wait(lock, [this] { return m_binaryCalls == 0; });
 +        }
 +    }
 +
-+    auto Enabled() const -> bool
++    /**
++     * Admits driver binary calls (hint, export or load) while the cache is enabled; disabling
++     * waits until every admitted call has finished.
++     */
++    class BinaryUse
 +    {
-+        return m_enabled.load();
++    public:
++        explicit BinaryUse(ProgramCache& cache)
++            : m_cache(cache)
++        {
++            std::lock_guard<std::mutex> lock(cache.m_mutex);
++            m_admitted = cache.m_enabled.load();
++            if (m_admitted)
++            {
++                cache.m_binaryCalls++;
++            }
++        }
++
++        ~BinaryUse()
++        {
++            if (!m_admitted)
++            {
++                return;
++            }
++            std::lock_guard<std::mutex> lock(m_cache.m_mutex);
++            if (--m_cache.m_binaryCalls == 0)
++            {
++                m_cache.m_idle.notify_all();
++            }
++        }
++
++        BinaryUse(const BinaryUse&) = delete;
++        auto operator=(const BinaryUse&) -> BinaryUse& = delete;
++
++        explicit operator bool() const
++        {
++            return m_admitted;
++        }
++
++    private:
++        ProgramCache& m_cache;
++        bool m_admitted{};
++    };
++
++    /** Asks the driver to keep the program's binary retrievable, unless the cache is off. */
++    void RequestRetrievableBinary(GLuint program)
++    {
++#ifdef USE_GLES
++        BinaryUse use(*this);
++        if (use)
++        {
++            glProgramParameteri(program, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
++        }
++#else
++        (void) program;
++#endif
 +    }
 +
      auto Load(GLuint program, const std::string& key) -> bool
      {
  #ifdef USE_GLES
-+        if (!m_enabled.load())
++        BinaryUse use(*this);
++        if (!use)
 +        {
 +            std::lock_guard<std::mutex> lock(m_mutex);
 +            m_misses++;
@@ -92,18 +159,19 @@ index e9769c474..81ea041a3 100644
          GLenum format{};
          std::vector<char> binary;
          {
-@@ -75,6 +101,10 @@ public:
+@@ -75,6 +158,11 @@ public:
      void Store(GLuint program, const std::string& key)
      {
  #ifdef USE_GLES
-+        if (!m_enabled.load())
++        BinaryUse use(*this);
++        if (!use)
 +        {
 +            return;
 +        }
          GLint length{};
          glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH, &length);
          if (length <= 0 || static_cast<size_t>(length) > maxBytes / 4)
-@@ -91,6 +121,10 @@ public:
+@@ -91,6 +179,10 @@ public:
          entry.binary.resize(static_cast<size_t>(written));
  
          std::lock_guard<std::mutex> lock(m_mutex);
@@ -114,15 +182,17 @@ index e9769c474..81ea041a3 100644
          auto it = Find(key);
          if (it != m_entries.end())
          {
-@@ -138,6 +172,7 @@ private:
+@@ -138,6 +230,9 @@ private:
      }
  
      std::mutex m_mutex;
 +    std::atomic<bool> m_enabled{true};
++    std::condition_variable m_idle;  //!< Signalled when the last admitted binary call finishes.
++    uint32_t m_binaryCalls{};        //!< Binary calls under way (guarded by m_mutex).
      std::list<Entry> m_entries; //!< Most recently used first.
      size_t m_bytes{};
      uint32_t m_hits{};
-@@ -151,6 +186,11 @@ void Shader::ProgramCacheStats(uint32_t& hits, uint32_t& misses)
+@@ -151,6 +246,11 @@ void Shader::ProgramCacheStats(uint32_t& hits, uint32_t& misses)
      ProgramCache::Instance().Stats(hits, misses);
  }
  
@@ -134,18 +204,17 @@ index e9769c474..81ea041a3 100644
  Shader::Shader()
      : m_shaderProgram(glCreateProgram())
  {
-@@ -195,7 +235,10 @@ void Shader::CompileProgram(const std::string& vertexShaderSource,
+@@ -194,9 +294,7 @@ void Shader::CompileProgram(const std::string& vertexShaderSource,
+     glAttachShader(m_shaderProgram, vertexShader);
      glAttachShader(m_shaderProgram, fragmentShader);
  
- #ifdef USE_GLES
+-#ifdef USE_GLES
 -    glProgramParameteri(m_shaderProgram, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
-+    if (ProgramCache::Instance().Enabled())
-+    {
-+        glProgramParameteri(m_shaderProgram, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
-+    }
- #endif
+-#endif
++    ProgramCache::Instance().RequestRetrievableBinary(m_shaderProgram);
      glLinkProgram(m_shaderProgram);
  
+     // Shader objects are no longer needed after linking, free the memory.
 diff --git a/src/libprojectM/Renderer/Shader.hpp b/src/libprojectM/Renderer/Shader.hpp
 index b6cd06807..b8d9091a6 100644
 --- a/src/libprojectM/Renderer/Shader.hpp

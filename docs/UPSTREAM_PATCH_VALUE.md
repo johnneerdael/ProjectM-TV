@@ -337,7 +337,7 @@ The candidate repairs18 audit IDs. Ten retained policies and five other deferred
 
 ## TV-only troubleshooting control 0035
 
-Patch0035 adds `projectm_opengl_set_program_cache_enabled` so the app can switch off the process-wide program binary cache from patch0001 (**Advanced › Shader binary cache**). Disabled, programs compile from source in their own context without the retrievable hint, export or `glProgramBinary` load; enabled again, the cache starts empty. It is on by default, so rendering and timings are unchanged. Not proposed upstream: the cache itself is TV-only. Added to diagnose crashes reported on a PowerVR GE9215 Fire TV Stick; no PowerVR result exists yet.
+Patch0035 adds `projectm_opengl_set_program_cache_enabled` so the app can switch off the process-wide program binary cache from patch0001 (**Advanced › Shader binary cache**). Disabled, programs compile from source in their own context without the retrievable hint, export or `glProgramBinary` load; disabling waits for binary calls already under way on other threads; enabled again, the cache starts empty. It is on by default, so rendering and timings are unchanged. Not proposed upstream: the cache itself is TV-only. Added to diagnose crashes reported on a PowerVR GE9215 Fire TV Stick; no PowerVR result exists yet.
 
 ## Measured benefit of 0019 / I31
 
