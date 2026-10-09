@@ -41,6 +41,8 @@ public class ProjectMApplication extends Application {
                     .apply();
         }
 
+        // Before the engine starts: keeps what the previous process was doing when it ended.
+        ExitDiagnostics.start(this);
         ProjectMCore.init(this);
 
         File customRoot = new File(getNoBackupFilesDir(), "custom-presets");

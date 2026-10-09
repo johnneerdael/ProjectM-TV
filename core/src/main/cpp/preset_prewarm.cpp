@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <chrono>
 
+#include "diagnostics_trail.h"
 #include "projectM-4/projectM.h"
 
 #define LOG_TAG "projectM-Native"
@@ -66,6 +67,7 @@ void PresetPrewarmer::Start(Reader reader) {
     if (thread_.joinable()) return;
     stop_ = false;
     reader_ = std::move(reader);
+    projectmtv::TrailCompileOn() = true;  // before the thread runs: its exit clears it
     thread_ = std::thread(&PresetPrewarmer::Run, this);
 }
 
@@ -100,13 +102,22 @@ void PresetPrewarmer::Request(const std::vector<std::string>& names) {
 }
 
 void PresetPrewarmer::Run() {
+    // However the worker ends (stopped, no EGL context, projectm_create failed), the trail must not
+    // claim a background compiler is running.
+    struct RunningState {
+        ~RunningState() { projectmtv::TrailCompileOn() = false; }
+    } runningState;
     // Below the render thread: compiling must not cost it frames.
     setpriority(PRIO_PROCESS, gettid(), 10);
+    projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "creating its EGL context");
     PbufferContext context;
     if (!context.Create()) {
-        LOGW("PREWARM unavailable: no off-screen OpenGL ES 3 context (error 0x%x)", eglGetError());
+        EGLint error = eglGetError();
+        LOGW("PREWARM unavailable: no off-screen OpenGL ES 3 context (error 0x%x)", error);
+        projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "no EGL context (error 0x%x)", error);
         return;
     }
+    projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "idle");
     for (;;) {
         std::string name;
         {
@@ -119,8 +130,10 @@ void PresetPrewarmer::Run() {
             recent_.push_back(name);
             if (recent_.size() > kRecentNames) recent_.pop_front();
         }
+        projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "compiling '%s'", name.c_str());
         auto preset = reader_(name);
         if (preset.data.empty()) {
+            projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "idle: could not read '%s'", name.c_str());
             std::lock_guard<std::mutex> lock(mutex_);
             active_.clear();
             continue;
@@ -132,6 +145,7 @@ void PresetPrewarmer::Run() {
         projectm_handle pm = projectm_create();
         if (!pm) {
             LOGW("PREWARM unavailable: projectm_create failed");
+            projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "stopped: projectm_create failed");
             std::lock_guard<std::mutex> lock(mutex_);
             active_.clear();
             break;
@@ -150,5 +164,7 @@ void PresetPrewarmer::Run() {
         projectm_opengl_program_cache_stats(&hits, &misses);
         LOGI("PREWARM preset='%s' ms=%.0f cache_hits=%u cache_misses=%u", name.c_str(), NowMs() - start,
              hits, misses);
+        projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "idle after compiling '%s' in %.0f ms", name.c_str(),
+                               NowMs() - start);
     }
 }

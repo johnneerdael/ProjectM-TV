@@ -120,4 +120,4 @@ If playback stutters, see [Picture quality and performance](picture-quality.md).
 
 ## Privacy
 
-Audio is analysed in memory and never stored or sent anywhere. The app makes network connections only for the opt-in auto-update, and while the [custom pack upload](custom-packs.md) dialog is open, a temporary listener on your local network.
+Audio is analysed in memory and never stored or sent anywhere. For the [exit report](settings.md#exit-report), the app keeps two short lines about what the engine was last doing (preset names and switch states) in its own storage; they never leave the TV. The app makes network connections only for the opt-in auto-update, and while the [custom pack upload](custom-packs.md) dialog is open, a temporary listener on your local network.

@@ -90,8 +90,11 @@ In the panel, Up and Down move between rows, Left and Right change a value, and 
 | Auto-update | Checks GitHub for new stable releases; *Via F-Droid* for F-Droid installs | Off |
 | Custom preset pack | Upload one ZIP from a phone or computer on the same network | No pack |
 | Skipped presets | Count of skipped presets; select to reset | – |
+| Background compile | Prepares upcoming presets' shaders on a second thread; *Off* compiles at the switch (longer pause). Troubleshooting only | On |
+| Shader binary cache | Reuses compiled shaders as driver binaries; *Off* always compiles from source. Troubleshooting only | On |
+| Last exit | Why the app last closed while on screen (Android 11+); select for recent exits and what the engine was doing | – |
 
-Opening *Advanced* also shows a **Diagnostics** card: render size, memory status, panel and UI size, frame rate, Native trails state, blend, audio source and level, track display, update status and device tier. The [settings reference](https://johnneerdael.github.io/ProjectM-TV/settings/) explains every value.
+Opening *Advanced* also shows a **Diagnostics** card: render size, memory status, panel and UI size, frame rate, Native trails state, blend, audio source and level, track display, update status, device tier and GPU. The [settings reference](https://johnneerdael.github.io/ProjectM-TV/settings/) explains every value.
 
 ## Requirements and limits
 
