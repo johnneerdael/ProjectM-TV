@@ -399,6 +399,7 @@ def appearance_from_analysis(analysis):
     from source_sampling import sampling_geometry
     from source_feedback import feedback_transfer
     from source_colour_processing import colour_processing
+    from source_colour_mix import texture_colour_transfer
     elements={}
     for family in analysis.families:
         identity=family['component'] or ('mesh_warp' if family['stage']=='mesh_warp' else 'shader_'+family['stage'])
@@ -470,12 +471,14 @@ def appearance_from_analysis(analysis):
     if final_colour.get('mode_code')==4:
         palette_candidate=any(e['colour'].get('mode_code') in {3,5} for e in elements.values())
     psychedelic=any(7 in e['family_codes'] for e in elements.values()) and palette_candidate
+    feedback=feedback_transfer(analysis)
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
-        'feedback_transfer':feedback_transfer(analysis),
+        'feedback_transfer':feedback,
         'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),
+        'texture_colour_transfer':texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba']),
         'execution_unknowns':list(analysis.unknowns),
         'uses_rendered_images':False,'uses_shader_execution':False,
         'uses_equation_execution':False,'appearance_match_accuracy':None,

@@ -1,0 +1,4596 @@
+{
+  "presets": 100,
+  "computed": 100,
+  "counts": {
+    "affine_sample_colour": 36,
+    "unknown": 164,
+    "presets_with_known_transfer": 35
+  },
+  "mixture_counts": {
+    "other_affine_source_mix": 21,
+    "signed_main_blur_mix": 14,
+    "nonnegative_main_blur_mix": 1
+  },
+  "lost_prior_descriptors": [],
+  "sum_preset_seconds": 31.132476,
+  "mean_preset_seconds": 0.31132476,
+  "batch_path": "build/preset-corpus/source-colour-mix-2026-10-09/batch-000001.zip",
+  "batch_sha256": "356d14a0c5d8de6af0035f190f514e3581caabfca88c771a4bc6f8632f2a4235",
+  "model_modules": {
+    "activity_model.py": "1955526da80753dd235a7a72353e0c4953624c234a1fd864dd8ef99c5dd7d052",
+    "analyzer_test_profiles.py": "2159b9643a1e8fd99524336b65d512371db941b8b794debe4964257e7b05096c",
+    "audience_export.py": "d9d43ffce753cf45a87d24740255160e125efecbd4c933193d6962079b363e03",
+    "audience_policy.py": "77c10ee184ae63943e4e42985123be566b0e4eb6a255bb627179b1d7fd6a0ba6",
+    "audience_ranking.py": "1d103a2c12a16868bb4530654b94692f28437cd97ed69f51d404c60ad04a1ad4",
+    "authored_canvas.py": "82b4bcd9ac50dc387b86f2db9f183f73b968e593249b5b1a99e2cf2fc09f59f7",
+    "behavior_evidence.py": "faa9cac24539ceda0953cdbc52e5867949ca8837d72171ed0f6dc73544693c3b",
+    "beta_collections.py": "8719e77c1cf196fc8206399281be45ba27597cfb8c9c89af141eea4d116d5692",
+    "beta_export.py": "d65ca3d61c391bc1b2e681fd16fc566254898baba85dd8d52fd8438f44eca886",
+    "beta_score.py": "72a4496b4014f7722597bbc71c528e68a937890e25cd4bb3c4d952418eb60eea",
+    "blur.py": "60197495fd89a90846201aa02d5e84e1d961f51d20c3f6cc20fd1890900a412b",
+    "builtin_wave.py": "ad60a25184d02397f9e8e8e5163227d8db1bf962372280ef498cca54b981b202",
+    "component_influence.py": "afe4d6e90351d2e5bc53b7cea209564c8a35949c8797ab902ebfbcda551b579c",
+    "composite_mesh.py": "8584494244d83e26072f9f7c2079e0cc0959e23835d54e93a6247763a8d32114",
+    "conftest.py": "49d3e5c80404fcae7030ffe96e763ed9db03488e02c3d49314ab101eb3e18195",
+    "core_backend.py": "6306d803e6e133f96649cb63dc435bb19cf712aa2748da471daa5ad05057eb45",
+    "core_corpus.py": "571dc6c61648eb9623c7988808dfd47137657c9e147466a4711c44eff235fa16",
+    "corpus_inputs.py": "22f2f0e1bc068a96d6d3e4c2218dd2effaabb73aff0498830efdef1bf1018bc8",
+    "corpus_store.py": "9c365fd6b30b87af10c038861d4716c50941a55935273522d6a04e90de99ce46",
+    "corpus_worker.py": "f5ce37680de0cbc0acb89130b31aea7a729adb602ae856ee750c92bbd958dbdb",
+    "coverage_audit.py": "1aa65df30448749c75004cd8cd4261c2d67f157692c9d79c269746b07d38b9cb",
+    "custom_wave.py": "fbf997c74f571cf71ec415c2062f4ccb4e888c6f1b355c5d0ae27cc3d3cb7bca",
+    "descriptors.py": "58d5bd476e3685d079ed3f28d006835173de243d416964760c758b7af8f09591",
+    "detail_pipeline.py": "fc8cc605ca60b84fcabb029e5c1f6226b9b894eb52c3e77fffaa9e802e82e406",
+    "effect_bursts.py": "6f2396d6ec1901919a5494f011d12b92f7e329281c2313a15a1ae793f3769cf4",
+    "effect_families.py": "4af19da05ab8b50f911e4d04cceeeb9b64a2ab90091a3362594d036c930f064c",
+    "effect_family_export.py": "64dfc2921a573f6b0f60fba3809819b027eed54ef155a4cf92df5d97c5e8538a",
+    "engine_profiles.py": "67dc2019b251631c5d6667ed164eb45bbf80239e3bef80c67b273b6273ff6cba",
+    "equation_domains.py": "d63bdda59623dbe88fb970414a93ae37fffff0cb8400ea12d3f42ee4a18a56b7",
+    "equation_loading.py": "e164850d796e51c69c0aaad9d668847b607b708c0577123fe8a8f2c75bfd7cd0",
+    "feedback.py": "e698ff1fede1264970689c60129d2768c3b2d80a34628fbe52154ec22634b1c8",
+    "feedback_field.py": "db25176d26e619ac7d952fbdb96110bac200768bab75359509c475f63e464288",
+    "field_math.py": "403a40ae31bd273a8ee86457a39b9278aca2dda76afb72c4dc92955b3b56b3bb",
+    "fit_activity_model.py": "01a46f7f77d90a8866885e0d403b7699f1d666e73939504c15c73932179293aa",
+    "forecast.py": "e381272f9083063e2313460baa09f08048ffa6ba31c125a6c0211fa3b7dc31dd",
+    "frame_chain.py": "5f8e9c10bfb70f4f0a4fa5981d8ac174cf37c851e808129facb8e3937ff2e7e0",
+    "gap_priority.py": "7843b151cf759496fcac8ba3fd9dea738a21abb87860a295d8861814ffdfdbf8",
+    "generate_composite_adapter.py": "ddaa3daeeada8664451af64fcd900fbbe818937923e6a306af94018e04b4fa8b",
+    "generate_noise_adapter.py": "6b15f33ae7ef451c73f1613950df7a247b1114e2b29db9e842f4c0f69492207b",
+    "generate_random_adapter.py": "e6d17325feb9bb7e09f922059ae45307fb90f5969ef800fdc22ed71b7a455b75",
+    "generate_shader_adapter.py": "ff5b1a87e146807dceab7a29228999240b805a527b27a30399e44e67f08be5ae",
+    "geometry.py": "15fab828160996974595e2dae39510df9ad6144d77704e81c4cf4f4c8f291991",
+    "geometry_features.py": "74e1a0e91dcafe94e8470cea4bd9be9e1c313b037041621021e2fcc80caf2ba8",
+    "grid_math.py": "d8e374f8e8f3e65eb92c102f2295ce810bd842e5c75dd70aedb916b51b769cbf",
+    "intensity_calibration.py": "388d215ed7a69891e085f6a3e9b17183fe993abd4b9c94ea05c2bb32ecf8551a",
+    "intensity_evidence.py": "dead5392ae70e92f51a90a597e81820f3e04c0887750af8ad5af81edc170f7aa",
+    "java_runtime.py": "588c6e08f55299196789a30c0223254c8effaa650dbddd59959feaa840bcdc25",
+    "legacy_composite.py": "8590d3070434d1b9719c0a6568881cbeb276bd5764978a265d8a61c650c413c7",
+    "line_points.py": "285fc5c4e514f4110d8c715d6d77c105ee5d6a9a12bd4281a4887dfe2865092b",
+    "materials.py": "f7ecf89afde220765571d977cbc772c0710f89ae3357e5f2b7c7737575e7c6a8",
+    "measured_motion.py": "0964d3fc6143f5a69b675d67ebd11e508aa929933ac21411168b425a247de8a5",
+    "mood_profiles.py": "b2ba437b403199c89f7a6917145c5808bf738ba8855a30697f57583d7f188895",
+    "mood_scoring.py": "048f4ccd6e968bda173554a080586b95c88d01488c8c33720d679dec955e7cdd",
+    "motion_vectors.py": "24e6d80a9630faf6c0f61d0897ddc8b05ce2cbbb7999657922606b0223fc7bc3",
+    "native_motion_executor.py": "f0eba962c7e5560772a2978bfae3767de3fe54dc1af2ef7781bcc0b82690cfa4",
+    "native_values.py": "0e05bff9b52057567f0bb52ea1c2bf8b344ff3d4e0e4bc58fed1565c38aadb7e",
+    "noise_inputs.py": "2e8d730f0ef39d156daa9bf3809b0c88fd03e1514d9f5b815beafb938b1b2730",
+    "palette_features.py": "363796b71c60c14048f2d749d9c51b09ee878b16d1fec161802e7a2d6cba080b",
+    "pipeline_fields.py": "18c823f668c5b5cc0bbb4ba7b0ca2b9d9bcdf95b853256a6fefa15e789ab3c5f",
+    "prediction_windows.py": "a6f18a314056d1143032dd04e68aae63bf10f09a4cfe41e2f2dba98295319c5a",
+    "preset_corpus.py": "ea82e505a817f03c56008d4b1304ccf292f2984da97ee18be81b41dc0627ab2b",
+    "primitives.py": "09a6abbbff15f646466a6600acb97a5427ccedb76e393f7c1c10bfa950dbda9c",
+    "process_memory.py": "ef128bf7c2ab0be11fd97303a8c4a7ca32bd62e3d76e63355cafadd6cf6d9f57",
+    "progress_report.py": "b01f72cd50c0edbdb0f1c8c45502fd5016e4610d21119188280f9ae16b4addc8",
+    "quad_lines.py": "121699d0af22d4c6142a6cb1d4065432d28513faf5afa4c00dc45d39ec2565cd",
+    "random_binding_context.py": "45b43d08719dbdca6dbe7e64de962d43132a58a31369947c81ad85938ff0714c",
+    "random_binding_contract.py": "6ee15603b09790ee23359887234f366782dd99ba2aa4c1d9633a37464d778896",
+    "sampling_policy.py": "c6e8767540704444fcada9a6b8d1c75da934bf13528c31b26abbf6b05aaab30f",
+    "scan.py": "a89ea2afacd4e474e1393e22d74287571adf9eba2dcc76c070b6b97a3184fcf5",
+    "scene_draw.py": "630a687aaf08d2ae851b1ac885f581d4112958a0e34ad4f9e086ac9c0a5e0d89",
+    "scene_equations.py": "0a7109a2bbc388bc1ee1c9492d5fed6566f7ab790351d96677aabe0f88ac9dc1",
+    "scene_warp.py": "b192e0b75badca5182cc0b081a63ceed4b9c8935120de45592dcc55fd1aff8ac",
+    "score_audit.py": "1d4326a433949c5405b0e32ab8667c5f71f07f61b019d166fd8e7eb60a18e7d6",
+    "scoring_context.py": "c93c721068c75acb32a69ef5f8da53530d1567be9a8f7cb7f2dd87d5d1c54fce",
+    "shader_bounds.py": "e371a00dd0ae8ba11a9f1a1ae0e1f7bb69fe06c9574bab3999fdd8cf0ea6c340",
+    "shader_compat.py": "a51f0d7fb84ed6c484b2fbab3d3b22aa40c236bab862b58a89c124288aba1e99",
+    "shader_fields.py": "7e8c1f093f8c68d0351cd9ff9227eca9205a4a050463f78893562fac6e67fcd7",
+    "shader_random.py": "a1c6f3661b0aca2c8118901923787f146eb4be254fa1ed9f3ec81d72ca27bc25",
+    "shader_uniformity.py": "1385070a2b84f891e70b9037cf5448bcd11a868f558d51d6ce517185ff628262",
+    "shader_uniforms.py": "2d8da6bbe979ad965aee945676b368f19d9a97c9fdffbaf5a3300e9db02d714e",
+    "shape_sampling.py": "ce4604d22395042b069aae5deaa59a51939e1d398b032bd8d744863ed72822ab",
+    "source_advection.py": "556e4098d3ef32b2dd90c9b2d1d3d220152c1a87ee2411f2ec9553dd3cdd5924",
+    "source_appearance.py": "e5ada96ce4e244b7a2689d0e2338c69230b514d21db22c773903e9fb3e57d52d",
+    "source_bass.py": "df7b04726377beeb22e07f660d5ca2b3acfa790edd8fa75f283cefa2db293086",
+    "source_classify.py": "31274981a2cccad59aa6a2b0ade32115f4834ab493b16b6a240d45b11ff526b4",
+    "source_colour_mix.py": "75a460b2f7d9ef6337ec99f9377ed30a4a369227c991b62a9fb3969b62f4c8ba",
+    "source_colour_processing.py": "4d73d950c1b80c2b6ab0836f2911ebd53e5339eaa0069aab3c5abb996136f443",
+    "source_composition.py": "587efe37d8ffda3eb018d9703a824a3e6f1748fd9705553637c093ff15e9b780",
+    "source_context.py": "796a048fcba2996ac397be290ac27eed7c14bcf6b69837413cae5bcfe26279ea",
+    "source_extract.py": "6c53dc864ea5aea4cf03b1990834493cd3ad51581ab18dc7ec627bb9672c250e",
+    "source_features.py": "eed7fa18005a4ca061431b7620effc46be94847f7eddc00e456bc2cabd82c8e5",
+    "source_feedback.py": "d2181d9f0a921654ffeceb340e6688d43e24610ed65dd37eaf7bbdece24e019a",
+    "source_forms.py": "e028da74ce64ac18f2c2e77f23bd18312df0185e04fe3effa228d142558f653f",
+    "source_geometry.py": "4fcd9cef64a4231468287ec2d49f96ebbce7403939b4484b733c3d7d21f31f70",
+    "source_inventory.py": "b480521afb68cd3dfda3a4d97f9073f9d39a68bbb73a14838943d38a40007a01",
+    "source_material.py": "6ee3bef84a525b83024d73580c2ffb483e7aaffca6c1898711435616441e6f59",
+    "source_motion.py": "8afac2f4f926a7b8f59591b2d153a7516a676c5354d2608d3cfea66681868ef4",
+    "source_polar.py": "6620d938b95358474db5be3348020e88227c6eef5eb50e4c7f29743bb4740c78",
+    "source_sampling.py": "7e340ad227045cff63c453531eb4838b4cd7afb942daf88211eda646620e73d9",
+    "source_temporal.py": "da3aee4033f041f0ca71c2852241da542f397a13184f457a1110541b5bc70ff9",
+    "source_transport.py": "e7415508088c791a2d404a4c68898ce8949486f015baa246f9f0ee0431704246",
+    "source_triggers.py": "3d124f2ce698f16f52e01cb3663d28f49d312705f2f13f1979f19baf0cdcafcb",
+    "source_uniforms.py": "d969a84a282e67d0defbf2076630f57175bca26a570483cd47b15f576016b152",
+    "spatial.py": "28574ddf26307bc348b5876c1c10ae5231282eec145c8c6431378e4c4a962e03",
+    "stage_resolution.py": "b5871fd68ee732991889cf3da5a63c356450b5c5ce720bae72df21587c2387a1",
+    "strict_source_features.py": "68915fbe03d2c6882a5d10634cd74c2aaa2dbbc6fa52d87610d71c9eabc5a11d",
+    "transport.py": "6c5cf734ff942277e7dc0e52108de150cec9b17e5f4c5c9a81a260b2844259de",
+    "uniform_descriptors.py": "a2e9bbfe13b60d9fbbe2a9e3b53128694b855b1c67c5ac2cf10dae4aadbd1347",
+    "uniform_source_descriptors.py": "210b9014920669b1e916196a0a1cf07e436f5b0f91e87a0b6c06b0162bba6b3d",
+    "unorm_sampler.py": "d2b1895ea6e5a480b7e8cdf97243d507c77a11e902cf7684c39621708e066d16"
+  },
+  "records": [
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (161).milk",
+        "name": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      "record_sha256": "e541dde14d29154564c2b1b2072ed1a0ec13c409b35f1eeafc6ef12bbfa35107",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (253).milk",
+        "name": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      "record_sha256": "f039172925dee9ebe15f0a8a823ca6a8d88ca13df34b9dad41013b0411da0435",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (389).milk",
+        "name": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      "record_sha256": "2b34a78e051eed993bd4bf7e501029135835e9b5611d33c5b422c82325ee66f4",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (39).milk",
+        "name": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      "record_sha256": "317d8ba4a43c5d04d1e667ea7baf9638e3c3be14365c977f58567669f61ebf46",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 3.0,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "19.milk",
+        "name": "19.milk",
+        "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d"
+      },
+      "record_sha256": "18e9bfe5d932b5343efc29521253c568a9b357ea82398ec92347661ca3e49126",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 0.980000019,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.978999972,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.971000016,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.980000019,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "404.milk",
+        "name": "404.milk",
+        "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f"
+      },
+      "record_sha256": "5fa0547af615706a4b46dbd1967a89c3b1b7dd69480f1986cc8c57dc554c7dc0",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+        "name": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+        "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8"
+      },
+      "record_sha256": "eb4fcf531994d0e1cec7c7fa9d3c015edfede5afc28d41e0e90cbde345b86f5c",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      "record_sha256": "eb18d72c2b64d540781380d5f6c956672f0f1490fb57221e48cf5bb424c52255",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00400000019,
+            -0.00400000019,
+            -0.00400000019
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      "record_sha256": "a089e829bbcb554250543d2cbce8fa64e730f16e329e5fd6230bc094f73e16c7",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "name": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      "record_sha256": "93ccabffdce58f124fd8ef5ec74b593db4df4ead4047f3d517bcac52ab82b2f3",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 2.5,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "clouds",
+              "matrix_rgb_rgba": [
+                [
+                  0.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.5,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.5,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+        "name": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+        "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd"
+      },
+      "record_sha256": "5c32e59eb09b4c0a58a9f4fd4abd1c1a6f3958bc153cd68fe7c9679323478686",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.33299994,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.33299994,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.33299994,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.33299994,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "name": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      "record_sha256": "469d908c0e5c5c849872004fe776b2683867e30044747ae2a3fa0ad00d74041b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "name": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      "record_sha256": "eb130055991f096e8bbdfb1fb067ff101e212b33547e5cc93a90f38a1f4ee82a",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Bmelgren - Tonic.milk",
+        "name": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      "record_sha256": "c626c1f92117945ac5cdb4cdf9d89d4df73bbad213aa6ca34bdf397233565d6f",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "EVET - Circling Meta-freeze 1.milk",
+        "name": "EVET - Circling Meta-freeze 1.milk",
+        "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0"
+      },
+      "record_sha256": "cc9acc03243cc04ccf2292a12c2dcdf2d51fa0d5fdaa90849455776d999d67b6",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "name": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      "record_sha256": "d56deccdc3e309497cbdf03f055c64ba60af4fae5edebb07138d0f554a64228e",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - heater core C_on route.milk",
+        "name": "EoS - heater core C_on route.milk",
+        "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9"
+      },
+      "record_sha256": "387f6c7a575475ed6e50468ada600b1a58cbe6061d4afd3902dc85d0bd690a53",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - more waveforms 7_phat_edit.milk",
+        "name": "EoS - more waveforms 7_phat_edit.milk",
+        "sha256": "026417e8c902bb6c5d0604c92f80b9996d891ebf498116dba657c922fbda4bbd"
+      },
+      "record_sha256": "ac135054963e53482bbfba707d4d4ddc7f74bb88c0588b3ce40da31594209e91",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - pointfield 07 insek altcolors.milk",
+        "name": "EoS - pointfield 07 insek altcolors.milk",
+        "sha256": "00aab1e58d025b2b4f9163a0a95c4de5a6024f9c1c9b9e6270ee02a347d5705e"
+      },
+      "record_sha256": "72c9533cacd702032d0400dc4dca0a5b4e3fcf1fc178986360b15963c6be638a",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - alien web bouncer [39].milk",
+        "name": "Flexi - alien web bouncer [39].milk",
+        "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576"
+      },
+      "record_sha256": "3931fcc9e04dadd5991f1ebfef04cf058351216a530feb7ac52be62875390b9b",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00749999983,
+            -0.00749999983,
+            -0.00749999983
+          ],
+          "direct_colour_gain_norm": 1.0839999988,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0419999994,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  -0.0419999994,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0419999994,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.0419999994,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0419999994,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0419999994,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "name": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      "record_sha256": "109936d5077b7c3cc83b77542e900c4a8163dca820902ec5b576eb27f2012447",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - hue burst.milk",
+        "name": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      "record_sha256": "fc9a64368833eeaf3cc1a958967f8952580d5d21cdcb13e8c989c36e801366c2",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.05800000088,
+            -0.0149999997,
+            -0.00400000019
+          ],
+          "direct_colour_gain_norm": 1.200000002,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  -0.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 8,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.100000001,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 9,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 10,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 12,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.959999979,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - splatter effects 11 halucination #1.milk",
+        "name": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      "record_sha256": "0279229ae58be3bab5da2bc8a7549f32693d319a1e9ce0c34c394ebe1e7358f7",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 3.0,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "name": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      "record_sha256": "e585b2108f901e89924f06e17d5a567e3d1e78fc4a928d4f9b81a244af2dd4c9",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+        "name": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+        "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7"
+      },
+      "record_sha256": "6871fc20ad70b5b53ecf3c755b72fab3c4af640f6bf29bd7895a99baf53ce008",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "name": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      "record_sha256": "608c68c33f83d39ee64d0ca06bd89d3379a53a8241e92b8871b3e94cd2263c9f",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.21875,
+            -0.21875,
+            -0.21875
+          ],
+          "direct_colour_gain_norm": 1.8774999831999994,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.1699999795999998,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.1699999795999998,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.1699999795999998,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "blur2",
+              "matrix_rgb_rgba": [
+                [
+                  -0.2700000035999997,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.2700000035999997,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.2700000035999997,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.4375,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.4375,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.4375,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+        "name": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+        "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf"
+      },
+      "record_sha256": "98a1b035e86522746f91f95b229652b41dec08e049a7d85a1f170a0f557f84b3",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Tadpole Hunter.milk",
+        "name": "Geiss - Tadpole Hunter.milk",
+        "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c"
+      },
+      "record_sha256": "64c4e2f0c03663242e420622dcd3cfd84b0e3da862cfb20bff86689c1580a8bf",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      "record_sha256": "470d3050f78fe4511aa9d0d238982b2facc4003f0f9ec4272b2c6f9b7c14a561",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      "record_sha256": "a8743727347a22c9baa375c9bdcf21313fe410ca1b4263b5071ce8427ebeea98",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00300000002,
+            -0.00300000002,
+            -0.00300000002
+          ],
+          "direct_colour_gain_norm": 1.00380000006,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 3,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.00380000006,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.00380000006,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.00380000006,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "name": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      "record_sha256": "f2277e3ce047035d9a87a32e85d1fe2c3b628f320d8b09081af48304b3dc0004",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "name": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      "record_sha256": "6e0b093256da86e196f0bf4418bd7e2c507828e833ca9f8a7d0b29996bd1522b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "InCUbuS - Our Destiny.milk",
+        "name": "InCUbuS - Our Destiny.milk",
+        "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807"
+      },
+      "record_sha256": "0c519aa93e4aeea51af4faa72a476193d0124fdcd6b05f4420f2e12ddd3984e7",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "LuxXx - Boiling Phosphene Soup I.milk",
+        "name": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      "record_sha256": "f47995d386d21126766d98684dc0cd076c3a3dda63dae5f37f387b28c1a264d9",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            null,
+            null,
+            null
+          ],
+          "direct_colour_gain_norm": 5.0,
+          "source_mixture_kind": "nonnegative_main_blur_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  3.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  3.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "blur2",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "name": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      "record_sha256": "50f548a4df4625d4fa47f44607ee04bae797e6d3dade988710015933ad36895a",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "name": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      "record_sha256": "bb15535cd3248b728bb0f1dec877632eff03f043a305aad8ee9538c3bc840c1c",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "name": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      "record_sha256": "b946cc70ee77b962126f425303c362326722cbf9e8f24be90d124fcf10eeceb0",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "ORB - Firelight.milk",
+        "name": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      "record_sha256": "a080869a9a0d021de162483bd1be30c5e36e63e5fc814ccce6f8cda4c88df709",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+        "name": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+        "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b"
+      },
+      "record_sha256": "36a1f72251f087a85abbc704f19e7b16e9d28b14e12ad2b27cb2377418a9f1a9",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.00499999989,
+            0.00499999989,
+            0.00499999989
+          ],
+          "direct_colour_gain_norm": 1.0399999992,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  -0.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0199999996,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.0199999996,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0199999996,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0199999996,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "name": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      "record_sha256": "8f443842360675802698c07d8a20fbac1cdcb349b4f441eb0e8cd62880e82f71",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.005859375,
+            -0.005859375,
+            -0.005859375
+          ],
+          "direct_colour_gain_norm": 1.01171875,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.9700000007,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0299999993,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 3,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.01171875,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.01171875,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.01171875,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.9700000007,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0299999993,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.9700000007,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "name": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      "record_sha256": "83f9da8c18a0e69ada0726a096404ff137c5c4a9ff8c4aebe44b53bf94effd54",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.07799999899999999,
+            -0.005400000083999995,
+            0.0
+          ],
+          "direct_colour_gain_norm": 2.2000000479999997,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.6000000239999999,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "blur2",
+              "matrix_rgb_rgba": [
+                [
+                  -0.600000024,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0299999993,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0299999993,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Serge + martin - crystal palace003.milk",
+        "name": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      "record_sha256": "f88b9c14aaa7cdbeb9199d1f579fd0af70a29c6de468c78babf56aef138369bc",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "name": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      "record_sha256": "84f2b0a823b2fbb779d1ffd50b38b75d932b30b3c10ca7a1be4ebf07d32d8196",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00985937519,
+            -0.00985937519,
+            -0.00985937519
+          ],
+          "direct_colour_gain_norm": 1.01171875,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 3,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.01171875,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.01171875,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.01171875,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "name": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      "record_sha256": "3d88cfafe60df5434d85e4aea907a3b2f81a9df0d85edc39e3846c589b0caa80",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+        "name": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+        "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363"
+      },
+      "record_sha256": "a0532fa3fd74236cb1d57091fd912b86aa8aa24af42404e7748b5a5efab52d0b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "name": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      "record_sha256": "f8b418d77d91e4876d87048e9dfb19ea0ba4e588fafb681d9e2d1f118848df67",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "name": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      "record_sha256": "be634bf940af87486c7c0ffd4af611bff8348b3474a8da09aaf59e610374c27c",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.0099999998,
+            0.009999999399999997,
+            0.4800000012
+          ],
+          "direct_colour_gain_norm": 4.400000004,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 11,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 12,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  -0.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -2.200000002,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.200000002,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "name": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      "record_sha256": "66fab67dc545d6be634d711e5a65959b0a8ec7b81c67a82f4c3ddf87491b3dcf",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.00999999978,
+            0.0
+          ],
+          "direct_colour_gain_norm": 2.0,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  -0.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0500000007999999,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0500000008,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+        "name": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+        "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad"
+      },
+      "record_sha256": "5de02e0a00b1a6ad4a81429605ab4ab4334aba07372949039f95f488bb684264",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.0099999998,
+            0.009999999399999997,
+            0.4800000012
+          ],
+          "direct_colour_gain_norm": 4.400000004,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 11,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 12,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  -0.5,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -2.200000002,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.200000002,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+        "name": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+        "sha256": "01803be5f3f974981e9bd8dbb6b06d2a8c211f873497414ac2d5651bc908dea5"
+      },
+      "record_sha256": "e3c9f33587f0876f8de3f16400b79d6066fd8728146b3a2c458ddbb67f3e0b19",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00749999983,
+            -0.00749999983,
+            -0.00749999983
+          ],
+          "direct_colour_gain_norm": 1.0839999988,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0419999994,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  -0.0419999994,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0419999994,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.0419999994,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0419999994,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0419999994,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Waltra - Codex Machine 2.milk",
+        "name": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      "record_sha256": "65019fcc71ce73dc51b3d9221bbd78af56ab46948c7d04685e5c1f23d7d8b6bc",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00200000009,
+            -0.00200000009,
+            -0.00200000009
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - Funnels (Jelly).milk",
+        "name": "Zylot - Funnels (Jelly).milk",
+        "sha256": "0008a62faf508e742f0d3dcf8c73ca6f41e372880f2de9834b10f838edfb79b1"
+      },
+      "record_sha256": "09ebcb8e881d71bb1ce7842de3176bbc0c409ab0d74149274fdde4cb5faee83b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - Spiral.milk",
+        "name": "Zylot - Spiral.milk",
+        "sha256": "02481b33b1399e5a186bc12f5f4230bb00d368edfd802857e4a2dac4831f5923"
+      },
+      "record_sha256": "b12741448bd82a38247092f754d1fbf2dc05d4ee3afeb5fef7fae254fc7de5c0",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - The Sound plays the Sights.milk",
+        "name": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      "record_sha256": "4294404a4bf73033adf9ad3ac6019baa0cb564631e3deedd2d3cc7282822c5b3",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "name": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      "record_sha256": "df261d12934d55ee9f6174c0ffaf54bdb791d15699b8f301f1cc788b25d8d6d6",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "amandio c - living boxes 4.milk",
+        "name": "amandio c - living boxes 4.milk",
+        "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356"
+      },
+      "record_sha256": "696baadb30e2b47b55eb13fde5e53bb7929ec6f77e65d2b32836ce968cf6e04b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+        "name": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+        "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff"
+      },
+      "record_sha256": "54e7373b64c1230ee16eaa9d6ca02ee286269b0e461174140f3f39f8cc037a3c",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "name": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      "record_sha256": "4ad38c6b3a2fb50d1cc1de7e8cd4bc8af26a1de7e6f6332aae179f8581e1ad95",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "bowel trounce dumring.milk",
+        "name": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      "record_sha256": "054e259df2b5140cf03e46c792ea170586cdcfbb70ae038c2e4120b5b2d738b5",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "cortex meat - adm affect non.milk",
+        "name": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      "record_sha256": "b82c0d89efa13dadaa737d82887ecfbcbdcdd050f31c7382eab62e5370db9979",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "cpe domains flacc - portable massation segway nz+.milk",
+        "name": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      "record_sha256": "12be2a9ce1d3c6f56c7b650d179b783310c74d5f84411d6ebfb05ac814757928",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "name": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      "record_sha256": "0527b95be36924bc7a892813e5266b26c6930fb89ddfc6f72fc6c80b9b75fbae",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "equidistant from vomit (out of totality).milk",
+        "name": "equidistant from vomit (out of totality).milk",
+        "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc"
+      },
+      "record_sha256": "789072cce64abdd1ec4122ea5c3d03048d12df8aa88fb79dad516fa27fdb5ffc",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "eye disease ngornggniq no business mashing.milk",
+        "name": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      "record_sha256": "f3390d1c59028fa330a44e68708ff08a2248bceeb57c1444d49d1f2132895e15",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "fed - DSC-011 LSD Edit 2.milk",
+        "name": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      "record_sha256": "8835d616a1c6a159c2314ee5ae4010c5b8821af55cdc9a992d6460fa9902f16d",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "name": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      "record_sha256": "7529c682c15800c3e672205ef34994494022e72278c3cd0413cee58539a79966",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+        "name": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+        "sha256": "014ddc38e758a5ebbfd2a950eaeda1956e0ec78b3ec048bd461452922b01dfe6"
+      },
+      "record_sha256": "6281efb5736b00b2ca8b89246626643a4a6875ad39558212f6640d75177a3128",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 0.939999998,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.939999998,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.939999998,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.939999998,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        },
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.0399999991,
+            -0.0399999991,
+            -0.0399999991
+          ],
+          "direct_colour_gain_norm": 1.33000004,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.33000004,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.33000004,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.33000004,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [191].milk",
+        "name": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      "record_sha256": "fc3adcfc2f8beb9af489fc8e84049bd34eddaac30655505480ac076e52f60514",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.0007599997032799993,
+            -0.0240000002,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0907000000486,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 12,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  -0.010249999778499998,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0250000004,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0700000005,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.5,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0002499999984999999,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0250000004,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  -0.00019999999160000005,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0199999996,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 13,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.00999999978,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "goody - woven beads (ps2-0).milk",
+        "name": "goody - woven beads (ps2-0).milk",
+        "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82"
+      },
+      "record_sha256": "c6d732023ed670eba27610afe4bfa693fdab6b4144d0ceab9bcc8741c2275aaa",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 0.8199999778,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.8199999778,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.8199999778,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.8199999778,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "name": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      "record_sha256": "78dec5a026b11bc0ae21c157f32b2dc09933a2573be5552b40a3049a90ff2b00",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "greazed up humility.milk",
+        "name": "greazed up humility.milk",
+        "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821"
+      },
+      "record_sha256": "aa1ddf9347ce1f9ee9b9bfca78e32a74c5bb1dd6925de9d9244dcf11aa4248fe",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "martin + flexi - lock and release bipolar 02.milk",
+        "name": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      "record_sha256": "c205e81e1fd81191206e75b50c4636825be3e5df0abb509aa9eab10f9d3ee98c",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "name": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      "record_sha256": "305be2661e70c965b36f0ca5619476af53023ca39fdb95dc5ab779f779aaf282",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "name": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      "record_sha256": "3c46ddec23ff02d7c33bba6a1889ad44862e5175cf98faa91e72442336926b55",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "name": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      "record_sha256": "c3509dc06306b875ad9b578cf577bf82debc59155aa6f9bfc2f572b1677f5fa4",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "name": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      "record_sha256": "c8897571cb26c0f473a524114e39b356f981ee83677b1d5245e0cdd0bfbeb8e7",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "shifter - liquid circuitry - conjugoth.milk",
+        "name": "shifter - liquid circuitry - conjugoth.milk",
+        "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5"
+      },
+      "record_sha256": "466744797cb46d7b35ad0ef234a46240eccafd391848f861ee1ae929ee9e8f12",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "name": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      "record_sha256": "8d945c1bc372c43b1474a6d339f93e8643735aaa0a3ab4a40b884a91fcee9de9",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "name": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      "record_sha256": "b8e587e8a6a8bbbef4e61984eb086b5d596b55d58542dbabe9c16c51f4414887",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - amental ruiner broach2.milk",
+        "name": "suksma - amental ruiner broach2.milk",
+        "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db"
+      },
+      "record_sha256": "ccdea34dfcc56a2efc0250db3fac1083c43e6957722a88af69713e4d9251e68b",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - bonobo - absurd.milk",
+        "name": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      "record_sha256": "49eb413704216e32c7656592cd40a900d05856961a79a131c95846ede210a6b9",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "name": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      "record_sha256": "4f33725c33394782a46e63d137f44e9fce437e0136279bb9fca910a700a9c3e3",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "name": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      "record_sha256": "c26565d3448264c2d11a192f731400b7a32b90ad315ca2371ab2ffe1b2cca02c",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "name": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      "record_sha256": "fb06bb6d5ee3629f6d2c52a88d8bed5019d211a96da5ddf8c8130708dd643062",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - ku pilled - forgoing utility nz.milk",
+        "name": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      "record_sha256": "e9c140557a439eea6932722f6b2202758d29eff93834cf7544ce1885b0fcbb6e",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "name": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      "record_sha256": "49f5c614c06c3e915a795821e80c0d1fbb886f2879802070f1c65be4af4ad3cc",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "name": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      "record_sha256": "ed8d2a602405d79f8abf087ca471d93b24af4abac08031578ef15d8f7c4bb13c",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            null,
+            null,
+            null
+          ],
+          "direct_colour_gain_norm": 1.14400000016,
+          "source_mixture_kind": "signed_main_blur_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  -0.100000001,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 5,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  -0.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0019999999799999997,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 6,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0199999996,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  -0.0019999999799999997,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 7,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  -0.100000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 8,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0019999999799999997,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0199999996,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 9,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  -0.0019999999799999997,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0199999996,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 10,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.100000001,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 11,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0019999999799999997,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.0199999996,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 12,
+              "canonical_texture": "blur3",
+              "matrix_rgb_rgba": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -0.0019999999799999997,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0199999996,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+        "name": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+        "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f"
+      },
+      "record_sha256": "5ddd157a71470cbf2e17caee9d9d9fc4489bd849c73d362230a01bac5a317505",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - never degweh - flx spr col.milk",
+        "name": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      "record_sha256": "24f23aaec00c3bd837ec078e15c90b732dcb44e9e02ffe1c88c3452a466e8eea",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "name": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      "record_sha256": "0d848cc6eb212c324d92120879f691396c92d367756be9cf463d63ffa4c71746",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - prigogine quantum foam self-organizer.milk",
+        "name": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      "record_sha256": "cf10297a319fea581e72cf0f6b04f8839f703fd341ebeb128e9c8d8658eb0e70",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 1.0,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 1,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "name": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      "record_sha256": "2f82e56d392c28cfe9a090c39e783d5556ae32d0b0ef8919b7f4914f35525177",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "name": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      "record_sha256": "9779de57e5919d638f29a92d1e6cb0e6abfa07d28cdd0508341eb81083fb27c6",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - spectro exp 777 - blur.milk",
+        "name": "suksma - spectro exp 777 - blur.milk",
+        "sha256": "018e0c956d661138bb97cf78d36f5e62cff34f3e11057519532cdca042bf4119"
+      },
+      "record_sha256": "9dfa7f1e38c955db7552a937ef198aed30f67fd3fc9e8415e6e3a7417b50e549",
+      "known_stages": [
+        {
+          "stage": "composite",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 2.4000001,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": false,
+          "sample_contributions": [
+            {
+              "sample_site_index": 0,
+              "canonical_texture": "blur1",
+              "matrix_rgb_rgba": [
+                [
+                  2.4000001,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2.4000001,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  2.4000001,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "name": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      "record_sha256": "d83fd8ba4498d8a70071689878b0c118cd2253f3d8d4a5e80edec8c1d7279bb1",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - tech ed lacquer sinus raw.milk",
+        "name": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      "record_sha256": "40deac082d23de63f178cd9e41cbb9a57598d8ac0fa0cda11325648f5e68def1",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - to finally feel like a cyborg.milk",
+        "name": "suksma - to finally feel like a cyborg.milk",
+        "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e"
+      },
+      "record_sha256": "d9b43c82f8a6621afdcb0134771822e8c97ad9d7d5dfc4b5b2c554875e999150",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direct_colour_gain_norm": 0.964999974,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 4,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  0.964999974,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.964999974,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.964999974,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - wait for it - 1-ret.milk",
+        "name": "suksma - wait for it - 1-ret.milk",
+        "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6"
+      },
+      "record_sha256": "8f392a5c83e0d8bfc027fd8eb97e9a07c1f918b7efe0d8aa3a6e4cfd329518b8",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "xtramartin (454).milk",
+        "name": "xtramartin (454).milk",
+        "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6"
+      },
+      "record_sha256": "79388eabcded8276b28b73f953c3ff30b40c7224286c2b96818fda7ff75c5e67",
+      "known_stages": []
+    },
+    {
+      "preset": {
+        "relative_path": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "name": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      },
+      "record_sha256": "cb03e8ace258367ec13145dc0af7fd99b08317bc4c072b1e00bd2d0b920707ef",
+      "known_stages": [
+        {
+          "stage": "warp",
+          "base_uv_matrix_rgb": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "constant_offset_rgb": [
+            -0.00300000002,
+            -0.00300000002,
+            -0.00300000002
+          ],
+          "direct_colour_gain_norm": 1.00380000006,
+          "source_mixture_kind": "other_affine_source_mix",
+          "coordinate_sample_dependency": true,
+          "sample_contributions": [
+            {
+              "sample_site_index": 2,
+              "canonical_texture": "main",
+              "matrix_rgb_rgba": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            {
+              "sample_site_index": 3,
+              "canonical_texture": "noise_lq",
+              "matrix_rgb_rgba": [
+                [
+                  0.00380000006,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.00380000006,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.00380000006,
+                  0.0
+                ]
+              ]
+            }
+          ],
+          "full_programs_location": "hash-bound raw paired batch and per-preset result"
+        }
+      ]
+    }
+  ]
+}

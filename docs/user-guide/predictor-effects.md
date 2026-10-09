@@ -174,6 +174,12 @@ engine's repaired scale/bias inputs. That resolves more blur-driven flow formula
 without rendering. Dynamic ranges remain unknown, and known decode inputs do not
 prove the final image's colours or movement.
 
+Raw texture-colour transfer records now preserve supported RGB mixtures of
+main imagery, blur and noise, including signed channel weights and source bias.
+These coefficients help explain colour mixing and contrast operations. They do
+not certify a final palette, softness or sharpness: image history, coordinates,
+clipping and later passes still matter.
+
 Ordered colour-processing records show supported tone steps per RGB channel:
 power/gamma, inversion, tint/bias and clipping, with channel permutations and
 unknown base programs retained. They follow the patched translator's abs/domain

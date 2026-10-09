@@ -20,19 +20,8 @@ def sampled_coordinate_response(field):
                       'Image-dependent sample locations can add nonlinear response; their Jacobians remain unresolved',
                       'UV response is a sampling-map change, not a measured screen trajectory, speed, bass response or mood score'],
         'uses_rendered_images':False,'uses_equation_execution':False,'uses_shader_execution':False}
-    samples=[];memo={}
-    def substitute(node,depth=0):
-        if depth>64 or len(memo)>=4096:raise ValueError('coordinate sample substitution budget exceeded')
-        if id(node) in memo:return memo[id(node)]
-        if node.op=='sample':
-            if node.dtype!='float4' or node.detail.get('site_index') is None:raise ValueError('sample value type/site identity is unresolved')
-            if len(samples)>=64:raise ValueError('direct coordinate sample count exceeds 64-input budget')
-            name=':coordinate-sample-'+str(len(samples));samples.append((name,node))
-            value=Field('input',dtype='float4',detail={'name':name})
-        else:value=Field(node.op,tuple(substitute(arg,depth+1) for arg in node.args),node.dtype,node.detail)
-        memo[id(node)]=value;return value
     try:
-        replaced=substitute(field)
+        replaced,samples=substitute_sample_values(field)
         matrix,offsets=_affine_basis_map(replaced,('_uv',)+tuple(name for name,sample in samples))
         contributions=[];weights=[];dependency=False
         for index,(name,sample) in enumerate(samples):
@@ -59,3 +48,30 @@ def sampled_coordinate_response(field):
             conditional_sample_offset_range_uv=bounds,coordinate_sample_dependency=dependency)
     except (ValueError,RecursionError) as error:result['unknown_reasons']=[str(error)]
     return result
+
+
+def substitute_sample_values(field,*,known_vertex=None):
+    """Share typed sample inputs without inventing texture values or bindings."""
+    samples=[];memo={}
+    def substitute(node,depth=0):
+        if depth>64 or len(memo)>=4096:raise ValueError('coordinate sample substitution budget exceeded')
+        if id(node) in memo:return memo[id(node)]
+        if known_vertex is not None and node.op=='input' and node.dtype=='float4' and node.detail.get('name')=='_vDiffuse':
+            components=[]
+            for i,value in enumerate(known_vertex):
+                components.append(Field('constant',dtype='float',detail={'value':value}) if value is not None else
+                    Field('member',(node,),'float',{'field':'xyzw'[i],'swizzle':True}))
+            value=Field('components',tuple(components),'float4')
+        elif node.op=='sample':
+            if node.dtype!='float4' or node.detail.get('site_index') is None:raise ValueError('sample value type/site identity is unresolved')
+            if len(samples)>=64:raise ValueError('direct coordinate sample count exceeds 64-input budget')
+            name=':coordinate-sample-'+str(len(samples));samples.append((name,node))
+            value=Field('input',dtype='float4',detail={'name':name})
+        else:
+            value=Field(node.op,tuple(substitute(arg,depth+1) for arg in node.args),node.dtype,node.detail)
+            if known_vertex is not None and value.op=='member' and value.detail.get('swizzle') and value.args[0].op=='components':
+                from field_math import SWIZZLE
+                chosen=tuple(value.args[0].args[SWIZZLE[c]] for c in value.detail['field'])
+                value=chosen[0] if len(chosen)==1 else Field('components',chosen,value.dtype)
+        memo[id(node)]=value;return value
+    return substitute(field),samples

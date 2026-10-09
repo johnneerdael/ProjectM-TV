@@ -37,7 +37,7 @@ def _constant_matrix_vector_parts(field):
     return tuple(result)
 
 
-def _affine_basis_map(field,bases):
+def _affine_basis_map(field,bases,*,output_width=2):
     """Split two coordinates into constant _uv coefficients and uniform offsets.
 
     This is algebra on the source graph, not floating-point shader execution.
@@ -116,7 +116,7 @@ def _affine_basis_map(field,bases):
         raise ValueError('coordinate is not supported constant-affine UV plus uniform offset')
 
     parts=_parts(field)
-    if len(parts)!=2:raise ValueError('texture coordinates are not two-dimensional')
+    if len(parts)!=output_width:raise ValueError('texture coordinates are not two-dimensional' if output_width==2 else 'RGB transfer does not contain three scalar outputs')
     values=[visit(part) for part in parts]
     return np.array([v[0] for v in values]),[v[1] for v in values]
 

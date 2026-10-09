@@ -174,6 +174,11 @@ all6main-frame min/max fields are supported constants. Reuse blur.native_ranges
 CORE_2315_BLUR; retain coherent fallback, float32 packing and native-vs-MD2
 close-gap distinction. Never default-fill a dynamic/missing triplet. Injection
 uses known_uniform_components and respects local shadows; observed binding false.
+`source_colour_mix.py` exports3x4RGB/RGBA sample matrices, source UV gradients
+and uniform offsets via shared affine/substitution code. Norms hold locations
+fixed; signed main/blur mixture labels include all participating sample weights.
+No sharpness, final palette, whole-loop gain or mood certainty follows. Warp
+vertex substitution stays warp-only, retaining unknown RGB and known alpha.
 `source_colour_processing.py` exports ordered perRGB known tone suffixes and
 constant/sample/source-expression bases. Keep translator abs/domain power lowering,
 channel projections and unknown resources; alpha-only code is not RGB processing.

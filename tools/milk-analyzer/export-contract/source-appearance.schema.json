@@ -2559,6 +2559,273 @@
               }
             }
           }
+        },
+        "texture_colour_transfer": {
+          "type": "object",
+          "required": [
+            "policy",
+            "stages",
+            "scope",
+            "observed_runtime_bindings",
+            "conditions"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-affine-texture-colour-transfer-v1"
+            },
+            "observed_runtime_bindings": {
+              "const": false
+            },
+            "stages": {
+              "type": "object",
+              "required": [
+                "warp",
+                "composite"
+              ],
+              "properties": {
+                "warp": {
+                  "type": "object",
+                  "required": [
+                    "source_model",
+                    "base_uv_matrix_rgb",
+                    "constant_offset_rgb",
+                    "offset_expressions",
+                    "sample_contributions",
+                    "direct_colour_gain_norm",
+                    "source_mixture_kind",
+                    "coordinate_sample_dependency",
+                    "full_colour_sensitivity",
+                    "actual_sharpness",
+                    "actual_feedback_persistence",
+                    "final_palette_verified",
+                    "unknown_reasons"
+                  ],
+                  "properties": {
+                    "source_model": {
+                      "enum": [
+                        "unknown",
+                        "affine_sample_colour"
+                      ]
+                    },
+                    "base_uv_matrix_rgb": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "array",
+                        "minItems": 4,
+                        "maxItems": 4,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "constant_offset_rgb": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    },
+                    "sample_contributions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "sample_site_index",
+                          "canonical_texture",
+                          "matrix_rgb_rgba",
+                          "coordinate_expression",
+                          "sampling_policy"
+                        ],
+                        "properties": {
+                          "matrix_rgb_rgba": {
+                            "type": "array",
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "items": {
+                              "type": "array",
+                              "minItems": 4,
+                              "maxItems": 4,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "direct_colour_gain_norm": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "source_mixture_kind": {
+                      "enum": [
+                        null,
+                        "signed_main_blur_mix",
+                        "nonnegative_main_blur_mix",
+                        "other_affine_source_mix"
+                      ]
+                    },
+                    "coordinate_sample_dependency": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "full_colour_sensitivity": {
+                      "type": "null"
+                    },
+                    "actual_sharpness": {
+                      "type": "null"
+                    },
+                    "actual_feedback_persistence": {
+                      "type": "null"
+                    },
+                    "final_palette_verified": {
+                      "const": false
+                    }
+                  }
+                },
+                "composite": {
+                  "type": "object",
+                  "required": [
+                    "source_model",
+                    "base_uv_matrix_rgb",
+                    "constant_offset_rgb",
+                    "offset_expressions",
+                    "sample_contributions",
+                    "direct_colour_gain_norm",
+                    "source_mixture_kind",
+                    "coordinate_sample_dependency",
+                    "full_colour_sensitivity",
+                    "actual_sharpness",
+                    "actual_feedback_persistence",
+                    "final_palette_verified",
+                    "unknown_reasons"
+                  ],
+                  "properties": {
+                    "source_model": {
+                      "enum": [
+                        "unknown",
+                        "affine_sample_colour"
+                      ]
+                    },
+                    "base_uv_matrix_rgb": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "array",
+                        "minItems": 4,
+                        "maxItems": 4,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "constant_offset_rgb": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    },
+                    "sample_contributions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "sample_site_index",
+                          "canonical_texture",
+                          "matrix_rgb_rgba",
+                          "coordinate_expression",
+                          "sampling_policy"
+                        ],
+                        "properties": {
+                          "matrix_rgb_rgba": {
+                            "type": "array",
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "items": {
+                              "type": "array",
+                              "minItems": 4,
+                              "maxItems": 4,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "direct_colour_gain_norm": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "source_mixture_kind": {
+                      "enum": [
+                        null,
+                        "signed_main_blur_mix",
+                        "nonnegative_main_blur_mix",
+                        "other_affine_source_mix"
+                      ]
+                    },
+                    "coordinate_sample_dependency": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "full_colour_sensitivity": {
+                      "type": "null"
+                    },
+                    "actual_sharpness": {
+                      "type": "null"
+                    },
+                    "actual_feedback_persistence": {
+                      "type": "null"
+                    },
+                    "final_palette_verified": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },

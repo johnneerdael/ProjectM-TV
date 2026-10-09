@@ -681,3 +681,40 @@ GetBlur decoding uses these scale/bias inputs, so resolving them can unblock
 affine colour and coordinate coefficients. It does not identify kernel history,
 actual texture contents, closed-loop flow speed, final colour palette or mood.
 The independent sample-range premise from the previous section still applies.
+
+## Raw texture-colour transfer
+
+`texture_colour_transfer`, policy `source-affine-texture-colour-transfer-v1`,
+exports per-stage raw RGB as `UV_matrix*input_uv4 + uniform_offset +
+sum(sample_matrix_i*sample_i.rgba)`. It shares the typed affine analyzer and
+bounded opaque-sample substitution with the coordinate-response model. Native
+or unresolved stages retain unknown rather than an invented authored shader.
+
+Each contribution has a3-by-4 `matrix_rgb_rgba`, source site/sampler/texture,
+coordinate program and sampling policy. `base_uv_matrix_rgb` preserves source
+UV gradients. `constant_offset_rgb` is null per channel where a uniform offset
+is dynamic; its source program remains available. Dynamic texture multipliers,
+nonlinear products, powers and quantized sampled colour remain unsupported.
+
+`direct_colour_gain_norm` is the maximum RGB row sum of absolute per-site/
+channel coefficients, treating directly read sample values independently while
+holding their locations fixed. Correlations/cancellation can reduce actual
+response; image-dependent coordinates can add indirect nonlinear response.
+`full_colour_sensitivity`, `actual_sharpness` and `actual_feedback_persistence`
+remain null. `final_palette_verified=false`. No texture/content is inspected.
+
+`source_mixture_kind` describes coefficient signs: `signed_main_blur_mix` means
+main and at least one blur are present and some coefficient in the entire sample
+mixture is negative; `nonnegative_main_blur_mix` means all sample coefficients
+are nonnegative with main/blur present. Other textures may participate in either
+case; inspect their individual matrices. `other_affine_source_mix` covers other
+sample combinations or the degenerate UV/uniform-only case. These are source
+mixture facts, not sharpening/softness, brightness or mood classifications.
+Kernel/history/coordinate alignment, decode ranges, clipping/storage, source
+injection and subsequent passes determine the final image.
+
+Warp `_vDiffuse` uses the earlier source-bound vertex colour contract, resolving
+only known consumed lanes. Dynamic decay keeps RGB unknown and alpha one;
+composite hue/vertex colours are never replaced with warp decay. Source stages
+and native binding inputs retain their qualification/context obligations. This
+model does not replace the main-only feedback-transfer or47numeric contracts.

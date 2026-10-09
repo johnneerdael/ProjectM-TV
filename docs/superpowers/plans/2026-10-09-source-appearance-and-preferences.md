@@ -178,3 +178,13 @@ triplet using the existing target safe-range normalizer and float32 packing.
 Keep dynamic/missing inputs unresolved, preserve native repairs over originalMD2
 bugs, respect lexical shadows and expose conditional binding provenance. Verify
 focused controls plus fixed100 coverage/retention before claiming a gain.
+
+## Raw RGB texture mixture extension
+
+Reuse bounded sample substitution and typed affine math for3RGBoutput rows.
+Export per-source RGBA matrices, UV gradients, uniform offsets, direct fixed-
+location norm and coarse mixture signs. Retain nested-coordinate uncertainty
+and dynamic/nonlinear/quantized abstention; no final palette/sharpness or
+whole-loop claim. Native warp vertex inputs must not leak into composite hue.
+Use real HueBurst warp and focusedcontrols plus the same fixed100coverage/
+retention check; keep the existing main-only feedback contract unchanged.
