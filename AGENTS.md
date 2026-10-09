@@ -109,6 +109,10 @@ colourful/fractal candidates do not grant flash permission or calibrated confide
 without execution. Keep scalar casts in sink/phase graphs, per-channel unknowns,
 the source31 shader clock's10000-second wrap, and masks/storage/frame-sampling
 qualifications. These are not measured visible flash or screen-speed values.
+`source_triggers.py` adds direct-band comparison sites to audio routes. Preserve
+threshold units/expressions, reversed predicates, null whole-control levels for
+nested switches and null frequency without audio history. Site presence is not
+certification of a visible flash; empty results do not prove absence.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

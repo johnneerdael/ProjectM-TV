@@ -464,6 +464,97 @@
                     },
                     "has_threshold_or_clamp": {
                       "type": "boolean"
+                    },
+                    "switch_triggers": {
+                      "type": "array",
+                      "description": "Contributing direct-band comparison sites; empty does not prove no flashing.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "input_code",
+                          "comparison",
+                          "threshold_value",
+                          "threshold_expression",
+                          "control_true_value",
+                          "control_false_value",
+                          "absolute_control_jump",
+                          "scope",
+                          "trigger_frequency_hz",
+                          "source_graph_path",
+                          "conditions",
+                          "limitations"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "direct-band-switch-sites-v1"
+                          },
+                          "input_code": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 8
+                          },
+                          "comparison": {
+                            "enum": [
+                              "greater",
+                              "less",
+                              "greater_equal",
+                              "less_equal"
+                            ]
+                          },
+                          "threshold_value": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "threshold_expression": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          "control_true_value": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "control_false_value": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "absolute_control_jump": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "scope": {
+                            "type": "string"
+                          },
+                          "trigger_frequency_hz": {
+                            "type": "null"
+                          },
+                          "source_graph_path": {
+                            "type": "string"
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "limitations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

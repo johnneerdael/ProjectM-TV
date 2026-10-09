@@ -353,6 +353,63 @@ def test_independent_phase_programs_retain_original_negative_amplitudes():
     assert colour['oscillator_function_codes']==[2,2,2]
 
 
+def test_shape_opacity_threshold_exports_band_threshold_and_control_jump():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=a=if(above(bass,1.2),.8,.1);\n'))
+    route=next(r for e in result['elements'] for r in e['audio_routes'] if r['control']=='opacity')
+    trigger=route['switch_triggers'][0]
+    assert trigger['input_code']==1 and trigger['comparison']=='greater'
+    assert trigger['threshold_value']==pytest.approx(1.2)
+    assert trigger['control_true_value']==pytest.approx(.8)
+    assert trigger['control_false_value']==pytest.approx(.1)
+    assert trigger['absolute_control_jump']==pytest.approx(.7)
+    assert trigger['trigger_frequency_hz'] is None
+    assert result['activity']['flashing']['value'] is None
+
+
+def test_shader_reversed_threshold_preserves_band_direction():
+    result=appearance(shader('shader_body {ret=float3(1.2<bass?0.8:0.1,0,0);}'))
+    trigger=result['elements'][0]['audio_routes'][0]['switch_triggers'][0]
+    assert trigger['comparison']=='greater'
+    assert trigger['absolute_control_jump']==pytest.approx(.7)
+
+
+def test_nested_switch_has_no_fabricated_whole_control_jump():
+    result=appearance(shader('shader_body {ret=float3((bass>1.2?0.8:0.1)*mid,0,0);}'))
+    trigger=result['elements'][0]['audio_routes'][0]['switch_triggers'][0]
+    assert trigger['input_code']==1
+    assert trigger['absolute_control_jump'] is None
+
+
+def test_dynamic_threshold_retains_expression_instead_of_fixed_number():
+    result=appearance(shader('shader_body {ret=float3(bass>mid?1:0,0,0);}'))
+    trigger=next(r for r in result['elements'][0]['audio_routes'] if r['input_code']==1)['switch_triggers'][0]
+    assert trigger['threshold_value'] is None
+    assert trigger['threshold_expression']['nodes']
+
+
+@pytest.mark.parametrize('code',['ret=float3((bass>1.2?0.8:0.1)*0,0,0);',
+                               'ret=float3(int(bass)>1.2?1:0,0,0);',
+                               'ret=float3(bass>1.2?0.1:0.1,0,0);'])
+def test_dead_quantized_or_zero_jump_paths_do_not_assert_direct_band_switch(code):
+    result=appearance(shader('shader_body {'+code+'}'))
+    assert not any(r['switch_triggers'] for e in result['elements'] for r in e['audio_routes'])
+
+
+def test_integer_switch_branches_report_whole_control_jump_and_path():
+    result=appearance(shader('shader_body {ret=float3(bass>1.2?1:0,0,0);}'))
+    trigger=result['elements'][0]['audio_routes'][0]['switch_triggers'][0]
+    assert trigger['absolute_control_jump']==1
+    assert isinstance(trigger['source_graph_path'],str)
+    assert trigger['source_graph_path'].startswith('output')
+
+
+@pytest.mark.parametrize('code',['ret=float3(bass>1.2?1:1,0,0);','ret=float3(bass>bass,0,0);'])
+def test_constant_integer_branch_and_self_predicate_have_no_switch_site(code):
+    result=appearance(shader('shader_body {'+code+'}'))
+    assert not any(r['switch_triggers'] for e in result['elements'] for r in e['audio_routes'])
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

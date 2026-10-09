@@ -174,6 +174,28 @@ null: an authored gain does not establish screen area, clipping or perceived
 reactivity. `has_threshold_or_clamp` identifies contributing conditional/clamping
 code; it is not a measured flash event.
 
+### Audio switch sites
+
+Each audio route additionally exports `switch_triggers[]`, policy
+`direct-band-switch-sites-v1`. This first extractor recognizes contributing
+strict/non-strict greater/less comparisons with a direct band operand, including
+reversed operands. `int(bass)` and transformed/state/Q-only inputs do not establish
+a direct-band threshold. An empty list is not proof of no switching or flashing.
+
+`threshold_value` is a finite typed source constant when known; otherwise null,
+with `threshold_expression` retaining the program if exportable. Its unit is the
+declared engine band unit. `comparison` applies to the route's band on the left.
+`control_true_value`/`control_false_value` and `absolute_control_jump` use the
+route's control unit and are available only for a complete scalar comparison or
+conditional with known branches. Nested/masked/composed switches retain null
+whole-control levels. Identical constant branches do not contribute a jump.
+
+`scope`, `source_graph_path`, `conditions` and `limitations` qualify the finding.
+These are source predicate sites, not certified discontinuities of the final
+screen image. Branch reachability, domains, clock/state and later composition
+still matter. `trigger_frequency_hz` remains null without declared audio history.
+Threshold analysis does not grant Chill eligibility or visible flash confidence.
+
 ## Control expression DAG
 
 `expression` and `q_bridge_expressions` use `{root,nodes,complete,resources_resolved}`.

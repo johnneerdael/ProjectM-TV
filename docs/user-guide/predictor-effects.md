@@ -91,6 +91,13 @@ float rounding and the engine's10000-second shader-clock reset. A colour cycle
 is not automatically a prominent brightness flash; masks, coverage and final
 composition still matter. These fields do not grant a Chill recommendation.
 
+Audio routes also identify supported band-triggered switches. A shape opacity
+formula `if(above(bass,1.2),.8,.1)` reports a bass threshold of1.2 and a source
+opacity jump of.7. The frequency depends on the music crossing that threshold.
+Nested switches retain their trigger but leave the whole-control jump unknown;
+later masks and feedback can hide or amplify a change. These are switch candidates
+for further interpretation, not measured screen flashes.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated
