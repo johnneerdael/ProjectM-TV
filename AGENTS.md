@@ -606,3 +606,22 @@ I04 deferred bounded remainder (2026-10-09): v2/v3 preserve flags/other math and
 All33 audit disposition checkpoint (2026-10-09):13repaired IDs/12new shipping patches0017–0028,10retained policies and10completed deferred owner packets. Fresh329host,51ASan/UBSanrenderer+nativeengine/JNI,137releaseJVM,53capture/helper+24subtests,28-patch application, bothABIreleaseAAR/debugAPK andstrictMkDocs pass. Final Border.cpp bytes match frozenM02sourceproof; artifact hashes separate. macOS standaloneEGLtransition skipped; Dockerdaemon unavailable, so Linux/Mesa/explicitGL_LIBS route is not locally certified. FinalCI/externalreview andPRready/merge/publication remain separate; no corpusrestart/versionbump. See [combined evidence](docs/superpowers/evidence/milkdrop-audit-repairs/final-shipping-checks/README.md).
 
 Authored fidelity followup (2026-10-09): user accepts necessary authored-work cost for I19/I22/I20 and requests production I24/I16 through a new merge-ready PR. Candidate0029–0033 restore line sample caps, discrete custom dots/single-dot NaN inputs, circle closure, per-instance evaluated thickness and the latest previous real-warp field. Preserve earlier0001–0028, raw equation values, prepared replay, fragment semantics and ownership; no API/version/dependency/preset changes. Current source checks pass329 host,63 normal/sanitizer renderer,137 JVM and60 capture/helper tests plus24 subtests; both ARM builds pass.76 focused Native jobs verify608 selected final-output captures and repeats. Four active-canvas Native4K JNI lifecycle jobs verify120 boundary captures/repeats; original zero-reference jobs remain fallback-only evidence. Owned API34 emulator5640 only; Standard1280x720 reference, Native3840x2160, frozen audio/seed/clock and exact identities. Source-instrumented artifacts are distinct from shipping builds. Combined isolated cost, recursive/analyzer/docs checks, final main integration and new PR CI/review remain open. No physical-TV headroom, whole-corpus or Windows-pixel claim. See [active evidence](docs/superpowers/evidence/authored-fidelity-followup/README.md); the historical33-finding ledger is not relabelled.
+
+Predictor accuracy documentation (2026-10-09): `docs/user-guide/authoring/testing.md`
+section5 separates20-claim behavioural grades, full-sample versus conditional
+pass rates (which do not replace average agreement), numerical tolerances, visual judgment and independent reference
+qualification. Its worked97.5example and100-case totals cite immutable predictor
+commit `b3737a564f4b937bd33959e17bb61dbe4eb11304`. Keep historical unknowns in the
+original denominator; do not describe the47-field source export or a completed
+corpus simulation as a fresh visual-accuracy audit. The predictor overview links
+to this explanation. No predictor/app/AAR behavior is changed by this guide update.
+
+
+Predictor contract guide publication (2026-10-09): `predictor-export.md` and
+`assets/predictor-export/` copy the documented2026-10-08research checkpoint from
+predictor commit `fdfd09e2`, with download bytes preserved and a main-guide status
+notice. The Predictor navigation links both research direction and export
+reference. Commands on the contract page require the experimental implementation
+branch and prepared inputs; publishing this guide does not merge that engine.
+Validate example/schema/manifest hashes and the strict MkDocs build when changing
+those downloads. The accuracy explanation links this separate export reference.

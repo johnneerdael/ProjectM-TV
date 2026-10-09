@@ -65,10 +65,10 @@ The predictor is tested by writing down **20 observable claims** per preset befo
 
 - **85 of 100** scored 95 or more out of 100; 71 matched all 20 claims;
 - among the 88 presets it could analyse, the mean score was **98.8**;
-- the 12 it could not complete hit numeric domains the analyser cannot yet resolve: mostly undefined powers (such as negative bases), plus division, dot-product and nonfinite-coordinate cases whose root causes are still being traced;
+- the 12 it could not complete hit numeric domains the analyser could not resolve at that checkpoint: mostly undefined powers (such as negative bases), plus division, dot-product and nonfinite-coordinate cases which were retained as unresolved in that audit;
 - the audit's own target is 100 of 100 presets at 95 or more, so this run did not pass it (mean 86.95 when unanalysable presets count as 0). It used the published 2.3.11 engine, before the projectM 4.2 rebase.
 
-Details and limits are in [Test and predict presets](authoring/testing.md#5-predicting-a-preset-from-its-source).
+These are historical behavioural-rubric grades. Average agreement measures closeness; the pass rate depends separately on the chosen gate. [How the score is measured](authoring/testing.md#how-are-you-measuring-97-accurate) explains the 20-claim arithmetic, a real 97.5 example, the 5% numerical tolerance, visual assessment and the difference between 85/100 and 85/88. Later repairs and source-only corpus exports do not retroactively increase this audit's accuracy.
 
 ## What remains before it replaces today's moods
 
@@ -95,3 +95,13 @@ If preset behaviour can be predicted from source, the same machinery can in prin
 ## What to expect
 
 When it lands, the result should be moods that explain themselves and new presets that can be placed without rendering. It should also leave much more room to make collections your own.
+
+
+## Use the predictor output in another tool
+
+The [predictor export contract](predictor-export.md) documents the feature envelope,
+all 47 simulated fields, strict extraction, provenance and unknowns, with downloadable
+JSON Schema, catalog and real examples. It also describes the limits of using
+these measurements for a Rust/wgpu adaptation and the additional semantic
+information needed for effect-family recognition or generation. The contract is a
+research checkpoint, separate from the accuracy rubric and shipped collections.
