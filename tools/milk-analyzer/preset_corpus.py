@@ -37,9 +37,9 @@ def verify_target(configuration):
     if file_hash(configuration['engine_profile'])!=configuration['engine_profile_sha256']:
         raise ValueError('engine profile identity changed')
     profile=json.loads(Path(configuration['engine_profile']).read_text())
-    # Published32 is byte-identical to31; both bind the same separately
+    # Published32/33 are byte-identical to31; all bind the same separately
     # qualified source31 archive. Keep historical publication names explicit.
-    if profile.get('source_engine')!=CORE_2331_ENGINE or profile.get('release') not in {'v2.3.31','v2.3.32'}:
+    if profile.get('source_engine')!=CORE_2331_ENGINE or profile.get('release') not in {'v2.3.31','v2.3.32','v2.3.33'}:
         raise ValueError('published profile source engine mismatch')
     if (profile.get('aar_sha256')!=CORE_2331_AAR_SHA256 or
             configuration['published_aar_sha256']!=CORE_2331_AAR_SHA256 or
@@ -158,11 +158,11 @@ def parse_args(argv=None):
     args=p.parse_args(argv)
     release31=args.target=='core2331'
     args.binaries=args.binaries or ROOT/('build/preset-corpus/source31/adapters' if release31 else 'build/preset-corpus/source29/adapters')
-    args.output=args.output or Path.home()/('Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2332' if release31 else
+    args.output=args.output or Path.home()/('Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2333' if release31 else
                                           'Downloads/ProjectM-TV-preset-corpus-15fps-480p-core2329-diagnostic')
     if release31:
-        args.aar=args.aar or ROOT/'build/preset-corpus/published32/projectM-TV-core-2.3.32.aar'
-        args.engine_profile=args.engine_profile or Path(__file__).with_name('profiles')/'published-core-v2.3.32.json'
+        args.aar=args.aar or ROOT/'build/preset-corpus/published33/projectM-TV-core-2.3.33.aar'
+        args.engine_profile=args.engine_profile or Path(__file__).with_name('profiles')/'published-core-v2.3.33.json'
     if not 1<=args.workers<=32:p.error('workers must be1..32')
     if args.frames<1 or args.width<1 or args.height<1 or args.width*args.height>1024*768:
         p.error('positive dimensions/frames within the currently supported reference area required')

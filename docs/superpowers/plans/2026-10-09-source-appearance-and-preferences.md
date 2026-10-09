@@ -5,7 +5,7 @@ The user wants sufficiently accurate mood descriptions and editable preference
 matching, with a machine-readable baseline visual description detailed enough
 for an eventual approximate reconstruction. Exact positions and pixel equality
 are not the objective of this layer. Continue in the same worktree with the
-verified latest full2.3.32AAR (byte-identical31); no main merge or duplicate corpus
+verified latest full2.3.33AAR (byte-identical32/31); no main merge or duplicate corpus
 render is implied.
 
 ## Required output

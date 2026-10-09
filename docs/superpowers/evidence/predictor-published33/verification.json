@@ -1,0 +1,13 @@
+{
+  "release": "v2.3.33",
+  "release_commit": "a3a045bd8a7655e48bce2368008e2ced7d724063",
+  "full_aar_sha256": "13290b486d08569f229f1f684e57aba849a31a2506270a4d305777322d8d7377",
+  "full_aar_bytes_equal_to32": true,
+  "engine_core_patch_tag_diff_empty": true,
+  "published_checksums_verified": true,
+  "new_runtime_captures": false,
+  "appearance_certified": false,
+  "historical_profiles_unchanged": true,
+  "downloads_launcher_sha256": "c5dfd7ad46955a73186d5c2c7e10af3d4d4f1a9be4fcea7b580ded362b983aea",
+  "owned_runner_processes": []
+}

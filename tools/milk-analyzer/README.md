@@ -65,15 +65,15 @@ extractor CLI option. It requires GLES300 at source entry points; strict remains
 the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
 nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
 
-## Latest publication:2.3.32; source engine unchanged from2.3.31
+## Latest publication:2.3.33; source engine unchanged from2.3.31
 
-`profiles/published-core-v2.3.32.json` binds the latest downloaded full AAR.
-Its bytes are identical to2.3.31 by SHA256 and direct comparison; engine/JNI
+`profiles/published-core-v2.3.33.json` binds the latest downloaded full AAR.
+Its bytes are identical to2.3.32 and2.3.31 by SHA256 and direct comparison; engine/JNI
 source has no changes between those tags. Existing exact-byte source/runtime
-evidence carries forward without new captures. The32 profile records that scope,
-and older31 profiles/results retain their original identity. Source31 adapters
+evidence carries forward without new captures. The33 profile records that scope,
+and older31/32 profiles/results retain their original identity. Source31 adapters
 and their separately pinned CPU archive remain the numerical producer. Corpus
-defaults use the32 publication and a new `-core2332` output directory.
+defaults use the33 publication and a new `-core2333` output directory.
 
 An additional opt-in forecast domain `shader_work_policy=uniform-proof-v1`
 statically identifies pure uniform shader subgraphs and computes them once with
