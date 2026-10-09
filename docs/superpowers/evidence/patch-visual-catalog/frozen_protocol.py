@@ -2,10 +2,13 @@
 import hashlib
 
 
-# Independently reconstructed from e98fca85 plus its pinned evaluator and
-# frozen 8a15996e deterministic instrumentation, then compared with the actual
-# original build source. See upstream-source-anchor.json for the observation.
-UPSTREAM_SOURCE_TREE_SHA256 = 'cbd3e22aae01abde85c6ae6af80e63b01196c4c2a15f269b75aa88b89cd0fa62'
+# Independently reconstructed from the exact engine/evaluator Git archives,
+# all admitted patches and frozen 8a15996e deterministic instrumentation, then
+# compared with both original build sources. See *-source-anchor.json receipts.
+FROZEN_SOURCE_TREES = {
+    'upstream': 'cbd3e22aae01abde85c6ae6af80e63b01196c4c2a15f269b75aa88b89cd0fa62',
+    'patched': '5e48da2b8a47f160a1884a648cae19127d833e69f5b5f3c55ffb5c64eff66533',
+}
 
 FROZEN_PCM = {
     240: '3075e03ba2c11bb0f3c73e26729c25cded47a8377e33115753b27a2d4f90b4ad',

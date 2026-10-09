@@ -111,12 +111,18 @@ class RunReceiptBinding(unittest.TestCase):
             self.check(overrides={'upstream-source-tree.json': source})
 
     def test_joint_upstream_inventory_and_worker_digest_drift_fails(self):
-        source = json.loads((EVIDENCE / 'upstream-source-tree.json').read_text())
+        self.check_joint_source_inventory_drift('upstream')
+
+    def test_joint_patched_inventory_and_worker_digest_drift_fails(self):
+        self.check_joint_source_inventory_drift('patched')
+
+    def check_joint_source_inventory_drift(self, role):
+        source = json.loads((EVIDENCE / f'{role}-source-tree.json').read_text())
         source['src/libprojectM/MilkdropPreset/VideoEcho.cpp'] = '0' * 64
         workers = json.loads((EVIDENCE / 'workers.json').read_text())
-        workers['upstream']['source_tree_sha256'] = verifier.inventory_digest(source)
-        with self.assertRaisesRegex(AssertionError, 'frozen upstream source anchor'):
-            self.check(overrides={'upstream-source-tree.json': source, 'workers.json': workers})
+        workers[role]['source_tree_sha256'] = verifier.inventory_digest(source)
+        with self.assertRaisesRegex(AssertionError, f'frozen {role} source anchor'):
+            self.check(overrides={f'{role}-source-tree.json': source, 'workers.json': workers})
 
     def test_frozen_worker_record_tamper_fails(self):
         workers = json.loads((EVIDENCE / 'workers.json').read_text())

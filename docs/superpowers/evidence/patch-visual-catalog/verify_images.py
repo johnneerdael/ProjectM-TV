@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 from guide_bindings import verify_guide
-from frozen_protocol import FROZEN_PCM, UPSTREAM_SOURCE_TREE_SHA256
+from frozen_protocol import FROZEN_PCM, FROZEN_SOURCE_TREES
 
 
 def sha(data):
@@ -97,15 +97,14 @@ def verify(repo):
     actual_textures = {path.relative_to(texture_root).as_posix(): sha(path.read_bytes())
                        for path in texture_root.rglob('*') if path.is_file()}
     assert actual_textures == textures, 'preserved texture bytes differ from inventory'
-    assert set(workers) == {'upstream', 'patched'}
+    assert set(workers) == set(FROZEN_SOURCE_TREES) == {'upstream', 'patched'}
     canonical = {}
     supplementary = {'source_tree_sha256', 'texture_inventory_sha256',
                      'evaluator_commit', 'ordered_patches'}
     for role, worker in workers.items():
         source_tree = json.loads((evidence / f'{role}-source-tree.json').read_text())
         assert inventory_digest(source_tree) == worker['source_tree_sha256'], f'source inventory: {role}'
-        if role == 'upstream':
-            assert inventory_digest(source_tree) == UPSTREAM_SOURCE_TREE_SHA256, 'frozen upstream source anchor'
+        assert inventory_digest(source_tree) == FROZEN_SOURCE_TREES[role], f'frozen {role} source anchor'
         assert texture_digest == worker['texture_inventory_sha256'], 'texture inventory mismatch'
         assert worker['evaluator_commit'] == '22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a'
         patches = [(p['filename'], p['sha256']) for p in worker['ordered_patches']]
