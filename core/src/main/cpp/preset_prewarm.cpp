@@ -127,6 +127,7 @@ void PresetPrewarmer::Run() {
         projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "compiling '%s'", name.c_str());
         auto preset = reader_(name);
         if (preset.data.empty()) {
+            projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "idle: could not read '%s'", name.c_str());
             std::lock_guard<std::mutex> lock(mutex_);
             active_.clear();
             continue;
@@ -138,6 +139,7 @@ void PresetPrewarmer::Run() {
         projectm_handle pm = projectm_create();
         if (!pm) {
             LOGW("PREWARM unavailable: projectm_create failed");
+            projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "stopped: projectm_create failed");
             std::lock_guard<std::mutex> lock(mutex_);
             active_.clear();
             break;
