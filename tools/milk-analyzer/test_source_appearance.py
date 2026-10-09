@@ -545,6 +545,105 @@ def test_nested_assignment_aliases_are_not_folded_as_value_snapshots():
     assert any('reference aliases' in r['reason'] for r in result['execution_unknowns'])
 
 
+def test_shape_motion_exports_linear_drift_and_sinusoidal_excursion():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=x=.5+.1*time;y=.5+.2*sin(2*time);ang=.3*time;\n'))
+    element=next(e for e in result['elements'] if e['id']=='shape_0')
+    controls={r['control']:r for r in element['motion_controls']}
+    assert controls['position_x']['curve_kind']=='linear_time'
+    assert controls['position_x']['signed_linear_rate_per_second']==pytest.approx(.1)
+    assert controls['position_y']['curve_kind']=='sinusoidal_time'
+    assert controls['position_y']['nominal_value_range']==pytest.approx([.3,.7])
+    assert controls['position_y']['period_seconds']==pytest.approx(math.pi)
+    assert controls['position_y']['maximum_absolute_control_rate_per_second']==pytest.approx(.4)
+    assert controls['rotation']['signed_linear_rate_per_second']==pytest.approx(.3)
+    assert all(r['visible_motion_speed'] is None for r in controls.values())
+
+
+def test_constant_feedback_rotation_is_not_stationary_image_claim():
+    result=appearance(read('fWaveAlpha=0\nper_frame_1=rot=.02;\n'))
+    element=next(e for e in result['elements'] if e['id']=='mesh_warp')
+    rotation=next(r for r in element['motion_controls'] if r['control']=='rotation')
+    assert rotation['curve_kind']=='constant'
+    assert rotation['constant_value']==pytest.approx(.02)
+    assert rotation['maximum_absolute_control_rate_per_second']==0
+    assert rotation['application']=='feedback sampling transform each step'
+    assert rotation['visible_motion_speed'] is None
+    assert result['activity']['motion_intensity']['value'] is None
+
+
+@pytest.mark.parametrize('formula',['.5+sin(time*time)','bass*.1','k','sin(time)*cos(time)'])
+def test_unsupported_motion_curve_keeps_unknown_rate(formula):
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=x='+formula+';\n'))
+    element=next(e for e in result['elements'] if e['id']=='shape_0')
+    control=next(r for r in element['motion_controls'] if r['control']=='position_x')
+    assert control['curve_kind']=='unknown'
+    assert control['maximum_absolute_control_rate_per_second'] is None
+
+
+def test_motion_oscillator_outside_colour_range_is_still_a_valid_source_curve():
+    result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
+        'shape_0_per_frame1=x=2+.1*cos(-3*time+1);\n'))
+    element=next(e for e in result['elements'] if e['id']=='shape_0')
+    control=next(r for r in element['motion_controls'] if r['control']=='position_x')
+    assert control['curve_kind']=='sinusoidal_time'
+    assert control['maximum_absolute_control_rate_per_second']==pytest.approx(.3)
+    assert control['nominal_value_range']==pytest.approx([1.9,2.1])
+
+
+def test_native_mesh_families_and_motion_controls_share_one_element():
+    result=appearance(read('fWaveAlpha=0\nper_frame_1=zoom=1.02;rot=.02;\n'))
+    mesh=[e for e in result['elements'] if e['stage']=='mesh_warp']
+    assert len(mesh)==1 and mesh[0]['id']=='mesh_warp'
+    assert 'radial_feedback_transform' in mesh[0]['mechanisms']
+    assert mesh[0]['legacy_ids']==['shader_mesh_warp']
+    assert mesh[0]['motion_controls']
+
+
+@pytest.mark.parametrize('formula,value',[('(.5+.2*sin(time))*0',0),('.5+.2*sin(0*time+1)',.5+.2*math.sin(1))])
+def test_inactive_motion_oscillators_are_constant_without_period(formula,value):
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=x='+formula+';\n')
+    element=next(e for e in appearance(source)['elements'] if e['id']=='shape_0')
+    control=next(r for r in element['motion_controls'] if r['control']=='position_x')
+    assert control['curve_kind']=='constant'
+    assert control['constant_value']==pytest.approx(value)
+    assert control['period_seconds'] is None and control['frequency_hz'] is None
+    assert control['maximum_absolute_control_rate_per_second']==0
+
+
+@pytest.mark.parametrize('code',['per_frame_1=k=time;\n','per_frame_init_1=k=.3;\n'])
+def test_private_main_locals_do_not_become_per_pixel_motion(code):
+    result=appearance(read('fWaveAlpha=0\n'+code+'per_pixel_1=rot=k;\n'))
+    control=next(r for e in result['elements'] if e['id']=='mesh_warp' for r in e['motion_controls'] if r['control']=='rotation')
+    assert control['curve_kind']=='unknown'
+    assert control['maximum_absolute_control_rate_per_second'] is None
+
+
+def test_per_pixel_q_copy_still_carries_main_time_curve():
+    result=appearance(read('fWaveAlpha=0\nper_frame_1=q1=time;\nper_pixel_1=rot=q1;\n'))
+    control=next(r for e in result['elements'] if e['id']=='mesh_warp' for r in e['motion_controls'] if r['control']=='rotation')
+    assert control['signed_linear_rate_per_second']==1
+
+
+def test_per_pixel_readonly_time_is_loaded_before_main_frame_writes():
+    result=appearance(read('fWaveAlpha=0\nper_frame_1=time=.3;\nper_pixel_1=rot=time;\n'))
+    control=next(r for e in result['elements'] if e['id']=='mesh_warp' for r in e['motion_controls'] if r['control']=='rotation')
+    assert control['signed_linear_rate_per_second']==1
+
+
+def test_per_pixel_q_accumulation_is_not_a_constant_for_all_vertices():
+    result=appearance(read('fWaveAlpha=0\nper_frame_init_1=q1=.3;\nper_pixel_1=q1+=.1;rot=q1;\n'))
+    control=next(r for e in result['elements'] if e['id']=='mesh_warp' for r in e['motion_controls'] if r['control']=='rotation')
+    assert control['curve_kind']=='unknown'
+
+
+def test_per_pixel_readonly_writes_can_accumulate_across_vertices():
+    result=appearance(read('fWaveAlpha=0\nper_pixel_1=time+=.1;rot=time;\n'))
+    control=next(r for e in result['elements'] if e['id']=='mesh_warp' for r in e['motion_controls'] if r['control']=='rotation')
+    assert control['curve_kind']=='unknown'
+
+
 def test_fractal_with_generated_colour_marks_conditional_psychedelic_potential():
     source=read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
         'warp_1=`shader_body {float2 z=uv-.5;for(int n=0;n<4;n++){'

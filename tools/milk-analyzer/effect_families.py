@@ -778,7 +778,8 @@ class _Analysis:
         inputs=dict(initialized)
         for name in inputs.keys()-resets.keys():
             if name in written or re.fullmatch(r'reg[0-9]{2}',name):
-                inputs[name]=Field('input',detail={'name':name,'state_scope':'previous persistent or shared register value'})
+                scope='shared:'+name if re.fullmatch(r'reg[0-9]{2}',name) else 'state:'+prefix+':'+name
+                inputs[name]=Field('input',detail={'name':scope,'state_scope':'previous persistent or shared register value'})
         inputs.update(resets)
         return inputs
 
@@ -796,7 +797,16 @@ class _Analysis:
             **{f'q{i}':init.environment.get(f'q{i}',_constant(0)) for i in range(1,33)}}
         frame = self.equation('per_frame_',self.frame_environment('per_frame_',init.environment,resets))
         self.main = frame.environment
-        mesh = self.equation('per_pixel_', frame.environment)
+        # PerPixelContext is a separate evaluator. Readonly values are copied
+        # before main frame code; warp controls reload each vertex. Q values
+        # copy once after main code and may then evolve across vertices.
+        readonly=(*READONLY,'meshx','meshy','pixelsx','pixelsy','aspectx','aspecty')
+        pixel_resets={**{name:frame.environment.get(name,Field('input',detail={'name':name}))
+                         for name in ('zoom','zoomexp','rot','warp','cx','cy','dx','dy','sx','sy')},
+                      **{name:Field('input',detail={'name':name}) for name in ('x','y','rad','ang')}}
+        pixel_initial={**pixel_resets,**{name:resets[name] for name in readonly},
+                       **{f'q{i}':frame.environment.get(f'q{i}',_constant(0)) for i in range(1,33)}}
+        mesh = self.equation('per_pixel_',self.frame_environment('per_pixel_',pixel_initial,pixel_resets))
         self.mesh_controls=mesh.environment
         for name in ('rot', 'zoom', 'zoomexp', 'sx', 'sy', 'dx', 'dy', 'warp'):
             value = mesh.environment.get(name, _constant(0))

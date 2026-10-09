@@ -664,6 +664,144 @@
                     }
                   }
                 }
+              },
+              "motion_controls": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "policy",
+                    "control",
+                    "control_unit",
+                    "application",
+                    "curve_kind",
+                    "maximum_absolute_control_rate_per_second",
+                    "visible_motion_speed",
+                    "conditions",
+                    "unknown_reasons"
+                  ],
+                  "properties": {
+                    "policy": {
+                      "const": "source-time-control-curves-v1"
+                    },
+                    "control": {
+                      "type": "string"
+                    },
+                    "control_unit": {
+                      "type": "string"
+                    },
+                    "application": {
+                      "enum": [
+                        "shape geometry parameter",
+                        "feedback sampling transform each step"
+                      ]
+                    },
+                    "curve_kind": {
+                      "enum": [
+                        "constant",
+                        "linear_time",
+                        "sinusoidal_time",
+                        "unknown"
+                      ]
+                    },
+                    "constant_value": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "offset_value": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "amplitude_value": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "oscillator_function_code": {
+                      "enum": [
+                        null,
+                        1,
+                        2
+                      ]
+                    },
+                    "phase_expression": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "angular_phase_rate_rad_per_second": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "period_seconds": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "frequency_hz": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "nominal_value_range": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "signed_linear_rate_per_second": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "maximum_absolute_control_rate_per_second": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "rate_unit": {
+                      "type": "string"
+                    },
+                    "expression": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "visible_motion_speed": {
+                      "type": "null"
+                    },
+                    "conditions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "unknown_reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
             }
           }

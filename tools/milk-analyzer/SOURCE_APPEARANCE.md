@@ -108,6 +108,49 @@ can use ordinary division. Unresolved denominators retain the native guarded
 operation. Nested assignment/reference-alias expressions remain explicit gaps
 rather than being folded as copied values. No native engine policy is changed.
 
+### Named motion-control curves
+
+Shape and contributing mesh elements add `motion_controls[]`, policy
+`source-time-control-curves-v1`. Each entry names its control, source unit,
+application and bounded formula export. Supported `curve_kind` values are
+`constant`, `linear_time`, `sinusoidal_time` and `unknown`. These describe the
+control formula rather than tracking a visible object.
+
+For `a*time+b`, `offset_value=b`, `signed_linear_rate_per_second=a`, and
+`maximum_absolute_control_rate_per_second=abs(a)`. No lifetime range is inferred
+for an unbounded drift. Constants have zero control derivative, not necessarily
+zero image motion. A single `b+A*sin/cos(w*time+p)` exports the original signed
+amplitude, full phase program, function code1cos/2sin, phase rate, period/frequency,
+range `[b-abs(A),b+abs(A)]` and maximum absolute control derivative `abs(A*w)`.
+`rate_unit` is `control_unit/source-time second`; rates are continuous nominal
+formula values, excluding clock jumps, rounding, rasterization and frame sampling.
+
+Shape x/y units are authored coordinates, radius is the source radius/NDC unit,
+and angle is radians. Mesh rotation's control unit is radians per feedback step;
+its time derivative changes that per-step amount. `application` explicitly marks
+mesh controls as `feedback sampling transform each step`. A constant rot.02 can
+rotate sampled feedback every step despite a zero control derivative. FPS, native
+warp-time math, feedback composition and visibility are still needed for image
+speed; `visible_motion_speed` and activity/mood scores remain null.
+
+Audio/state/nonlinear time and unsupported combined oscillators retain unknown
+rates and reasons. Do not infer stationary images from unknowns or constant
+controls. The previous per-element audio routes remain alongside these curves.
+Native mesh families and control curves share the canonical `mesh_warp` element.
+Earlier experimental records could split this role into `shader_mesh_warp` and
+`mesh_warp`; `legacy_ids` preserves the former alias when its families are merged.
+Do not count those aliases as two independent visible layers. Frozen older records
+retain their original IDs and model hashes.
+
+Per-pixel EEL has its own variable context. Only the ten native warp controls,
+Q values, registered readonly values, dimensions and coordinates seed its
+analysis; private main locals do not transfer. Readonly values copy before main
+frame equations, Q values afterward. Warp controls/coordinates reload per vertex;
+writable Q/readonly/custom state can evolve between vertices and stays unknown
+without an invariant. `state:<section>:<name>` inputs identify those unresolved
+state slots; shared-register inputs use `shared:<name>`. Frozen older outputs are
+not relabelled with corrected bindings.
+
 ## Colour modes
 
 | `colour.mode_code` | Interpretation |

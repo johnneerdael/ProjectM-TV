@@ -385,12 +385,14 @@ def _colour(field,*,allow_shared_multiplier=True):
 
 def appearance_from_analysis(analysis):
     from effect_families import _parts,_number,_walk
+    from source_motion import motion_control
     elements={}
     for family in analysis.families:
-        identity=family['component'] or 'shader_'+family['stage']
+        identity=family['component'] or ('mesh_warp' if family['stage']=='mesh_warp' else 'shader_'+family['stage'])
         element=elements.setdefault(identity,{'id':identity,'stage':family['stage'],'family_codes':[],
             'mechanisms':[],'parameters':{},'colour':None,'audio_routes':[],
             'approximate_screen_coverage':None,'conditions':[],'evidence':[]})
+        if family['stage']=='mesh_warp':element['legacy_ids']=['shader_mesh_warp']
         code=FAMILY_CODES.get(family['mechanism'])
         if code is not None and code not in element['family_codes']:element['family_codes'].append(code)
         element['mechanisms'].append(family['mechanism'])
@@ -410,6 +412,8 @@ def appearance_from_analysis(analysis):
         if identity not in elements:continue #later composite disconnected this drawing
         from source_geometry import shape_geometry
         elements[identity]['geometry']=shape_geometry(controls,elements[identity]['parameters']['instances'])
+        elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
+            application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():
             if name in controls:
                 value=controls[name];elements[identity]['parameters'][name]=_number(value)
@@ -420,19 +424,24 @@ def appearance_from_analysis(analysis):
     consumes_feedback=composite is None or any(n.op=='sample' and
         n.detail.get('canonical_texture') in {'main','blur1','blur2','blur3'} for n,p in _walk(composite))
     if consumes_mesh and consumes_feedback:
-        routes=[];parameters={}
+        routes=[];parameters={};motion=[]
         for name,(control,unit) in MESH_CONTROLS.items():
             value=getattr(analysis,'mesh_controls',{}).get(name)
             if value is not None:
                 routes+=_routes(control,unit,value,analysis);parameters[name]=_number(value)
-        if routes:
-            elements['mesh_warp']={'id':'mesh_warp','stage':'mesh_warp','family_codes':[8],
-                'mechanisms':['native_feedback_transform_controls'],'parameters':parameters,
-                'colour':None,'audio_routes':routes,'approximate_screen_coverage':None,
-                'conditions':['active warp consumes transformed UV and final composite retains feedback',
-                              'feedback contains visible texture; sampling-map motion is not a screen-speed measurement'],
-                'evidence':[analysis.evidence(prefix,'source native feedback controls retain audio paths','output')
-                            for prefix in ['per_frame_','per_pixel_']]}
+                motion.append(motion_control(value,control,unit,application='feedback sampling transform each step'))
+        neutral={'zoom':1,'radial_zoom':1,'scale_x':1,'scale_y':1,'rotation':0,'translation_x':0,'translation_y':0,'deformation':0}
+        if routes or any(r['curve_kind']!='constant' or r['constant_value']!=neutral[r['control']] for r in motion):
+            element=elements.setdefault('mesh_warp',{'id':'mesh_warp','stage':'mesh_warp','family_codes':[8],
+                'mechanisms':[],'parameters':{},'colour':None,'audio_routes':[],
+                'approximate_screen_coverage':None,'conditions':[],'evidence':[]})
+            element['parameters'].update(parameters)
+            element['mechanisms'].append('native_feedback_transform_controls')
+            element['audio_routes']=routes;element['motion_controls']=motion
+            element['conditions']+=['active warp consumes transformed UV and final composite retains feedback',
+                                  'feedback contains visible texture; sampling-map motion is not a screen-speed measurement']
+            element['evidence']+=[analysis.evidence(prefix,'source native feedback controls retain source curves','output')
+                                 for prefix in ['per_frame_','per_pixel_']]
     for element in elements.values():
         if element['colour'] is None:element['colour']={'mode_code':None,'palette_diversity':None,'constant_rgb':None,'guaranteed_visible':False}
         element['conditions']=list(dict.fromkeys(element['conditions']))

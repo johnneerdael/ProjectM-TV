@@ -105,6 +105,13 @@ not resolve overlap. Dynamic sizes, opacity, clipping and later shaders can stil
 prevent a visible-area estimate. Init-only audio captures remain separate from
 live reactivity, and changing persistent variables do not masquerade as fixed sizes.
 
+Named shape and feedback controls also describe supported drift and oscillation.
+For `x=.5+.1*sin(2*time)`, the source-coordinate excursion is±.1, period pi seconds,
+and nominal peak control speed.2 units/s. Audio/state/nonlinear formulas can still
+abstain. A constant feedback rotation is applied each feedback step and may keep
+moving the picture; zero change in its control value is not a still-image claim.
+These source rates do not yet establish perceived screen movement or a mood score.
+
 The [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md)
 and [JSON Schema](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/export-contract/source-appearance.schema.json)
 explain how to read every field. Successful source extraction is not a calibrated

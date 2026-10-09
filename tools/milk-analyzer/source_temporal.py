@@ -2,8 +2,8 @@
 import math
 
 
-def affine_shader_time_rate(field):
-    """Return slope for a scalar a*time+b with finite constant a/b, else None.
+def affine_time_parameters(field):
+    """Return (slope, offset) for finite constant-affine scalar time, else None.
 
     Arithmetic describes the authored real-valued formula, not float32 rounding
     or shader-clock wrap events. Reject dynamic casts, state and other inputs.
@@ -64,7 +64,11 @@ def affine_shader_time_rate(field):
         if b[0]!=0 or b[1]==0:return None
         return (a[0]/b[1],a[1]/b[1])
 
-    pair=visit(field)
+    return visit(field)
+
+
+def affine_shader_time_rate(field):
+    pair=affine_time_parameters(field)
     return None if pair is None else pair[0]
 
 

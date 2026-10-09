@@ -120,6 +120,10 @@ the target does; writable persistent custom locals/shared registers remain
 previous-state inputs. Init captures use namespaced inputs; EELvol is local,
 packed shader volume remains aggregate. Branch assignments use native `_if`
 environment merging. None of these facts establishes image or mood accuracy.
+`source_motion.py` exports named constant/linear/sinusoidal source control curves.
+Keep source-time units, ranges and signed coefficients separate from visible
+motion. Constant mesh controls apply each feedback step; zero derivative is not
+zero image speed. Audio/state/nonlinear curves remain unknown without support.
 
 Canonical source31 corpus admission requires the exact qualified host CPU
 archive pinned separately as `preset_corpus.CORE_2331_SOURCE_ARCHIVE_SHA256`;

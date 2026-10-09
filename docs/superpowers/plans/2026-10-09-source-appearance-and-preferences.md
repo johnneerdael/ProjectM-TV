@@ -82,8 +82,22 @@ contract documentation and review. The numerical47-field export stays unchanged.
   coefficients. Lifecycle, init/live inputs, compound writes and guarded division
   were corrected before those calculations; other state/reference effects remain
   explicit gaps. Clipping, union area and opacity contributions are still pending.
-- Motion/transform rates, feedback recurrence and calibrated mood/preference
+- Named motion-control curves are implemented;20/100presets have55known
+  nonconstant time curves. These are source control rates, not visible motion.
+  Per-pixel bindings/state and mesh-role aliasing were corrected before counting.
+- Spatial/image motion, feedback recurrence and calibrated mood/preference
   matching remain required work. Existing47numeric fields stay unchanged.
 
 See source-temporal, source-switch-sites and source-geometry evidence folders;
 source-math controls do not establish image accuracy or completed preference fit.
+
+## User reconstruction notification gate
+
+Notify the user when source-only JSON enables a separate program to describe or
+construct a recognizable approximation of a preset's characteristic look, including
+forms/layers, colours/materials, characteristic motion and specific audio response.
+Current partial traits do not satisfy this gate. Validate explicit descriptions
+prospectively; successful extraction, control tests or simulation agreement alone
+do not prove independent reconstruction usefulness. Keep unresolved properties
+visible and retain frozen prior review outputs. The user does not require pixel
+identity or an exported shader program.
