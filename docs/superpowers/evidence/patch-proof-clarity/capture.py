@@ -17,6 +17,15 @@ def texture_inventory(root):
             for i in sorted(root.rglob('*')) if i.is_file()}
 
 
+def verify_inputs(preset, pcm, textures, inputs):
+    if sha(preset.read_bytes())!=inputs['preset_sha256']:
+        raise ValueError('Preset inputs changed during capture')
+    if sha(pcm.read_bytes())!=inputs['pcm_sha256']:
+        raise ValueError('PCM inputs changed during capture')
+    if texture_inventory(textures)!=inputs['texture_inventory']:
+        raise ValueError('Texture inputs changed during capture')
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--repo', type=Path, required=True)
@@ -57,6 +66,7 @@ def main():
             path.write_text(json.dumps(job, indent=2) + '\n')
             hashes = {}
             with (run / 'diagnostics.txt').open('wb') as log:
+                verify_inputs(args.preset,pcm,textures,inputs)
                 proc = subprocess.Popen([identity['worker'], '--job', str(path)], stdout=subprocess.PIPE,
                     stderr=log, env=dict(os.environ, PRESET_LAB_SEED='12345'))
                 for frame in selected:
@@ -68,8 +78,7 @@ def main():
                         Image.frombytes('RGB', (3840,2160), payload).save(run / f'frame-{frame:03d}.png')
                 if proc.wait():
                     raise ValueError((run / 'diagnostics.txt').read_text())
-                if texture_inventory(textures)!=texture_hashes:
-                    raise ValueError('Texture inputs changed during capture')
+                verify_inputs(args.preset,pcm,textures,inputs)
             manifest = json.loads((run / 'manifest.json').read_text())
             if manifest['status'] != 'success' or manifest['gl_error_frames']:
                 raise ValueError('renderer failure')

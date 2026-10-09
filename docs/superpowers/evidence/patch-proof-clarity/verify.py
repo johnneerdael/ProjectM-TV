@@ -8,6 +8,10 @@ import tempfile
 from pathlib import Path
 from PIL import Image
 
+EXPECTED_PAIRS={('escape','0028'),('crush','0021'),('carnival','0021'),
+                ('swirl','0023'),('nebula','0030'),('city-alt','0032'),('salad','0033')}
+FROZEN_RECEIPT_SHA256='d6bbf19c6d02434168b290e8ea24d0d9b0877b40fd8a87e7dda179f035b5bd42'
+
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -17,7 +21,13 @@ def main():
     evidence=Path(__file__).resolve().parent
     repo=evidence.parents[3]
     gallery=json.loads((evidence/'gallery.json').read_text())
+    assert len(gallery)==len(EXPECTED_PAIRS)
+    assert {(pair['name'],pair['patch']) for pair in gallery}==EXPECTED_PAIRS
     workers=json.loads((evidence/'workers.json').read_text())
+    frozen={'workers':workers,'captures':[{key:p[key] for key in ('name','patch','frame','inputs')}|
+            {'roles':{role:{key:r[key] for key in ('identity_ref','asset_sha256','rgb_sha256','runs')}
+                      for role,r in p['roles'].items()}} for p in gallery]}
+    assert sha(json.dumps(frozen,sort_keys=True,separators=(',',':'),allow_nan=False).encode())==FROZEN_RECEIPT_SHA256
     full=json.loads((repo/'docs/superpowers/evidence/patch-visual-catalog/patched-source-tree.json').read_text())
     assert workers['full']['source_tree']==full
     allowed={'0021':{'CustomWaveform.cpp','PerPixelContext.cpp','WaveformPerPointContext.cpp','WaveformPerPointContext.hpp'},
