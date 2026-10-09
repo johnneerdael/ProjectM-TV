@@ -39,7 +39,9 @@ Fixed100 source census:100computed conditional descriptions;98presets with contr
 records;20presets with known nonconstant time curves (11linear,44sinusoidal).
 Other controls:776constant,405unknown. Constants are not counted as moving/quiet
 images. Sum per-preset elapsed28.689071seconds, mean.28689071seconds. Exact source/
-model identities and all control values are in census.json. No whole-pack coverage
+model identities and compact control values are in census.json. Full control DAGs
+and condition lists remain in the raw paired batch; curve/DAG hashes bind the
+compact rows to those records. No whole-pack coverage
 or calibrated mood claim follows from this sample.
 
 Raw paired batch:
