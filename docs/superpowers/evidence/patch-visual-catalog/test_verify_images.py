@@ -14,7 +14,7 @@ spec.loader.exec_module(verifier)
 
 
 class RunReceiptBinding(unittest.TestCase):
-    def check(self, change=None, overrides=None):
+    def check(self, change=None, overrides=None, image_swap=None):
         overrides = overrides or {}
         runs = json.loads((EVIDENCE / 'run-manifests.json').read_text())
         if change:
@@ -41,7 +41,15 @@ class RunReceiptBinding(unittest.TestCase):
             (evidence / 'run-manifests.json').write_text(json.dumps(runs))
             assets = root / 'docs/user-guide/images/patches'
             assets.mkdir(parents=True)
-            (assets / 'audit').symlink_to(REPO / 'docs/user-guide/images/patches/audit', target_is_directory=True)
+            originals = REPO / 'docs/user-guide/images/patches/audit'
+            if image_swap:
+                (assets / 'audit').mkdir()
+                for path in originals.glob('*.png'):
+                    source_name = (image_swap[1] if path.name == image_swap[0] else
+                                   image_swap[0] if path.name == image_swap[1] else path.name)
+                    (assets / 'audit' / path.name).symlink_to(originals / source_name)
+            else:
+                (assets / 'audit').symlink_to(originals, target_is_directory=True)
             verifier.verify(root)
 
     def test_frozen_receipts_pass(self):
@@ -98,6 +106,19 @@ class RunReceiptBinding(unittest.TestCase):
                 record['manifest']['identity']['worker_sha256'] = '0' * 64
         with self.assertRaisesRegex(AssertionError, 'canonical worker'):
             self.check(drift, {'captures/I16.json': capture})
+
+    def test_exchanged_png_and_role_metadata_fails(self):
+        images = json.loads((EVIDENCE / 'images.json').read_text())
+        before, after = 'I17-4k-upstream.png', 'I17-4k-patched.png'
+        images[before], images[after] = images[after], images[before]
+        with self.assertRaisesRegex(AssertionError, 'filename identity'):
+            self.check(overrides={'images.json': images}, image_swap=(before, after))
+
+    def test_gallery_frame_drift_fails(self):
+        gallery = json.loads((EVIDENCE / 'gallery.json').read_text())
+        gallery[0]['frame'] = 119
+        with self.assertRaisesRegex(AssertionError, 'gallery frame'):
+            self.check(overrides={'gallery.json': gallery})
 
 
 if __name__ == '__main__':

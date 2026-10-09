@@ -23,14 +23,19 @@ def verify(repo):
     assert len(gallery) == 18 and len({e['issue'] for e in gallery}) == 18
     assert len(images) == 46, 'expected 23 complete pairs'
     expected = set()
+    selected_frames = {}
     for entry in gallery:
         for pair in [entry, *entry['extras']]:
             expected.update(f"{pair['case']}-{role}.png" for role in ('upstream', 'patched'))
+            assert pair['case'] not in selected_frames, 'duplicate gallery case'
+            selected_frames[pair['case']] = pair['frame']
     assert set(images) == expected
     assets = repo / 'docs/user-guide/images/patches/audit'
     assert {p.name for p in assets.glob('*.png')} == expected
     cases = set()
     for name, info in images.items():
+        assert name == f"{info['case']}-{info['role']}.png", f'filename identity: {name}'
+        assert info['frame'] == selected_frames[info['case']], f'gallery frame: {name}'
         path = assets / name
         assert sha(path.read_bytes()) == info['png_sha256'], name
         with Image.open(path) as image:
