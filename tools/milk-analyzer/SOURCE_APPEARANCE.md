@@ -247,6 +247,49 @@ storage clamping and later feedback/composite are excluded;
 the incoming RGB term uses source alpha in both supported modes, while the
 destination term differs. See the [Khronos blending reference](https://wikis.khronos.org/opengl/Draw_Buffer_Blend).
 
+### Audio-dependent shape area
+
+`audio_area_response`, policy `source-custom-shape-audio-area-v1`, reuses the
+constant-affine source analysis for the six EEL band inputs. It accepts a radius
+`r=b+k·a` with constant effective polygon side count. The ordered `input_codes`
+identify the active bands; `radius_bias` and `radius_gains` give `b` and `k`.
+Nonlinear, state/time-dependent and unresolved radius programs abstain. Init
+audio snapshots are not current inputs; plain EEL `vol` is not a registered band.
+
+For `c=n*sin(2*pi/n)/8`, the nominal viewport-area fraction per aspectY is
+`c*(b+k·a)^2`. `nominal_area_polynomial_per_aspect_y` exports:
+
+```text
+area(a) = constant + linear·a + a^T quadratic_matrix a
+constant = c*b*b
+linear = 2*c*b*k
+quadratic_matrix = c*k*k^T
+```
+
+The symmetric matrix includes both off-diagonal entries, so cross terms occur
+twice. `area_derivative_constant_per_aspect_y` is `linear`, and
+`area_derivative_linear_matrix_per_aspect_y` is `2*quadratic_matrix`:
+the area gradient is the former vector plus the latter matrix times `a`.
+Multiply by target aspectY; derivatives use declared band units. These are
+nominal real-valued formulas before float32 radius projection, trig/raster
+rounding and clipping, valid only for finite source intermediates and a radius
+within the exported finite-float32 magnitude. They are not an exact derivative
+of discrete GPU pixels or a response to BPM.
+
+Example: a four-sided shape with `rad=.2+.1*bass` has area polynomial
+`.02+.02*bass+.005*bass^2` per aspectY, and derivative `.02+.01*bass`.
+At bass2 its nominal area coefficient is.08. Actual clipped coverage may behave
+differently. Negative radii retain their squared nominal area.
+
+`area_to_alpha_integral_factor` and `area_to_rgb_integral_factors` independently
+carry known fill means from `fill_contribution`. Multiplying area/derivatives by
+these factors gives nominal injection coefficients when material is independent
+and known. Textured/dynamic material keeps the corresponding factors null even
+with known geometry. Instance sums count overlap repeatedly. Constant radius
+uses an empty active-band list; unknown radius uses null. Nonfinite coefficient
+or derivative estimates remain unknown, and
+`visible_bass_response_strength` stays null.
+
 ## Logical composition and sampler flow
 
 `composition`, policy `source-logical-composition-v1`, explains the logical normal

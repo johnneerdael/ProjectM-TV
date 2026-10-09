@@ -1369,6 +1369,169 @@
                     "const": false
                   }
                 }
+              },
+              "audio_area_response": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "source_model",
+                  "input_codes",
+                  "radius_bias",
+                  "radius_gains",
+                  "nominal_area_polynomial_per_aspect_y",
+                  "area_derivative_constant_per_aspect_y",
+                  "area_derivative_linear_matrix_per_aspect_y",
+                  "area_to_alpha_integral_factor",
+                  "area_to_rgb_integral_factors",
+                  "configured_instances",
+                  "radius_expression",
+                  "maximum_finite_float32_radius_magnitude",
+                  "visible_bass_response_strength",
+                  "unknown_reasons",
+                  "conditions",
+                  "uses_rendered_images",
+                  "uses_equation_execution",
+                  "uses_shader_execution"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-audio-area-v1"
+                  },
+                  "source_model": {
+                    "enum": [
+                      "unknown",
+                      "constant_radius",
+                      "affine_audio_radius"
+                    ]
+                  },
+                  "input_codes": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6
+                    }
+                  },
+                  "radius_bias": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "radius_gains": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "nominal_area_polynomial_per_aspect_y": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "constant": {
+                        "type": "number"
+                      },
+                      "linear": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "quadratic_matrix": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "area_derivative_constant_per_aspect_y": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "area_derivative_linear_matrix_per_aspect_y": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "area_to_alpha_integral_factor": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "area_to_rgb_integral_factors": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "configured_instances": {
+                    "type": "integer"
+                  },
+                  "radius_expression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "maximum_finite_float32_radius_magnitude": {
+                    "type": "number"
+                  },
+                  "visible_bass_response_strength": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "uses_rendered_images": {
+                    "const": false
+                  },
+                  "uses_equation_execution": {
+                    "const": false
+                  },
+                  "uses_shader_execution": {
+                    "const": false
+                  }
+                }
               }
             }
           }

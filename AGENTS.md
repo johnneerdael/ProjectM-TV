@@ -135,6 +135,11 @@ vertex RGBA, gradient/border and int-style blending/texture flags.
 untextured centre/perimeter RGBA with barycentric second moments; preserve
 colour/alpha covariance and per-channel unknowns. Its per-aspect area coefficients
 are nominal unclipped injection, not displayed prominence or overlap union.
+`source_geometry.shape_audio_area_response` reuses constant-affine basis analysis
+for the six current EEL bands. Export nominal squared-radius area and gradient,
+including symmetric cross terms; preserve finite intermediates/radius conditions
+and material factors independently. Init snapshots, state/time, nonlinear radii,
+unknown side counts and nonfinite coefficients must not become known audio area.
 Keep raw values,
 per-channel unknowns, raw border-alpha enable gating, source texture requests and
 unverified fallback/binding status. Perimeter/border/texture audio routes must not

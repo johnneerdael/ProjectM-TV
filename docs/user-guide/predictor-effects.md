@@ -137,6 +137,14 @@ unknown, and clipping, borders, destination colour and later shaders still
 determine what appears on screen. This is a source contribution model; final
 prominence and mood eligibility remain pending.
 
+Supported audio-dependent radii now have nominal area formulas and band
+sensitivities. For a square with `rad=.2+.1*bass`, the area coefficient is
+`.02+.02*bass+.005*bass²` per aspectY. The JSON records which bands participate,
+their cross terms and available opacity/colour factors. This helps an independent
+renderer reproduce size response from supplied audio values. Clipped screen
+coverage, later feedback and perceived bass response are still separate; state,
+nonlinear or unresolved radius programs retain unknowns.
+
 Supported warp expressions now describe how previous-image RGB is weighted or
 mixed, including spatial copies and constant colour injection. An ideal.98colour
 gain halves a floating-colour perturbation after about34.3warp evaluations;

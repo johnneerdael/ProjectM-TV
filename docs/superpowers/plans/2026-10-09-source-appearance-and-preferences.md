@@ -81,6 +81,13 @@ destination colour, overlap union and later composition unresolved. This uses
 the established native colour policy and does not restore MilkDrop2's packed
 8-bit vertex colours or run image simulation.
 
+Extend that join to supported affine audio radii using the existing basis
+analyzer. Squaring the radius yields a quadratic nominal polygon-area model and
+its band gradient, including cross terms. Carry known material means separately;
+retain float32 projection/clipping, unknown sides, nonlinear/state/time terms,
+init snapshots and nonfinite domains. Do not call the coefficients a calibrated
+visible bass-response score.
+
 ## Quantitative checkpoint
 
 - Nominal shader-time RGB timing is implemented; fixed100 has zero timing
