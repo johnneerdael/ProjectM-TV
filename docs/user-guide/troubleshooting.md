@@ -34,6 +34,18 @@ Diagnostics shows the real render size, frame rate and memory state. More in [Pi
 
 Auto lowers resolution to hold the target frame rate and to keep memory free for the music app; Diagnostics shows *resolution reduced for memory headroom* when memory is the reason. To test a preset at full size, choose **Advanced › Resolution › Native**. Memory protection still applies. Android often runs its menus at 1080p on a 4K TV; Diagnostics lists **Panel** (the physical display) separately from **UI**.
 
+## The app closes at preset changes
+
+If ProjectM TV closes by itself, often when one preset changes into the next, while the music keeps playing:
+
+1. Open the app again and check **Advanced › Last exit**. Select it for the [exit report](settings.md#exit-report): *crashed (native code)* or *killed by signal* points to the graphics driver or the engine, *killed for low memory* to memory.
+2. Try **Advanced › Transitions › Lightweight**, then **Classic**. If only Auto blends crash, the lower blend resolution is involved.
+3. Turn **Advanced › Shader binary cache** **Off**. If the crashes stop, the GPU driver cannot reuse program binaries between OpenGL contexts.
+4. If they continue, also turn **Advanced › Background compile** **Off**. Switches then pause the picture while each preset compiles, often for a second or two. If the crashes stop only now, the driver fails when two threads compile at once.
+5. Report the result with a photo of the exit report, the device model and which switches you changed. Turn the switches back **On** afterwards if they made no difference.
+
+These switches exist to diagnose crashes first reported on a Fire TV Stick 4K Max (2nd gen, PowerVR GE9215 GPU). Leave them **On** otherwise.
+
 ## Native trails says inactive or fallback
 
 Native trails works only above 1330p. On a 1080p TV, Diagnostics shows *inactive (render 1080p)*, which is expected. *Canvas fallback* usually means no supported whole-number authored canvas exists at this render size; *shader/resource fallback* means the GPU driver rejected the trails shaders. In both cases the standard renderer is used. Please report the Diagnostics text and your TV model.

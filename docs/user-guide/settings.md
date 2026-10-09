@@ -40,6 +40,9 @@ Open the panel with **Center**, **Enter** or **Menu**. **Up / Down** selects a r
 | Auto-update | Off, On; *Via F-Droid* | Off | Checks GitHub for new stable releases. See [Updates](getting-started.md#updates) |
 | Custom preset pack | *Upload ZIP ›* | No pack | Upload your own presets from a phone or computer. See [Custom preset packs](custom-packs.md) |
 | Skipped presets | *None*, or *N · Reset* | | Shows how many presets this TV skips; select it to clear the list |
+| Background compile | Off, On | On | Compiles the shaders of the next, random and previous presets on a second thread with its own OpenGL context, so switches do not pause. *Off* compiles them at the switch instead: the picture can hold for a second or two at each change. Troubleshooting only, see [The app closes at preset changes](troubleshooting.md#the-app-closes-at-preset-changes) |
+| Shader binary cache | Off, On | On | Keeps compiled shader programs as driver binaries and reuses them in the background thread's and the render thread's contexts. *Off* always compiles from source. Troubleshooting only, see [The app closes at preset changes](troubleshooting.md#the-app-closes-at-preset-changes) |
+| Last exit | *None recorded*, or the reason and how long ago | | The latest time the app ended while on screen, from Android's exit records (Android 11 and later). Select it for the [exit report](#exit-report) |
 
 The Advanced panel scrolls when its rows do not fit; D-pad focus brings each row into view.
 
@@ -62,6 +65,18 @@ Opening **Advanced** also shows a **Diagnostics** card beside it with live value
 | Track | `corner, always` | Track display state, or *no access* with the Android path to enable it |
 | Update | `up to date, checked 14:02` | Auto-update state |
 | Device | `standard tier, 3800 MB RAM` | [Device tier](picture-quality.md#device-tiers) and RAM |
+| GPU | `Mali-G52` | The graphics chip as its driver names it |
+
+## Exit report
+
+Selecting **Advanced › Last exit** opens **Recent exits**: the device, Android version, GPU and the two troubleshooting switches, then up to five recent exits of the app, newest first. Each exit shows:
+
+- how long ago and why it ended, as Android recorded it: for example *crashed (native code)*, *killed for low memory*, *killed by signal 11 (SIGSEGV)*, *stopped by the system* or *force stopped*;
+- whether the app was *on screen* or only running *in the background* (for example for track titles);
+- Android's description and the memory the app used at that moment, when Android provides them;
+- for the last process that showed visuals, what the engine was doing: the **render** line (*loading*, *blending into*, *showing* a preset, with its size and the switch states) and the **prewarm** line (*compiling* a preset in the background, or *idle*), each with the seconds before the exit.
+
+The app keeps those two lines in a small file in its own storage and overwrites them in place; it never sends them anywhere. Android 10 and older have no exit records: the report then shows only the last render and prewarm lines. Take a photo of the report when you report a crash.
 
 ## Notices
 

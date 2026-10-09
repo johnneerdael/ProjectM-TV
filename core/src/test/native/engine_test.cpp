@@ -13,6 +13,9 @@
 #include <set>
 #include <thread>
 #include <chrono>
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
 #include <sys/types.h>
 #include "android/asset_manager.h"
 #include "GLES3/gl3.h"
@@ -180,6 +183,8 @@ void projectm_opengl_forget_texture_pool() { ++g_poolForgets; }
 size_t projectm_opengl_texture_pool_bytes() { return 0; }
 uint32_t g_cacheHits = 0, g_cacheMisses = 0;
 void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses) { *hits = g_cacheHits; *misses = g_cacheMisses; }
+bool g_programCacheEnabled = true;
+void projectm_opengl_set_program_cache_enabled(bool enabled) { g_programCacheEnabled = enabled; }
 char* projectm_get_version_string() { return strdup("4.2.0"); }
 void projectm_free_string(const char* s) { free((void*)s); }
 }
@@ -856,6 +861,45 @@ int main(int argc, char** argv) {
     CHECK(current() == prepared && current() != before);
     CHECK(g_library.PeekPrevious() == before);  // Left would go back to it: prepared as well
     CHECK(g_prewarmLists.back()[1] == g_library.PeekRandom() && g_prewarmLists.back()[1] != prepared); }
+
+  printf("troubleshooting switches: Background compile and Shader binary cache, with the trail file\n");
+  {
+    char path[] = "/tmp/projectm-trail-XXXXXX";
+    int created = mkstemp(path);
+    CHECK(created >= 0);
+    close(created);
+    projectmtv::OpenTrail(path);
+    auto trail = [&path]() { std::ifstream in(path); std::stringstream text; text << in.rdbuf(); return text.str(); };
+    const std::string pid = "pid=" + std::to_string(getpid()) + " ";
+    int stops = g_prewarmStops, starts = g_prewarmStarts;
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setBackgroundCompile(nullptr, nullptr, false);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setShaderBinaryCache(nullptr, nullptr, false);
+    CHECK(!g_programCacheEnabled);
+    frame();
+    CHECK(g_prewarmStops == stops + 1 && !g_engine.prewarmerStarted && g_prewarmStarts == starts);
+    size_t requests = g_prewarmLists.size();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
+    CHECK(g_prewarmLists.size() == requests);  // nothing is prepared while it is off
+    std::string text = trail();
+    printf("%s", text.c_str());
+    CHECK(text.size() == 2 * projectmtv::kTrailLineBytes);  // two fixed-size lines
+    CHECK(text.rfind("render " + pid, 0) == 0);
+    CHECK(text.find("loaded '" + current() + "' (cut) in ") != std::string::npos);
+    CHECK(text.find("prewarm " + pid) == projectmtv::kTrailLineBytes);
+    CHECK(text.find("background compile off") != std::string::npos);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setBackgroundCompile(nullptr, nullptr, true);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setShaderBinaryCache(nullptr, nullptr, true);
+    CHECK(g_programCacheEnabled);
+    frame();
+    CHECK(g_prewarmStarts == starts + 1 && g_engine.prewarmerStarted);
+    CHECK(g_prewarmLists.size() == requests + 1);  // prepares the upcoming presets right away
+    // A long preset name is cut to the line, which stays fixed-size and newline-terminated.
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "loading '%s'", std::string(1000, 'x').c_str());
+    text = trail();
+    CHECK(text.size() == 2 * projectmtv::kTrailLineBytes && text[projectmtv::kTrailLineBytes - 1] == '\n');
+    close(projectmtv::TrailFd().exchange(-1));
+    unlink(path);
+  }
 
   printf("output measurements: flat and still are logged, never skipped\n");
   {

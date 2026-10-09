@@ -56,6 +56,7 @@
 #include <vector>
 
 #include "projectM-4/projectM.h"
+#include "diagnostics_trail.h"
 #include "preset_prewarm.h"
 #include "snapshot_fade.h"
 
@@ -1232,6 +1233,10 @@ struct Inputs {
     std::atomic<int> softCutDuration{7};
     std::atomic<bool> autoChange{true};
     std::atomic<bool> beatCuts{false};  // projectM's hard cut to the next preset on a loud beat
+    // Troubleshooting switches (Settings › Advanced) for GPU drivers that fail with a second EGL
+    // context or with program binaries moved between contexts.
+    std::atomic<bool> backgroundCompile{true};
+    std::atomic<bool> programCache{true};
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
     std::atomic<bool> settingsDirty{true};
@@ -1304,6 +1309,7 @@ struct Engine {
     int appliedMeshHeight = 0;
     double createdAt = 0;
     bool firstPresetLogged = false;
+    bool prewarmerStarted = false;  // background compile thread running (follows backgroundCompile)
     bool texturesApplied = false;
     std::vector<std::string> texturePaths;
     double lastFrameAt = 0;
@@ -1478,6 +1484,7 @@ void UpdateTexturePool(double now) {
 // Whether the upcoming preset may be compiled in the background: its short-lived projectM instance
 // must not push Android into taking memory from the music player.
 bool PrewarmAllowed(double now) {
+    if (!g_engine.prewarmerStarted) return false;  // Background compile is off
     if (now < g_prewarmPausedUntil.load()) return false;
     static const long totalKb = MemInfoKb("MemTotal: %ld kB");
     long availableKb = AvailableMemoryKb();
@@ -1672,12 +1679,18 @@ bool LoadPreset(const std::string& name, bool smooth) {
         g_engine.texturePaths = std::move(preset.texturePaths);
         g_engine.texturesApplied = true;
     }
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "loading '%s' (%s, %dx%d, shader cache %s, background compile %s)",
+                           name.c_str(), smooth ? "blend" : "cut", g_engine.renderWidth, g_engine.renderHeight,
+                           g_inputs.programCache.load() ? "on" : "off", g_engine.prewarmerStarted ? "on" : "off");
     // Parses the preset, loads its textures and compiles its shaders: the stall at a switch, unless
     // the prewarmer already compiled them (then they come from the program cache).
     projectm_load_preset_data(g_engine.pm, data.c_str(), smooth);
     double loadEnd = NowSeconds();
     uint32_t cacheHits = 0, cacheMisses = 0;
     projectm_opengl_program_cache_stats(&cacheHits, &cacheMisses);
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "loaded '%s' (%s) in %.0f ms: %u programs cached, %u compiled",
+                           name.c_str(), smooth ? "blend" : "cut", (loadEnd - loadStart) * 1000.0,
+                           cacheHits - cacheHitsBefore, cacheMisses - cacheMissesBefore);
     double loadMs = (loadEnd - loadStart) * 1000.0;
     long availAfter = AvailableMemoryKb();
     long rssAfter = ResidentMemoryKb();
@@ -1778,11 +1791,16 @@ void HandleAutoSwitch() {
         double seconds = std::min<double>(softCut, kMaxLightweightSeconds);
         g_engine.fade.Start(NowSeconds(), seconds);
         BeginTransition(seconds, true);
+        projectmtv::WriteTrail(projectmtv::kTrailRender, "fading into '%s' (lightweight, %.0f s)",
+                               g_engine.current.c_str(), seconds);
     } else if (smooth && softCut > 0) {
         BeginTransition(softCut, false);
         g_engine.transitionScaled = scaled;
         g_engine.transitionStepped = false;
         if (scaled) g_engine.scaledUntil = g_engine.transitionEnd + kScaledHoldSeconds;
+        projectmtv::WriteTrail(projectmtv::kTrailRender, "blending into '%s' (%s, %d s, %dx%d)",
+                               g_engine.current.c_str(), scaled ? "auto" : "classic", softCut,
+                               g_engine.renderWidth, g_engine.renderHeight);
     }
 }
 
@@ -1808,7 +1826,8 @@ void HandleCommands() {
             // A category rebuild clears history. Record a retained preset first, so the next
             // candidates are prepared around the preset on screen, just as after a switch.
             if (g_library.Contains(g_engine.current)) g_library.RecordShown(g_engine.current);
-            g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
+            if (g_engine.prewarmerStarted)
+                g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
         }
         if (!g_library.Contains(g_engine.current) && !SwitchPreset([] { return g_library.Next(); }, false)) {
             g_inputs.categoryDirty = true; // continue bounded attempts on the next stored frame
@@ -1958,6 +1977,7 @@ void TrackTransition(double now, double frameCpuSeconds) {
     }
     if (now < g_engine.transitionEnd) return;
     g_engine.inTransition = false;
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "showing '%s' (transition done)", g_engine.current.c_str());
     float fps = static_cast<float>(g_engine.transitionFrames / std::max(0.001, now - g_engine.transitionStart));
     float blendFps = static_cast<float>(g_engine.transitionFrames / std::max(0.001, now - g_engine.transitionLoadEnd));
     bool lightweight = g_engine.transitionLightweight;
@@ -1975,6 +1995,29 @@ void TrackTransition(double now, double frameCpuSeconds) {
     g_engine.transitionScaled = false;
 }
 
+void StartPrewarmer() {
+    g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
+    g_engine.prewarmerStarted = true;
+}
+
+// GL thread, once presets are showing: starts or stops the background compile thread (and with it
+// its second EGL context) to follow Settings › Advanced › Background compile.
+void ApplyBackgroundCompile() {
+    if (g_engine.current.empty()) return;  // started with the first preset
+    bool enabled = g_inputs.backgroundCompile.load();
+    if (enabled == g_engine.prewarmerStarted) return;
+    if (enabled) {
+        StartPrewarmer();
+        if (PrewarmAllowed(NowSeconds()))
+            g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
+    } else {
+        g_prewarmer.Stop();  // waits for a compile in progress
+        g_engine.prewarmerStarted = false;
+        projectmtv::WriteTrail(projectmtv::kTrailPrewarm, "background compile off");
+    }
+    LOGI("PREWARM background compile %s", enabled ? "on" : "off");
+}
+
 // contextAlive: the EGL context that owns our GL objects is still current (else just forget them).
 void DestroyEngineLocked(bool contextAlive) {
     {
@@ -1986,6 +2029,7 @@ void DestroyEngineLocked(bool contextAlive) {
         g_renderBudget.generation = generation; // Reject asynchronous callbacks from the old owner.
     }
     g_prewarmer.Stop();
+    g_engine.prewarmerStarted = false;
     ReleaseScaledTarget(contextAlive);
     // The presets destroyed below may still add their textures to the pool: empty it afterwards.
     struct PoolRelease {
@@ -2085,6 +2129,7 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     g_engine.fpsWindowStart = NowSeconds();
     g_engine.createdAt = g_engine.fpsWindowStart;
     g_engine.firstPresetLogged = false;
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "GL context created");
     LOGI("projectM instance created");
 }
 
@@ -2115,6 +2160,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
         g_inputs.settingsDirty = true;
         return;
     }
+    ApplyBackgroundCompile();
     if (g_texturePoolFlush.exchange(false) && g_engine.texturePoolLimit > 0) {
         projectm_opengl_set_texture_pool_limit(0);
         g_engine.texturePoolLimit = 0;
@@ -2143,7 +2189,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                 categorySerial = g_inputs.categoryRequestedSerial.load();
             }
             g_engine.categoryGeneration = g_library.CategoryGeneration();
-            g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
+            if (g_inputs.backgroundCompile.load()) StartPrewarmer();
             std::string resume;  // preset shown before an EGL context loss, if any
             {
                 std::lock_guard<std::mutex> published(g_published.mutex);
@@ -2242,6 +2288,29 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
 JNIEXPORT void JNICALL JNI_FN(release)(JNIEnv*, jclass) {
     std::lock_guard<std::mutex> lock(g_engineMutex);
     DestroyEngineLocked(true);
+    projectmtv::WriteTrail(projectmtv::kTrailRender, "engine released");
+}
+
+// Settings › Advanced › Background compile: compile upcoming presets on a second thread and EGL
+// context (on), or only on the render thread at the switch (off). Applied on the GL thread.
+JNIEXPORT void JNICALL JNI_FN(setBackgroundCompile)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.backgroundCompile = enabled;
+}
+
+// Settings › Advanced › Shader binary cache: reuse linked programs as binaries across instances and
+// contexts (on), or always compile from source (off; patch 0035).
+JNIEXPORT void JNICALL JNI_FN(setShaderBinaryCache)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.programCache = enabled;
+    projectm_opengl_set_program_cache_enabled(enabled);
+}
+
+// File in which the engine records what it was last doing (see diagnostics_trail.h).
+JNIEXPORT void JNICALL JNI_FN(setDiagnosticsFile)(JNIEnv* env, jclass, jstring path) {
+    if (!path) return;
+    const char* text = env->GetStringUTFChars(path, nullptr);
+    if (!text) return;
+    projectmtv::OpenTrail(text);
+    env->ReleaseStringUTFChars(path, text);
 }
 
 JNIEXPORT void JNICALL JNI_FN(addWaveform)(JNIEnv* env, jclass, jbyteArray waveform, jint length) {

@@ -1,0 +1,165 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Allow the program binary cache to be switched off
+
+Add projectm_opengl_set_program_cache_enabled. Disabled, every shader program is
+compiled and linked from source in the context that uses it: the binary-retrievable
+hint is not set, no binary is exported or loaded with glProgramBinary, and cached
+entries are dropped (also when a program finishes exporting after the switch).
+Enabled again, the cache starts empty. Default and enabled behaviour are unchanged.
+
+TV-only diagnostic control: ProjectM TV exposes it as an Advanced setting to test
+GPU drivers (first reported on a PowerVR GE9215 Fire TV Stick) whose program
+binaries may fail when moved between EGL contexts. Not proposed upstream; the
+program cache itself is TV-only (patch 0001).
+
+---
+diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
+index 5d0f09f01..95271c89b 100644
+--- a/src/api/include/projectM-4/render_opengl.h
++++ b/src/api/include/projectM-4/render_opengl.h
+@@ -74,6 +74,18 @@ PROJECTM_EXPORT void projectm_opengl_burn_texture(projectm_handle instance, uint
+  */
+ PROJECTM_EXPORT void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses);
+ 
++/**
++ * @brief Enables (the default) or disables the process-wide cache of linked shader programs.
++ *
++ * Disabled, every program is compiled and linked from source in the context that uses it: no
++ * program binary is requested, exported or loaded with glProgramBinary, and cached entries are
++ * dropped. For drivers whose program binaries fail when moved between contexts. Thread-safe;
++ * applies to programs compiled after the call.
++ *
++ * @param enabled true to cache program binaries, false to always compile.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_program_cache_enabled(bool enabled);
++
+ /**
+  * @brief During a soft-cut transition, renders the outgoing preset only every n-th frame.
+  *
+diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
+index 1b7f17a4b..93fba2ee0 100644
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -357,6 +357,11 @@ void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses)
+     }
+ }
+ 
++void projectm_opengl_set_program_cache_enabled(bool enabled)
++{
++    libprojectM::Renderer::Shader::SetProgramCacheEnabled(enabled);
++}
++
+ void projectm_set_beat_sensitivity(projectm_handle instance, float sensitivity)
+ {
+     auto projectMInstance = handle_to_instance(instance);
+diff --git a/src/libprojectM/Renderer/Shader.cpp b/src/libprojectM/Renderer/Shader.cpp
+index e9769c474..81ea041a3 100644
+--- a/src/libprojectM/Renderer/Shader.cpp
++++ b/src/libprojectM/Renderer/Shader.cpp
+@@ -32,9 +32,35 @@ public:
+         return cache;
+     }
+ 
++    /**
++     * Off: programs are always compiled and never exported or loaded as binaries (for drivers
++     * whose program binaries cannot be trusted across contexts). Turning it off drops all entries.
++     */
++    void SetEnabled(bool enabled)
++    {
++        std::lock_guard<std::mutex> lock(m_mutex);
++        m_enabled = enabled;
++        if (!enabled)
++        {
++            m_entries.clear();
++            m_bytes = 0;
++        }
++    }
++
++    auto Enabled() const -> bool
++    {
++        return m_enabled.load();
++    }
++
+     auto Load(GLuint program, const std::string& key) -> bool
+     {
+ #ifdef USE_GLES
++        if (!m_enabled.load())
++        {
++            std::lock_guard<std::mutex> lock(m_mutex);
++            m_misses++;
++            return false;
++        }
+         GLenum format{};
+         std::vector<char> binary;
+         {
+@@ -75,6 +101,10 @@ public:
+     void Store(GLuint program, const std::string& key)
+     {
+ #ifdef USE_GLES
++        if (!m_enabled.load())
++        {
++            return;
++        }
+         GLint length{};
+         glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH, &length);
+         if (length <= 0 || static_cast<size_t>(length) > maxBytes / 4)
+@@ -91,6 +121,10 @@ public:
+         entry.binary.resize(static_cast<size_t>(written));
+ 
+         std::lock_guard<std::mutex> lock(m_mutex);
++        if (!m_enabled.load())
++        {
++            return; // turned off while this program was being exported
++        }
+         auto it = Find(key);
+         if (it != m_entries.end())
+         {
+@@ -138,6 +172,7 @@ private:
+     }
+ 
+     std::mutex m_mutex;
++    std::atomic<bool> m_enabled{true};
+     std::list<Entry> m_entries; //!< Most recently used first.
+     size_t m_bytes{};
+     uint32_t m_hits{};
+@@ -151,6 +186,11 @@ void Shader::ProgramCacheStats(uint32_t& hits, uint32_t& misses)
+     ProgramCache::Instance().Stats(hits, misses);
+ }
+ 
++void Shader::SetProgramCacheEnabled(bool enabled)
++{
++    ProgramCache::Instance().SetEnabled(enabled);
++}
++
+ Shader::Shader()
+     : m_shaderProgram(glCreateProgram())
+ {
+@@ -195,7 +235,10 @@ void Shader::CompileProgram(const std::string& vertexShaderSource,
+     glAttachShader(m_shaderProgram, fragmentShader);
+ 
+ #ifdef USE_GLES
+-    glProgramParameteri(m_shaderProgram, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
++    if (ProgramCache::Instance().Enabled())
++    {
++        glProgramParameteri(m_shaderProgram, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
++    }
+ #endif
+     glLinkProgram(m_shaderProgram);
+ 
+diff --git a/src/libprojectM/Renderer/Shader.hpp b/src/libprojectM/Renderer/Shader.hpp
+index b6cd06807..b8d9091a6 100644
+--- a/src/libprojectM/Renderer/Shader.hpp
++++ b/src/libprojectM/Renderer/Shader.hpp
+@@ -111,6 +111,12 @@ public:
+      */
+     static void ProgramCacheStats(uint32_t& hits, uint32_t& misses);
+ 
++    /**
++     * @brief Enables (the default) or disables the process-wide program binary cache. Disabled,
++     *        every program is compiled and linked from source and no binary is exported or loaded.
++     */
++    static void SetProgramCacheEnabled(bool enabled);
++
+     /**
+      * @brief Sets a single float uniform.
+      * The program must be bound before calling this method!

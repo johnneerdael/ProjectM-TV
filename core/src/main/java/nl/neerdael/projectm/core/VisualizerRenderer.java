@@ -38,6 +38,7 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     }
 
     private volatile float currentFps;
+    private volatile String glRenderer = "";
     private volatile int surfaceWidth;
     private volatile int surfaceHeight;
     private long fpsWindowStart;
@@ -47,8 +48,8 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        Log.i(TAG, "GL: " + GLES20.glGetString(GLES20.GL_VERSION) + " | "
-                + GLES20.glGetString(GLES20.GL_RENDERER));
+        glRenderer = GLES20.glGetString(GLES20.GL_RENDERER);
+        Log.i(TAG, "GL: " + GLES20.glGetString(GLES20.GL_VERSION) + " | " + glRenderer);
         try {
             // The render thread is the app's critical path; keep it ahead of background work.
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_DISPLAY);
@@ -129,6 +130,12 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     /** Must run on the GL thread (use GLSurfaceView.queueEvent). */
     public void release() {
         ProjectMJNI.release();
+    }
+
+    /** The GPU as its driver names it (GL_RENDERER), empty before the first surface. */
+    public String getGlRenderer() {
+        String renderer = glRenderer;
+        return renderer == null ? "" : renderer;
     }
 
     public float getCurrentFps() {
