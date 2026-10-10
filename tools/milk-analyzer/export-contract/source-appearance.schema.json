@@ -845,6 +845,62 @@
                         "smooth_nominal",
                         "piecewise_lipschitz"
                       ]
+                    },
+                    "value_envelope": {
+                      "type": "object",
+                      "required": [
+                        "policy",
+                        "nominal_value_range",
+                        "assumed_finite_input_names",
+                        "unknown_reasons",
+                        "uses_equation_execution",
+                        "uses_rendered_images",
+                        "native_numeric_certified",
+                        "conditions"
+                      ],
+                      "properties": {
+                        "policy": {
+                          "const": "source-scalar-finite-input-envelope-v1"
+                        },
+                        "nominal_value_range": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "assumed_finite_input_names": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "unknown_reasons": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "uses_equation_execution": {
+                          "const": false
+                        },
+                        "uses_rendered_images": {
+                          "const": false
+                        },
+                        "native_numeric_certified": {
+                          "const": false
+                        },
+                        "conditions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     }
                   }
                 }

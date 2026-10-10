@@ -289,3 +289,11 @@ border-alpha gate. Preserve float32 singleton domains and potential modulo
 boundary zones; do not restore original packed-byte colours. Keep possible
 local risk separate from visible flashing, event frequency and mood labels.
 Measure real-preset support before adding any audience interpretation.
+
+## Value support separate from timing support
+
+Derive conditional scalar envelopes for finite named inputs through bounded
+trig, min/max clamps and understood branch unions. Reuse the existing walker,
+retain denominator/overflow/effect guards and explicit finite-input premises,
+and preserve unknown temporal regularity. Measure whether this lowers material
+unknowns without turning value support into a no-flash or audience certificate.

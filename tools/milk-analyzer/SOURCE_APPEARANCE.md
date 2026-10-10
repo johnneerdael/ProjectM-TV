@@ -1185,3 +1185,32 @@ wrap candidate can be faint, masked, textured, clipped or replaced later; it
 does not classify the preset as Intense or disqualify it from Chill by itself.
 All conclusions depend on the declared nominal envelope and finite conversion
 premises; native appearance/precision qualification remains separate.
+
+### Conditional scalar value envelopes with unknown timing
+
+When the time-curve rules cannot bound a control's value, `value_envelope` can
+provide a separate conditional range. The same bounded walker supports a
+value-only mode: named scalar inputs represent arbitrary finite values, with
+`assumed_finite_input_names` recorded explicitly. No audio range, defaultzero
+or state history is invented. Relevant source intermediates must remain finite.
+
+Sine/cosine can bound values regardless of unknown phase timing; nested
+min/max can bound a clamped input; understood comparisons return0..1 and
+conditional branches use the union of their supported value ranges. Square
+and safe arithmetic preserve required denominator domains. Internal extended
+intervals model unbounded finite values; infinities never appear in exported
+ranges. Known overflow, singular denominators, opaque operations, random calls,
+uninitialized nodes, unsupported typed casts and effectful loops retain gaps.
+
+The separate value envelope can populate `nominal_value_range` with an upper
+bound while `curve_kind`, `maximum_absolute_control_rate_per_second` and
+`nominal_continuity` remain unknown. A control confined to[.2,.8] can still
+jump abruptly between its endpoints. Finite values are not smooth values,
+and a possible-wrap result is not a complete flash result. Native float32/libm
+certification and final appearance remain separate; `native_numeric_certified`
+is false. No frame/time/audio samples or expression-program execution occur.
+
+The shader-specific `shader_bounds` walker remains separate because its typed
+float32, declared sampler and stored-UNORM8 contract is different from these
+nominal EEL control envelopes. The implementation reuses source-control
+calculus rather than introducing another parser or generic execution engine.

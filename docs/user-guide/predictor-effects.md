@@ -299,3 +299,9 @@ the engine's colour-wrap boundary and separately reports possible border
 on/off changes. Smooth source equations can therefore carry a jump risk.
 These are local candidates: opacity, coverage, textures and feedback determine
 what a viewer sees, so displayed flashing and mood eligibility remain unknown.
+
+A value range can now be available even when timing is unknown. For example,
+audio-driven sine colours and clamped controls have bounded values under
+explicit finite-input assumptions. The JSON names those assumptions and keeps
+rate/continuity unknown. A bounded colour can still switch sharply, so these
+envelopes do not certify calm movement, absence of flashing or a mood label.

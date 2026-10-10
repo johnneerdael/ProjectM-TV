@@ -66,6 +66,12 @@ def motion_control(field,control,unit,*,application):
     result.update(nominal_value_range=bounds['nominal_value_range'],
                   nominal_value_range_kind='upper_bound' if bounds['nominal_value_range'] is not None else 'unknown',
                   nominal_continuity=bounds['nominal_continuity'],unknown_reasons=bounds['unknown_reasons'])
+    if result['nominal_value_range'] is None:
+        from source_control_bounds import scalar_value_envelope
+        envelope=scalar_value_envelope(field)
+        result['value_envelope']=envelope
+        if envelope['nominal_value_range'] is not None:
+            result.update(nominal_value_range=envelope['nominal_value_range'],nominal_value_range_kind='upper_bound')
     if bounds['maximum_absolute_control_rate_per_second'] is not None:
         result.update(curve_kind='compound_time',rate_estimate_kind='upper_bound',
                       maximum_absolute_control_rate_per_second=bounds['maximum_absolute_control_rate_per_second'])

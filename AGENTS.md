@@ -997,3 +997,9 @@ wrap candidates are conditional envelope risks with an explicit rounding
 margin, not visible flashes or complete no-flash certificates. Border gating
 uses raw double alpha and the native float32 threshold; skip disabled-border
 channels in consumed-risk summaries. Keep missing/nonfinite domains unknown.
+
+Source value-envelope maintenance: `scalar_value_envelope` reuses the bounded
+control walker in value-only mode. Named finite-input premises must be exposed;
+internal unbounded intervals are not infinity/defaultzero input values. Reject
+known overflow/singular/opaque/uninitialized cases and serialize finite bounds
+only. Value envelopes never infer unknown rates, continuity or mood readiness.

@@ -7,9 +7,9 @@ def merge_continuity(kinds):
     return 'piecewise_lipschitz' if 'piecewise_lipschitz' in kinds else 'smooth_nominal'
 
 
-def compound_time_bounds(field):
+def compound_time_bounds(field,*,_value_only=False):
     from source_appearance import _phase_literal
-    memo={};active=set()
+    memo={};active=set();finite_inputs=set()
     def magnitude(span):return None if span is None else max(map(abs,span))
     def add_rates(a,b):return None if a is None or b is None else a+b
     def positive_divide(a,b):
@@ -30,11 +30,14 @@ def compound_time_bounds(field):
         return 'piecewise_lipschitz' if any(i[2]=='piecewise_lipschitz' for i in items) else 'smooth_nominal'
     def checked(span,rate,kind):
         if span is not None:
-            if not all(math.isfinite(v) for v in span) or span[0]>span[1]:span=None
+            if span[0]==math.inf or span[1]==-math.inf:
+                raise ValueError('source value envelope has a known overflow endpoint domain')
+            if any(math.isnan(v) for v in span) or span[0]>span[1]:span=None
+            elif not _value_only and not all(math.isfinite(v) for v in span):span=None
             else:
                 # One outward step covers rounding in each endpoint operation.
                 span=[math.nextafter(span[0],-math.inf),math.nextafter(span[1],math.inf)]
-                if not all(math.isfinite(v) for v in span):span=None
+                if not _value_only and not all(math.isfinite(v) for v in span):span=None
         if rate is not None and (not math.isfinite(rate) or rate<0):rate=None
         elif rate is not None and rate>0:
             rate=math.nextafter(rate,math.inf)
@@ -52,8 +55,27 @@ def compound_time_bounds(field):
         literal=_phase_literal(node)
         if literal is not None:return ([literal,literal],0.,'smooth_nominal')
         if node.dtype!='float':return None
+        if node.op=='input' and _value_only:
+            name=node.detail.get('name')
+            if not isinstance(name,str) or not name:return None
+            finite_inputs.add(name)
+            return ([-math.inf,math.inf],None,'unknown')
         if node.op=='input' and node.detail.get('name') in {'time',':native-render-time-f32'}:
             return (None,1.,'smooth_nominal')
+        if _value_only and node.op in {'select','less','greater','less_equal','greater_equal','equal','eel_equal','not_equal'}:
+            args=[visit(arg,depth+1) for arg in node.args]
+            if any(a is None for a in args):return None
+            if node.op=='select' and len(args)==3:
+                a,b=args[1][0],args[2][0]
+                if a is None or b is None:return None
+                return checked([min(a[0],b[0]),max(a[1],b[1])],None,'unknown')
+            if node.op!='select' and len(args)==2:return ([0.,1.],None,'unknown')
+            return None
+        if _value_only and node.op=='sqr' and len(node.args)==1:
+            child=visit(node.args[0],depth+1)
+            if child is None or child[0] is None:return None
+            lo,hi=child[0];low=0. if lo<=0<=hi else min(lo*lo,hi*hi)
+            return checked([low,max(lo*lo,hi*hi)],None,'unknown')
         if node.op in {'cast','narrow','construct','components','negate','sin','cos','abs'} and len(node.args)==1:
             child=visit(node.args[0],depth+1)
             if child is None:return None
@@ -77,7 +99,8 @@ def compound_time_bounds(field):
             span=None if x is None or y is None else ([x[0]+y[0],x[1]+y[1]] if node.op=='add' else [x[0]-y[1],x[1]-y[0]])
             return checked(span,add_rates(dx,dy),kind)
         if node.op=='multiply':
-            span=None if x is None or y is None else [min(u*v for u in x for v in y),max(u*v for u in x for v in y)]
+            products=None if x is None or y is None else [0. if u==0 or v==0 else u*v for u in x for v in y]
+            span=None if products is None else [min(products),max(products)]
             return checked(span,add_rates(product_term(dx,y),product_term(dy,x)),kind)
         if node.op in {'min','max'}:
             if x is not None and y is not None:
@@ -110,7 +133,28 @@ def compound_time_bounds(field):
     if value is None:
         result['unknown_reasons']=['unsupported input, discontinuous operation or unproved denominator domain'];return result
     span,rate,kind=value
+    if _value_only:
+        if span is not None and not all(math.isfinite(v) for v in span):span=None
+        rate=None;kind='unknown'
     result.update(nominal_value_range=span,maximum_absolute_control_rate_per_second=rate,
                   nominal_continuity=kind,supported_nominal_formula=True)
-    if rate is None:result['unknown_reasons']=['no finite lifetime nominal rate bound from supported formula']
+    result['assumed_finite_input_names']=sorted(finite_inputs)
+    if _value_only:
+        if span is None:result['unknown_reasons']=['no finite source value envelope from supported formula']
+    elif rate is None:result['unknown_reasons']=['no finite lifetime nominal rate bound from supported formula']
     return result
+
+
+def scalar_value_envelope(field):
+    """Bound scalar values under finite inputs/intermediates; infer no timing."""
+    report=compound_time_bounds(field,_value_only=True)
+    return {'policy':'source-scalar-finite-input-envelope-v1',
+        'nominal_value_range':report['nominal_value_range'],
+        'assumed_finite_input_names':report.get('assumed_finite_input_names',[]),
+        'unknown_reasons':report['unknown_reasons'],
+        'uses_equation_execution':False,'uses_rendered_images':False,
+        'native_numeric_certified':False,
+        'conditions':['All listed scalar input values and relevant source intermediates are finite',
+                      'Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults',
+                      'Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown',
+                      'Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate']}
