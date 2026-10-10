@@ -2677,3 +2677,13 @@ model. The current native shape source and original MilkDrop2 packed-colour path
 remain distinct references. These nominal source schedules omit clock resets,
 quantization and frame aliasing; they do not certify actual native or visible
 flash timing, no-flash absence, final prominence or a mood.
+
+Source graph query caches reuse angle/radius presence and coordinate-uniformity
+answers within one analysis. They preserve the original predicates, first-query
+work charging and configured budgets. Coordinate uniformity includes the exact
+basis tuple in its key; all identity caches retain the original node strongly.
+The feedback-envelope helper also retains manufactured canonical/projection
+nodes, preventing recycled Python object IDs from changing a later answer.
+These caches improve computation coverage, not mathematical confidence or
+appearance accuracy. Structured JSON can retain unresolved per-field budget
+calculations; inspect those reasons separately from whole-description status.

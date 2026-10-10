@@ -25,21 +25,21 @@ def feedback_envelope(analysis):
     samples={};memo={};active=set();image_memo={};envelope_memo={};assumptions=set();scalar_memo={};derived_domains={}
     def op(name,*args):return Field(name,tuple(args),'float')
     def image(node,depth=0):
-        if id(node) in image_memo:return image_memo[id(node)]
+        if id(node) in image_memo and image_memo[id(node)][0] is node:return image_memo[id(node)][1]
         if depth>64 or len(image_memo)>=4096:raise ValueError('feedback sample-dependency budget exceeded')
         if node.op=='sample':answer=True
         elif node.op in {'unknown','uninitialized'} or node.op.startswith('loop_'):
             raise ValueError('feedback expression/dependency unresolved')
         else:answer=any(image(arg,depth+1) for arg in node.args)
-        image_memo[id(node)]=answer;return answer
+        image_memo[id(node)]=(node,answer);return answer
     def visit(node,depth=0):
         node=_canonical_lane(node);key=id(node)
-        if key in memo:return memo[key]
+        if key in memo and memo[key][0] is node:return memo[key][1]
         if depth>64 or len(memo)+len(active)>=4096 or key in active:raise ValueError('feedback affine graph budget/cycle exceeded')
         active.add(key)
         try:value=calculate(node,depth)
         finally:active.remove(key)
-        memo[key]=value;return value
+        memo[key]=(node,value);return value
     def calculate(node,depth):
         if not image(node):return node,{}
         if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle') and len(node.detail['field'])==1:
@@ -66,7 +66,7 @@ def feedback_envelope(analysis):
         return op('multiply',a,b),{**{key:op('multiply',c,b) for key,c in at.items()},
                                   **{key:op('multiply',c,a) for key,c in bt.items()}}
     def scalar_inputs(node,depth=0):
-        if id(node) in scalar_memo:return scalar_memo[id(node)]
+        if id(node) in scalar_memo and scalar_memo[id(node)][0] is node:return scalar_memo[id(node)][1]
         if depth>64 or len(scalar_memo)>=4096:raise ValueError('feedback scalar projection budget exceeded')
         value=node
         if node.op=='narrow' and node.detail.get('numeric_domain')=='shader-float32':
@@ -80,7 +80,7 @@ def feedback_envelope(analysis):
                 'source_domain':converted})
             derived_domains[value.detail['name']]=converted
             # Carry the converted range directly; do not treat it as arbitrary input.
-            scalar_memo[id(node)]=value;envelope_memo[id(node)]=(node,converted)
+            scalar_memo[id(node)]=(node,value);envelope_memo[id(node)]=(node,converted)
             return value
         if node.op=='member' and node.dtype=='float' and node.detail.get('swizzle') and len(node.detail['field'])==1:
             parent=node.args[0];lane=SWIZZLE[node.detail['field']]
@@ -92,7 +92,7 @@ def feedback_envelope(analysis):
                     part=parts[lane]
                     if not (part.op=='member' and part.args and part.args[0] is parent):value=scalar_inputs(part,depth+1)
         if value is node:value=Field(node.op,tuple(scalar_inputs(arg,depth+1) for arg in node.args),node.dtype,node.detail)
-        scalar_memo[id(node)]=value;return value
+        scalar_memo[id(node)]=(node,value);return value
     def bound(node):
         key=id(node)
         if key in envelope_memo:return envelope_memo[key][1]

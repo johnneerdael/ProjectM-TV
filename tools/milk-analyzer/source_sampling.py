@@ -37,6 +37,17 @@ def _constant_matrix_vector_parts(field):
     return tuple(result)
 
 
+def _uniform_for_bases(node,bases):
+    from effect_families import _walk,_CACHE
+    basis_key=tuple(bases);cache=_CACHE.get();key=('sampling_uniform',id(node),basis_key)
+    if cache is not None and key in cache and cache[key][0] is node:return cache[key][1]
+    blocked=set(basis_key)|{'_uv','_rad_ang','_vDiffuse'}
+    result=not any(child.op in {'sample','unknown','uninitialized'} or child.op.startswith('loop_') or
+        child.op=='input' and child.detail.get('name') in blocked for child,path in _walk(node))
+    if cache is not None:cache[key]=(node,result)
+    return result
+
+
 def _affine_basis_map(field,bases,*,output_width=2):
     """Split two coordinates into constant _uv coefficients and uniform offsets.
 
@@ -46,17 +57,14 @@ def _affine_basis_map(field,bases,*,output_width=2):
     """
     from shader_fields import Field
     from field_math import SWIZZLE
-    from effect_families import _parts,_walk
+    from effect_families import _parts
     from source_appearance import _canonical_lane,_phase_literal
     zero=Field('constant',dtype='float',detail={'value':0.})
     memo={};active=set()
     width=4*len(bases);columns={name:4*i for i,name in enumerate(bases)}
 
     def uniform(node):
-        for child,path in _walk(node):
-            if child.op in {'sample','unknown','uninitialized'} or child.op.startswith('loop_'):return False
-            if child.op=='input' and child.detail.get('name') in set(bases)|{'_uv','_rad_ang','_vDiffuse'}:return False
-        return True
+        return _uniform_for_bases(node,bases)
 
     def scale(pair,k):
         weights,offset=pair

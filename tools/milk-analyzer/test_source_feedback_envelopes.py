@@ -6,6 +6,33 @@ from test_effect_families import shader,read
 from test_source_appearance import appearance
 
 
+def test_feedback_memo_retains_synthetic_canonical_nodes_during_the_analysis(monkeypatch):
+    """Nested swizzles manufacture nodes whose IDs must not be recycled."""
+    import weakref
+    from types import SimpleNamespace
+    import source_appearance
+    from source_feedback_envelopes import feedback_envelope
+    from shader_fields import Field
+    canonical=source_appearance._canonical_lane
+    temporary=[]
+    def observe(node):
+        # Entries in the helper's identity memo remain live until it returns.
+        assert all(ref() is not None for ref in temporary)
+        result=canonical(node)
+        if result is not node:temporary.append(weakref.ref(result))
+        return result
+    monkeypatch.setattr(source_appearance,'_canonical_lane',observe)
+    uv=Field('input',dtype='float4',detail={'name':'_uv'})
+    sample=Field('sample',(uv,),'float4',{'canonical_texture':'main','site_index':1})
+    rgb=Field('member',(sample,),'float3',{'field':'rgb','swizzle':True})
+    lanes=tuple(Field('member',(rgb,),'float',{'field':lane,'swizzle':True}) for lane in 'rgb')
+    analysis=SimpleNamespace(outputs={'warp':Field('components',lanes,'float3')},
+        stages={'warp':{'kind':'custom_warp'}})
+    result=feedback_envelope(analysis)
+    assert temporary
+    assert result['source_model']=='bounded_affine_main_sample_colour'
+
+
 def envelope(code):
     d=appearance(shader('shader_body {'+code+'}',stage='warp'))
     assert 'feedback_envelope' in d,'dynamic feedback colour envelope missing'
@@ -76,6 +103,22 @@ def test_dynamic_fixed_warp_decay_uses_native_upper_clamp_without_zero_fill():
 def test_duplicate_same_sample_path_combines_coefficients_before_bounding():
     r=envelope('float3 c=GetPixel(uv);ret=c*.5-c*.2;')
     assert r['maximum_colour_difference_gain']==pytest.approx(.3,abs=1e-7)
+
+
+def test_four_independent_blur_samples_keep_every_site_and_its_coefficient():
+    r=envelope('ret=.25*(GetPixel(uv)+GetPixel(uv+.01)+GetPixel(uv+.02)+GetPixel(uv-.03))-.01;')
+    assert len(r['sample_contributions'])==4
+    assert r['maximum_colour_difference_gain']==pytest.approx(1.,abs=1e-7)
+    for site in r['sample_contributions']:
+        expected=[[[.25,.25] if i==j else [0.,0.] for j in range(3)] for i in range(3)]
+        assert site['matrix_rgb_coefficient_ranges']==expected
+
+
+def test_external_noise_offset_cannot_borrow_a_previous_main_sample_answer():
+    r=envelope('ret=GetPixel(uv)+tex2D(sampler_noise_lq,uv).rgb*.01;')
+    assert r['source_model']=='unknown'
+    assert r['maximum_colour_difference_gain'] is None
+    assert r['sample_contributions']==[]
 
 
 def test_dynamic_q_upload_overflow_cannot_gain_finite_feedback_envelope():

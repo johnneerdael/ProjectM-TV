@@ -1,0 +1,44 @@
+{
+  "count": 2000,
+  "structured": 2000,
+  "newly_structured": [
+    {
+      "relative_path": "flexi - grind my glitch up [230].milk",
+      "sha256": "d69f5cc4bbd1123ccbcf20bfedad9f91000807e828c95becf20651481fee5457",
+      "rank": "1852ab0286a1426248f36ffde3020e05f7ccf60b16ee2312b26346499751efa1"
+    },
+    {
+      "relative_path": "Flexi + geiss - the deep diver's cognitive dissonance 1's and 0's where they don't belong.milk",
+      "sha256": "7d0af310f0145d44fc33792e3f00cff86aef841bfb9f81e6eb4f76dfb9737a4f",
+      "rank": "29892e793c1cc245698859f52c5f23882252510c10af6977db01cafc08258514"
+    }
+  ],
+  "lost_structured": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "selection_sha256": "6ef58b92fa758019c4b041ce8e498dcda81999430d5295f3c972e5f0c4342d7c",
+  "scenario_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "wall_seconds": 260.75488379200397,
+  "uses_rendered_images": false,
+  "uses_equation_execution": false,
+  "uses_shader_execution": false,
+  "previously_structured_semantic_changes": 35,
+  "changed_sections": [
+    "visual_description.feedback_envelope"
+  ],
+  "unchanged_previously_structured": 1963,
+  "partial_budget_presets": 109,
+  "full_suite": {
+    "tests": 3120,
+    "subtests": 92,
+    "seconds": 199.43
+  },
+  "additional_feedback_controls": 2,
+  "final_controls_structured_schema_valid": 100,
+  "changed_descriptions_schema_valid": 37,
+  "appearance_accuracy_verified": false,
+  "mood_accuracy_verified": false,
+  "evidence_hashes": {
+    "comparison.jsonl.gz": "3e0f1fd38a441f7bc4079422198de13be5dbea98c4a0ddb23c2567492157543a",
+    "summary.json.gz": "65cbaa4028ef47b73e925cb7fc263615d2c9bf751f4de681f4a1acf0f176e333"
+  }
+}

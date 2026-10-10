@@ -437,19 +437,27 @@ def _same(a, b):
 
 
 def _angle(value):
-    return any(node.op == 'atan2' and _spatial(node) or
+    cache=_CACHE.get();key=('angle_presence',id(value))
+    if cache is not None and key in cache and cache[key][0] is value:return cache[key][1]
+    result=any(node.op == 'atan2' and _spatial(node) or
                node.op == 'member' and node.detail.get('field') in {'y', 'g'} and
                node.args[0].op == 'input' and node.args[0].detail.get('name') == '_rad_ang' or
                _is_spatial_input(node) and node.detail.get('name') == 'ang'
                for node, _ in _walk(value))
+    if cache is not None:cache[key]=(value,result)
+    return result
 
 
 def _radius(value):
-    return any(node.op in {'length', 'distance'} and _spatial(node) or
+    cache=_CACHE.get();key=('radius_presence',id(value))
+    if cache is not None and key in cache and cache[key][0] is value:return cache[key][1]
+    result=any(node.op in {'length', 'distance'} and _spatial(node) or
                node.op == 'member' and node.detail.get('field') in {'x', 'r'} and
                node.args[0].op == 'input' and node.args[0].detail.get('name') == '_rad_ang' or
                _is_spatial_input(node) and node.detail.get('name') == 'rad'
                for node, _ in _walk(value))
+    if cache is not None:cache[key]=(value,result)
+    return result
 
 
 def _radial_depth(value):

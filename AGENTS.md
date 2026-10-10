@@ -1377,3 +1377,12 @@ two-state range is not an abrupt-event certificate. Modulo cadence uses supporte
 affine/sinusoidal source curves and exact strict-boundary enumeration≤16; native
 singletons, tangent/native-margin timing, unknown inputs and numeric domains
 stay separate. Never sum channel schedules into a visible flash frequency.
+
+Source query reuse: radial/angle presence and sampling-coordinate uniformity
+memoize only successfully completed answers within the per-analysis ContextVar.
+Retain the original node strongly; sampling uniformity also keys the complete
+basis tuple. Keep witness short-circuit semantics, unsafe-node predicates and
+unchanged first-query traversal charging. A structured description can still
+contain per-field budget unknowns; do not equate it with complete interpretation.
+Local feedback-envelope identity caches likewise retain original canonical and
+projected nodes until return, including manufactured nested-swizzle nodes.
