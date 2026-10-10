@@ -8,9 +8,13 @@ COLUMNS=('_uv.x','_uv.y','_uv.z','_uv.w','_rad_ang.x','_rad_ang.y')
 
 
 def uniform(field):
-    from effect_families import _walk
-    return not any(n.op in {'sample','unknown','uninitialized','sequence'} or n.op.startswith('loop_') or
+    from effect_families import _walk,_CACHE
+    cache=_CACHE.get();key=('periodic_uniform',id(field))
+    if cache is not None and key in cache and cache[key][0] is field:return cache[key][1]
+    result=not any(n.op in {'sample','unknown','uninitialized','sequence'} or n.op.startswith('loop_') or
         n.op=='input' and n.detail.get('name') in {*BASES,'_vDiffuse'} for n,p in _walk(field))
+    if cache is not None:cache[key]=(field,result)
+    return result
 
 
 def number(v):return Field('constant',dtype='float',detail={'value':float(v)})

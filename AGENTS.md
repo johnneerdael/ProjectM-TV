@@ -1294,3 +1294,15 @@ affine warp mesh-UV column norms and caller-supplied positive aspects. Composite
 and original-UV-only maps bypass it; shader offsets cancel at fixed inputs.
 Preserve coordinate-domain guards, exclude texel alignment and pointwise/temporal
 speed claims, and keep nearest-main feedback hazards possible rather than observed.
+
+Global mesh-UV certificates use independent coordinate Lipschitz columns over
+unbounded finite mesh UV, with original UV/uniforms fixed. Do not invent a UV box
+or treat raw frac seam derivatives as global. Typed continuous triangular folds
+use outward exact slopes; image-dependent coordinates need full texture chains.
+Nonlinear/native scenario composition retains separate identity and default status.
+
+UV-response qualification includes original Grind under the source34 reader,
+sealed compile manifest and full declared audio/canvas scenario. Plain source31
+tests alone do not cover its budget boundary. Reuse strong-identity uniform facts
+inside one analysis; do not raise traversal limits or treat schema-valid unknown
+descriptions as preserved structured output.

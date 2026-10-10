@@ -2435,3 +2435,38 @@ Geiss's authoring guide specifies zoom as a per-frame transform; original
 MilkDrop2 `milkdropfs.cpp` lines 1877–1924 applies zoom/stretch/warp/rotation and
 translation to previous-image sampling coordinates. The declared patched-core
 native displacement and shader-coordinate basis models remain the numeric target.
+
+## Global nonlinear mesh-UV response
+
+Each lookup now exports `mesh_uv_response`, a 2-by-2 matrix of nonnegative
+output-UV/input-mesh-UV Lipschitz ceilings. It varies one mesh coordinate at a
+time, holding shader uniforms, original UV, native uploads and other inputs fixed.
+Mesh UV is not assumed to lie in `[0,1]`: the warped map and the segment from its
+original position need global valid domains. Unbounded UV squares, singular
+domains, quantized spatial inputs and unsupported/discontinuous operations remain
+unverified. Image-driven coordinates require their complete nested texture chain
+and are excluded from this direct global certificate.
+
+Supported sine/cosine deformations can be bounded without sampling coordinates.
+For `uv + (.02*sin(8*uv.y+time),0)`, the gain matrix is at most
+`[[1,.16],[0,1]]` after declared native literal conversion. Native lookup RMS
+composition uses the norms of these gain columns in place of affine columns;
+the triangle bound remains conservative for independent coordinate changes.
+
+Continuous triangular folds `abs(2*frac(phase)-1)` have global slope ceiling 2,
+including their cusps/seams. The existing typed fold extraction supplies exact
+phase coefficients and output scale; their products round outward. Raw `frac`
+has a jump and does not borrow that global certificate. A derivative that exists
+only away from seams is insufficient for native displacement composition.
+
+Caller-declared domains produce `scenario_mesh_uv_response`; they do not change
+the default certificate. `scenario_native_lookup_transport` separately composes
+that gain with the existing native displacement envelope and retains scenario
+identity. It does not add unsupported native-control domains or certify runtime
+inputs. Typical movement, forward screen speed, history and visible intensity
+remain separate from these sufficient upper bounds.
+
+References: [HLSL sin](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-sin)
+uses radian arguments; [HLSL frac](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-frac)
+returns values in `[0,1)`. The continuous triangular composite and its slope
+bound are derived from those operations rather than inferred from screenshots.

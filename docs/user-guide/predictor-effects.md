@@ -573,3 +573,9 @@ a constant authored lookup can still transport the previous image every frame.
 Its RMS quantities need the renderer's aspect values and remain separate from
 forward screen speed. Nearest main-image sampling can expose a possible feedback
 jump source, but positive displacement ceilings do not certify visible flashes.
+
+Native lookup transport now also accepts supported nonlinear mesh-UV response
+bounds, including sinusoidal deformations and continuous triangular folds. Raw
+fractional seams and image-driven maps remain guarded. The export keeps audio-
+conditioned bounds separate from defaults and does not assume warped UV stays
+inside `[0,1]`. This extends source movement interpretation without sampling frames.

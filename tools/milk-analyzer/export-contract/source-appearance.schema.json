@@ -6342,6 +6342,31 @@
                   },
                   "visible_screen_speed": {
                     "type": "null"
+                  },
+                  "lookup_response_model": {
+                    "enum": [
+                      "affine_mesh_uv",
+                      "nonlinear_mesh_uv_lipschitz",
+                      null
+                    ]
+                  },
+                  "scenario_native_lookup_transport": {
+                    "type": "object",
+                    "required": [
+                      "native_mesh_contribution",
+                      "rms_lookup_displacement_uv_upper_bound_terms",
+                      "input_scenario_sha256",
+                      "observed_runtime_inputs",
+                      "runtime_binding_verified"
+                    ],
+                    "properties": {
+                      "observed_runtime_inputs": {
+                        "const": false
+                      },
+                      "runtime_binding_verified": {
+                        "const": false
+                      }
+                    }
                   }
                 }
               }

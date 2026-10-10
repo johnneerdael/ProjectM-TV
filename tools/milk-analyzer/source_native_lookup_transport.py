@@ -15,6 +15,12 @@ def _norm_upper(values):
 
 def native_lookup_transport(description):
     displacement=description['native_warp_displacement'];rows=[]
+    def bound(matrix):
+        gains=[_norm_upper([r[i] for r in matrix]) for i in (0,1)]
+        if any(v is None for v in gains):return None
+        return {'aspect_corrected_native_terms':displacement['rms_upper_bound_terms'],
+            'matrix_gain_terms':{'inverse_aspect_x':gains[0],'inverse_aspect_y':gains[1]},
+            'formula':'native_rms_bound(aspectX,aspectY) * (gain_x/aspectX + gain_y/aspectY)'}
     for stage,maps in description['sampling_geometry']['stages'].items():
         for lookup in maps or []:
             row={'stage':stage,'sample_site_index':lookup['sample_site_index'],'sampler':lookup['sampler'],
@@ -22,29 +28,38 @@ def native_lookup_transport(description):
                 'rms_lookup_displacement_uv_upper_bound_terms':None,
                 'feedback_step_unit':'source_texture_uv/feedback_step','texel_alignment_included':False,
                 'visible_screen_speed':None,'unknown_reasons':[],
-                'conditions':['Selected authored warp lookup has a constant-affine shader map and bounded uniform native controls',
+                'conditions':['Selected authored warp lookup has a constant-affine or globally Lipschitz mesh-UV map and bounded uniform native controls',
+                    'Nonlinear certificates require finite valid source domains for both coordinates and every point of their connecting path',
                     'Compare mesh-warped versus original UV at the same frame/control values; uniform shader offsets cancel',
                     'Supply finite positive renderer aspectX/Y; divide native aspect-corrected displacement by each aspect before the shader map',
                     'Uniform original UV area RMS, not a pointwise jump bound, temporal derivative or forward feature speed',
                     'Texel alignment, mesh/pixel precision, clipping/wrapping, texture history and later passes remain separate',
                     'Repeated main-texture sampling is feedback transport; external textures alone do not establish repeated feature motion']}
-            matrix=lookup['matrix_uv4']
+            matrix=lookup['matrix_uv4'];response_model='affine_mesh_uv'
+            if matrix is None and lookup['mesh_uv_response']['global_lipschitz_domain_verified']:
+                matrix=[r+[0,0] for r in lookup['mesh_uv_response']['matrix_uv_output_input_gain_upper_bounds']]
+                response_model='nonlinear_mesh_uv_lipschitz'
+            row['lookup_response_model']=response_model if matrix is not None else None
             if stage!='warp' or matrix is not None and all(v==0 for r in matrix for v in r[:2]):
                 row['native_mesh_contribution']='bypassed'
             elif matrix is None:row['unknown_reasons']=['authored lookup is not a supported constant-affine map']
-            elif lookup['sampling_motion']['unknown_reasons']:
+            elif response_model=='affine_mesh_uv' and lookup['sampling_motion']['unknown_reasons']:
                 row['unknown_reasons']=list(lookup['sampling_motion']['unknown_reasons'])
             elif displacement['status']!='bounded_uniform_sampling_displacement':
                 row['unknown_reasons']=['native uniform sampling displacement domain unresolved']
             else:
-                gains=[_norm_upper([r[i] for r in matrix]) for i in (0,1)]
-                if any(v is None for v in gains):row['unknown_reasons']=['lookup column norm is nonfinite or unrepresentable']
+                terms=bound(matrix)
+                if terms is None:row['unknown_reasons']=['lookup column norm is nonfinite or unrepresentable']
                 else:
                     row['native_mesh_contribution']='bounded'
-                    row['rms_lookup_displacement_uv_upper_bound_terms']={
-                        'aspect_corrected_native_terms':displacement['rms_upper_bound_terms'],
-                        'matrix_gain_terms':{'inverse_aspect_x':gains[0],'inverse_aspect_y':gains[1]},
-                        'formula':'native_rms_bound(aspectX,aspectY) * (gain_x/aspectX + gain_y/aspectY)'}
+                    row['rms_lookup_displacement_uv_upper_bound_terms']=terms
+            extra=lookup['mesh_uv_response'].get('scenario_mesh_uv_response')
+            if extra is not None and extra['global_lipschitz_domain_verified'] and displacement['status']=='bounded_uniform_sampling_displacement' and stage=='warp':
+                scenario_matrix=[r+[0,0] for r in extra['matrix_uv_output_input_gain_upper_bounds']]
+                terms=bound(scenario_matrix)
+                row['scenario_native_lookup_transport']={'native_mesh_contribution':'bounded' if terms is not None else 'unknown',
+                    'rms_lookup_displacement_uv_upper_bound_terms':terms,'lookup_response_model':'nonlinear_mesh_uv_lipschitz',
+                    'input_scenario_sha256':extra['input_scenario_sha256'],'observed_runtime_inputs':False,'runtime_binding_verified':False}
             rows.append(row)
     return rows
 
