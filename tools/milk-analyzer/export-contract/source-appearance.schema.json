@@ -6060,7 +6060,8 @@
             "value",
             "status",
             "hazards",
-            "material_change_bounds"
+            "material_change_bounds",
+            "shader_change_bounds"
           ],
           "properties": {
             "value": {
@@ -6073,6 +6074,25 @@
               "type": "array",
               "items": {
                 "type": "object"
+              }
+            },
+            "shader_change_bounds": {
+              "type": "array",
+              "description": "Raw shader RGB partial source-time rates with sampled colours and all other inputs held fixed; excludes texture motion/history and total displayed variation.",
+              "items": {
+                "type": "object",
+                "required": ["stage", "channels", "samples_are_held_fixed", "includes_sampling_coordinate_response", "total_rgb_rate_per_second", "visible_flash_frequency_hz", "conditions"],
+                "properties": {
+                  "stage": {"enum": ["warp", "composite"]},
+                  "samples_are_held_fixed": {"const": true},
+                  "includes_sampling_coordinate_response": {"const": false},
+                  "total_rgb_rate_per_second": {"type": "null"},
+                  "visible_flash_frequency_hz": {"type": "null"},
+                  "channels": {"type": "array", "minItems": 3, "maxItems": 3, "items": {
+                    "type": "object", "required": ["maximum_absolute_rgb_rate_per_source_second", "unknown_reasons"],
+                    "properties": {"maximum_absolute_rgb_rate_per_source_second": {"type": ["number", "null"], "minimum": 0}}
+                  }}
+                }
               }
             },
             "material_change_bounds": {

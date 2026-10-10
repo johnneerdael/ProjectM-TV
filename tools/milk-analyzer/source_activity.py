@@ -28,7 +28,7 @@ def source_activity(analysis,description):
     from source_polar import _nodes
     from source_time_switches import time_switch_events
     from source_forms import known_invalid_phase_offset
-    flashing={'value':None,'status':'unknown','hazards':[],'material_change_bounds':[],
+    flashing={'value':None,'status':'unknown','hazards':[],'material_change_bounds':[],'shader_change_bounds':[],
         'conditions':['Full-stage blackout is an authored raw-RGB mechanism under finite inputs and selected custom shader',
                       'All contributing RGB intermediates and multiplicative factors must be finite; finite inputs alone do not prove this',
                       'Nonblack retained content and later storage/composition/trails determine visible flashes',
@@ -38,6 +38,13 @@ def source_activity(analysis,description):
                       'Components are separated from combined transport, wrapping, texel shifts and later custom shaders',
                       'Multiply per-step rates by actual feedback FPS only under steady controls/cadence',
                       'Geometry speeds precede clipping, source coverage, later shaders and feedback; no whole-screen intensity score']}
+    for stage,model in description['nonlinear_texture_colour_bounds']['stages'].items():
+        for report,scenario in ((model,None),(model.get('scenario_colour_envelope'),True)):
+            if report is None:continue
+            response=report['direct_colour_time_response']
+            if response['channels']:
+                flashing['shader_change_bounds'].append({**response,'stage':stage,
+                    'input_scenario_sha256':report['input_scenario_sha256'] if scenario else None})
     memo={}
     def scalar(node,depth=0):
         if depth>64 or len(memo)>=512:raise ValueError('activity scalar projection budget exceeded')

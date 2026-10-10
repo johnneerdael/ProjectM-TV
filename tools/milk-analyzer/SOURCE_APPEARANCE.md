@@ -2210,3 +2210,34 @@ those blend factors with the maintained native floating modulo conversion.
 This model follows the declared core conversion, not legacy packed-byte steps.
 See [Microsoft blending factors](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dblend)
 for the source-alpha and inverse-source-alpha definitions.
+
+## Direct shader RGB partial time response
+
+`nonlinear_texture_colour_bounds.stages.{warp,composite}.direct_colour_time_response`
+exports three raw RGB partial rate ceilings. The same records are linked by stage
+under `activity.flashing.shader_change_bounds`, with default and declared-scenario
+records kept separate. The selected aliases `time`, `_c2.x` and
+`:native-render-time-f32` advance together at one source second per second within
+their continuous clock domains. Audio, state, frame counters, FPS, progress and
+spatial coordinates stay fixed, as do the explicit sampled RGBA inputs `[0,1]`.
+
+For `sample*(.5+.5*sin(3*time))`, each raw RGB partial rate is at most 1.5 per
+source second. For `sample*sin(3*time)*bass`, a caller-declared bass domain `[0,2]`
+gives a ceiling of 6; without an amplitude domain no finite lifetime ceiling is
+claimed. These upper bounds need not be reached and are not typical activity.
+The native oscillator uniform formulas are followed rather than held fixed.
+
+Time inside a sample coordinate contributes no direct colour multiplier rate
+when sampled values are held fixed. A zero direct rate therefore does not certify
+a static image. `includes_sampling_coordinate_response=false`,
+`samples_are_held_fixed=true`, null total rate and null visible flash frequency
+make that boundary machine-readable. Image/feedback history and later passes
+remain separate. Quantized time-dependent Q uploads retain taint through scalar
+projection and cannot masquerade as zero-rate fixed inputs. Discontinuous gates,
+singular arithmetic and unsupported domains retain null channel ceilings.
+
+The clocks may reset or wrap; native CPU/GPU float32 sampling and storage steps
+are outside continuous nominal rates. This is source response math, not an AAR
+runtime or visual qualification. [Microsoft's HLSL sin reference](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-sin)
+specifies radians; the original MilkDrop2 `milkdropfs.cpp` uniform binding and
+the current `source_uniforms.native_time_contract` define clock/oscillator inputs.

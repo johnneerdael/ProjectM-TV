@@ -5,17 +5,27 @@ from shader_fields import Field
 def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
     from source_advection import substitute_sample_values
     from source_control_bounds import scalar_value_envelope,scalar_response_envelope
-    from source_appearance import _data_return,_canonical_lane,_audio_codes,EEL_AUDIO,PACKED
-    from effect_families import _parts
+    from source_appearance import _data_return,_canonical_lane,_audio_codes,_packed_reads,EEL_AUDIO,PACKED
+    from effect_families import _parts,_deps
     from field_math import SWIZZLE
     from source_native_warp import _f32
     from source_polar import _nodes
     stages={}
+    time_names={'time',':native-render-time-f32','_c2.x'}
     for stage in ('warp','composite'):
         r={'source_model':'unknown','channel_value_envelopes':None,
             'raw_rgb_bounds_if_samples_unit_interval':None,'sample_textures':[],
             'colour_difference_gain':None,'whole_feedback_contraction':None,
             'actual_feedback_persistence':None,'visible_flashing':None,'unknown_reasons':[],
+            'direct_colour_time_response':{'policy':'source-fixed-sample-colour-time-response-v1','status':'unknown',
+                'channels':[],'channel_order':['r','g','b'],'samples_are_held_fixed':True,
+                'includes_sampling_coordinate_response':False,'total_rgb_rate_per_second':None,
+                'visible_flash_frequency_hz':None,
+                'conditions':['Sample RGBA values are independent [0,1] inputs held fixed; changing sample positions/history are separate',
+                    'Declared source-time aliases advance together at one source second per second between clock resets/wraps',
+                    'Audio, state, frame counters, FPS, progress, spatial coordinates and all other inputs held fixed',
+                    'Native float32 clock/upload quantization and finite precision are not continuous-rate certificates',
+                    'Raw stage RGB partial rates exclude geometry, feedback, subsequent composition/storage, prominence and mood']},
             'direct_colour_audio_response':{'policy':'source-fixed-sample-colour-audio-response-v1','status':'unknown',
                 'bands':[],'includes_sampling_coordinate_response':False,'visible_response_strength':None,
                 'conditions':['Sampled RGBA colours are independent declared local inputs held fixed during each band variation',
@@ -31,7 +41,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             for name,sample in samples:
                 for lane in 'xyzw':domains[name+'.'+lane]=[0.,1.]
             local_sample_names=set(domains)-set(input_domains or {})
-            derived=set();derived_audio={}
+            derived=set();derived_audio={};derived_time=set()
             def project(node,depth=0):
                 original=node;key=id(original)
                 if key in memo:return memo[key][1]
@@ -63,6 +73,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                     if span is None:raise ValueError('native colour-input upload domain unresolved')
                     name=':nonlinear-colour-narrow-'+str(len(memo));domains[name]=[_f32(v) for v in span];derived.add(name)
                     derived_audio[name]=set(_audio_codes(node,analysis))
+                    if _deps(node)&time_names or 0 in _packed_reads(node).get('_c2',set()):derived_time.add(name)
                     return Field('input',dtype='float',detail={'name':name})
                 if node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
                     parent=node.args[0];lane=SWIZZLE[node.detail['field']]
@@ -106,6 +117,16 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                 response['bands'].append({'input_code':code,'channel_order':['r','g','b'],
                     'control_unit':'raw stage RGB component/declared audio input unit','channel_response_envelopes':reports})
             response['status']='conditional source direct-colour paths'
+            time_response=r['direct_colour_time_response']
+            for selected in projected:
+                tainted=any(n.op=='input' and n.detail.get('name') in derived_time for n,path in _nodes(selected))
+                report=scalar_response_envelope(Field('unknown') if tainted else selected,input_names=time_names,input_domains=domains)
+                channel={k:v for k,v in report.items() if k not in {'policy','maximum_absolute_control_change_per_audio_unit',
+                    'maximum_time_rate','visible_response_strength','conditions'}}
+                channel['maximum_absolute_rgb_rate_per_source_second']=report['maximum_absolute_control_change_per_audio_unit']
+                if tainted:channel['unknown_reasons']=['time-dependent native float32 upload prevents a continuous direct-colour bound']
+                time_response['channels'].append(channel)
+            time_response['status']='conditional source direct-colour time paths'
             spans=[c['nominal_value_range'] for c in channels]
             r['channel_value_envelopes']=channels
             r['sample_textures']=sorted({s.detail.get('canonical_texture') for name,s in samples},key=str)

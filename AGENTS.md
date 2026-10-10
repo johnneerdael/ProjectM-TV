@@ -1256,3 +1256,9 @@ source-alpha-over adds alpha_rate under explicit destination RGB [0,1]. Require
 stable modulo/continuity domains, retain transparent centre RGB when perimeter
 alpha participates, and withhold textured fill rates. Quantization, coverage,
 local modulo/draw-gate hazards and whole-screen flashing are separate.
+
+Shader direct time response varies time/_c2.x/native-render-time together, with
+sample RGBA, audio/state/coordinates/frame/FPS/progress fixed. Native time formulas
+remain expressions; time-dependent narrow/Q uploads retain taint. Zero partial
+rate is not static-image/no-flash proof; texture coordinate/history response and
+total displayed variation remain separate. Default/scenario records retain identity.

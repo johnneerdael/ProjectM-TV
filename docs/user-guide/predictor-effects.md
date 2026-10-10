@@ -529,3 +529,10 @@ changing opacity also changes how much of the background remains under ordinary
 alpha blending. The export identifies possible colour-modulo jumps and border
 draw-gate crossings separately. Texture changes, moving coverage, feedback and
 later shaders still require their own analysis; these are local source facts.
+
+`activity.flashing.shader_change_bounds` adds raw shader RGB change ceilings
+for the direct source-time contribution. It can bound a colour pulse while
+holding sampled colours and audio/state fixed. A declared audio range can bound
+the pulse amplitude. Texture movement and changing feedback remain separate,
+so a zero direct rate does not mean the preset is static or calm. Threshold jumps
+and time-dependent quantized Q uploads keep unresolved smooth-rate results.
