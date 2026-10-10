@@ -2640,3 +2640,40 @@ per output, with strong node references and complete-only caching. Shared nodes
 reachable through either masked or unmasked routes retain the existential mask
 condition. Calls outside an analysis cache keep the prior identity traversal.
 No numerical bounds or traversal limits are changed by this condition lookup.
+
+## Shape material difference size and modulo cadence
+
+`activity.flashing.material_jump_bounds` reports conservative differences between
+two supported material states at fixed geometry, barycentric position and
+destination RGB in `[0,1]`. These are not necessarily adjacent frames or abrupt
+events. For untextured fan endpoints within the linear alpha domain, the bound
+maximizes an exact-rational quadratic over centre weight `w` and edge weight
+`1-w`. Transparent centre colour therefore receives its interpolated alpha
+weight, rather than a whole-shape opacity assumption. Clipped alpha uses a scalar
+Lipschitz fallback. Source-alpha-over uses colour contrast against the fixed
+destination; additive excludes that destination term.
+
+Border gate uncertainty includes zero effective alpha for the off state. Borders
+refer to one draw pass, with no raster-area claim. Filled polygon bounds multiply
+the existing nominal area ceiling and configured instance count; multiply the
+reported coefficient by target aspectY. Repeated overlaps remain summed, and
+clipping, moving coverage, thick/repeated borders, storage and subsequent
+feedback/composition remain separate. Texture RGB/alpha lacks this contract and
+keeps null bounds. `visible_flash_strength` remains null and
+`abrupt_change_verified` false, even for a large two-state colour range.
+
+Per-channel `material_temporal.channels.*.nominal_modulo_schedule` describes
+nonzero affine-time drift or a supported single sine/cosine crossing strict
+interior multiples of the native `256/255` float32 period. Affine drift crosses
+once every `period/abs(rate)` seconds; an oscillator crosses each strict interior
+boundary twice per cycle. Exact rational boundary counting caps at 16; excessive,
+unsupported or numeric-domain cases remain unquantified. Frozen native endpoint
+domains receive no schedule. Tangencies and native two-ULP preboundary resets
+remain separate, and channel/shape rates cannot simply be summed.
+
+[OpenGL ES 3.0 §4.1.7](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf)
+defines the blend equations and clamping used by the declared normalized-target
+model. The current native shape source and original MilkDrop2 packed-colour path
+remain distinct references. These nominal source schedules omit clock resets,
+quantization and frame aliasing; they do not certify actual native or visible
+flash timing, no-flash absence, final prominence or a mood.

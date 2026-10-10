@@ -1,0 +1,57 @@
+{
+  "sample_size": 2000,
+  "structured": 1998,
+  "schema_valid_including_unknowns": 2000,
+  "verified_archive_pairs": 2000,
+  "same_random_selection": true,
+  "new_source_gaps": 0,
+  "newly_structured_cases": [
+    "flexi - grind my glitch up [192].milk",
+    "flexi - grind my glitch up [317].milk",
+    "flexi - grind my glitch up [319].milk"
+  ],
+  "sized_shape_hazard_presets": 144,
+  "area_weighted_shape_hazard_presets": 40,
+  "timed_shape_hazard_presets": 48,
+  "full_suite": {
+    "tests": 3109,
+    "subtests": 92,
+    "seconds": 202.85
+  },
+  "uses_rendered_images": false,
+  "native_event_timing_verified": false,
+  "visible_flash_strength_verified": false,
+  "mood_accuracy_verified": false,
+  "report_sha256": "1ebef822ada64e1e548a19ad211454da77e3defc7dc86df7218e0d961256f494",
+  "run_identity": "7bab39ee8ce7f6068333a91cfc9e0abd9954fa1762f8718d29e54c54b90dfa78",
+  "unstructured_cases": [
+    {
+      "preset": {
+        "relative_path": "Flexi + geiss - the deep diver's cognitive dissonance 1's and 0's where they don't belong.milk",
+        "name": "Flexi + geiss - the deep diver's cognitive dissonance 1's and 0's where they don't belong.milk",
+        "sha256": "7d0af310f0145d44fc33792e3f00cff86aef841bfb9f81e6eb4f76dfb9737a4f"
+      },
+      "description": {
+        "schema_version": 1,
+        "status": "unknown",
+        "unknown_reasons": [
+          "static field traversal budget exceeded"
+        ]
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [230].milk",
+        "name": "flexi - grind my glitch up [230].milk",
+        "sha256": "d69f5cc4bbd1123ccbcf20bfedad9f91000807e828c95becf20651481fee5457"
+      },
+      "description": {
+        "schema_version": 1,
+        "status": "unknown",
+        "unknown_reasons": [
+          "static field traversal budget exceeded"
+        ]
+      }
+    }
+  ]
+}

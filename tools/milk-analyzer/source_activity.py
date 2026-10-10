@@ -28,7 +28,7 @@ def source_activity(analysis,description):
     from source_polar import _nodes
     from source_time_switches import time_switch_events
     from source_forms import known_invalid_phase_offset
-    flashing={'value':None,'status':'unknown','hazards':[],'material_change_bounds':[],'shader_change_bounds':[],
+    flashing={'value':None,'status':'unknown','hazards':[],'material_change_bounds':[],'material_jump_bounds':[],'shader_change_bounds':[],
         'conditions':['Full-stage blackout is an authored raw-RGB mechanism under finite inputs and selected custom shader',
                       'All contributing RGB intermediates and multiplicative factors must be finite; finite inputs alone do not prove this',
                       'Nonblack retained content and later storage/composition/trails determine visible flashes',
@@ -119,6 +119,8 @@ def source_activity(analysis,description):
             records,hazards=shape_activity(element)
             flashing['material_change_bounds'].extend(records)
             flashing['hazards'].extend(hazards)
+            from source_shape_jump_bounds import shape_material_jump_bounds
+            flashing['material_jump_bounds'].extend(shape_material_jump_bounds(element))
         v=element.get('vertex_motion',{});speed=v.get('maximum_vertex_speed_ndc_per_second_upper_bound')
         if speed is not None:motion['geometry_speed_bounds'].append({'element_id':element['id'],
             'kind':'polygon_perimeter_vertex_speed','maximum_ndc_per_second':speed,

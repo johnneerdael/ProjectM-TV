@@ -31,6 +31,7 @@ def shape_activity(element):
     crossings=[name for name,c in channels.items() if c['may_be_consumed'] and c['possible_native_wrap_jump'] is True]
     if crossings:hazards.append({'kind':'shape_channel_modulo_crossing','element_id':identity,
         'channels':crossings,'event_rate_hz':None,'visible_flashing_verified':False,
+        'nominal_channel_schedules':{name:channels[name]['nominal_modulo_schedule'] for name in crossings},
         'scope':'possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event'})
     gate=temporal['border_gate']
     if gate['possible_state_change'] is True:hazards.append({'kind':'shape_border_draw_gate',

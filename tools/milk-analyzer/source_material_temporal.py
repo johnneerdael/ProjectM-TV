@@ -18,6 +18,8 @@ def _channel(field,name,group):
     result={'group':group,'raw_time_curve':curve,'native_float32_endpoint_domain':None,
         'native_endpoint_domain_singleton':None,'native_value_if_singleton':None,
         'possible_native_wrap_jump':None,'may_be_consumed':True,'unknown_reasons':[]}
+    from source_shape_modulo_schedule import modulo_schedule
+    result['nominal_modulo_schedule']=modulo_schedule(curve,PERIOD)
     span=curve['nominal_value_range']
     if span is None:
         result['unknown_reasons']=['raw channel has no supported lifetime source envelope'];return result
@@ -30,6 +32,7 @@ def _channel(field,name,group):
     if singleton:
         result['native_value_if_singleton']=float(colour_modulo(endpoints[0]))
         result['possible_native_wrap_jump']=False
+        result['nominal_modulo_schedule']=modulo_schedule(curve,PERIOD,native_singleton=True)
     elif curve['maximum_absolute_control_rate_per_second']==0 and curve['nominal_continuity']!='unknown':
         result['possible_native_wrap_jump']=False
     else:

@@ -628,3 +628,16 @@ Copying a scalar into RGB keeps all three valid lanes, while shortening a vector
 excludes discarded lanes. Numeric casts remain explicit, so integer steps cannot
 silently become smooth colour or motion estimates. This improves both missing
 dependencies and false effect detections without claiming a visible flash rate.
+
+Shape colour changes now have opacity-weighted difference ceilings and nominal
+fill-area weighting. A transparent-centre fan can have a much smaller potential
+colour jump than an opaque fill. Source-alpha-over also depends on contrast
+against the destination. These compare two possible material states; a slow smooth
+colour swing can have a large range without being flashy. Borders include their
+off state, but their raster footprint remains unknown.
+
+Supported linear and sinusoidal channels also expose nominal modulo-crossing
+cadence per channel. Float32-frozen, unsupported and excessive-crossing cases
+remain unquantified. Timing, size and affected area stay separate: no visible
+flash strength, actual flash frequency or Chill/Normal/Intense verdict follows
+from these quantities alone.

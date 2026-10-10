@@ -2216,6 +2216,9 @@
                             "border"
                           ]
                         },
+                        "nominal_modulo_schedule": {
+                          "$ref": "#/$defs/shapeModuloSchedule"
+                        },
                         "raw_time_curve": {
                           "type": "object"
                         },
@@ -6241,6 +6244,10 @@
                 }
               }
             },
+            "material_jump_bounds": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/shapeMaterialDifference"}
+            },
             "material_change_bounds": {
               "type": "array",
               "description": "Conditional per-shape material partial time-rate ceilings at fixed geometry, barycentrics and destination; not visible flash rates.",
@@ -6690,6 +6697,38 @@
           }
         }
       }
+    },
+    "shapeModuloSchedule": {
+      "type": "object",
+      "required": ["policy", "nominal_crossing_event_rate_hz", "period_seconds", "strict_boundary_count", "crossings", "native_event_timing_verified", "visible_flash_frequency_hz", "unknown_reasons", "conditions"],
+      "properties": {
+        "policy": {"const": "source-shape-nominal-modulo-crossings-v1"},
+        "nominal_crossing_event_rate_hz": {"type": ["number", "null"], "minimum": 0},
+        "period_seconds": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "strict_boundary_count": {"type": ["integer", "null"], "minimum": 0},
+        "crossings": {"type": "array", "items": {"type": "object"}},
+        "native_event_timing_verified": {"const": false},
+        "visible_flash_frequency_hz": {"type": "null"},
+        "unknown_reasons": {"type": "array", "items": {"type": "string"}},
+        "conditions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "shapeMaterialDifference": {
+      "type": "object",
+      "required": ["policy", "element_id", "part", "maximum_incoming_rgb_difference", "maximum_blended_rgb_difference", "summed_nominal_rgb_difference_integral_per_aspect_y", "visible_flash_strength", "abrupt_change_verified", "scope", "conditions"],
+      "properties": {
+        "policy": {"const": "source-shape-two-state-material-difference-v1"},
+        "part": {"enum": ["fill", "border"]},
+        "maximum_incoming_rgb_difference": {"$ref": "#/$defs/threeDifferenceBounds"},
+        "maximum_blended_rgb_difference": {"$ref": "#/$defs/threeDifferenceBounds"},
+        "summed_nominal_rgb_difference_integral_per_aspect_y": {"$ref": "#/$defs/threeDifferenceBounds"},
+        "visible_flash_strength": {"type": "null"},
+        "abrupt_change_verified": {"const": false}
+      }
+    },
+    "threeDifferenceBounds": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": ["number", "null"], "minimum": 0}
     },
     "feedbackColourSensitivity": {
       "type": "object",

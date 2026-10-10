@@ -1367,3 +1367,13 @@ Output multiplier conditions use one complete budget-charged causal DAG inventor
 with strong node identities per analysis; shared masked/unmasked paths retain
 existential semantics and uncached callers retain the prior traversal. Never cache
 partial facts on failure or raise traversal limits to hide a lost description.
+
+Shape flashing math: two-state material bounds use fixed barycentrics/geometry
+and destination[0,1], untextured inputs and converted endpoint domains. Retain
+shared fan weights in quadratic maxima, alpha-clipping fallback, over-blend
+contrast and border off-state alpha0. Area weighting is nominal peraspectY and
+sum-over-instances, excluding overlap union/rasterization/later feedback. Large
+two-state range is not an abrupt-event certificate. Modulo cadence uses supported
+affine/sinusoidal source curves and exact strict-boundary enumeration≤16; native
+singletons, tangent/native-margin timing, unknown inputs and numeric domains
+stay separate. Never sum channel schedules into a visible flash frequency.
