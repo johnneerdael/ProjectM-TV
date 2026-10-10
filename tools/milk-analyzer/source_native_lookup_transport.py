@@ -15,10 +15,10 @@ def _norm_upper(values):
 
 def native_lookup_transport(description):
     displacement=description['native_warp_displacement'];rows=[]
-    def bound(matrix):
+    def bound(matrix,source=None):
         gains=[_norm_upper([r[i] for r in matrix]) for i in (0,1)]
         if any(v is None for v in gains):return None
-        return {'aspect_corrected_native_terms':displacement['rms_upper_bound_terms'],
+        return {'aspect_corrected_native_terms':(source or displacement)['rms_upper_bound_terms'],
             'matrix_gain_terms':{'inverse_aspect_x':gains[0],'inverse_aspect_y':gains[1]},
             'formula':'native_rms_bound(aspectX,aspectY) * (gain_x/aspectX + gain_y/aspectY)'}
     for stage,maps in description['sampling_geometry']['stages'].items():
@@ -60,6 +60,14 @@ def native_lookup_transport(description):
                 row['scenario_native_lookup_transport']={'native_mesh_contribution':'bounded' if terms is not None else 'unknown',
                     'rms_lookup_displacement_uv_upper_bound_terms':terms,'lookup_response_model':'nonlinear_mesh_uv_lipschitz',
                     'input_scenario_sha256':extra['input_scenario_sha256'],'observed_runtime_inputs':False,'runtime_binding_verified':False}
+            spatial=description['native_spatial_displacement']
+            if spatial['status']=='bounded_spatial_sampling_displacement' and stage=='warp' and matrix is not None:
+                invalid=response_model=='affine_mesh_uv' and lookup['sampling_motion']['unknown_reasons']
+                if not invalid:
+                    terms=bound(matrix,spatial)
+                    row['spatial_native_lookup_transport']={'native_mesh_contribution':'bounded' if terms is not None else 'unknown',
+                        'rms_lookup_displacement_uv_upper_bound_terms':terms,'lookup_response_model':response_model,
+                        'uniform_across_vertices':False,'visible_screen_speed':None}
             rows.append(row)
     return rows
 

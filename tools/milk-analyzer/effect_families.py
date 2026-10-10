@@ -862,7 +862,7 @@ class _Analysis:
         readonly=(*READONLY,'meshx','meshy','pixelsx','pixelsy','aspectx','aspecty')
         pixel_resets={**{name:frame.environment.get(name,Field('input',detail={'name':name}))
                          for name in ('zoom','zoomexp','rot','warp','cx','cy','dx','dy','sx','sy')},
-                      **{name:Field('input',detail={'name':name}) for name in ('x','y','rad','ang')}}
+                      **{name:Field('input',detail={'name':name,'native_mesh_reset_input':True}) for name in ('x','y','rad','ang')}}
         pixel_initial={**pixel_resets,**{name:resets[name] for name in readonly},
                        **{f'q{i}':frame.environment.get(f'q{i}',_constant(0)) for i in range(1,33)}}
         mesh = self.equation('per_pixel_',self.frame_environment('per_pixel_',pixel_initial,pixel_resets))

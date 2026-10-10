@@ -1312,3 +1312,10 @@ envelope, with all10native controls uniform and finite; signed stretch must avoi
 zero and native reciprocal/warp-scale guards hold. Radial inverse-scale intervals
 bound the same-frame operator pointwise before RMS integration. Exact affine
 coefficients stay on exponent-one; do not grant new negative-zoom or visible-speed policy.
+
+Spatial displacement uses ONLY native_mesh_reset_input-tagged coordinates and
+pure typed formulas; persistent/shared/random/state inputs retain unknowns.
+Native float32 endpoint padding must cover reset radius/angle values. Pointwise
+control/operator bounds precede nominal RMS integration; do not label them uniform
+affine transforms or certify interpolated mesh area/folds/visible speed. Spatial
+lookup composition is separate from the existing uniform result.

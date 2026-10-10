@@ -56,25 +56,8 @@ def native_warp_displacement(analysis,transport,*,radial_zoom=None):
         if scale==0:raise ValueError('native warp scale reciprocal is singular, even when warp is zero')
         if _f32(1/scale)==0:raise ValueError('native warp scale reciprocal underflows')
         _scalar(analysis.values,'fWarpAnimSpeed',1,'float')
-        inv_stretch={}
-        for name in ('sx','sy'):
-            inv_stretch[name]=sorted(1/v for v in domains[name])
         inv_z=radial['tangential_sampling_scale_range'] if radial is not None else sorted(1/v for v in domains['zoom'])
-        diagonal={name:_product_span(inv_z,inv_stretch[name]) for name in ('sx','sy')}
-        magnitude=lambda span:max(map(abs,span))
-        rotation=2. if magnitude(domains['rot'])>=math.pi else _positive(2*math.sin(magnitude(domains['rot'])/2))
-        diagonal_max=max(magnitude(span) for span in diagonal.values())
-        diagonal_deviation=max(abs(v-1) for span in diagonal.values() for v in span)
-        matrix_bound=_positive(_product(rotation,diagonal_max)+diagonal_deviation)
-        stretch_max=max(magnitude(span) for span in inv_stretch.values())
-        stretch_deviation=max(abs(v-1) for span in inv_stretch.values() for v in span)
-        center_radius=math.hypot(*(max(abs(.5-v) for v in domains[name]) for name in ('cx','cy')))
-        displacement_radius=math.hypot(magnitude(domains['dx']),magnitude(domains['dy']))
-        center_bound=_positive(_product(_positive(_product(rotation,stretch_max)+stretch_deviation),center_radius)+displacement_radius)
-        warp_bound=_product(_positive(math.sqrt(2)*2*_f32(.0035)),magnitude(domains['warp']))
-        terms={'translation_and_center':center_bound,'centered_geometry':_positive(matrix_bound/math.sqrt(12)),
-               'procedural_warp':warp_bound}
-        if matrix_bound>0 and terms['centered_geometry']==0:raise ValueError('geometry displacement quotient underflows')
+        terms=displacement_terms(domains,inv_z)
         coefficients=None;mean=None;controls=None
         if radial is None and all(span[0]==span[1] for span in domains.values()):
             controls={name:span[0] for name,span in domains.items()};p=controls
@@ -95,3 +78,25 @@ def native_warp_displacement(analysis,transport,*,radial_zoom=None):
     except (ValueError,OverflowError,ZeroDivisionError) as error:
         result['unknown_reasons'].append(str(error))
     return result
+
+
+def displacement_terms(domains,inv_z):
+    inv_stretch={}
+    for name in ('sx','sy'):
+        inv_stretch[name]=sorted(1/v for v in domains[name])
+    diagonal={name:_product_span(inv_z,inv_stretch[name]) for name in ('sx','sy')}
+    magnitude=lambda span:max(map(abs,span))
+    rotation=2. if magnitude(domains['rot'])>=math.pi else _positive(2*math.sin(magnitude(domains['rot'])/2))
+    diagonal_max=max(magnitude(span) for span in diagonal.values())
+    diagonal_deviation=max(abs(v-1) for span in diagonal.values() for v in span)
+    matrix_bound=_positive(_product(rotation,diagonal_max)+diagonal_deviation)
+    stretch_max=max(magnitude(span) for span in inv_stretch.values())
+    stretch_deviation=max(abs(v-1) for span in inv_stretch.values() for v in span)
+    center_radius=math.hypot(*(max(abs(.5-v) for v in domains[name]) for name in ('cx','cy')))
+    displacement_radius=math.hypot(magnitude(domains['dx']),magnitude(domains['dy']))
+    center_bound=_positive(_product(_positive(_product(rotation,stretch_max)+stretch_deviation),center_radius)+displacement_radius)
+    warp_bound=_product(_positive(math.sqrt(2)*2*_f32(.0035)),magnitude(domains['warp']))
+    terms={'translation_and_center':center_bound,'centered_geometry':_positive(matrix_bound/math.sqrt(12)),
+           'procedural_warp':warp_bound}
+    if matrix_bound>0 and terms['centered_geometry']==0:raise ValueError('geometry displacement quotient underflows')
+    return terms

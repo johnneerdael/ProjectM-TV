@@ -5440,6 +5440,48 @@
         },
         "activity": {
           "$ref": "#/$defs/sourceActivityMechanisms"
+        },
+        "native_spatial_displacement": {
+          "type": "object",
+          "required": [
+            "policy",
+            "status",
+            "uniform_across_vertices",
+            "control_domains",
+            "rms_upper_bound_terms",
+            "conditions"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-spatial-control-displacement-v1"
+            },
+            "status": {
+              "enum": [
+                "unknown",
+                "not_contributing",
+                "not_required",
+                "bounded_spatial_sampling_displacement"
+              ]
+            },
+            "uniform_across_vertices": {
+              "const": false
+            },
+            "control_domains": {
+              "type": "object"
+            },
+            "rms_upper_bound_terms": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "complete_sampling_map_area_ratio": {
+              "type": "null"
+            },
+            "visible_motion_speed": {
+              "type": "null"
+            }
+          }
         }
       }
     },
@@ -6390,6 +6432,22 @@
                       },
                       "runtime_binding_verified": {
                         "const": false
+                      }
+                    }
+                  },
+                  "spatial_native_lookup_transport": {
+                    "type": "object",
+                    "required": [
+                      "native_mesh_contribution",
+                      "rms_lookup_displacement_uv_upper_bound_terms",
+                      "uniform_across_vertices"
+                    ],
+                    "properties": {
+                      "uniform_across_vertices": {
+                        "const": false
+                      },
+                      "visible_screen_speed": {
+                        "type": "null"
                       }
                     }
                   }

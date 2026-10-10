@@ -42,13 +42,7 @@ def native_radial_zoom(transport):
         z,e=[row['native_float32_endpoint_domain'] for row in selected]
         if z is None or e is None or z[0]<=0 or e[0]<=0:raise ValueError('zoom/zoomexp lack positive finite native domains')
         rmax=result['nominal_radius_domain'][1]
-        power=_outward([math.pow(base,exponent) for base in e for exponent in (-1,2*rmax-1)])
-        for value in power:
-            if _f32(value)==0:raise ValueError('native inner power endpoint underflows')
-        factors=_outward([math.pow(base,exponent) for base in z for exponent in power])
-        for value in factors:
-            if _f32(value)==0 or _f32(1/value)==0:raise ValueError('native power/reciprocal endpoint underflows')
-        tangent=_outward([1/v for v in factors])
+        power,factors,tangent=radial_scale_domains(z,e,rmax)
         logs_e=[math.log(v) for v in e];logs_z=[math.log(v) for v in z]
         derivative=_product_span([2,2],logs_e,logs_z,power)
         fold_term=_product_span([0,rmax],derivative)
@@ -61,3 +55,14 @@ def native_radial_zoom(transport):
     except (ValueError,OverflowError,ZeroDivisionError) as error:
         result['unknown_reasons'].append(str(error))
     return result
+
+
+def radial_scale_domains(z,e,rmax):
+    power=_outward([math.pow(base,exponent) for base in e for exponent in (-1,2*rmax-1)])
+    for value in power:
+        if _f32(value)==0:raise ValueError('native inner power endpoint underflows')
+    factors=_outward([math.pow(base,exponent) for base in z for exponent in power])
+    for value in factors:
+        if _f32(value)==0 or _f32(1/value)==0:raise ValueError('native power/reciprocal endpoint underflows')
+    tangent=_outward([1/v for v in factors])
+    return power,factors,tangent

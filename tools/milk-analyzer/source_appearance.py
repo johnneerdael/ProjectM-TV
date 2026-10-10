@@ -101,7 +101,7 @@ def _expression(field):
         index=len(nodes);ids[id(node)]=index;nodes.append(None)
         detail={key:value for key,value in node.detail.items() if key in {'value','name','field','operator','target_type','reason','index',
             'sampler','canonical_texture','surface','frame','site_index','sampling_policy','coordinate_convention','intrinsic','lod_effect',
-            'numeric_domain','explicit_source_cast','equation_phase','value_binding','native_uniform_role'}}
+            'numeric_domain','explicit_source_cast','equation_phase','value_binding','native_uniform_role','native_mesh_reset_input'}}
         nodes[index]={'op':node.op,'dtype':node.dtype,'args':[visit(arg) for arg in node.args],'detail':detail}
         if node.op.startswith('loop_'):nodes[index]['unresolved_loop_plan']=True
         return index
@@ -538,6 +538,8 @@ def appearance_from_analysis(analysis):
     transport=native_warp_transport(analysis,consumed=consumes_mesh and consumes_feedback)
     radial=native_radial_zoom(transport)
     texture_transfer=texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba'])
+    displacement=native_warp_displacement(analysis,transport,radial_zoom=radial)
+    from source_spatial_displacement import spatial_displacement
     from source_texture_envelopes import texture_colour_envelopes
     from source_nonlinear_colour import nonlinear_texture_colour_bounds
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
@@ -547,7 +549,8 @@ def appearance_from_analysis(analysis):
         'native_warp_recipe':native_warp_recipe(analysis,consumed=consumes_mesh and consumes_feedback),
         'native_warp_transport':transport,
         'native_radial_zoom':radial,
-        'native_warp_displacement':native_warp_displacement(analysis,transport,radial_zoom=radial),
+        'native_warp_displacement':displacement,
+        'native_spatial_displacement':spatial_displacement(analysis,displacement),
         'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),

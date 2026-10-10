@@ -585,3 +585,9 @@ when all required controls have finite uniform domains. The export identifies
 this as a radial envelope rather than an exact affine integral. It preserves
 singular/spatial/negative-power guards and can carry the resulting movement bound
 through supported shader lookups without building an image.
+
+`native_spatial_displacement` adds separate envelopes for supported controls that
+vary across the mesh. It distinguishes native coordinate inputs from persistent
+state and keeps uniform transform results unchanged. A separate spatial lookup
+record can carry the bound into shader sampling. These are conservative source
+movement quantities; they do not establish folds, typical speed or a mood.

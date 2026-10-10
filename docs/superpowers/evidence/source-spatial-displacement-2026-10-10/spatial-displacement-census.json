@@ -1,0 +1,72 @@
+{
+  "presets": 100,
+  "computed": 100,
+  "structured_descriptions": 100,
+  "bounded_spatial_presets": [
+    "EVET - Circling Meta-freeze 1.milk",
+    "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+    "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+    "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+    "Illusion & Rovastar - Decitrip - j4+.milk",
+    "Zylot - Spiral.milk",
+    "Zylot - Funnels (Jelly).milk",
+    "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+    "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+    "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk"
+  ],
+  "bounded_spatial_lookup_presets": [
+    "EVET - Circling Meta-freeze 1.milk",
+    "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+    "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+    "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+    "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk"
+  ],
+  "combined_native_lookup_presets": [
+    "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+    "EVET - Circling Meta-freeze 1.milk",
+    "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+    "ORB - Firelight.milk",
+    "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+    "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+    "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+    "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+    "martin + flexi - lock and release bipolar 02.milk",
+    "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+    "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+    "suksma - amental ruiner broach2.milk",
+    "shifter - liquid circuitry - conjugoth.milk",
+    "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "Geiss - Tadpole Hunter.milk",
+    "404.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+    "goody - woven beads (ps2-0).milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "equidistant from vomit (out of totality).milk",
+    "Waltra - Codex Machine 2.milk",
+    "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+    "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk"
+  ],
+  "new_spatial_lookup_presets": [
+    "EVET - Circling Meta-freeze 1.milk",
+    "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+    "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+    "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+    "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk"
+  ],
+  "new_execution_gaps": [],
+  "spatial_unknown_reasons": {
+    "dx lacks a bounded spatial control domain": 10,
+    "zoom lacks a bounded spatial control domain": 20,
+    "per-vertex control is not a supported pure formula": 6,
+    "persistent/shared input lacks a per-vertex domain proof": 3,
+    "rot lacks a bounded spatial control domain": 6,
+    "sx lacks a bounded spatial control domain": 1,
+    "cx lacks a bounded spatial control domain": 2,
+    "zoomexp lacks a bounded spatial control domain": 1,
+    "spatial radial power domain unresolved": 1
+  }
+}

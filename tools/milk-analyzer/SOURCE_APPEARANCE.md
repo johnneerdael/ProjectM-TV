@@ -2500,3 +2500,33 @@ propagated through a supported shader UV response. Texel alignment, radius/power
 rounding, interpolation, history, forward motion and visible intensity remain
 unverified. The original MilkDrop2 `milkdropfs.cpp` lines 1877–1892 and the current
 native mesh source establish radial zoom before stretch and rotation.
+
+## Spatial native control displacement
+
+`native_spatial_displacement` is a separate descriptor for pure per-vertex
+controls with bounded native reset coordinates. It does not change the uniform
+affine/radial descriptor's status. Native reset input tags distinguish mesh x/y,
+radius and angle from similarly named frame variables, persistent locals and
+shared registers. Only tagged mesh inputs receive coordinate ranges.
+
+Native x/y are aspect-corrected positions within `[0,1]` under positive valid
+viewport aspects. Radius/angle bounds pad float32 `sqrt(2)`/`pi` endpoints outwards;
+target libm/intermediate accuracy beyond that declared padding remains a premise.
+`PerPixelMesh.cpp` lines 282–288 copies these coordinates before per-vertex
+execution; transformed controls are read afterwards. Authored changes use the
+programmed expression, not a new reset-domain assumption. Persistent/shared
+inputs, random/memory effects and unsupported pure formulas retain unknowns.
+
+For all ten controls, source scalar envelopes convert to finite native endpoint
+domains. Positive zoom/exponent and nonzero stretch/reciprocal/warp-scale guards
+still apply. Controls may vary across vertices, so the shared displacement algebra
+uses a pointwise worst-case operator and centre/translation ceiling before
+uniform original-area RMS integration. Correlation can tighten the bound but is
+not assumed. No uniform affine matrix, exact area/Jacobian, fold count, temporal
+smoothness or visible-speed certificate is inferred.
+
+`spatial_native_lookup_transport` separately propagates the spatial displacement
+through supported authored UV response, with uniformity false and aspect inputs
+explicit. Default uniform transport remains unchanged. Native mesh interpolation,
+rounding, texel alignment, history and image prominence remain separate; these
+source envelopes are not automatic mood assignments.
