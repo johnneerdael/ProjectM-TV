@@ -2590,3 +2590,30 @@ for non-affine maps. Native mesh transport is separate. Existing bilinear raw-RG
 gradient coefficients consume these rates with uploaded texture dimensions as
 inputs. Fixed texel contents, declared colour response and filtering are required;
 full feedback evolution, screen motion, visible flashing and moods are unverified.
+
+## Nonlinear feedback colour sensitivity
+
+`feedback_colour_sensitivity` aggregates the existing independent sampled-RGBA
+derivative matrices for raw warp RGB. For each RGB row it sums all four column
+ceilings across main and blur sites. The maximum row sum is
+`maximum_fixed_coordinate_feedback_sample_gain`, in the infinity norm, under the
+declared sample `[0,1]` and finite-input premises. Shared sample identities remain
+shared in the producer graph; distinct sites are conservatively independent.
+
+`maximum_previous_image_colour_gain` additionally requires every active colour
+sample to have valid image-independent coordinate domains, main base-level
+nonmipmapped linear/nearest sampling with repeat/clamp addressing, no active blur
+transfer and no clip/discard. The native frame-wrap selector can choose either
+repeat or clamp; both are nonexpansive for identical coordinates and input images
+under nominal sampling. Unknown addressing stays unresolved. The patched native
+shader wrapper writes fixed output alpha, but all sampled alpha columns remain
+in the gain bound. This is a raw warp operator, before later drawing or storage.
+
+For `.25*pow(GetPixel(uv),2)`, the nominal bound is `.5`; for the unscaled square
+it is `2`. `sufficient_raw_warp_colour_contraction` reports whether the complete
+previous-image bound is below one. False means this sufficient test failed, not
+that amplification or instability is proved. Blur sample gain is separate from
+the unproved blur-to-previous-image transfer; image-driven coordinates and opaque
+paths also keep the previous-image result null. Default and scenario records are
+distinct. Whole feedback contraction, actual persistence/stability and mood
+remain unverified, including when the raw operator has a contraction bound.

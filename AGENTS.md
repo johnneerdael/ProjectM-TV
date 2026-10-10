@@ -1336,3 +1336,12 @@ retain original-domain checks and keep native upload time taint. Skip dependency
 walks only when the taint set is empty; preserve the exact-profile Grind regression
 and fixed traversal budgets. RGB gradient propagation remains conditional on
 filtering/dimensions and fixed texture contents, not feedback or visible intensity.
+
+Nonlinear feedback-colour maintenance: aggregate all sampled RGBA derivative
+columns and feedback sites in RGB infinity norm. Keep fixed-sample gain separate
+from the previous-image operator: require valid image-independent coordinates,
+nonexpansive main sampler policy, no active blur transfer and no clip/discard.
+External lookups can also add image-dependent coordinate response and must pass
+the coordinate guard. Preserve per-row unknowns, source alpha semantics and
+scenario identity; never infer full stored feedback stability, persistence or
+mood from the raw warp sufficient contraction test.

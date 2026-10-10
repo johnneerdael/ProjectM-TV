@@ -5119,6 +5119,9 @@
             }
           }
         },
+        "feedback_colour_sensitivity": {
+          "$ref": "#/$defs/feedbackColourSensitivity"
+        },
         "feedback_envelope": {
           "type": "object",
           "description": "Conditional nominal varying affine sampled-main RGB envelopes, holding coordinates/nonimage inputs fixed. Not native/full-loop/visible persistence certification.",
@@ -6686,6 +6689,34 @@
             "minimum": 0
           }
         }
+      }
+    },
+    "feedbackColourSensitivity": {
+      "type": "object",
+      "required": [
+        "policy", "source_model", "maximum_fixed_coordinate_feedback_sample_gain",
+        "feedback_sample_row_gain_upper_bounds_rgb", "maximum_previous_image_colour_gain",
+        "sufficient_raw_warp_colour_contraction", "whole_feedback_contraction_verified",
+        "actual_feedback_stability", "actual_feedback_persistence", "sample_contributions",
+        "unknown_reasons", "conditions"
+      ],
+      "properties": {
+        "policy": {"const": "source-nonlinear-feedback-colour-sensitivity-v1"},
+        "source_model": {"enum": ["unknown", "partial_feedback_sample_colour_response", "bounded_feedback_sample_colour_response"]},
+        "maximum_fixed_coordinate_feedback_sample_gain": {"type": ["number", "null"], "minimum": 0},
+        "maximum_previous_image_colour_gain": {"type": ["number", "null"], "minimum": 0},
+        "feedback_sample_row_gain_upper_bounds_rgb": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "items": {"type": ["number", "null"], "minimum": 0}
+        },
+        "sufficient_raw_warp_colour_contraction": {"type": ["boolean", "null"]},
+        "whole_feedback_contraction_verified": {"const": false},
+        "actual_feedback_stability": {"type": "null"},
+        "actual_feedback_persistence": {"type": "null"},
+        "sample_contributions": {"type": "array", "items": {"type": "object"}},
+        "unknown_reasons": {"type": "array", "items": {"type": "string"}},
+        "conditions": {"type": "array", "items": {"type": "string"}},
+        "scenario_feedback_colour_sensitivity": {"$ref": "#/$defs/feedbackColourSensitivity"}
       }
     },
     "shaderThresholdReset": {

@@ -568,5 +568,8 @@ def appearance_from_analysis(analysis):
                        'Audio inputs are engine bands/attenuated bands/volume, not isolated instruments or vocals']}
     from source_activity import source_activity
     result['activity']=source_activity(analysis,result)
+    from source_feedback_sensitivity import feedback_colour_sensitivity
+    result['feedback_colour_sensitivity']=feedback_colour_sensitivity(result,
+        warp_contains_clip=analysis.stages['warp'].get('source_contains_clip',False))
     result['record_sha256']=_digest(result)
     return result

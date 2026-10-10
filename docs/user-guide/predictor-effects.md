@@ -606,3 +606,11 @@ has a .06 UV-unit-per-second ceiling with other inputs fixed. JSON keeps this
 separate from native mesh movement and changing texture history. Image-driven
 coordinates, discontinuous maps and unbounded gains stay unresolved; no inverse
 feature velocity or final screen speed is inferred from this ceiling.
+
+The feedback-colour summary now measures how raw warp colour differences can
+propagate through supported nonlinear source math. A scaled colour square can
+dampen differences; an unscaled square has a higher sensitivity ceiling. JSON
+separates fixed sampled-colour sensitivity from a stricter previous-image
+operator bound. Blur transfer, image-driven coordinates, later drawing/storage
+and full feedback history keep explicit uncertainty. A gain above one is not
+proof of wild visuals, and a raw contraction is not a Chill verdict.
