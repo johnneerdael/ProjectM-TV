@@ -1309,7 +1309,7 @@ class _Analysis:
             self.families = [row for row in self.families if row['stage'] != 'mesh_warp']
 
 
-def analyze_families(source, *, profile='gles300', compatibility=None):
+def analyze_families(source, *, profile='gles300', compatibility=None,input_scenario=None):
     """Return JSON mechanism evidence from a parsed source; never render or run it.
 
     Missing compatibility preserves conditional source mechanisms. Bound rejected
@@ -1324,10 +1324,14 @@ def analyze_families(source, *, profile='gles300', compatibility=None):
         raise ValueError('supported target profile required')
     if compatibility is not None and not isinstance(compatibility, dict):
         raise ValueError('compatibility dictionary required')
+    if input_scenario is not None:
+        from source_input_scenario import validate_scenario
+        input_scenario=validate_scenario(input_scenario)
     work_cache = {}
     token = _CACHE.set(work_cache)
     try:
         analysis = _Analysis(source, profile, compatibility)
+        analysis.input_scenario=input_scenario
         budget_exhausted = False
         phases = [('equations', analysis.main_equations), ('drawing', analysis.primitives),
                   ('warp_', lambda: analysis.shader('warp', 'warp_')),
@@ -1371,5 +1375,6 @@ def analyze_families(source, *, profile='gles300', compatibility=None):
                        'Unrecognized live forms are not proof of family absence',
                        'No waveform, shader-field raster, feedback sequence or audio signal is executed',
                        'Source locations identify sections, not token-exact motif spans']}
+    if input_scenario is not None:record['input_scenario']=input_scenario
     record['record_sha256'] = _digest(record)
     return record

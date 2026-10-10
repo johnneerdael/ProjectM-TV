@@ -443,3 +443,11 @@ numbers; unrestricted audio inputs keep those estimates unknown. A known
 displacement bound can survive an unknown frequency. These describe texture
 coordinates, so small extent alone does not establish slow movement or Chill
 eligibility; temporal changes and feedback remain separate.
+
+For a declared test condition, the source exporter accepts `--input-scenario`
+with a JSON file containing audio-band intervals and optional shader-canvas
+dimensions. It adds separate conditional ripple bounds and retains the default
+description. These are caller assumptions, not measured music or genre ranges.
+See the [technical input-scenario contract](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md#opt-in-declared-input-scenarios)
+for the JSON format and identity rules. Canvas dimensions must describe what
+the shader sees; Native4K output can use an authored canvas of a different size.

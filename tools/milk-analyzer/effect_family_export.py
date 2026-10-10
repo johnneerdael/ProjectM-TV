@@ -24,7 +24,7 @@ def loaded_model_hashes():
     return models
 
 
-def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None):
+def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None,input_scenario=None):
     """Return (stable record, cache_hit); the only native operation is parsing."""
     path=Path(path);reader=Path(reader).resolve(strict=True)
     raw=path.read_bytes();source_sha=hashlib.sha256(raw).hexdigest()
@@ -38,6 +38,12 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
               'reader_sha256':file_hash(reader),'model_modules':models,
               'profile':profile,'compatibility':compatibility,
               'compile_manifest_sha256':None if manifest is None else manifest['record_sha256']}
+    if input_scenario is not None:
+        from source_input_scenario import validate_scenario
+        scenario=validate_scenario(input_scenario)
+        input_scenario={k:scenario[k] for k in ('schema_version','name','audio_band_ranges')}
+        if scenario['shader_canvas_size'] is not None:input_scenario['shader_canvas_size']=scenario['shader_canvas_size']
+        identity['input_scenario_sha256']=scenario['record_sha256']
     key=digest(identity)
     cached=None if cache is None else Path(cache)/(key+'.json')
     if cached is not None and cached.is_file():
@@ -57,7 +63,7 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
     if manifest is not None:
         from source_compile_manifest import compatibility_from_manifest
         compatibility,compile_evidence=compatibility_from_manifest(manifest,source)
-    analysis=analyze_families(source,profile=profile,compatibility=compatibility)
+    analysis=analyze_families(source,profile=profile,compatibility=compatibility,input_scenario=input_scenario)
     if model_file_hashes()!=models or file_hash(reader)!=identity['reader_sha256'] or file_hash(path)!=source_sha:
         raise ValueError('static family model/parser/preset changed during analysis')
     record={'schema_version':1,'export_kind':'preset-effect-families','status':'computed',
@@ -68,6 +74,7 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
                           'engine_archive_sha256':source['parser_inputs']['engine_archive_sha256'],
                           'model_modules':models},'cache_key':key}
     if compile_evidence is not None:record['provenance']['offline_compile_evidence']=compile_evidence
+    if input_scenario is not None:record['provenance']['input_scenario_sha256']=scenario['record_sha256']
     if cached is not None:
         atomic_json(cached,{'cache_key':key,'record':record,'record_sha256':digest(record)})
     return record,False
@@ -82,6 +89,7 @@ def main(argv=None):
     parser.add_argument('--profile',choices=('gles300','glsl330'),default='gles300')
     parser.add_argument('--batch-size',type=int,default=100)
     parser.add_argument('--compile-manifest',type=Path,help='Saved source-bound offline compiler evidence; no runtime certification')
+    parser.add_argument('--input-scenario',type=Path,help='Declared ripple input domains; additional conditional bounds, no observed-input certification')
     args=parser.parse_args(argv)
     try:
         reader=args.reader.resolve(strict=True)
@@ -90,6 +98,11 @@ def main(argv=None):
             from source_compile_manifest import validate_manifest
             raw_manifest=args.compile_manifest.read_bytes();compile_file_sha=hashlib.sha256(raw_manifest).hexdigest()
             compile_manifest=validate_manifest(json.loads(raw_manifest),args.profile)
+        input_scenario=None;scenario_file_sha=None
+        if args.input_scenario is not None:
+            from source_input_scenario import validate_scenario
+            raw_scenario=args.input_scenario.read_bytes();scenario_file_sha=hashlib.sha256(raw_scenario).hexdigest()
+            input_scenario=json.loads(raw_scenario);scenario=validate_scenario(input_scenario)
         if args.source.is_file():
             if args.source.suffix.lower()!='.milk':raise ValueError('MilkDrop source file required')
             cases=[{'relative_path':args.source.name,'name':args.source.name,
@@ -105,6 +118,9 @@ def main(argv=None):
                   'profile':args.profile,'source_engine':engine,
                   'simulation':False,'AI_involved':False}
         if compile_manifest is not None:identity['compile_manifest_file_sha256']=compile_file_sha
+        if input_scenario is not None:
+            identity['input_scenario_file_sha256']=scenario_file_sha
+            identity['input_scenario_sha256']=scenario['record_sha256']
         cache=args.cache or args.output/'cache'
         with RunStore(args.output,identity,cases,batch_size=args.batch_size) as store:
             pending=store.pending()
@@ -115,9 +131,11 @@ def main(argv=None):
                     raise ValueError('static analysis identity changed; start a new run after edits finish')
                 if args.compile_manifest is not None and file_hash(args.compile_manifest)!=compile_file_sha:
                     raise ValueError('offline compile manifest changed during run')
+                if args.input_scenario is not None and file_hash(args.input_scenario)!=scenario_file_sha:
+                    raise ValueError('input scenario changed during run')
                 started=time.perf_counter();hit=False
                 try:
-                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest)
+                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest,input_scenario=input_scenario)
                 except Exception as error:
                     result={'export_kind':'preset-effect-families',
                             'status':'timeout' if isinstance(error,subprocess.TimeoutExpired) else 'error','analysis':None,
@@ -125,6 +143,8 @@ def main(argv=None):
                             'uses_rendered_reference':False,'appearance_accuracy_verified':False}
                 if args.compile_manifest is not None and file_hash(args.compile_manifest)!=compile_file_sha:
                     raise ValueError('offline compile manifest changed during preset export')
+                if args.input_scenario is not None and file_hash(args.input_scenario)!=scenario_file_sha:
+                    raise ValueError('input scenario changed during preset export')
                 store.complete(case,result)
                 print(json.dumps({'event':'preset_completed','preset':case['name'],'status':result['status'],
                                   'cache_hit':hit,'elapsed_seconds':round(time.perf_counter()-started,6),

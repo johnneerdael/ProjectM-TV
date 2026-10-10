@@ -5554,6 +5554,38 @@
               "const": false
             }
           }
+        },
+        "scenario_deformation_envelope": {
+          "type": "object",
+          "description": "Additional caller-declared input assumptions; unconstrained envelope remains unchanged.",
+          "properties": {
+            "input_scenario_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "maximum_absolute_displacement_uv": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              }
+            },
+            "jacobian_perturbation_infinity_norm_upper_bound": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "native_numeric_certified": {
+              "const": false
+            }
+          }
         }
       }
     }

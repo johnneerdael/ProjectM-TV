@@ -1,0 +1,233 @@
+{
+  "basis": "caller-declared input scenario; not captured music, genre distribution or native runtime qualification",
+  "presets": 100,
+  "all_unconstrained_descriptions_unchanged": true,
+  "no_source_gap_or_budget_regressions": true,
+  "source_and_zip_joins_verified": true,
+  "scenario": {
+    "schema_version": 1,
+    "policy": "declared-source-input-scenario-v1",
+    "name": "declared-bands-zero-to-two-canvas854x480",
+    "audio_band_ranges": {
+      "bass": [
+        0.0,
+        2.0
+      ],
+      "bass_att": [
+        0.0,
+        2.0
+      ],
+      "mid": [
+        0.0,
+        2.0
+      ],
+      "mid_att": [
+        0.0,
+        2.0
+      ],
+      "treb": [
+        0.0,
+        2.0
+      ],
+      "treb_att": [
+        0.0,
+        2.0
+      ]
+    },
+    "shader_canvas_size": [
+      854,
+      480
+    ],
+    "scalar_input_domains": {
+      "bass": [
+        0.0,
+        2.0
+      ],
+      "_c3.x": [
+        0.0,
+        2.0
+      ],
+      "bass_att": [
+        0.0,
+        2.0
+      ],
+      "_c4.x": [
+        0.0,
+        2.0
+      ],
+      "mid": [
+        0.0,
+        2.0
+      ],
+      "_c3.y": [
+        0.0,
+        2.0
+      ],
+      "mid_att": [
+        0.0,
+        2.0
+      ],
+      "_c4.y": [
+        0.0,
+        2.0
+      ],
+      "treb": [
+        0.0,
+        2.0
+      ],
+      "_c3.z": [
+        0.0,
+        2.0
+      ],
+      "treb_att": [
+        0.0,
+        2.0
+      ],
+      "_c4.z": [
+        0.0,
+        2.0
+      ],
+      "_c7.x": [
+        854.0,
+        854.0
+      ],
+      "_c7.y": [
+        480.0,
+        480.0
+      ],
+      "_c7.z": [
+        0.0011709601385518909,
+        0.0011709601385518909
+      ],
+      "_c7.w": [
+        0.0020833334419876337,
+        0.0020833334419876337
+      ]
+    },
+    "observed_runtime_inputs": false,
+    "runtime_binding_verified": false,
+    "bound_scope": "additional ripple deformation envelope only; unconstrained descriptions preserved",
+    "conditions": [
+      "Caller-declared input assumptions, not measured or guaranteed music/genre/audience ranges",
+      "Band intervals constrain actual engine inputs; waveform reachability and cross-band correlation are unverified",
+      "Shader canvas dimensions are explicit authored-canvas uniforms, not inferred from display/output pixels",
+      "Native canvas/selection/allocation/profile must match the declaration before native appearance credit"
+    ],
+    "record_sha256": "7b1313997f184498dcb19c34a8b28ee08207ad2a4cef93110b7cfd4aa47d68bf"
+  },
+  "scenario_file_sha256": "4335a689b07878b15095fd850d34e341360f5d82c5e2ed26730e76b250fbf337",
+  "counts": {
+    "scenario_maps": 7,
+    "complete_scenario_displacement": 7,
+    "new_complete_displacement": 4,
+    "scenario_gradient_bounds": 7,
+    "new_scenario_gradient_bounds": 4,
+    "scenario_identity_no_fold_sufficient": 2
+  },
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "compile_manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "zip_sha256": "e1019051fa524009daed8efc7f8df5b676be468e27836d8320a4b31b7f84b820",
+  "sum_export_preset_seconds": 39.405804,
+  "maximum_export_preset_seconds": 2.471651,
+  "rows": [
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "scenario_maps": [
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "canonical_texture": "blur3",
+          "displacement": [
+            0.00999999978,
+            0.00999999978
+          ],
+          "jacobian_bound": 3.8999999142,
+          "identity_no_fold_sufficient": false
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "canonical_texture": "main",
+          "displacement": [
+            0.00999999978,
+            0.00999999978
+          ],
+          "jacobian_bound": 3.8999999142,
+          "identity_no_fold_sufficient": false
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "canonical_texture": "blur1",
+          "displacement": [
+            0.00999999978,
+            0.00999999978
+          ],
+          "jacobian_bound": 3.8999999142,
+          "identity_no_fold_sufficient": false
+        }
+      ]
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "scenario_maps": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "canonical_texture": "blur2",
+          "displacement": [
+            0.012000000215999994,
+            0.012000000215999994
+          ],
+          "jacobian_bound": 0.08400000151199999,
+          "identity_no_fold_sufficient": true
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "canonical_texture": "main",
+          "displacement": [
+            0.012000000215999994,
+            0.012000000215999994
+          ],
+          "jacobian_bound": 0.08400000151199999,
+          "identity_no_fold_sufficient": true
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "scenario_maps": [
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "canonical_texture": "main",
+          "displacement": [
+            0.009367681108415129,
+            0.016666667535901073
+          ],
+          "jacobian_bound": 5.693333715663813,
+          "identity_no_fold_sufficient": false
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "canonical_texture": "blur1",
+          "displacement": [
+            0.009367681108415129,
+            0.016666667535901073
+          ],
+          "jacobian_bound": 5.693333715663813,
+          "identity_no_fold_sufficient": false
+        }
+      ]
+    }
+  ]
+}

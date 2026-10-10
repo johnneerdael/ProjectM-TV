@@ -4,12 +4,12 @@ from fractions import Fraction
 from shader_fields import Field
 
 
-def coefficient_envelope(field):
+def coefficient_envelope(field,*,input_domains=None):
     from source_control_bounds import scalar_value_envelope
     from source_appearance import _canonical_lane
     from source_native_warp import _f32
     from field_math import SWIZZLE
-    memo={};active=set();domains={};assumptions=set()
+    memo={};active=set();domains=dict(input_domains or {});assumptions=set();derived=set()
     def project(original,depth=0):
         key=id(original)
         if key in memo:return memo[key][1]
@@ -26,16 +26,17 @@ def coefficient_envelope(field):
                 args=tuple(project(v,depth+1) for v in node.args)
                 if node.op=='narrow' and node.detail.get('numeric_domain')=='shader-float32':
                     report=scalar_value_envelope(args[0],input_domains=domains);span=report['nominal_value_range']
-                    assumptions.update(set(report['assumed_finite_input_names'])-domains.keys())
+                    assumptions.update(set(report['assumed_finite_input_names'])-derived)
                     if span is None:raise ValueError('ripple native upload range unresolved')
                     name=':ripple-coefficient-upload-'+str(len(memo));domains[name]=[_f32(v) for v in span]
+                    derived.add(name)
                     result=Field('input',dtype='float',detail={'name':name})
                 else:result=Field(node.op,args,node.dtype,node.detail)
         finally:active.remove(key)
         memo[key]=(original,result);return result
     try:
         r=scalar_value_envelope(project(field),input_domains=domains)
-        r['assumed_finite_input_names']=sorted(assumptions|set(r['assumed_finite_input_names'])-domains.keys())
+        r['assumed_finite_input_names']=sorted(assumptions|set(r['assumed_finite_input_names'])-derived)
         return r
     except (ValueError,RecursionError,OverflowError,IndexError) as error:
         r=scalar_value_envelope(Field('unknown',detail={'reason':str(error)}));r['unknown_reasons']=[str(error)];return r
@@ -50,7 +51,7 @@ def _upper(value):
     return result
 
 
-def deformation_envelope(waves,*,basis,identity_baseline):
+def deformation_envelope(waves,*,basis,identity_baseline,input_domains=None):
     amp_reports=[];gradient_reports=[];displacement=[Fraction(0),Fraction(0)];jacobian=[Fraction(0),Fraction(0)]
     def magnitude(report):
         span=report['nominal_value_range']
@@ -60,8 +61,8 @@ def deformation_envelope(waves,*,basis,identity_baseline):
         if a==0 or b==0:return Fraction(0)
         return None if a is None or b is None else a*b
     for w in waves:
-        amps=[coefficient_envelope(v) for v in w['amplitude']]
-        gradients=[coefficient_envelope(v) for v in w['gradient']]
+        amps=[coefficient_envelope(v,input_domains=input_domains) for v in w['amplitude']]
+        gradients=[coefficient_envelope(v,input_domains=input_domains) for v in w['gradient']]
         amp_reports.append(amps);gradient_reports.append(gradients)
         k=sum((magnitude(r) for r in gradients if magnitude(r) is not None),Fraction(0))
         if any(magnitude(r) is None for r in gradients):k=None

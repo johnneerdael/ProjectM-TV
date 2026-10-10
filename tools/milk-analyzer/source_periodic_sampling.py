@@ -207,6 +207,11 @@ def oscillatory_displacement(field,analysis):
             jacobian_perturbation_infinity_norm_upper_bound=bound,
             sufficient_no_fold_of_unwrapped_nominal_map=bound<1 if bound is not None and matrix==identity else None,
             deformation_envelope=envelopes)
+        scenario=getattr(analysis,'input_scenario',None)
+        if scenario is not None:
+            result['scenario_deformation_envelope']=deformation_envelope([waves[w['id']] for w in rows],basis=basis,
+                identity_baseline=matrix==identity,input_domains=scenario['scalar_input_domains'])
+            result['scenario_deformation_envelope']['input_scenario_sha256']=scenario['record_sha256']
     except (ValueError,RecursionError,OverflowError,IndexError) as error:result['unknown_reasons']=[str(error)]
     result['phase_gradient_column_order']=list(COLUMNS)
     return result

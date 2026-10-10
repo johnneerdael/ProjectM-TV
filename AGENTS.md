@@ -1156,3 +1156,11 @@ amplitude/gradient bounds round outward; overflow withholds only the affected
 bound and positive underflow cannot certify zero. Mixed/radial or nonidentity
 maps do not receive an identity UV no-fold claim. Extent/spatial deformation
 does not establish time-rate, perceived intensity, feedback or a mood.
+
+Declared source-input scenarios are opt-in through effect_family_export
+--input-scenario. Validate named engine audio intervals and explicit shader
+canvas inputs; do not infer canvas from display size or bind EEL custom vol
+registers. Preserve unconstrained descriptors and add separate ripple scenario
+bounds. Bind cache/run records to semantic/raw-file hashes and reject changed
+files during runs. These declarations are assumptions, never observed runtime
+inputs, music/genre guarantees or native appearance certification.

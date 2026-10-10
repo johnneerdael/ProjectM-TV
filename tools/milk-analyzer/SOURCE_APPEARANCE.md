@@ -1804,3 +1804,48 @@ representable upper bound. Mixed/radial bases withhold UV Jacobian certificates.
 finite perturbation bound below1. Failing the condition is not a fold proof.
 `visible_motion_intensity`, actual folds, temporal rates/continuity, prominence,
 full feedback behavior and mood remain separate open work.
+
+## Opt-in declared input scenarios
+
+The source exporter accepts `--input-scenario FILE.json`. With no scenario,
+source descriptions retain their unconstrained input assumptions. A scenario
+adds `analysis.input_scenario` and each supported ripple's separate
+`scenario_deformation_envelope`, leaving the ordinary `deformation_envelope`
+and all source programs intact. Currently this scenario affects only ripple
+deformation bounds, not every field or the existing47-field numerical export.
+
+Example of a **declared mathematical test domain**, not measured music:
+
+```json
+{
+  "schema_version": 1,
+  "name": "bounded-band-example",
+  "audio_band_ranges": {
+    "bass": [0, 2], "mid": [0, 2], "treb": [0, 2],
+    "bass_att": [0, 2], "mid_att": [0, 2], "treb_att": [0, 2]
+  },
+  "shader_canvas_size": [854, 480]
+}
+```
+
+Intervals are finite, ordered and nonnegative. Supported names are the eight
+engine band/attenuated/volume inputs. EEL aliases apply only to its six native
+band variables; `vol`/`vol_att` bind packed shader inputs, never custom EEL
+registers of those names. Arbitrary state/Q/source-variable domains are rejected.
+Cross-band correlations, waveform reachability and actual music distributions
+remain unverified. Relative bands depend on running averages and clock steps;
+the producer does not label0–2as a natural/global range.
+
+`shader_canvas_size` supplies actual declared shader-canvas width/height, not
+physical display or render-target dimensions. `_c7` dimensions and reciprocals
+follow target float32 conversion. Native4K can retain an authored canvas, so
+inferring these inputs from the screen resolution would be incorrect. This
+declaration does not verify allocation, target selection or runtime binding.
+
+Validated scenarios have a semantic `record_sha256`; each extra envelope cites
+it. CLI run manifests also bind the raw scenario-file hash, checking the file
+before/after every preset. Cache keys separate scenario/default results. The
+API copies validated request data before reading a preset. Changing the file
+during a run aborts instead of mixing assumptions. A scenario record explicitly
+sets `observed_runtime_inputs:false` and `runtime_binding_verified:false`.
+Conditional test-domain bounds are not measured or calibrated mood/genre scores.
