@@ -614,3 +614,11 @@ separates fixed sampled-colour sensitivity from a stricter previous-image
 operator bound. Blur transfer, image-driven coordinates, later drawing/storage
 and full feedback history keep explicit uncertainty. A gain above one is not
 proof of wild visuals, and a raw contraction is not a Chill verdict.
+
+The source model also has a frozen 2,000-preset random coverage audit from the
+9,606-file pack (2026-10-10). It completed in about eight minutes with four CPU
+workers, without simulation or frame inspection: 1,995 structured descriptions
+and five explicit traversal-budget fallbacks. Specific gaps and conditional trait
+counts are tracked separately from export success. This larger pool prioritizes
+common missing calculations; it does not establish a visual or mood accuracy rate.
+The 100 original controls remain available for focused regression comparisons.

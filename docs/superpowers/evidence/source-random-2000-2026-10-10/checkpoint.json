@@ -1,0 +1,15 @@
+{
+  "producer_model_commit": "c564bda0fb53e530dee427d0e992ee292dfb9f1c",
+  "source_model_changed": false,
+  "report_sha256": "9bca5ca2bfd02b7fbed039b81e8cdcb5e3db5a4fbdd6a9ccff385c5087b2f0fd",
+  "selection_sha256": "8fc5ce167191bb53d0d52564dae47083f84bb73b97146db7dbf4c357e223fdab",
+  "run_identity": "ab9686ba6593d5c735c61c274262ef2c923b8cf9eba7b1c56660cbee26e1fc9d",
+  "sample_size": 2000,
+  "structured": 1995,
+  "schema_valid_including_unknown_fallbacks": 2000,
+  "verified_archive_pairs": 2000,
+  "batches": 20,
+  "simulated_frames": 0,
+  "reported_gaps_are_descriptor_specific": true,
+  "accuracy_or_mood_verified": false
+}
