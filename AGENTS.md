@@ -1275,3 +1275,10 @@ inputs/coordinates fixed. Sum Lipschitz columns for simultaneous changes, not
 signed Jacobian cancellation. Ordinary float-width coercions follow typed parts;
 int/bool/native narrow and unresolved vector sample dependencies stay guarded.
 Direct sample colour matrices exclude nested lookup-coordinate chains explicitly.
+
+Nested lookup motion composes per-lane UV gains, linear base-level W/H gradients
+and direct RGB gains as nonnegative dimension polynomials. Actual uploaded sizes
+remain inputs; native aspectXY [0,1] requires positive finite viewport context.
+Keep nonexhaustive/total-bound flags false, preserve quantized/singular/nearest
+guards and 64-site/4096-term budgets. No history, direct coefficient-time or
+complete feedback/mood claim follows from modeled path terms.

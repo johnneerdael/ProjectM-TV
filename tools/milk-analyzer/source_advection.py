@@ -10,7 +10,7 @@ def sampled_coordinate_response(field):
     from source_polar import _nodes
     result={'policy':'source-direct-sampled-coordinate-response-v1','source_model':'unknown',
         'base_matrix_uv4':None,'offset_uv':None,'offset_expressions':None,
-        'sample_contributions':[],'direct_sample_gain_norm':None,
+        'sample_contributions':[],'direct_sample_gain_norm':None,'direct_sample_count':None,
         'conditional_sample_offset_range_uv':None,
         'range_premise':'each directly sampled RGBA component independently lies in [0,1]; not certified by source',
         'coordinate_sample_dependency':None,'full_coordinate_sensitivity':None,
@@ -22,6 +22,7 @@ def sampled_coordinate_response(field):
         'uses_rendered_images':False,'uses_equation_execution':False,'uses_shader_execution':False}
     try:
         replaced,samples=substitute_sample_values(field)
+        result['direct_sample_count']=len(samples)
         matrix,offsets=_affine_basis_map(replaced,('_uv',)+tuple(name for name,sample in samples))
         contributions=[];weights=[];dependency=False
         for index,(name,sample) in enumerate(samples):

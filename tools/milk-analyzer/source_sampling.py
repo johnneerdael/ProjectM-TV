@@ -189,6 +189,8 @@ def sampling_geometry(analysis):
             result['folded_coordinate_map']=folded_coordinate_map(node.args[0],analysis)
             from source_sampling_motion import sampling_motion
             result['sampling_motion']=sampling_motion(result,node.args[0],input_scenario=getattr(analysis,'input_scenario',None))
+            from source_nested_sampling import coordinate_sample_response
+            result['coordinate_sample_response']=coordinate_sample_response(node.args[0],result['sampled_coordinate_response'],input_scenario=getattr(analysis,'input_scenario',None))
             maps.append(result)
         stages[stage]=maps;statuses[stage]='conditional custom source'
     return {'policy':'source-affine-sampling-geometry-v1','stages':stages,'stage_status':statuses,

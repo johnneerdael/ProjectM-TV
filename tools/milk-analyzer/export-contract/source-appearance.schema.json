@@ -6201,7 +6201,8 @@
             "status",
             "feedback_step_components",
             "geometry_speed_bounds",
-            "texture_motion_bounds"
+            "texture_motion_bounds",
+            "nested_texture_motion"
           ],
           "properties": {
             "value": {
@@ -6282,6 +6283,9 @@
                   }
                 }
               }
+            },
+            "nested_texture_motion": {
+              "$ref": "#/$defs/nestedTextureMotion"
             }
           }
         }
@@ -6339,6 +6343,94 @@
                       "null"
                     ],
                     "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "nestedTextureMotion": {
+      "type": "object",
+      "required": [
+        "policy",
+        "chains",
+        "paths_are_exhaustive",
+        "full_sampling_motion_bound_verified",
+        "conditions"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-nested-texture-motion-v1"
+        },
+        "paths_are_exhaustive": {
+          "const": false
+        },
+        "full_sampling_motion_bound_verified": {
+          "const": false
+        },
+        "visible_rgb_rate_per_second": {
+          "type": "null"
+        },
+        "chains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "stage",
+              "path_sample_site_indices",
+              "path_samplers",
+              "rgb_rate_polynomial",
+              "visible_rgb_rate_per_second",
+              "scope"
+            ],
+            "properties": {
+              "visible_rgb_rate_per_second": {
+                "type": "null"
+              },
+              "rgb_rate_polynomial": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "coefficient",
+                      "dimension_factors"
+                    ],
+                    "properties": {
+                      "coefficient": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "dimension_factors": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "stage",
+                            "sample_site_index",
+                            "sampler",
+                            "axis"
+                          ],
+                          "properties": {
+                            "axis": {
+                              "enum": [
+                                "width",
+                                "height"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }

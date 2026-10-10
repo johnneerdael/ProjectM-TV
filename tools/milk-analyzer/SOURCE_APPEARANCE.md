@@ -2321,3 +2321,45 @@ term. No coefficient or null total-rate field claims that nested influence is ze
 See [Microsoft's HLSL lerp definition](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-lerp)
 for the mixture formula. The native typed coercion rules and original MilkDrop2
 shader expressions determine which lanes reach that formula.
+
+## Nested sample-coordinate motion chains
+
+`sampling_geometry.stages.*.coordinate_sample_response` now supplies a 2-by-4
+UV response ceiling matrix for each directly nested sample. Each column varies
+one inner RGBA lane, holding other sample lanes and native/time/audio/spatial
+inputs fixed. Coordinate products, supported powers and native-upload envelopes
+use the existing coefficient projection/calculus. Quantized sample-dependent
+coefficients, singular arithmetic and unsupported paths retain null ceilings.
+Native aspectX/Y have explicit `[0,1]` domain premises under positive finite
+viewport dimensions: source34 `ProjectM.cpp` lines 675–676 computes one or the
+ratio of the smaller dimension to the larger, and `MilkdropShader.cpp` binds `_c0`.
+Original MilkDrop2 `milkdropfs.cpp` lines 3952–3967 uses the same aspect rule.
+This is a source-context premise, not an observed binding or screen size.
+
+`activity.motion_intensity.nested_texture_motion.chains` composes those edges
+with linear base-level sampling and direct RGB response. If a root lookup moves
+with axis ceilings `u,v`, its sampled component rate is bounded by `Wroot*u +
+Hroot*v`. The outer lookup's UV response matrix converts that sampled change into
+two coordinate-rate ceilings; multiplying by `Wouter,Houter` gives an outer sampled
+component ceiling. Continue through the finite lookup DAG, then multiply by each
+output RGB row's summed independent sampled-lane response ceilings.
+
+The result is a nonnegative polynomial, exported as terms with `coefficient` and
+`dimension_factors` identifying stage, sample site, sampler/texture and width/height.
+Actual uploaded dimensions remain caller inputs. For a root moving at `.1 UV/s`
+on x and an outer offset `.2*root.rg`, each RGB path contributes
+`.02*Wroot*Wouter + .02*Wroot*Houter` under the declared image/filter premises.
+Three lookups produce terms with three dimension factors. Distinct paths are
+summed conservatively; cancellation or correlation is not assumed.
+
+Only supported positive lookup-motion paths are exported. `paths_are_exhaustive`
+and `full_sampling_motion_bound_verified` are false. Sum terms for modeled
+contributions; omitted/unsupported paths, direct time variation in coefficients
+or colour, changing textures/history, native mesh and later passes must be added
+before any total bound. Nearest/mipmap/unresolved filters receive no smooth
+bilinear chain credit. Cycles are excluded and explicit 64-site/4096-term budgets
+retain incomplete outcomes. This does not establish typical motion or a mood.
+
+References remain the shader and bilinear filtering guides above; chain products
+use exact rational coefficients followed by outward finite conversion. No frame
+is constructed and no sample value or image is observed.

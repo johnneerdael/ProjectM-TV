@@ -552,3 +552,10 @@ RGBA-to-RGB gain matrix per direct sample, and identifies when those coefficient
 are used for texture-motion bounds. A sample used only to move another texture
 lookup still needs the nested gradient calculation; its absence from the direct
 RGB matrix does not mean it has no visible influence.
+
+`activity.motion_intensity.nested_texture_motion` now follows supported nested
+lookup paths. Its formulas show how an inner image can move an outer lookup and
+therefore change output colour. Callers supply each texture's uploaded width and
+height. The paths remain conditional and incomplete: direct colour changes,
+changing feedback images and unsupported filters need separate treatment before
+a whole-image rate or mood can be inferred.

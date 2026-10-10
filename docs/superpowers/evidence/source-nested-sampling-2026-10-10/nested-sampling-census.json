@@ -1,0 +1,1985 @@
+{
+  "presets": 100,
+  "computed": 100,
+  "structured_descriptions": 100,
+  "coordinate_response_presets": [
+    "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+    "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+    "EVET - Circling Meta-freeze 1.milk",
+    "suksma - prigogine quantum foam self-organizer.milk",
+    "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+    "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+    "cortex meat - adm affect non.milk",
+    "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+    "$$$ Royal - Mashup (161).milk",
+    "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+    "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+    "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+    "Flexi - splatter effects 11 halucination #1.milk",
+    "suksma - wait for it - 1-ret.milk",
+    "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+    "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+    "flexi - grind my glitch up [191].milk",
+    "Flexi - hue burst.milk",
+    "Illusion & Rovastar - Decitrip - j4+.milk",
+    "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+    "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+    "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+    "suksma - amental ruiner broach2.milk",
+    "shifter - liquid circuitry - conjugoth.milk",
+    "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+    "suksma - bonobo - absurd.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "suksma - out of fuckus newband plays harry partch - shf.milk",
+    "cpe domains flacc - portable massation segway nz+.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "$$$ Royal - Mashup (39).milk",
+    "bowel trounce dumring.milk",
+    "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+    "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "goody - woven beads (ps2-0).milk",
+    "suksma - dotes hostile undertake - graphic novel fists.milk",
+    "$$$ Royal - Mashup (389).milk",
+    "Flexi - alien web bouncer [39].milk",
+    "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "equidistant from vomit (out of totality).milk",
+    "greazed up humility.milk",
+    "suksma - tech ed lacquer sinus raw.milk",
+    "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+    "Waltra - Codex Machine 2.milk",
+    "suksma - to finally feel like a cyborg.milk"
+  ],
+  "positive_coordinate_response_presets": [
+    "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+    "suksma - prigogine quantum foam self-organizer.milk",
+    "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+    "cortex meat - adm affect non.milk",
+    "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+    "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+    "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+    "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+    "Flexi - hue burst.milk",
+    "Illusion & Rovastar - Decitrip - j4+.milk",
+    "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+    "shifter - liquid circuitry - conjugoth.milk",
+    "suksma - bonobo - absurd.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "cpe domains flacc - portable massation segway nz+.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "bowel trounce dumring.milk",
+    "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "goody - woven beads (ps2-0).milk",
+    "Flexi - alien web bouncer [39].milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "equidistant from vomit (out of totality).milk",
+    "greazed up humility.milk",
+    "suksma - tech ed lacquer sinus raw.milk",
+    "Waltra - Codex Machine 2.milk"
+  ],
+  "positive_nested_motion_presets": [
+    "goody - woven beads (ps2-0).milk"
+  ],
+  "chain_records": [
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        5,
+        6
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        5,
+        6,
+        8
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq",
+        "sampler_blur1"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        5,
+        7
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.04849439138306022,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        5,
+        7,
+        8
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq",
+        "sampler_blur1"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.008817162149803342,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 5,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        4,
+        6
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        4,
+        6,
+        8
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq",
+        "sampler_blur1"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 6,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        4,
+        7
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.017023599096515483,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    },
+    {
+      "name": "goody - woven beads (ps2-0).milk",
+      "stage": "composite",
+      "path_sample_site_indices": [
+        4,
+        7,
+        8
+      ],
+      "path_samplers": [
+        "sampler_noise_hq",
+        "sampler_noise_hq",
+        "sampler_blur1"
+      ],
+      "input_scenario_sha256": null,
+      "rgb_rate_polynomial": [
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "width"
+              }
+            ]
+          },
+          {
+            "coefficient": 0.003095199863868272,
+            "dimension_factors": [
+              {
+                "stage": "composite",
+                "sample_site_index": 4,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "height"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 7,
+                "sampler": "sampler_noise_hq",
+                "canonical_texture": "noise_hq",
+                "axis": "width"
+              },
+              {
+                "stage": "composite",
+                "sample_site_index": 8,
+                "sampler": "sampler_blur1",
+                "canonical_texture": "blur1",
+                "axis": "height"
+              }
+            ]
+          }
+        ]
+      ],
+      "visible_rgb_rate_per_second": null,
+      "scope": "modeled lookup-motion path; direct time changes in coefficients/colour and texture history remain separate"
+    }
+  ],
+  "new_execution_gaps": [],
+  "budget_reports": []
+}

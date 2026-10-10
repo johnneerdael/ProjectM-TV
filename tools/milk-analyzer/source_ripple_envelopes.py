@@ -4,13 +4,13 @@ from fractions import Fraction
 from shader_fields import Field
 
 
-def coefficient_envelope(field,*,input_domains=None):
-    from source_control_bounds import scalar_value_envelope
+def coefficient_envelope(field,*,input_domains=None,response_inputs=None):
+    from source_control_bounds import scalar_value_envelope,scalar_response_envelope
     from source_appearance import _canonical_lane
     from source_native_warp import _f32
     from field_math import SWIZZLE
-    from effect_families import _parts
-    memo={};active=set();domains=dict(input_domains or {});assumptions=set();derived=set()
+    from effect_families import _parts,_deps
+    memo={};active=set();domains=dict(input_domains or {});assumptions=set();derived=set();tainted=set()
     def project(original,depth=0):
         key=id(original)
         if key in memo:return memo[key][1]
@@ -18,7 +18,11 @@ def coefficient_envelope(field,*,input_domains=None):
         active.add(key)
         try:
             node=_canonical_lane(original)
-            if node.op=='dot' and len(node.args)==2:
+            if node.op=='cast' and node.dtype=='float' and node.detail.get('target_type')=='float' and len(node.args)==1 and node.args[0].dtype in {'float','float2','float3','float4'}:
+                parts=_parts(node.args[0])
+                if not parts or parts[0].dtype!='float':raise ValueError('float coefficient cast lane unresolved')
+                result=project(parts[0],depth+1)
+            elif node.op=='dot' and len(node.args)==2:
                 a,b=map(_parts,node.args)
                 if len(a)!=len(b) or not 1<=len(a)<=4:raise ValueError('coefficient dot dimensions unresolved')
                 result=Field('constant',detail={'value':0.})
@@ -47,16 +51,24 @@ def coefficient_envelope(field,*,input_domains=None):
                     if span is None:raise ValueError('ripple native upload range unresolved')
                     name=':ripple-coefficient-upload-'+str(len(memo));domains[name]=[_f32(v) for v in span]
                     derived.add(name)
+                    dependencies=_deps(args[0])
+                    if response_inputs is not None and (dependencies&set(response_inputs) or dependencies&tainted):tainted.add(name)
                     result=Field('input',dtype='float',detail={'name':name})
                 else:result=Field(node.op,args,node.dtype,node.detail)
         finally:active.remove(key)
         memo[key]=(original,result);return result
     try:
-        r=scalar_value_envelope(project(field),input_domains=domains)
+        selected=project(field)
+        if response_inputs is None:r=scalar_value_envelope(selected,input_domains=domains)
+        else:
+            if _deps(selected)&tainted:raise ValueError('sample-dependent quantized coefficient prevents continuous response')
+            r=scalar_response_envelope(selected,input_names=response_inputs,input_domains=domains)
         r['assumed_finite_input_names']=sorted(assumptions|set(r['assumed_finite_input_names'])-derived)
         return r
     except (ValueError,RecursionError,OverflowError,IndexError) as error:
-        r=scalar_value_envelope(Field('unknown',detail={'reason':str(error)}));r['unknown_reasons']=[str(error)];return r
+        unknown=Field('unknown',detail={'reason':str(error)})
+        r=scalar_value_envelope(unknown) if response_inputs is None else scalar_response_envelope(unknown,input_names=response_inputs)
+        r['unknown_reasons']=[str(error)];return r
 
 
 def _upper(value):
