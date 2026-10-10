@@ -579,3 +579,9 @@ bounds, including sinusoidal deformations and continuous triangular folds. Raw
 fractional seams and image-driven maps remain guarded. The export keeps audio-
 conditioned bounds separate from defaults and does not assume warped UV stays
 inside `[0,1]`. This extends source movement interpretation without sampling frames.
+
+Radial zoom with a non-unit exponent now joins the native displacement envelope
+when all required controls have finite uniform domains. The export identifies
+this as a radial envelope rather than an exact affine integral. It preserves
+singular/spatial/negative-power guards and can carry the resulting movement bound
+through supported shader lookups without building an image.

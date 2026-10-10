@@ -536,6 +536,7 @@ def appearance_from_analysis(analysis):
     from source_radial_zoom import native_radial_zoom
     from source_warp_displacement import native_warp_displacement
     transport=native_warp_transport(analysis,consumed=consumes_mesh and consumes_feedback)
+    radial=native_radial_zoom(transport)
     texture_transfer=texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba'])
     from source_texture_envelopes import texture_colour_envelopes
     from source_nonlinear_colour import nonlinear_texture_colour_bounds
@@ -545,8 +546,8 @@ def appearance_from_analysis(analysis):
         'feedback_envelope':feedback_envelope(analysis),
         'native_warp_recipe':native_warp_recipe(analysis,consumed=consumes_mesh and consumes_feedback),
         'native_warp_transport':transport,
-        'native_radial_zoom':native_radial_zoom(transport),
-        'native_warp_displacement':native_warp_displacement(analysis,transport),
+        'native_radial_zoom':radial,
+        'native_warp_displacement':native_warp_displacement(analysis,transport,radial_zoom=radial),
         'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),

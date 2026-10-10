@@ -2470,3 +2470,33 @@ References: [HLSL sin](https://learn.microsoft.com/en-us/windows/win32/direct3dh
 uses radian arguments; [HLSL frac](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-frac)
 returns values in `[0,1)`. The continuous triangular composite and its slope
 bound are derived from those operations rather than inferred from screenshots.
+
+## Radial zoom composed into native displacement
+
+`native_warp_displacement.sampling_model` distinguishes the original
+`uniform_affine_envelope` from `uniform_radial_zoom_envelope`. A positive finite
+uniform zoom/exponent can now use the existing radial factor range over nominal
+radius `[0,sqrt(2)]`, even when the exponent is not one. The inverse factor range
+then replaces the uniform inverse zoom in the displacement envelope.
+
+For aspect-corrected centred position p, radial inverse factor h(p), rotation R
+and inverse stretch S, the position-dependent term is `(R*S*h(p)-I)*p`.
+Since h(p) lies within the proved interval, a uniform operator ceiling follows
+from the rotation displacement bound, largest diagonal magnitude and largest
+diagonal deviation from one. Multiplying by the uniform-square RMS radius gives
+the existing centred-geometry term. Centre/translation and procedural warp terms
+remain separate; this proof does not require h(p) to be constant across vertices.
+
+Every other native control must still be uniform with a finite converted domain.
+Stretch cannot cross zero, and native reciprocal/warp-scale/speed guards remain.
+Spatial/state-dependent controls, nonpositive radial power domains and overflow/
+underflow stay unresolved. Signed stretch remains supported separately from the
+positive radial power policy. No new negative-zoom interpretation is introduced.
+
+Exact affine RMS coefficients remain available only on the existing exponent-one
+branch. Radial records expose factor/scale/radius intervals and a sufficient RMS
+ceiling, not an exact integral, area ratio or fold count. The same ceiling can be
+propagated through a supported shader UV response. Texel alignment, radius/power
+rounding, interpolation, history, forward motion and visible intensity remain
+unverified. The original MilkDrop2 `milkdropfs.cpp` lines 1877–1892 and the current
+native mesh source establish radial zoom before stretch and rotation.

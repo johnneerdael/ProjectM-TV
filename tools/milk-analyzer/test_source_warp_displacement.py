@@ -66,7 +66,7 @@ def test_procedural_warp_has_separate_minkowski_displacement_term():
     assert r['affine_rms_squared_aspect_coefficients']==[0,0,0]
 
 
-@pytest.mark.parametrize('body',['zoom=0;','zoom=bass;','zoom=1;zoomexp=1.2;','zoom=1;rot=rand(10);'])
+@pytest.mark.parametrize('body',['zoom=0;','zoom=bass;','zoom=1;rot=rand(10);'])
 def test_unresolved_aggregate_domain_does_not_create_displacement(body):
     r=displacement(body)
     assert r['status']=='unknown'

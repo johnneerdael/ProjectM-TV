@@ -1306,3 +1306,9 @@ sealed compile manifest and full declared audio/canvas scenario. Plain source31
 tests alone do not cover its budget boundary. Reuse strong-identity uniform facts
 inside one analysis; do not raise traversal limits or treat schema-valid unknown
 descriptions as preserved structured output.
+
+Radial displacement fallback reuses the existing positive zoom/exponent factor
+envelope, with all10native controls uniform and finite; signed stretch must avoid
+zero and native reciprocal/warp-scale guards hold. Radial inverse-scale intervals
+bound the same-frame operator pointwise before RMS integration. Exact affine
+coefficients stay on exponent-one; do not grant new negative-zoom or visible-speed policy.

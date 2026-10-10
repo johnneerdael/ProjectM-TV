@@ -5091,6 +5091,31 @@
               "items": {
                 "type": "string"
               }
+            },
+            "sampling_model": {
+              "enum": [
+                "uniform_affine_envelope",
+                "uniform_radial_zoom_envelope",
+                null
+              ]
+            },
+            "radial_zoom_factor_range": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "radial_sampling_scale_range": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
             }
           }
         },
