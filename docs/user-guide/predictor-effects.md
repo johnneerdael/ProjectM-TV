@@ -599,3 +599,10 @@ threshold reachability, affected area and feedback history still matter.
 The signal must have supported continuous nominal math. Integer casts, floor,
 boolean signals and other unproved discontinuities receive no boundary-size
 estimate until their actual discrete transitions are modeled.
+
+Nonlinear sampling coordinates can now expose partial source-time speed bounds.
+For example, a sine ripple with amplitude .02 and phase speed 3 radians per second
+has a .06 UV-unit-per-second ceiling with other inputs fixed. JSON keeps this
+separate from native mesh movement and changing texture history. Image-driven
+coordinates, discontinuous maps and unbounded gains stay unresolved; no inverse
+feature velocity or final screen speed is inferred from this ceiling.

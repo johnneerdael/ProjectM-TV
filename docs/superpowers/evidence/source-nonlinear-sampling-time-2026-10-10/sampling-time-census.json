@@ -1,0 +1,2483 @@
+{
+  "presets": 100,
+  "source_only": true,
+  "improved_presets": [
+    {
+      "preset": {
+        "relative_path": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "name": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "cortex meat - adm affect non.milk",
+        "name": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "name": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (161).milk",
+        "name": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_cells",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_cells",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - wait for it - 1-ret.milk",
+        "name": "suksma - wait for it - 1-ret.milk",
+        "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "name": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "name": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+        "name": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+        "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [191].milk",
+        "name": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 13,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 13,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - hue burst.milk",
+        "name": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "name": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "name": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur2",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur2",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - amental ruiner broach2.milk",
+        "name": "suksma - amental ruiner broach2.milk",
+        "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "shifter - liquid circuitry - conjugoth.milk",
+        "name": "shifter - liquid circuitry - conjugoth.milk",
+        "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "name": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "name": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - bonobo - absurd.milk",
+        "name": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+        "name": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+        "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "fed - DSC-011 LSD Edit 2.milk",
+        "name": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - The Sound plays the Sights.milk",
+        "name": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_blur2",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.012000000216000005,
+            0.014640000623520015
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_fw_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.012000000216000005,
+            0.014640000623520015
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "404.milk",
+        "name": "404.milk",
+        "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.07999999820000005,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.07999999820000005,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.03125000000000002,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.03125000000000002,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "eye disease ngornggniq no business mashing.milk",
+        "name": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "bowel trounce dumring.milk",
+        "name": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "name": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+        "name": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+        "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_cells",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_cells",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+        "name": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+        "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_hq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.1164500009737652,
+            0.16465000078819328
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_hq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.1164500009737652,
+            0.16465000078819328
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "name": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (389).milk",
+        "name": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - alien web bouncer [39].milk",
+        "name": "Flexi - alien web bouncer [39].milk",
+        "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 5,
+          "sampler": "sampler_blur3",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 5,
+          "sampler": "sampler_blur3",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "sampler": "sampler_blur2",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "sampler": "sampler_blur2",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (253).milk",
+        "name": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "name": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur3",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "sampler": "sampler_blur3",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_pc_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_pc_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_blur1",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_blur1",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "name": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_fc_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 0,
+          "sampler": "sampler_fc_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - tech ed lacquer sinus raw.milk",
+        "name": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.03125000000000002,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.03125000000000002,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "sampler": "sampler_main",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "name": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "name": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      "improved": [
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_smalltiled_electric_nebula",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "sampler": "sampler_smalltiled_electric_nebula",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+        "name": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+        "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+        "name": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+        "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "name": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "name": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      "improved": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": false,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "sampler": "sampler_noise_lq",
+          "scenario": true,
+          "before": [
+            null,
+            null
+          ],
+          "after": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  ],
+  "positive_new_ceiling_presets": [
+    "Zylot - The Sound plays the Sights.milk",
+    "404.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "suksma - tech ed lacquer sinus raw.milk"
+  ],
+  "new_rgb_gradient_coefficient_presets": [
+    "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+    "cortex meat - adm affect non.milk",
+    "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+    "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+    "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+    "flexi - grind my glitch up [191].milk",
+    "Flexi - hue burst.milk",
+    "shifter - liquid circuitry - conjugoth.milk",
+    "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+    "suksma - bonobo - absurd.milk",
+    "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+    "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+    "$$$ Royal - Mashup (389).milk",
+    "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+    "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+    "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+    "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+    "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk"
+  ],
+  "new_positive_rgb_gradient_coefficient_presets": [
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk"
+  ],
+  "new_nearest_hazard_presets": [],
+  "structured_descriptions": 100,
+  "schema_valid": 100,
+  "unchanged_source_hashes": 100,
+  "new_execution_gaps": []
+}

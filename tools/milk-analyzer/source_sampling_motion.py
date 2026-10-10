@@ -1,4 +1,4 @@
-"""Partial time motion of affine lookups and conditional texture-gradient rates."""
+"""Partial source-time lookup motion and conditional texture-gradient rates."""
 import math
 from fractions import Fraction
 
@@ -49,6 +49,8 @@ def sampling_motion(record,field,*,input_scenario=None):
             'Scenario quantities are partial time response with audio/state/frame/FPS and all other inputs fixed']}
     curves=record['offset_controls']
     try:
+        if record['matrix_uv4'] is None:
+            return _nonlinear_sampling_motion(result,record,field,input_scenario=input_scenario)
         if len(curves)!=2:raise ValueError('constant-affine coordinate offsets unavailable')
         if known_invalid_phase_offset(field,preserve_zero_products=True):raise ValueError('known invalid coordinate arithmetic')
         rates=[c['maximum_absolute_control_rate_per_second'] for c in curves]
@@ -60,6 +62,47 @@ def sampling_motion(record,field,*,input_scenario=None):
                 'input_scenario_sha256':input_scenario['record_sha256'],
                 'observed_runtime_inputs':False,'runtime_binding_verified':False}
     except (ValueError,RecursionError,OverflowError) as error:result['unknown_reasons']=[str(error)]
+    return result
+
+
+def _nonlinear_sampling_motion(result,record,field,*,input_scenario=None):
+    """Nominal partial derivative ceilings; no inverse-feature velocity inferred."""
+    from effect_families import _parts
+    from source_ripple_envelopes import coefficient_envelope
+    from source_forms import known_invalid_phase_offset
+    result.update(policy='source-nonlinear-sampling-time-motion-v1',
+        conditions=['Nominal partial lookup response while source-time aliases advance together',
+            'Native mesh/original coordinates, audio/state/frame/FPS and all other inputs held fixed and finite',
+            'No [0,1] bound is invented for warped UV; unbounded spatial gains remain unresolved',
+            'Image-driven coordinates require texture-history and gradient chains and remain separate',
+            'These axis ceilings are not inverse feature velocity, total lookup speed or screen movement',
+            'Native quantization/cadence, clock wraps/resets, filtering/history and later passes remain unqualified'])
+    try:
+        if record['sampled_coordinate_response']['direct_sample_count']!=0:
+            raise ValueError('image-driven coordinates require a complete sample-coordinate time chain')
+        parts=_parts(field)
+        if len(parts)!=2:raise ValueError('lookup is not two-dimensional')
+        def bounds(domains):
+            reports=[coefficient_envelope(p,input_domains=domains,
+                response_inputs={'time',':native-render-time-f32','_c2.x'}) for p in parts]
+            rates=[r['maximum_absolute_control_change_per_audio_unit'] for r in reports]
+            return {**_report(record,rates,[None,None]),
+                'assumed_finite_input_names':sorted({n for r in reports for n in r['assumed_finite_input_names']}),
+                'unknown_reasons':sorted({s for r in reports for s in r['unknown_reasons']})}
+        result.update(bounds(None))
+        if input_scenario is not None:
+            result['scenario_sampling_motion']={**bounds(input_scenario['scalar_input_domains']),
+                'input_scenario_sha256':input_scenario['record_sha256'],
+                'observed_runtime_inputs':False,'runtime_binding_verified':False}
+        # Keep original arithmetic, including zero products, in the validity gate.
+        candidates=[result,result.get('scenario_sampling_motion')]
+        if any(r is not None and any(v is not None for v in r['maximum_lookup_axis_speed_uv_per_second']) for r in candidates):
+            if known_invalid_phase_offset(field,preserve_zero_products=True):
+                raise ValueError('known invalid original coordinate arithmetic')
+    except (ValueError,RecursionError,OverflowError,IndexError) as error:
+        result.update(_report(record,[None,None],[None,None]),unknown_reasons=[str(error)])
+        if 'scenario_sampling_motion' in result:
+            result['scenario_sampling_motion'].update(_report(record,[None,None],[None,None]),unknown_reasons=[str(error)])
     return result
 
 

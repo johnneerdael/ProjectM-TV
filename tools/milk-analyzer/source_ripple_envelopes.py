@@ -61,7 +61,7 @@ def coefficient_envelope(field,*,input_domains=None,response_inputs=None):
         selected=project(field)
         if response_inputs is None:r=scalar_value_envelope(selected,input_domains=domains)
         else:
-            if _deps(selected)&tainted:raise ValueError('sample-dependent quantized coefficient prevents continuous response')
+            if tainted and _deps(selected)&tainted:raise ValueError('sample-dependent quantized coefficient prevents continuous response')
             r=scalar_response_envelope(selected,input_names=response_inputs,input_domains=domains)
         r['assumed_finite_input_names']=sorted(assumptions|set(r['assumed_finite_input_names'])-derived)
         return r

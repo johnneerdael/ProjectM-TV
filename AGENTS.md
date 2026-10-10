@@ -1327,3 +1327,12 @@ Require supported nominal continuity with every contributing signal input varied
 value intervals alone cannot justify jumps for floor/integer/boolean signals.
 Source jump magnitude is a limiting gap, not a discrete-frame or whole-screen
 flash. Sample-driven timing remains unknown; packed shader-clock schedules retain wrap semantics.
+
+Non-affine sampling-time maintenance: reuse scalar coefficient response calculus
+with source-time aliases varied together and mesh/audio/state held fixed. Preserve
+partial per-axis unknowns and separate scenario identity; never invent warped UV
+boxes, inverse-feature velocity or total speed. Exclude sampled-coordinate chains,
+retain original-domain checks and keep native upload time taint. Skip dependency
+walks only when the taint set is empty; preserve the exact-profile Grind regression
+and fixed traversal budgets. RGB gradient propagation remains conditional on
+filtering/dimensions and fixed texture contents, not feedback or visible intensity.

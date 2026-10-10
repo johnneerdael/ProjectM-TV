@@ -2565,3 +2565,28 @@ and the declared patched translator/typed graph determine the reset branches;
 no screenshot is used to infer their source behaviour.
 [Microsoft's HLSL floor reference](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-floor)
 specifies integer-valued results even though the return type is floating point.
+
+## Nonlinear lookup partial time speed
+
+`sampling_geometry.stages.*[].sampling_motion` now includes supported non-affine
+lookup maps under policy `source-nonlinear-sampling-time-motion-v1`. Each axis
+uses nominal scalar response calculus with source-time aliases advancing together;
+mesh/original coordinates, audio, state, frame/FPS and all other inputs stay fixed.
+For `uv.x + .02*sin(8*uv.y + 3*time)`, the partial-time ceiling is `.06` UV units
+per second, since the sine derivative magnitude is at most one. This follows the
+[HLSL sin input in radians](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-sin)
+and ordinary nominal chain-rule math, not numerical time samples.
+
+The scalar projector retains packed clock lanes, types, native upload taint and
+finite-domain guards. Default and declared-scenario bounds stay separate. No
+`[0,1]` warp-UV box is invented: `uv.x*time` has no finite global default speed
+ceiling, while a bounded sine can. Discontinuous frac/floor and image-driven
+coordinates remain unresolved. Original arithmetic, including zero products, is
+checked before a candidate bound is credited.
+
+`maximum_lookup_axis_speed_uv_per_second` carries partial ceilings; signed inverse
+feature velocity, maximum inverse-feature speed and total lookup speed remain null
+for non-affine maps. Native mesh transport is separate. Existing bilinear raw-RGB
+gradient coefficients consume these rates with uploaded texture dimensions as
+inputs. Fixed texel contents, declared colour response and filtering are required;
+full feedback evolution, screen motion, visible flashing and moods are unverified.
