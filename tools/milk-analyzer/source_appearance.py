@@ -562,5 +562,7 @@ def appearance_from_analysis(analysis):
                        'Source phase palette does not establish rendered colour diversity or flash permission',
                        'Unknown activity cannot be promoted to a confident Chill preference match',
                        'Audio inputs are engine bands/attenuated bands/volume, not isolated instruments or vocals']}
+    from source_activity import source_activity
+    result['activity']=source_activity(analysis,result)
     result['record_sha256']=_digest(result)
     return result

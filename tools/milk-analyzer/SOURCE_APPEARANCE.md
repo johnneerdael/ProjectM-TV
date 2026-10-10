@@ -41,7 +41,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `sampling_geometry.stages.*[].sample_value_offset_envelope` | Conditional nonlinear local sample-value offset ranges; no image-gradient or whole-feedback sensitivity |
 | `elements[].audio_routes[].nominal_audio_response` | Sufficient nominal scalar control-change bound per audio input unit, with other inputs fixed; no time-rate or visible response score |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
-| `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
+| `activity.flashing`, `activity.motion_intensity` | Conditional blackout mechanisms, feedback-step components and polygon speed bounds; overall visible intensity remains unknown |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
 | `limitations` | Consumer-relevant boundaries |
@@ -2131,3 +2131,45 @@ Reference: [HLSL normalize](https://learn.microsoft.com/en-us/windows/win32/dire
 MilkDrop2 delegates this intrinsic to D3DX and the patched GLSL built-in retains
 the same division-by-length domain. Native finite-precision/storage/sampling
 behavior, visual geometry, feedback and mood remain separate.
+
+## Flashing mechanisms and feedback movement
+
+`activity.flashing.hazards` now identifies supported periodic full-composite
+blackout gates: the same spatially uniform binary source-time comparison
+multiplies each contributing RGB channel, leaving raw RGB zero in the off state.
+All contributing RGB intermediates must be finite, not just the shader inputs:
+for example, finite `bass=0` does not make `1/bass` finite. Known singular
+contributing expressions prevent certification; unknown domains retain this premise.
+Records contain switch-event rate, blackout cycle rate, period and off fraction.
+A spatial mask or added background does not receive that whole-stage claim.
+A blackout mechanism is not a verified visible flash: nonblack on-state content,
+shader selection, cadence, storage, transitions and trails must retain it.
+An empty list is not proof of flash-safe absence.
+
+`activity.motion_intensity.feedback_step_components` reports known native
+rotation radians per feedback step and positive uniform zoom factors per step.
+Rotation uses the effective matrix angle `atan2(sin(rot),cos(rot))` after native
+float32 control conversion, retaining the authored native angle separately.
+Full turns therefore do not masquerade as large step movement. Every known mesh
+control is domain-checked even when an earlier unknown prevents a complete recipe.
+Their rate coefficients can be multiplied by actual feedback FPS under steady
+controls/cadence. A constant rot or zoom parameter has zero parameter derivative
+but its repeated feedback mapping still moves content. These components do not
+certify combined screen motion: other transforms, shader UV changes, texel
+alignment, wrapping, clipping and visible feedback content remain separate.
+Disconnected and known-invalid native maps do not receive component credit.
+
+`geometry_speed_bounds` exposes already derived polygon-perimeter vertex bounds
+in NDC per second, before later mapping/visibility. This does not silently promote
+centre-only or partial clock bounds into whole-preset screen speed. Overall
+flashing/motion values and mood conclusions remain null pending complete path
+and prominence handling. Status describes supported mechanisms, not confidence.
+
+References:
+
+- [Geiss preset authoring](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html): zoom/translation per frame.
+- Local projectM authoring guide, `content/1.docs/3.preset-authoring/4.effects/04.image-warp.md`: transforming the previous frame.
+- Original MilkDrop2 `vis_milk2/milkdropfs.cpp`, lines 1877–1924: zoom reciprocal, stretch, oscillator displacement, sin/cos rotation and translation.
+- Published-core source snapshot `MilkdropPreset/PerPixelMesh.cpp`, lines 250–251 and 305–306: native float rotation sine/cosine.
+- [Khronos GLSL specification](https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.pdf), section 8.1: radians, sin/cos and two-argument atan. Desktop semantics are a math reference, not GLES runtime qualification.
+- [Microsoft HLSL step](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-step) and [smoothstep](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-smoothstep): discontinuous binary switching versus smooth Hermite interpolation, guiding subsequent source flash extraction.

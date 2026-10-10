@@ -1242,3 +1242,10 @@ strict positive padded norm minimum. Typed lane/width checks and signed unit
 component bounds are mandatory. Normalization guards discharge only a proved
 internal normalized_component; arbitrary/zero/singular/native-quantized inputs
 remain unresolved. Rate ceilings are sufficient bounds, not reaction/palette proof.
+
+Activity priority: focus on flashing and physical movement pathways. A constant
+feedback rot/zoom is motion per step, not zero speed from a parameter derivative.
+Source blackout gates require the same uniform binary multiplier across all live
+RGB channels; added backgrounds/spatial predicates do not qualify. Keep source
+mechanism/cadence, geometry speed and actual visibility/combined screen intensity
+separate. No empty-evidence Chill certification or unsupported mood percentage.

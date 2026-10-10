@@ -68,8 +68,11 @@ def test_clipped_white_oscillators_are_not_multicolour_candidates():
 
 def test_preference_description_keeps_flashing_and_motion_uncertainty():
     result=appearance(shader('shader_body {ret=.5+.5*cos(time+float3(0,2,4));}'))
-    assert result['activity']['flashing']=={'value':None,'status':'unknown'}
-    assert result['activity']['motion_intensity']=={'value':None,'status':'unknown'}
+    assert result['activity']['flashing']['value'] is None
+    assert result['activity']['flashing']['status']=='unknown'
+    assert result['activity']['flashing']['hazards']==[]
+    assert result['activity']['motion_intensity']['value'] is None
+    assert result['activity']['motion_intensity']['status']=='unknown'
     assert result['mood_matches']['chill']['eligible'] is None
 
 

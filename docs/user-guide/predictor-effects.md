@@ -508,3 +508,16 @@ Normalized colour recipes can now receive conditional component bounds when
 source input ranges prove a nonzero vector length. Zero-length possibilities
 stay unknown; the predictor does not silently choose a direction or colour for
 an undefined normalization. These bounds do not establish a final palette.
+
+The activity export now separates explicit flash mechanisms from movement
+quantities. It can identify periodic full-stage blackout gates and report their
+source cadence. Movement records distinguish per-frame feedback rotation/zoom
+from parameter changes over time, and expose existing polygon vertex-speed
+bounds. Their visibility and combined full-screen effect remain unverified;
+empty flash evidence does not certify a calm preset.
+
+Rotation speed uses the effective angle of its feedback matrix, so a full turn
+is not counted as a large visible step. Blackout predictions require finite
+arithmetic throughout the contributing RGB expression; finite inputs alone do
+not ensure this. These source quantities help describe mechanisms before we
+combine their prominence and interactions into mood scores.

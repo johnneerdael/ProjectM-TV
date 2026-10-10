@@ -1,0 +1,105 @@
+"""Source flashing mechanisms and actual feedback-step movement components."""
+import math
+
+
+def _known_invalid_feedback_domain(analysis):
+    """Check every known control, even when recipe loading stopped earlier."""
+    from source_appearance import _phase_literal
+    from source_native_warp import _f32
+    from scene_equations import _scalar
+    controls=getattr(analysis,'mesh_controls',{})
+    try:
+        for name,value in controls.items():
+            literal=_phase_literal(value)
+            if literal is None:continue
+            native=_f32(literal)
+            if name in {'zoom','sx','sy'}:
+                if native==0 or _f32(1/native)==0:return True
+        scale=_scalar(analysis.values,'fWarpScale',1,'float')
+        if scale==0 or _f32(1/scale)==0:return True
+    except (ValueError,OverflowError,ZeroDivisionError):return True
+    return False
+
+
+def source_activity(analysis,description):
+    from effect_families import _parts,SPATIAL
+    from shader_fields import Field
+    from source_appearance import _canonical_lane,_colour_product,_typed_control_identity,_data_return
+    from source_polar import _nodes
+    from source_time_switches import time_switch_events
+    from source_forms import known_invalid_phase_offset
+    flashing={'value':None,'status':'unknown','hazards':[],
+        'conditions':['Full-stage blackout is an authored raw-RGB mechanism under finite inputs and selected custom shader',
+                      'All contributing RGB intermediates and multiplicative factors must be finite; finite inputs alone do not prove this',
+                      'Nonblack retained content and later storage/composition/trails determine visible flashes',
+                      'Source clocks, sampling cadence and native precision must retain the schedule; no flash-safe absence proof']}
+    motion={'value':None,'status':'unknown','feedback_step_components':[],'geometry_speed_bounds':[],
+        'conditions':['Warp parameters act every feedback step; constant parameter time derivatives are not image speeds',
+                      'Components are separated from combined transport, wrapping, texel shifts and later custom shaders',
+                      'Multiply per-step rates by actual feedback FPS only under steady controls/cadence',
+                      'Geometry speeds precede clipping, source coverage, later shaders and feedback; no whole-screen intensity score']}
+    memo={}
+    def scalar(node,depth=0):
+        if depth>64 or len(memo)>=512:raise ValueError('activity scalar projection budget exceeded')
+        if id(node) in memo:return memo[id(node)][1]
+        n=_canonical_lane(node)
+        if n.op=='member' and n.dtype=='float' and n.detail.get('swizzle') and len(n.detail.get('field',''))==1 and n.args[0].op!='input':
+            from field_math import SWIZZLE
+            parent=n.args[0];i=SWIZZLE[n.detail['field']];parts=_parts(parent)
+            if i<len(parts) and not (parts[i].op=='member' and parts[i].args and parts[i].args[0] is parent):
+                result=scalar(parts[i],depth+1);memo[id(node)]=(node,result);return result
+        result=Field(n.op,tuple(scalar(a,depth+1) for a in n.args),n.dtype,n.detail)
+        memo[id(node)]=(node,result);return result
+    composite=analysis.outputs.get('composite')
+    if composite is not None:
+        try:
+            channels=[scalar(p) for p in _parts(_data_return(composite))[:3]]
+            if any(known_invalid_phase_offset(c,preserve_zero_products=True) for c in channels):
+                raise ValueError('Known invalid contributing RGB domain prevents blackout certification')
+            candidates={};active=[]
+            for c in channels:
+                coefficient,factors=_colour_product(c)
+                if coefficient==0:continue
+                ids=set()
+                for f in factors:
+                    gate=f
+                    while gate.op=='cast' and gate.dtype=='float' and len(gate.args)==1 and gate.args[0].dtype=='bool':gate=gate.args[0]
+                    if gate.op not in {'greater','greater_equal','less','less_equal'}:continue
+                    if any(n.op in {'sample','unknown','uninitialized','sequence'} or n.op.startswith('loop_') or n.op=='input' and n.detail.get('name') in SPATIAL for n,path in _nodes(gate)):continue
+                    if known_invalid_phase_offset(gate,preserve_zero_products=True):continue
+                    identity=_typed_control_identity(gate)
+                    if identity is None:continue
+                    events=[e for e in time_switch_events(gate) if e['whole_control_levels_known'] and e.get('control_true_value')==1 and e.get('control_false_value')==0]
+                    if not events:continue
+                    ids.add(identity);candidates[identity]=(gate,events)
+                active.append(ids)
+            common=set.intersection(*active) if active and len(channels)==3 else set()
+            for identity in sorted(common):
+                gate,events=candidates[identity]
+                for e in events:
+                    flashing['hazards'].append({'kind':'full_stage_blackout_gate','stage':'composite','off_rgb':[0,0,0],
+                        'switch_event_rate_hz':e['nominal_event_rate_hz'],'blackout_cycles_hz':1/e['period_seconds'],
+                        'period_seconds':e['period_seconds'],'off_fraction':1-e['predicate_true_fraction'],
+                        'clock_kind':e['clock_kind'],'visible_flashing_verified':False,'source_event':e})
+        except (ValueError,RecursionError,IndexError,OverflowError) as error:flashing['unknown_reasons']=[str(error)]
+    recipe=description['native_warp_recipe'];p=recipe['native_float32_controls']
+    invalid=_known_invalid_feedback_domain(analysis)
+    if recipe['contribution']=='consumed' and not invalid:
+        if p.get('rot') not in (None,0):
+            amount=abs(math.atan2(math.sin(p['rot']),math.cos(p['rot'])))
+            motion['feedback_step_components'].append({'kind':'rotation',
+                'authored_native_radians_per_feedback_step':p['rot'],
+                'absolute_radians_per_feedback_step':amount,'degrees_per_second_per_feedback_fps':amount*180/math.pi,
+                'parameter_time_rate_is_motion_speed':False,'net_screen_speed_verified':False})
+        if p.get('zoomexp')==1 and p.get('zoom',0)>0 and p['zoom']!=1:
+            motion['feedback_step_components'].append({'kind':'zoom','scale_per_feedback_step':p['zoom'],
+                'log_scale_per_second_per_feedback_fps':math.log(p['zoom']),
+                'parameter_time_rate_is_motion_speed':False,'net_screen_speed_verified':False})
+    for element in description['elements']:
+        v=element.get('vertex_motion',{});speed=v.get('maximum_vertex_speed_ndc_per_second_upper_bound')
+        if speed is not None:motion['geometry_speed_bounds'].append({'element_id':element['id'],
+            'kind':'polygon_perimeter_vertex_speed','maximum_ndc_per_second':speed,
+            'estimate_kind':v['estimate_kind'],'visible_screen_speed_verified':False})
+    if flashing['hazards']:flashing['status']='source periodic blackout mechanism'
+    if motion['feedback_step_components'] or motion['geometry_speed_bounds']:motion['status']='source movement quantified for listed components'
+    return {'flashing':flashing,'motion_intensity':motion}

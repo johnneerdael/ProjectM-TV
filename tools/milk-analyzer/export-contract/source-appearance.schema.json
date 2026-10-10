@@ -5406,6 +5406,9 @@
               }
             }
           }
+        },
+        "activity": {
+          "$ref": "#/$defs/sourceActivityMechanisms"
         }
       }
     },
@@ -6043,6 +6046,57 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "sourceActivityMechanisms": {
+      "type": "object",
+      "description": "Source flash mechanisms and per-step/geometry movement quantities; visible verdicts remain unknown.",
+      "properties": {
+        "flashing": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "hazards"
+          ],
+          "properties": {
+            "value": {
+              "type": "null"
+            },
+            "status": {
+              "type": "string"
+            },
+            "hazards": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "motion_intensity": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "feedback_step_components",
+            "geometry_speed_bounds"
+          ],
+          "properties": {
+            "value": {
+              "type": "null"
+            },
+            "status": {
+              "type": "string"
+            },
+            "feedback_step_components": {
+              "type": "array"
+            },
+            "geometry_speed_bounds": {
+              "type": "array"
+            }
           }
         }
       }

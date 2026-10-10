@@ -1,0 +1,416 @@
+{
+  "presets": 100,
+  "statuses": {
+    "computed": 100
+  },
+  "blackout_presets": [],
+  "feedback_step_presets": [
+    {
+      "name": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.003000020980835,
+          "log_scale_per_second_per_feedback_fps": 0.002995529897878979,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.025189995765686,
+          "log_scale_per_second_per_feedback_fps": 0.02487795713563057,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "ORB - Firelight.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0499999523162842,
+          "log_scale_per_second_per_feedback_fps": 0.04879011875636829,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "EoS - pointfield 07 insek altcolors.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0099999904632568,
+          "log_scale_per_second_per_feedback_fps": 0.009950321410848074,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.8999999761581421,
+          "log_scale_per_second_per_feedback_fps": -0.10536054214877988,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "Serge + martin - crystal palace003.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9999200105667114,
+          "log_scale_per_second_per_feedback_fps": -7.999263261390241e-05,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0004899501800537,
+          "log_scale_per_second_per_feedback_fps": 0.0004898301936542158,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "Flexi - hue burst.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9995099902153015,
+          "log_scale_per_second_per_feedback_fps": -0.0004901298787261379,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "martin + flexi - lock and release bipolar 02.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9900000095367432,
+          "log_scale_per_second_per_feedback_fps": -0.010050326220427584,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "amandio c - living boxes 4.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9998999834060669,
+          "log_scale_per_second_per_feedback_fps": -0.00010002159592616078,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0010000467300415,
+          "log_scale_per_second_per_feedback_fps": 0.0009995470164405893,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "components": [
+        {
+          "kind": "rotation",
+          "authored_native_radians_per_feedback_step": 0.019999999552965164,
+          "absolute_radians_per_feedback_step": 0.019999999552965164,
+          "degrees_per_second_per_feedback_fps": 1.1459155646484371,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        },
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0079599618911743,
+          "log_scale_per_second_per_feedback_fps": 0.007928448514245812,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "suksma - out of fuckus newband plays harry partch - shf.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9995099902153015,
+          "log_scale_per_second_per_feedback_fps": -0.0004901298787261379,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "cpe domains flacc - portable massation segway nz+.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0003000497817993,
+          "log_scale_per_second_per_feedback_fps": 0.00030000477586599275,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "404.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0019999742507935,
+          "log_scale_per_second_per_feedback_fps": 0.001997976964861805,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "eye disease ngornggniq no business mashing.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.020300030708313,
+          "log_scale_per_second_per_feedback_fps": 0.020096731796459006,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0230000019073486,
+          "log_scale_per_second_per_feedback_fps": 0.022739488833955344,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9995099902153015,
+          "log_scale_per_second_per_feedback_fps": -0.0004901298787261379,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0005099773406982,
+          "log_scale_per_second_per_feedback_fps": 0.0005098473464484329,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0529999732971191,
+          "log_scale_per_second_per_feedback_fps": 0.05164320779297691,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0529999732971191,
+          "log_scale_per_second_per_feedback_fps": 0.05164320779297691,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "suksma - tech ed lacquer sinus raw.milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 0.9995099902153015,
+          "log_scale_per_second_per_feedback_fps": -0.0004901298787261379,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    },
+    {
+      "name": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "components": [
+        {
+          "kind": "zoom",
+          "scale_per_feedback_step": 1.0329999923706055,
+          "log_scale_per_second_per_feedback_fps": 0.03246718275183396,
+          "parameter_time_rate_is_motion_speed": false,
+          "net_screen_speed_verified": false
+        }
+      ]
+    }
+  ],
+  "geometry_speed_presets": [
+    {
+      "name": "EVET - Circling Meta-freeze 1.milk",
+      "elements": 1
+    },
+    {
+      "name": "ORB - Firelight.milk",
+      "elements": 3
+    },
+    {
+      "name": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+      "elements": 2
+    },
+    {
+      "name": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "elements": 2
+    },
+    {
+      "name": "$$$ Royal - Mashup (161).milk",
+      "elements": 1
+    },
+    {
+      "name": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "elements": 2
+    },
+    {
+      "name": "EoS - heater core C_on route.milk",
+      "elements": 1
+    },
+    {
+      "name": "suksma - wait for it - 1-ret.milk",
+      "elements": 1
+    },
+    {
+      "name": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+      "elements": 3
+    },
+    {
+      "name": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "elements": 3
+    },
+    {
+      "name": "suksma - never degweh - flx spr col.milk",
+      "elements": 3
+    },
+    {
+      "name": "suksma - amental ruiner broach2.milk",
+      "elements": 1
+    },
+    {
+      "name": "fed - DSC-011 LSD Edit 2.milk",
+      "elements": 2
+    },
+    {
+      "name": "InCUbuS - Our Destiny.milk",
+      "elements": 1
+    },
+    {
+      "name": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "elements": 1
+    },
+    {
+      "name": "EoS - more waveforms 7_phat_edit.milk",
+      "elements": 1
+    },
+    {
+      "name": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "elements": 1
+    },
+    {
+      "name": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "elements": 1
+    },
+    {
+      "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "elements": 2
+    },
+    {
+      "name": "suksma - to finally feel like a cyborg.milk",
+      "elements": 2
+    }
+  ],
+  "movement_presets": [
+    "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+    "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+    "EVET - Circling Meta-freeze 1.milk",
+    "ORB - Firelight.milk",
+    "EoS - pointfield 07 insek altcolors.milk",
+    "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+    "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+    "$$$ Royal - Mashup (161).milk",
+    "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+    "EoS - heater core C_on route.milk",
+    "suksma - wait for it - 1-ret.milk",
+    "Serge + martin - crystal palace003.milk",
+    "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+    "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+    "Flexi - hue burst.milk",
+    "martin + flexi - lock and release bipolar 02.milk",
+    "amandio c - living boxes 4.milk",
+    "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+    "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+    "suksma - never degweh - flx spr col.milk",
+    "suksma - amental ruiner broach2.milk",
+    "suksma - out of fuckus newband plays harry partch - shf.milk",
+    "cpe domains flacc - portable massation segway nz+.milk",
+    "fed - DSC-011 LSD Edit 2.milk",
+    "InCUbuS - Our Destiny.milk",
+    "404.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+    "EoS - more waveforms 7_phat_edit.milk",
+    "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+    "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+    "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+    "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+    "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+    "suksma - tech ed lacquer sinus raw.milk",
+    "suksma - to finally feel like a cyborg.milk",
+    "Geiss - Brain Zoom 4 (Jelly).milk"
+  ]
+}
