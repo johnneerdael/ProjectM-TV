@@ -67,6 +67,7 @@ parameters remain null when no source constant is established.
 | 7 | Recognized complex quadratic or iterated folding recurrence: fractal construction |
 | 8 | Feedback transport, rotation, scaling, advection or nonlinear transformation |
 | 9 | Repeating two-dimensional radial glow field; particle identities are not established |
+| 10 | Raw planar or native-radius sine/cosine band generator; masks and dominance remain separate |
 
 Multiple codes can coexist. Read `mechanisms`, `parameters` and `conditions`
 before choosing a reconstruction. An empty list means no supported construction
@@ -1665,3 +1666,44 @@ area, real audio trajectories and final composition remain outside the bound.
 The result includes `native_numeric_certified:false`, null visible response
 and null maximum time-rate. Existing signed `linear_gain` and switch-trigger
 records remain separate. No mood score follows from a Lipschitz upper bound.
+
+## Procedural oscillatory bands
+
+`elements[].procedural_forms[]` includes form/family code10 for supported scalar
+sine/cosine generators whose phase is constant-affine in one declared native
+UV basis, or solely in the native radial varying. The phase must reach RGB data
+or its mask/control graph; a sine that only bends texture sampling coordinates
+does not establish a colour-band generator. Discarded fourth lanes, zero/dead
+terms, uniform-only phases, mixed coordinate bases, varying spatial scales and
+unsupported non-affine phases do not establish this descriptor.
+
+Proved complete nominal clamps/saturation and dominating min/max branches
+disconnect generators from this colour traversal. Constant-affine sums of
+bounded sine/cosine/saturate terms use exact binary-rational range arithmetic
+for that decision; unknown and partial masks retain conditional forms. The
+same colour-data guard applies to the existing radial-glow form9. Known
+singular uniform phase operations and established out-of-float32 upload
+envelopes reject form10; arbitrary finite unknown phase inputs remain
+conditional. Existing native abs lowering stays intact for roots/powers.
+
+For `sin(kx*u+ky*v+b)`, `phase_coefficients` and `phase_normal_uv` retain the
+signed nominal phase gradient. `nominal_period_in_basis_units` is
+`2*pi/hypot(kx,ky)`, measured along the phase normal. The perpendicular tangent
+is the nominal stripe direction. Native-radius phases use `2*pi/abs(kr)` in
+radial varying units, retaining the signed coefficient. These periods describe
+the raw sine/cosine generator, not the fundamental period after abs, thresholds,
+products or other later transformations.
+
+`basis` distinguishes shader UV, original UV and native radial varying.
+Warp shader UV includes mesh warping; original UV bypasses it. Native radial
+input is supplied and interpolated by the engine; do not reconstruct it as a
+pixel-exact analytic circle from this descriptor. The record retains the full
+generator/phase programs and its uniform `phase_motion_control`/`audio_routes`.
+Those control the phase shift, not colour amplitude or physical screen speed.
+
+Canonical formula IDs are generators, not layer counts or identities of objects.
+Distinct generators can coexist and masks, tint, clipping, projection, native
+precision, sampling or feedback can suppress/change them. Screen coverage,
+visible speed, ring count, calibrated mood and appearance remain unverified.
+Code10 is an additive vocabulary item; consumers must handle unfamiliar codes
+explicitly rather than treating an unsupported code as absence of an effect.

@@ -1,0 +1,652 @@
+{
+  "basis": "raw canonical source band generators, not actual layers or mood accuracy",
+  "presets": 100,
+  "counts": {
+    "band_generators": 1,
+    "presets_with_bands": 1,
+    "presets_with_native_radius_bands": 0,
+    "presets_with_planar_bands": 1,
+    "presets_with_band_audio_phase_routes": 0,
+    "presets_with_band_time_phase": 1,
+    "new_colour_budget_exhaustion": 0,
+    "previous_glow_forms": 4,
+    "current_glow_forms": 4
+  },
+  "changed_gap_records": [],
+  "changed_nonlinear_rgb_boxes_after_cache_repair": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "compile_manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "model_modules": {
+    "effect_families.py": "e6fa7df5fae21420189528b5a9ff18c04e56c1d2c2059179b8591336d413ed9c",
+    "source_appearance.py": "ab2aeb05bd8013aa656bbd4546e5be68566ae6b98f9151c53ba3dda9ae8bf346",
+    "source_forms.py": "930d099157a40da8defe3bd6f5b0f69f3ce5bb522a62f7ef4a8116562b6390ee",
+    "source_nonlinear_colour.py": "9b76c9d7fdb075db749851ad01af55eb7fcb36ddba568dd2e5dd54b4037bc21a"
+  },
+  "zip_sha256": "3acdb9fbd48beaaadb7fc77ec8dddc2b2b90414a1aa01f41f70f41f495296495",
+  "source_and_zip_joins_verified": true,
+  "sum_export_preset_seconds": 39.266447,
+  "maximum_export_preset_seconds": 2.426758,
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (161).milk",
+      "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303",
+      "record_sha256": "893476185ed384dce7adcb9b7214c30d6a9bb408e9ae3e87fabb47c74441e03d",
+      "band_forms": []
+    },
+    {
+      "preset": "$$$ Royal - Mashup (253).milk",
+      "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2",
+      "record_sha256": "27c106741c1f1fd7de8f7ee384c3a74bfc6cfaca77f03dd28cd0b09549168041",
+      "band_forms": []
+    },
+    {
+      "preset": "$$$ Royal - Mashup (389).milk",
+      "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef",
+      "record_sha256": "a19b64ad153ec501d0b7736a56a9425c3a8dd93945f51dddad529e81bfac27ea",
+      "band_forms": []
+    },
+    {
+      "preset": "$$$ Royal - Mashup (39).milk",
+      "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b",
+      "record_sha256": "07d4214419d4a3d59e06eb70576d5e750316abc0f29c9927aea633d37a7a8717",
+      "band_forms": []
+    },
+    {
+      "preset": "19.milk",
+      "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d",
+      "record_sha256": "e9773fe10f599cd6f8df5653c6d9035ee07605243ad46bea70b47568ea7984d6",
+      "band_forms": []
+    },
+    {
+      "preset": "404.milk",
+      "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f",
+      "record_sha256": "06dbfce5ab26726d99eeedb9174c2c9544d6aa00a5aa09d435ce50b488196290",
+      "band_forms": []
+    },
+    {
+      "preset": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+      "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8",
+      "record_sha256": "0d5c4a92a4a1dcedc47dbccaaa6ff799d14d7ecdf0e7d17b30717375ffafbe91",
+      "band_forms": []
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38",
+      "record_sha256": "aff623674178736c14a0c96afa48df9c8e9bb1cdccc278243ab30062949c541d",
+      "band_forms": []
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+      "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273",
+      "record_sha256": "8f9a08ab56df8035d907b6ff48c4331fb2fded9c48e8147dea839ea5bdb4ead3",
+      "band_forms": []
+    },
+    {
+      "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "record_sha256": "ab613a26c34ceadd579fd35959e6ee63716324d429d76b3889390da27437ebd6",
+      "band_forms": []
+    },
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "record_sha256": "a916c917823347d0c08262c753f3a1eb1435bf3e9b19d2c23c51527f2811d7f3",
+      "band_forms": []
+    },
+    {
+      "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+      "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad",
+      "record_sha256": "bdd302fb8ecbda32124a4c6a4617b49ebecc255c876eaab46d6c5d4f55775700",
+      "band_forms": []
+    },
+    {
+      "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e",
+      "record_sha256": "d86ad718f720e739a2f8813caa4d977af5dac8b4ad28e37859f2582328d26b41",
+      "band_forms": []
+    },
+    {
+      "preset": "Bmelgren - Tonic.milk",
+      "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280",
+      "record_sha256": "67e66fca5b32ed9dae9ad31f49bf7b0b65a68de6911840b46d4f691220fe5e15",
+      "band_forms": []
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "record_sha256": "410b0dd15328d1e8e19a3cf7be65940104d0b2f1928dad871988cb60140520ab",
+      "band_forms": []
+    },
+    {
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "record_sha256": "aebcd7aa26afe39b7e4b36eec6e43917d511f341f24d5b5d60a9d4cc5517131b",
+      "band_forms": []
+    },
+    {
+      "preset": "EoS - heater core C_on route.milk",
+      "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9",
+      "record_sha256": "b8d0328d0a528be2dd5426b5865fd0b54c151cc61552f3cde6b66fd5a818bdfa",
+      "band_forms": []
+    },
+    {
+      "preset": "EoS - more waveforms 7_phat_edit.milk",
+      "sha256": "026417e8c902bb6c5d0604c92f80b9996d891ebf498116dba657c922fbda4bbd",
+      "record_sha256": "c73b87570cfbb4f45ce10fd469b9d45aa1ac2701f3d569ea600085d5dc3edd0a",
+      "band_forms": []
+    },
+    {
+      "preset": "EoS - pointfield 07 insek altcolors.milk",
+      "sha256": "00aab1e58d025b2b4f9163a0a95c4de5a6024f9c1c9b9e6270ee02a347d5705e",
+      "record_sha256": "bd0935aaa1fbad39b0255d18d2521d83c4ced2b4a74e63222fa3a60f3fdba74f",
+      "band_forms": []
+    },
+    {
+      "preset": "Flexi - alien web bouncer [39].milk",
+      "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+      "record_sha256": "c875a0d211b68aa67a5b6876702d3c6a2fe3f286003d3630b2b1f8e3953b1cbd",
+      "band_forms": []
+    },
+    {
+      "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+      "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a",
+      "record_sha256": "c3adb4ea383516d5cdbe550768a3b4fd612d1fd7446812c6f1c3435b2bb508c0",
+      "band_forms": []
+    },
+    {
+      "preset": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "record_sha256": "2631e146811c949d0b505c7c3b9260cf7b1b202b844e127f93bc78facc07969f",
+      "band_forms": []
+    },
+    {
+      "preset": "Flexi - splatter effects 11 halucination #1.milk",
+      "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff",
+      "record_sha256": "21e4505cf069ea2287167caa3996e984557ca4e7bc2e2a4d4a2452912db21a3c",
+      "band_forms": []
+    },
+    {
+      "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "record_sha256": "f95e3b612e29b681e0775f583038e089c8cc32acc85392e0c2affbc7440b5ff6",
+      "band_forms": []
+    },
+    {
+      "preset": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7",
+      "record_sha256": "4c3d6af167dbe6f78650606690ba6b44b9f74cbf664a3c5b10d4e6434135b9a5",
+      "band_forms": []
+    },
+    {
+      "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+      "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8",
+      "record_sha256": "a31e497b96bd00460d96f7e7ab422fe3329a2197281b48c6782cc3eec73b45d6",
+      "band_forms": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+      "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf",
+      "record_sha256": "18c2a137dad5d011ae807182f3ba455d434c72c4eda5505f2c70466888cfc994",
+      "band_forms": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter.milk",
+      "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c",
+      "record_sha256": "96d2d28a132353575b838a4cfd5472f13a9f55c7eabe719bc836fd970b85a587",
+      "band_forms": []
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "record_sha256": "0c61950c33632891c98735065f958f3e2d06790d935c565ae0d2a4fb5517cef4",
+      "band_forms": []
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "record_sha256": "64794ec636d3efc3855bb7f883d6806088a3d62cac6406d51f677d00f04a1d82",
+      "band_forms": []
+    },
+    {
+      "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30",
+      "record_sha256": "df7d6f6b3c8a354aa53b043a826bc62332be208ad3a0a264cfd3db272e6d65ca",
+      "band_forms": []
+    },
+    {
+      "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "record_sha256": "073b1b81de33478cac07cfea0d013f172ac5ac57ed906a4d6f63d60103d05f37",
+      "band_forms": []
+    },
+    {
+      "preset": "InCUbuS - Our Destiny.milk",
+      "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807",
+      "record_sha256": "1f19b54f10ff38c05cbac040fdef80772022a54f37a241bee1dabe7c307f9ed2",
+      "band_forms": []
+    },
+    {
+      "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+      "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3",
+      "record_sha256": "6fc9286d793a59333f5867fb82d36afe2cf1e02a580af1adc2c8d683d2dc66de",
+      "band_forms": []
+    },
+    {
+      "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+      "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b",
+      "record_sha256": "67873906ac9d5b0842dc3f378a59d48ce607213f9f1c635695d7cdc13e1239a5",
+      "band_forms": []
+    },
+    {
+      "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "record_sha256": "7a44a528f22fac901eeffe5b0721cb89701107d8deae831d9042118c8182473c",
+      "band_forms": []
+    },
+    {
+      "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+      "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3",
+      "record_sha256": "8657d129fdecce0d5644f578e44e199952240c056e48424b686cb170b2bf1fc7",
+      "band_forms": []
+    },
+    {
+      "preset": "ORB - Firelight.milk",
+      "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192",
+      "record_sha256": "37884b76b601e54ef6878cbb182f030dd50223d19ecef5ac6d04fad55da24754",
+      "band_forms": []
+    },
+    {
+      "preset": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b",
+      "record_sha256": "b4b7f57a6bfee327611649370e3560e703f51591de2f3e92a8a07d56e9fdf615",
+      "band_forms": []
+    },
+    {
+      "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "record_sha256": "8dc2384b8f0f15c5ec5657c11f79c761f9d1f86f3bc03a266123a13c2c52ba47",
+      "band_forms": []
+    },
+    {
+      "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+      "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990",
+      "record_sha256": "fb9b648c9ac0f8eb1e889ce29dbee5aa361b87c03aad79ccae2b8f57e7c08843",
+      "band_forms": []
+    },
+    {
+      "preset": "Serge + martin - crystal palace003.milk",
+      "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522",
+      "record_sha256": "d214a5cedc69ad4685dd8bcc497ae3e0604b6355539bab944dbf277fc849fa69",
+      "band_forms": []
+    },
+    {
+      "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e",
+      "record_sha256": "b6a0d2c7f3b1abfab412ddbc5cc244fa07ff4e6588a44c23d0bb2cd2f49fc93a",
+      "band_forms": []
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "record_sha256": "cf51f54d0f3539a622cdddfe5c396df3415aa81afc5d87994684aca2a34d48e5",
+      "band_forms": []
+    },
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "record_sha256": "894b5df93a75cd9c253dca34cdc27beec0e5e6d0c5dfa383728f7cb86131fce2",
+      "band_forms": []
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "record_sha256": "8153bdc6d2ffa068a6da89ffb9447b33acbe52be050cb90c49e05b682597f76d",
+      "band_forms": []
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+      "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca",
+      "record_sha256": "58f9749da46e1716462c7d3b6fe3a6e227d7b0c293742ef605ac836035e48458",
+      "band_forms": []
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+      "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf",
+      "record_sha256": "4ac7917418666a118cd9d0ed593850238f214f1c021ca086c908045a8bff13cd",
+      "band_forms": []
+    },
+    {
+      "preset": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+      "record_sha256": "eaf3949a85ee189c8977f5f13c5374c2d79db65328492c656d4b6061e18697cb",
+      "band_forms": []
+    },
+    {
+      "preset": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+      "sha256": "01803be5f3f974981e9bd8dbb6b06d2a8c211f873497414ac2d5651bc908dea5",
+      "record_sha256": "81baf943ee72c1c1bb2353b4265bcecb8996233fbbd4ad3e0877f590d2abc413",
+      "band_forms": []
+    },
+    {
+      "preset": "Waltra - Codex Machine 2.milk",
+      "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb",
+      "record_sha256": "781a7a48b35f9d1dec7bb5bfb3b8c875a5dcc802737079d0f3fbc2773c615a22",
+      "band_forms": []
+    },
+    {
+      "preset": "Zylot - Funnels (Jelly).milk",
+      "sha256": "0008a62faf508e742f0d3dcf8c73ca6f41e372880f2de9834b10f838edfb79b1",
+      "record_sha256": "530fb30b315fae7bb7f9786024aec367a39f35cd60bcd0b5c14af95f5c8aba35",
+      "band_forms": []
+    },
+    {
+      "preset": "Zylot - Spiral.milk",
+      "sha256": "02481b33b1399e5a186bc12f5f4230bb00d368edfd802857e4a2dac4831f5923",
+      "record_sha256": "f71f513636c300c036594efeeb9a8a69290bda9db95800071fa940254f8e8d6f",
+      "band_forms": []
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "record_sha256": "039c9d54e9597aa1cf46622221e47651c4f4111d91080d5a8fa6802cda5b111f",
+      "band_forms": [
+        {
+          "id": "band_b67cec3d5a5e39b48987e3cc01d715ff14c5433a7c4dad5d394872a85321ea3c",
+          "construction": "planar_oscillatory_bands",
+          "basis": "shader_uv",
+          "phase_coefficients": [
+            10.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "phase_normal_uv": [
+            1.0,
+            0.0
+          ],
+          "nominal_period_in_basis_units": 0.6283185307179586
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "record_sha256": "df79be65c3b5cb8f624c945ce68ed60b113a0964a645a6a7410a382dcc011c0b",
+      "band_forms": []
+    },
+    {
+      "preset": "amandio c - living boxes 4.milk",
+      "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356",
+      "record_sha256": "a0a655bbd1dbe522a079e42bce50b136c406190b579417e612fb1f2597ff3d2b",
+      "band_forms": []
+    },
+    {
+      "preset": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+      "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff",
+      "record_sha256": "163adf1cb54dac64fc9308d8cb675dd92a16b3ae517f7b596abbd5379360299b",
+      "band_forms": []
+    },
+    {
+      "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a",
+      "record_sha256": "11d17f477e58ff6a627d5b11e128f18eed218b7e626812b3dd4b19dc107ef7d0",
+      "band_forms": []
+    },
+    {
+      "preset": "bowel trounce dumring.milk",
+      "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247",
+      "record_sha256": "23c6595b531e1bd2aafe7734586710c4034cea37dc836f8a366cdba01febc66a",
+      "band_forms": []
+    },
+    {
+      "preset": "cortex meat - adm affect non.milk",
+      "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f",
+      "record_sha256": "bfd5fa000a5872de4b421d421ac9849d15eb28b6a85c025845070e404de4ea36",
+      "band_forms": []
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz+.milk",
+      "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "record_sha256": "6abe0c8e9f1a49d5ddca25dd54cd376adf805392202ec1b1c14cb691595eb637",
+      "band_forms": []
+    },
+    {
+      "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "record_sha256": "a8ad3f20c11e995480027f6ba979d45ae64726e0122a88c9e16e8a527af99f89",
+      "band_forms": []
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "record_sha256": "9aaa5b350934b787b1c7b756ef2edd4746b822a3861f37be546c1ed4135c48f5",
+      "band_forms": []
+    },
+    {
+      "preset": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "record_sha256": "f8306be561e9052524968c35698a0b0e22718af3d9e1bb2dfa10a82a7f1ec50d",
+      "band_forms": []
+    },
+    {
+      "preset": "fed - DSC-011 LSD Edit 2.milk",
+      "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991",
+      "record_sha256": "79357ad5267a4124f19a6b8aa99e596b59bcf04a254bb1b510ad9475ff256611",
+      "band_forms": []
+    },
+    {
+      "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+      "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda",
+      "record_sha256": "45d96854375ad034f8d945b2720f366b4f9d05e818f4eb1f1ab7b9a64d84588f",
+      "band_forms": []
+    },
+    {
+      "preset": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+      "sha256": "014ddc38e758a5ebbfd2a950eaeda1956e0ec78b3ec048bd461452922b01dfe6",
+      "record_sha256": "71ae84a0e9a31481ba596fc2407eb6268e0874a461cb515b8d44c8ef98dad49e",
+      "band_forms": []
+    },
+    {
+      "preset": "flexi - grind my glitch up [191].milk",
+      "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919",
+      "record_sha256": "b6cb73d502b58ace1d731d67a65e45b0cc49297dccc929d63f59a96d163f7c57",
+      "band_forms": []
+    },
+    {
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "record_sha256": "acfce8945539309e8eadb587233931e541b82cf7d83ffa3dad3302a537c9d44e",
+      "band_forms": []
+    },
+    {
+      "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60",
+      "record_sha256": "e2719c418a2833f3102cc8110536ad64e7ffd6ea857ce69674b079e287b0b92c",
+      "band_forms": []
+    },
+    {
+      "preset": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "record_sha256": "abeecf937476e664c17da93c5d42a6193b42181493a55ec682874069e23b1b32",
+      "band_forms": []
+    },
+    {
+      "preset": "martin + flexi - lock and release bipolar 02.milk",
+      "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561",
+      "record_sha256": "9b301dfcad9af595254ac3aeeb84a44d5f0af63dfa5e0e79b0762e890576bcbe",
+      "band_forms": []
+    },
+    {
+      "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+      "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9",
+      "record_sha256": "8da53e7b5c264dd87eac8cb6e440ae04c26584673699a2311d9615cff93d570a",
+      "band_forms": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "record_sha256": "15aaf47c7e41efb194f1a91fed8ba2c234ab346abd2905f8f8e03d8d3c75c7ba",
+      "band_forms": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+      "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20",
+      "record_sha256": "c1bcb8e06fac4ac47877901014844a3c0a032d877920ead850da3f65c3539692",
+      "band_forms": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "record_sha256": "c9579022c694e89e1618abe500e575e8262297542118a11213ecc7768c83fc0d",
+      "band_forms": []
+    },
+    {
+      "preset": "shifter - liquid circuitry - conjugoth.milk",
+      "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5",
+      "record_sha256": "bb8241f89ef49065a27cd7764d69b8d093ae920f1a7606e6683731211eeede09",
+      "band_forms": []
+    },
+    {
+      "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333",
+      "record_sha256": "ac443fdca8b4d216fb7e9807d7de03fa3844397ea57bdcf702067f31949f4b14",
+      "band_forms": []
+    },
+    {
+      "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "record_sha256": "b7ac559d3649079ef019a918c50186757f5de20c077756c83aa7fe38782da603",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "record_sha256": "220decf763ffdb2df9e067f09d9ca906fb239af209e114a7603b7fb05a24f873",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - bonobo - absurd.milk",
+      "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58",
+      "record_sha256": "44ddf4bba59370ef67e5267a115d5664035e9abf41025d01c643a3c9df951967",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "record_sha256": "4f5ef787e632b102347c3f36ec3d5a1ee722a7cf5ad9eb935e55b5287301ece2",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+      "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7",
+      "record_sha256": "9369d97a269f6ccfc5537cdf5f0064c2ff1e8727e93daa22bfb5f93678730b5d",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "record_sha256": "32fc9bc75e5ff83d26018ed49f6381452eb9b07da240df35a3176049d46cf177",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - ku pilled - forgoing utility nz.milk",
+      "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c",
+      "record_sha256": "edabc28a57cbbfa0899ffb3e1c6c29bb95a2b8543525084a5ed60d915abcd2c7",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+      "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7",
+      "record_sha256": "0c7d68c03d1b8b4b069ca3d84e0da2ef618c38099689b6f151756edd1a21edd8",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "record_sha256": "6f36bbc73560195da71fafdddf66d18ea217a78751236a73827c660bc76a130e",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "record_sha256": "7b31bbf6e8668584c6e328c5a73e1c42e01a77a67f7594c962426993fb48eee7",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - never degweh - flx spr col.milk",
+      "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d",
+      "record_sha256": "fb99f8708468b47cd9fd13692f1b73356377e8677a5be249a0eb177bb218bc41",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+      "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6",
+      "record_sha256": "5b27a6a69b257ad9551c5924db793cd0ef2efb8a6e519e5093ebb82b6dc13125",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - prigogine quantum foam self-organizer.milk",
+      "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852",
+      "record_sha256": "2c8306290e961b0e7ddcad361456f30c047f6a81389ebe666f3a9141acfbe325",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+      "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d",
+      "record_sha256": "6cb9fcb99e1aeb5e867a9c16780529594ea72573c45be236c658233b1a955ca3",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+      "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a",
+      "record_sha256": "a0443e896677dcba74d47c420bca6ce38bacb229bb9a8de1d8154412fd7595da",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - blur.milk",
+      "sha256": "018e0c956d661138bb97cf78d36f5e62cff34f3e11057519532cdca042bf4119",
+      "record_sha256": "85e3f9718f8656be602ddb3c2ef88274e2796cad492918729cd808f0eccd6295",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+      "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99",
+      "record_sha256": "7b627bfad90655186a097d1b56106bcc68f1508c3107db2bfd03603afd3de165",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - tech ed lacquer sinus raw.milk",
+      "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078",
+      "record_sha256": "b6611d01f467be8c194a3006a865b3527fd82b3e0890505e46c7f16459fa571f",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "record_sha256": "1b857c6dc40c60b1f7589a1eddfa1029a730c4245fb72cf409dd52dd034add7a",
+      "band_forms": []
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "record_sha256": "82ce85f951f5b1d621b17ff7b9cb85aae5e7b544c60746695581c4837d1322ce",
+      "band_forms": []
+    },
+    {
+      "preset": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "record_sha256": "6a4ee07f95d290670eb760c2e098239b3dca31ab110059eb6b1a7d9686f7d360",
+      "band_forms": []
+    },
+    {
+      "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+      "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9",
+      "record_sha256": "c79b53c82ac6a1232f2345ce564d0f3f0ffc1277f75818bffc71ffc21a73143d",
+      "band_forms": []
+    }
+  ]
+}

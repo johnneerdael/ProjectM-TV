@@ -85,3 +85,15 @@ def test_shader_uniforms_named_like_eel_coordinates_do_not_claim_spatial_grid():
 def test_identical_repeated_formula_is_one_canonical_generator_not_a_layer_count():
     fs=forms('ret=saturate(.04/length(frac(uv*8)-.5))+saturate(.04/length(frac(uv*8)-.5));')
     assert len(fs)==1
+
+
+@pytest.mark.parametrize('body',[
+    'ret=GetPixel(uv+.02*saturate(.04/length(frac(uv*8)-.5)));',
+    'ret=saturate(2+saturate(.04/length(frac(uv*8)-.5)));',
+])
+def test_coordinate_only_or_fully_clipped_glows_do_not_claim_colour_forms(body):
+    assert forms(body)==[]
+
+
+def test_partially_attenuated_glow_retains_raw_form():
+    assert len(forms('ret=saturate(.5*saturate(.04/length(frac(uv*8)-.5)));'))==1

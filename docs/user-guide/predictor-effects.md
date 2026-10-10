@@ -415,3 +415,10 @@ This helps distinguish a control dependency from its possible strength.
 It is an upper bound, not a typical response or screen-intensity score.
 Thresholds, singularities and quantized uploads keep explicit unknowns;
 recurrent feedback and actual audio timing require separate understanding.
+
+The source descriptor can now recognize straight sinusoidal bands and radial
+oscillations where their spatial phase is supported. Form code10 exports raw
+spacing, signed orientation, the coordinate basis and phase controls. A sine
+used only to distort image coordinates is kept separate from a colour-band
+generator. Masks, clipping and feedback can change the appearance, so these
+are contributing source constructions with unknown final prominence.

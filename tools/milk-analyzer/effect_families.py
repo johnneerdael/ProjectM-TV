@@ -301,7 +301,7 @@ def _children_uncached(value, *, plans=True):
     return value.args
 
 
-def _walk(value):
+def _walk(value,*,sample_coordinates=True,constant_clipping=False):
     pending = [(value, 'output')]
     seen = set()
     while pending:
@@ -315,8 +315,13 @@ def _walk(value):
             if cache['field_visits'] > MAX_FIELD_VISITS:
                 raise _SemanticBudget('static field traversal budget exceeded')
         yield node, path
+        children=() if node.op=='sample' and not sample_coordinates else _children(node)
+        if constant_clipping:
+            from source_forms import constant_colour_clip_children
+            clipped=constant_colour_clip_children(node)
+            if clipped is not None:children=clipped
         pending.extend((arg, path + '/' + node.op + '[' + str(index) + ']')
-                       for index, arg in enumerate(_children(node)))
+                       for index, arg in enumerate(children))
 
 
 def _deps(value):
@@ -1005,10 +1010,18 @@ class _Analysis:
         output = _rgb_output(output)
         self.outputs[stage] = output
         nodes = list(_walk(output))
+        colour_nodes={id(node) for node,path in _walk(output,sample_coordinates=False,constant_clipping=True)}
         self.unknowns.extend({'section': prefix, 'reason': n.detail.get('reason', 'unresolved live typed field')}
                              for n, _ in nodes if n.op in {'unknown', 'uninitialized'})
         for node, path in nodes:
-            if node.op=='saturate':
+            if node.op in {'sin','cos'} and id(node) in colour_nodes:
+                from source_forms import spatial_oscillatory_band
+                try:form=spatial_oscillatory_band(node,self)
+                except (ValueError,RecursionError):form=None
+                if form is not None:
+                    self.add('spatial_oscillatory_bands',prefix,node,
+                             'constant-affine UV/radius phase supplies a live periodic scalar generator',path=path,parameters=form)
+            if node.op=='saturate' and id(node) in colour_nodes:
                 from source_forms import periodic_radial_glow
                 try:form=periodic_radial_glow(node,self)
                 except (ValueError,RecursionError):form=None

@@ -57,7 +57,7 @@
                 "items": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 9
+                  "maximum": 10
                 }
               },
               "parameters": {
@@ -1111,119 +1111,126 @@
               "procedural_forms": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "required": [
-                    "policy",
-                    "id",
-                    "form_code",
-                    "generator",
-                    "generator_expression",
-                    "mapping_expression",
-                    "cell_centre",
-                    "radial_gain",
-                    "core_radius_cell_units",
-                    "core_disk_area_per_cell",
-                    "mapping_matrix_uv4",
-                    "phase_motion_controls",
-                    "audio_routes",
-                    "actual_screen_coverage",
-                    "appearance_guaranteed",
-                    "conditions"
-                  ],
-                  "properties": {
-                    "policy": {
-                      "const": "source-periodic-radial-glow-v1"
-                    },
-                    "form_code": {
-                      "const": 9
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "cell_centre": {
-                      "type": "array",
-                      "minItems": 2,
-                      "maxItems": 2,
-                      "items": {
-                        "type": "number",
-                        "exclusiveMinimum": 0,
-                        "exclusiveMaximum": 1
-                      }
-                    },
-                    "radial_gain": {
-                      "type": "number",
-                      "exclusiveMinimum": 0
-                    },
-                    "core_radius_cell_units": {
-                      "type": "number",
-                      "exclusiveMinimum": 0
-                    },
-                    "core_disk_area_per_cell": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "core_clipped_by_cell": {
-                      "type": "boolean"
-                    },
-                    "mapping_matrix_uv4": {
-                      "type": [
-                        "array",
-                        "null"
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "policy",
+                        "id",
+                        "form_code",
+                        "generator",
+                        "generator_expression",
+                        "mapping_expression",
+                        "cell_centre",
+                        "radial_gain",
+                        "core_radius_cell_units",
+                        "core_disk_area_per_cell",
+                        "mapping_matrix_uv4",
+                        "phase_motion_controls",
+                        "audio_routes",
+                        "actual_screen_coverage",
+                        "appearance_guaranteed",
+                        "conditions"
                       ],
-                      "minItems": 2,
-                      "maxItems": 2,
-                      "items": {
-                        "type": "array",
-                        "minItems": 4,
-                        "maxItems": 4,
-                        "items": {
-                          "type": "number"
-                        }
-                      }
-                    },
-                    "mapping_rank_uv4": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ],
-                      "minimum": 2,
-                      "maximum": 2
-                    },
-                    "phase_motion_controls": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "audio_routes": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "nominal_audio_response": {
-                            "$ref": "#/$defs/nominalAudioResponse"
+                      "properties": {
+                        "policy": {
+                          "const": "source-periodic-radial-glow-v1"
+                        },
+                        "form_code": {
+                          "const": 9
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "cell_centre": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "exclusiveMaximum": 1
+                          }
+                        },
+                        "radial_gain": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "core_radius_cell_units": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "core_disk_area_per_cell": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        },
+                        "core_clipped_by_cell": {
+                          "type": "boolean"
+                        },
+                        "mapping_matrix_uv4": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "array",
+                            "minItems": 4,
+                            "maxItems": 4,
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "mapping_rank_uv4": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 2,
+                          "maximum": 2
+                        },
+                        "phase_motion_controls": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "audio_routes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "nominal_audio_response": {
+                                "$ref": "#/$defs/nominalAudioResponse"
+                              }
+                            }
+                          }
+                        },
+                        "actual_screen_coverage": {
+                          "type": "null"
+                        },
+                        "visible_motion_speed": {
+                          "type": "null"
+                        },
+                        "appearance_guaranteed": {
+                          "const": false
+                        },
+                        "conditions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
                           }
                         }
                       }
                     },
-                    "actual_screen_coverage": {
-                      "type": "null"
-                    },
-                    "visible_motion_speed": {
-                      "type": "null"
-                    },
-                    "appearance_guaranteed": {
-                      "const": false
-                    },
-                    "conditions": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
+                    {
+                      "$ref": "#/$defs/spatialOscillatoryBand"
                     }
-                  }
+                  ]
                 }
               },
               "native_colour_generators": {
@@ -5290,6 +5297,90 @@
           "type": "null"
         },
         "native_numeric_certified": {
+          "const": false
+        }
+      }
+    },
+    "spatialOscillatoryBand": {
+      "type": "object",
+      "required": [
+        "policy",
+        "id",
+        "form_code",
+        "construction",
+        "generator_expression",
+        "phase_expression",
+        "basis",
+        "phase_coefficients",
+        "nominal_period_in_basis_units",
+        "phase_motion_control",
+        "audio_routes",
+        "conditions"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-spatial-oscillatory-bands-v1"
+        },
+        "form_code": {
+          "const": 10
+        },
+        "construction": {
+          "enum": [
+            "planar_oscillatory_bands",
+            "native_radius_oscillatory_bands"
+          ]
+        },
+        "basis": {
+          "enum": [
+            "shader_uv",
+            "original_uv",
+            "native_radial_varying"
+          ]
+        },
+        "phase_coefficients": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "phase_normal_uv": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "nominal_period_in_basis_units": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "phase_motion_control": {
+          "type": "object"
+        },
+        "audio_routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nominal_audio_response": {
+                "$ref": "#/$defs/nominalAudioResponse"
+              }
+            }
+          }
+        },
+        "actual_screen_coverage": {
+          "type": "null"
+        },
+        "visible_motion_speed": {
+          "type": "null"
+        },
+        "appearance_guaranteed": {
           "const": false
         }
       }

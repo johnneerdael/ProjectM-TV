@@ -1125,3 +1125,11 @@ Do not replace an unknown cross-band amplitude with an assumed audio range.
 Dynamic casts/narrowing, thresholds, singular domains and unsupported effects
 retain null bounds. Sufficient partial response is not a minimum/typical gain,
 audio time-rate, recurrent-state derivative or final screen/mood certificate.
+
+Source oscillatory-band maintenance: `source_forms.spatial_oscillatory_band`
+uses constant-affine phase in one native UV basis or the radius lane alone.
+Additive family/form code10 exports nominal raw generator period, signed
+normal and uniform phase controls, not visible stripes/ring count or dominance.
+Keep coordinate-only sampling oscillations separate: colour-data traversal
+stops at sample nodes, retaining shared expressions that also reach RGB/masks.
+Do not infer exact analytic circles from the interpolated native radial varying.
