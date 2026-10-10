@@ -120,3 +120,17 @@ def q_uniform_domains(source,*,policy):
         index=int(name[1:])-1
         result.setdefault('_q'+chr(ord('a')+index//4),{})[index%4]=bounds
     return result
+
+
+def main_q_domain_evidence(source,*,policy,candidates,input_domains=None):
+    """Supplement native Q domains with separately scoped real induction proofs.
+
+    Keep the existing native selector-domain entrypoint authoritative. Nominal
+    private-state bounds require explicit candidates, initialization and a full
+    ordered transition with host resets; they never populate q_uniform_domains.
+    """
+    result={'native_domains':main_q_domains(source,policy=policy)}
+    from source_proofs import main_q_invariant_evidence
+    proof=main_q_invariant_evidence(source,policy=policy,candidates=candidates,input_domains=input_domains)
+    if proof is not None:result['nominal_proof']=proof
+    return result

@@ -68,7 +68,55 @@ are explicitly skipped; default-off tests still run. Complete qualification
 must include the component environment and the pinned native adapters required
 by the rest of the analyzer suite.
 
-Z3 and compiler-backed source additions are the following planned steps;
-installation of their libraries does not mean those capabilities are integrated.
+## Solver and recurrent dependency supplements
+
+`--proof-python PATH` enables the pinned Z3 worker alongside or independently
+of `--symbolic-python`. Scalar value records gain `solver_refinement`; existing
+bounds and native selector domains are preserved. The separate
+`main_q_domain_evidence` API requires caller-supplied candidate private-state
+ranges and proves both initialization and the ordered frame transition. It
+rejects effects, unqualified storage, invalid domains and shared/cross-phase
+state; only q1..q32 reload their initial snapshots. See `SOURCE_PROOFS.md`.
+
+The fixed 2,000-source scalar census added zero new bounds and zero >1% reductions.
+It produced 514 small enclosure reductions across 307 presets. Its value here is
+an explicit proof/counterexample facility, not a measured classification gain.
+
+`--phase-dependencies` adds a top-level `source_dependency_evidence` record.
+The Stims-derived monotone fixpoint closes private main-frame predecessor edges
+while retaining initialization uncertainty, Q resets, random-stream uncertainty
+and shared-memory/phase exclusions. It exposes additional possible audio ancestry
+in main source control endpoints for 470 of the full 9,606 presets. Those endpoints
+may still be gated or superseded by custom shaders; ancestry is not visible strength.
+No bounds or appearance predictions are changed by this component.
+
+```sh
+build/preset-lab-venv/bin/python tools/milk-analyzer/effect_family_export.py core/src/main/assets/presets --reader build/preset-corpus/source34/adapters/milk-native-reader --symbolic-python build/source-component-venv/bin/python --proof-python build/source-component-venv/bin/python --phase-dependencies --output build/source-component-export
+```
+
+Enabled backend identities and the dependency policy join the cache/run identity.
+After all supplemental analysis, source/model/parser identities are checked again
+before publishing or caching. A cached default-off result cannot masquerade as
+an enabled result.
+
+## Auxiliary shader and precision components
+
+Compiler components are separate opt-in exports. They preserve exact GLES300
+source AST evidence and label modified inspection profiles explicitly. Their
+function, call, loop, conversion and resource inventories supplement source
+understanding; they do not select native branches or assign effects/moods.
+SPIRV-Cross, Naga and Slang bridge scopes and exact tool requirements are documented
+with the compiler component evidence. No shader is rendered.
+
+`source_precision_export.export_precision_query` exports already parsed pure
+scalar Fields into FPCore and FPTaylor requests. A caller must supply finite input
+domains and an explicit common binary32/binary64 format. Exact existing literals
+and operation order are retained. `run_fptaylor_js` runs a separately supplied
+portable bundle under a process deadline with frozen bundle/config bytes and
+runtime identity checks. Its portable interval backend rejects trig. FPCore
+requests also worked with the separately built Daisy tool. Both reject the
+overflow control; neither certifies the actual mixed-format native pipeline.
+Herbie-compatible requests are for separately labelled new/adapted effects;
+its output must never replace authored prediction arithmetic silently.
 See `docs/research/2026-10-10-component-reuse-evaluation.md` and
 `docs/superpowers/plans/2026-10-10-source-component-adoption.md`.

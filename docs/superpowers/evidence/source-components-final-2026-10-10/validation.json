@@ -1,0 +1,13 @@
+{
+  "tests": 3266,
+  "subtests": 92,
+  "suite_seconds": 200.68,
+  "suite_log_sha256": "6aa65816a2dcc864cabba8ad97d291d74f433f1340f69c8424b146d00ca365cb",
+  "export_records": 100,
+  "schema_failures": 0,
+  "model_hash_mismatches": 0,
+  "uses_rendered_images": false,
+  "combined_export_archive_sha256": "b8a9bfdfd612902df1c24aae315259a12b8aea2ee626c3751ad9df165fc90f30",
+  "independent_review": "all four actionable findings repaired and retested; no remaining correctness findings",
+  "qualification_scope": "source component integration, not appearance/mood accuracy"
+}

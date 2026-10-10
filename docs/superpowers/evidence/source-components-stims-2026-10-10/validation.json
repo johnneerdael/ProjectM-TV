@@ -1,0 +1,9 @@
+{
+  "Stims_pytest_controls": 15,
+  "Stims_previous14_plus_effect_families_and_Q": 106,
+  "component_production_sha256": "01cd3522b9d6d61cfd171765360a7273efca0a33aff0edc5d58d96f289d26712",
+  "component_runner_sha256": "067dc6cd7d83049c8ec643b9b8c394872ac6b038397689a6e1d52e9841f84d65",
+  "fixture_sha256": "268123e8d8efc2847d042d8117fce5875fa22cc5ef24011da488fe1d2f977658",
+  "no_equation_shader_or_visual_execution": true,
+  "preliminary_abort": "Per-case newly copied executable startup overhead; preserved outside qualification in build/preset-corpus/source-components-stims-full9606-2026-10-10/aborted.json"
+}

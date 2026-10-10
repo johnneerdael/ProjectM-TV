@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "scope": "Independent expression/default-table ideas adapted to native source graphs; no borrowed runtime or numeric execution",
+  "lineage": [
+    {
+      "repository": "https://github.com/zz-plant/stims",
+      "commit": "36e902704cab7a3c39bfc0a6b2bf587d8ba7e291",
+      "paths": ["packages/milkdrop-toolchain/src/preset-dataflow.ts", "packages/milkdrop-toolchain/tests/preset-dataflow.test.ts"],
+      "license": "Unlicense",
+      "reuse": "Monotone predecessor dependency closure and recurrence/overwrite/init/reset test ideas; native host policy adapted separately"
+    },
+    {
+      "repository": "https://github.com/captbaritone/eel-wasm",
+      "commit": "4bae490f6e0e397264a0269de69d47a59079b0d5",
+      "paths": ["packages/compiler/tools/testCases.ts"],
+      "license": "MIT (package metadata)",
+      "reuse": "Independently rewritten controls motivated by negative sqrt, EEL epsilon equality, sequence implicit-return and dead assignment branch cases; no implementation copied"
+    },
+    {
+      "repository": "https://github.com/jberg/milkdrop-preset-utils",
+      "commit": "ba5a4e445300be0dad5e43a6d7f2638c6f02b7f8",
+      "paths": ["src/index.js"],
+      "license": "MIT",
+      "reuse": "Default-table mismatch regression ideas; neither field parser nor browser-host defaults imported"
+    }
+  ],
+  "native_route_controls": [
+    {
+      "name": "negative_square_root_keeps_audio_operand",
+      "source": "per_frame_1=rot=sqrt(-4)*bass;\n",
+      "native_may_input_dependencies": ["bass"],
+      "value_claim": "No numeric bound or literal sqrt result is supplied by this dependency-only component"
+    },
+    {
+      "name": "epsilon_equality_selects_live_branch",
+      "source": "per_frame_1=rot=if(equal(0,.000009),bass,mid);\n",
+      "native_may_input_dependencies": ["bass"]
+    },
+    {
+      "name": "last_expression_of_sequence_is_the_value",
+      "source": "per_frame_1=rot=(k=bass;k+treb;);\n",
+      "native_may_input_dependencies": ["bass", "treb"]
+    },
+    {
+      "name": "unselected_assignment_branch_cannot_supply_current_audio",
+      "source": "per_frame_init_1=k=0;\nper_frame_1=rot=if(0,(k=bass;),mid);\n",
+      "native_may_input_dependencies": ["mid"]
+    }
+  ],
+  "native_default_controls": {
+    "mv_a": 0,
+    "shape_border_a": 0,
+    "foreign_mv_a": 1,
+    "foreign_shape_border_a": 0.1,
+    "reason": "Foreign defaults must not replace the existing target constructor/loader defaults"
+  }
+}

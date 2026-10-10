@@ -44,30 +44,30 @@ Files: create `source_symbolic.py`, `source_symbolic_worker.py`,
 Files: extend the isolated worker/client protocol and tests; integrate only with
 existing source-domain entry points whose inputs/numeric contract are explicit.
 
-- [ ] Add proof controls for declaration-bound polynomial predicates, a bounded
+- [x] Add proof controls for declaration-bound polynomial predicates, a bounded
   recurrence and an unbounded mutation, format/order negatives and timeout unknown.
-- [ ] Lower only qualified graph operations, retaining real versus native-FP scope.
+- [x] Lower only qualified graph operations, retaining real versus native-FP scope.
   Reject unsupported functions, unknown storage, missing domains and effects.
-- [ ] Consume proofs as additional domain evidence, preserving initialization,
+- [x] Consume proofs as additional domain evidence, preserving initialization,
   reset and transition obligations before any recurrent-state claim.
-- [ ] Measure changed calculations and exact affected source cases; run full-pack
+- [x] Measure changed calculations and exact affected source cases; run full-pack
   source checks when focused/sample evidence cannot establish practical value.
-- [ ] Review and commit the step; keep unsupported constructions explicit.
+- [x] Review and commit the step; keep unsupported constructions explicit.
 
 ## 3. Compiler analysis components
 
 Files: add an auxiliary wrapper/evidence exporter around installed glslang,
 SPIR-V Tools and SPIRV-Cross. Reuse their APIs/CLI rather than another binary parser.
 
-- [ ] Add exact GLES300 AST and labelled ES310 inspection controls; preserve original
+- [x] Add exact GLES300 AST and labelled ES310 inspection controls; preserve original
   shader/preset/tool hashes and auto-binding/profile distinctions.
-- [ ] Apply selective passes and function summaries; test casts, loop/control-flow,
+- [x] Apply selective passes and function summaries; test casts, loop/control-flow,
   samples and source joins. Do not blanket inline helper code or promote inspection
   results to native runtime equivalence.
-- [ ] Compare information recovered with current live source slices and report
+- [x] Compare information recovered with current live source slices and report
   actual additional useful facts/cost before integration.
-- [ ] Add Stims fixture/pattern components with adapters for our actual host rules.
-- [ ] Evaluate Slang/Crab/Naga against remaining named gaps; more adapter work is
+- [x] Add Stims fixture/pattern components with adapters for our actual host rules.
+- [x] Evaluate Slang/Crab/Naga against remaining named gaps; more adapter work is
   allowed when it saves substantial bespoke work. Keep low-risk useful small
   additions eligible. Update evidence and commits after each verified component.
 
@@ -78,3 +78,10 @@ and processing cost independently. Do not translate compiler success into appear
 accuracy, nor infer a 10k improvement from a toy control. Retain negative/failed
 fixtures, exact full-pack denominator and all terminal outcomes. No shared devices,
 captures or duplicate render corpus are needed.
+
+## Final component checkpoint
+
+All planned component experiments/interfaces are implemented and qualified within
+their stated scopes. Final integration: 3,266 tests + 92 subtests; 100/100 complete
+static exports pass schema/identity checks. See source-components-final evidence.
+No native/visual/mood accuracy promotion or main merge follows from this phase.

@@ -1,0 +1,9 @@
+{
+  "scope": "comparison-only audit of saved exact source/model rows; no preset analysis rerun",
+  "presets": 2000,
+  "prior_dependency_sets_changed": [],
+  "replaced_order_sensitive_false_differences": 100,
+  "before_rows_sha256": "33a776ea9279766de5c7cda3796a6e45fca8d18ab67b586434fc50b910c9f160",
+  "after_rows_sha256": "1665e1fe0846d275855a4f4403e74712ce9149891545d07ed42a5fc171a52bc4",
+  "comparison_runner_sha256": "067dc6cd7d83049c8ec643b9b8c394872ac6b038397689a6e1d52e9841f84d65"
+}

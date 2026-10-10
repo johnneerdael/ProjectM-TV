@@ -94,7 +94,7 @@ def _lower(tree, domains, derived, depth=0):
 class SymbolicSession:
     """One caller-owned reusable worker; a timeout disables this session."""
 
-    def __init__(self, python, *, timeout=1., startup_timeout=10.):
+    def __init__(self, python, *, timeout=1., startup_timeout=10., worker_path=None, ready_message=None):
         if not 0 < timeout <= 10 or not 0 < startup_timeout <= 30:
             raise ValueError('bounded positive worker timeouts required')
         # Preserve a venv executable's path: resolving its symlink would run
@@ -104,6 +104,9 @@ class SymbolicSession:
             raise ValueError('prepared symbolic Python executable required')
         self.timeout = timeout
         self.startup_timeout = startup_timeout
+        self.worker_path = WORKER if worker_path is None else Path(worker_path)
+        self.ready_message = ({'protocol': 1, 'sympy_version': '1.14.0'}
+                              if ready_message is None else ready_message)
         self.process = None
         self.failure = None
         self.cache = OrderedDict()
@@ -111,7 +114,7 @@ class SymbolicSession:
         self.lock = threading.Lock()
         self.buffer = b''
         self.identity = {'policy': 'source-sympy-nominal-response-v1', 'sympy_version': '1.14.0',
-                         'worker_sha256': hashlib.sha256(WORKER.read_bytes()).hexdigest(),
+                         'worker_sha256': hashlib.sha256(self.worker_path.read_bytes()).hexdigest(),
                          'python': str(self.python), 'timeout_seconds': timeout}
 
     def _read(self, seconds, *, deadline=None):
@@ -178,11 +181,11 @@ class SymbolicSession:
                 return {'status': 'unavailable', 'reason': self.failure}
             try:
                 if self.process is None:
-                    self.process = subprocess.Popen([str(self.python), '-u', str(WORKER)],
+                    self.process = subprocess.Popen([str(self.python), '-u', str(self.worker_path)],
                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, bufsize=0)
                     os.set_blocking(self.process.stdin.fileno(), False)
                     ready = self._read(self.startup_timeout)
-                    if ready != {'protocol': 1, 'sympy_version': '1.14.0'}:
+                    if ready != self.ready_message:
                         raise ValueError('symbolic worker version/protocol mismatch')
                 self.stats['queries'] += 1
                 deadline = time.monotonic() + self.timeout

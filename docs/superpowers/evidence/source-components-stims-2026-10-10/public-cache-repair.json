@@ -1,0 +1,20 @@
+{
+  "preset_path": "build/preset-corpus/static-review-presets/Flexi - alien web bouncer [39].milk",
+  "preset_sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "profile": "gles300",
+  "compile_manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "input_scenario_sha256": "2565547f96168db58f5932c6a60a53dddd31756296c410b0e81bfbfc3b52f59d",
+  "components": "SymPy+Z3+Stims",
+  "source_status": "partial",
+  "export_status": "computed",
+  "standalone_seconds": 0.03296674997545779,
+  "combined_export_seconds": 0.6715007500024512,
+  "standalone_matches_export": true,
+  "source_stims_sha256": "5aea56ca6a708951f5c3991f6439eaeb41b3bb3e999874dcb0b1f1f58e9f792b"
+}

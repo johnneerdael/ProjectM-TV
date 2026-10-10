@@ -1,0 +1,17 @@
+{
+  "main_render_control_fields": {
+    "presets": 98,
+    "outputs": 297,
+    "band_paths": 631
+  },
+  "q_snapshot_potential_inputs": {
+    "presets": 119,
+    "outputs": 493,
+    "band_paths": 1038
+  },
+  "private_temporaries": {
+    "presets": 192,
+    "outputs": 1188,
+    "band_paths": 2791
+  }
+}

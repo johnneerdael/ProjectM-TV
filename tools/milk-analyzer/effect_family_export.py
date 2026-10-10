@@ -7,7 +7,7 @@ import sys
 import time
 import subprocess
 import tempfile
-from contextlib import nullcontext
+from contextlib import ExitStack
 
 from corpus_store import RunStore,atomic_json,digest,discover,file_hash
 from effect_families import analyze_families,POLICY,_IMPORT_MODEL_HASHES as _FAMILY_IMPORT_HASHES
@@ -25,7 +25,17 @@ def loaded_model_hashes():
     return models
 
 
-def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None,input_scenario=None):
+def _component_identity():
+    from source_symbolic import active_identity as symbolic_identity
+    from source_proofs import active_identity as solver_identity
+    symbolic=symbolic_identity();solver=solver_identity()
+    if solver is None:return symbolic
+    result={'solver':solver}
+    if symbolic is not None:result['symbolic']=symbolic
+    return result
+
+
+def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None,input_scenario=None,phase_dependencies=False):
     """Return (stable record, cache_hit); the only native operation is parsing."""
     path=Path(path);reader=Path(reader).resolve(strict=True)
     raw=path.read_bytes();source_sha=hashlib.sha256(raw).hexdigest()
@@ -39,9 +49,9 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
               'reader_sha256':file_hash(reader),'model_modules':models,
               'profile':profile,'compatibility':compatibility,
               'compile_manifest_sha256':None if manifest is None else manifest['record_sha256']}
-    from source_symbolic import active_identity
-    components=active_identity()
+    components=_component_identity()
     if components is not None:identity['source_components']=components
+    if phase_dependencies:identity['phase_dependency_policy']='source-stims-main-local-may-dependencies-v1'
     if input_scenario is not None:
         from source_input_scenario import validate_scenario
         scenario=validate_scenario(input_scenario)
@@ -78,8 +88,13 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
                           'engine_archive_sha256':source['parser_inputs']['engine_archive_sha256'],
                           'model_modules':models},'cache_key':key}
     if components is not None:record['provenance']['source_components']=components
+    if phase_dependencies:
+        from source_stims import source_phase_dependency_evidence
+        record['source_dependency_evidence']=source_phase_dependency_evidence(source)
     if compile_evidence is not None:record['provenance']['offline_compile_evidence']=compile_evidence
     if input_scenario is not None:record['provenance']['input_scenario_sha256']=scenario['record_sha256']
+    if model_file_hashes()!=models or file_hash(reader)!=identity['reader_sha256'] or file_hash(path)!=source_sha:
+        raise ValueError('static family model/parser/preset changed during supplemental analysis')
     if cached is not None:
         atomic_json(cached,{'cache_key':key,'record':record,'record_sha256':digest(record)})
     return record,False
@@ -95,11 +110,16 @@ def main(argv=None):
     parser.add_argument('--batch-size',type=int,default=100)
     parser.add_argument('--compile-manifest',type=Path,help='Saved source-bound offline compiler evidence; no runtime certification')
     parser.add_argument('--input-scenario',type=Path,help='Declared ripple input domains; additional conditional bounds, no observed-input certification')
+    parser.add_argument('--proof-python',type=Path,help='Optional prepared Z3 worker Python; supplemental nominal bounds and predicate proofs')
+    parser.add_argument('--phase-dependencies',action='store_true',help='Supplemental predecessor-state may-dependencies; preserves numeric unknowns')
     parser.add_argument('--symbolic-python',type=Path,help='Optional prepared SymPy worker Python; adds bounded nominal source refinements')
     args=parser.parse_args(argv)
     try:
         from source_symbolic import SymbolicSession
-        with SymbolicSession(args.symbolic_python) if args.symbolic_python is not None else nullcontext():
+        from source_proofs import ProofSession
+        with ExitStack() as contexts:
+            if args.symbolic_python is not None:contexts.enter_context(SymbolicSession(args.symbolic_python))
+            if args.proof_python is not None:contexts.enter_context(ProofSession(args.proof_python))
             return _run(args)
     except (ValueError,OSError,RuntimeError) as error:
         print('Static family export stopped: '+str(error),file=sys.stderr)
@@ -133,9 +153,9 @@ def _run(args):
                   'reader_sha256':file_hash(reader),'model_modules':loaded_model_hashes(),
                   'profile':args.profile,'source_engine':engine,
                   'simulation':False,'AI_involved':False}
-        from source_symbolic import active_identity
-        components=active_identity()
+        components=_component_identity()
         if components is not None:identity['source_components']=components
+        if args.phase_dependencies:identity['phase_dependency_policy']='source-stims-main-local-may-dependencies-v1'
         if compile_manifest is not None:identity['compile_manifest_file_sha256']=compile_file_sha
         if input_scenario is not None:
             identity['input_scenario_file_sha256']=scenario_file_sha
@@ -154,7 +174,7 @@ def _run(args):
                     raise ValueError('input scenario changed during run')
                 started=time.perf_counter();hit=False
                 try:
-                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest,input_scenario=input_scenario)
+                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest,input_scenario=input_scenario,phase_dependencies=args.phase_dependencies)
                 except Exception as error:
                     result={'export_kind':'preset-effect-families',
                             'status':'timeout' if isinstance(error,subprocess.TimeoutExpired) else 'error','analysis':None,

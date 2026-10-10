@@ -1445,3 +1445,16 @@ history retained. The active predictor owns local `build/preset-lab-venv`,
 Copied environment imports, focused source/adapter tests and strict docs pass.
 The primary checkout's separate unsaved files were preserved. Detailed inventory
 and migration records are in `~/Downloads/ProjectM-TV-worktree-cleanup-2026-10-10/`.
+
+Source-component adoption (2026-10-10): the optional `--proof-python` worker
+adds Z3 nominal value/predicate/private-state proof evidence; it never promotes
+real proofs into native Q selector bounds. `--phase-dependencies` adds a
+Stims-derived private main-frame predecessor fixpoint with init/Q/phase/RNG
+uncertainty retained. Backend/policy identities participate in static export
+cache keys, and publication checks occur after supplemental analysis. Optional
+compiler/Naga/Slang/Crab and precision-query bridges are auxiliary source exports,
+not native or visual certification. Prepared component environments and exact
+artifact hashes are required for their optional controls. See
+`tools/milk-analyzer/SOURCE_COMPONENTS.md` and component evidence/research reports.
+Keep the original predictor-maths goal paused until the approved component
+adoption/validation phase completes; no main merge or device corpus is included.

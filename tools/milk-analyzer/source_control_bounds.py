@@ -377,7 +377,7 @@ def scalar_response_envelope(field,*,input_names,input_domains=None):
 def scalar_value_envelope(field,*,input_domains=None):
     """Bound scalar values under finite inputs/intermediates; infer no timing."""
     report=compound_time_bounds(field,_value_only=True,_input_domains=input_domains)
-    return {'policy':'source-scalar-finite-input-envelope-v1',
+    result={'policy':'source-scalar-finite-input-envelope-v1',
         'nominal_value_range':report['nominal_value_range'],
         'assumed_finite_input_names':report.get('assumed_finite_input_names',[]),
         'declared_input_domains':report.get('declared_input_domains',{}),
@@ -388,3 +388,8 @@ def scalar_value_envelope(field,*,input_domains=None):
                       'Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults',
                       'Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown',
                       'Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate']}
+
+    from source_proofs import scalar_value_evidence
+    refinement=scalar_value_evidence(field,input_domains=input_domains,candidate_bounds=report['nominal_value_range'],original_report=report)
+    if refinement is not None:result['solver_refinement']=refinement
+    return result

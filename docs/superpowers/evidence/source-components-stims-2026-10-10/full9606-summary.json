@@ -1,0 +1,18 @@
+{
+  "presets": 9606,
+  "terminal_status_counts": {
+    "source_may_dependencies": 2461,
+    "partial": 7145
+  },
+  "presets_with_new_current_audio_ancestry": 1349,
+  "main_controls_with_new_current_audio_ancestry": 8864,
+  "main_control_band_paths_added": 19557,
+  "numeric_bounds_changed": 0,
+  "appearance_predictions_changed": 0,
+  "wall_seconds": 221.90248775001965,
+  "analysis_worker_seconds": 33.9697866141214,
+  "mean_analysis_ms": 3.5363092456924217,
+  "max_analysis_seconds": 0.044965417007915676,
+  "manifest_sha256": "b2d196d2475819abdb2fe4e4e20eb87d3948d5eb6aa2232216e529e74d29e6e5",
+  "rows_sha256": "33a776ea9279766de5c7cda3796a6e45fca8d18ab67b586434fc50b910c9f160"
+}
