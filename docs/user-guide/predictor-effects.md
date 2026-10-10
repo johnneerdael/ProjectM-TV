@@ -326,3 +326,11 @@ even though its parameter has no temporal variation. The recipe carries the
 renderer aspect ratio and texel alignment as inputs. It describes nominal
 sampling geometry, with GPU rounding and mesh interpolation kept separate;
 it does not yet establish visible speed or a Chill/Normal/Intense label.
+
+`native_warp_transport` extends this to supported time/audio-varying controls.
+It bounds feedback expansion/contraction along two principal axes and the
+affine area multiplier, retaining reflection separately. The scales use
+aspect-corrected coordinates; procedural distortion and physical-screen
+geometry remain separate. Per-vertex spatial/state/random changes cannot be
+treated as one uniform transform and retain unknown results. Audio-driven
+value bounds do not establish timing or smoothness.

@@ -29,6 +29,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `uses_rendered_images`, `uses_shader_execution`, `uses_equation_execution` | All false for this source-only producer |
 | `appearance_match_accuracy` | Null until separately validated; do not infer it from a successful parse/test |
 | `native_warp_recipe` | Nominal uniform native feedback sampling map with runtime aspect/texel inputs; dynamic/radial controls remain unknown |
+| `native_warp_transport` | Uniform affine-component scale/area envelopes from supported varying controls; aspect-corrected geometry, not screen motion |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1320,3 +1321,34 @@ Aspect and texel inputs must be supplied by the renderer. Trigonometry,
 intermediate rounding, precision, triangle interpolation, transition blending,
 feedback contents and later shaders remain distinct conditions. This is a
 source construction recipe, not a whole-preset image or mood certification.
+
+
+## Uniform affine transport envelopes
+
+`native_warp_transport` retains ten independent source control rows and bounds
+an affine component when every control has a pure uniform expression, zoomexp
+converts to1, and zoom/sx/sy have finite sign-definite native endpoint domains
+with finite nonzero reciprocals. Only declared readonly frame/configuration
+inputs establish uniformity; spatial, persistent/shared state, random/memory
+and opaque operations cannot establish it from a dependency list alone. Even
+per-frame random expressions abstain until execution-phase provenance is added.
+
+In aspect-corrected coordinates, the inverse affine sampling matrix is
+zoom*diag(sx,sy)*transpose(R), giving singular scales abs(zoom*sx) and
+abs(zoom*sy), and area ratio abs(zoom*zoom*sx*sy). Native endpoint products are
+computed as exact binary-rational products and rounded outwards for JSON.
+Independent envelopes can overestimate correlated extremes. Reflection parity
+is sign(sx*sy); negative zoom flips both axes and leaves that parity unchanged.
+Axis behavior reports expansion, contraction, neutral or a neutral-crossing
+range. These describe per-step feedback transport, not parameter-change rates.
+Finite-input assumptions and unknown timing/continuity survive audio envelopes.
+
+Procedural warp, physical-screen aspect, source content, clipping, texture
+wrapping, later shaders and feedback accumulation remain separate. A nonlinear
+spatial control is not a uniform affine map: its area needs derivatives of
+its varying controls. `complete_sampling_map_area_ratio` and
+`visible_screen_motion` remain null. This descriptor does not certify moods.
+The native/reference operation order is the same source cited by the uniform
+recipe; the creator's [authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html)
+explains zoom/rotation/stretch as repeated image motion rather than control
+variation. Current patched-native semantics remain the target.

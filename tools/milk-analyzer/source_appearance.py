@@ -513,10 +513,12 @@ def appearance_from_analysis(analysis):
     psychedelic=any(7 in e['family_codes'] for e in elements.values()) and palette_candidate
     feedback=feedback_transfer(analysis)
     from source_native_warp import native_warp_recipe
+    from source_warp_transport import native_warp_transport
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback,
         'native_warp_recipe':native_warp_recipe(analysis,consumed=consumes_mesh and consumes_feedback),
+        'native_warp_transport':native_warp_transport(analysis,consumed=consumes_mesh and consumes_feedback),
         'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),

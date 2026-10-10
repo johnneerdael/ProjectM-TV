@@ -1024,3 +1024,12 @@ runtime aspect/texel inputs. Preserve selected legacy/custom spatial signs;
 unresolved nonzero warp branches stay unknown. Radial/dynamic/singular/nonfinite controls stay
 unknown. Affine identity/area describe only the affine component; procedural
 warp, sampling interpolation, content, display motion and moods remain separate.
+
+Source warp-transport maintenance: `source_warp_transport` joins supported
+native float32 control envelopes into uniform affine scaling/area bounds.
+Require zoomexp=1, nonzero sign-definite zoom/stretch domains and finite
+reciprocals. Prove uniformity through readonly input dependencies and pure scalar
+operations; dependency-free random/memory operations are not uniform proofs.
+Keep independent control rows even when aggregate transport is unresolved.
+Principal scales are aspect-corrected, not display-space. No procedural-map
+Jacobian, visible motion or mood certificate follows from these bounds.

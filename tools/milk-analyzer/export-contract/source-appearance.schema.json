@@ -4664,6 +4664,59 @@
               "type": "boolean"
             }
           }
+        },
+        "native_warp_transport": {
+          "type": "object",
+          "description": "Conditional uniform affine-component scaling envelopes in aspect-corrected source coordinates; no complete-map Jacobian or displayed-motion claim.",
+          "required": [
+            "status",
+            "controls",
+            "visible_screen_motion",
+            "unknown_reasons"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "bounded_uniform_affine_component",
+                "unknown",
+                "not_contributing"
+              ]
+            },
+            "controls": {
+              "type": "object"
+            },
+            "source_to_output_axis_scales": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "area_ratio_source_to_output": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "orientation": {
+              "enum": [
+                "preserving",
+                "reversing",
+                null
+              ]
+            },
+            "visible_screen_motion": {
+              "type": "null"
+            },
+            "complete_sampling_map_area_ratio": {
+              "type": "null"
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
