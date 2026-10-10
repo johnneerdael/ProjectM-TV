@@ -373,3 +373,10 @@ known. Inner sites keep their own cadence without claiming the whole control
 has that jump. The list is nonexhaustive; an empty list does not prove smooth
 behaviour. Frame sampling, clock resets, native precision, opacity and later
 processing determine whether a source event becomes a visible pulse or flash.
+
+The static batch exporter can also consume saved offline shader compile results
+with `--compile-manifest`. Exact preset/shader and engine/tool identities keep
+the evidence tied to its source. Accepted shaders select a conditional custom
+branch; rejected shaders select a conditional fallback candidate. Missing or
+stale evidence remains unresolved. Texture assumptions and native driver
+acceptance stay explicit, so compilation alone does not certify appearance.

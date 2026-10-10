@@ -1,7 +1,7 @@
 # Static effect-family export
 
 Policy `source-effect-families-v1`; semantic record schema1. Experimental feature
-branch `feat/predictor-static-effect-families`, separate from the shipped collections.
+branch `feat/predictor-static-output-bounds`, separate from the shipped collections.
 This export recognizes mathematical program mechanisms from native-parsed `.milk`
 equations and typed shader dependency graphs. It does not execute equations,
 waveforms, shader fields, feedback frames, a renderer, or an AI model.
@@ -27,7 +27,9 @@ build/preset-lab-venv/bin/python tools/milk-analyzer/effect_family_export.py --o
 
 The default parser is `build/preset-corpus/source31/adapters/milk-native-reader`.
 `--reader` can identify another prepared copy, but its reported engine must match
-the exact published2.3.31 34-patch source identity. `--profile gles300` is the
+the supported exact source31or source34identity. Source34matches the
+current published2.3.34/35/36math-source line; published-runtime qualification
+remains independently pending. `--profile gles300` is the
 default; `glsl330` is also a declared interpretation context. Neither option
 proves a shader actually compiled or ran on a GPU.
 
@@ -42,6 +44,35 @@ edits with dependencies fixed before import; these parent snapshots do not
 authenticate arbitrary dependency modules preloaded and edited before either
 parent import. A parser timeout or an unexpected
 per-preset error retains a null analysis record and permits remaining cases to run.
+
+## Saved offline compile evidence
+
+Supply `--compile-manifest path/to/manifest.json` to the batch exporter. It
+consumes saved CPU translation/offline GLSL compile results; it does not invoke
+a compiler, equation evaluator, GPU or renderer. Existing
+`corpus_worker.compatibility_for` and `shader_compat.check_shader` can prepare
+reports with explicitly declared sampler/texsize inputs. Preparation itself is
+source parsing/translation/compilation, never shader execution. Freeze tool and
+source identities and retain the descriptor assumptions; injected declarations
+are not proof that textures actually load or bind in a later native run.
+
+The manifest is a JSON object with schema_version1, kind
+`source-offline-compatibility-set`, explicit profile, engine/archive identity,
+compiler_inputs translator/validator SHA256, false native_driver_verified and
+runtime_texture_bindings_verified, a nonempty binding_assumptions string,
+`presets` keyed by full-file preset SHA256, and record_sha256 over the object
+without that hash field. Each preset value maps warp/composite to the complete
+existing check_shader report. Missing preset/stage entries remain unresolved.
+The seal checks integrity; it is not producer authentication.
+
+Accepted/rejected reports retain native-profile and input-loading conditions.
+Source, request, stage, profile, engine/archive and compiler identities must
+match. Runtime-certification claims, malformed/status-contradictory results and
+stale source are rejected. Manifest file bytes join run/cache identity and must
+stay unchanged before/after each preset, including the last result. Direct API
+`export_preset(..., compile_manifest=manifest)` accepts the same sealed object;
+choose this or direct compatibility, not both. Provenance includes
+`offline_compile_evidence` with assumptions and matching manifest identity.
 
 ## Direct API
 

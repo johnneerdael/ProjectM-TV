@@ -1073,3 +1073,12 @@ uncertainty and event-site versus whole-control scope. Current EEL int/floor
 share native floor; shader int casts remain distinct. Keep clock resets and
 sampled/native precision separate. Bounded nonexhaustive scans and per-analysis
 cache avoid recursion via the internal motion-control switch-scan opt-out.
+
+Source offline-compile evidence maintenance: `effect_family_export` optionally
+consumes `--compile-manifest` through `source_compile_manifest`. Bind exact
+preset/shader/request/profile/engine/archive/compiler hashes and preserve
+declared sampler assumptions. Seals provide integrity, not producer identity
+or GPU/texture binding certification. Missing cases remain unknown; native
+driver and runtime texture flags must stay false. Freeze manifest bytes across
+each preset and before result commitment, including the final case. The source
+exporter itself still only invokes the native reader, never compile/render/eval.

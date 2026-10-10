@@ -1,0 +1,2732 @@
+{
+  "basis": "source-bound offline branch candidates under explicit descriptor assumptions, not native rendering/bindings or appearance",
+  "sample_presets": 100,
+  "source_joins_verified": true,
+  "zip_sha256": "360d95306ea90d080b95de496a99fd6fb3c5412a7206bec555a5a8c289aa6e6a",
+  "manifest_sha256": "a3701de5c868d25e21af9eb2457f0c918746270455870ad32447dee4d835523f",
+  "manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "model_modules": {
+    "effect_family_export.py": "f28394f75e66930794f513b3a36ed1f1119b274832e3acc8cb93ce1b0217f164",
+    "source_compile_manifest.py": "5b4d9ef636aa7236dbf932248a246c31d8f0bec90d43e92ff4ef76b8aa1c1441"
+  },
+  "counts": {
+    "warp:custom_warp": 86,
+    "composite:custom_composite": 87,
+    "recipe:uniform_native_wave_warp": 15,
+    "recipe:unknown": 74,
+    "recipe:not_contributing": 5,
+    "warp:fixed_warp": 14,
+    "composite:legacy_composite": 13,
+    "recipe:uniform_affine": 6
+  },
+  "previous_counts": {
+    "warp:unknown": 87,
+    "composite:unknown": 87,
+    "recipe:unknown": 86,
+    "recipe:not_contributing": 5,
+    "warp:fixed_warp": 13,
+    "composite:legacy_composite": 13,
+    "recipe:uniform_native_wave_warp": 3,
+    "recipe:uniform_affine": 6
+  },
+  "gains": {
+    "new_complete_uniform_warp_recipe": 12
+  },
+  "family_records_changed_presets": 72,
+  "sum_offline_preparation_preset_seconds": 33.77351991504838,
+  "sum_export_preset_seconds": 37.822124,
+  "maximum_export_preset_seconds": 2.364767,
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (161).milk",
+      "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "923869c935e67dc86468b29ef691bbfd0c8e23cf08b389e271844bfb4b72f5e2",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "143095ee21748b03ae9726679d07f41c9b7f1741932e427d733bf2243b1013dd",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "$$$ Royal - Mashup (253).milk",
+      "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "e6a2342a78dc5cf1c5d89c41e617e5ff8bc9115f6004a7378a7063a1105f480f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "3d75529ba485b1d76a71ba896a5e1bb4c24026446cf8e549d4698a0ac9a5b3f8",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "per_frame_",
+          "reason": "stateful EEL loop is not statically normalized"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (389).milk",
+      "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "2c4858820fbfc02de7c424fd54599d62e7919552f5ce255deee354373cb4f3b1",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "43eabe0585817b414c9661fda8b3397a8668b74e383f6d35e03e7dacac6fece0",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (39).milk",
+      "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "0faf37ba866c7722fa6b3d84c8844d29ce319814fa62c711cae00026dd9d74d6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "7174d7b1d3f6761980a06542585442c67d5a7fee4d012c23df43e1e0d5525e17",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "19.milk",
+      "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "9d18e07290adf7df4aae631ae6ee2a53eed7b89de9ac940998dbc86fefde0349",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "1461c9fa145a0cf674d059d3e9cebbae8927f91567a5d9e8f46fe2d889771510",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "404.milk",
+      "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "3afea984fd6f5b84bf3160729dc83418c1e844b8a820e2c9ee7fbe980daf4e53",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "d585708db592a116c8b2a1bd9859a908e36b16131a9c45669b30edc3d0843ced",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+      "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "dc1d543b79b50f5f3dd5236bf66d48c26d95abd27a7dd6491a0517d6f906f46c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "7f65920b0076db9d8113814c22032fae963123495459ef46d308bc7169de62fe",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "567569466dac20e7b43f26fc9f648a18d3b8e4081d9cb45cbbdf82ee8e7cdab8",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "100ef8a305404f530e6f6449a9431f9076b2c11ec4a07f0b7278e08efcd8dfa6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "not_contributing",
+      "recipe_after": "not_contributing",
+      "unknowns": []
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+      "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "2627e3c8832aaab5c69cb3b6acbfbfbfbe8ef6cb324af19c43379b28cd41c510",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "100ef8a305404f530e6f6449a9431f9076b2c11ec4a07f0b7278e08efcd8dfa6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "688d778ca828ccd343368b9c70ef32c07600f4abe112fc7c5a9c011995488157",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "621fadd105555ba16ef2b3104951751df30b0cf2bd428b076fd0d55a8b4bbb33",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "b2677a5e8f99c829fc284567eed1e94ac5ed6c5283fb249ffc04faaa8b4b9263",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "aa56a1cc66399a7d99b255cb8ab018c364d9cc2172ae9c2a369e28166fab51bc",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+      "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "a9689ca2a9d694c95fe79ec940779561de3c09c7883f1cc26ec379e585737326",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ea6cb1ab600c082f67c803d46b9357a4ec27772a23035918e9afea2469d0f233",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "267497da65584ce9f35e0fa34c0bf8cb6a8865f45571d6e4bba7de92311dd4dc",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "a66551a92bb6abb34b5870c7e1298c3832b60f1facdabaef6b78471b0f907cac",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "Bmelgren - Tonic.milk",
+      "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "5e993f6f163fa3f2f8e528d28aaac37e504fe037a26630f6dc57294ebc12a83d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "32533a73d90864d8c343b959175e504ed2f9de4f1c84d9ca861bdc5ace9c5b67",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "ee3d386679891457b7dc670dc2221a6b5be78cf51cb81a2f87366c5660169e48",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "67e6e26a1467c0de6ba757ea16edad43f64dfb9de19b8e2dbc89a7f9234417da",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "EoS - heater core C_on route.milk",
+      "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "EoS - more waveforms 7_phat_edit.milk",
+      "sha256": "026417e8c902bb6c5d0604c92f80b9996d891ebf498116dba657c922fbda4bbd",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "uniform_native_wave_warp",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "EoS - pointfield 07 insek altcolors.milk",
+      "sha256": "00aab1e58d025b2b4f9163a0a95c4de5a6024f9c1c9b9e6270ee02a347d5705e",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "uniform_native_wave_warp",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "Flexi - alien web bouncer [39].milk",
+      "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "153a3374a5c0d792dc138ab787edcd3444a12c429a23415ca63efad91a55eca4",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "77ae512f8e42928fd6cc2bddcf412d84d1bae348c10f72b90e8a4b8321bc2f60",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+      "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "003fe31c7bccb6689f4bc38872a1edfe82833fe0f8ef3017f3617d16cc54dfed",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "65094959e6a6f97103151e7379bfc36e552969a039d1ec0ff4396a163bdba475",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "6292f9835c9b2efa9b72980e0fc280940a9dd255bb569cbb8dabee1fb69918aa",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "f4744088aaa06f51cf1001c8695e6ef8e474edd1f2319bd91bb7fd067da3be51",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Flexi - splatter effects 11 halucination #1.milk",
+      "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "0faf37ba866c7722fa6b3d84c8844d29ce319814fa62c711cae00026dd9d74d6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "7e36a64cf3ef079e3c26237b94d56bc0166bd478109f2751de8f7eb37ee567d0",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "b7617ab94905a70cc2d6709babd549f41fe506b8f9bcf81c22448a8dc9690378",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "2eeb9da0e5d13d54658a4e1d2baad405ae471072e03329155b90a15e5ddaa31b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "74f3fc6d51e736d3a1c9131123fcb47da36e80b9df820648df1f3c37b29261df",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ccb5f1f0ccfeadb04b255a23d56a695d7e99cc00abe4283924abd6ec5b9f7d44",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+      "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "fe08cc38f187badd3613ca1d78821a62168073c12ade40cd35c553d6432dfd60",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "70abd81d9781259fc19c45e744975ec2860de40f466ae2d25aaa52aa188a1523",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+      "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "af932896ee548deba8cc0e629e6e4e6c462a30adfb9af7e6ecef7e4b3236d94c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "85f1bb180d9327fd276e1fe5940ae49b7a723a8701e02904095e6d0dcecfdfc6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter.milk",
+      "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "1af879d941c07420f5f5dba668e08f3ad2bda473778667e632440bf10bd9a127",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "85f1bb180d9327fd276e1fe5940ae49b7a723a8701e02904095e6d0dcecfdfc6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "b33862b20336e120540164fb147d4fecab7989e413eca7c21b9dd9aca29a19b6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "3e33b81a067aaed9f4012ca6f85460e12b99e4ed2fdee8a2315665d391993d50",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "2d90e16cb5a2d594b3f694e919ce94fddc73f36a942d28295c10b2ecdac10959",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "3e33b81a067aaed9f4012ca6f85460e12b99e4ed2fdee8a2315665d391993d50",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "eaf090796ded393e6e03cec92e4bef5e70afa5004e8bf5a3453c475b1c5ea43d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "248ab431246b84cc306075c1939491af6ad2bfb01711fd7da61e1bdd311b39ba",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "7b7cbdcba6e1f58454c93e232e7959b2b3cb5d05c536e05b565ad5bf57d42784",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "InCUbuS - Our Destiny.milk",
+      "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+      "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "45dc96a29d1d3fc7f5feb0527bc1ac9c788b2c89e6c64f14b7b7369ca1d3e87b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "0f0ba1831b177ba160923916c333cab9e6e9fb83778fd6b76ea728dc46df3cfc",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+      "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "c855238dec72fe5ad92973ac7d8134b4ef6e8e9ba79975abececdef8de8ef4b3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "7593371f973bba11ec821a8d139c349bf3164904b5b2c7e281d8e3f7062f5778",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "0be91680615df35a4d42af28cf5f7096c723ca57bef6bb19783396a1b9ad71e2",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "9d5daf00d75728adbece75220f8c8ce829fc2bb94bf91914de72e43af5ab5972",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+      "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "ef1313ebc6728f424a872b1ffa96e5743abccf3859f5db51a0e4bbdca98dbfa9",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "6a2ff94b47f275ff5cf00e69626086afa79d04438219149699f7a0766835db7b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "ORB - Firelight.milk",
+      "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "ca9d2db08548ea5cedd46036c87da7494ce2096add0a86561f003187cb1fbbf0",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "e9c0eedb576dbf47a09798d632149f2cb4a9e346ab9b216ce45548f19812c8ee",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "559a01c626cd4260e0347063e12ffaf6feff35df026717b0d27d387aebd4cff1",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "ceb2c93eaf9f05cf46b9c30fea76351ed237add7521ed6f9f3fc8bcca45a6626",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "f858119b9d610040f752f90d4103c1769d9cd12a22ebba82b3e290b7791e4323",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+      "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "52f2c061139870f14cf0bca8e2b3060d2f7da8302dd5e24d60cd774197cbf57b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Serge + martin - crystal palace003.milk",
+      "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "bc3992efa1f6dbb619ddc249034bcb4bb0dea91eb87583bb606f53369a8b69a6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ef375ed903bed2dc86a980264c31e33ba931e557d75899b9cd5499e65765663e",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "75635cef97e40f3658afdec98d90d5d2d1245446f868fd927b484abe93c756d5",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "43fc3d83bbf3ef456a84462498005f01293580019b442f276cd062675af9728c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "a9c49e9e1d7102fdac75888710a5369c943abfc002a3adbf7e66fe18e0454f4a",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "e4f5dbceee1e80e8f607f44d278bb2ebd2b5fc552861b0c8f3bfa4971de41c91",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "43ec467280014e5da70864e04ec8b125881aba0c4fa0965e4404d2f14a13bdf7",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "9234020744b5599065f39487d81b6fc60b8af5a7356792e0757bf211ff174ce3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "not_contributing",
+      "recipe_after": "not_contributing",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "28ef1e9a8517f576335cd48d4f3b4ff514137ff0ad5adfc5b6814387d2eb6417",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "9b6af05c6c95f397a47d61aa668edb084791ff658883e92141cbc76246b8eb6c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+      "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "8a4cf7eb9a01cf7d28d21df02f1b387e3ea2c6c691d9a57f6a3f724580fed026",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+      "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "f35a3de66930534e50baf2a7b955cd1bf29e5e77464da174f85191c7d63af865",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "a77cf103384aa755f5e3917b1d3a0927a8875acfa8e65b6c5af7e1e5ee019b4f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "8a4cf7eb9a01cf7d28d21df02f1b387e3ea2c6c691d9a57f6a3f724580fed026",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "7bbc5270dee4dfe9345420c57deefaa911efda564f0a8c227845056698a23624",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+      "sha256": "01803be5f3f974981e9bd8dbb6b06d2a8c211f873497414ac2d5651bc908dea5",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "153a3374a5c0d792dc138ab787edcd3444a12c429a23415ca63efad91a55eca4",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "a77cf103384aa755f5e3917b1d3a0927a8875acfa8e65b6c5af7e1e5ee019b4f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Waltra - Codex Machine 2.milk",
+      "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "66f1310b9cf8aa5128722b679845d0eaec4ad07649a3ae109044b335bdf9487e",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "48ad28354a874cc076fc86de8074dc53a82751f4d0163c57080f631de52a4284",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "Zylot - Funnels (Jelly).milk",
+      "sha256": "0008a62faf508e742f0d3dcf8c73ca6f41e372880f2de9834b10f838edfb79b1",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "c5158d15a035f0202414f030d7b8ec8d93fec0d72a44e173b8851e7e721fce4b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Zylot - Spiral.milk",
+      "sha256": "02481b33b1399e5a186bc12f5f4230bb00d368edfd802857e4a2dac4831f5923",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "61939c7904bcb1a2e6fa12d05a0f4f43fe9d5d2f1fa386ada7df7f1080cc851f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "ffa73d9b50368b8064070e2b59f31e32194d4a0183c98013d3a3a1b777668f33",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": []
+    },
+    {
+      "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "68ec5c8f5ccd19162f0bc826974a6eda63eb6a420bbfa5566f889c3e22d2d78c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "8fa169dc659af1e1fcd1153f0e9564861bbc0b7d93ca833168112a3952c0d33f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": [
+        {
+          "section": "per_frame_",
+          "reason": "stateful EEL loop is not statically normalized"
+        },
+        {
+          "section": "shape_0_per_frame",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "shape_0_per_frame",
+          "reason": "shape geometry is statically unresolved"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - living boxes 4.milk",
+      "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "uniform_native_wave_warp",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+      "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "f34975496836f9ef7f286560ced1178cbbf28c0bbc2ff95c2c3b6f89fc3e3b91",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "a04ca39a04fecab5a0c4e37ade7608cac639468b28462d59add15b4474b85299",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": [
+        {
+          "section": "per_frame_init_",
+          "reason": "stateful EEL loop is not statically normalized"
+        },
+        {
+          "section": "per_frame_",
+          "reason": "stateful EEL loop is not statically normalized"
+        },
+        {
+          "section": "shape_0_per_frame",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "shape_0_per_frame",
+          "reason": "shape geometry is statically unresolved"
+        }
+      ]
+    },
+    {
+      "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "bowel trounce dumring.milk",
+      "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "630b9502c131b34a92128043d6a0f87fdb239b3f6c8797ca422a46a87f2ffe92",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "1fb5cf54ccd4e751f4884a05ad45d656bf743e8696b50be5718b9c519d790ede",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "cortex meat - adm affect non.milk",
+      "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "330e839fa1fcc2ebefa35c1bf25d9a6f5e1f9ebfad3492e60733f1fa9691e36a",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "70abd81d9781259fc19c45e744975ec2860de40f466ae2d25aaa52aa188a1523",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz+.milk",
+      "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "d0c2879f2786723465032cf036255070611d000b75eb4d1cbafd6daac02b5096",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "offline target rejected"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "c30ecef9e2a096a991ea7c0721c722358f8cd48ff1572d75dc1f38e39b92db35",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "acb157c7c451995cc411861e766cd606335d44c47a911da1b1d97bfd3201b40f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "4f693b5c82a92846d61a9d0c404c45baf49a5a49fd4f8edc7ba54759cd2862f3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "bc7f5d85ad06510884995525433147d788207cccde69524d3dffaffe99b31a33",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "4ffb5412639257bc6a484575fff1805a57228068f0cdc1600e3fedc6ac9df47f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "b569999c5dcaaa1ad192db43ba0af701f1ca8f24433434cebc681fb15313777f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "2b5e183c698a147c01defea92d3daee888496d229410c9021e51ff416fc2e55b",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "fed - DSC-011 LSD Edit 2.milk",
+      "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "0f8a3f8b75a76eb0e84e75478504d9b3ac9911587eb5e4206fe5c62f26518dbc",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "bb074789bd4ce073faa5788596315395752a80c7e65997ece84c62432edbd6b7",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+      "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "a0d0fe8d6d7e1e89362e2ffe6b46ed3855a035443fefd04b19f018cb66f06abd",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "8c563e3dd8180f99098fc0cd5009ee0ff4c1dc447cd57433e6e905ce187f3384",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+      "sha256": "014ddc38e758a5ebbfd2a950eaeda1956e0ec78b3ec048bd461452922b01dfe6",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "927f249a1fb6d5edc9b7478fb20eb5f5a39b914826744b8bf199cad216915a3e",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ee3a01badc6f52d721f7761c666b018ed7467e90f824fe1cd735fe15eac08f9a",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "flexi - grind my glitch up [191].milk",
+      "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "18430b26cd7cf11173d885f6a693be5b60f347cd93db4fc5234faa044db807f4",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "ceb86a3ca6815208705301dd677c393c06b6b73906330f8ae92321c1934938a3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "405380d1e605697d3be4338f4f5e65b590dc4d9b0290aa606143e7ee255295e8",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "0a41d1754f5266c0bae45ca08829da16fd36bf36a5511dac99db56bdb5d3a3a4",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "e392b1361f1635b9dd28a1e48aa206e5ca814fe7d774da287dd350861a8f3ea5",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "martin + flexi - lock and release bipolar 02.milk",
+      "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "e3c4e8b791adf5032e0613f767b1753a573d6da6956674eaf2baf2ec36c0c9ac",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "e6ebc78719906b1448c21a77987b418c57ce8829c36d5a0f24e7c1cb03fbd7a6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": [
+        {
+          "section": "per_frame_init_",
+          "reason": "stateful EEL loop is not statically normalized"
+        },
+        {
+          "section": "per_frame_",
+          "reason": "stateful EEL loop is not statically normalized"
+        },
+        {
+          "section": "wave_0_per_point",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "wave_0_per_point",
+          "reason": "stateful EEL assign is not statically normalized"
+        },
+        {
+          "section": "wave_1_per_point",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "shape_1_per_frame",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "shape_1_per_frame",
+          "reason": "stateful EEL assign is not statically normalized"
+        },
+        {
+          "section": "shape_1_per_frame",
+          "reason": "shape geometry is statically unresolved"
+        },
+        {
+          "section": "shape_2_per_frame",
+          "reason": "stateful EEL mem is not statically normalized"
+        },
+        {
+          "section": "shape_2_per_frame",
+          "reason": "stateful EEL assign is not statically normalized"
+        },
+        {
+          "section": "shape_2_per_frame",
+          "reason": "shape geometry is statically unresolved"
+        },
+        {
+          "section": "warp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+      "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "01aa36900efe050184c7b885623e4298f24f4fa857c7e6fc9492518d68f6b602",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "63feaa4be2f913e0a518f4f9b3b1be8fa51893510324dc51a52f8b8354835cf3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "48e28ec376b68f1dbe692b829f35d2acc4824670ee43ea6e83306c76ac280724",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "43aa61110ee4cbfc52490dc2c7a1d3765e002fe77942c1e2dbc619257d7d7f39",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "not_contributing",
+      "recipe_after": "not_contributing",
+      "unknowns": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+      "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "27d5793729f6724ef7e56be58d5a130b091ca2e21fde75ce89e8e2c793730388",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "f2585f8db7cd1f788787165453e3e76455fc1c6207bd6273bd1549d04a2a1b65",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "48e28ec376b68f1dbe692b829f35d2acc4824670ee43ea6e83306c76ac280724",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "8da51da836e215cf03aef9c29b0893984912af7003a09ab4ea1fb56a48f789aa",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "not_contributing",
+      "recipe_after": "not_contributing",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        }
+      ]
+    },
+    {
+      "preset": "shifter - liquid circuitry - conjugoth.milk",
+      "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "552add1c564accc48f3e2571a29a0100dd90fbb0fc5251583ab3f544daab3f38",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "658abdfcdf3c973c5fd5dfe8251648492303e0555768e25ade22937365c8a2fd",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "3cb6d4d7a4c3f2d9fa40866c21fbd22e526e95896614efd09fd0e4be8109342f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "70abd81d9781259fc19c45e744975ec2860de40f466ae2d25aaa52aa188a1523",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "9f77c3bf51f12f636f9539ab3a63145c087bf4fa4a9a6971a3fd98e6ba76a477",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "25fb3673b003d92a03aa0b52fedff2b84e61c9f6bfa06ef4543262d90e2f9e41",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "e8179056287e66d5417c2be353805aa20c26f98ee6a228964b9590a86bccc02e",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "shader expression not lowered: sampler_state"
+        },
+        {
+          "section": "comp_",
+          "reason": "shader expression not lowered: sampler_state"
+        },
+        {
+          "section": "comp_",
+          "reason": "dynamic sampler expression"
+        },
+        {
+          "section": "comp_",
+          "reason": "dynamic sampler expression"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - bonobo - absurd.milk",
+      "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "3e70ee8cbd8d9422fa83b2adb92d0268e25fcb7b99c7fa6fbb7ad0bd85ff688e",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "15973f43b02a4b0ae0293d71b6bc597a939201d9a2fe27071a30c92b3d5b12eb",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "4684a838a8f5ff43a67971ca3747a80c39baf8facc972a712ae179a7de99016d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "82403d6282853e2bc7db7d2b921286818bf68019f35e480fa972b9f9611810ea",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+      "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "9f58a7ddd744a196ece0733cbfd72f7f7f420eaf54f5574e3dfd73c652f8b38f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ce854ee5a171c7ed26c7718fe75c693c71b24aed43a7ae874fc86db4cb83c94d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "component projection exceeds type"
+        },
+        {
+          "section": "comp_",
+          "reason": "loop/domain control effects require runtime termination/domain; no execution performed"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "c7731d769773473824025e554481dbe5b4684eda32a66b698121156e4f37ba7f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "db96f18bc507c9468be23fa603692157afa7b28ee30f3bd99633d9c622361e5d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "uniform_affine",
+      "recipe_after": "uniform_affine",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - ku pilled - forgoing utility nz.milk",
+      "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "662b265f1ab2aec0e07368172ed6f31233b40ae99ca850b36afc6680e0796e87",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "4069a477483b0b557edf63d26aee32065bf62702c7d9ed37398190d2b6299f2d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+      "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "e14827172346f129340db4b3d8ab06b42a495a655ac984740c4bb075355a14e8",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "ceb1690c775d2d57cba8d4992b877ce692e2f3a96c2d36694b087aeb31acd3d3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "575988295a7b401eadbac5ec66421f856efd935955ae2e9173b1f721bf65c36a",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ab58349dd2d041bc5c603022b875ba65178dcd56b27ec2e423274a974ade310c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "82962fabf72f93beeb16941c784f3bfb12abad608f6e67cf5c5524557d020d26",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "828acb978097519ca5dde210ded7bbfac81e310494e725d1e031dde89acffebe",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "uniform_native_wave_warp",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - never degweh - flx spr col.milk",
+      "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "37d2025f5f85f8c59a475fd3eb8554223970b4694543041aa49e1180efe6dfdf",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "0d377b92212882533c4d3ae0d03c2dcc598481ce2caef8656ddcacaa99dad29f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+      "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "490ad16459f6e847f8cb3fc7b57725773697e4a4632e6021d1dceb33aa0829d6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "47c674b6fd403b89dbec55d6a8b15ded8470eee49bba204e0a130ea931fb187d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - prigogine quantum foam self-organizer.milk",
+      "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "809e16b265d513497a081cc133f9f58911ef99d819ba2d044b013d7bd41eab3c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "a1deb9995a6ee8c84ea00abab854352677ee8e358ec9628bb81ec36be1fa95e1",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+      "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d",
+      "stages": {
+        "warp": {
+          "shader_version": 3,
+          "source_sha256": "9c6fbc488bcb3f1f8f2372439903c8075d4832d146b9acd475cc6ba80528f151",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "a24f4b4a0e9c91eca39c4c0d5a4f2477b493c0b18a933b4415956550d7b88495",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+      "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "b7617ab94905a70cc2d6709babd549f41fe506b8f9bcf81c22448a8dc9690378",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "1561dd3740bbd2a79233e354512a1bc1fb1ed58e3df35b72e3603d9c1ddee59f",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - blur.milk",
+      "sha256": "018e0c956d661138bb97cf78d36f5e62cff34f3e11057519532cdca042bf4119",
+      "stages": {
+        "warp": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "fixed_warp",
+          "reason": "file-level shader version disabled"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "2ff43a0018f29da1f2213c3eefb2729ab24ec5553ae0ae689e3f8538e9f92fe6",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+      "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "ac203c7f2aefb5a9aff0d75ac45f97de77e96478bfbdb1fc02b92226558ced77",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "0b9b749970abe1fcc6e7a82a4a0eef1ec35854fcd5c3239f1c95117018c9298d",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - tech ed lacquer sinus raw.milk",
+      "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "7128ca5904b44aae6658a17a418c58b87dbbfa322d219f6d7142061aabebe395",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "ecefb24b3842761ff3b167ac0d4de8924af1d1c02fe4b804da6fcb1c7afda2c3",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "e736953b43714091c592ccd51868e5eb5848d62e04fdc3876abd65ddc88e2df0",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": [
+        {
+          "section": "comp_",
+          "reason": "shader expression not lowered: sampler_state"
+        },
+        {
+          "section": "comp_",
+          "reason": "shader expression not lowered: sampler_state"
+        },
+        {
+          "section": "comp_",
+          "reason": "dynamic sampler expression"
+        },
+        {
+          "section": "comp_",
+          "reason": "dynamic sampler expression"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "e62573966f533034cc4fa9c9ab6ef0d8753a3004a19c027a6c3779231dceaa72",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 2,
+          "source_sha256": "c10c7e23f4d796a963aa0a0877c6b6f59f7a2d5421598e57ba7ae873c5da0fdd",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "not_contributing",
+      "recipe_after": "not_contributing",
+      "unknowns": []
+    },
+    {
+      "preset": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "0047fe0e293749ffd60a4dd02c7707328d9b0d2f201ae914e306d99d3ef1b75c",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 3,
+          "source_sha256": "2e9f1559e5e7e9bbda930775bf064a802ae2b4ea6ab2527e93586d31c14ff236",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_composite",
+          "reason": "offline target accepted"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    },
+    {
+      "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+      "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9",
+      "stages": {
+        "warp": {
+          "shader_version": 2,
+          "source_sha256": "336150236b2fd678dfb342e5181ae1aa496e46a1e338d3a05e4143cecce074b7",
+          "conditional_on_native_profile": true,
+          "source_contains_clip": false,
+          "kind": "custom_warp",
+          "reason": "offline target accepted"
+        },
+        "composite": {
+          "shader_version": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "conditional_on_native_profile": false,
+          "source_contains_clip": false,
+          "kind": "legacy_composite",
+          "reason": "file-level shader version disabled"
+        }
+      },
+      "recipe_before": "unknown",
+      "recipe_after": "unknown",
+      "unknowns": []
+    }
+  ]
+}
