@@ -6059,7 +6059,8 @@
           "required": [
             "value",
             "status",
-            "hazards"
+            "hazards",
+            "material_change_bounds"
           ],
           "properties": {
             "value": {
@@ -6072,6 +6073,21 @@
               "type": "array",
               "items": {
                 "type": "object"
+              }
+            },
+            "material_change_bounds": {
+              "type": "array",
+              "description": "Conditional per-shape material partial time-rate ceilings at fixed geometry, barycentrics and destination; not visible flash rates.",
+              "items": {
+                "type": "object",
+                "required": ["element_id", "part", "maximum_incoming_rgb_rate_per_second", "maximum_blended_rgb_rate_per_second", "scope", "conditions"],
+                "properties": {
+                  "element_id": {"type": "string"},
+                  "part": {"enum": ["fill", "border"]},
+                  "maximum_incoming_rgb_rate_per_second": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": ["number", "null"], "minimum": 0}},
+                  "maximum_blended_rgb_rate_per_second": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": ["number", "null"], "minimum": 0}},
+                  "visible_flashing_verified": {"const": false}
+                }
               }
             }
           }

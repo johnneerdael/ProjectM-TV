@@ -1,0 +1,486 @@
+{
+  "presets": 100,
+  "computed": 100,
+  "local_hazard_presets": [
+    {
+      "name": "EVET - Circling Meta-freeze 1.milk",
+      "hazards": [
+        {
+          "kind": "shape_border_draw_gate",
+          "element_id": "shape_3",
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible raw-alpha draw gate crossing; colour modulo and screen coverage are separate"
+        }
+      ]
+    },
+    {
+      "name": "$$$ Royal - Mashup (161).milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_0",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "suksma - never degweh - flx spr col.milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_0",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_2",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_0",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_2",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_0",
+          "channels": [
+            "g",
+            "border_a"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_border_draw_gate",
+          "element_id": "shape_0",
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible raw-alpha draw gate crossing; colour modulo and screen coverage are separate"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "g",
+            "border_a"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_border_draw_gate",
+          "element_id": "shape_1",
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible raw-alpha draw gate crossing; colour modulo and screen coverage are separate"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_2",
+          "channels": [
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "equidistant from vomit (out of totality).milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_2",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_3",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_2",
+          "channels": [
+            "r",
+            "g",
+            "b",
+            "r2",
+            "g2",
+            "b2"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    },
+    {
+      "name": "suksma - to finally feel like a cyborg.milk",
+      "hazards": [
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_0",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        },
+        {
+          "kind": "shape_channel_modulo_crossing",
+          "element_id": "shape_1",
+          "channels": [
+            "r",
+            "g",
+            "b"
+          ],
+          "event_rate_hz": null,
+          "visible_flashing_verified": false,
+          "scope": "possible consumed vertex colour/opacity jump; source envelope crossing is not a reached or visible event"
+        }
+      ]
+    }
+  ],
+  "material_rate_presets": [
+    "EVET - Circling Meta-freeze 1.milk",
+    "ORB - Firelight.milk",
+    "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+    "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+    "$$$ Royal - Mashup (161).milk",
+    "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+    "suksma - wait for it - 1-ret.milk",
+    "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+    "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+    "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+    "Flexi - hue burst.milk",
+    "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+    "suksma - never degweh - flx spr col.milk",
+    "suksma - amental ruiner broach2.milk",
+    "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+    "suksma - bonobo - absurd.milk",
+    "Zylot - Funnels (Jelly).milk",
+    "InCUbuS - Our Destiny.milk",
+    "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+    "EoS - more waveforms 7_phat_edit.milk",
+    "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+    "suksma - ku pilled - forgoing utility nz.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "equidistant from vomit (out of totality).milk",
+    "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+    "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+    "suksma - to finally feel like a cyborg.milk"
+  ],
+  "positive_material_rate_presets": [
+    {
+      "name": "InCUbuS - Our Destiny.milk",
+      "bounds": [
+        {
+          "element_id": "shape_0",
+          "part": "fill",
+          "policy": "source-shape-material-rate-v1",
+          "maximum_incoming_rgb_rate_per_second": [
+            null,
+            null,
+            null
+          ],
+          "maximum_blended_rgb_rate_per_second": [
+            null,
+            null,
+            null
+          ],
+          "destination_rgb_domain": [
+            0,
+            1
+          ],
+          "blend_mode": "source_alpha_additive",
+          "visible_flashing_verified": false,
+          "scope": "nominal material partial time rate at fixed barycentric coordinates and fixed destination",
+          "unknown_reasons": [
+            "texture colour, alpha and coordinate variation remain unresolved"
+          ],
+          "conditions": [
+            "Finite supported channel arithmetic and stable modulo cell; source-clock jumps excluded",
+            "Native float32 and legacy packed-byte quantization/storage steps are not continuous rate guarantees",
+            "Fixed geometry/coverage, barycentric coordinates, destination RGB in [0,1] and no later shaders/feedback",
+            "Fill requires untextured vertex colour; borders are untextured and rate applies only while drawn",
+            "Rates bound incoming alpha*RGB and, for source-alpha-over, add alpha-rate times destination ceiling",
+            "Rate ceilings need not be reached; no displayed flash frequency, whole-screen intensity or mood verdict"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "part": "fill",
+          "policy": "source-shape-material-rate-v1",
+          "maximum_incoming_rgb_rate_per_second": [
+            null,
+            null,
+            null
+          ],
+          "maximum_blended_rgb_rate_per_second": [
+            null,
+            null,
+            null
+          ],
+          "destination_rgb_domain": [
+            0,
+            1
+          ],
+          "blend_mode": "source_alpha_over",
+          "visible_flashing_verified": false,
+          "scope": "nominal material partial time rate at fixed barycentric coordinates and fixed destination",
+          "unknown_reasons": [
+            "texture colour, alpha and coordinate variation remain unresolved"
+          ],
+          "conditions": [
+            "Finite supported channel arithmetic and stable modulo cell; source-clock jumps excluded",
+            "Native float32 and legacy packed-byte quantization/storage steps are not continuous rate guarantees",
+            "Fixed geometry/coverage, barycentric coordinates, destination RGB in [0,1] and no later shaders/feedback",
+            "Fill requires untextured vertex colour; borders are untextured and rate applies only while drawn",
+            "Rates bound incoming alpha*RGB and, for source-alpha-over, add alpha-rate times destination ceiling",
+            "Rate ceilings need not be reached; no displayed flash frequency, whole-screen intensity or mood verdict"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "part": "border",
+          "policy": "source-shape-material-rate-v1",
+          "maximum_incoming_rgb_rate_per_second": [
+            0.5085999696850777,
+            0.669799960076809,
+            0.8655999484062196
+          ],
+          "maximum_blended_rgb_rate_per_second": [
+            0.5085999696850777,
+            0.669799960076809,
+            0.8655999484062196
+          ],
+          "destination_rgb_domain": [
+            0,
+            1
+          ],
+          "blend_mode": "source_alpha_over",
+          "visible_flashing_verified": false,
+          "scope": "nominal material partial time rate at fixed barycentric coordinates and fixed destination",
+          "unknown_reasons": [],
+          "conditions": [
+            "Finite supported channel arithmetic and stable modulo cell; source-clock jumps excluded",
+            "Native float32 and legacy packed-byte quantization/storage steps are not continuous rate guarantees",
+            "Fixed geometry/coverage, barycentric coordinates, destination RGB in [0,1] and no later shaders/feedback",
+            "Fill requires untextured vertex colour; borders are untextured and rate applies only while drawn",
+            "Rates bound incoming alpha*RGB and, for source-alpha-over, add alpha-rate times destination ceiling",
+            "Rate ceilings need not be reached; no displayed flash frequency, whole-screen intensity or mood verdict"
+          ]
+        }
+      ]
+    }
+  ],
+  "complete_rgb_material_rate_presets": [
+    "EVET - Circling Meta-freeze 1.milk",
+    "ORB - Firelight.milk",
+    "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+    "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+    "$$$ Royal - Mashup (161).milk",
+    "suksma - wait for it - 1-ret.milk",
+    "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+    "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+    "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+    "Flexi - hue burst.milk",
+    "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+    "suksma - never degweh - flx spr col.milk",
+    "suksma - amental ruiner broach2.milk",
+    "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+    "suksma - bonobo - absurd.milk",
+    "Zylot - Funnels (Jelly).milk",
+    "InCUbuS - Our Destiny.milk",
+    "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+    "EoS - more waveforms 7_phat_edit.milk",
+    "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+    "suksma - ku pilled - forgoing utility nz.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "equidistant from vomit (out of totality).milk",
+    "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+    "suksma - to finally feel like a cyborg.milk"
+  ]
+}

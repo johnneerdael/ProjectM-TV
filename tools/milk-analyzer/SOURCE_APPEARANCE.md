@@ -2173,3 +2173,40 @@ References:
 - Published-core source snapshot `MilkdropPreset/PerPixelMesh.cpp`, lines 250–251 and 305–306: native float rotation sine/cosine.
 - [Khronos GLSL specification](https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.pdf), section 8.1: radians, sin/cos and two-argument atan. Desktop semantics are a math reference, not GLES runtime qualification.
 - [Microsoft HLSL step](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-step) and [smoothstep](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-smoothstep): discontinuous binary switching versus smooth Hermite interpolation, guiding subsequent source flash extraction.
+
+## Shape colour/opacity transfer rates and local jump sources
+
+`activity.flashing.material_change_bounds` links each shape fill or border to
+three conditional incoming RGB rate ceilings. For fixed barycentric coordinates,
+the interpolated channel magnitude and rate do not exceed the largest endpoint
+ceiling. With colour `C` and clamped blend alpha `a`, the incoming term is `a*C`:
+
+```text
+incoming_rate <= alpha_max * colour_rate + alpha_rate * colour_max
+additive, fixed destination: blended_rate <= incoming_rate
+source-alpha-over, fixed destination D in [0,1]:
+    blended_rate <= incoming_rate + alpha_rate
+```
+
+All operations remain nominal continuous source math, with rate sums rounded
+outward. Native upload/storage quantization, clock jumps, moving coverage and
+later feedback/shaders remain separate. A source envelope must stay in a stable
+modulo cell and have supported continuity/rate. Known native singleton domains
+give zero material rate. Texture colour/alpha and coordinates prevent a fill
+rate claim; borders are untextured, and their rate applies only while drawn.
+Centre colours remain included when centre alpha is zero but perimeter alpha is
+nonzero: alpha and colour interpolate independently before multiplication.
+
+Two local hazards are exported separately: `shape_channel_modulo_crossing` and
+`shape_border_draw_gate`. They identify possible consumed discontinuity sources,
+not reached events or verified screen flashes. Their event frequency stays null.
+Disabled borders and fully transparent fills retain the existing consumption
+guards. A bounded slow colour term does not certify a calm entire preset.
+
+Original MilkDrop2 `milkdropfs.cpp`, lines 2373–2395, establishes the same
+source-alpha/additive-or-over blend factors, but packs authored channels into
+8-bit vertex colours. The patched core `CustomShape.cpp`, lines 398–401, uses
+those blend factors with the maintained native floating modulo conversion.
+This model follows the declared core conversion, not legacy packed-byte steps.
+See [Microsoft blending factors](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dblend)
+for the source-alpha and inverse-source-alpha definitions.

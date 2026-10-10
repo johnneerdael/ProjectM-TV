@@ -28,7 +28,7 @@ def source_activity(analysis,description):
     from source_polar import _nodes
     from source_time_switches import time_switch_events
     from source_forms import known_invalid_phase_offset
-    flashing={'value':None,'status':'unknown','hazards':[],
+    flashing={'value':None,'status':'unknown','hazards':[],'material_change_bounds':[],
         'conditions':['Full-stage blackout is an authored raw-RGB mechanism under finite inputs and selected custom shader',
                       'All contributing RGB intermediates and multiplicative factors must be finite; finite inputs alone do not prove this',
                       'Nonblack retained content and later storage/composition/trails determine visible flashes',
@@ -96,10 +96,15 @@ def source_activity(analysis,description):
                 'log_scale_per_second_per_feedback_fps':math.log(p['zoom']),
                 'parameter_time_rate_is_motion_speed':False,'net_screen_speed_verified':False})
     for element in description['elements']:
+        if 'material_temporal' in element and 'material' in element:
+            from source_shape_activity import shape_activity
+            records,hazards=shape_activity(element)
+            flashing['material_change_bounds'].extend(records)
+            flashing['hazards'].extend(hazards)
         v=element.get('vertex_motion',{});speed=v.get('maximum_vertex_speed_ndc_per_second_upper_bound')
         if speed is not None:motion['geometry_speed_bounds'].append({'element_id':element['id'],
             'kind':'polygon_perimeter_vertex_speed','maximum_ndc_per_second':speed,
             'estimate_kind':v['estimate_kind'],'visible_screen_speed_verified':False})
-    if flashing['hazards']:flashing['status']='source periodic blackout mechanism'
+    if flashing['hazards']:flashing['status']='source flash mechanisms; visibility unresolved'
     if motion['feedback_step_components'] or motion['geometry_speed_bounds']:motion['status']='source movement quantified for listed components'
     return {'flashing':flashing,'motion_intensity':motion}

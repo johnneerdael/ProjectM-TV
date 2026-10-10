@@ -521,3 +521,11 @@ is not counted as a large visible step. Blackout predictions require finite
 arithmetic throughout the contributing RGB expression; finite inputs alone do
 not ensure this. These source quantities help describe mechanisms before we
 combine their prominence and interactions into mood scores.
+
+For shape fills and borders, `activity.flashing.material_change_bounds` now
+bounds how quickly colour and opacity can change the incoming blend term at a
+fixed point in the shape. A slow RGB change with low opacity has a smaller bound;
+changing opacity also changes how much of the background remains under ordinary
+alpha blending. The export identifies possible colour-modulo jumps and border
+draw-gate crossings separately. Texture changes, moving coverage, feedback and
+later shaders still require their own analysis; these are local source facts.

@@ -1249,3 +1249,10 @@ Source blackout gates require the same uniform binary multiplier across all live
 RGB channels; added backgrounds/spatial predicates do not qualify. Keep source
 mechanism/cadence, geometry speed and actual visibility/combined screen intensity
 separate. No empty-evidence Chill certification or unsupported mood percentage.
+
+Shape activity rates use fixed barycentric/destination partial time variation:
+bound incoming alpha*RGB by alpha_max*colour_rate+alpha_rate*colour_max;
+source-alpha-over adds alpha_rate under explicit destination RGB [0,1]. Require
+stable modulo/continuity domains, retain transparent centre RGB when perimeter
+alpha participates, and withhold textured fill rates. Quantization, coverage,
+local modulo/draw-gate hazards and whole-screen flashing are separate.
