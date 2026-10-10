@@ -1,5 +1,9 @@
 # MilkDrop source analysis and predictive collections beta
 
+[Optional source components](SOURCE_COMPONENTS.md) document the isolated symbolic
+adapter, explicit scope and full-pack benefit comparisons. They extend the
+existing source analyzer and do not replace the target language/engine policy.
+
 The primary no-image entry point is [strict source extraction](STRICT_EXTRACTION.md):
 `source_extract.py` runs equations, geometry and isolated shader-colour queries,
 then `source_classify.py` scores cached evidence. It constructs no display fields

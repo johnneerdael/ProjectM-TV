@@ -1,0 +1,18 @@
+{
+  "tests": 3173,
+  "subtests": 92,
+  "suite_seconds": 256.01,
+  "full_source_rows": 9606,
+  "row_seconds": {
+    "median": 0.3909446040051989,
+    "p95": 0.5182882920198608,
+    "maximum": 0.8918639170005918
+  },
+  "complete_wall_seconds": 964.3101082909852,
+  "scope": "mesh (per-frame/per-pixel) and custom shape controls; band response only",
+  "source_model_sha256": "33bc024cfff298bfe8842a5c218177e5b0f7e47270cfdfadcc48a77d95483d61",
+  "full_suite_log_sha256": "ca721169a76b6941747f35e476f549d69d61a28b44b18a11de6ec51892a79786",
+  "review": "focused independent code review found no remaining actionable findings; bounded runtime still required",
+  "unchanged_presets": true,
+  "simulation": false
+}

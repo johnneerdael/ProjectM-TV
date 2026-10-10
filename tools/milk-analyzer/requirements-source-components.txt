@@ -1,0 +1,3 @@
+# Optional source-only backend worker environment; no Android dependency.
+sympy==1.14.0
+z3-solver==5.1.0.0

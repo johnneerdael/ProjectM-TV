@@ -1,0 +1,86 @@
+[
+  {
+    "preset": {
+      "relative_path": "Stahlregen + Geiss - Old school, baby! (Flower V2)_1 - lack-of-torture torture mess.milk",
+      "sha256": "53753691006809b61f09725f5d896999d62a513f0fd72fb3eaad7fa033814641"
+    },
+    "element": "mesh_warp",
+    "control": "rot",
+    "band": "treb",
+    "scenario": "unconstrained",
+    "before": 0.20000000000000015,
+    "after": 0.10000000000000002
+  },
+  {
+    "preset": {
+      "relative_path": "Stahlregen + Geiss - Old school, baby! (Flower V2)_1 - lack-of-torture torture mess.milk",
+      "sha256": "53753691006809b61f09725f5d896999d62a513f0fd72fb3eaad7fa033814641"
+    },
+    "element": "mesh_warp",
+    "control": "rot",
+    "band": "treb",
+    "scenario": "declared_0_2",
+    "before": 0.20000000000000015,
+    "after": 0.10000000000000002
+  },
+  {
+    "preset": {
+      "relative_path": "one-stop step-by-step deviance cure 13th step devolution reprisal loss-through-finding inverse paradigm degenerating entropy gain.milk",
+      "sha256": "2ebe9e23eca8d52ccb0772b2bacac867b76de962ba7e2d97bd281467eb88db27"
+    },
+    "element": "shape_0",
+    "control": "ang",
+    "band": "mid_att",
+    "scenario": "declared_0_2",
+    "before": 4.000000000000003,
+    "after": 2.000000000000001
+  },
+  {
+    "preset": {
+      "relative_path": "pladman visits the sevendys with some shaders you intotal nz.milk",
+      "sha256": "9e96de40a85aa086451586a7e7472d6457e232eab8d90d26c40c33c84fdf5db5"
+    },
+    "element": "shape_0",
+    "control": "ang",
+    "band": "mid_att",
+    "scenario": "declared_0_2",
+    "before": 4.000000000000003,
+    "after": 2.000000000000001
+  },
+  {
+    "preset": {
+      "relative_path": "pladman visits the sevendys with some shaders you intotal.milk",
+      "sha256": "63d01fdb814b4f1143d073630504a76e1e9f3773ba22c13e5570bfb8e8b30225"
+    },
+    "element": "shape_0",
+    "control": "ang",
+    "band": "mid_att",
+    "scenario": "declared_0_2",
+    "before": 4.000000000000003,
+    "after": 2.000000000000001
+  },
+  {
+    "preset": {
+      "relative_path": "suksma - gaia, heaven's outhouse.milk",
+      "sha256": "757f995dfd345d1304f4d0db94462aed836f9caec872194e420b041e9c87b0f4"
+    },
+    "element": "shape_0",
+    "control": "ang",
+    "band": "mid_att",
+    "scenario": "declared_0_2",
+    "before": 4.000000000000003,
+    "after": 2.000000000000001
+  },
+  {
+    "preset": {
+      "relative_path": "suksma - gaia, heaven's outhouse2.milk",
+      "sha256": "f2560de4234e06386f4a0c086d4c4fc83df590a1d04882de3555417813b34167"
+    },
+    "element": "shape_0",
+    "control": "ang",
+    "band": "mid_att",
+    "scenario": "declared_0_2",
+    "before": 4.000000000000003,
+    "after": 2.000000000000001
+  }
+]

@@ -343,7 +343,7 @@ def scalar_response_envelope(field,*,input_names,input_domains=None):
         raise ValueError('response input names must be nonempty scalar names')
     report=compound_time_bounds(field,_input_domains=input_domains,_response_input_names=names)
     finite=report.get('assumed_finite_input_names',[])
-    return {'policy':'source-nominal-audio-control-response-v1',
+    result={'policy':'source-nominal-audio-control-response-v1',
         'maximum_absolute_control_change_per_audio_unit':report['maximum_absolute_control_rate_per_second'],
         'bound_kind':'upper_bound','nominal_continuity':report['nominal_continuity'],
         'varying_input_names':sorted(names),'held_fixed_input_names':sorted(set(finite)-names),
@@ -356,6 +356,22 @@ def scalar_response_envelope(field,*,input_names,input_domains=None):
                       'This is a sufficient upper bound, not a minimum or typical response, or a response direction',
                       'Quantized uploads/casts, discontinuities and unsupported domains remain unresolved',
                       'No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim']}
+    from source_symbolic import refine_response
+    refinement=None if result['maximum_absolute_control_change_per_audio_unit']==0 else refine_response(field,names,input_domains,report)
+    if refinement is not None:
+        result['symbolic_refinement']=refinement
+        maximum=refinement['maximum_absolute_control_change_per_audio_unit']
+        baseline=result['maximum_absolute_control_change_per_audio_unit']
+        if maximum is not None and (baseline is None or maximum<baseline):
+            result['baseline_absolute_control_change_per_audio_unit']=baseline
+            result['maximum_absolute_control_change_per_audio_unit']=maximum
+            result['nominal_continuity']='smooth_nominal'
+            result['assumed_finite_input_names']=refinement['assumed_finite_input_names']
+            result['held_fixed_input_names']=sorted(set(refinement['assumed_finite_input_names'])-names)
+            result['declared_input_domains']={n:list(input_domains[n]) for n in refinement['assumed_finite_input_names']
+                if input_domains and n in input_domains}
+            result['unknown_reasons']=[]
+    return result
 
 
 def scalar_value_envelope(field,*,input_domains=None):

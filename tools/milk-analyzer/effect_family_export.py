@@ -7,6 +7,7 @@ import sys
 import time
 import subprocess
 import tempfile
+from contextlib import nullcontext
 
 from corpus_store import RunStore,atomic_json,digest,discover,file_hash
 from effect_families import analyze_families,POLICY,_IMPORT_MODEL_HASHES as _FAMILY_IMPORT_HASHES
@@ -38,6 +39,9 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
               'reader_sha256':file_hash(reader),'model_modules':models,
               'profile':profile,'compatibility':compatibility,
               'compile_manifest_sha256':None if manifest is None else manifest['record_sha256']}
+    from source_symbolic import active_identity
+    components=active_identity()
+    if components is not None:identity['source_components']=components
     if input_scenario is not None:
         from source_input_scenario import validate_scenario
         scenario=validate_scenario(input_scenario)
@@ -73,6 +77,7 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
                           'engine':source['parser_inputs']['engine'],
                           'engine_archive_sha256':source['parser_inputs']['engine_archive_sha256'],
                           'model_modules':models},'cache_key':key}
+    if components is not None:record['provenance']['source_components']=components
     if compile_evidence is not None:record['provenance']['offline_compile_evidence']=compile_evidence
     if input_scenario is not None:record['provenance']['input_scenario_sha256']=scenario['record_sha256']
     if cached is not None:
@@ -90,7 +95,18 @@ def main(argv=None):
     parser.add_argument('--batch-size',type=int,default=100)
     parser.add_argument('--compile-manifest',type=Path,help='Saved source-bound offline compiler evidence; no runtime certification')
     parser.add_argument('--input-scenario',type=Path,help='Declared ripple input domains; additional conditional bounds, no observed-input certification')
+    parser.add_argument('--symbolic-python',type=Path,help='Optional prepared SymPy worker Python; adds bounded nominal source refinements')
     args=parser.parse_args(argv)
+    try:
+        from source_symbolic import SymbolicSession
+        with SymbolicSession(args.symbolic_python) if args.symbolic_python is not None else nullcontext():
+            return _run(args)
+    except (ValueError,OSError,RuntimeError) as error:
+        print('Static family export stopped: '+str(error),file=sys.stderr)
+        return 2
+
+
+def _run(args):
     try:
         reader=args.reader.resolve(strict=True)
         compile_manifest=None;compile_file_sha=None
@@ -117,6 +133,9 @@ def main(argv=None):
                   'reader_sha256':file_hash(reader),'model_modules':loaded_model_hashes(),
                   'profile':args.profile,'source_engine':engine,
                   'simulation':False,'AI_involved':False}
+        from source_symbolic import active_identity
+        components=active_identity()
+        if components is not None:identity['source_components']=components
         if compile_manifest is not None:identity['compile_manifest_file_sha256']=compile_file_sha
         if input_scenario is not None:
             identity['input_scenario_file_sha256']=scenario_file_sha

@@ -1,0 +1,21 @@
+{
+  "presets": 9606,
+  "changed_presets": 1756,
+  "unresolved_presets": 0,
+  "new_bounds": 0,
+  "tighter_bounds": 11295,
+  "more_than_1_percent_tighter_bounds": 7,
+  "materially_improved_presets": 6,
+  "presets_with_unavailable_component": 0,
+  "refinement_counts": {
+    "bounded": 11799,
+    "unsupported": 255171,
+    "unbounded": 1771,
+    "baseline_zero": 11
+  },
+  "wall_seconds": 964.3101082909852,
+  "manifest_sha256": "33bc024cfff298bfe8842a5c218177e5b0f7e47270cfdfadcc48a77d95483d61",
+  "rows_sha256": "936b779ad73f2ae96f81ae1c0e4f61191ee2138c295a4f8f9e792e661fcf002f",
+  "appearance_accuracy_verified": false,
+  "mood_accuracy_verified": false
+}

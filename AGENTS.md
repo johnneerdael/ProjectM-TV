@@ -1428,3 +1428,20 @@ distinguishes exact GLES300 AST from ES310/auto-binding inspection SPIR-V. Pure
 nominal real simplification and explicit float32 proof results stay separate.
 Do not import other MilkDrop hosts' Q/init/random policies without target adapters.
 See `docs/research/2026-10-10-component-reuse-evaluation.md` and its evidence ZIP.
+
+Optional source components (2026-10-10): the isolated SymPy worker consumes a
+strict pure scalar graph and returns derivative programs for the existing range
+calculator. Original response/value-domain errors and phase-qualified inputs
+remain guarded; no native numeric or visible-response credit follows. Request
+writing and reading share a bounded deadline; failures disable the caller-owned
+session rather than repeatedly retrying. `--symbolic-python` changes provenance
+and cache identity. Default-off operation remains independent of SymPy/Z3.
+See `tools/milk-analyzer/SOURCE_COMPONENTS.md` and the adoption plan.
+
+Worktree cleanup (2026-10-10): six obsolete worktrees were removed with branch
+history retained. The active predictor owns local `build/preset-lab-venv`,
+`build/docs-venv`, `build/visual-loop`, `build/milk-analyzer` and
+`build/preset-corpus/source29`; no external ProjectM-TV worktree symlink remains.
+Copied environment imports, focused source/adapter tests and strict docs pass.
+The primary checkout's separate unsaved files were preserved. Detailed inventory
+and migration records are in `~/Downloads/ProjectM-TV-worktree-cleanup-2026-10-10/`.

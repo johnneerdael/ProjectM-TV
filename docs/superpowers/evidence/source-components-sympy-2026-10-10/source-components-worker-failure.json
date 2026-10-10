@@ -1,0 +1,167 @@
+{
+  "preset": "orb - inferno - burnt to a crisp - ngdothz rnz.milk",
+  "program": {
+    "root": 0,
+    "nodes": [
+      {
+        "op": "add",
+        "dtype": "float",
+        "args": [
+          1,
+          2
+        ],
+        "detail": {}
+      },
+      {
+        "op": "constant",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "value": 0.9519000053405762
+        }
+      },
+      {
+        "op": "multiply",
+        "dtype": "float",
+        "args": [
+          3,
+          4
+        ],
+        "detail": {}
+      },
+      {
+        "op": "constant",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "value": 0.1
+        }
+      },
+      {
+        "op": "sin",
+        "dtype": "float",
+        "args": [
+          5
+        ],
+        "detail": {}
+      },
+      {
+        "op": "multiply",
+        "dtype": "float",
+        "args": [
+          6,
+          17
+        ],
+        "detail": {}
+      },
+      {
+        "op": "multiply",
+        "dtype": "float",
+        "args": [
+          7,
+          12
+        ],
+        "detail": {}
+      },
+      {
+        "op": "add",
+        "dtype": "float",
+        "args": [
+          8,
+          11
+        ],
+        "detail": {}
+      },
+      {
+        "op": "add",
+        "dtype": "float",
+        "args": [
+          9,
+          10
+        ],
+        "detail": {}
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "bass"
+        }
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "mid"
+        }
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "treb"
+        }
+      },
+      {
+        "op": "add",
+        "dtype": "float",
+        "args": [
+          13,
+          16
+        ],
+        "detail": {}
+      },
+      {
+        "op": "add",
+        "dtype": "float",
+        "args": [
+          14,
+          15
+        ],
+        "detail": {}
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "bass_att"
+        }
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "treb_att"
+        }
+      },
+      {
+        "op": "input",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "name": "mid_att"
+        }
+      },
+      {
+        "op": "constant",
+        "dtype": "float",
+        "args": [],
+        "detail": {
+          "value": 0.1
+        }
+      }
+    ]
+  },
+  "input_names": [
+    "bass"
+  ],
+  "result": {
+    "status": "unavailable",
+    "reason": "symbolic worker time budget exceeded"
+  }
+}
