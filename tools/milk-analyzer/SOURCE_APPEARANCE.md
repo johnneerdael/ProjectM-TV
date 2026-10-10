@@ -373,6 +373,34 @@ always null. Conditions still require valid sampler/input domains, target-stage
 selection, complete writes and source termination; discard/stale pixels remain
 an unresolved separate feedback route. Composite/display gain is excluded.
 
+### Conditional warp colour bounds
+
+`feedback_transfer.colour_bounds`, policy
+`source-fixed-coordinate-colour-bounds-v1`, adds per-channel raw-output intervals
+under the explicit premise that each previous-main sampled RGB component lies
+independently in `[0,1]`. Lower bounds add negative coefficients to the bias;
+upper bounds add positive coefficients. Distinct sample sites remain separate.
+For `.1+.6*main(uv)-.2*main(uv*.5)`, each raw channel has interval `[-.1,.7]`;
+the direct difference bound is.8 rather than the net gain.4.
+
+`maximum_colour_difference_gain` uses the infinity norm: the largest absolute
+RGB change across all sampled values bounds each output change by that norm
+times the exported gain. It holds coordinates/non-image inputs fixed.
+`sufficient_contraction_bound=true` means the gain is below one, conditional on
+image-independent nonexpansive sampling and identical external inputs. False
+means this sufficient bound failed, not that the system is unstable; unknown
+coordinate feedback leaves it null. The colour-only operator excludes the
+actual draw/storage/detail recurrence.
+
+For `0<k<1`, the conditional ideal perturbation half-life upper bound is
+`log(.5)/log(k)` warp evaluations. This supports signed/channel-mixed and
+multiple-sample operators beyond the single positive diagonal case. Zero gain
+does not receive a fake finite half-life. Storage quantization, clipping, drawing
+injection, blur, masks/discard and actual frame scheduling are not included.
+These are nominal real-valued estimates, not a GPU rounding guarantee.
+`actual_feedback_stability` remains null; the bounds establish neither visible
+flashing nor a mood category.
+
 ## Ordered shader colour processing
 
 `colour_processing`, policy `source-ordered-colour-processing-v1`, records RGB

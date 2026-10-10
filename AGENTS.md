@@ -145,7 +145,11 @@ per-channel unknowns, raw border-alpha enable gating, source texture requests an
 unverified fallback/binding status. Perimeter/border/texture audio routes must not
 invent visibility or final palette verification; prune known unused style controls.
 `source_feedback.py` exports nominal warp RGB transfer matrices/bias and per-site
-absolute coefficient norms with coordinates fixed. Fixed decay and custom returned
+conditional colour bounds. Keep different sample sites separate when deriving
+RGB intervals and infinity-norm perturbation decay. Contraction needs declared
+nonexpansive image-independent sampling and matching external inputs; a failed
+sufficient bound is not actual instability. Real storage/feedback stability stays
+unknown. Absolute coefficient norms hold coordinates fixed. Fixed decay and custom returned
 RGB stay distinct. Ideal positive scalar half-life is not actual trail persistence;
 retain coordinate-feedback, storage/drawing/detail/discard and domain conditions.
 Unknown/nonlinear/blur transfers cannot become low-reactivity or Chill evidence.

@@ -3,6 +3,32 @@ import math
 import numpy as np
 
 
+def _colour_bounds(matrices,bias,norm,dependency):
+    result={'policy':'source-fixed-coordinate-colour-bounds-v1',
+        'raw_rgb_bounds_if_samples_unit_interval':None,
+        'maximum_colour_difference_gain':norm,'sufficient_contraction_bound':None,
+        'ideal_colour_perturbation_half_life_upper_bound_warp_evaluations':None,
+        'actual_feedback_stability':None,
+        'conditions':['Each previous-main sampled RGB component independently lies in [0,1]; source does not certify that premise',
+                      'Bounds use nominal real arithmetic before shader float32 rounding; no discrete GPU sensitivity certificate is supplied',
+                      'Difference gain holds coordinates and non-image inputs fixed, using the RGB infinity norm',
+                      'Contraction/decay estimates require image-independent nonexpansive sampling and identical external inputs across compared states',
+                      'Drawing, blend/storage quantization, blur, masks, discard and authored/native detail are outside this colour-only operator',
+                      'A failed sufficient bound does not prove amplification or instability; no flashing or mood score is inferred']}
+    if matrices is None or bias is None or norm is None:return result
+    low=np.array(bias,dtype=float);high=low.copy()
+    for matrix in matrices:
+        low+=np.minimum(matrix,0).sum(axis=1)
+        high+=np.maximum(matrix,0).sum(axis=1)
+    if np.all(np.isfinite(low)) and np.all(np.isfinite(high)):
+        result['raw_rgb_bounds_if_samples_unit_interval']=np.stack((low,high),axis=1).tolist()
+    if dependency is False:
+        result['sufficient_contraction_bound']=norm<1
+        if 0<norm<1:
+            result['ideal_colour_perturbation_half_life_upper_bound_warp_evaluations']=math.log(.5)/math.log(norm)
+    return result
+
+
 def feedback_transfer(analysis):
     from effect_families import _parts,_walk
     from source_appearance import _phase_literal,_canonical_lane,_data_return,_expression
@@ -14,6 +40,7 @@ def feedback_transfer(analysis):
         'nominal_half_life_warp_evaluations':None,'source_sample_sites':None,
         'coordinate_feedback_dependency':None,'sample_contributions':[],
         'actual_feedback_persistence':None,'unknown_reasons':[],
+        'colour_bounds':_colour_bounds(None,None,None,None),
         'conditions':['Custom source must remain selected and execute in valid input/sample domains',
                       'Colour weights hold sampling coordinates fixed; image-driven coordinates can add nonlinear response',
                       'Nominal half life excludes UNORM storage/rounding, clipping, source injection, blur, motion vectors and authored/native detail',
@@ -35,7 +62,7 @@ def feedback_transfer(analysis):
         if not math.isfinite(gain):
             result['unknown_reasons']=['nonfinite native decay conversion'];return result
         gain=min(gain,1.);matrix=np.eye(3)*gain;bias=np.zeros(3);norm=abs(gain)
-        sites=1;dependent=False;result['source_model']='fixed_main_decay'
+        matrices={0:matrix};sites=1;dependent=False;result['source_model']='fixed_main_decay'
     elif field is not None:
         samples={};memo={};active=set()
         def visit(node):
@@ -101,6 +128,7 @@ def feedback_transfer(analysis):
         result['unknown_reasons']=['aggregate transfer is nonfinite'];return result
     result.update(matrix_rgb=matrix.tolist(),constant_offset_rgb=bias.tolist(),direct_colour_gain_norm=float(norm),
         uniform_diagonal_gain=gain,source_sample_sites=sites,coordinate_feedback_dependency=dependent)
+    result['colour_bounds']=_colour_bounds(list(matrices.values()),bias,float(norm),dependent)
     if gain is not None and 0<gain<1 and dependent is False:
         result['nominal_half_life_warp_evaluations']=math.log(.5)/math.log(gain)
     return result

@@ -1814,6 +1814,66 @@
                   "const": false
                 }
               }
+            },
+            "colour_bounds": {
+              "type": "object",
+              "required": [
+                "policy",
+                "raw_rgb_bounds_if_samples_unit_interval",
+                "maximum_colour_difference_gain",
+                "sufficient_contraction_bound",
+                "ideal_colour_perturbation_half_life_upper_bound_warp_evaluations",
+                "actual_feedback_stability",
+                "conditions"
+              ],
+              "properties": {
+                "policy": {
+                  "const": "source-fixed-coordinate-colour-bounds-v1"
+                },
+                "raw_rgb_bounds_if_samples_unit_interval": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "maximum_colour_difference_gain": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sufficient_contraction_bound": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "ideal_colour_perturbation_half_life_upper_bound_warp_evaluations": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "actual_feedback_stability": {
+                  "type": "null"
+                },
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         },

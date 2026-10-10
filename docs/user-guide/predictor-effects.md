@@ -152,6 +152,12 @@ stored pixels need not follow that decay because rounding and new drawings matte
 Image-driven coordinate maps can add nonlinear feedback response and remain
 outside that persistence estimate. These source coefficients help describe
 feedback character, while actual trail lifetime and mood confidence remain unknown.
+Conditional colour bounds now retain each sample's signs and channel weights.
+They can estimate an ideal perturbation decay bound for multiple copies or
+negative/channel-mixed gains. The premise keeps sampling nonexpansive and
+independent of image contents; pixel rounding, new drawings and later processing
+remain outside it. This describes part of feedback character without declaring
+the complete preset stable, calm or nonflashing.
 Custom warp programs that explicitly use the engine's supplied vertex colour
 also receive its known decay factor. Dynamic factors remain unknown; this does
 not add decay to programs that omit it or claim a measured GPU binding.

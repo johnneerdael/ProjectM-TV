@@ -88,6 +88,12 @@ retain float32 projection/clipping, unknown sides, nonlinear/state/time terms,
 init snapshots and nonfinite domains. Do not call the coefficients a calibrated
 visible bass-response score.
 
+For the approved feedback step, reuse affine per-site warp colour coefficients
+to derive conditional RGB envelopes and colour-only infinity-norm contraction
+bounds. Preserve independent sites/signs, image-coordinate dependence and
+nominal-before-rounding scope. A failed sufficient condition is not instability;
+whole feedback/mood remains separate from this operator.
+
 ## Quantitative checkpoint
 
 - Nominal shader-time RGB timing is implemented; fixed100 has zero timing
