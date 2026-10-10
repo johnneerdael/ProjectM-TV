@@ -525,6 +525,7 @@ def appearance_from_analysis(analysis):
         palette_candidate=any(e['colour'].get('mode_code') in {3,5} for e in elements.values())
     psychedelic=any(7 in e['family_codes'] for e in elements.values()) and palette_candidate
     feedback=feedback_transfer(analysis)
+    from source_feedback_envelopes import feedback_envelope
     from source_native_warp import native_warp_recipe
     from source_warp_transport import native_warp_transport
     from source_radial_zoom import native_radial_zoom
@@ -533,6 +534,7 @@ def appearance_from_analysis(analysis):
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback,
+        'feedback_envelope':feedback_envelope(analysis),
         'native_warp_recipe':native_warp_recipe(analysis,consumed=consumes_mesh and consumes_feedback),
         'native_warp_transport':transport,
         'native_radial_zoom':native_radial_zoom(transport),

@@ -387,3 +387,10 @@ can clarify shader colours and feedback weights; dynamic values retain their
 source expressions and audio dependencies. Per-pixel Q mutations are separate
 from the shader snapshot. A source binding does not establish runtime values,
 native rounding parity or final appearance.
+
+`feedback_envelope` adds supported time/audio-varying colour weights to the
+feedback data. It bounds the sampled-colour response and raw RGB range under
+explicit input assumptions, while keeping different sample locations separate.
+A contraction estimate needs image-independent sampling and excludes drawing,
+storage and later passes. Image-driven coordinates, nonlinear colour and missing
+domains remain unresolved; the bound does not establish visible trail duration.

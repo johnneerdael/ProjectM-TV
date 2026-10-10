@@ -7,7 +7,7 @@ def merge_continuity(kinds):
     return 'piecewise_lipschitz' if 'piecewise_lipschitz' in kinds else 'smooth_nominal'
 
 
-def compound_time_bounds(field,*,_value_only=False):
+def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
     from source_appearance import _phase_literal
     memo={};active=set();finite_inputs=set()
     def magnitude(span):return None if span is None else max(map(abs,span))
@@ -59,6 +59,11 @@ def compound_time_bounds(field,*,_value_only=False):
             name=node.detail.get('name')
             if not isinstance(name,str) or not name:return None
             finite_inputs.add(name)
+            if _input_domains and name in _input_domains:
+                span=_input_domains[name]
+                if not isinstance(span,(list,tuple)) or len(span)!=2 or not all(type(v) in {int,float} and math.isfinite(v) for v in span) or span[0]>span[1]:
+                    raise ValueError('declared scalar input domain invalid')
+                return (list(span),None,'unknown')
             return ([-math.inf,math.inf],None,'unknown')
         if node.op=='input' and node.detail.get('name') in {'time',':native-render-time-f32'}:
             return (None,1.,'smooth_nominal')
@@ -139,18 +144,21 @@ def compound_time_bounds(field,*,_value_only=False):
     result.update(nominal_value_range=span,maximum_absolute_control_rate_per_second=rate,
                   nominal_continuity=kind,supported_nominal_formula=True)
     result['assumed_finite_input_names']=sorted(finite_inputs)
+    result['declared_input_domains']={name:list(_input_domains[name]) for name in sorted(finite_inputs)
+        if _input_domains and name in _input_domains}
     if _value_only:
         if span is None:result['unknown_reasons']=['no finite source value envelope from supported formula']
     elif rate is None:result['unknown_reasons']=['no finite lifetime nominal rate bound from supported formula']
     return result
 
 
-def scalar_value_envelope(field):
+def scalar_value_envelope(field,*,input_domains=None):
     """Bound scalar values under finite inputs/intermediates; infer no timing."""
-    report=compound_time_bounds(field,_value_only=True)
+    report=compound_time_bounds(field,_value_only=True,_input_domains=input_domains)
     return {'policy':'source-scalar-finite-input-envelope-v1',
         'nominal_value_range':report['nominal_value_range'],
         'assumed_finite_input_names':report.get('assumed_finite_input_names',[]),
+        'declared_input_domains':report.get('declared_input_domains',{}),
         'unknown_reasons':report['unknown_reasons'],
         'uses_equation_execution':False,'uses_rendered_images':False,
         'native_numeric_certified':False,

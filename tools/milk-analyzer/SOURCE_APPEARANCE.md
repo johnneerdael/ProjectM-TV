@@ -34,6 +34,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_warp_displacement` | Per-step backward-sampling RMS expression/bound in aspect-corrected source coordinates; not visible speed |
 | `elements[].wave_material` | Built-in wave RGB clamp/normalization and mode/volume alpha recipe; threshold jump candidates are not visible flashes |
 | `native_input_bindings.main_frame_q` | Source main-frame q1..q32 snapshots packed into shader float32 banks, with unknown dynamic values retained |
+| `feedback_envelope` | Conditional varying affine-in-main RGB coefficient/gain envelopes; colour-only, not full feedback persistence |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
@@ -1542,3 +1543,37 @@ unqualified across float32 upload; direct raw-source band coefficients and the
 final shader transfer are different facts. This can clarify constant feedback
 weights and colour recipes, but does not certify dynamic values, native temporal/
 rounding parity, whole feedback or appearance/mood accuracy.
+
+
+## Varying feedback colour envelopes
+
+`feedback_envelope` is additive to the existing constant point-transfer model.
+It factors supported RGB expressions into source offset plus per-main-sample
+coefficient expressions. Coefficients/offsets may vary with non-image time,
+audio, spatial or Q inputs when their nominal scalar envelopes are finite.
+Distinct sample sites remain independent. Products of sampled colours,
+unbounded/singular coefficients, blur/history or unresolved nodes remain unknown.
+
+For each output RGB row, sum the maximum absolute coefficient across input RGB
+lanes/sites to bound the fixed-coordinate infinity-norm colour response. Sample
+premises of independently bounded[0,1]RGB give a raw output box, including signed
+coefficients and supported offsets. Coefficient correlations can tighten these
+conservative independent envelopes; the producer does not sample frames/time.
+Image-driven coordinates keep contraction unknown. Otherwise a gain upper bound
+below1 is sufficient only under nonexpansive image-independent sampling and
+identical non-image inputs; log(.5)/log(gain) is a nominal perturbation half-life
+upper bound in operator evaluations. A failed sufficient condition is not
+amplification/instability. Native rounding, storage, drawing, blur/detail,
+discard and the complete feedback loop remain separate.
+
+Native Q/fixed-decay narrow nodes first require finite endpoint conversion to
+float32. Their derived ranges become explicitly bounded local scalar inputs
+while subsequent nominal arithmetic is analyzed. `scalar_value_envelope` accepts
+input_domains and reports consumed declared domains as premises; these cannot
+be silently generalized to arbitrary runtime inputs. Known upload overflow and
+invalid domains abstain. Fixed warp preserves min(float32(decay),1), including
+negative values; it does not add a lower zero clamp.
+
+Actual persistence, visible flashing/motion and mood labels remain unresolved.
+The source/program/target contracts and sampling/drawing stages must be joined
+before a colour-only bound can establish a complete scene behaviour.

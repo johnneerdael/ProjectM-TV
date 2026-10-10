@@ -1091,3 +1091,12 @@ Keep Q init reload/reset and shader-local shadows separate. Preserve native
 uniform-role provenance in expressions/audio bridges; Q-mediated scalar gain
 does not become certified across the upload boundary. No equation execution
 or observed GPU binding follows from this source contract.
+
+Source varying-feedback maintenance: `source_feedback_envelopes` factors only
+supported affine-in-main RGB expressions, preserving per-site coefficient
+envelopes and fixed-coordinate infinity-norm bounds. Reuse scalar_value_envelope
+with explicit locally derived input_domains for native narrow ranges; expose
+declared domain premises and reject nonfinite upload/invalid domains. Nonlinear,
+unbounded, singular, blur/history and unresolved paths remain unknown. Keep
+colour-only contraction/half-life distinct from native rounding, sampling-map
+sensitivity, storage/drawing/detail and actual persistence or mood readiness.

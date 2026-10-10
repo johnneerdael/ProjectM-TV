@@ -4995,6 +4995,61 @@
               }
             }
           }
+        },
+        "feedback_envelope": {
+          "type": "object",
+          "description": "Conditional nominal varying affine sampled-main RGB envelopes, holding coordinates/nonimage inputs fixed. Not native/full-loop/visible persistence certification.",
+          "required": [
+            "source_model",
+            "maximum_colour_difference_gain",
+            "coordinate_feedback_dependency",
+            "actual_feedback_persistence",
+            "unknown_reasons"
+          ],
+          "properties": {
+            "source_model": {
+              "enum": [
+                "unknown",
+                "bounded_affine_main_sample_colour"
+              ]
+            },
+            "maximum_colour_difference_gain": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "raw_rgb_bounds_if_samples_unit_interval": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "sample_contributions": {
+              "type": "array"
+            },
+            "coordinate_feedback_dependency": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "sufficient_contraction_bound": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "actual_feedback_persistence": {
+              "type": "null"
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
