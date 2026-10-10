@@ -111,6 +111,62 @@ def test_amplification_of_translucent_fill_is_not_clamped_to_input_alpha():
     assert row['displayed_contribution_interval'][1]==pytest.approx(baseline['displayed_contribution_interval'][1]*2)
 
 
+def test_fractional_colour_power_bounds_influence_without_inventing_a_derivative():
+    row,_=evidence('a=.01;a2=.01;',composite='ret=pow(GetPixel(uv),.5);')
+    transfer=row['final_transfer']
+    assert transfer['difference_gain_interval'][1] is None
+    assert transfer['sampled_colour_modulus']['status']=='bounded'
+    assert row['displayed_contribution_interval'][1]<row['displayed_support_fraction_interval'][1]*.11
+    assert row['displayed_contribution_interval'][1]>row['source_contribution_interval'][1]
+    assert row['feedback_contribution_interval']==[0,1]
+
+
+def test_fractional_colour_resampling_uses_local_change_not_tiny_source_integral():
+    row,_=evidence('rad=.001;a=.01;a2=.01;',
+        composite='ret=pow(GetPixel(float2(.5,.5)),.5);')
+    assert row['displayed_support_fraction_interval']==[0,1]
+    assert row['displayed_contribution_interval'][1]==pytest.approx(.1,rel=1e-5)
+
+
+def test_fractional_colour_invalid_incoming_source_cannot_use_conditional_modulus():
+    row,_=evidence('rad=1e100;',composite='ret=pow(GetPixel(uv),.5);')
+    assert row['known_invalid_native_domain']
+    assert row['displayed_contribution_interval']==[0,1]
+
+
+def test_fractional_colour_history_driven_coordinates_keep_unknown_transfer():
+    row,_=evidence('a=.01;a2=.01;',
+        composite='ret=pow(GetPixel(uv+GetPixel(uv).xy*.1),.5);')
+    assert row['final_transfer']['difference_gain_interval'][1] is None
+    assert not row['final_transfer'].get('sampled_colour_modulus')
+
+
+def test_fractional_colour_blur_modulus_does_not_assume_unit_main_to_blur_gain():
+    row,_=evidence('rad=10;a=.0001;a2=.0001;r=g=b=r2=g2=b2=1;',
+        composite='ret=pow(GetBlur1(uv),.5);',config='fBlur1Min=0\nfBlur1Max=.01\n')
+    assert row['final_transfer']['sampled_colour_modulus']['status']=='bounded'
+    assert row['displayed_contribution_interval'][1]>=.1
+    assert any('blur' in reason and 'propagation' in reason for reason in row['unknown_reasons'])
+
+
+@pytest.mark.parametrize('composite',[
+    'ret=GetBlur1(uv);',
+    'ret=GetBlur1(uv)*GetBlur1(uv);',
+    'ret=GetPixel(uv)+GetBlur1(uv);',
+    'ret=tex2D(sampler_blur1,uv).rgb;',
+    'ret=pow(tex2D(sampler_blur1,uv).rgb,.5);',
+    'ret=tex2D(sampler_blur1,uv).rgb*tex2D(sampler_blur1,uv).rgb;',
+])
+def test_existing_blur_site_gain_is_not_an_incoming_main_gain(composite):
+    row,_=evidence('rad=10;a=.1;a2=.1;r=g=b=r2=g2=b2=1;',
+        composite=composite,config='fBlur1Min=0\nfBlur1Max=.01\n')
+    transfer=row['final_transfer']
+    assert transfer['difference_gain_interval'][1] is None
+    assert transfer['sample_site_difference_gain_interval'][1] is not None or transfer.get('sampled_colour_modulus',{}).get('status')=='bounded'
+    assert row['displayed_contribution_interval'][1]==1
+    assert any('blur' in reason and 'propagation' in reason for reason in row['unknown_reasons'])
+
+
 def test_constant_composite_disconnects_configured_drawing():
     row,_=evidence(composite='ret=float3(.3,.4,.5);')
     assert row['final_transfer']['difference_gain_interval']==[0,0]
@@ -249,6 +305,130 @@ def test_native_legacy_gamma_and_filter_gain_uses_bounded_pointwise_transfer(fla
     row,_=evidence('a=.1;a2=.1;',shader_version=0,config='fGammaAdj=.5\n'+flags)
     assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(.5*factor)
     assert row['final_transfer']['pointwise_support_preserved'] is True
+
+
+@pytest.mark.parametrize('viewport',[(1000,2000),(0,0)])
+def test_legacy_gamma_only_portrait_or_unknown_viewport_does_not_preserve_source_support(viewport):
+    row,_=evidence('a=.1;a2=.1;',shader_version=0,viewport=viewport,config='fGammaAdj=1\n')
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(1)
+    assert row['final_transfer']['pointwise_support_preserved'] is False
+    assert row['displayed_support_fraction_interval']==[0,1]
+    assert row['displayed_contribution_interval'][1]>=.09999
+
+
+@pytest.mark.parametrize('viewport',[(2000,1000),(1000,1000)])
+def test_legacy_gamma_only_landscape_and_square_keep_source_integral_bound(viewport):
+    row,_=evidence('a=.1;a2=.1;',shader_version=0,viewport=viewport,config='fGammaAdj=1\n')
+    assert row['final_transfer']['pointwise_support_preserved'] is True
+    assert row['displayed_contribution_interval'][1]==pytest.approx(
+        row['source_contribution_interval'][1]+row['sampling_support_allowance_fraction']*row['opacity']['interval'][1])
+
+
+def test_legacy_portrait_transparent_finite_source_stays_zero():
+    row,_=evidence('a=0;a2=0;',shader_version=0,viewport=(1000,2000),config='fGammaAdj=1\n')
+    assert row['displayed_contribution_interval']==[0,0]
+
+
+def test_legacy_portrait_invalid_source_cannot_use_small_gamma_ceiling():
+    row,_=evidence('r=1e100;r2=1e100;a=0;a2=0;',shader_version=0,viewport=(1000,2000),config='fGammaAdj=.1\n')
+    assert row['known_invalid_native_domain'] is True
+    assert row['displayed_contribution_interval']==[0,1]
+
+
+@pytest.mark.parametrize('alpha,gamma,gain,pointwise',[
+    (.5,.5,1,False),(.5,0,1,False),(.5,2,2,False),
+    (-.5,.5,.5,True),(.001,.5,.5,True),(2,.5,3,False),
+    (.5,-2,1,False),(.5,100,8,False),
+])
+def test_legacy_echo_uses_native_branch_and_absolute_blend_redraw_gain(alpha,gamma,gain,pointwise):
+    row,_=evidence('a=.1;a2=.1;',shader_version=0,
+        config=f'fVideoEchoAlpha={alpha}\nfGammaAdj={gamma}\n')
+    transfer=row['final_transfer']
+    assert transfer['difference_gain_interval'][1]==pytest.approx(gain)
+    assert transfer['pointwise_support_preserved'] is pointwise
+    if not pointwise:
+        assert row['displayed_support_fraction_interval']==[0,1]
+        assert row['displayed_contribution_interval'][1]>=.09999
+        assert row['feedback_contribution_interval']==[0,1]
+        assert transfer['legacy_response']['sample_textures']==['main']
+
+
+def test_legacy_echo_filters_follow_gamma_echo_and_hue_before_ordered_polynomials():
+    row,_=evidence(shader_version=0,config='fVideoEchoAlpha=.5\nfGammaAdj=2\nbBrighten=1\nbDarken=1\nbSolarize=1\nbInvert=1\n')
+    transfer=row['final_transfer']
+    assert transfer['difference_gain_interval'][1]==pytest.approx(16)
+    assert transfer['legacy_response']['application_order']==['hue_and_gamma_echo_draws','brighten','darken','solarize','invert']
+
+
+@pytest.mark.parametrize('zoom',[-2,0,1e100])
+def test_legacy_echo_zoom_uses_native_post_equation_clamp(zoom):
+    row,_=evidence(shader_version=0,config=f'fVideoEchoAlpha=.5\nper_frame_1=echo_zoom={zoom};\n')
+    transfer=row['final_transfer']
+    assert transfer['difference_gain_interval'][1]==pytest.approx(2)
+    assert transfer['legacy_response']['native_control_ranges']['echo_zoom']==pytest.approx([max(.001,min(1000,zoom))]*2)
+
+
+def test_legacy_echo_declared_domains_bound_dynamic_gain_and_native_gamma_clamp():
+    row,_=evidence(shader_version=0,config='per_frame_1=echo_alpha=bass;gamma=treb;\n',domains={'bass':[.1,.2],'treb':[.2,.5]})
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(1)
+    assert row['final_transfer']['legacy_response']['native_control_ranges']['gamma']==pytest.approx([.2,.5])
+
+
+@pytest.mark.parametrize('control',['echo_alpha=1e100;','echo_alpha=1e100*1e100*1e100*1e100;','gamma=1e100*1e100*1e100*1e100;'])
+def test_legacy_invalid_controls_retain_unknown_transfer(control):
+    row,_=evidence(shader_version=0,config='fVideoEchoAlpha=.5\nper_frame_1='+control+'\n')
+    assert row['final_transfer']['difference_gain_interval'][1] is None
+    assert row['final_transfer']['unknown_reasons']
+
+
+def test_legacy_undefined_orientation_conversion_uses_native_gamma_only_fallback():
+    row,_=evidence(shader_version=0,config='fVideoEchoAlpha=.5\nfGammaAdj=.5\nper_frame_1=echo_orient=1e100;\n')
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(.5)
+    assert row['final_transfer']['legacy_response']['echo_selection']=='native orientation conversion fallback'
+
+
+def test_legacy_out_of_range_static_tint_gain_is_not_assumed_unit():
+    row,_=evidence(shader_version=0,config='fShader=10\nfVideoEchoAlpha=.5\nfGammaAdj=2\n')
+    assert row['final_transfer']['difference_gain_interval'][1]>=2*(10/3-1)
+
+
+def test_legacy_echo_tint_product_overflow_keeps_unknown_native_domain():
+    row,_=evidence(shader_version=0,config='fShader=10\nper_frame_1=echo_alpha=1e38;\n')
+    assert row['final_transfer']['difference_gain_interval'][1] is None
+
+
+@pytest.mark.parametrize('orientation',[-2147483648.5,2147483647.5])
+def test_legacy_orientation_native_truncation_precedes_integer_domain_check(orientation):
+    row,_=evidence(shader_version=0,config=f'fVideoEchoAlpha=.5\nfGammaAdj=.5\nper_frame_1=echo_orient={orientation};\n')
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(1)
+    assert row['final_transfer']['pointwise_support_preserved'] is False
+
+
+def test_legacy_gamma_post_equation_clamp_precedes_float32_conversion():
+    row,_=evidence(shader_version=0,config='fVideoEchoAlpha=.5\nper_frame_1=gamma=1e100;\n')
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(8)
+
+
+@pytest.mark.parametrize('gamma',[0,.1,.5])
+def test_legacy_gamma_does_not_bound_known_invalid_incoming_native_domain(gamma):
+    row,_=evidence('r=1e100;r2=1e100;a=0;a2=0;',shader_version=0,config=f'fGammaAdj={gamma}\n')
+    assert row['known_invalid_native_domain'] is True
+    assert row['displayed_contribution_interval']==[0,1]
+
+
+def test_opaque_legacy_control_is_not_certified_by_native_gamma_clamp():
+    from source_prominence import _final_transfer
+    from shader_fields import Field
+    from test_source_static_behaviour import analysis
+    a=analysis('PSVERSION_COMP=0\nfVideoEchoAlpha=.5\n')
+    a.main['gamma']=Field('unknown',detail={'reason':'unresolved source control'})
+    assert _final_transfer(a,{})['difference_gain_interval'][1] is None
+
+
+def test_custom_composite_does_not_apply_legacy_echo_controls():
+    row,_=evidence(config='fVideoEchoAlpha=2\nfGammaAdj=8\nbBrighten=1\n')
+    assert row['final_transfer']['difference_gain_interval'][1]==pytest.approx(1)
+    assert 'legacy_response' not in row['final_transfer']
 
 
 def test_history_dependent_coordinates_do_not_reuse_fixed_sample_alpha_gain():

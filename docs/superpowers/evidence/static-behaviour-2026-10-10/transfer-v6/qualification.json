@@ -1,0 +1,20 @@
+{
+  "inputs": {
+    "build/preset-corpus/static-behaviour-2000-2026-10-10-transfer-v6/manifest.json": "7370b98646598d8ec6973c2562a70fc226cc20f0053578fa3a6333f426225005",
+    "build/preset-corpus/static-behaviour-2000-2026-10-10-transfer-v6/rows.jsonl.gz": "adb5e62ef541f08f3e8e51b7e798b43bb75a6b028398a98706bc0d9d265d5b12",
+    "build/preset-corpus/static-behaviour-final100-2026-10-10-transfer-v6/run-manifest.json": "e755b5917f9a986b6c369126459f305ce4bb93181426f03ca0f1be84fad69e2b",
+    "build/preset-corpus/static-behaviour-final100-2026-10-10-transfer-v6/batch-000001.zip": "29cd9d7d5aea37e9deb91ecc314deb51fecd8232486fef284582fb42beebfcf8",
+    "build/preset-corpus/static-transfer-suite-2026-10-10.log": "cead1d8ed1e1af43fa03d7982f417759be4271207c90edbe0e6f6e8754971f81",
+    "tools/milk-analyzer/source_prominence.py": "451fac77037ebb1875f1779d149c5f46d3644ff674538201e548b29da78758bb",
+    "tools/milk-analyzer/source_colour_modulus.py": "108c1a42f3a628d80b841055ceb92b3911b61375b7360f87c23478de6c5ccc3f",
+    "tools/milk-analyzer/static_behaviour_scoring.py": "64c5266dbc3b69db168810abd92df1c07003e0dc609e3116252b6f39ebdff954"
+  },
+  "prepared_tests": 3552,
+  "subtests": 92,
+  "test_seconds": 207.99,
+  "warnings": "five intentional nonfinite-conversion controls",
+  "strict_mkdocs": true,
+  "no_images": true,
+  "no_equation_or_shader_sequences": true,
+  "native_appearance_certified": false
+}

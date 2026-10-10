@@ -1507,6 +1507,23 @@ Resolved rules enter export/cache identity; physical evidence remains unchanged.
 `partial_contributions` may inform the source-potential index but never closes
 texture/history uncertainty or supplies a total-activity lower bound.49 focused
 scorer/builder/export tests pass. Derived scoring on unchanged final-v5 evidence
-adds0indices (367remain), exposing unresolved final transfers as the next priority.
+adds0indices (367remain). Follow-up review found both unresolved final transfers
+and a consumer continuity-tag mismatch; the frozen derived snapshot predates that
+correction and must not be treated as corrected coverage.
 See `tools/milk-analyzer/STATIC_BEHAVIOUR.md`; do not report this as improved
 whole-preset grouping or rewrite the preserved producer rows.
+
+Conditional final-transfer follow-up (2026-10-10): legacy
+gamma is summed redraw gain with native post-equation clamps, not `pow`. Echo
+and portrait aspect expansion do not preserve source area. Authored nonlinear
+sample-colour moduli may bound two-state changes without a finite derivative;
+their delta is independent sampled RGBA lane change, not elapsed time/history.
+Only main-only sampled-site moduli may join incoming drawing without additional
+image-operator bounds; blur normalization remains a separate propagation question.
+Keep native precision, invalid inputs, sample-dependent seams and unknown feedback
+explicit. See `tools/milk-analyzer/STATIC_BEHAVIOUR.md`.
+The frozen transfer-v6 check passes3552 prepared tests plus92subtests,100 paired
+schema/model-valid source exports and2000 computed source rows. Conditional
+potential indices change367→378; useful hue descriptions stay1552 and automatic
+eligible bands remain empty. See the transfer-v6 evidence folder; these are
+conditional source-coverage counts, not mood or appearance accuracy.

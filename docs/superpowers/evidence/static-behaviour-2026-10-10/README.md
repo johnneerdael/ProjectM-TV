@@ -75,3 +75,36 @@ Final frozen source/model/context/reader/compiler/component identities and resul
 are in `final-v5/`; full per-source records remain in the task-owned build folder.
 No rendered frames, equation/shader sequences or native appearance accuracy credit
 were used. The goal remains active for useful validated mood grouping.
+
+## Transfer v6 checkpoint
+
+The unchanged2,000-preset source sample retains2,000 behavior reports and1,552
+useful hue descriptions. Conditional activity indices change367→378; candidate
+Normal/Intense counts are112/111. Automatic eligibility remains empty. The run
+takes168.50s with4workers. Source-only rows, exact model/context/compiler identities
+and hashes are preserved separately in `transfer-v6/` and the task-owned build.
+There are13 newly available indices and2 withdrawn estimates (net+11), with27
+values changed overall. Conditional legacy transfer evidence reaches368presets;
+36carry a bounded sampled-color modulus.589retain explicit blur-propagation guards.
+`transfer-v6/comparison.json` names every changed preset with its exact hash.
+
+Legacy gamma/echo now use native clamps, absolute redraw/blend gains and ordered
+filters; portrait support is conservative. Authored sampled-color moduli include
+square roots and other positive powers, retaining unknown native precision and
+history trajectories. Review caught and fixed packed-sample predicate seams and
+the unsafe assumption that a shader's raw blur-site gain is an incoming-main gain.
+`GetBlur1` decodes normalization; raw `sampler_blur1` is the amplification witness.
+For uniform main0→.05 and stored blur range[0,.1], the nominal raw bank changes
+0→.5; affine/root/square RGB differences are .5/.7071/.25. Site formulas remain
+exported, while unqualified propagation cannot narrow displayed contribution.
+
+The scorer also now consumes the producer's actual `piecewise_lipschitz` material
+partial without changing its total-activity scope. Earlier zero-gain derived rows
+remain historical and do not establish corrected coverage.
+
+Fresh qualification: **3552 prepared tests and92subtests pass**,207.99s; five
+expected overflow warnings exercise invalid native domains. All100 paired exports
+pass appearance-schema/model checks with no unresolved-activity Chill suggestion.
+Strict MkDocs passes. Independent follow-up review has no remaining material finding
+in this increment. No new AAR defect, rendered-frame test or mood-accuracy claim
+follows; complete motion/feedback behavior remains the next unresolved work.

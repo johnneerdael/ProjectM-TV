@@ -140,8 +140,37 @@ leaving the underlying physical evidence unchanged. The resolved rules participa
 in export/cache identity; unknown names, nonfinite values and invalid thresholds
 reject. Bands stay Chill1–30,Normal25–75,Intense70–100.
 
-The first derived scoring-only check on the frozen2000 v5 records retains367
-indices and changes0. Its1305 fixed-texture partial records are exported but their
-final transfers remain too uncertain to provide additional whole-display values.
-This is a bottleneck result, not a classification improvement claim. Original
-rows remain unchanged and the derived results have a distinct scorer/source hash.
+The first derived scoring-only check on the frozen2000 v5 records retained367
+indices and changed0. Subsequent review found two obstacles: many final transfers
+were unresolved, and the scorer rejected the producer's `piecewise_lipschitz`
+continuity tag. The consumer now accepts that tag for the conditional partial,
+while retaining unknown total activity. The original rows and derived snapshot
+remain unchanged; they do not measure the corrected consumer's coverage.
+
+## Final color-transfer responses
+
+Legacy gamma is a weighted series of redraws, not a shader power. Its conditional
+image-response gain includes the native post-equation gamma/zoom clamps,
+unclamped echo alpha, hue multiplication and ordered brighten/darken/solarize/
+invert filters. Scalar controls hold fixed across the two compared images.
+Echo and portrait aspect expansion can redistribute support across the display.
+Finite gain does not resolve the controls' own time or audio response.
+
+Some authored shaders have a finite two-state response but no finite derivative
+at zero. For example, `sqrt(x)` changes by at most `sqrt(delta)` for nonnegative
+inputs separated by at most `delta`. The optional
+`prominence.by_component.*.final_transfer.sampled_colour_modulus` exports one
+formula per RGB channel, using terms `coefficient * delta ** exponent` with
+`0 < exponent <= 1`. `delta` is the maximum change in the declared sampled RGBA
+lanes at fixed sites; masks, uniforms and other inputs hold fixed. It is not
+elapsed time or a texture-history change inferred from source.
+
+Contribution bounds use the local encoded-RGBA change ceiling. They apply source
+area only when pointwise support preservation is established; arbitrary lookup
+keeps full-display support. A blur-site modulus remains useful shader evidence,
+but is not joined to an incoming drawing without a qualified main-to-blur
+propagation bound: blur normalization can amplify the change. A fractional-power modulus does not acquire
+a finite per-second gain. Sample-driven branch seams, unknown or invalid domains,
+history-driven lookup coordinates and unresolved shader selection remain guarded.
+Nominal modulus bounds exclude native rounding and storage quantization; they
+do not certify appearance or remove the unknown accumulated-feedback trajectory.

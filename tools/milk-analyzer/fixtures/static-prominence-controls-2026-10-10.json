@@ -74,7 +74,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "2e717423b147e3372a8f92457e16b17f01b00e05270d2bf44b6ebd69862d7fd9",
           "target_profile": "gles300"
@@ -196,7 +196,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "4ff0a380c42e38b7fd15b7a8ff3ecb4ee813316d43e339a938a0299a18945a77",
           "target_profile": "gles300"
@@ -331,7 +331,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "d755ee770e780525a34711fad4ef1c06a8b98cd8067044049e6bb9c791e1f0f9",
           "target_profile": "gles300"
@@ -466,7 +466,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "1128c7796a12eae5bfb3c406943c936c54f49504389a75f60995dfab50808aa7",
           "target_profile": "gles300"
@@ -603,7 +603,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "6a9127da254f0113e5da95047956bc77906715ba9846644294f5ff1c3d4f56ff",
           "target_profile": "gles300"
@@ -726,7 +726,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "2b92061175e27bdd1157938d963f3ee6d60c46d79643db27ea5f8d6e5d58fd47",
           "target_profile": "gles300"
@@ -863,7 +863,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "29d195858d2ec154236b9b052f3d173588aa14c3cf2fd2702f981f5fa95e896c",
           "target_profile": "gles300"
@@ -1306,7 +1306,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "df629ebcbc3c83ec954aa1612fcb594c4b82f536b0619b6d64c926654c8d9e34",
           "target_profile": "gles300"
@@ -1447,7 +1447,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "23e31cc92f8631b007752087c96d3dba6e816bd360170924b459fc52d43f1149",
           "target_profile": "gles300"
@@ -1571,7 +1571,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "f2da01aad4d4144d9ab7963ecd15cf8b1c04ca954f4339922bd43f833385f750",
           "target_profile": "gles300"
@@ -1714,7 +1714,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "36355893296a7d14d0782c8bba76b9e65eea872547faccea5700185c3e87b1ff",
           "target_profile": "gles300"
@@ -1871,7 +1871,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "e8ed544eb444f4d6ef4402eb4f579e015fbd551f2a0fd8a26db492fa8a3969a0",
           "target_profile": "gles300"
@@ -2316,7 +2316,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "5178eb9c815400d899a24a038622c9aee2749243fb6f8d299674282698c37d08",
           "target_profile": "gles300"
@@ -2473,7 +2473,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "2661eb31915e70e488d46ffdc38218c28ef22ff723faf5ded477aab14fcbde74",
           "target_profile": "gles300"
@@ -2917,7 +2917,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "965990b7f3d5d79a13fd6344d28b49bc9d52dd9166d3f9d4b11c7e261063c8e4",
           "target_profile": "gles300"
@@ -2986,9 +2986,1846 @@
         ]
       },
       "name": "resampled_transparent_fill_possible_border"
+    },
+    {
+      "arguments": {
+        "config": "fVideoEchoAlpha=.5\nfGammaAdj=.5\n",
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.10000002384185791
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "active or possible native echo",
+            "gamma_absolute_weight_sum_upper": 1,
+            "gamma_redraw_weights": [
+              1
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                0.5,
+                0.5
+              ],
+              "echo_orient": [
+                0.0,
+                0.0
+              ],
+              "echo_zoom": [
+                2.0,
+                2.0
+              ],
+              "gamma": [
+                0.5,
+                0.5
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "echo_orient": null,
+              "echo_zoom": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "c0a59d15ed0db4d8fcc5f39b82e89a4160df8947a502a5d852773ef528746104",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.10000002384185791
+        ]
+      },
+      "name": "legacy_echo_low_gamma"
+    },
+    {
+      "arguments": {
+        "config": "fVideoEchoAlpha=2\nfGammaAdj=.5\n",
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.30000007152557373
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            3.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 3.0,
+            "echo_selection": "active or possible native echo",
+            "gamma_absolute_weight_sum_upper": 1,
+            "gamma_redraw_weights": [
+              1
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                2.0,
+                2.0
+              ],
+              "echo_orient": [
+                0.0,
+                0.0
+              ],
+              "echo_zoom": [
+                2.0,
+                2.0
+              ],
+              "gamma": [
+                0.5,
+                0.5
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "echo_orient": null,
+              "echo_zoom": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "7b81b32b80d91649937fecf6c3ba7ff56565761e3d896b6fc1b9f956b3e62c0e",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.30000007152557373
+        ]
+      },
+      "name": "legacy_echo_signed_weights"
+    },
+    {
+      "arguments": {
+        "config": "fVideoEchoAlpha=.5\nfGammaAdj=2\nbBrighten=1\nbDarken=1\nbSolarize=1\nbInvert=1\n",
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            16.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "active or possible native echo",
+            "gamma_absolute_weight_sum_upper": 2.0,
+            "gamma_redraw_weights": [
+              1,
+              1.0
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                1.0,
+                1.0
+              ],
+              "darken": [
+                1.0,
+                1.0
+              ],
+              "echo_alpha": [
+                0.5,
+                0.5
+              ],
+              "echo_orient": [
+                0.0,
+                0.0
+              ],
+              "echo_zoom": [
+                2.0,
+                2.0
+              ],
+              "gamma": [
+                2.0,
+                2.0
+              ],
+              "invert": [
+                1.0,
+                1.0
+              ],
+              "solarize": [
+                1.0,
+                1.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 8.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "echo_orient": null,
+              "echo_zoom": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "803a11db517fdcfdedf8f209beea5f7da77d57bfbeb820697160ff6ac215bae3",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "legacy_echo_ordered_filters"
+    },
+    {
+      "arguments": {
+        "config": "fVideoEchoAlpha=-.5\nfGammaAdj=.5\n",
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.0035992406027849006
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          0.07198479489318549
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            0.5
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "native gamma-only branch",
+            "gamma_absolute_weight_sum_upper": 0.5,
+            "gamma_redraw_weights": [
+              0.5
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                -0.5,
+                -0.5
+              ],
+              "gamma": [
+                0.5,
+                0.5
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": true,
+          "unknown_reasons": []
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "41a6ddec96af3c75b8406d5ec30fb5edc1f1d88d084f1805819b0bbedbe83c38",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [],
+        "visible_contrast_interval": [
+          0.0,
+          0.0035992406027849006
+        ]
+      },
+      "name": "legacy_negative_echo_inactive"
+    },
+    {
+      "arguments": {
+        "config": "per_frame_1=echo_alpha=bass;gamma=treb;\n",
+        "domains": {
+          "bass": [
+            0.1,
+            0.2
+          ],
+          "treb": [
+            0.2,
+            0.5
+          ]
+        },
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.10000002384185791
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "active or possible native echo",
+            "gamma_absolute_weight_sum_upper": 1.0,
+            "gamma_redraw_weights": null,
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                0.10000000149011612,
+                0.20000000298023224
+              ],
+              "echo_orient": [
+                0.0,
+                0.0
+              ],
+              "echo_zoom": [
+                2.0,
+                2.0
+              ],
+              "gamma": [
+                0.20000000298023224,
+                0.5
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": {
+                "assumed_finite_input_names": [
+                  "bass"
+                ],
+                "conditions": [
+                  "All listed scalar input values and relevant source intermediates are finite",
+                  "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                  "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                  "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                ],
+                "declared_input_domains": {
+                  "bass": [
+                    0.1,
+                    0.2
+                  ]
+                },
+                "native_numeric_certified": false,
+                "nominal_value_range": [
+                  0.1,
+                  0.2
+                ],
+                "policy": "source-scalar-finite-input-envelope-v1",
+                "unknown_reasons": [],
+                "uses_equation_execution": false,
+                "uses_rendered_images": false
+              },
+              "echo_orient": null,
+              "echo_zoom": null,
+              "gamma": {
+                "assumed_finite_input_names": [
+                  "treb"
+                ],
+                "conditions": [
+                  "All listed scalar input values and relevant source intermediates are finite",
+                  "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                  "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                  "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                ],
+                "declared_input_domains": {
+                  "treb": [
+                    0.2,
+                    0.5
+                  ]
+                },
+                "native_numeric_certified": false,
+                "nominal_value_range": [
+                  0.2,
+                  0.5
+                ],
+                "policy": "source-scalar-finite-input-envelope-v1",
+                "unknown_reasons": [],
+                "uses_equation_execution": false,
+                "uses_rendered_images": false
+              },
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "a4c100a09483c91c8651ab2ec3e0c5c6900530458edd10f696906c2769abf657",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "6b1d8af056ab3d6730ed0c7f4c3387a8ee6c81b9682367d80462e29bffbe261d",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "native echo resampling may expand nonzero source support; accumulated feedback remains separate"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.10000002384185791
+        ]
+      },
+      "name": "legacy_dynamic_declared_domains"
+    },
+    {
+      "arguments": {
+        "config": "fVideoEchoAlpha=.5\nper_frame_1=echo_alpha=1e100*1e100*1e100*1e100;\n",
+        "shader_version": 0
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            null
+          ],
+          "method": "unresolved composite transfer",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native legacy response unresolved: nonfinite live legacy control echo_alpha"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0023437502793967058
+          ],
+          [
+            0.0,
+            0.0046875005587934115
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "5c19db11b446d3dad048aa4cdad98bfd39ebe6091249421c794bc3ff56975d23",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.007031251676380634
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "native legacy response unresolved: nonfinite live legacy control echo_alpha"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "legacy_known_nonfinite_alpha"
+    },
+    {
+      "arguments": {
+        "config": "fGammaAdj=0\n",
+        "shader_version": 0
+      },
+      "body": "r=1e100;r2=1e100;a=0;a2=0;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            null
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "native gamma-only branch",
+            "gamma_absolute_weight_sum_upper": 0.0,
+            "gamma_redraw_weights": [
+              0.0
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                0.0,
+                0.0
+              ],
+              "gamma": [
+                0.0,
+                0.0
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "known invalid incoming domain contradicts the finite sampled-main legacy response premise"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": null,
+        "known_invalid_native_domain": true,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.0,
+            0.0
+          ],
+          "known_invalid_native_domain": true,
+          "mean_fill_alpha": null,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.003921627998352,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "af84ab28906c64b303ff24c2b44d73f95986cf9fa884b5b8b108c804e495b8d2",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.0,
+        "source_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "configured source shape projection/material reaches final transfer",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "shape controls",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "d859cb69030b59c712fb8d8b93fef2f25f116fd9ed9b275b6e126d55f9ad036f"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "known invalid incoming domain contradicts the finite sampled-main legacy response premise",
+          "known invalid native geometry/material domain prevents a zero source contribution certificate",
+          "known invalid native material conversion prevents transparency certification"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "legacy_zero_gamma_invalid_incoming"
+    },
+    {
+      "arguments": {
+        "config": "fGammaAdj=1\n",
+        "shader_version": 0,
+        "viewport": [
+          1000,
+          2000
+        ]
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.10000002384185791
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "native gamma-only branch",
+            "gamma_absolute_weight_sum_upper": 1.0,
+            "gamma_redraw_weights": [
+              1.0
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                0.0,
+                0.0
+              ],
+              "gamma": [
+                1.0,
+                1.0
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native legacy portrait aspect expansion or unresolved viewport prevents support preservation"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.004166667163371922
+          ],
+          [
+            0.0,
+            0.008333334326743843
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "fe0b90e2802efb158a10e7a6d0002e42e18d380a3bcca4afa96d91dacab928d4",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "f9c0309a779536c65726cca6cb36fd4a6f3571b130678ac9277f20d6860b6030",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001760130673577169,
+        "source_contribution_interval": [
+          0.0,
+          0.012500002980232239
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.125,
+            0.125
+          ],
+          "aspect_y": 1.0,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.001,
+            0.0005
+          ],
+          "summed_clipped_area_fraction_upper": 0.125,
+          "summed_nominal_area_fraction": 0.125
+        },
+        "unknown_reasons": [
+          "native legacy portrait aspect expansion or unresolved viewport prevents support preservation"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.10000002384185791
+        ]
+      },
+      "name": "legacy_portrait_gamma_only"
+    },
+    {
+      "arguments": {
+        "config": "fGammaAdj=1\n",
+        "shader_version": 0,
+        "viewport": [
+          0,
+          0
+        ]
+      },
+      "body": "a=.1;a2=.1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.10000002384185791
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "legacy_response": {
+            "application_order": [
+              "hue_and_gamma_echo_draws",
+              "brighten",
+              "darken",
+              "solarize",
+              "invert"
+            ],
+            "conditions": [
+              "Live scalar controls are held fixed for the image-colour difference bound",
+              "Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional",
+              "Contributing native hue phases and vertex-colour products are finite",
+              "Native gamma/zoom clamps precede float conversion; echo alpha is unclamped",
+              "Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering",
+              "Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps"
+            ],
+            "echo_absolute_blend_weight_sum_upper": 1.0,
+            "echo_selection": "native gamma-only branch",
+            "gamma_absolute_weight_sum_upper": 1.0,
+            "gamma_redraw_weights": [
+              1.0
+            ],
+            "includes_scalar_control_response": false,
+            "native_control_ranges": {
+              "brighten": [
+                0.0,
+                0.0
+              ],
+              "darken": [
+                0.0,
+                0.0
+              ],
+              "echo_alpha": [
+                0.0,
+                0.0
+              ],
+              "gamma": [
+                1.0,
+                1.0
+              ],
+              "invert": [
+                0.0,
+                0.0
+              ],
+              "solarize": [
+                0.0,
+                0.0
+              ]
+            },
+            "native_numeric_certified": false,
+            "ordered_filter_gain_upper": 1.0,
+            "sample_textures": [
+              "main"
+            ],
+            "source_range_evidence": {
+              "brighten": null,
+              "darken": null,
+              "echo_alpha": null,
+              "gamma": null,
+              "invert": null,
+              "solarize": null
+            },
+            "source_role": "current warped main with drawing",
+            "tint_absolute_gain_upper": 1.0
+          },
+          "method": "native legacy absolute blend/redraw and ordered pointwise filter gain ceiling",
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "native legacy portrait aspect expansion or unresolved viewport prevents support preservation"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": null,
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "53e981b2d141be8fcb10a7ebc2096154de770b28e94348cbc8d4bd4547e86322",
+          "input_scenario_sha256": null,
+          "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "f9c0309a779536c65726cca6cb36fd4a6f3571b130678ac9277f20d6860b6030",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.0,
+        "source_contribution_interval": [
+          0.0,
+          0.10000002384185791
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "9776eb65651fff940ae70577e0be0005531a640979bc4c9620596d27193409db"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "unresolved target viewport",
+          "nominal_area_fraction": null,
+          "parameter_ranges": [],
+          "summed_nominal_area_fraction": null
+        },
+        "unknown_reasons": [
+          "native legacy portrait aspect expansion or unresolved viewport prevents support preservation",
+          "positive target viewport dimensions are required"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.10000002384185791
+        ]
+      },
+      "name": "legacy_unknown_viewport_gamma_only"
     }
   ],
-  "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+  "model_dependency_sha256": {
+    "source_colour_modulus.py": "108c1a42f3a628d80b841055ceb92b3911b61375b7360f87c23478de6c5ccc3f",
+    "source_prominence.py": "451fac77037ebb1875f1779d149c5f46d3644ff674538201e548b29da78758bb"
+  },
+  "model_sha256": "fd2bf29bab3acb7e6c6d5e30a3dbc9a773f5fc22e9202efdc0e2ad4b101f1a27",
   "policy": "source-effect-prominence-v1",
   "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
   "schema_version": 1,
@@ -3037,6 +4874,42 @@
       ],
       "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-memory-repair/build/preset-corpus/source34/production-engine/src/libprojectM/MilkdropPreset/Filters.cpp",
       "purpose": "native pointwise filters",
+      "sha256": "5f477b8475461c6a0ae5605622fe931c0db6cb0f7d6f8daed8888c060bf11546"
+    },
+    {
+      "lines": [
+        428,
+        436
+      ],
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-memory-repair/build/preset-corpus/source34/production-engine/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "purpose": "post-equation gamma and echo zoom clamps",
+      "sha256": "16ebbd1220af201b460b21ce682e5e2b67ed14e0b384e6e074e74f4adc13066e"
+    },
+    {
+      "lines": [
+        94,
+        123
+      ],
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-memory-repair/build/preset-corpus/source34/production-engine/src/libprojectM/MilkdropPreset/FinalComposite.cpp",
+      "purpose": "selected legacy echo then filters",
+      "sha256": "e3c619258a550b0ad6008be3d7e01693af7e7a7f786ae8a7299e0ad142fa9d9b"
+    },
+    {
+      "lines": [
+        86,
+        207
+      ],
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-memory-repair/build/preset-corpus/source34/production-engine/src/libprojectM/MilkdropPreset/VideoEcho.cpp",
+      "purpose": "native echo threshold, orientation fallback, absolute blend/redraw weights",
+      "sha256": "04d4fbd4ee333c8bd9c6841445cbdb6a6a4fabbc6202087cb2da37d231d35c5d"
+    },
+    {
+      "lines": [
+        41,
+        59
+      ],
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-memory-repair/build/preset-corpus/source34/production-engine/src/libprojectM/MilkdropPreset/Filters.cpp",
+      "purpose": "native ordered filter activation",
       "sha256": "5f477b8475461c6a0ae5605622fe931c0db6cb0f7d6f8daed8888c060bf11546"
     }
   ],

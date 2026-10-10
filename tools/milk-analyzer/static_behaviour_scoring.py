@@ -123,7 +123,7 @@ def score_static_behaviour(evidence,*,preferences=None):
             partial_rate=partial.get('maximum_brightness_change_per_second')
             partial_delta=partial.get('brightness_delta_range')
             partial_strength=[0.,None]
-            if partial_rate is not None and partial_delta is not None and partial.get('nominal_continuity')=='smooth_nominal':
+            if partial_rate is not None and partial_delta is not None and partial.get('nominal_continuity') in {'smooth_nominal','piecewise_lipschitz'}:
                 partial_strength=_scale([0.,partial_rate],extent,rules['brightness_reference_rgb_s'])
                 contrast_cap=_scale(_span(partial_delta),extent,rules['flash_contrast_reference'])
                 if partial_strength[1] is not None and contrast_cap[1] is not None:

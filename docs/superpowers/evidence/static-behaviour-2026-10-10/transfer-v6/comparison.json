@@ -1,0 +1,239 @@
+{
+  "comparison": "unchanged source v5 versus transfer-v6",
+  "counts": {
+    "before_indices": 367,
+    "after_indices": 378,
+    "gained_indices": 13,
+    "lost_indices": 2,
+    "changed_indices": 27,
+    "unknown_chill_violations": 0
+  },
+  "new_candidate_bands": {
+    "Normal": 112,
+    "Intense": 111
+  },
+  "transfer_features": {
+    "blur_propagation_guard_presets": 589,
+    "legacy_gain_presets": 368,
+    "bounded_modulus_presets": 36
+  },
+  "changes": [
+    {
+      "preset_sha256": "fdc55c71062899dc927b30c6dabb014ab25978d92177b5ac578cb9f388ded553",
+      "before": 30.653140485286716,
+      "after": 43.56999563336364,
+      "bands": [
+        "Normal"
+      ],
+      "relative_path": "EoS - 7th galaxy b.milk"
+    },
+    {
+      "preset_sha256": "260c51221f28cb848423f2ccaa71910de878281d32394635899474c312aebcdf",
+      "before": null,
+      "after": 20.799998819828037,
+      "bands": [],
+      "relative_path": "Phat_Rovastar - What_does_your_soul_look_like9b.milk"
+    },
+    {
+      "preset_sha256": "bf0f4de35e39972b051b03a811f7f3665df0ad733f2fe369d9991699ca091301",
+      "before": 97.34700343566455,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "blood red raw holy - sth absolutely blazed lying naked hidden in the savannah roam.milk"
+    },
+    {
+      "preset_sha256": "7b2c6e7c8d963b7731f84120010e0636650c7cd6e1df131b335b01677ae80df4",
+      "before": null,
+      "after": 2.4374798286390327,
+      "bands": [],
+      "relative_path": "Rovastar + Loadus + Geiss - Tone-mapped FractalDrop 7c.milk"
+    },
+    {
+      "preset_sha256": "8714e3858ae8ab7e0f05aacd91994ae7fc0af9d400615a1921900c139bd008d3",
+      "before": null,
+      "after": 49.17362163474527,
+      "bands": [
+        "Normal"
+      ],
+      "relative_path": "shifter - spincycle b.milk"
+    },
+    {
+      "preset_sha256": "092f96c284b7f46535751ca838226ebccf03393ee1056bf9348b43cc46f5bf82",
+      "before": null,
+      "after": 37.98639559087754,
+      "bands": [
+        "Normal"
+      ],
+      "relative_path": "shifter - lattice.milk"
+    },
+    {
+      "preset_sha256": "d4ab257d9cf9c0ccd73a80ec6fa4c0ba15177d52660112e6dc4861d8a7e71886",
+      "before": 23.871475040912628,
+      "after": 8.776303586044486,
+      "bands": [],
+      "relative_path": "$$$ Royal - Mashup (139).milk"
+    },
+    {
+      "preset_sha256": "7c612f17533f2af2fee0dec4e3e885b583b4fa56c6cf8cb94f548b8f9a36d301",
+      "before": 5.1347150772809975,
+      "after": 1.0133204864978327,
+      "bands": [],
+      "relative_path": "EoS - pointfield 09 the gases beyond 85b.milk"
+    },
+    {
+      "preset_sha256": "e8a138c938bdaf5559163c14989d73e0803b8157a6bacd3dc8b166a05881a2fc",
+      "before": 5.1347150772809975,
+      "after": 20.434907245953564,
+      "bands": [],
+      "relative_path": "EoS - pointfield 09 the gases beyond 85c.milk"
+    },
+    {
+      "preset_sha256": "b98405a17cacd2b5d81eb27f5e8f1441c741cac257c6fca5f473d3f791a07975",
+      "before": null,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "shifter - spincycle (sweeet candy).milk"
+    },
+    {
+      "preset_sha256": "484a559ec63fe951879fe234b52b7bd5bc83059ac2649c35665c361d195f9785",
+      "before": null,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "EoS+Phat Blue_blinky_lights.milk"
+    },
+    {
+      "preset_sha256": "31ec688577a888e65d6f63b945fe2d123da5a3971acd1eb9ca17f4cd58cf12f0",
+      "before": 100.0,
+      "after": null,
+      "bands": [],
+      "relative_path": "Nivush - Crazy Diamonds.milk"
+    },
+    {
+      "preset_sha256": "e927f4e9bf627d18686559f6b7c63a778c348937ac6056a0e13109a30e373615",
+      "before": null,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "shifter - kinderkind neon.milk"
+    },
+    {
+      "preset_sha256": "9913a4b4b984939644ed11f07dba8a75633a457111b543bcce9321440528b2a9",
+      "before": null,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "shifter - spasmic comet neon.milk"
+    },
+    {
+      "preset_sha256": "d23fc18c1e85fd7a5cfe7813a575b0116c20aaff0a1e699cb01be3a1042ff63f",
+      "before": 13.283293359174541,
+      "after": 17.531017741852907,
+      "bands": [],
+      "relative_path": "suksma - geiss pill dreampt - crop coicle.milk"
+    },
+    {
+      "preset_sha256": "7a1f3644220e38fe47665bdd4b97f4b324c7e3c44ff5de5f3212a08d18f88d9a",
+      "before": null,
+      "after": 47.481195088116586,
+      "bands": [
+        "Normal"
+      ],
+      "relative_path": "Roosta  - Bursting.milk"
+    },
+    {
+      "preset_sha256": "abd9761d5550e037a7eaec61bfb0a4424cf5d5409395845c8b9cb24b5c445715",
+      "before": 23.83534087297322,
+      "after": 1.619201126491922,
+      "bands": [],
+      "relative_path": "Tag - Cradle of Life(remix of yin 315).milk"
+    },
+    {
+      "preset_sha256": "06710c7b8f7688b89175656f5738bd2a252612ec785266ceb43564fa13c05c72",
+      "before": null,
+      "after": 1.958319885759355,
+      "bands": [],
+      "relative_path": "suksma - irratated moms.milk"
+    },
+    {
+      "preset_sha256": "21c7e36983ccc62e22709b68f7cebaf790f889cea7e8a9c0e80c853326953953",
+      "before": 100.0,
+      "after": 2.866761861263724,
+      "bands": [],
+      "relative_path": "suksma - Geiss - Cosmic Dust 2 - Trails 5b - mash0000 - lateral honeycomb spinal bias.milk"
+    },
+    {
+      "preset_sha256": "54e24a1662f50857655dc846258a2c1e84e2e0fa08164393619287a784dbd8aa",
+      "before": 26.01690454483033,
+      "after": 100.0,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "EoS - Apocalypse F.milk"
+    },
+    {
+      "preset_sha256": "158bc2fd0b8d9b716b8a5c44d44cd2757a2bf09f2dc80a23eac50c0e12dc87f7",
+      "before": 23.83534087297322,
+      "after": 1.619201126491922,
+      "bands": [],
+      "relative_path": "yin - 314 - Ocean of Light (ascending nadi mix).milk"
+    },
+    {
+      "preset_sha256": "55ce8ce831c73cea13dc8cc687369e5fd2aee0f3e38cc5edb52e9d78cfd5d2e6",
+      "before": 72.58385108833437,
+      "after": 2.866761861263724,
+      "bands": [],
+      "relative_path": "suksma - my throat be a wellspring of blood - plenum of unprofessional wrestler physicists.milk"
+    },
+    {
+      "preset_sha256": "1583fc0ee3053341fc296c83be3a14dd0d0a5c033f8db94478e5f6339807fb85",
+      "before": null,
+      "after": 1.9583198857593556,
+      "bands": [],
+      "relative_path": "Rovastar + Loadus - FractalDrop (Active Sparks Mix) Steady.milk"
+    },
+    {
+      "preset_sha256": "ac7013695622d2e8263ad817199d0b81333fcc6ee823de953f6a45fdddc0618d",
+      "before": null,
+      "after": 76.87527609757382,
+      "bands": [
+        "Intense"
+      ],
+      "relative_path": "yin - 253 - Artificial poles of the continuum (remix #3).milk"
+    },
+    {
+      "preset_sha256": "9ce53552756a14375d8e34c1030f0faa2a6a63248befd7da3b5f837bba52a4c3",
+      "before": null,
+      "after": 16.797039675109637,
+      "bands": [],
+      "relative_path": "phat_Phenethylamine.milk"
+    },
+    {
+      "preset_sha256": "d0e79e7c68732350c376b44d61e33fffd440bf08a3c8bfe1185eafb46adb2fce",
+      "before": 10.333809511662428,
+      "after": 49.97394946446957,
+      "bands": [
+        "Normal"
+      ],
+      "relative_path": "beta106i - Airhandler (Last Breath - Clam).milk"
+    },
+    {
+      "preset_sha256": "3402aa46824fdb5de7a89871310ee1e7ff175bd5bf41321d1f6ffe49a5188a3e",
+      "before": 100.0,
+      "after": null,
+      "bands": [],
+      "relative_path": "gwadeloag - phusillyty roam.milk"
+    }
+  ],
+  "before_rows_sha256": "c87f4446bc50d17427f5b53ff78541832a6ef6f54e8f8a63c2652227423de671",
+  "after_rows_sha256": "adb5e62ef541f08f3e8e51b7e798b43bb75a6b028398a98706bc0d9d265d5b12",
+  "uses_rendered_images": false,
+  "appearance_accuracy_verified": false
+}

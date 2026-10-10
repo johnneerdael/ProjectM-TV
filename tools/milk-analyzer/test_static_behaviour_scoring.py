@@ -156,3 +156,30 @@ def test_editable_preference_reference_changes_mapping_not_mathematical_evidence
 def test_invalid_preferences_are_rejected(preferences):
     from static_behaviour_scoring import score_static_behaviour
     with pytest.raises(ValueError):score_static_behaviour(evidence(),preferences=preferences)
+
+
+def test_actual_producer_piecewise_material_partial_can_inform_potential():
+    from static_behaviour_scoring import score_static_behaviour
+    model=textured_partial_model()
+    partial=model['flashing']['records'][0]['fixed_unit_texture_material_partial']
+    partial['nominal_continuity']='piecewise_lipschitz'
+    result=score_static_behaviour(model)
+    assert result['partial_contributions'][0]['strength_interval'][1]==1.
+    assert result['intensity']['value']==100
+    assert result['eligible_bands']==[]
+
+
+def test_source_producer_textured_fill_is_consumed_without_changing_total_scope():
+    from test_source_flash_behaviour import textured_fill
+    from static_behaviour_scoring import score_static_behaviour
+    row=textured_fill('r=.5+.4*sin(60*time);r2=r;g=0;g2=0;b=0;b2=0;a=.5;a2=.5;border_a=0;additive=1;')
+    model=textured_partial_model()
+    identity=row['component_id']
+    model['flashing']['records']=[row]
+    model['prominence']['by_component'][identity]=model['prominence']['by_component'].pop('shader_composite')
+    model['motion']['contributions']=[]
+    result=score_static_behaviour(model)
+    assert result['partial_contributions'][0]['strength_interval'][1]>0
+    assert result['intensity']['value'] is not None
+    assert result['eligible_bands']==[]
+    assert row['total_brightness_rate_known'] is False

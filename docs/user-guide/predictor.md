@@ -38,6 +38,14 @@ Chill / Normal / Intense grouping; it is not yet a calibrated mood or visual-acc
 claim. Known partial evidence and automatic eligibility are exported separately.
 Read the [source behaviour contract](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/STATIC_BEHAVIOUR.md).
 
+Response bounds can describe changes without pretending to know the input's
+history. For example, a square-root colour operation has a bounded response to
+a declared texture-value change even though its derivative is infinite at zero.
+The JSON keeps that two-state response separate from per-second motion or flashing.
+Legacy gamma and echo use the patched engine's actual redraw and blending rules.
+These conditional bounds help quantify possible effect strength; they do not
+by themselves establish a preset's mood.
+
 ## What the static JSON can describe
 
 The static producer is `effect_family_export.py`. Its `analysis.visual_description`

@@ -231,7 +231,95 @@ def _pointwise_main(sample):
     except (ValueError,RecursionError):return False
 
 
-def _final_transfer(analysis,description):
+def _legacy_transfer(analysis,domains,result,viewport=None):
+    """Bound image-colour response with live scalar controls held fixed.
+
+    Native post-equation clamps and blend draw weights are distinct from EEL
+    source values. Echo samples current main, not an additional history surface.
+    """
+    from effect_families import _walk,_SemanticBudget
+    from legacy_composite import gamma_weights,source_tint_amount
+    from engine_profiles import CORE_2331_DISPLAY
+    from source_forms import known_invalid_phase_offset
+    from source_native_warp import _f32
+    unknown=result['unknown_reasons'];main=getattr(analysis,'main',{})
+    ranges={};evidence={}
+    def control(name,clamp=None,*,float32=True):
+        field=main.get(name)
+        if field is None:raise ValueError('missing live legacy control '+name)
+        nodes=list(_walk(field,preserve_zero_products=True))
+        if any(n.op in {'unknown','uninitialized','unresolved','sequence'} or n.op.startswith('loop_') for n,p in nodes):
+            raise ValueError('opaque live legacy control '+name)
+        if any(n.op=='constant' and not isinstance(n.detail.get('value'),(int,float)) for n,p in nodes):
+            raise ValueError('nonfinite live legacy control '+name)
+        if known_invalid_phase_offset(field,preserve_zero_products=True):
+            raise ValueError('known invalid live legacy control domain '+name)
+        pair,report=_value_range(field,domains)
+        evidence[name]=report
+        if clamp is not None:
+            pair=list(clamp) if pair is None else [max(clamp[0],min(clamp[1],v)) for v in pair]
+        if pair is not None and float32:pair=[_f32(v) for v in pair]
+        ranges[name]=pair
+        return pair
+    try:
+        gamma=control('gamma',(0.,8.));alpha=control('echo_alpha')
+        if alpha is None:raise ValueError('live echo alpha has no finite float32 envelope')
+        flags={name:control(name,float32=False) for name in ('brighten','darken','solarize','invert')}
+        tint=source_tint_amount(analysis.source)
+        if tint is None or not math.isfinite(tint):raise ValueError('native legacy tint policy/amount unresolved')
+        # Normalized native corner shade is in [.5,1] before static fShader.
+        # This conservative box also bounds out-of-range positive tint amounts.
+        tint_gain=1. if tint<=float(np.float32(.001)) else max(1.,abs(1.-.5*tint))
+        echo=alpha[1]>float(np.float32(.001));selection='active or possible native echo' if echo else 'native gamma-only branch'
+        if echo:
+            # Out-of-int orientation is explicitly handled by native omission;
+            # a known constant outside that domain selects gamma-only output.
+            orientation=control('echo_orient',float32=False)
+            truncated=None if orientation is None else [math.trunc(v) for v in orientation]
+            if truncated is not None and (truncated[1]<-(2**31) or truncated[0]>2**31-1):
+                echo=False;selection='native orientation conversion fallback'
+            else:control('echo_zoom',(.001,1000.))
+        if echo:
+            blend_gain=max(abs(1.-v)+abs(v) for v in (max(alpha[0],float(np.float32(.001))),alpha[1]))
+            gamma_gain=max(1.,gamma[1])
+        else:blend_gain=1.;gamma_gain=gamma[1]
+        weights=None
+        if gamma[0]==gamma[1]:
+            weights=gamma_weights(gamma[0],echo=echo,control_policy=CORE_2331_DISPLAY)
+            gamma_gain=sum(abs(v) for v in weights)
+        # Each post-clamp gamma redraw weight is in [0,1]. Preserve a finite
+        # native vertex-colour product premise, including excessive tint/alpha.
+        mix_magnitude=max(abs(v) for v in (*alpha,*(1.-v for v in alpha))) if echo else 1.
+        _f32(tint_gain*mix_magnitude)
+        filter_gain=2.**sum(flags[name]!=[0.,0.] for name in ('brighten','darken','solarize'))
+        gain=gamma_gain*blend_gain*tint_gain*filter_gain
+        if not math.isfinite(gain):raise ValueError('native legacy response gain overflow')
+    except _SemanticBudget:raise
+    except (ValueError,RecursionError,OverflowError) as error:
+        unknown.append('native legacy response unresolved: '+str(error));return result
+    landscape=(isinstance(viewport,(list,tuple)) and len(viewport)==2 and
+        all(isinstance(v,(int,float)) and math.isfinite(v) and v>0 for v in viewport) and viewport[0]>=viewport[1])
+    result.update(difference_gain_interval=[0.,gain],pointwise_support_preserved=not echo and landscape,
+        method='native legacy absolute blend/redraw and ordered pointwise filter gain ceiling',
+        legacy_response={'native_control_ranges':ranges,'source_range_evidence':evidence,
+            'echo_selection':selection,'gamma_redraw_weights':weights,
+            'gamma_absolute_weight_sum_upper':gamma_gain,'echo_absolute_blend_weight_sum_upper':blend_gain,
+            'tint_absolute_gain_upper':tint_gain,'ordered_filter_gain_upper':filter_gain,
+            'application_order':['hue_and_gamma_echo_draws','brighten','darken','solarize','invert'],
+            'sample_textures':['main'],'source_role':'current warped main with drawing',
+            'includes_scalar_control_response':False,'native_numeric_certified':False,
+            'conditions':['Live scalar controls are held fixed for the image-colour difference bound',
+                'Listed source scalar inputs and relevant EEL intermediates are finite; declared domains are conditional',
+                'Contributing native hue phases and vertex-colour products are finite',
+                'Native gamma/zoom clamps precede float conversion; echo alpha is unclamped',
+                'Main is finite encoded unit-interval RGBA, sampled with nonnegative unit-mass bilinear filtering',
+                'Nominal blend/redraw/polynomial bounds exclude native rounding and storage quantization jumps']})
+    if echo:unknown.append('native echo resampling may expand nonzero source support; accumulated feedback remains separate')
+    elif not landscape:unknown.append('native legacy portrait aspect expansion or unresolved viewport prevents support preservation')
+    return result
+
+
+def _final_transfer(analysis,description,domains=None,viewport=None):
     from effect_families import _walk,_SemanticBudget
     from source_appearance import _data_return,_phase_literal
     selected=analysis.stages['composite'];field=analysis.outputs.get('composite');unknown=[]
@@ -244,18 +332,8 @@ def _final_transfer(analysis,description):
             result.update(difference_gain_interval=[0.,1.],pointwise_support_preserved=True,
                           method='selected native default main-texture copy')
             return result
-        # Native gamma is a summed brightness gain, not a pow() exponent.
-        main=getattr(analysis,'main',{});gamma=_phase_literal(main.get('gamma')) if main.get('gamma') is not None else None
-        echo=_phase_literal(main.get('echo_alpha')) if main.get('echo_alpha') is not None else None
-        flags=[_phase_literal(main.get(name)) if main.get(name) is not None else None for name in ('brighten','darken','solarize')]
-        if selected['kind']=='legacy_composite' and gamma is not None and math.isfinite(gamma) and gamma>=0 and echo==0 and all(v is not None and math.isfinite(v) for v in flags):
-            # Native blend filters are pointwise polynomials on stored [0,1]:
-            # brighten=1-(1-x)^2, darken=x^2, solarize=2*x*(1-x).
-            # Each has Lipschitz ceiling2; inversion has ceiling1.
-            gain=gamma*2**sum(v!=0 for v in flags)
-            result.update(difference_gain_interval=[0.,gain],pointwise_support_preserved=True,
-                          method='native legacy gamma/hue and pointwise filter gain ceiling')
-        else:unknown.append('native default/echo/filter transfer and its support are not fully resolved')
+        if selected['kind']=='legacy_composite':return _legacy_transfer(analysis,domains or {},result,viewport)
+        unknown.append('native default/echo/filter transfer and its support are not fully resolved')
         return result
     nodes=list(_walk(_data_return(field)))
     from source_forms import known_invalid_phase_offset
@@ -305,7 +383,28 @@ def _final_transfer(analysis,description):
             spans=nonlinear.get('raw_rgb_bounds_if_samples_unit_interval')
             if spans is not None and all(a==b for a,b in spans):
                 result.update(difference_gain_interval=[0.,0.],method='saturation/range proves output independence')
-        else:unknown.append('nonlinear/gamma/mask difference gain unresolved under source domains')
+        else:
+            from source_colour_modulus import sampled_colour_difference_modulus
+            modulus=sampled_colour_difference_modulus(analysis,input_domains=domains)
+            if modulus['status']=='bounded':
+                result['sampled_colour_modulus']=modulus
+                result['method']='conditional fixed-site sampled-colour difference modulus'
+                main_only=all(not s['varying'] or s['canonical_texture']=='main' for s in modulus['sample_sites'])
+                if main_only and all(c['lipschitz_gain_upper'] is not None for c in modulus['channels']):
+                    result['difference_gain_interval']=[0.,max(c['lipschitz_gain_upper'] for c in modulus['channels'])]
+                elif main_only:
+                    unknown.append('fractional colour power has no finite rate gain at zero; two-state modulus is separate')
+                else:
+                    unknown.append('main-to-blur perturbation propagation is unresolved; shader-site modulus does not bound incoming drawing')
+            else:
+                unknown.append('nonlinear/gamma/mask difference gain unresolved under source domains')
+                result['sampled_colour_modulus_unresolved']=modulus
+    if any(s.detail.get('canonical_texture') in {'blur1','blur2','blur3'} for s in samples):
+        site_gain=result['difference_gain_interval']
+        result['sample_site_difference_gain_interval']=list(site_gain)
+        if site_gain[1]!=0:
+            result['difference_gain_interval']=[0.,None]
+            unknown.append('main-to-blur perturbation propagation is unresolved; sample-site gain is not an incoming-main gain')
     if not result['pointwise_support_preserved']:
         unknown.append('sampling/blur may expand any nonzero source footprint to the whole display')
     return result
@@ -331,7 +430,7 @@ def prominence_evidence(analysis,description,context):
         domains[name]=list(span)
     elements={e['id']:e for e in description.get('elements',[])}
     controls=_shape_controls(analysis);identities=sorted(set(elements)|set(controls))
-    final=_final_transfer(analysis,description);components=[]
+    final=_final_transfer(analysis,description,domains,viewport);components=[]
     source_identity=analysis.source.get('preset_sha256')
     model_identity=_digest({'policy':POLICY,'projection':'TV-source31-NDC-aspectY-angle-pi4',
                            'model_source_sha256':MODEL_SOURCE_SHA256,
@@ -385,6 +484,10 @@ def prominence_evidence(analysis,description,context):
                 support['area_fraction_interval']=[1.,1.];area=[1.,1.]
             else:unknown.append('wave/audio primitive screen support unresolved')
         transfer={'difference_gain_interval':[0.,1.],'pointwise_support_preserved':True,'method':'already final composite RGB','unknown_reasons':[]} if stage=='composite' else dict(final)
+        if known_invalid and 'legacy_response' in transfer:
+            transfer={**transfer,'difference_gain_interval':[0.,None],'pointwise_support_preserved':False,
+                'unknown_reasons':transfer['unknown_reasons']+[
+                    'known invalid incoming domain contradicts the finite sampled-main legacy response premise']}
         gain=transfer['difference_gain_interval'][1]
         if source[1]==0 or gain==0:
             displayed=[0.,0.];display_area=[0.,0.]
@@ -397,6 +500,17 @@ def prominence_evidence(analysis,description,context):
             incoming=(source[1]+allowance*local_alpha if preserved else local_alpha)*opacity.get('source_rgb_difference_ceiling',1.)
             if known_invalid:incoming=1.
             displayed=[0.,display_area[1] if gain is None else min(display_area[1],incoming*gain)]
+            modulus=transfer.get('sampled_colour_modulus')
+            main_only=modulus is not None and all(not s['varying'] or s['canonical_texture']=='main' for s in modulus['sample_sites'])
+            if main_only and not known_invalid:
+                from source_colour_modulus import evaluate_colour_modulus
+                # Per-site perturbation, never the area-averaged injection.
+                # Nonpointwise sampling can spread a tiny source over the
+                # whole display; only the local encoded-RGBA ceiling survives.
+                delta=min(1.,local_alpha*opacity.get('source_rgb_difference_ceiling',1.))
+                response=evaluate_colour_modulus(modulus,delta)
+                if response is not None:
+                    displayed[1]=min(displayed[1],display_area[1]*min(1.,response))
             if not known_invalid and transfer.get('normalized_output_difference_ceiling') is not None:
                 displayed[1]=min(displayed[1],transfer['normalized_output_difference_ceiling'])
         unknown+=transfer['unknown_reasons']
