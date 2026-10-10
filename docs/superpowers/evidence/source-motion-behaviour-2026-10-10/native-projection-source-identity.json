@@ -1,0 +1,34 @@
+{
+  "policy": "motion-native-projection-source-identity-v1",
+  "files": [
+    {
+      "path": "build/preset-corpus/source31/production-engine/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+      "sha256": "468644762d187a3d589e218ea6c5210526662a3a712e6d0614834b5d56b69fb4"
+    },
+    {
+      "path": "build/preset-corpus/source31/production-engine/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp",
+      "sha256": "362278a893b0d3ef50c02343082678c16e5c8b09f6128b454e6c3a1007ebef5b"
+    },
+    {
+      "path": "build/preset-corpus/source31/production-engine/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert",
+      "sha256": "d5d25153edc331b2bf80a2b27793c81eddbf5fe3b2a4b9e8758fafa48ebd4d39"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9"
+    },
+    {
+      "path": "build/preset-corpus/source31/adapters/milk-native-reader",
+      "sha256": "a208ef1581e5655bfc44b2e9857b4429f8f321ef7d67f79abbe7bbd22fd61f0c"
+    }
+  ],
+  "verified_source_ranges": {
+    "CustomShape.cpp": "228-229 center; 253-259 perimeter projection",
+    "PerPixelMesh.cpp": "360-366 procedural phase/factors",
+    "PresetWarpVertexShaderGlsl330.vert": "42-106 composed UV producer and selected legacy signs",
+    "milkdropfs.cpp": "1877-1919 warp operator order/aspect; 2382-2402 shape projection"
+  },
+  "current_target_rule": "Existing pinned source31 reader and source model remain authoritative; MilkDrop2 is projection/order comparison only",
+  "uses_source_program_execution": false,
+  "uses_shader_execution": false
+}

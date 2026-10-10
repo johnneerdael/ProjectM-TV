@@ -29,6 +29,15 @@ The [export reference](predictor-export.md) keeps these contracts separate. The
 47 numerical fields have not all become static. Removing retained frame arrays
 from a forecast does not remove its simulation cost.
 
+## Source behaviour work in progress
+
+The experimental branch now joins conditional flashing, movement-speed, prominence
+and hue-candidate information into a separate `static_behaviour` report. It also
+exports an initial source-potential activity index. This is progress toward automatic
+Chill / Normal / Intense grouping; it is not yet a calibrated mood or visual-accuracy
+claim. Known partial evidence and automatic eligibility are exported separately.
+Read the [source behaviour contract](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/STATIC_BEHAVIOUR.md).
+
 ## What the static JSON can describe
 
 The static producer is `effect_family_export.py`. Its `analysis.visual_description`

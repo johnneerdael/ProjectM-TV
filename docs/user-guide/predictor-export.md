@@ -13,6 +13,17 @@ Publishing this reference does not merge the experimental predictor or change th
 [shipped mood collections](predictive-collections.md). The
 [predictor overview](predictor.md) explains the direction and current evidence.
 
+## Experimental source behaviour extension
+
+The predictor branch now adds `analysis.visual_description.static_behaviour`: separate
+flashing, movement, prominence and colour-candidate evidence, plus an initial
+source-potential preference mapping. It runs without frame simulation. The mapping
+is uncalibrated: `predicted_bands` are provisional and `eligible_bands` require
+complete bounded evidence. Missing feedback or input trajectories can still prevent
+automatic classification. The historical numerical contract below remains separate.
+
+Read the [field definitions, units and assumptions](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/STATIC_BEHAVIOUR.md).
+
 ## Static source-description contract
 
 Implementation checkpoint: `9c8ff632`, 2026-10-10, experimental

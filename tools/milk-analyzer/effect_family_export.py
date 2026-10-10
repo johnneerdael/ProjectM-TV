@@ -35,7 +35,7 @@ def _component_identity():
     return result
 
 
-def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None,input_scenario=None,phase_dependencies=False):
+def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',compatibility=None,compile_manifest=None,input_scenario=None,phase_dependencies=False,behaviour_context=None):
     """Return (stable record, cache_hit); the only native operation is parsing."""
     path=Path(path);reader=Path(reader).resolve(strict=True)
     raw=path.read_bytes();source_sha=hashlib.sha256(raw).hexdigest()
@@ -50,6 +50,9 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
               'profile':profile,'compatibility':compatibility,
               'compile_manifest_sha256':None if manifest is None else manifest['record_sha256']}
     components=_component_identity()
+    from source_static_behaviour import validate_context
+    behaviour_context=validate_context(behaviour_context)
+    identity['behaviour_context']=behaviour_context
     if components is not None:identity['source_components']=components
     if phase_dependencies:identity['phase_dependency_policy']='source-stims-main-local-may-dependencies-v1'
     if input_scenario is not None:
@@ -77,7 +80,7 @@ def export_preset(path,*,reader=DEFAULT_READER,cache=None,profile='gles300',comp
     if manifest is not None:
         from source_compile_manifest import compatibility_from_manifest
         compatibility,compile_evidence=compatibility_from_manifest(manifest,source)
-    analysis=analyze_families(source,profile=profile,compatibility=compatibility,input_scenario=input_scenario)
+    analysis=analyze_families(source,profile=profile,compatibility=compatibility,input_scenario=input_scenario,behaviour_context=behaviour_context)
     if model_file_hashes()!=models or file_hash(reader)!=identity['reader_sha256'] or file_hash(path)!=source_sha:
         raise ValueError('static family model/parser/preset changed during analysis')
     record={'schema_version':1,'export_kind':'preset-effect-families','status':'computed',
@@ -110,6 +113,7 @@ def main(argv=None):
     parser.add_argument('--batch-size',type=int,default=100)
     parser.add_argument('--compile-manifest',type=Path,help='Saved source-bound offline compiler evidence; no runtime certification')
     parser.add_argument('--input-scenario',type=Path,help='Declared ripple input domains; additional conditional bounds, no observed-input certification')
+    parser.add_argument('--behaviour-context',type=Path,help='Declared viewport/feedback-FPS/static input domains for source behaviour prediction')
     parser.add_argument('--proof-python',type=Path,help='Optional prepared Z3 worker Python; supplemental nominal bounds and predicate proofs')
     parser.add_argument('--phase-dependencies',action='store_true',help='Supplemental predecessor-state may-dependencies; preserves numeric unknowns')
     parser.add_argument('--symbolic-python',type=Path,help='Optional prepared SymPy worker Python; adds bounded nominal source refinements')
@@ -135,6 +139,12 @@ def _run(args):
             raw_manifest=args.compile_manifest.read_bytes();compile_file_sha=hashlib.sha256(raw_manifest).hexdigest()
             compile_manifest=validate_manifest(json.loads(raw_manifest),args.profile)
         input_scenario=None;scenario_file_sha=None
+        from source_static_behaviour import validate_context
+        behaviour_context=validate_context()
+        behaviour_file_sha=None
+        if args.behaviour_context is not None:
+            raw_behaviour=args.behaviour_context.read_bytes();behaviour_file_sha=hashlib.sha256(raw_behaviour).hexdigest()
+            behaviour_context=validate_context(json.loads(raw_behaviour))
         if args.input_scenario is not None:
             from source_input_scenario import validate_scenario
             raw_scenario=args.input_scenario.read_bytes();scenario_file_sha=hashlib.sha256(raw_scenario).hexdigest()
@@ -155,6 +165,8 @@ def _run(args):
                   'simulation':False,'AI_involved':False}
         components=_component_identity()
         if components is not None:identity['source_components']=components
+        identity['behaviour_context']=behaviour_context
+        if behaviour_file_sha is not None:identity['behaviour_context_file_sha256']=behaviour_file_sha
         if args.phase_dependencies:identity['phase_dependency_policy']='source-stims-main-local-may-dependencies-v1'
         if compile_manifest is not None:identity['compile_manifest_file_sha256']=compile_file_sha
         if input_scenario is not None:
@@ -172,9 +184,11 @@ def _run(args):
                     raise ValueError('offline compile manifest changed during run')
                 if args.input_scenario is not None and file_hash(args.input_scenario)!=scenario_file_sha:
                     raise ValueError('input scenario changed during run')
+                if args.behaviour_context is not None and file_hash(args.behaviour_context)!=behaviour_file_sha:
+                    raise ValueError('behaviour context changed during run')
                 started=time.perf_counter();hit=False
                 try:
-                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest,input_scenario=input_scenario,phase_dependencies=args.phase_dependencies)
+                    result,hit=export_preset(case['path'],reader=reader,cache=cache,profile=args.profile,compile_manifest=compile_manifest,input_scenario=input_scenario,phase_dependencies=args.phase_dependencies,behaviour_context=behaviour_context)
                 except Exception as error:
                     result={'export_kind':'preset-effect-families',
                             'status':'timeout' if isinstance(error,subprocess.TimeoutExpired) else 'error','analysis':None,
@@ -184,6 +198,8 @@ def _run(args):
                     raise ValueError('offline compile manifest changed during preset export')
                 if args.input_scenario is not None and file_hash(args.input_scenario)!=scenario_file_sha:
                     raise ValueError('input scenario changed during preset export')
+                if args.behaviour_context is not None and file_hash(args.behaviour_context)!=behaviour_file_sha:
+                    raise ValueError('behaviour context changed during preset export')
                 store.complete(case,result)
                 print(json.dumps({'event':'preset_completed','preset':case['name'],'status':result['status'],
                                   'cache_hit':hit,'elapsed_seconds':round(time.perf_counter()-started,6),

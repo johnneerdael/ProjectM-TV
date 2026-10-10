@@ -1,0 +1,56 @@
+{
+  "presets": 2000,
+  "terminal_status_counts": {
+    "computed": 2000
+  },
+  "behaviour_reports": 1876,
+  "presets_with_useful_hue_description": 1439,
+  "presets_with_conditional_activity_index": 1144,
+  "eligible_bands": {},
+  "provisional_source_potential_bands": {
+    "Chill": 674,
+    "Normal": 104,
+    "Intense": 101
+  },
+  "unknown_reasons_by_presets": [
+    [
+      "complete displayed source activity model not established",
+      1876
+    ],
+    [
+      "source movement or displayed contribution unresolved",
+      1876
+    ],
+    [
+      "total brightness trajectory or transition extent unresolved",
+      1717
+    ],
+    [
+      "contributing source flash mechanism is not exhaustively quantified",
+      266
+    ],
+    [
+      "spatial-band offset domain budget exceeded",
+      121
+    ],
+    [
+      "displayed contribution has no source bound",
+      43
+    ],
+    [
+      "source literal distinct-node budget exceeded",
+      3
+    ],
+    [
+      "known invalid native source domain",
+      2
+    ]
+  ],
+  "uses_rendered_images": false,
+  "appearance_accuracy_verified": false,
+  "scope": "Source evidence and uncalibrated preference mapping; counts are not visual accuracy",
+  "wall_seconds": 163.4657753330248,
+  "worker_seconds": 594.8421542048163,
+  "manifest_sha256": "3b22c88ddbbc5a2fa96764e83174bd9d9b2c6295c4649bc15efb49eb5dde3071",
+  "rows_sha256": "1e92ca3ebded773c5f57a29983e0a61460a18e2da0de5b1f0341487a194cb867"
+}

@@ -576,5 +576,7 @@ def appearance_from_analysis(analysis):
     from source_feedback_sensitivity import feedback_colour_sensitivity
     result['feedback_colour_sensitivity']=feedback_colour_sensitivity(result,
         warp_contains_clip=analysis.stages['warp'].get('source_contains_clip',False))
+    from source_static_behaviour import static_behaviour
+    result['static_behaviour']=static_behaviour(analysis,result,getattr(analysis,'behaviour_context',None))
     result['record_sha256']=_digest(result)
     return result

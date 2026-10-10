@@ -1,0 +1,2249 @@
+{
+  "context": {
+    "feedback_fps": 30,
+    "viewport": [
+      1920,
+      1080
+    ]
+  },
+  "controls": [
+    {
+      "colour_character": {
+        "actual_image_palette_verified": false,
+        "by_component": {
+          "mesh_warp": {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "f47e8f2a0eaaed560caf884f91e417dd10407f06af66d7fe3006141d8d7e90b3"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          "wave_0": {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "blue"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "f47e8f2a0eaaed560caf884f91e417dd10407f06af66d7fe3006141d8d7e90b3"
+            },
+            "source_palette": {
+              "anchors": [
+                {
+                  "hsv": [
+                    0.6666666666666666,
+                    1.0,
+                    0.9999998807907104
+                  ],
+                  "hue_family": "blue",
+                  "raw_source_rgb": [
+                    0.0,
+                    0.0,
+                    0.9999998807907104
+                  ],
+                  "rgb": [
+                    0.0,
+                    0.0,
+                    0.9999998807907104
+                  ],
+                  "role": "custom_wave_native_point",
+                  "temperature": "cool"
+                }
+              ],
+              "channel_domain_evidence": {
+                "a": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "b": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "g": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "r": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                }
+              },
+              "hue_families_possible": [
+                "blue"
+              ],
+              "known_invalid_native_domain": false,
+              "model": "native_custom_wave_source_box",
+              "provably_inactive": false,
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ]
+            },
+            "stage": "drawing",
+            "status": "known_source_colour",
+            "unknown_reasons": []
+          }
+        },
+        "candidate_palette_hierarchy": [
+          {
+            "contributors": [
+              "wave_0"
+            ],
+            "hue_family": "blue",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "cool",
+            "weight_interval": [
+              0.0,
+              1.0
+            ]
+          }
+        ],
+        "category_policy": {
+          "fitted_to_human_labels": false,
+          "grayscale_saturation_below": 0.08,
+          "hue_degrees": {
+            "blue": [
+              [
+                195,
+                255
+              ]
+            ],
+            "cyan": [
+              [
+                165,
+                195
+              ]
+            ],
+            "green": [
+              [
+                75,
+                165
+              ]
+            ],
+            "orange": [
+              [
+                15,
+                45
+              ]
+            ],
+            "pink": [
+              [
+                285,
+                345
+              ]
+            ],
+            "purple": [
+              [
+                255,
+                285
+              ]
+            ],
+            "red": [
+              [
+                0,
+                15
+              ],
+              [
+                345,
+                360
+              ]
+            ],
+            "yellow": [
+              [
+                45,
+                75
+              ]
+            ]
+          },
+          "near_black_value_at_most": 0.02,
+          "temperature_by_family": {
+            "blue": "cool",
+            "cyan": "cool",
+            "grayscale": "neutral",
+            "green": "mixed",
+            "orange": "warm",
+            "pink": "warm",
+            "purple": "mixed",
+            "red": "warm",
+            "yellow": "warm"
+          }
+        },
+        "components": [
+          {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "blue"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "f47e8f2a0eaaed560caf884f91e417dd10407f06af66d7fe3006141d8d7e90b3"
+            },
+            "source_palette": {
+              "anchors": [
+                {
+                  "hsv": [
+                    0.6666666666666666,
+                    1.0,
+                    0.9999998807907104
+                  ],
+                  "hue_family": "blue",
+                  "raw_source_rgb": [
+                    0.0,
+                    0.0,
+                    0.9999998807907104
+                  ],
+                  "rgb": [
+                    0.0,
+                    0.0,
+                    0.9999998807907104
+                  ],
+                  "role": "custom_wave_native_point",
+                  "temperature": "cool"
+                }
+              ],
+              "channel_domain_evidence": {
+                "a": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "b": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "g": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "r": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                }
+              },
+              "hue_families_possible": [
+                "blue"
+              ],
+              "known_invalid_native_domain": false,
+              "model": "native_custom_wave_source_box",
+              "provably_inactive": false,
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ]
+            },
+            "stage": "drawing",
+            "status": "known_source_colour",
+            "unknown_reasons": []
+          },
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "f47e8f2a0eaaed560caf884f91e417dd10407f06af66d7fe3006141d8d7e90b3"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          }
+        ],
+        "conditions": [
+          "HSV families describe encoded source RGB, not measured image colour, lighting temperature or aesthetic judgment",
+          "Independent RGB boxes admit hue candidates, not simultaneous or reached colours; source correlations may restrict them",
+          "Prominence intervals order possible contribution; overlap, alpha, destination and feedback prevent guaranteed dominance",
+          "Unknown inherited palettes remain unknown even when a texture-read mechanism is known"
+        ],
+        "inherited_component_ids": [
+          "mesh_warp"
+        ],
+        "policy": "source-colour-character-v1",
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "f47e8f2a0eaaed560caf884f91e417dd10407f06af66d7fe3006141d8d7e90b3"
+        },
+        "unknown_contributors": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "inherited_colour"
+          }
+        ],
+        "useful_hue_description": true,
+        "uses_equation_execution": false,
+        "uses_rendered_images": false,
+        "uses_shader_execution": false
+      },
+      "name": "native_custom_wave_blue",
+      "raw_preset_body": "wavecode_0_enabled=1\nwavecode_0_r=1\nwavecode_0_g=0\nwavecode_0_b=0\nwave_0_per_frame1=r=0;g=1;\nwave_0_per_point1=g=0;b=1;\n"
+    },
+    {
+      "colour_character": {
+        "actual_image_palette_verified": false,
+        "by_component": {
+          "mesh_warp": {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8ab0908bf2fdaa15904f09ae6a8c18c81537079d0443973d6e15bafaef5f7194"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          "wave_0": {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "red",
+                "orange",
+                "yellow"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8ab0908bf2fdaa15904f09ae6a8c18c81537079d0443973d6e15bafaef5f7194"
+            },
+            "source_palette": {
+              "anchors": [],
+              "channel_domain_evidence": {
+                "a": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "b": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "g": {
+                  "assumed_finite_input_names": [
+                    "sample"
+                  ],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {
+                    "sample": [
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "r": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                }
+              },
+              "hue_families_possible": [
+                "red",
+                "orange",
+                "yellow"
+              ],
+              "known_invalid_native_domain": false,
+              "model": "native_custom_wave_source_box",
+              "provably_inactive": false,
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ]
+            },
+            "stage": "drawing",
+            "status": "dynamic_source_colour",
+            "unknown_reasons": []
+          }
+        },
+        "candidate_palette_hierarchy": [
+          {
+            "contributors": [
+              "wave_0"
+            ],
+            "hue_family": "red",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              1.0
+            ]
+          },
+          {
+            "contributors": [
+              "wave_0"
+            ],
+            "hue_family": "orange",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              1.0
+            ]
+          },
+          {
+            "contributors": [
+              "wave_0"
+            ],
+            "hue_family": "yellow",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              1.0
+            ]
+          }
+        ],
+        "category_policy": {
+          "fitted_to_human_labels": false,
+          "grayscale_saturation_below": 0.08,
+          "hue_degrees": {
+            "blue": [
+              [
+                195,
+                255
+              ]
+            ],
+            "cyan": [
+              [
+                165,
+                195
+              ]
+            ],
+            "green": [
+              [
+                75,
+                165
+              ]
+            ],
+            "orange": [
+              [
+                15,
+                45
+              ]
+            ],
+            "pink": [
+              [
+                285,
+                345
+              ]
+            ],
+            "purple": [
+              [
+                255,
+                285
+              ]
+            ],
+            "red": [
+              [
+                0,
+                15
+              ],
+              [
+                345,
+                360
+              ]
+            ],
+            "yellow": [
+              [
+                45,
+                75
+              ]
+            ]
+          },
+          "near_black_value_at_most": 0.02,
+          "temperature_by_family": {
+            "blue": "cool",
+            "cyan": "cool",
+            "grayscale": "neutral",
+            "green": "mixed",
+            "orange": "warm",
+            "pink": "warm",
+            "purple": "mixed",
+            "red": "warm",
+            "yellow": "warm"
+          }
+        },
+        "components": [
+          {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "red",
+                "orange",
+                "yellow"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8ab0908bf2fdaa15904f09ae6a8c18c81537079d0443973d6e15bafaef5f7194"
+            },
+            "source_palette": {
+              "anchors": [],
+              "channel_domain_evidence": {
+                "a": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "b": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    0.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "g": {
+                  "assumed_finite_input_names": [
+                    "sample"
+                  ],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {
+                    "sample": [
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    0.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                },
+                "r": {
+                  "assumed_finite_input_names": [],
+                  "conditions": [
+                    "All listed scalar input values and relevant source intermediates are finite",
+                    "Unbounded internal intervals represent arbitrary finite values, not supplied infinities or zero defaults",
+                    "Conditional branch unions and bounded trig/clamps infer values only; timing, continuity and visible flashing remain unknown",
+                    "Nominal envelope excludes target rounding/libm/overflow behavior; native conversion and appearance qualification stay separate"
+                  ],
+                  "declared_input_domains": {},
+                  "native_numeric_certified": false,
+                  "nominal_value_range": [
+                    1.0,
+                    1.0
+                  ],
+                  "policy": "source-scalar-finite-input-envelope-v1",
+                  "unknown_reasons": [],
+                  "uses_equation_execution": false,
+                  "uses_rendered_images": false
+                }
+              },
+              "hue_families_possible": [
+                "red",
+                "orange",
+                "yellow"
+              ],
+              "known_invalid_native_domain": false,
+              "model": "native_custom_wave_source_box",
+              "provably_inactive": false,
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ]
+            },
+            "stage": "drawing",
+            "status": "dynamic_source_colour",
+            "unknown_reasons": []
+          },
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8ab0908bf2fdaa15904f09ae6a8c18c81537079d0443973d6e15bafaef5f7194"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          }
+        ],
+        "conditions": [
+          "HSV families describe encoded source RGB, not measured image colour, lighting temperature or aesthetic judgment",
+          "Independent RGB boxes admit hue candidates, not simultaneous or reached colours; source correlations may restrict them",
+          "Prominence intervals order possible contribution; overlap, alpha, destination and feedback prevent guaranteed dominance",
+          "Unknown inherited palettes remain unknown even when a texture-read mechanism is known"
+        ],
+        "inherited_component_ids": [
+          "mesh_warp"
+        ],
+        "policy": "source-colour-character-v1",
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "8ab0908bf2fdaa15904f09ae6a8c18c81537079d0443973d6e15bafaef5f7194"
+        },
+        "unknown_contributors": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "inherited_colour"
+          }
+        ],
+        "useful_hue_description": true,
+        "uses_equation_execution": false,
+        "uses_rendered_images": false,
+        "uses_shader_execution": false
+      },
+      "name": "sample_warm_gradient",
+      "raw_preset_body": "wavecode_0_enabled=1\nwave_0_per_point1=r=1;g=sample;b=0;\n"
+    },
+    {
+      "colour_character": {
+        "actual_image_palette_verified": false,
+        "by_component": {
+          "mesh_warp": {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8fb940fc5ba5830720bb6d66f8ead44328cc02b96e21064630be2368ff67f31a"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          "shape_0": {
+            "component_id": "shape_0",
+            "contribution_interval": [
+              0.0,
+              0.0031497951886551587
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "cyan"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  1.1920928955078125e-07,
+                  0.333333412806193
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8fb940fc5ba5830720bb6d66f8ead44328cc02b96e21064630be2368ff67f31a"
+            },
+            "source_palette": {
+              "anchors": [
+                {
+                  "hsv": [
+                    0.0,
+                    1.0,
+                    0.9999998807907104
+                  ],
+                  "hue_family": "red",
+                  "raw_source_rgb": [
+                    0.9999998807907104,
+                    0.0,
+                    0.0
+                  ],
+                  "rgb": [
+                    0.9999998807907104,
+                    0.0,
+                    0.0
+                  ],
+                  "role": "centre",
+                  "temperature": "warm"
+                }
+              ],
+              "hue_families_possible": [
+                "red"
+              ],
+              "model": "native_vertex_gradient_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ]
+            },
+            "stage": "drawing",
+            "status": "known_source_colour",
+            "unknown_reasons": []
+          }
+        },
+        "candidate_palette_hierarchy": [
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "cyan",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "cool",
+            "weight_interval": [
+              0.0,
+              0.0031497951886551587
+            ]
+          }
+        ],
+        "category_policy": {
+          "fitted_to_human_labels": false,
+          "grayscale_saturation_below": 0.08,
+          "hue_degrees": {
+            "blue": [
+              [
+                195,
+                255
+              ]
+            ],
+            "cyan": [
+              [
+                165,
+                195
+              ]
+            ],
+            "green": [
+              [
+                75,
+                165
+              ]
+            ],
+            "orange": [
+              [
+                15,
+                45
+              ]
+            ],
+            "pink": [
+              [
+                285,
+                345
+              ]
+            ],
+            "purple": [
+              [
+                255,
+                285
+              ]
+            ],
+            "red": [
+              [
+                0,
+                15
+              ],
+              [
+                345,
+                360
+              ]
+            ],
+            "yellow": [
+              [
+                45,
+                75
+              ]
+            ]
+          },
+          "near_black_value_at_most": 0.02,
+          "temperature_by_family": {
+            "blue": "cool",
+            "cyan": "cool",
+            "grayscale": "neutral",
+            "green": "mixed",
+            "orange": "warm",
+            "pink": "warm",
+            "purple": "mixed",
+            "red": "warm",
+            "yellow": "warm"
+          }
+        },
+        "components": [
+          {
+            "component_id": "shape_0",
+            "contribution_interval": [
+              0.0,
+              0.0031497951886551587
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "cyan"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  1.1920928955078125e-07,
+                  0.333333412806193
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8fb940fc5ba5830720bb6d66f8ead44328cc02b96e21064630be2368ff67f31a"
+            },
+            "source_palette": {
+              "anchors": [
+                {
+                  "hsv": [
+                    0.0,
+                    1.0,
+                    0.9999998807907104
+                  ],
+                  "hue_family": "red",
+                  "raw_source_rgb": [
+                    0.9999998807907104,
+                    0.0,
+                    0.0
+                  ],
+                  "rgb": [
+                    0.9999998807907104,
+                    0.0,
+                    0.0
+                  ],
+                  "role": "centre",
+                  "temperature": "warm"
+                }
+              ],
+              "hue_families_possible": [
+                "red"
+              ],
+              "model": "native_vertex_gradient_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.9999998807907104,
+                  0.9999998807907104
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "warm"
+              ]
+            },
+            "stage": "drawing",
+            "status": "known_source_colour",
+            "unknown_reasons": []
+          },
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "8fb940fc5ba5830720bb6d66f8ead44328cc02b96e21064630be2368ff67f31a"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          }
+        ],
+        "conditions": [
+          "HSV families describe encoded source RGB, not measured image colour, lighting temperature or aesthetic judgment",
+          "Independent RGB boxes admit hue candidates, not simultaneous or reached colours; source correlations may restrict them",
+          "Prominence intervals order possible contribution; overlap, alpha, destination and feedback prevent guaranteed dominance",
+          "Unknown inherited palettes remain unknown even when a texture-read mechanism is known"
+        ],
+        "inherited_component_ids": [
+          "mesh_warp"
+        ],
+        "policy": "source-colour-character-v1",
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "8fb940fc5ba5830720bb6d66f8ead44328cc02b96e21064630be2368ff67f31a"
+        },
+        "unknown_contributors": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "inherited_colour"
+          }
+        ],
+        "useful_hue_description": true,
+        "uses_equation_execution": false,
+        "uses_rendered_images": false,
+        "uses_shader_execution": false
+      },
+      "name": "native_shape_red_then_inversion",
+      "raw_preset_body": "fGammaAdj=1\nbInvert=1\nshapecode_0_enabled=1\nshape_0_per_frame1=r=1;g=0;b=0;r2=1;g2=0;b2=0;a=1;a2=1;\n"
+    },
+    {
+      "colour_character": {
+        "actual_image_palette_verified": false,
+        "by_component": {
+          "mesh_warp": {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "eeacc333e0dce7aeef7db9e320dc0b0db96c6c8fab130732447a91c9ef96660f"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          "shape_0": {
+            "component_id": "shape_0",
+            "contribution_interval": [
+              0.0,
+              0.00314979556414005
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "grayscale",
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "cyan",
+                "blue",
+                "purple",
+                "pink"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool",
+                "mixed",
+                "neutral",
+                "warm"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "eeacc333e0dce7aeef7db9e320dc0b0db96c6c8fab130732447a91c9ef96660f"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "grayscale"
+              ],
+              "model": "correlated_native_shared_scalar_rgb",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "neutral"
+              ]
+            },
+            "stage": "drawing",
+            "status": "dynamic_source_colour",
+            "unknown_reasons": [
+              "b has an interval rather than a constant native colour",
+              "b2 has an interval rather than a constant native colour",
+              "g has an interval rather than a constant native colour",
+              "g2 has an interval rather than a constant native colour",
+              "r has an interval rather than a constant native colour",
+              "r2 has an interval rather than a constant native colour"
+            ]
+          }
+        },
+        "candidate_palette_hierarchy": [
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "grayscale",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "neutral",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "red",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "orange",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "yellow",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "green",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "mixed",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "cyan",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "cool",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "blue",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "cool",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "purple",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "mixed",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          },
+          {
+            "contributors": [
+              "shape_0"
+            ],
+            "hue_family": "pink",
+            "role": "conditional source/final candidate, not dominant image hue",
+            "temperature": "warm",
+            "weight_interval": [
+              0.0,
+              0.00314979556414005
+            ]
+          }
+        ],
+        "category_policy": {
+          "fitted_to_human_labels": false,
+          "grayscale_saturation_below": 0.08,
+          "hue_degrees": {
+            "blue": [
+              [
+                195,
+                255
+              ]
+            ],
+            "cyan": [
+              [
+                165,
+                195
+              ]
+            ],
+            "green": [
+              [
+                75,
+                165
+              ]
+            ],
+            "orange": [
+              [
+                15,
+                45
+              ]
+            ],
+            "pink": [
+              [
+                285,
+                345
+              ]
+            ],
+            "purple": [
+              [
+                255,
+                285
+              ]
+            ],
+            "red": [
+              [
+                0,
+                15
+              ],
+              [
+                345,
+                360
+              ]
+            ],
+            "yellow": [
+              [
+                45,
+                75
+              ]
+            ]
+          },
+          "near_black_value_at_most": 0.02,
+          "temperature_by_family": {
+            "blue": "cool",
+            "cyan": "cool",
+            "grayscale": "neutral",
+            "green": "mixed",
+            "orange": "warm",
+            "pink": "warm",
+            "purple": "mixed",
+            "red": "warm",
+            "yellow": "warm"
+          }
+        },
+        "components": [
+          {
+            "component_id": "shape_0",
+            "contribution_interval": [
+              0.0,
+              0.00314979556414005
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "grayscale",
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "cyan",
+                "blue",
+                "purple",
+                "pink"
+              ],
+              "model": "conditional_native_legacy_hue_gamma_filter_box",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "cool",
+                "mixed",
+                "neutral",
+                "warm"
+              ],
+              "transfer_model": "native_legacy_gamma_hue_and_ordered_filters"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "eeacc333e0dce7aeef7db9e320dc0b0db96c6c8fab130732447a91c9ef96660f"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [
+                "grayscale"
+              ],
+              "model": "correlated_native_shared_scalar_rgb",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": [
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ],
+                [
+                  0.0,
+                  1.0
+                ]
+              ],
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [
+                "neutral"
+              ]
+            },
+            "stage": "drawing",
+            "status": "dynamic_source_colour",
+            "unknown_reasons": [
+              "b has an interval rather than a constant native colour",
+              "b2 has an interval rather than a constant native colour",
+              "g has an interval rather than a constant native colour",
+              "g2 has an interval rather than a constant native colour",
+              "r has an interval rather than a constant native colour",
+              "r2 has an interval rather than a constant native colour"
+            ]
+          },
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "eeacc333e0dce7aeef7db9e320dc0b0db96c6c8fab130732447a91c9ef96660f"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          }
+        ],
+        "conditions": [
+          "HSV families describe encoded source RGB, not measured image colour, lighting temperature or aesthetic judgment",
+          "Independent RGB boxes admit hue candidates, not simultaneous or reached colours; source correlations may restrict them",
+          "Prominence intervals order possible contribution; overlap, alpha, destination and feedback prevent guaranteed dominance",
+          "Unknown inherited palettes remain unknown even when a texture-read mechanism is known"
+        ],
+        "inherited_component_ids": [
+          "mesh_warp"
+        ],
+        "policy": "source-colour-character-v1",
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "eeacc333e0dce7aeef7db9e320dc0b0db96c6c8fab130732447a91c9ef96660f"
+        },
+        "unknown_contributors": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "inherited_colour"
+          }
+        ],
+        "useful_hue_description": true,
+        "uses_equation_execution": false,
+        "uses_rendered_images": false,
+        "uses_shader_execution": false
+      },
+      "name": "dynamic_shared_scalar_greyscale",
+      "raw_preset_body": "shapecode_0_enabled=1\nshape_0_per_frame1=r=.5+.5*sin(time);g=r;b=r;r2=r;g2=r;b2=r;a=1;a2=1;\n"
+    },
+    {
+      "colour_character": {
+        "actual_image_palette_verified": false,
+        "by_component": {
+          "mesh_warp": {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "7724d3c7e98c9a878ff12fc9116aff82dd395f232a65732ce32a551f9b463140"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          "wave_0": {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "known invalid native source domain"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "7724d3c7e98c9a878ff12fc9116aff82dd395f232a65732ce32a551f9b463140"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "known_invalid_native_colour_domain",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "drawing",
+            "status": "unknown_colour",
+            "unknown_reasons": [
+              "known invalid native input domain",
+              "r native colour domain unresolved"
+            ]
+          }
+        },
+        "candidate_palette_hierarchy": [],
+        "category_policy": {
+          "fitted_to_human_labels": false,
+          "grayscale_saturation_below": 0.08,
+          "hue_degrees": {
+            "blue": [
+              [
+                195,
+                255
+              ]
+            ],
+            "cyan": [
+              [
+                165,
+                195
+              ]
+            ],
+            "green": [
+              [
+                75,
+                165
+              ]
+            ],
+            "orange": [
+              [
+                15,
+                45
+              ]
+            ],
+            "pink": [
+              [
+                285,
+                345
+              ]
+            ],
+            "purple": [
+              [
+                255,
+                285
+              ]
+            ],
+            "red": [
+              [
+                0,
+                15
+              ],
+              [
+                345,
+                360
+              ]
+            ],
+            "yellow": [
+              [
+                45,
+                75
+              ]
+            ]
+          },
+          "near_black_value_at_most": 0.02,
+          "temperature_by_family": {
+            "blue": "cool",
+            "cyan": "cool",
+            "grayscale": "neutral",
+            "green": "mixed",
+            "orange": "warm",
+            "pink": "warm",
+            "purple": "mixed",
+            "red": "warm",
+            "yellow": "warm"
+          }
+        },
+        "components": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "unresolved final RGB transfer"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "7724d3c7e98c9a878ff12fc9116aff82dd395f232a65732ce32a551f9b463140"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unresolved_feedback_palette",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "mesh_warp",
+            "status": "inherited_colour",
+            "unknown_reasons": [
+              "feedback/image colour is unresolved",
+              "later main/blur/texture composition may change the source colours"
+            ]
+          },
+          {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "eligible_accent": true,
+            "final_candidate_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "unknown",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": [],
+              "transfer_model": "known invalid native source domain"
+            },
+            "provenance": {
+              "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+              "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+              "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+              "preset_sha256": "7724d3c7e98c9a878ff12fc9116aff82dd395f232a65732ce32a551f9b463140"
+            },
+            "source_palette": {
+              "anchors": [],
+              "hue_families_possible": [],
+              "model": "known_invalid_native_colour_domain",
+              "reached_palette_verified": false,
+              "rgb_component_intervals": null,
+              "scope": "source anchors and conditional independent RGB box; no reached hue histogram or displayed dominance",
+              "temperature_candidates": []
+            },
+            "stage": "drawing",
+            "status": "unknown_colour",
+            "unknown_reasons": [
+              "known invalid native input domain",
+              "r native colour domain unresolved"
+            ]
+          }
+        ],
+        "conditions": [
+          "HSV families describe encoded source RGB, not measured image colour, lighting temperature or aesthetic judgment",
+          "Independent RGB boxes admit hue candidates, not simultaneous or reached colours; source correlations may restrict them",
+          "Prominence intervals order possible contribution; overlap, alpha, destination and feedback prevent guaranteed dominance",
+          "Unknown inherited palettes remain unknown even when a texture-read mechanism is known"
+        ],
+        "inherited_component_ids": [
+          "mesh_warp"
+        ],
+        "policy": "source-colour-character-v1",
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "7724d3c7e98c9a878ff12fc9116aff82dd395f232a65732ce32a551f9b463140"
+        },
+        "unknown_contributors": [
+          {
+            "component_id": "mesh_warp",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "inherited_colour"
+          },
+          {
+            "component_id": "wave_0",
+            "contribution_interval": [
+              0.0,
+              1.0
+            ],
+            "reason": "unknown_colour"
+          }
+        ],
+        "useful_hue_description": false,
+        "uses_equation_execution": false,
+        "uses_rendered_images": false,
+        "uses_shader_execution": false
+      },
+      "name": "invalid_native_wave_rgb",
+      "raw_preset_body": "wavecode_0_enabled=1\nwave_0_per_point1=r=1e100;g=0;b=0;a=0;\n"
+    }
+  ],
+  "model_sha256": "e72afb3b476b9e30b47818fc8444160b3ee31956086d88a0c33f2021fd3a5a16",
+  "numpy_version": "2.5.3",
+  "policy": "source-colour-character-v1",
+  "schema_version": 1,
+  "scope": "source colour anchors/boxes/cones and conditional palette hierarchy, not actual image palette",
+  "uses_equation_execution": false,
+  "uses_rendered_images": false,
+  "uses_shader_execution": false
+}

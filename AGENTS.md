@@ -1458,3 +1458,18 @@ artifact hashes are required for their optional controls. See
 `tools/milk-analyzer/SOURCE_COMPONENTS.md` and component evidence/research reports.
 Keep the original predictor-maths goal paused until the approved component
 adoption/validation phase completes; no main merge or device corpus is included.
+
+
+Static behaviour integration (2026-10-10, in progress): the source description
+now includes `static_behaviour` with separate flashing, motion, prominence and
+colour evidence. `source_static_behaviour.validate_context` freezes declared
+viewport/FPS/scalar domains; export/cache identities include that context.
+`static_behaviour_scoring` is an uncalibrated source-potential preference mapping;
+its point estimate is not typical visible intensity. Missing contributing
+trajectories and execution/domain gaps veto automatic eligibility. Preserve
+source-only/no-render flags and all conditional bounds. `static_behaviour_validate`
+reuses one frozen parser per worker, validates saved compiler seals/source/profile
+joins and optionally enters caller-selected SymPy/Z3 sessions. Its cohort counts
+are interpretation evidence, not appearance or human mood accuracy. Prepared
+qualification and completed coverage belong in task evidence; do not infer success
+from synthetic controls or constant final RGB with unresolved execution.

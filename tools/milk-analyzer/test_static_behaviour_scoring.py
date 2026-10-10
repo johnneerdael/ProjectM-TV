@@ -1,0 +1,76 @@
+"""Source-model activity decisions retain extent and missing contributors."""
+import pytest
+
+
+def evidence(*, speed=0., contrast=0., frequency=0., extent=1., complete=True):
+    return {'policy':'source-static-behaviour-v1', 'context':{'viewport':[1920,1080],'feedback_fps':30},
+            'output_model_complete':complete,
+            'flashing':{'records':[{'component_id':'shader_composite','kind':'shader_brightness_change',
+                'periodic_contrast_range':[contrast,contrast], 'brightness_delta_range':[0.,contrast],
+                'cycle_rate_hz':frequency, 'event_rate_hz':0., 'event_schedules':[],
+                'nominal_continuity':'smooth_nominal','total_brightness_rate_known':True,
+                'maximum_brightness_change_per_second':contrast*frequency*3.141592653589793,
+                'unknown_reasons':[]}], 'source_hazards':[], 'unknown_reasons':[]},
+            'motion':{'contributions':[{'component_id':'shader_composite','kind':'geometry_trajectory',
+                'rate_kind':'source_time_partial','speed_interval_vp_per_second':[speed,speed],
+                'unknown_reasons':[]}]},
+            'prominence':{'by_component':{'shader_composite':{
+                'displayed_support_fraction_interval':[extent,extent],
+                'displayed_contribution_interval':[extent,extent],
+                'final_transfer':{'difference_gain_interval':[1.,1.]},
+                'known_invalid_native_domain':False,'unknown_reasons':[]}}}}
+
+
+def test_calm_source_model_is_chill():
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(evidence(speed=.01,contrast=.1,frequency=.05))
+    assert 'Chill' in result['eligible_bands']
+    assert result['intensity']['interval'][1]<=30
+
+
+def test_uniform_fast_brightness_modulation_is_intense():
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(evidence(contrast=.8,frequency=4))
+    assert 'Intense' in result['eligible_bands']
+    assert 'Chill' not in result['eligible_bands']
+
+
+@pytest.mark.parametrize('extent',[0.,.0001])
+def test_invisible_or_tiny_fast_effect_does_not_drive_intense(extent):
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(evidence(speed=10.,contrast=1.,frequency=30.,extent=extent))
+    assert 'Intense' not in result['predicted_bands']
+    assert result['intensity']['interval'][1]<30
+
+
+def test_unknown_prominent_motion_stays_unknown():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence()
+    model['motion']['contributions'][0]['speed_interval_vp_per_second']=[0.,None]
+    result=score_static_behaviour(model)
+    assert 'Chill' not in result['eligible_bands']
+    assert result['unknown_contributors']
+
+
+def test_no_records_cannot_prove_calm_when_output_model_incomplete():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence(complete=False);model['flashing']['records']=[];model['motion']['contributions']=[]
+    result=score_static_behaviour(model)
+    assert result['eligible_bands']==[]
+    assert result['intensity']['interval']==[1.,100.]
+
+
+def test_nonfinite_domain_never_resolves_an_opacity_zero_effect():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence(extent=0.)
+    model['prominence']['by_component']['shader_composite']['known_invalid_native_domain']=True
+    result=score_static_behaviour(model)
+    assert result['eligible_bands']==[]
+    assert result['unknown_contributors']
+
+
+def test_exported_preferences_cannot_mutate_future_scores():
+    from static_behaviour_scoring import score_static_behaviour
+    first=score_static_behaviour(evidence())
+    first['preference_rules']['motion_reference_vp_s']=999
+    assert score_static_behaviour(evidence())['preference_rules']['motion_reference_vp_s']==.75
