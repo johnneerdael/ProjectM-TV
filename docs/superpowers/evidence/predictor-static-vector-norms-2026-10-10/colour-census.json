@@ -1,0 +1,316 @@
+{
+  "basis": "Nominal vector norm/distance enclosures and response with strong memo identity; no appearance or mood certificate",
+  "presets": 100,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "ordinary_bounded_declared_texture_inputs": 76,
+    "scenario_bounded_declared_texture_inputs": 81,
+    "new_complete_scenario_stages_vs_previous_ordinary": 10,
+    "new_complete_scenario_stages": 7,
+    "new_complete_ordinary_stages": 5,
+    "ordinary_stage_records_changed": 6,
+    "presets_with_complete_scenario_colour": 62,
+    "presets_with_new_complete_scenario_colour": 7,
+    "ordinary_unknown": 114,
+    "scenario_unknown": 109,
+    "ordinary_partial_declared_texture_inputs": 10,
+    "scenario_partial_declared_texture_inputs": 10
+  },
+  "changed_source_gap_presets": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "model_modules": {
+    "source_control_bounds.py": "1e8629087ce0f64408af7ef1f123ef057cd2509d785d06fca74df5b16ef99459",
+    "source_input_scenario.py": "1d82c9b703d9af8baa1703a05931339d6c04f55300a6dfa089dabda1c82c68fa",
+    "source_nonlinear_colour.py": "b9e543a3edb5f1b93f0688c8f38fc877bf623cef052dd732eb16098f56220f91"
+  },
+  "zip_sha256": "e7ddbed7d65306bc1d7efce9750ec184d7be6018c25889fe884de2ed5a3fbc58",
+  "rows": [
+    {
+      "preset": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "ordinary",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ],
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ],
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ],
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ],
+            [
+              -0.029999999300000003,
+              -0.029999999299999996
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "ordinary",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.05400000089000005,
+              1.0460000005100003
+            ],
+            [
+              -0.07999999820000002,
+              0.9200000018000001
+            ],
+            [
+              -0.004000000190000001,
+              1.9758989588480642
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.05400000089000005,
+              1.0460000005100003
+            ],
+            [
+              -0.07999999820000002,
+              0.9200000018000001
+            ],
+            [
+              -0.004000000190000001,
+              1.9758989588480642
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+      "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7",
+      "stage_gains": [
+        {
+          "stage": "composite",
+          "scope": "scenario",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -6.825786432226924,
+              5.645786436306924
+            ],
+            [
+              -5.189747462905842,
+              1.6360389693210815
+            ],
+            [
+              -2.876038963921083,
+              5.009747466985843
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "ordinary",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1e-323,
+              1.0000000000000004
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1e-323,
+              1.0000000000000004
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "ordinary",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1e-323,
+              1.0000000000000004
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "partial_declared_texture_inputs",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1.5e-323,
+              1.0000000000000007
+            ],
+            [
+              -1e-323,
+              1.0000000000000004
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "ordinary",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ],
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ],
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ],
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ],
+            [
+              -0.0019531250552734403,
+              1.0019531533552741
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "stage_gains": [
+        {
+          "stage": "warp",
+          "scope": "scenario",
+          "before": "unknown",
+          "after": "bounded_declared_texture_inputs",
+          "rgb_bounds": [
+            [
+              -3e-323,
+              1.200000003000001
+            ],
+            [
+              -3e-323,
+              1.200000003000001
+            ],
+            [
+              -3e-323,
+              2.1000000156000014
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

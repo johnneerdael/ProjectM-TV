@@ -1225,3 +1225,14 @@ Preserve ordinary motion records and remap units explicitly. Keep total rate and
 visible speed null; zero partial rate is not stationarity or mood proof. Native
 quantized Q uploads/time switches remain guarded; scenarios cannot imply actual
 clock, native precision, geometry or feedback qualification.
+
+Vector norms: require matching float scalar/vector widths, preserve scalar lane
+identity and distance subtraction. Use component-box hypot for value enclosures
+and hypot(component rates) for sufficient norm response, including the origin.
+Do not reinterpret a finite norm bound as normalization, positive reactivity,
+geometry, feedback or mood proof; singular/quantized components remain guarded.
+
+Scalar calculus memo entries retain (original node, result) and verify identity.
+Distance generates temporary subtraction nodes; an id-only cache can silently
+reuse stale bounds. Keep the repeated20-distance=210 regression and existing
+node/depth budgets. Strong references are required even outside family cache scope.

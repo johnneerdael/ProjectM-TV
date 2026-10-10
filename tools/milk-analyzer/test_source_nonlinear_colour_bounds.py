@@ -285,3 +285,68 @@ def test_audio_switched_colour_branches_do_not_acquire_continuous_gain():
 def test_fixed_mask_does_not_discard_a_branch_with_singular_audio_domain():
     r=colour('ret=uv.x>.5 ? GetPixel(uv)/bass : GetPixel(uv)*bass;')
     assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])
+
+
+def test_vector_length_bounds_declared_signed_component_box():
+    x=Field('input',detail={'name':'x'});y=Field('input',detail={'name':'y'})
+    f=scalar('length',Field('components',(x,y),'float2'))
+    r=scalar_value_envelope(f,input_domains={'x':[-1,1],'y':[-1,1]})
+    assert r['nominal_value_range']==pytest.approx([0,np.sqrt(2)],abs=2e-14)
+
+
+def test_vector_length_has_finite_response_at_origin_without_root_derivative():
+    from source_control_bounds import scalar_response_envelope
+    x=Field('input',detail={'name':'x'});y=Field('input',detail={'name':'y'})
+    r=scalar_response_envelope(scalar('length',Field('components',(x,y),'float2')),input_names={'x'})
+    assert r['maximum_absolute_control_change_per_audio_unit']==pytest.approx(1,abs=2e-14)
+    assert r['nominal_continuity']=='piecewise_lipschitz'
+
+
+def test_sampled_vector_length_has_raw_colour_and_audio_response_bounds():
+    r=colour('ret=length(GetPixel(uv).rg)*bass;')
+    b=r['direct_colour_audio_response']['bands'][0]
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([np.sqrt(2)]*3,abs=2e-14)
+
+
+def test_vector_distance_preserves_difference_before_norm():
+    x=Field('input',detail={'name':'x'})
+    a=Field('components',(x,constant(0)),'float2');b=Field('components',(constant(2),constant(3)),'float2')
+    r=scalar_value_envelope(scalar('distance',a,b),input_domains={'x':[0,1]})
+    assert r['nominal_value_range']==pytest.approx([np.sqrt(10),np.sqrt(13)],abs=3e-14)
+
+
+def test_norm_does_not_invent_bounds_for_unsupported_component_domain():
+    r=colour('ret=length(float2(1/GetPixel(uv).r,0))*bass;')
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])
+
+
+def test_raw_vector_input_components_use_qualified_declared_domains():
+    v=Field('input',dtype='float2',detail={'name':'v'})
+    r=scalar_value_envelope(scalar('length',v),input_domains={'v.x':[.3,.4],'v.y':[.5,.6]})
+    assert r['nominal_value_range']==pytest.approx([np.hypot(.3,.5),np.hypot(.4,.6)],abs=2e-14)
+    assert r['assumed_finite_input_names']==['v.x','v.y']
+
+
+def test_norm_rejects_matrix_and_mismatched_vector_types():
+    matrix=Field('input',dtype='float2x2',detail={'name':'m'})
+    assert scalar_value_envelope(scalar('length',matrix))['nominal_value_range'] is None
+    a=Field('input',dtype='float2',detail={'name':'a'});b=Field('input',dtype='float3',detail={'name':'b'})
+    assert scalar_value_envelope(scalar('distance',a,b))['nominal_value_range'] is None
+
+
+def test_quantized_norm_component_keeps_continuous_response_unknown():
+    from source_control_bounds import scalar_response_envelope
+    x=Field('input',detail={'name':'x'})
+    n=Field('narrow',(x,),'float',{'numeric_domain':'shader-float32'})
+    r=scalar_response_envelope(scalar('length',Field('components',(n,constant(1)),'float2')),input_names={'x'},input_domains={'x':[0,1]})
+    assert r['maximum_absolute_control_change_per_audio_unit'] is None
+
+
+def test_multiple_distance_temporaries_keep_distinct_bounds_in_local_memo():
+    x=Field('input',detail={'name':'x'});a=Field('components',(x,constant(0)),'float2');f=constant(0)
+    for i in range(1,21):
+        b=Field('components',(constant(i),constant(0)),'float2')
+        f=scalar('add',f,scalar('distance',a,b))
+    for _ in range(10):
+        r=scalar_value_envelope(f,input_domains={'x':[0,0]})
+        assert r['nominal_value_range']==pytest.approx([210,210],abs=2e-11)

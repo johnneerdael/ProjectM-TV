@@ -45,12 +45,12 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
         return span,rate,kind
     def visit(node,depth=0):
         key=id(node)
-        if key in memo:return memo[key]
+        if key in memo and memo[key][0] is node:return memo[key][1]
         if depth>64 or len(memo)+len(active)>=512 or key in active:raise ValueError('compound source-time node/depth budget exceeded')
         active.add(key)
         try:result=calculate(node,depth)
         finally:active.remove(key)
-        memo[key]=result;return result
+        memo[key]=(node,result);return result
     def input_result(name):
         if not isinstance(name,str) or not name:return None
         finite_inputs.add(name)
@@ -67,7 +67,7 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
         if literal is not None:return ([literal,literal],0.,'smooth_nominal')
         if _response_input_names is not None and node.op in {'narrow','cast','construct'}:
             return None # Quantized/discrete inputs are not nominal continuous maps.
-        if _response_input_names is not None and node.op=='member' and node.dtype=='float':
+        if (_response_input_names is not None or _value_only) and node.op=='member' and node.dtype=='float':
             from source_appearance import _canonical_lane
             from field_math import SWIZZLE
             projected=_canonical_lane(node);parent=projected.args[0]
@@ -88,6 +88,29 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
                 span,rate,kind=child
                 return checked(None if span is None else [-span[1],-span[0]],rate,kind)
             return None
+        if node.op in {'length','distance'} and len(node.args)==(1 if node.op=='length' else 2):
+            from effect_families import _parts
+            from shader_fields import Field
+            types={a.dtype for a in node.args}
+            if len(types)!=1 or next(iter(types)) not in {'float','float2','float3','float4'}:return None
+            width=1 if node.args[0].dtype=='float' else int(node.args[0].dtype[-1])
+            parts=[_parts(a) for a in node.args]
+            if any(len(p)!=width or any(v.dtype!='float' for v in p) for p in parts):return None
+            components=parts[0] if node.op=='length' else [
+                Field('subtract',(a,b),'float') for a,b in zip(*parts)]
+            values=[visit(v,depth+1) for v in components]
+            if any(v is None for v in values):return None
+            lows=[];highs=[]
+            for span,rate,kind in values:
+                lows.append(0. if span is None or span[0]<=0<=span[1] else min(map(abs,span)))
+                highs.append(math.inf if span is None else max(map(abs,span)))
+            lower,upper=math.hypot(*lows),math.hypot(*highs)
+            if not math.isfinite(lower):return None
+            rates=[v[1] for v in values]
+            rate=None if any(r is None for r in rates) else math.hypot(*rates)
+            span,rate,kind=checked([lower,upper],rate,'piecewise_lipschitz')
+            if span is not None:span[0]=max(0.,span[0])
+            return span,rate,kind
         if _response_input_names is not None and node.op=='select' and len(node.args)==3:
             from source_polar import _nodes
             from source_forms import known_invalid_phase_offset

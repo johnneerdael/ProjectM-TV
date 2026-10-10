@@ -498,3 +498,8 @@ controls. This estimates the source-time part of a control's rate while audio,
 frame counters and state stay fixed. It can describe a steady-band movement
 recipe; it does not measure total movement or establish calmness. Ordinary
 motion/trajectory records remain alongside it.
+
+Vector-length and distance formulas now contribute nominal value/response bounds.
+These help describe radial and magnitude-driven recipes without taking frames.
+A norm can have a finite response bound at zero, while division or normalization
+by that norm may still have an unresolved singular domain.

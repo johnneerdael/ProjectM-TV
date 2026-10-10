@@ -43,6 +43,12 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                 finally:active.remove(key)
                 memo[key]=(original,value);return value
             def calculate(node,depth):
+                if node.op in {'length','distance'}:
+                    vectors=[]
+                    for arg in node.args:
+                        parts=_parts(arg)
+                        vectors.append(Field('components',tuple(project(v,depth+1) for v in parts),arg.dtype))
+                    return Field(node.op,tuple(vectors),node.dtype,node.detail)
                 if node.op=='dot' and len(node.args)==2:
                     a,b=map(_parts,node.args)
                     if len(a)!=len(b) or not 1<=len(a)<=4:raise ValueError('colour dot dimensions unresolved')

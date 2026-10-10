@@ -2075,3 +2075,31 @@ Finite/input-domain records, caller scenario identity and false observed/native
 binding flags accompany each result. Clock jumps, source-to-native rounding,
 discrete frames, viewport projection and visibility remain unqualified. A zero
 partial time derivative does not mean stationary visuals or a calm preset.
+
+## Vector norm and point-distance bounds
+
+Nominal scalar envelopes support `length` and `distance` over one to four float
+components. Distance retains componentwise subtraction before the norm. Raw
+vector input components use qualified scalar names/domains. Matrices, mismatched
+vector types/widths, unsupported components and quantized response operands stay
+unresolved. Colour projection preserves original lane/domain/upload guards.
+
+The component box gives a norm lower bound from each interval's minimum absolute
+value (zero when it crosses zero), and an upper bound from maximum absolute
+values. Hypot avoids a direct squared-sum overflow/underflow. Endpoint padding is
+outward and norm values remain nonnegative. For independent x,y in [-1,1], the
+nominal norm enclosure is [0,sqrt(2)]. Missing component-value bounds can leave
+values unbounded without necessarily preventing a continuous response bound.
+
+If component response ceilings are L_i, reverse triangle inequality gives norm
+response ceiling hypot(L_i). Thus length((x,y)) is1-Lipschitz for x variation,
+including at the origin; it does not need the singular derivative of sqrt at0.
+This is a sufficient bound, not a positive minimum or actual response. Correlated
+components can make it loose; no normalization or final visible geometry follows.
+Singular source components and nonfinite/quantized native uploads remain guarded.
+
+References: [HLSL length](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-length),
+[HLSL distance](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-distance).
+MilkDrop2 delegates these shader intrinsics to D3DX; the patched GLSL generator
+retains the corresponding built-ins. Native arithmetic and appearance remain
+separate from these nominal source rules.
