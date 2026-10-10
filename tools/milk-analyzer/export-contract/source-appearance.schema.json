@@ -6073,6 +6073,9 @@
         },
         "visible_motion_speed": {
           "type": "null"
+        },
+        "outer_fold_structure": {
+          "$ref": "#/$defs/outerFoldStructure"
         }
       }
     },
@@ -6883,6 +6886,147 @@
           "const": false
         },
         "whole_frame_blackout_verified": {
+          "const": false
+        }
+      }
+    },
+    "outerFoldStructure": {
+      "type": "object",
+      "required": [
+        "policy",
+        "stage",
+        "status",
+        "index",
+        "candidates",
+        "absence_proved",
+        "quantitative_bounds_eligible",
+        "phase_value_range",
+        "visible_motion_speed",
+        "fundamental_cell_area_uv2"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-typed-outer-fold-structures-v1"
+        },
+        "stage": {
+          "enum": [
+            "warp",
+            "composite",
+            null
+          ]
+        },
+        "status": {
+          "enum": [
+            "unknown",
+            "not_contributing",
+            "structural_candidates",
+            "partial_structural_candidates",
+            "no_supported_structure_detected"
+          ]
+        },
+        "index": {
+          "type": "object",
+          "required": [
+            "policy",
+            "complete",
+            "unique_nodes",
+            "unknown_barriers"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-typed-field-index-v1"
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "unique_nodes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unknown_barriers": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "object_identities_persisted": {
+              "const": false
+            }
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "function",
+              "kernel_node_id",
+              "phase_node_id",
+              "phase_is_opaque",
+              "phase_scalar_projection_performed",
+              "phase_domain_status",
+              "quantitative_bounds_eligible"
+            ],
+            "properties": {
+              "function": {
+                "enum": [
+                  "triangular_frac_structure",
+                  "biased_abs_frac_structure"
+                ]
+              },
+              "kernel_node_id": {
+                "type": "string"
+              },
+              "phase_node_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "phase_is_opaque": {
+                "const": true
+              },
+              "phase_scalar_projection_performed": {
+                "const": false
+              },
+              "phase_domain_status": {
+                "enum": [
+                  "unqualified",
+                  "known_invalid"
+                ]
+              },
+              "quantitative_bounds_eligible": {
+                "const": false
+              },
+              "native_selection_verified": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "absence_proved": {
+          "const": false
+        },
+        "quantitative_bounds_eligible": {
+          "const": false
+        },
+        "inspection_complete": {
+          "type": "boolean"
+        },
+        "phase_value_range": {
+          "type": "null"
+        },
+        "visible_motion_speed": {
+          "type": "null"
+        },
+        "fundamental_cell_area_uv2": {
+          "type": "null"
+        },
+        "uses_rendered_images": {
+          "const": false
+        },
+        "uses_shader_execution": {
+          "const": false
+        },
+        "uses_equation_execution": {
           "const": false
         }
       }

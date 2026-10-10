@@ -194,7 +194,7 @@ def sampling_geometry(analysis):
             from source_sample_offset_envelopes import sample_value_offset_envelope
             result['sample_value_offset_envelope']=sample_value_offset_envelope(node.args[0],input_scenario=getattr(analysis,'input_scenario',None))
             from source_folded_sampling import folded_coordinate_map
-            result['folded_coordinate_map']=folded_coordinate_map(node.args[0],analysis)
+            result['folded_coordinate_map']=folded_coordinate_map(node.args[0],analysis,stage=stage)
             from source_sampling_motion import sampling_motion
             result['sampling_motion']=sampling_motion(result,node.args[0],input_scenario=getattr(analysis,'input_scenario',None))
             from source_nested_sampling import coordinate_sample_response

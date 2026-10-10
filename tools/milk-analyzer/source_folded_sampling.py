@@ -4,7 +4,7 @@ import numpy as np
 from shader_fields import Field
 
 
-def folded_coordinate_map(field,analysis):
+def folded_coordinate_map(field,analysis,*,stage=None):
     from effect_families import _parts
     from source_appearance import _canonical_lane,_phase_literal,_expression,_routes
     from source_periodic_sampling import uniform_affine_scalar
@@ -96,4 +96,10 @@ def folded_coordinate_map(field,analysis):
         inverse=np.linalg.inv(m);area=abs(1/det)
         if np.all(np.isfinite(inverse)) and math.isfinite(area):result.update(repeat_lattice_basis_uv=inverse.tolist(),fundamental_cell_area_uv2=area)
     except (ValueError,RecursionError,OverflowError,IndexError,np.linalg.LinAlgError) as error:result['unknown_reasons']=[str(error)]
+    if result['source_model']=='unknown':
+        from source_field_index import outer_fold_evidence,unknown_fold_evidence
+        try:result['outer_fold_structure']=outer_fold_evidence(field,analysis,stage=stage)
+        except (ValueError,RecursionError,OverflowError) as error:
+            result['outer_fold_structure']=unknown_fold_evidence(analysis,stage=stage,
+                reason='optional outer fold inspection unresolved: '+str(error))
     return result

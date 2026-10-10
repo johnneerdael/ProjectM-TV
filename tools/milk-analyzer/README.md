@@ -19,6 +19,15 @@ results and reuses the paired100-preset ZIP writer. Supported mechanisms remain
 conditional on active stages/resources/visibility; unrecognized forms are unknown,
 not proof of absence. These are not new mood indexes.
 
+The static sampler export now preserves `outer_fold_structure` when the numeric
+fold descriptor remains unknown. `source_field_index.py` indexes existing typed
+semantic children and captures the outer kernel while retaining a large phase
+program by reference. This original Python implementation reproduces the indexed
+query/capture functionality evaluated in glsl-transformer; it copies no upstream
+AGPL source and adds no Java dependency. Its structural records have no range,
+lattice, speed or mood credit. See [source appearance](SOURCE_APPEARANCE.md) for
+the additive contract and unresolved native/domain/budget guards.
+
 This analyzer began with the inductive main-Q domain and shader selector proof
 from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25). It now includes
 an experimental numerical source forecaster and separate collection tools that

@@ -1190,6 +1190,16 @@ programs/audio routes. Constant inverse repeat lattices require one UV basis and
 finite invertible phase coefficients. Preserve original-domain checks; no tile
 count, native precision, final kaleidoscope or mood credit follows.
 
+Typed outer fold inspection (2026-10-10): `source_field_index.py` reuses existing
+semantic children and analysis-local caches to attach `outer_fold_structure` when
+numeric fold projection remains unknown. Preserve the old descriptor and its
+unknown/range fields; opaque captures cannot earn quantitative or mood credit.
+Index paths/`semantic_child_slot` are semantic traversal locations, not authored
+AST slots. Retain local budget/domain/native-selection failures. The implementation
+is original Python inspired by the external indexed-query experiment, with no
+copied glsl-transformer AGPL source or Java dependency. See
+`tools/milk-analyzer/SOURCE_APPEARANCE.md` and the glsl-transformer validation report.
+
 Quantized colour: floor/frac provide value enclosures only, never continuous
 rate or flash certification. Preserve conservative integer-seam padding and
 known-invalid/native-upload guards. `scenario_colour_envelope` supplements the

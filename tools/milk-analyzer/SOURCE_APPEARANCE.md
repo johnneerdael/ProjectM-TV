@@ -8,6 +8,43 @@ No equations, shaders, images or display frames are executed by this producer.
 Machine shape schema: `export-contract/source-appearance.schema.json`; source,
 context, digest and reconstruction-readiness checks remain separate.
 
+## Outer fold structure when numeric projection remains unknown
+
+`sampling_geometry.stages[stage][i].folded_coordinate_map.outer_fold_structure`
+is optional source evidence added when the existing fold descriptor is unknown.
+It leaves `source_model`, axes, original unknown reasons, coefficient programs,
+repeat lattices and all quantitative fields unchanged.
+
+`source_field_index.py` builds an analysis-local operator/type index using existing
+semantic child selection. It preserves selected-branch, discarded-lane,
+zero-product and loop policies. Index node IDs are local labels; parent
+`semantic_child_slot` and `source_graph_path` refer to that semantic traversal,
+not original `Field.args` positions or authored source offsets. No graph-object
+identity is persisted between presets. Root/stage/budget-bound indexes, local
+rules and phase-domain probes reuse the existing analysis cache.
+
+Each candidate captures a typed outer `abs`/`frac` construction and leaves the
+phase node opaque. `phase_scalar_projection_performed` stays false;
+`phase_domain_status` is `unqualified` or `known_invalid`. Native driver selection
+is not invented from a source candidate or offline acceptance. Casts between
+kernel operators are not stripped, and known-invalid original phase domains are
+retained even where ordinary semantic zero pruning hides their children.
+
+`quantitative_bounds_eligible` and `absence_proved` are always false. Phase range,
+repeat-cell area and visible speed remain null. An incomplete index or local
+inspection failure remains unknown while preserving any captured structures and
+the legacy descriptor. Expected value/traversal/overflow failures are recorded
+locally; unrelated programming errors are not silently swallowed. Structure alone
+cannot certify motion, visible copies, flashing or a mood band.
+
+This is independently authored Python functionality inspired by indexed queries
+and opaque capture, validated against the external glsl-transformer experiment;
+no upstream AGPL implementation, grammar or AST source was transcribed. The
+original `flexi - grind my glitch up [231].milk` regression recovers six scalar
+fragments corresponding to three authored vector fold constructions while its
+five old coordinate reports retain their scalar-projection budget abstentions.
+
+
 ## Produce and locate
 
 Use `effect_family_export.py` as documented in `EFFECT_FAMILIES.md`. Each paired

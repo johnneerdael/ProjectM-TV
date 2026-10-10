@@ -103,6 +103,29 @@ this distinction supports treating algorithm reuse and a literal source port as
 different engineering choices, not declaring a proposed implementation legally
 cleared. [SAS Institute v World Programming, paragraphs 31–43](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62010CJ0406).
 
+## Original Python implementation follow-up
+
+The smallest recommended functionality is now implemented in
+`tools/milk-analyzer/source_field_index.py`. It uses this project's existing typed
+semantic child/literal/domain facilities, operator/type indexing, reverse semantic
+use edges and bounded outer matching with phase captures. No upstream Java,
+grammar or matcher source was copied. The analysis-local cache reuses indexes,
+rule matches and original phase-domain inspections.
+
+`source_folded_sampling.py` adds `outer_fold_structure` on a numeric-descriptor
+failure, and `source_sampling.py` supplies its existing stage. Old unknown/range/
+lattice/speed fields are preserved. Expected optional-inspection failures attach
+unknown structural evidence instead of replacing the old description. Native
+selection, invalid domains, discarded lanes, casts and loop/depth/budget failures
+remain guarded. The source contract and schema explicitly forbid quantitative or
+absence credit from these captures.
+
+The unchanged grind-my-glitch regression now exports structural facts: the three
+authored vector kernels lower to six scalar captures. Its five previous coordinate
+fold reports still retain their scalar-projection budget abstentions. This is an
+implemented structural gain; it is not a new motion/appearance/mood prediction.
+The frozen Java experiment remains a reference and retains its original identities.
+
 ## Build and backend identity
 
 Pinned official shallow clone:
