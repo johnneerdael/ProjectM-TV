@@ -38,6 +38,8 @@ def source_activity(analysis,description):
                       'Components are separated from combined transport, wrapping, texel shifts and later custom shaders',
                       'Multiply per-step rates by actual feedback FPS only under steady controls/cadence',
                       'Geometry speeds precede clipping, source coverage, later shaders and feedback; no whole-screen intensity score']}
+    from source_sampling_motion import texture_motion_bounds
+    motion['texture_motion_bounds']=texture_motion_bounds(description)
     for stage,model in description['nonlinear_texture_colour_bounds']['stages'].items():
         for report,scenario in ((model,None),(model.get('scenario_colour_envelope'),True)):
             if report is None:continue
@@ -113,5 +115,7 @@ def source_activity(analysis,description):
             'kind':'polygon_perimeter_vertex_speed','maximum_ndc_per_second':speed,
             'estimate_kind':v['estimate_kind'],'visible_screen_speed_verified':False})
     if flashing['hazards']:flashing['status']='source flash mechanisms; visibility unresolved'
-    if motion['feedback_step_components'] or motion['geometry_speed_bounds']:motion['status']='source movement quantified for listed components'
+    if motion['feedback_step_components'] or motion['geometry_speed_bounds'] or any(
+            v is not None and v>0 for r in motion['texture_motion_bounds'] for v in r['maximum_lookup_axis_speed_uv_per_second']):
+        motion['status']='source movement quantified for listed components'
     return {'flashing':flashing,'motion_intensity':motion}

@@ -6118,7 +6118,8 @@
             "value",
             "status",
             "feedback_step_components",
-            "geometry_speed_bounds"
+            "geometry_speed_bounds",
+            "texture_motion_bounds"
           ],
           "properties": {
             "value": {
@@ -6132,6 +6133,21 @@
             },
             "geometry_speed_bounds": {
               "type": "array"
+            },
+            "texture_motion_bounds": {
+              "type": "array",
+              "description": "Per-lookup partial time speeds and affine RGB-weighted bilinear worst-case coefficients; actual uploaded texture dimensions and fixed texel/content premises remain inputs.",
+              "items": {
+                "type": "object",
+                "required": ["stage", "sample_site_index", "maximum_lookup_axis_speed_uv_per_second", "linear_texture_rgb_rate_coefficients_per_dimension", "texture_dimensions_verified", "visible_rgb_rate_per_second", "scope", "conditions"],
+                "properties": {
+                  "stage": {"enum": ["warp", "composite"]},
+                  "texture_dimensions_verified": {"const": false},
+                  "visible_rgb_rate_per_second": {"type": "null"},
+                  "maximum_lookup_axis_speed_uv_per_second": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": ["number", "null"], "minimum": 0}},
+                  "linear_texture_rgb_rate_coefficients_per_dimension": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": ["number", "null"], "minimum": 0}}}
+                }
+              }
             }
           }
         }

@@ -536,3 +536,12 @@ holding sampled colours and audio/state fixed. A declared audio range can bound
 the pulse amplitude. Texture movement and changing feedback remain separate,
 so a zero direct rate does not mean the preset is static or calm. Threshold jumps
 and time-dependent quantized Q uploads keep unresolved smooth-rate results.
+
+Texture lookups now expose `sampling_motion`: how fast a supported affine map
+shifts its sampling coordinates, plus inverse feature-motion bounds when the map
+is invertible. `activity.motion_intensity.texture_motion_bounds` combines those
+speeds with supported shader colour weights. For linear filtering, it provides
+worst-case colour-change coefficients that require the actual uploaded texture
+dimensions. Constant images can change far less than that ceiling. Image history,
+native mesh movement and later feedback stay separate; nearest filtering does
+not receive a smooth bilinear rate bound.

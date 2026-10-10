@@ -1262,3 +1262,10 @@ sample RGBA, audio/state/coordinates/frame/FPS/progress fixed. Native time formu
 remain expressions; time-dependent narrow/Q uploads retain taint. Zero partial
 rate is not static-image/no-flash proof; texture coordinate/history response and
 total displayed variation remain separate. Default/scenario records retain identity.
+
+Affine sampling motion checks supported offset candidates before original-domain
+preflight; keep the original Grind budget control and do not raise MAX_FIELD_VISITS.
+Use exact rational inverse coefficients for feature velocity in a single basis.
+Bilinear rate coefficients require fixed [0,1] texels and actual uploaded W/H;
+do not substitute canvas dimensions or give nearest/mipmapped sampling a smooth
+bound. Native mesh, texture history, direct RGB and later feedback remain separate.

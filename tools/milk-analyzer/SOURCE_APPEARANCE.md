@@ -2241,3 +2241,46 @@ are outside continuous nominal rates. This is source response math, not an AAR
 runtime or visual qualification. [Microsoft's HLSL sin reference](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-sin)
 specifies radians; the original MilkDrop2 `milkdropfs.cpp` uniform binding and
 the current `source_uniforms.native_time_contract` define clock/oscillator inputs.
+
+## Affine sampling motion and texture-gradient coefficients
+
+Each `sampling_geometry.stages.*` lookup now has `sampling_motion`. For a
+constant affine map `s=M*p+b(t)`, offset curves bound the lookup-axis speeds in
+source texture UV per second. When a single two-dimensional basis is invertible,
+an isolated fixed texture feature moves as `p(t)=M^-1*(s-b(t))`. Thus its signed
+velocity is `-M^-1*b'` for supported constant-velocity offsets. Otherwise,
+`abs(M^-1)*axis_rate_bounds` gives a conservative feature-speed ceiling in that
+declared basis. Exact rational determinant/inverse arithmetic avoids treating a
+rounded singularity as an invertible map. Mixed bases and singular maps retain
+lookup rates but no inverse feature velocity. Native mesh/spatial inputs stay fixed.
+
+`activity.motion_intensity.texture_motion_bounds` links those rates to constant
+affine RGB sample weights. For bilinear base-level sampling of fixed texels in
+`[0,1]`, each sampled RGBA component changes no faster than:
+
+```text
+sample_rate <= W * abs(du/dt) + H * abs(dv/dt)
+RGB_i sampling contribution <= sum_j abs(weight_ij) * sample_rate
+```
+
+The export stores two dimension coefficients per RGB component; callers supply
+the actual uploaded texture width `W` and height `H`. Canvas dimensions are not
+silently reused as texture sizes. Rate sums/products round outwards, and overflow
+or unrepresentable inverse quantities remain unknown. The formula is a worst-case
+adjacent-texel-contrast ceiling: a constant image can produce zero variation.
+Nearest filtering, mipmapped/unresolved sampling and non-affine colour mixtures
+do not receive bilinear coefficients. Separate sites retain their own weights
+and motion; summing their ceilings allows independent or correlated content.
+
+Default and declared-scenario records retain separate identities. Scenario rates
+are partial source-time components with audio/state/frame/FPS/progress fixed,
+not total movement. Time-dependent sample values, image history, native mesh
+motion, direct RGB changes and later composite/feedback terms remain separate.
+Wrapping/clipping can change which feature is seen. Neither a lookup rate nor
+its inverse feature speed certifies visible screen motion, flashing or mood.
+
+[Microsoft's bilinear filtering reference](https://learn.microsoft.com/en-us/windows/win32/direct3d9/bilinear-texture-filtering)
+defines weighted interpolation of neighbouring texels. The dimension factors
+above follow from adjacent centres being separated by `1/W` and `1/H` UV units.
+Original MilkDrop2 and declared core sampler policies determine the applicable
+filter/address mode; native GPU rounding remains outside nominal derivatives.
