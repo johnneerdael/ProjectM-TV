@@ -1172,3 +1172,8 @@ Only offset bounds with sample-independent spatial coefficients qualify; image
 dependent scale stays unknown. Check original zero-product/singular domains
 before certification. Ranges do not establish image gradients, full feedback,
 visible motion or moods; input scenarios do not implicitly override this model.
+
+Sample-offset scenarios: export additional bounds in `scenario_offset_envelope`
+with the validated scenario hash. Preserve unconstrained offset results and
+independent local RGBA domains. Missing canvas/bands remain unknown; scenarios
+must not suppress singular image domains or image-dependent spatial coefficients.

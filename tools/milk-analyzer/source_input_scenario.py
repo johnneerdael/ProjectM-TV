@@ -37,7 +37,7 @@ def validate_scenario(request):
     result={'schema_version':1,'policy':'declared-source-input-scenario-v1','name':name,
         'audio_band_ranges':audio,'shader_canvas_size':size,'scalar_input_domains':domains,
         'observed_runtime_inputs':False,'runtime_binding_verified':False,
-        'bound_scope':'additional ripple deformation envelope only; unconstrained descriptions preserved',
+        'bound_scope':'additional ripple deformation and sampled-value offset envelopes only; unconstrained descriptions preserved',
         'conditions':['Caller-declared input assumptions, not measured or guaranteed music/genre/audience ranges',
                       'Band intervals constrain actual engine inputs; waveform reachability and cross-band correlation are unverified',
                       'Shader canvas dimensions are explicit authored-canvas uniforms, not inferred from display/output pixels',

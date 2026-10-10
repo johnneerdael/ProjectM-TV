@@ -1881,6 +1881,16 @@ Native texture binding/decoding and the[0,1]premise remain conditional.
 Full coordinate sensitivity, image spatial gradients, feedback evolution,
 screen motion/intensity, actual structure/dominance and mood stay unresolved.
 An offset range is a magnitude ingredient, not a fluid simulation or a proof
-that a particular texture appears on screen. Declared input scenarios currently
-bind ripple envelopes only; these image-offset records retain their own source
-premises without an automatic scenario override.
+that a particular texture appears on screen. Opt-in declared input scenarios add `scenario_offset_envelope` alongside the
+unchanged ordinary bounds. It records the scenario semantic hash, per-axis
+value reports and source model. Named audio intervals and explicit shader-canvas
+uniforms can constrain audio-scaled or texel-sized offsets. Local sampled RGBA
+premises remain independent [0,1] inputs; missing texture contents, singular
+image reciprocals and image-dependent spatial scale are not resolved by a
+scenario. Observed-input and runtime-binding flags remain false.
+
+For `12*texsize.zw*(GetPixel(uv).rg-.5)` with declared shader canvas 854x480,
+the nominal offset intervals are approximately [-6/854,6/854] and
+[-6/480,6/480]. They describe source UV displacement, not display pixel speed.
+A Native4K panel does not determine these uniforms. Ordinary output stays
+unbounded when the caller does not declare canvas dimensions.

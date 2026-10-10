@@ -1,7 +1,7 @@
 """Pointwise nonlinear sampled-colour offsets, not image-gradient dynamics."""
 
 
-def sample_value_offset_envelope(field):
+def sample_value_offset_envelope(field,*,input_scenario=None):
     from effect_families import _parts,_deps
     from source_advection import substitute_sample_values
     from source_periodic_sampling import uniform_affine_scalar
@@ -21,6 +21,12 @@ def sample_value_offset_envelope(field):
                       'Ranges include non-image uniform offsets and require their finite/domain premises; baseline mapping is excluded',
                       'Sampling gradients, coordinates/history, filtering/decoding, texture bindings and native precision remain separate',
                       'No global motion, whole-feedback stability, displayed structure, flashing or mood certificate follows']}
+    scenario_result=None
+    if input_scenario is not None:
+        scenario_result={'source_model':'unknown','offset_range_uv':None,'offset_value_envelopes':None,
+            'input_scenario_sha256':input_scenario['record_sha256'],'unknown_reasons':[],
+            'observed_runtime_inputs':False,'runtime_binding_verified':False}
+        result['scenario_offset_envelope']=scenario_result
     try:
         replaced,samples=substitute_sample_values(field)
         if not samples:raise ValueError('lookup has no direct sampled-value coordinate inputs')
@@ -38,6 +44,15 @@ def sample_value_offset_envelope(field):
         if known_invalid_phase_offset(field,preserve_zero_products=True):raise ValueError('sample-offset source has a known invalid original domain')
         reports=[coefficient_envelope(v,input_domains=domains) for v in offsets]
         spans=[r['nominal_value_range'] for r in reports]
+        if scenario_result is not None:
+            scenario_domains=dict(input_scenario['scalar_input_domains'])
+            scenario_domains.update(domains)
+            extra=[coefficient_envelope(v,input_domains=scenario_domains) for v in offsets]
+            ranges=[r['nominal_value_range'] for r in extra]
+            scenario_result.update(source_model='sample_value_offset_bounds' if all(v is not None for v in ranges) else
+                'partial_sample_value_offset_bounds' if any(v is not None for v in ranges) else 'unknown',
+                offset_range_uv=ranges,offset_value_envelopes=extra,
+                unknown_reasons=[reason for r in extra for reason in r['unknown_reasons']])
         dependency=False;sites=[]
         for name,s in samples:
             nodes=list(_nodes(s.args[0]))
@@ -52,5 +67,7 @@ def sample_value_offset_envelope(field):
             base_coefficient_programs=coefficients,sample_sites=sites,
             sample_textures=sorted({s.detail.get('canonical_texture') for name,s in samples},key=str),
             coordinate_sample_dependency=dependency,unknown_reasons=[reason for r in reports for reason in r['unknown_reasons']])
-    except (ValueError,RecursionError,OverflowError,IndexError) as error:result['unknown_reasons']=[str(error)]
+    except (ValueError,RecursionError,OverflowError,IndexError) as error:
+        result['unknown_reasons']=[str(error)]
+        if scenario_result is not None:scenario_result['unknown_reasons']=[str(error)]
     return result

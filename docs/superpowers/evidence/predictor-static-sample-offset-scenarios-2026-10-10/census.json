@@ -1,0 +1,1048 @@
+{
+  "basis": "Caller-declared finite bands [0,2], shader canvas 854x480, independent sampled RGBA [0,1]; no appearance/mood certification",
+  "presets": 100,
+  "ordinary_offset_records_unchanged": true,
+  "source_gap_inventories_unchanged": true,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "unknown": 1026,
+    "new_complete_sites": 47,
+    "presets_with_new_complete_sites": 19,
+    "sample_value_offset_bounds": 108,
+    "presets_with_complete_scenario_bounds": 36,
+    "image_driven_presets_in_sample": 52
+  },
+  "zip_sha256": "0922e48eb1fbaecdca5031160ea7c7a2367b77f3f5c00137272d43aba4fd194c",
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (39).milk",
+      "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.002341920277103785,
+              0.002341920277103785
+            ],
+            [
+              -0.0041666668839752735,
+              0.0041666668839752735
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0023419202771037856,
+              0.0023419202771037856
+            ],
+            [
+              -0.004166666883975274,
+              0.004166666883975274
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0018735362497860708,
+              0.0018735362497860708
+            ],
+            [
+              -0.0033333335571802208,
+              0.0033333335571802208
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.0018735362497860708,
+              0.0018735362497860708
+            ],
+            [
+              -0.0033333335571802208,
+              0.0033333335571802208
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - splatter effects 11 halucination #1.milk",
+      "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.002341920277103785,
+              0.002341920277103785
+            ],
+            [
+              -0.0041666668839752735,
+              0.0041666668839752735
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0023419202771037856,
+              0.0023419202771037856
+            ],
+            [
+              -0.004166666883975274,
+              0.004166666883975274
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0002927400346379729,
+              0.0002927400346379729
+            ],
+            [
+              -0.0005208333604969088,
+              0.0005208333604969088
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.014988289443721851,
+              0.014988289443721851
+            ],
+            [
+              -0.021333333976620048,
+              0.021333333976620048
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 12,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.08533333586381354,
+              0.08533333586381354
+            ],
+            [
+              -0.05995315774491085,
+              0.05995315774491085
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "gained_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 18,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            [
+              -0.03608334175198772,
+              0.05191665586801245
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 17,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            [
+              -0.03191667486801245,
+              0.05608332275198772
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 16,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.03517096844855198,
+              0.052829029171448195
+            ],
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 15,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.032829048171448195,
+              0.05517094944855198
+            ],
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+      "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.014988289443721846,
+              0.014988289443721846
+            ],
+            [
+              -0.021333333976620038,
+              0.021333333976620038
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+      "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "canonical_texture": "blur3",
+          "offset_range_uv": [
+            [
+              -0.017121622994983866,
+              0.017121622994983866
+            ],
+            [
+              -0.022832163028907924,
+              0.022832163028907924
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.006208649307409373,
+              0.006208649307409373
+            ],
+            [
+              -0.00868321675912116,
+              0.00868321675912116
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.014988289443721846,
+              0.014988289443721846
+            ],
+            [
+              -0.021333333976620038,
+              0.021333333976620038
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "gained_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 18,
+          "canonical_texture": "blur2",
+          "offset_range_uv": [
+            [
+              -0.20936768410841536,
+              0.20936768410841536
+            ],
+            [
+              -0.21666667053590133,
+              0.21666667053590133
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 16,
+          "canonical_texture": "blur3",
+          "offset_range_uv": [
+            [
+              0.5906323128915842,
+              1.409367687108416
+            ],
+            [
+              -0.41666667353590153,
+              0.41666667353590153
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 13,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.018735362216830278,
+              0.018735362216830278
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 12,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              0.9812646377831696,
+              1.0187353622168305
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur2",
+          "offset_range_uv": [
+            [
+              -0.018735362216830278,
+              0.018735362216830278
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 10,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              0.9812646377831696,
+              1.0187353622168305
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.018735362216830278,
+              0.018735362216830278
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur2",
+          "offset_range_uv": [
+            [
+              0.9812646377831696,
+              1.0187353622168305
+            ],
+            [
+              -0.03333333507180218,
+              0.03333333507180218
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 19,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              0.8906323178915846,
+              1.1093676821084157
+            ],
+            [
+              -0.1166666685359012,
+              0.1166666685359012
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 17,
+          "canonical_texture": "blur2",
+          "offset_range_uv": [
+            [
+              0.7906323158915844,
+              1.2093676841084158
+            ],
+            [
+              -0.21666667053590133,
+              0.21666667053590133
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 15,
+          "canonical_texture": "blur3",
+          "offset_range_uv": [
+            [
+              -0.4093676871084156,
+              0.4093676871084156
+            ],
+            [
+              -0.41666667353590153,
+              0.41666667353590153
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "flexi - grind my glitch up [191].milk",
+      "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 12,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.004683840554207571,
+              0.004683840554207571
+            ],
+            [
+              -0.008333333767950549,
+              0.008333333767950549
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "gained_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.03512880415655678,
+              0.03512880415655678
+            ],
+            [
+              -0.0625000032596291,
+              0.0625000032596291
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.035128804156556774,
+              0.035128804156556774
+            ],
+            [
+              -0.06250000325962908,
+              0.06250000325962908
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.009367681108415403,
+              0.08683840464207583
+            ],
+            [
+              -0.08333333767950568,
+              0.056666666635901315
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.1280000138010542,
+              0.1280000138010542
+            ],
+            [
+              -0.08992974364687419,
+              0.08992974364687419
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 18,
+          "canonical_texture": "blur3",
+          "offset_range_uv": [
+            [
+              -0.1409648771180029,
+              0.1409648771180029
+            ],
+            [
+              -0.13144730852300798,
+              0.13144730852300798
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 17,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.1409648771180029,
+              0.1409648771180029
+            ],
+            [
+              -0.13144730852300798,
+              0.13144730852300798
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0070257608313113494,
+              0.0070257608313113494
+            ],
+            [
+              -0.01250000065192581,
+              0.01250000065192581
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.028103043325245398,
+              0.028103043325245398
+            ],
+            [
+              -0.05000000260770324,
+              0.05000000260770324
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "gained_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 10,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.03512880415655678,
+              0.03512880415655678
+            ],
+            [
+              -0.0625000032596291,
+              0.0625000032596291
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.035128804156556774,
+              0.035128804156556774
+            ],
+            [
+              -0.06250000325962908,
+              0.06250000325962908
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur1",
+          "offset_range_uv": [
+            [
+              -0.009367681108415403,
+              0.08683840464207583
+            ],
+            [
+              -0.08333333767950568,
+              0.056666666635901315
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0070257608313113494,
+              0.0070257608313113494
+            ],
+            [
+              -0.01250000065192581,
+              0.01250000065192581
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.028103043325245398,
+              0.028103043325245398
+            ],
+            [
+              -0.05000000260770324,
+              0.05000000260770324
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0070257608313113494,
+              0.0070257608313113494
+            ],
+            [
+              -0.01250000065192581,
+              0.01250000065192581
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.028103043325245398,
+              0.028103043325245398
+            ],
+            [
+              -0.05000000260770324,
+              0.05000000260770324
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0016393441705534451,
+              0.001639344170553446
+            ],
+            [
+              -0.0029166667771160196,
+              0.0029166667771160213
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "gained_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.0070257608313113494,
+              0.0070257608313113494
+            ],
+            [
+              -0.01250000065192581,
+              0.01250000065192581
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "offset_range_uv": [
+            [
+              -0.028103043325245398,
+              0.028103043325245398
+            ],
+            [
+              -0.05000000260770324,
+              0.05000000260770324
+            ]
+          ],
+          "ordinary_offset_range_uv": [
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  ],
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "model_modules": {
+    "source_input_scenario.py": "2d524bb53195096452621922961c8a344a389f26bc4104c345274896597426bd",
+    "source_sample_offset_envelopes.py": "7df06d531454926f3151fe9eafec9d52c1759bb3cc7a3ca3f6fe57702b48ad31",
+    "source_sampling.py": "edabb6473f6f0367920f6613de7d607cddd07cbe26e412fdf0e7e5ef630c7db9"
+  }
+}

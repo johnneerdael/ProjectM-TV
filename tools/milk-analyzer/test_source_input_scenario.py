@@ -120,3 +120,41 @@ def test_cli_rejects_oversized_json_audio_integer_cleanly(tmp_path):
     from test_core2331_warp import BINARIES
     context=tmp_path/'huge.json';context.write_text(json.dumps(scenario(audio_band_ranges={'bass':[0,10**400]})))
     assert export.main([str(tmp_path),'--reader',str(BINARIES/'milk-native-reader'),'--output',str(tmp_path/'output'),'--input-scenario',str(context)])==2
+
+
+def test_scenario_bounds_audio_driven_image_offset_without_changing_default():
+    s=shader('shader_body {ret=GetPixel(uv+float2(.05*bass*pow(GetBlur1(uv).r,2),0));}')
+    plain=analyze(s)['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
+    declared=analyze(s,input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))
+    r=declared['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
+    assert r['offset_range_uv']==plain['offset_range_uv']==[None,[0,0]]
+    extra=r['scenario_offset_envelope']
+    assert extra['offset_range_uv'][0]==pytest.approx([0,.1],abs=2e-8)
+    assert extra['source_model']=='sample_value_offset_bounds'
+    assert extra['input_scenario_sha256']==declared['input_scenario']['record_sha256']
+    assert r['visible_motion_intensity'] is None
+
+
+def test_scenario_bounds_texel_sized_image_offsets_with_authored_canvas():
+    s=shader('shader_body {ret=GetPixel(uv+12*texsize.zw*(GetPixel(uv).rg-.5));}')
+    r=analyze(s,input_scenario=scenario(shader_canvas_size=[854,480]))['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
+    assert r['offset_range_uv']==[None,None]
+    spans=r['scenario_offset_envelope']['offset_range_uv']
+    assert spans[0]==pytest.approx([-6/854,6/854],rel=2e-7)
+    assert spans[1]==pytest.approx([-6/480,6/480],rel=2e-7)
+    assert r['full_coordinate_sensitivity'] is None
+
+
+def test_scenario_cannot_hide_image_domain_singularity_or_dynamic_scale():
+    for code in ('ret=GetPixel(uv+float2(bass/GetPixel(uv).r,0));', 'ret=GetPixel(uv*(1+bass*GetPixel(uv).r));'):
+        r=analyze(shader('shader_body {'+code+'}'),input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
+        extra=r['scenario_offset_envelope']
+        assert extra['source_model']!='sample_value_offset_bounds'
+        assert extra['offset_range_uv'] is None or extra['offset_range_uv'][0] is None
+
+
+def test_sample_offset_scenario_without_required_canvas_stays_unresolved():
+    s=shader('shader_body {ret=GetPixel(uv+12*texsize.zw*(GetPixel(uv).rg-.5));}')
+    r=analyze(s,input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
+    assert r['scenario_offset_envelope']['source_model']=='unknown'
+    assert r['scenario_offset_envelope']['offset_range_uv']==[None,None]

@@ -5652,6 +5652,59 @@
         },
         "visible_motion_intensity": {
           "type": "null"
+        },
+        "scenario_offset_envelope": {
+          "type": "object",
+          "description": "Additional conditional bounds using the declared scenario; ordinary bounds remain unchanged.",
+          "properties": {
+            "source_model": {
+              "enum": [
+                "unknown",
+                "sample_value_offset_bounds",
+                "partial_sample_value_offset_bounds"
+              ]
+            },
+            "offset_range_uv": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "offset_value_envelopes": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "input_scenario_sha256": {
+              "type": "string"
+            },
+            "observed_runtime_inputs": {
+              "const": false
+            },
+            "runtime_binding_verified": {
+              "const": false
+            }
+          }
         }
       }
     }

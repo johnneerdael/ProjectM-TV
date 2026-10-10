@@ -458,3 +458,10 @@ example, how squared brightness or a noise channel displaces a texture lookup.
 The assumed image-input range is explicit; actual texture contents, image
 gradients and evolving feedback remain unknown. This supplies deformation
 ingredients without inspecting a frame, rather than guaranteeing a fluid look.
+
+An optional declared audio/canvas scenario also adds
+`sample_value_offset_envelope.scenario_offset_envelope`. This can bound how far
+an image-driven lookup shifts under the chosen band intervals and shader-canvas
+size. The ordinary bounds remain alongside it, and neither record measures
+visible speed, image gradients or mood. For Native4K, declare the shader's
+authored canvas rather than assuming it equals the panel size.
