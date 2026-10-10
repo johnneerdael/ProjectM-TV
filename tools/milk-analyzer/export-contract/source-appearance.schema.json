@@ -2051,6 +2051,154 @@
                     ]
                   }
                 }
+              },
+              "material_temporal": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "channels",
+                  "native_modulo_period",
+                  "native_wrap_margin",
+                  "possible_consumed_wrap_jump",
+                  "border_gate",
+                  "visible_flashing",
+                  "visible_flash_frequency_hz",
+                  "uses_equation_execution",
+                  "uses_rendered_images",
+                  "conditions"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-native-shape-material-temporal-v1"
+                  },
+                  "channels": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "required": [
+                        "group",
+                        "raw_time_curve",
+                        "native_float32_endpoint_domain",
+                        "native_endpoint_domain_singleton",
+                        "native_value_if_singleton",
+                        "possible_native_wrap_jump",
+                        "may_be_consumed",
+                        "unknown_reasons"
+                      ],
+                      "properties": {
+                        "group": {
+                          "enum": [
+                            "centre",
+                            "perimeter",
+                            "border"
+                          ]
+                        },
+                        "raw_time_curve": {
+                          "type": "object"
+                        },
+                        "native_float32_endpoint_domain": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "native_endpoint_domain_singleton": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        },
+                        "native_value_if_singleton": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        },
+                        "possible_native_wrap_jump": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        },
+                        "may_be_consumed": {
+                          "type": "boolean"
+                        },
+                        "unknown_reasons": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "native_modulo_period": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "native_wrap_margin": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "possible_consumed_wrap_jump": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "border_gate": {
+                    "type": "object",
+                    "required": [
+                      "comparison",
+                      "threshold",
+                      "nominal_always_enabled",
+                      "possible_state_change"
+                    ],
+                    "properties": {
+                      "comparison": {
+                        "const": "raw border_a > threshold"
+                      },
+                      "threshold": {
+                        "type": "number"
+                      },
+                      "nominal_always_enabled": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "possible_state_change": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "visible_flashing": {
+                    "type": "null"
+                  },
+                  "visible_flash_frequency_hz": {
+                    "type": "null"
+                  },
+                  "uses_equation_execution": {
+                    "const": false
+                  },
+                  "uses_rendered_images": {
+                    "const": false
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }

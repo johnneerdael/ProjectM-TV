@@ -281,3 +281,11 @@ rules, safe denominator domains and arithmetic safeguards. Distinguish exact
 old estimates from conservative new bounds, propagate possible-cusp regularity,
 and preserve unknown inputs/discontinuities/unbounded rates. Measure gains
 on the unchanged100source sample before drawing mood conclusions.
+
+## Material temporal candidates
+
+Join channel time envelopes with the patched engine's colour modulo and raw
+border-alpha gate. Preserve float32 singleton domains and potential modulo
+boundary zones; do not restore original packed-byte colours. Keep possible
+local risk separate from visible flashing, event frequency and mood labels.
+Measure real-preset support before adding any audience interpretation.

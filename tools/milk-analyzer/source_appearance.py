@@ -449,6 +449,8 @@ def appearance_from_analysis(analysis):
         from source_material import shape_material,shape_fill_contribution
         elements[identity]['geometry']=shape_geometry(controls,elements[identity]['parameters']['instances'])
         elements[identity]['material']=shape_material(controls,analysis.values.get('shapecode_'+identity.removeprefix('shape_')+'_image',''))
+        from source_material_temporal import shape_material_temporal
+        elements[identity]['material_temporal']=shape_material_temporal(controls)
         elements[identity]['fill_contribution']=shape_fill_contribution(elements[identity]['geometry'],elements[identity]['material'])
         elements[identity]['audio_area_response']=shape_audio_area_response(controls,elements[identity]['geometry'],elements[identity]['fill_contribution'])
         elements[identity]['center_trajectory']=planar_trajectory([controls['x'],controls['y']])

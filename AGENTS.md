@@ -990,3 +990,10 @@ nominal time envelopes/rate bounds; `compound_time` keeps periods unknown.
 Preserve exact-versus-bound metadata, cusp/unknown regularity in all joins,
 EEL denominator guards and rate-underflow abstention. These are not native
 precision, visible-motion or mood certificates. No input/frame sampling is used.
+
+Source material temporal maintenance: preserve native float32 double-fmod
+colour conversion separately from MilkDrop2packed bytes. `material_temporal`
+wrap candidates are conditional envelope risks with an explicit rounding
+margin, not visible flashes or complete no-flash certificates. Border gating
+uses raw double alpha and the native float32 threshold; skip disabled-border
+channels in consumed-risk summaries. Keep missing/nonfinite domains unknown.

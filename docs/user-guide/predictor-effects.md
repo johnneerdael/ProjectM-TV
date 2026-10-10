@@ -292,3 +292,10 @@ safe divisions. The JSON distinguishes exact nominal estimates from upper
 bounds, and smooth formulas from a weaker class that allows cusps. A bounded
 value need not have bounded speed. These facts improve source descriptions;
 they still do not measure visible motion, flashing or mood suitability.
+
+Shape colours and opacity now include source-only change information in
+`material_temporal`. It flags possible jumps when a raw channel approaches
+the engine's colour-wrap boundary and separately reports possible border
+on/off changes. Smooth source equations can therefore carry a jump risk.
+These are local candidates: opacity, coverage, textures and feedback determine
+what a viewer sees, so displayed flashing and mood eligibility remain unknown.

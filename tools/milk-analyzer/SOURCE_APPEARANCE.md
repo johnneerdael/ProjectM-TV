@@ -1145,3 +1145,43 @@ between clock discontinuities and before native precision/clipping/feedback.
 Consumers must handle the additive curve category and estimate/regularity
 fields. Never substitute a rate bound for measured visible motion or a mood
 score. Existing47field simulation exports are unchanged.
+
+### Shape colour and opacity temporal risk
+
+`material_temporal.channels` covers centre, perimeter and border RGBA controls.
+Each channel keeps a compact raw time-curve summary and a float32 endpoint
+domain from its supported nominal lifetime envelope. A singleton domain can
+provide `native_value_if_singleton` using the established native colour
+conversion, even when a tiny raw oscillation remains nonzero mathematically.
+Missing envelopes and nonfinite native conversions retain unknown values.
+The full source DAG is already in `material.channel_expressions`; it is not
+duplicated here.
+
+The target colour period is float32 `256/255`, with CPU mapping
+`fmod(fmod(float32(x),m)+m,m)`. This differs from MilkDrop2's packed8bit
+integer conversion; the predictor preserves the TV engine's target policy.
+`possible_native_wrap_jump` identifies a modulo-boundary candidate within
+the supplied endpoint domain, including a two-period-ULP margin below each
+boundary for remainder-plus-period rounding near zero. Rational boundary
+comparison avoids inaccurate modulo-cell division for large finite floats.
+This is conditional candidate risk, not an observed jump, its timing, or a
+certificate that every possible floating-point step is absent.
+
+`border_gate` separately models raw double `border_a > float32(.0001)`. It
+exports nominal always-on/off versus a possible state change. This draw gate
+does not use modulo alpha: a negative raw alpha can convert positive while
+the border remains disabled. Disabled border channel risks are excluded from
+`possible_consumed_wrap_jump`. Both native fan endpoint alphas must be proved zero to exclude fill channels
+under ordinary finite source-alpha blending. One zero-alpha endpoint still
+affects intermediate RGB/alpha interpolation, so it cannot be excluded alone.
+Other centre/perimeter consumption depends on opacity, primitive coverage
+and the later pipeline. Unknown active channels
+keep the aggregate unknown unless another active channel already supplies a
+positive possible-risk candidate.
+
+Raw oscillator rate/period are not converted into a visible flash frequency.
+`visible_flashing` and `visible_flash_frequency_hz` stay null. A threshold or
+wrap candidate can be faint, masked, textured, clipped or replaced later; it
+does not classify the preset as Intense or disqualify it from Chill by itself.
+All conclusions depend on the declared nominal envelope and finite conversion
+premises; native appearance/precision qualification remains separate.
