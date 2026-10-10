@@ -107,10 +107,14 @@ Crab checkout `b1eeb1a9402ab0664e962f26f89d923f8514284c` builds successfully. Th
 actual fixed sample `Martin - Pixies Party (Hakan mash-up) 6-10.milk` initializes
 `y0=(rand(10)-5)*.03` and writes
 `y0=max(-.5,min(.5,y0+vy0*dt));reg05=y0` in main-frame line50. The declared
-nominal model uses initialization `[-.15,.12]` and safely overapproximates the
+nominal model now conservatively uses initialization `[-.15,.15]` and safely overapproximates the
 increment as an arbitrary finite real each frame. Crab's rational interval CFG
 fixpoint returns `[-.5,.5]` at the loop header and postframe; removing the clamp
-returns `[-oo,+oo]`. See [source-bound candidate evidence](crab-actual-clamp.json).
+returns `[-oo,+oo]`. See [widened-initialization evidence](crab-widened-initialization.json).
+The [earlier candidate](crab-actual-clamp.json) used an explicitly unverified
+`[-.15,.12]` caller premise; it is preserved, not treated as native rand proof.
+The wider premise avoids assuming an integer-only exclusive rand range and
+reproduces the same bounded/unbounded clamp controls.
 These are candidates for separate initialization, full ordered phase, reset and
 native-FP proofs. The wrapper explicitly leaves source-model mapping unverified.
 It does not silently interpret this fragment as a proof of the complete preset.
