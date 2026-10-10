@@ -122,6 +122,7 @@ def oscillatory_displacement(field,analysis):
         'base_matrix_uv4':None,'base_coefficient_programs':None,'base_offset_programs':None,'waves':[],
         'jacobian_perturbation_infinity_norm_upper_bound':None,
         'sufficient_no_fold_of_unwrapped_nominal_map':None,'actual_fold_present':None,
+        'deformation_envelope':None,
         'visible_motion_speed':None,'unknown_reasons':[],
         'uses_equation_execution':False,'uses_shader_execution':False,'uses_rendered_images':False,
         'conditions':['Nominal unwrapped lookup map with uniform inputs fixed; all source domains/inputs/intermediates usable and finite',
@@ -198,11 +199,14 @@ def oscillatory_displacement(field,analysis):
         offset_programs=[_expression(pair[1]) for pair in baselines]
         if any(p is None for row in base_programs for p in row) or any(p is None for p in offset_programs) or any(w['phase_offset_program'] is None for w in rows):
             raise ValueError('periodic map program export budget exceeded')
+        from source_ripple_envelopes import deformation_envelope
+        envelopes=deformation_envelope([waves[w['id']] for w in rows],basis=basis,identity_baseline=matrix==identity)
         result.update(source_model='uniform_affine_plus_oscillators',basis=basis,
             base_matrix_uv4=[r[:4] for r in matrix] if base_constant and all(v==0 for r in matrix for v in r[4:]) else None,
             base_coefficient_programs=base_programs,base_offset_programs=offset_programs,waves=rows,
             jacobian_perturbation_infinity_norm_upper_bound=bound,
-            sufficient_no_fold_of_unwrapped_nominal_map=bound<1 if bound is not None and matrix==identity else None)
+            sufficient_no_fold_of_unwrapped_nominal_map=bound<1 if bound is not None and matrix==identity else None,
+            deformation_envelope=envelopes)
     except (ValueError,RecursionError,OverflowError,IndexError) as error:result['unknown_reasons']=[str(error)]
     result['phase_gradient_column_order']=list(COLUMNS)
     return result

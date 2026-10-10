@@ -436,3 +436,10 @@ plays the Sights,” for example, uses treble to scale horizontal bending, bass
 to scale vertical bending, and bass/mids to alter the spacing. The descriptor
 can express those source relationships without rendering a frame; how strongly
 they appear on screen remains separate from the coordinate formula.
+
+`deformation_envelope` adds conditional bounds on ripple extent and spatial
+deformation. Bounded dynamic controls such as sine phases can supply useful
+numbers; unrestricted audio inputs keep those estimates unknown. A known
+displacement bound can survive an unknown frequency. These describe texture
+coordinates, so small extent alone does not establish slow movement or Chill
+eligibility; temporal changes and feedback remain separate.

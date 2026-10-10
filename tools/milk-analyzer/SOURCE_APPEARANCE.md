@@ -1770,3 +1770,37 @@ dominant screen structure, flash permission or mood score follows from them.
 Uniform distribution separately limits traversal to512visits/depth64 and64
 result terms. A budget rejection stays unknown; it does not increase the
 shared source-analysis budget or silently discard unexpanded terms.
+
+## Ripple deformation envelopes
+
+Supported periodic maps additionally export `deformation_envelope`. Its
+`maximum_absolute_displacement_uv` has separate x/y upper bounds on the
+oscillatory component only, excluding baseline mapping/offset. It sums the
+maximum absolute uniform amplitude of each wave, using `abs(sin/cos)<=1`.
+Unknown amplitudes retain nulls per axis; unknown phase frequency does not
+erase an independently bounded displacement amplitude.
+
+The same record bounds Jacobian row sums using amplitude and phase-gradient
+value envelopes, including supported bounded dynamic formulas. For example,
+`.02*sin(time)*sin(8*v)` has displacement bound.02and Jacobian perturbation
+bound.16. `.02*sin(v*(3+sin(time)))` uses frequency range[2,4]and bound.08.
+These are sufficient global nominal bounds with uniform inputs held fixed
+over space, not average deformation or measured screen motion.
+
+`amplitude_value_envelopes` and `phase_gradient_value_envelopes` follow the
+parent `waves[]` order and declared six-column spatial order. Each includes
+finite-input assumptions and unresolved reasons. Numeric vector input lanes
+retain qualified names. Explicit native float32 uploads use monotone converted
+endpoint domains, rejecting unproved/nonfinite conversion; subsequent arithmetic
+is still nominal and native accuracy remains unqualified. No arbitrary audio
+range is supplied. Known scalar ranges and phase correlations can tighten the
+bound in later work, but missing knowledge never becomes zero response.
+
+Exact binary-rational magnitude products/sums are rounded outward. An
+unrepresentable gradient bound remains null while independently known
+displacement survives. A positive underflow result rounds up to a positive
+representable upper bound. Mixed/radial bases withhold UV Jacobian certificates.
+`identity_no_fold_sufficient` requires identity baseline, a single UV basis and
+finite perturbation bound below1. Failing the condition is not a fold proof.
+`visible_motion_intensity`, actual folds, temporal rates/continuity, prominence,
+full feedback behavior and mood remain separate open work.

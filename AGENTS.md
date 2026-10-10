@@ -1148,3 +1148,11 @@ shared uniform multipliers/divisors over add/subtract branches. Preserve signed
 weights and original-graph domain checks; never linearize spatial-wave products
 or discard terms when budgets fail. Zylot's original warp is a source control
 for amplitude and spatial-frequency audio routes; no captured appearance credit.
+
+Ripple-envelope maintenance: `source_ripple_envelopes` projects uniform scalar
+coefficient lanes with original-node retention and explicit float32 upload
+endpoint domains. Propagate finite premises and per-axis unknowns. ExactFraction
+amplitude/gradient bounds round outward; overflow withholds only the affected
+bound and positive underflow cannot certify zero. Mixed/radial or nonidentity
+maps do not receive an identity UV no-fold claim. Extent/spatial deformation
+does not establish time-rate, perceived intensity, feedback or a mood.

@@ -5503,6 +5503,57 @@
         },
         "uses_rendered_images": {
           "const": false
+        },
+        "deformation_envelope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-uniform-ripple-deformation-envelope-v1"
+            },
+            "maximum_absolute_displacement_uv": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              }
+            },
+            "amplitude_value_envelopes": {
+              "type": "array"
+            },
+            "phase_gradient_value_envelopes": {
+              "type": "array"
+            },
+            "jacobian_perturbation_infinity_norm_upper_bound": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "identity_no_fold_sufficient": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "visible_motion_intensity": {
+              "type": "null"
+            },
+            "actual_fold_present": {
+              "type": "null"
+            },
+            "native_numeric_certified": {
+              "const": false
+            }
+          }
         }
       }
     }
