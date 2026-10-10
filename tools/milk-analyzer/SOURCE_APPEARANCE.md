@@ -2103,3 +2103,31 @@ References: [HLSL length](https://learn.microsoft.com/en-us/windows/win32/direct
 MilkDrop2 delegates these shader intrinsics to D3DX; the patched GLSL generator
 retains the corresponding built-ins. Native arithmetic and appearance remain
 separate from these nominal source rules.
+
+## Nonzero normalized colour components
+
+The colour projector preserves scalar lanes of `normalize(v)` as an internal
+`normalized_component` range/response node, keeping the original shader domain
+guard. This internal node is not a shader language extension or exported shader
+program. Its typed vector width/index must be valid. The component box must prove
+a strictly positive norm minimum after outward padding; a zero-touching box
+withholds the normalized component.
+
+Ratio enclosures use component and norm ranges and the unit-component bound
+[-1,1], retaining nonnegative/nonpositive signs. For independent sampled RGB
+[0,1], `normalize(sample.rgb+.1)` has a nonzero domain and nonnegative unit
+component enclosures. `normalize(sample.rgb)` cannot exclude zero length and
+remains unknown. A domain-checked normalization is discharged only through this
+specific nonzero component proof, not a generic guard bypass.
+
+For vectors with norms at least m>0, normalized-vector difference is at most
+original-vector difference divided by m. Thus component response ceiling is
+hypot(L_i)/m, where L_i are component response ceilings. This is sufficient,
+not a minimum/typical response, direction or final palette. Correlations can
+make it loose. Quantized/dynamic native uploads, singular component programs,
+invalid shapes and numeric overflow/underflow stay guarded.
+
+Reference: [HLSL normalize](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-normalize).
+MilkDrop2 delegates this intrinsic to D3DX and the patched GLSL built-in retains
+the same division-by-length domain. Native finite-precision/storage/sampling
+behavior, visual geometry, feedback and mood remain separate.

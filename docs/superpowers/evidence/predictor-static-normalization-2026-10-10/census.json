@@ -1,0 +1,75 @@
+{
+  "basis": "Nominal nonzero normalized colour-component proof; no native numerical/appearance/mood certificate",
+  "presets": 100,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "ordinary_bounded_declared_texture_inputs": 76,
+    "scenario_bounded_declared_texture_inputs": 82,
+    "new_complete_scenario_stages_vs_previous_ordinary": 6,
+    "new_complete_scenario_stages": 1,
+    "new_complete_ordinary_stages": 0,
+    "ordinary_stage_records_changed": 1,
+    "presets_with_complete_scenario_colour": 63,
+    "presets_with_new_complete_scenario_colour": 1,
+    "ordinary_unknown": 114,
+    "scenario_unknown": 108,
+    "ordinary_partial_declared_texture_inputs": 10,
+    "scenario_partial_declared_texture_inputs": 10
+  },
+  "changed_source_gap_presets": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "model_modules": {
+    "source_control_bounds.py": "c52410dd69d6c5fbae97692dd901268cefede0930efdb84022ecf7a42e9a29c6",
+    "source_input_scenario.py": "1d82c9b703d9af8baa1703a05931339d6c04f55300a6dfa089dabda1c82c68fa",
+    "source_nonlinear_colour.py": "d354b35a6b2a78ca050e0656cd53460d0f80a784accd2b1a39a199d135a1d3ba"
+  },
+  "zip_sha256": "07afb7963811893e28b9846e0ceb3b43beb84564b3086d6339030b57c8919ad4",
+  "rows": [
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "stage_records": [
+        {
+          "stage": "composite",
+          "scope": "ordinary",
+          "before_source_model": "unknown",
+          "after_source_model": "unknown",
+          "before_rgb_bounds": null,
+          "after_rgb_bounds": null,
+          "after_unknown_reasons": [
+            "no finite source value envelope from supported formula",
+            "no finite source value envelope from supported formula",
+            "no finite source value envelope from supported formula"
+          ]
+        },
+        {
+          "stage": "composite",
+          "scope": "scenario",
+          "before_source_model": "unknown",
+          "after_source_model": "bounded_declared_texture_inputs",
+          "before_rgb_bounds": null,
+          "after_rgb_bounds": [
+            [
+              -1.5690465098942883,
+              1.0000000000000007
+            ],
+            [
+              -1.5690465098942883,
+              1.0000000000000007
+            ],
+            [
+              -1.5690465098942883,
+              1.0000000000000007
+            ]
+          ],
+          "after_unknown_reasons": []
+        }
+      ]
+    }
+  ]
+}

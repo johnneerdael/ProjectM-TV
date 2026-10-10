@@ -1236,3 +1236,9 @@ Scalar calculus memo entries retain (original node, result) and verify identity.
 Distance generates temporary subtraction nodes; an id-only cache can silently
 reuse stale bounds. Keep the repeated20-distance=210 regression and existing
 node/depth budgets. Strong references are required even outside family cache scope.
+
+Normalized colour components: retain the shader domain guard and require a
+strict positive padded norm minimum. Typed lane/width checks and signed unit
+component bounds are mandatory. Normalization guards discharge only a proved
+internal normalized_component; arbitrary/zero/singular/native-quantized inputs
+remain unresolved. Rate ceilings are sufficient bounds, not reaction/palette proof.

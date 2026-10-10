@@ -503,3 +503,8 @@ Vector-length and distance formulas now contribute nominal value/response bounds
 These help describe radial and magnitude-driven recipes without taking frames.
 A norm can have a finite response bound at zero, while division or normalization
 by that norm may still have an unresolved singular domain.
+
+Normalized colour recipes can now receive conditional component bounds when
+source input ranges prove a nonzero vector length. Zero-length possibilities
+stay unknown; the predictor does not silently choose a direction or colour for
+an undefined normalization. These bounds do not establish a final palette.

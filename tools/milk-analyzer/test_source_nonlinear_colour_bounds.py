@@ -350,3 +350,60 @@ def test_multiple_distance_temporaries_keep_distinct_bounds_in_local_memo():
     for _ in range(10):
         r=scalar_value_envelope(f,input_domains={'x':[0,0]})
         assert r['nominal_value_range']==pytest.approx([210,210],abs=2e-11)
+
+
+def test_positive_offset_normalized_sample_has_unit_colour_enclosure():
+    r=colour('ret=normalize(GetPixel(uv).rgb+.1);')
+    assert r['source_model']=='bounded_declared_texture_inputs'
+    for lo,hi in r['raw_rgb_bounds_if_samples_unit_interval']:
+        assert 0<=lo<=hi<=1
+    assert r['visible_flashing'] is None
+
+
+def test_zero_touching_normalized_sample_remains_singular():
+    r=colour('ret=normalize(GetPixel(uv).rgb);')
+    assert r['source_model']=='unknown'
+    assert r['raw_rgb_bounds_if_samples_unit_interval'] is None
+
+
+def test_positive_normalized_band_vector_gets_conditional_response_bound():
+    from test_effect_families import analyze
+    s=shader('shader_body {ret=normalize(float3(bass+.1,mid+.1,treb+.1));}',stage='warp')
+    a=analyze(s,input_scenario={'schema_version':1,'name':'positive-norm','audio_band_ranges':{'bass':[0,2],'mid':[0,2],'treb':[0,2]}})
+    r=a['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']['scenario_colour_envelope']
+    assert r['source_model']=='bounded_declared_texture_inputs'
+    b=next(x for x in r['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is not None for x in b['channel_response_envelopes'])
+    assert r['actual_feedback_persistence'] is None
+
+
+def test_normalization_does_not_hide_invalid_or_unbounded_input_domains():
+    for code in ('ret=normalize(float3(1/GetPixel(uv).r,1,1));', 'ret=normalize(float3(bass,mid,treb));'):
+        r=colour(code)
+        assert r['source_model']=='unknown'
+
+
+def test_normalized_component_keeps_sign_in_signed_nonzero_box():
+    from source_control_bounds import scalar_value_envelope
+    v=Field('components',(Field('input',detail={'name':'x'}),constant(1)),'float2')
+    f=Field('normalized_component',(v,),'float',{'index':0})
+    r=scalar_value_envelope(f,input_domains={'x':[-1,1]})
+    assert r['nominal_value_range']==pytest.approx([-1,1],abs=2e-14)
+
+
+def test_normalized_component_rejects_invalid_lane_and_matrix_shapes():
+    v=Field('input',dtype='float2',detail={'name':'v'})
+    for index in (-1,2,False,None):
+        r=scalar_value_envelope(Field('normalized_component',(v,),'float',{'index':index}),input_domains={'v.x':[1,2],'v.y':[1,2]})
+        assert r['nominal_value_range'] is None
+    m=Field('input',dtype='float2x2',detail={'name':'m'})
+    assert scalar_value_envelope(Field('normalized_component',(m,),'float',{'index':0}))['nominal_value_range'] is None
+
+
+def test_normalized_component_quantized_operand_has_no_continuous_response():
+    from source_control_bounds import scalar_response_envelope
+    x=Field('input',detail={'name':'x'})
+    n=Field('narrow',(x,),'float',{'numeric_domain':'shader-float32'})
+    v=Field('components',(n,constant(1)),'float2')
+    r=scalar_response_envelope(Field('normalized_component',(v,),'float',{'index':0}),input_names={'x'},input_domains={'x':[0,1]})
+    assert r['maximum_absolute_control_change_per_audio_unit'] is None

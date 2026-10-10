@@ -68,6 +68,11 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                     parent=node.args[0];lane=SWIZZLE[node.detail['field']]
                     if parent.op=='input' and parent.dtype.startswith('float'):
                         return Field('input',dtype='float',detail={'name':parent.detail['name']+'.'+'xyzw'[lane]})
+                    if parent.op=='normalize' and len(parent.args)==1:
+                        vector=parent.args[0];parts=_parts(vector)
+                        if vector.dtype not in {'float','float2','float3','float4'} or lane>=len(parts):raise ValueError('normalized colour lane/type unresolved')
+                        projected=Field('components',tuple(project(v,depth+1) for v in parts),vector.dtype)
+                        return Field('normalized_component',(projected,),'float',{'index':lane})
                     if parent.op=='domain_checked':
                         child=_parts(parent.args[0])[lane]
                         return Field('domain_checked',(project(child,depth+1),),'float',parent.detail)

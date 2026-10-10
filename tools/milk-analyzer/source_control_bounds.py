@@ -88,6 +88,32 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
                 span,rate,kind=child
                 return checked(None if span is None else [-span[1],-span[0]],rate,kind)
             return None
+        if node.op=='normalized_component' and len(node.args)==1:
+            from effect_families import _parts
+            vector=node.args[0];index=node.detail.get('index')
+            if vector.dtype not in {'float','float2','float3','float4'}:return None
+            width=1 if vector.dtype=='float' else int(vector.dtype[-1]);parts=_parts(vector)
+            if len(parts)!=width or type(index) is not int or not 0<=index<width or any(v.dtype!='float' for v in parts):return None
+            values=[visit(v,depth+1) for v in parts]
+            if any(v is None for v in values):return None
+            lows=[0. if v[0] is None or v[0][0]<=0<=v[0][1] else min(map(abs,v[0])) for v in values]
+            highs=[math.inf if v[0] is None else max(map(abs,v[0])) for v in values]
+            minimum=math.nextafter(math.hypot(*lows),-math.inf)
+            maximum=math.nextafter(math.hypot(*highs),math.inf)
+            if minimum<=0 or not math.isfinite(minimum):return None
+            numerator=values[index][0];span=[-1.,1.]
+            if numerator is not None:
+                if all(math.isfinite(v) for v in numerator) and math.isfinite(maximum):
+                    quotients=[x/y for x in numerator for y in (minimum,maximum)]
+                    span=[max(-1.,min(quotients)),min(1.,max(quotients))]
+                else:
+                    if numerator[0]>=0:span[0]=0.
+                    if numerator[1]<=0:span[1]=0.
+            rates=[v[1] for v in values]
+            rate=None if any(r is None for r in rates) else positive_divide(math.hypot(*rates),minimum)
+            span,rate,kind=checked(span,rate,continuity(*values))
+            if span is not None:span=[max(-1.,span[0]),min(1.,span[1])]
+            return span,rate,kind
         if node.op in {'length','distance'} and len(node.args)==(1 if node.op=='length' else 2):
             from effect_families import _parts
             from shader_fields import Field
@@ -130,7 +156,8 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
             rate=None if a[1] is None or b[1] is None else max(a[1],b[1])
             return checked(span,rate,continuity(a,b))
         if _response_input_names is not None and node.op=='domain_checked' and len(node.args)==1:
-            if node.detail.get('function') not in {'sqrt','pow'}:return None
+            function=node.detail.get('function')
+            if function not in {'sqrt','pow'} and not (function=='normalize' and node.args[0].op=='normalized_component'):return None
             return visit(node.args[0],depth+1)
         if _response_input_names is not None and node.op in {'saturate','clamp'}:
             child=visit(node.args[0],depth+1)
@@ -167,7 +194,8 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
                 span=[min(values),max(values)]
             return checked(span,rate,continuity(*args))
         if _value_only and node.op=='domain_checked' and len(node.args)==1:
-            if node.detail.get('function') not in {'sqrt','pow'}:return None
+            function=node.detail.get('function')
+            if function not in {'sqrt','pow'} and not (function=='normalize' and node.args[0].op=='normalized_component'):return None
             return visit(node.args[0],depth+1)
         if _value_only and node.op in {'frac','floor'} and len(node.args)==1:
             child=visit(node.args[0],depth+1)
