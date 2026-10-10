@@ -24,14 +24,15 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex):
             for name,sample in samples:
                 for lane in 'xyzw':domains[name+'.'+lane]=[0.,1.]
             def project(node,depth=0):
-                node=_canonical_lane(node);key=id(node)
-                if key in memo:return memo[key]
+                original=node;key=id(original)
+                if key in memo:return memo[key][1]
+                node=_canonical_lane(original)
                 if depth>64 or len(memo)+len(active)>=4096 or key in active:
                     raise ValueError('nonlinear colour projection budget/cycle exceeded')
                 active.add(key)
                 try:value=calculate(node,depth)
                 finally:active.remove(key)
-                memo[key]=value;return value
+                memo[key]=(original,value);return value
             def calculate(node,depth):
                 if node.op=='dot' and len(node.args)==2:
                     a,b=map(_parts,node.args)

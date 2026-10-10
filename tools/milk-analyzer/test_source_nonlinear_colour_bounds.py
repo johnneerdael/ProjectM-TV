@@ -105,3 +105,16 @@ def test_luminance_dot_colour_has_supported_raw_range():
 def test_abs_power_does_not_change_literal_exponent_one_sign_exception():
     r=colour('ret=pow(-GetPixel(uv),1);')
     assert np.array(r['raw_rgb_bounds_if_samples_unit_interval'])==pytest.approx(np.array([[-1,0]]*3),abs=1e-12)
+
+
+def test_canonical_swizzles_keep_independent_lane_domains_across_calls():
+    from concurrent.futures import ThreadPoolExecutor
+    source=shader('shader_body {ret=GetPixel(float2(ang,1/rad));}')
+    def run(_):
+        r=appearance(source)['nonlinear_texture_colour_bounds']['stages']['composite']
+        for lane,channel in zip('xyz',r['channel_value_envelopes']):
+            assert list(channel['declared_input_domains'])==[':coordinate-sample-0.'+lane]
+        return r
+    expected=run(0)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert all(r==expected for r in pool.map(run,range(12)))
