@@ -318,3 +318,11 @@ and candidate positions where the same source texture feature could repeat.
 It also describes supported offset movement. This helps reconstruct potential
 repeated layouts from source, but it does not count visible copies or certify
 a grid, tunnel or fractal. Source content, masks and feedback remain separate.
+
+`native_warp_recipe` now describes supported constant native zoom, stretch,
+rotation, translation and the four procedural warp waves. Fixed controls can
+move feedback every frame: a fixed zoom of 1.1 expands an existing feature
+even though its parameter has no temporal variation. The recipe carries the
+renderer aspect ratio and texel alignment as inputs. It describes nominal
+sampling geometry, with GPU rounding and mesh interpolation kept separate;
+it does not yet establish visible speed or a Chill/Normal/Intense label.

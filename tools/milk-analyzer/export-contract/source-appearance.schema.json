@@ -4597,6 +4597,73 @@
               }
             }
           }
+        },
+        "native_warp_recipe": {
+          "type": "object",
+          "description": "Conditional nominal uniform native mesh map; runtime aspect and texel offsets required. Not a GPU precision or visible-motion certificate.",
+          "required": [
+            "model_kind",
+            "contribution",
+            "native_float32_controls",
+            "visible_screen_motion",
+            "unknown_reasons"
+          ],
+          "properties": {
+            "model_kind": {
+              "enum": [
+                "uniform_affine",
+                "uniform_native_wave_warp",
+                "unknown",
+                "not_contributing"
+              ]
+            },
+            "contribution": {
+              "enum": [
+                "consumed",
+                "disconnected"
+              ]
+            },
+            "native_float32_controls": {
+              "type": "object"
+            },
+            "visible_screen_motion": {
+              "type": "null"
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "matrix_uv_aspect_coefficients": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "offset_uv_aspect_coefficients": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "procedural_warp": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "shader_branch": {
+              "enum": [
+                "legacy",
+                "custom",
+                "unknown"
+              ]
+            },
+            "conditional_on_native_profile": {
+              "type": "boolean"
+            }
+          }
         }
       }
     },

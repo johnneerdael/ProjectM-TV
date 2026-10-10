@@ -28,6 +28,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `execution_unknowns` | Unresolved loading, branches, loops/domains and interpretation conditions; these are not rendered failures |
 | `uses_rendered_images`, `uses_shader_execution`, `uses_equation_execution` | All false for this source-only producer |
 | `appearance_match_accuracy` | Null until separately validated; do not infer it from a successful parse/test |
+| `native_warp_recipe` | Nominal uniform native feedback sampling map with runtime aspect/texel inputs; dynamic/radial controls remain unknown |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1281,3 +1282,41 @@ underflow and nonfinite derived estimates retain unknown speed. Units are
 declared basis UV per source-time second, not pixels or measured screen motion.
 `actual_visible_copy_count` and `visible_screen_motion` remain null. Full
 feedback evolution, overlaps, content/history and appearance remain open.
+
+
+## Uniform native feedback map
+
+`native_warp_recipe` provides nominal sampling geometry for known uniform
+float32-converted mesh controls with zoomexp=1. Dynamic/radial, singular and
+nonfinite controls stay unknown; disconnected native mesh is marked separately.
+For output source UV u, let A=diag(aspectX,aspectY), c=(cx,cy), d=(dx,dy),
+S=diag(1/sx,1/sy), R the nominal rotation of the emitted float32 angle, and z=zoom.
+The affine sampling map is:
+
+```
+q = S * (A*(u-.5)/z + .5-c)
+v = inv(A) * (R*q + c-d-.5) + .5 + texel_offset_uv
+```
+
+The JSON matrix coefficient basis is [1,aspectY/aspectX,aspectX/aspectY];
+offset basis is [1,1/aspectX,1/aspectY,aspectY/aspectX,aspectX/aspectY].
+Area ratio abs(z*z*sx*sy) belongs only to the affine source-to-output component.
+Identity likewise excludes procedural warp and texel alignment. Neither implies
+stationary visible feedback. The four native waves are added before rotation,
+using pos=2*u-1 and an explicit 2x4 axis/factor coefficient matrix in each phase.
+`shader_branch` distinguishes legacy/default from accepted custom warp. Custom
+warp negates the legacy second-axis coefficients; unresolved nonzero warp
+stays unknown. Offline branch acceptance remains conditional on native profile.
+The per-axis displacement bound before rotation is 2*abs(warp)*float32(.0035).
+Wave factors expose their bias/amplitude/frequency/phase and render-time scaling.
+No time samples are evaluated by the producer.
+
+The authored MilkDrop2 reference in milkdropfs.cpp (lines1870–1929) reverses
+projection Y; the current legacy vertex shader already uses source UV Y and
+reverses oscillator signs accordingly. The recipe preserves that convention.
+Current source34 PerPixelMesh.cpp supplies emitted controls, CPU rotation and
+warp factors; PresetWarpVertexShaderGlsl330.vert supplies operation order.
+Aspect and texel inputs must be supplied by the renderer. Trigonometry,
+intermediate rounding, precision, triangle interpolation, transition blending,
+feedback contents and later shaders remain distinct conditions. This is a
+source construction recipe, not a whole-preset image or mood certification.

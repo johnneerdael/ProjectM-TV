@@ -1016,3 +1016,11 @@ Source copy-lattice maintenance: preserve sampling-map bases and wrap policy.
 matrix offset motion, not visible copies or screen trajectories. Unknown wrap
 is conditional, mixed/singular maps stay unknown, and positive origin-rate
 product underflow must not create a stationary certificate.
+
+Source native-warp maintenance: `source_native_warp` exports nominal uniform
+feedback sampling recipes from float32-converted literal controls. Preserve
+zoom/stretch/wave-warp/rotation/translation/aspect/texel ordering and
+runtime aspect/texel inputs. Preserve selected legacy/custom spatial signs;
+unresolved nonzero warp branches stay unknown. Radial/dynamic/singular/nonfinite controls stay
+unknown. Affine identity/area describe only the affine component; procedural
+warp, sampling interpolation, content, display motion and moods remain separate.
