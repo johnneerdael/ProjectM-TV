@@ -1,107 +1,171 @@
-# The road ahead: predicting presets from source
+# Predicting presets from source
 
-Today's [preset moods](predictive-collections.md) come from **watching** each preset. Every preset is rendered for 14 seconds at 128×72 pixels, and its frames are measured: how much the picture moves, how often brightness jumps. This works, but it has hard limits. A short, tiny render of synthetic audio cannot see how a preset reacts to real music, develops over minutes, or looks at 4K, and every new preset must be rendered before it can be placed.
+The predictor's current priority is **describing a preset's constructions and audio
+controls directly from its `.milk` source**. The aim is machine-readable JSON that
+helps another program understand its characteristic look, match user preferences
+and eventually create a recognizable adaptation or generate a new effect.
 
-The **predictor**, in development on the [`feat/predictor-visual-loop`](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-visual-loop/tools/milk-analyzer) branch (pull request [#45](https://github.com/johnneerdael/ProjectM-TV/pull/45)), takes the opposite approach. It **reads** the preset and works out its behaviour mathematically, the way an engineer would read the code, instead of looking at pictures.
+This work is experimental. It does not change the app's
+[shipped preset moods](predictive-collections.md), which still use the historical
+frame-measurement bundle. **A source-only JSON description that reliably reconstructs
+the whole preset's look has not yet been validated.**
 
-!!! note "Status"
-    This page describes a **direction**, not a finished design. The predictor is research in progress: it is not merged, and it does not change the moods shipped in the app. The formulas, profiles and thresholds below show how the work is currently sketched. Expect them to change as the research matures. The published beta collections stay as they are until a source-based version has been validated well enough to replace them.
+!!! note "Implementation checkpoint"
+    This page describes the committed source work at `9c8ff632` (2026-10-10) on
+    `feat/predictor-static-output-bounds`.
+    It follows the static mechanism work merged by PR #67 into the experimental
+    predictor parent branch. Publishing these docs separately does not merge that
+    implementation into `main` or replace the released mood indexes.
 
-## Measuring pictures vs. analysing source
+    The [reference documentation archive](https://github.com/johnneerdael/ProjectM-TV/tree/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632)
+    preserves the cited contracts and evidence summaries. The implementation
+    checkpoint is local and is not published by this documentation update.
 
-| | Today: measure rendered frames | Predictor: analyse the source |
+## Three different kinds of result
+
+| Path | What it does | What its result means |
 |---|---|---|
-| Input | Pixels from one 14-second render | The `.milk` file itself |
-| Method | Optical flow and brightness differences | Executes the equations in MilkDrop's phase order, follows shapes, waves, warp transport, feedback and final colour expressions analytically |
-| Audio | One synthetic test signal | Traces which outputs depend on which audio bands, and can test counterfactual inputs with everything else held fixed |
-| Resolution | 128×72 | Resolution-independent quantities: viewport units, events per second |
-| Uncertainty | A single number per measurement | Explicit intervals; *unknown* when a quantity cannot be established |
-| New presets | Must be rendered first | Analysed directly from text |
-| Explanations | "This preset moves a lot" | Which code moves what, and why |
+| Shipped mood collections | Measures frames from the historical controlled native render and stores rankings. | A beta activity ranking for that short input window. |
+| Numerical source forecast | Executes source equations and simulates shader/feedback fields under declared audio, time, assets and render settings. | The existing 47-field statistical export. It consumes no native reference frames, but still performs simulation. |
+| Static source description | Parses the file, follows contributing equation/shader expressions and recognizes supported mathematical constructions. | Conditional forms, parameters, colour ingredients, coordinate mappings and audio-to-control relationships without executing equations, shaders or display frames. |
 
-The difference matters most for the cases pictures handle badly. A colour pulse that is fast but small, a preset that is calm in silence but violent on a drop, or one whose structure only appears after a minute: all of these are visible in the code even when 14 seconds of 128×72 frames miss them.
+The [export reference](predictor-export.md) keeps these contracts separate. The
+47 numerical fields have not all become static. Removing retained frame arrays
+from a forecast does not remove its simulation cost.
 
-## From code to physical measurements
+## What the static JSON can describe
 
-The predictor first produces **feature records**: physical quantities with units, evidence type and support, kept separate from any opinion about mood. Examples:
+The static producer is `effect_family_export.py`. Its `analysis.visual_description`
+adds structured appearance and control traits alongside the effect-family record:
 
-| Feature | Unit | From the source |
+| Source-derived evidence | What a consumer can learn | What remains conditional |
 |---|---|---|
-| Motion speed, acceleration, jerk (95th percentile) | viewport widths per second, per second², per second³ | Shape and wave vertices, warp transport, by divided differences over the evaluated timeline |
-| Discontinuities | events per second | Sudden jumps in geometry |
-| Coherent brightness changes | transitions per second × brightness step | Reachable final-colour expressions and their discontinuous branches |
-| Bass response | normalized RGB difference | The same program run with and without a bass change, all else identical |
-| Palette | warm/cool −1…1, coloured share, hue bins, hue rate | Final colour functions at declared points |
-| Structure | normalized coordinates | Nonlinear warp, symmetry, feedback complexity |
+| Component IDs and family codes | Wave/point/shape primitives, polar-depth layouts, mirror constructions, recognized fractal recurrences, feedback transforms and repeating radial glow fields. | Which constructions dominate the displayed picture. Points do not establish independent particles. |
+| Shape geometry and material | Nominal size, polygon area, centre-to-edge vertex colour, borders, blending and texture requests. | Clipping, overlap, opacity, actual image binding and later shading. |
+| Texture-coordinate mappings | Supported scaling, reflection, shear, translation, polar angle/depth layouts and image-driven displacement coefficients. | Actual sampled image contents, visible copy count and screen motion. |
+| Colour expressions and mixtures | Supported generated colour formulas, signed sample-channel weights, tone operations and native colour inputs. | The complete final palette after masks, texture history, storage and composition. |
+| Time and audio control routes | Which source control responds to bass, mids or highs; supported gains, switches, thresholds and time curves. | Perceived response strength, flash frequency and motion intensity for arbitrary music. |
+| Logical feedback/display flow | Drawing order, contributing texture reads and supported nominal colour transfer. | Full recurrence, actual trail persistence and context-dependent native detail. |
 
-Each value says what supports it. Missing support yields *unknown*, never a guessed zero. A preset that stands still produces a genuine 0; a preset whose motion cannot be established produces no number at all.
+For example, a radius expression `rad=.2+.05*bass` can explain that the shape's
+radius changes with bass, including a source gain of `.05` radius units per bass
+unit. That gain is not the percentage of the screen that moves. A nominal colour
+oscillator can supply its period without establishing that it creates a visible
+flash.
 
-## From measurements to moods, and much more
+Recognition traces live outputs and consumed vector lanes, not names or a list of
+functions. Unsupported state, branches, domains, resources and excessive symbolic
+complexity remain explicit unknowns. A detected fractal plus varied generated
+colour can be a psychedelic candidate; neither label proves a particular mood.
 
-Scores are computed from those features with explicit, inspectable formulas. As an illustration, the current research sketch, which is likely to change, uses:
+Read the [machine contract and numeric dictionaries](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/SOURCE_APPEARANCE.md)
+and the [mechanism reference](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/EFFECT_FAMILIES.md)
+for exact fields, units, conditions and source evidence.
 
-```text
-Intensity  = max(1 + 99·(0.28·speed + 0.12·acceleration + 0.08·jerk
-                        + 0.32·flashes + 0.12·brightness jumps + 0.08·bass response),
-                 1 + 99·flashes)
-Smoothness = 100·(1 − 0.35·acceleration − 0.45·jerk − 0.20·discontinuities)
-Warm, Cold = from the palette's warm/cool balance
-Psychedelic = palette diversity, nonlinear warp, feedback complexity, symmetry, hue evolution
-```
+## Current evidence
 
-Every input is normalized to a saturation scale (for example, speed saturates at 0.75 screen widths per second). Unknown inputs widen the result into an interval instead of being dropped. A preset is placed in **Chill**, **Normal** or **Intense** only when its whole intensity interval fits in the band and is at most 10 points wide. Chill additionally requires *proven* bounds on speed, acceleration, jerk and the absence of flashes for the whole preset. When the evidence is not strong enough, the predictor abstains instead of guessing.
+The committed checkpoint's prepared analyzer suite passed **2,301 tests and 92
+subtests**. These are language, numerical and descriptor controls, not 2,301
+presets with verified visual matches. The fixed 100-preset source sample provides
+coverage evidence for individual ingredients:
 
-Because the measurements and the preferences are separate, the same analysis can serve many different tastes **without re-running anything**:
+| Ingredient supported in that sample | Presets | Evidence |
+|---|---:|---|
+| Nonidentity constant-affine sample maps | 61 | [Sampling geometry](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-sampling-geometry-2026-10-09/README.md) |
+| Direct sampled-colour coordinate response | 23 | [Blur bindings and 64 response maps](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-blur-bindings-2026-10-09/README.md) |
+| Raw RGB mixture models | 35 | [36 supported shader stages](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-colour-mix-2026-10-09/README.md) |
+| Consumed native time formulas | 15 | [Native clock inputs](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-native-time-2026-10-09/README.md) |
+| Consumed native hue recipes | 14 | [Four-corner colour ingredient](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-composite-hue-2026-10-10/README.md) |
+| Mixed polar maps | 2 | [Four angle/depth maps](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-polar-mixed-2026-10-09/README.md) |
+| Repeating radial glow generators | 2 | [Four distinct generators](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/docs/superpowers/evidence/source-radial-grid-2026-10-09/README.md) |
 
-- **Genre profiles:** starter profiles exist for ambient, chillout, trance, melodic techno, techno, hardstyle, pop, hip-hop, jazz and classical. *Melodic techno*, for example, targets intensity 35–75, smoothness 85–100, a subtle bass response, strong symmetry and feedback that fades within 0.3–1.5 seconds.
-- **Viewing profiles:** neutral, gentle home TV, focus, psychedelic and party.
-- **Your own profile:** a small JSON file listing what you want (a target range per feature or score, how much it matters) and hard limits (for example "never more than one flash per second").
+These groups overlap. The counts are neither a whole-pack success rate nor an
+appearance-accuracy percentage; even a computed record can have major unknowns.
+Each linked checkpoint retains its original source/model hashes and scope.
 
-Changing a profile simply rescores the stored features. That opens the way to collections tuned to a genre, a room or a person, rather than three fixed moods.
+The declared reference is the **full published ProjectM TV core 2.3.33 AAR**,
+verified byte-equivalent to 2.3.32 and the earlier qualified source31 target.
+Source CPU parser/model identities remain separate from AAR/JNI runtime identities.
+The runtime qualification contains three small 30-frame, 128×72 JNI controls;
+it does not certify all authored presets or 4K appearance. The
+[published profile](https://github.com/johnneerdael/ProjectM-TV/blob/fab54330f0144a63f1c30ed7afe7cb8b72191bc2/docs/superpowers/evidence/predictor-docs-reference-9c8ff632/tools/milk-analyzer/profiles/published-core-v2.3.33.json)
+records hashes and the exact scope. This is the latest locally verified profile
+for this documentation checkpoint, not a claim that no newer release exists.
 
-## How well does source prediction work?
+## Open work and pending validation
 
-The predictor is tested by writing down **20 observable claims** per preset before any frame is rendered, then grading them against captures from the unchanged published engine. In a randomized audit of 100 bundled presets:
+The following are open questions or unfinished work, not proven ceilings on what
+static analysis can ultimately describe:
 
-- **85 of 100** scored 95 or more out of 100; 71 matched all 20 claims;
-- among the 88 presets it could analyse, the mean score was **98.8**;
-- the 12 it could not complete hit numeric domains the analyser could not resolve at that checkpoint: mostly undefined powers (such as negative bases), plus division, dot-product and nonfinite-coordinate cases which were retained as unresolved in that audit;
-- the audit's own target is 100 of 100 presets at 95 or more, so this run did not pass it (mean 86.95 when unanalysable presets count as 0). It used the published 2.3.11 engine, before the projectM 4.2 rebase.
+- Whole-preset recognizable reconstruction and a calibrated appearance score.
+- Final element dominance, visible coverage and complete colour palette.
+- Perceived movement intensity, actual flash events and whole-feedback evolution.
+- Actual random phases, selected images and bindings when no matching runtime inputs are supplied.
+- Reliable automatic mood, musical-genre or audience assignments.
 
-These are historical behavioural-rubric grades. Average agreement measures closeness; the pass rate depends separately on the chosen gate. [How the score is measured](authoring/testing.md#how-are-you-measuring-97-accurate) explains the 20-claim arithmetic, a real 97.5 example, the 5% numerical tolerance, visual assessment and the difference between 85/100 and 85/88. Later repairs and source-only corpus exports do not retroactively increase this audit's accuracy.
+The current export keeps `appearance_match_accuracy` null, activity values unknown and
+Chill eligibility null when the required support is absent. An empty mechanism
+list does not prove that the picture is plain; an unknown flash value does not
+mean no flashing.
 
-## What remains before it replaces today's moods
+## Current implementation constraints
 
-- **Extraction coverage.** Palette features already come from source. Complete visible motion, spatial colour coverage, pulse proofs, structure and full feedback analysis are still being built. Until they are, many presets correctly come out as *unknown*.
-- **Calibration.** The formula weights are explicit starting assumptions, not yet fitted to viewers' judgments.
-- **Validation at scale.** The 100-preset audit covered 60 frames at 256×144 with one audio stream. Longer runs, real music and 4K detail must be checked before the source-based index replaces the measured one.
-- **An intentional migration.** The shipped collections will change only in a release that says so, with the new index verified like the current one.
+The implementation deliberately supports a bounded vocabulary. For example,
+constant-affine sample maps can be described while unsupported dynamic scales
+remain unknown. Direct sample-response analysis has 64-sample/4,096-node budgets;
+exported control programs have a 256-node budget. These are extendable
+implementation choices, not theoretical limits on predicting presets.
 
-## Options it could enable
+For an exact frame, selected images, random phases, initial feedback, audio and
+clock values are additional inputs. Their absence does not rule out a useful
+approximate baseline description; it prevents claiming that exact instance
+without declaring those inputs.
 
-Keeping *measurement*, *preference* and *validation* separate makes several features possible. None of them is a commitment yet; they illustrate where this could go:
+## From source traits to preferences
 
-- **Moods that explain themselves:** "Intense because of three full-screen flashes per second on the kick", instead of a bare number.
-- **Genre collections:** presets matched to ambient, techno or classical listening, using editable profiles instead of a fixed model.
-- **Personal profiles:** your own limits and preferences, such as warm colours only, no flashes, or slow motion, applied to the whole library at once.
-- **A gentle first-use default** for living rooms, with strict proven limits on flashing and abrupt motion, instead of a guess.
-- **Instant placement of custom packs:** presets you upload could be analysed from their text, without a render pass.
-- **Transparent uncertainty:** presets whose behaviour cannot be established are marked unknown, rather than silently placed in the wrong collection.
+The intended next consumer separates the preset's evidence from the viewer's
+preferences. It could favor supported smooth control curves, warm colour
+ingredients or strong bass-linked geometry, and penalize supported abrupt
+opacity changes. Preference weights and audience assumptions should be editable.
 
-## Further ahead: generating presets
+The shipped overlapping activity ranges are Chill 1–30, Normal 25–75 and Intense
+70–100. They are rank bands, not accuracy percentages. Existing experimental
+preference formulas are assumptions; the new static export does not produce a
+calibrated replacement score. A family name alone cannot justify a Chill
+recommendation. Age or genre can supply a user-editable default preference,
+not a claim about every listener in that group.
 
-If preset behaviour can be predicted from source, the same machinery can in principle work in reverse: search a restricted, typed preset grammar for programs that satisfy a set of feature constraints, such as "smooth, warm, bass-reactive, no flashes". This is an idea for later, not part of the current work, and it makes no promise about aesthetic quality. The hand-written *Aurora* test presets already show the first half: a preset designed so that its behaviour could be forecast before rendering ([details](authoring/testing.md#aurora-a-preset-designed-to-be-predicted)).
+Once sufficient traits are supported, changing a preference profile should
+rescore saved evidence without repeating expensive simulation. Where support is
+missing, the program must retain uncertainty rather than invent a calm or intense
+result.
 
-## What to expect
+## Adaptation and generation
 
-When it lands, the result should be moods that explain themselves and new presets that can be placed without rendering. It should also leave much more room to make collections your own.
+A Rust/wgpu consumer can already use supported constructions and parameters as
+inputs to an original effect template. It must record its choices for unknown
+colours, resources and behaviors separately. The JSON is not a complete scene
+graph or shader program, and no native-4K performance result follows from it.
 
+The longer-term goal is a description detailed enough to generate a recognizable
+approximation of a particular preset, including which elements move or change
+colour with each audio band. Another route is generating new programs from a
+restricted vocabulary of understood forms, materials, motion and audio controls,
+then analyzing them against a user's brief. Complete reconstruction and a
+production generator remain future validation work.
 
-## Use the predictor output in another tool
+## What historical accuracy scores mean
 
-The [predictor export contract](predictor-export.md) documents the feature envelope,
-all 47 simulated fields, strict extraction, provenance and unknowns, with downloadable
-JSON Schema, catalog and real examples. It also describes the limits of using
-these measurements for a Rust/wgpu adaptation and the additional semantic
-information needed for effect-family recognition or generation. The contract is a
-research checkpoint, separate from the accuracy rubric and shipped collections.
+Earlier 95, 97.5 or 100 scores graded **frozen predictions against native renders
+under a particular behavioral rubric and input protocol**. They were not the
+accuracy of this newer static JSON export, and they cannot be transferred to a
+new library version or renderer without matching evidence.
+
+The historical 2.3.11 audit had 85 of 100 presets at or above its 95-point gate,
+with a 98.8 mean among the 88 completed cases. Those are different quantities:
+pass rate answers how many met the gate, while average agreement measures the
+scored predictions' closeness. The 12 incomplete cases stay incomplete in that
+historical record even after later fixes. See
+[how “97% accurate” was measured](authoring/testing.md#how-are-you-measuring-97-accurate)
+for the rubric, tolerances, denominators and limits. No current static appearance
+percentage is established by that historical audit.

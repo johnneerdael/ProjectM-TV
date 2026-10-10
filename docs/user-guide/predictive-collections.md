@@ -79,6 +79,14 @@ The weights were fitted to eight human judgments of real presets. In leave-one-o
 
 Report a mismatch with the preset name (shown in the settings panel), the mood, the song and your TV.
 
+## Predictor development is separate
+
+The current [source predictor](predictor.md) is developing conditional JSON
+descriptions of mathematical constructions, materials and audio controls without
+rendering frames. Its [export contract](predictor-export.md) is separate from this
+measurement bundle. These source traits have not replaced the shipped scores,
+and no calibrated source-only Chill/Normal/Intense classifier is claimed.
+
 ## For developers
 
 The bundle lives in `core/src/main/assets/preset-genres/`:
