@@ -90,10 +90,16 @@ def _shape_controls(analysis):
 
 def _value_range(field,domains):
     from source_appearance import _phase_literal
-    value=_phase_literal(field)
+    literal_failure=None
+    try:value=_phase_literal(field)
+    except (ValueError,RecursionError) as error:
+        value=None;literal_failure=str(error)
     if value is not None and math.isfinite(value):return [value,value],None
     from source_control_bounds import scalar_value_envelope
     report=scalar_value_envelope(field,input_domains=domains)
+    if literal_failure:
+        report={**report,'literal_guard_failure':literal_failure,
+                'unknown_reasons':sorted(set(report['unknown_reasons']+[literal_failure]))}
     pair=report['nominal_value_range']
     refinement=report.get('solver_refinement',{})
     refined=refinement.get('nominal_value_range')
@@ -117,7 +123,12 @@ def _shape_support(controls,instances,viewport,domains):
     for index in range(instances):
         c=_instance_controls(controls,index)
         radius,report=_value_range(c['rad'],domains);x,xr=_value_range(c['x'],domains);y,yr=_value_range(c['y'],domains)
-        sides=_phase_literal(c['sides']);angle=_phase_literal(c['ang'])
+        literals={}
+        for name in ('sides','ang'):
+            try:literals[name]=_phase_literal(c[name])
+            except (ValueError,RecursionError) as error:
+                literals[name]=None;unknown.append(name+' literal guard unresolved: '+str(error))
+        sides=literals['sides'];angle=literals['ang']
         records.append({'instance':index,'radius':radius,'center_x':x,'center_y':y,
                         'range_evidence':{name:r for name,r in (('rad',report),('x',xr),('y',yr)) if r is not None}})
         if sides is None or not -(2**31)-1<sides<2**31 or radius is None:
@@ -176,7 +187,7 @@ def _shape_opacity(controls,element,domains):
     material=element.get('material') or shape_material(controls,'')
     if domains:
         from source_material_temporal import shape_scenario_material_envelope
-        temporal=element.get('scenario_material_envelope') or shape_scenario_material_envelope(controls,
+        temporal=shape_scenario_material_envelope(controls,
             {'scalar_input_domains':domains,'record_sha256':_digest(domains)})
     else:temporal=element.get('material_temporal') or shape_material_temporal(controls)
     pairs=[native_channel_envelope(temporal['channels'][name]) for name in ('a','a2')]
@@ -196,7 +207,9 @@ def _shape_opacity(controls,element,domains):
     invalid=any('finite native colour conversion' in reason and
                 (not reason.startswith('border_') or border_possible) for reason in material['unknown_reasons'])
     for name in ('additive','textured'):
-        value=_phase_literal(controls[name])
+        try:value=_phase_literal(controls[name])
+        except (ValueError,RecursionError) as error:
+            value=None;unknown.append(name+' literal guard unresolved: '+str(error))
         if value is not None and not -(2**31)-1<value<2**31:
             invalid=True;unknown.append(name+' is outside the native integer conversion domain')
     if texture!='untextured_vertex_gradient' and material['texture'].get('tex_zoom_source')==0:
@@ -219,7 +232,7 @@ def _pointwise_main(sample):
 
 
 def _final_transfer(analysis,description):
-    from effect_families import _walk
+    from effect_families import _walk,_SemanticBudget
     from source_appearance import _data_return,_phase_literal
     selected=analysis.stages['composite'];field=analysis.outputs.get('composite');unknown=[]
     result={'difference_gain_interval':[0.,None],'pointwise_support_preserved':False,
@@ -246,7 +259,13 @@ def _final_transfer(analysis,description):
         return result
     nodes=list(_walk(_data_return(field)))
     from source_forms import known_invalid_phase_offset
-    if known_invalid_phase_offset(field,preserve_zero_products=True):
+    try:invalid=known_invalid_phase_offset(field,preserve_zero_products=True)
+    except _SemanticBudget:raise
+    except (ValueError,RecursionError) as error:
+        unknown.append('composite domain guard unresolved: '+str(error))
+        result['method']='unresolved composite domain guard'
+        return result
+    if invalid:
         unknown.append('known invalid composite domains prevent an independence or gain claim');return result
     samples=[n for n,p in nodes if n.op=='sample' and n.detail.get('canonical_texture') in HISTORY]
     opaque=any(n.op in {'unknown','uninitialized','unresolved','sequence'} or n.op.startswith('loop_') for n,p in nodes)
@@ -305,7 +324,11 @@ def prominence_evidence(analysis,description,context):
             all(isinstance(v,(int,float)) and math.isfinite(v) and v>0 for v in viewport)):
         viewport=None
     domains=getattr(analysis,'input_scenario',None) or {}
-    domains=domains.get('scalar_input_domains',{})
+    domains=dict(domains.get('scalar_input_domains',{}))
+    for name,span in context.get('scalar_input_domains',{}).items():
+        if name in domains and list(domains[name])!=list(span):
+            raise ValueError('conflicting scenario/context scalar input domain: '+name)
+        domains[name]=list(span)
     elements={e['id']:e for e in description.get('elements',[])}
     controls=_shape_controls(analysis);identities=sorted(set(elements)|set(controls))
     final=_final_transfer(analysis,description);components=[]
@@ -370,7 +393,8 @@ def prominence_evidence(analysis,description,context):
             # With arbitrary resampling only the per-texel alpha ceiling survives;
             # using source integral here would invent area preservation.
             local_alpha=min(1.,opacity['interval'][1]*max(1,support.get('configured_instances',1)))
-            incoming=(source[1]+allowance*local_alpha if preserved else opacity['interval'][1])*opacity.get('source_rgb_difference_ceiling',1.)
+            if opacity.get('border_possible'):local_alpha=1.
+            incoming=(source[1]+allowance*local_alpha if preserved else local_alpha)*opacity.get('source_rgb_difference_ceiling',1.)
             if known_invalid:incoming=1.
             displayed=[0.,display_area[1] if gain is None else min(display_area[1],incoming*gain)]
             if not known_invalid and transfer.get('normalized_output_difference_ceiling') is not None:

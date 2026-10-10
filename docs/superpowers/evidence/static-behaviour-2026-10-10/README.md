@@ -44,3 +44,34 @@ components. The earlier cohort results stay unchanged as historical evidence.
 Three human references in that cohort exposed misleading low partial scores;
 those are diagnostic feedback under old engine/unspecified audio, not current
 visual validation or fitting targets.
+
+## Independent review and exact regressions
+
+The next combined v4 source run computed2000 rows and100 schema-valid exports,
+but its full suite exposed the exact grind230 shared-budget regression. Independent
+review also identified repeated-instance resampling underbounds, raw saturation
+being treated as displayed flashing, and omitted motion context domains. Those
+findings were repaired and retested before the v5 qualification. Historical v4
+counts are not qualification of the later fixes or automatic mood accuracy.
+
+The optional index now owns a private bounded traversal cache and does not charge
+or reset the original query budget. The exact grind230/deep-diver controls pass.
+Motion preserves/merges declared context domains and rejects conflicts. Arbitrary
+resampling uses aggregate instance alpha; unresolved borders retain a unit ceiling.
+Final-output clamp evidence preserves raw source modulation, and the restricted
+finite-domain guard retains unknown/overflowing native phases rather than turning
+nominal saturation into automatic Chill. Fresh follow-up review found no further
+material issue in these bounded fixes. Final full-suite/cohort results are recorded
+only after the frozen v5 jobs finish.
+
+## Final v5 checkpoint
+
+**3472 prepared tests and92subtests pass**,206.60s; strict MkDocs also passes.
+All100 paired source exports pass schema/model identity and unknown-activity
+rejection checks. The unchanged2000 source cohort now retains2000 behaviour
+reports,1552 useful hue descriptions and367 conditional source-potential indices.
+Automatic eligible bands remain empty. The run takes166.18s with4 workers.
+Final frozen source/model/context/reader/compiler/component identities and results
+are in `final-v5/`; full per-source records remain in the task-owned build folder.
+No rendered frames, equation/shader sequences or native appearance accuracy credit
+were used. The goal remains active for useful validated mood grouping.

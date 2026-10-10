@@ -15,7 +15,7 @@ FLOAT_TYPES={'float','float2','float3','float4'}
 class TypedFieldIndex:
     """Index semantic child edges once, retaining budgets and unresolved nodes."""
     def __init__(self, root, *, max_nodes=4096):
-        from effect_families import _children
+        from effect_families import _children,_CACHE
         if type(max_nodes) is not int or max_nodes <= 0:
             raise ValueError('positive distinct-node budget required')
         self.root=root
@@ -31,35 +31,40 @@ class TypedFieldIndex:
         self._rule_cache={}
         self._phase_domain_cache={}
         self._phase_domain_inspections=0
-        pending=[(root,'output',None,None)]
-        while pending:
-            node,path,parent,slot=pending.pop()
-            identity=id(node)
-            key=self._objects.get(identity)
-            if key is None:
-                if len(self._nodes)>=max_nodes:
-                    self.complete=False
-                    self.unknown_reasons.append('typed index distinct-node budget exceeded')
-                    break
-                key='n'+str(len(self._nodes))
-                self._objects[identity]=key
-                self._nodes[key]=node
-                self._paths[key]=path
-                self._operations[(node.op,node.dtype)].append(key)
-                if node.op in {'unknown','uninitialized','sequence'} or node.op.startswith('loop_'):
-                    self._barriers.append(key)
-                try:
-                    children=_children(node)
-                except (ValueError,RecursionError,IndexError) as error:
-                    self.complete=False
-                    self.unknown_reasons.append('semantic child selection unresolved: '+str(error))
-                    children=()
-                pending.extend((child,path+'/'+node.op+'['+str(i)+']',key,i)
-                               for i,child in reversed(list(enumerate(children))))
-            if parent is not None:
-                self._parents[key].append({'parent_node_id':parent,'semantic_child_slot':slot})
-        if self._barriers:
-            self.unknown_reasons.append('unresolved typed source or loop/control nodes retained')
+        self._work_cache={}
+        token=_CACHE.set(self._work_cache)
+        try:
+            pending=[(root,'output',None,None)]
+            while pending:
+                node,path,parent,slot=pending.pop()
+                identity=id(node)
+                key=self._objects.get(identity)
+                if key is None:
+                    if len(self._nodes)>=max_nodes:
+                        self.complete=False
+                        self.unknown_reasons.append('typed index distinct-node budget exceeded')
+                        break
+                    key='n'+str(len(self._nodes))
+                    self._objects[identity]=key
+                    self._nodes[key]=node
+                    self._paths[key]=path
+                    self._operations[(node.op,node.dtype)].append(key)
+                    if node.op in {'unknown','uninitialized','sequence'} or node.op.startswith('loop_'):
+                        self._barriers.append(key)
+                    try:
+                        children=_children(node)
+                    except (ValueError,RecursionError,IndexError) as error:
+                        self.complete=False
+                        self.unknown_reasons.append('semantic child selection unresolved: '+str(error))
+                        children=()
+                    pending.extend((child,path+'/'+node.op+'['+str(i)+']',key,i)
+                                   for i,child in reversed(list(enumerate(children))))
+                if parent is not None:
+                    self._parents[key].append({'parent_node_id':parent,'semantic_child_slot':slot})
+            if self._barriers:
+                self.unknown_reasons.append('unresolved typed source or loop/control nodes retained')
+        finally:
+            _CACHE.reset(token)
 
     def query(self, op, *, dtype=None):
         if dtype is not None:return list(self._operations.get((op,dtype),()))
@@ -79,7 +84,11 @@ class TypedFieldIndex:
                 'child_policy':'existing contributing typed children, selected branches and loop dependencies',
                 'paths_and_slots':'semantic child traversal; slots are not original Field.args or authored AST offsets',
                 'object_identities_persisted':False,
-                'phase_domain_inspections':self._phase_domain_inspections}
+                'phase_domain_inspections':self._phase_domain_inspections,
+                'work_scope':'isolated optional inspection',
+                'optional_field_visits':self._work_cache.get('field_visits',0),
+                'optional_normalized_term_nodes':self._work_cache.get('normalized_term_nodes',0),
+                'optional_budget_exhausted':self._work_cache.get('traversal_budget_exhausted',False)}
 
 
 def field_index(field, *, stage=None, max_nodes=4096):
@@ -155,6 +164,20 @@ def unknown_fold_evidence(analysis, *, stage, reason):
 
 
 def outer_fold_evidence(field, analysis, *, stage, index=None):
+    """Run auxiliary work privately; only immutable/root-bound results are shared."""
+    from effect_families import _CACHE
+    if stage is not None and stage not in {'warp','composite'}:raise ValueError('shader stage required')
+    if index is None:
+        try:index=field_index(field,stage=stage)
+        except (ValueError,RecursionError,OverflowError) as error:
+            return unknown_fold_evidence(analysis,stage=stage,reason='typed index inspection unresolved: '+str(error))
+    if index.root is not field:raise ValueError('index must be bound to this field root')
+    token=_CACHE.set(index._work_cache)
+    try:return _inspect_outer_folds(field,analysis,stage=stage,index=index)
+    finally:_CACHE.reset(token)
+
+
+def _inspect_outer_folds(field, analysis, *, stage, index):
     """Report local source fold structure while leaving phase math unqualified."""
     from source_forms import known_invalid_phase_offset
     if stage is not None and stage not in {'warp','composite'}:raise ValueError('shader stage required')

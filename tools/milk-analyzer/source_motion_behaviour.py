@@ -33,7 +33,27 @@ def _context(context):
     ax, ay = min(1., w/h), min(1., h/w)
     if not all(math.isfinite(v) and v > 0 for v in (ax, ay)):
         raise ValueError('viewport aspect outside finite motion domain')
-    return {'viewport': list(viewport), 'feedback_fps': values[-1], 'aspect_x': ax, 'aspect_y': ay}
+    domains=context.get('scalar_input_domains',{})
+    if not isinstance(domains,dict):raise ValueError('declared scalar input domains must be an object')
+    for name,span in domains.items():
+        if not isinstance(name,str) or not name or not isinstance(span,(list,tuple)) or len(span)!=2 or any(
+                type(v) not in {int,float} or not math.isfinite(v) for v in span) or span[0]>span[1]:
+            raise ValueError('finite ordered static input domain required')
+    result={'viewport':list(viewport),'feedback_fps':values[-1],'aspect_x':ax,'aspect_y':ay,
+            'scalar_input_domains':{name:list(span) for name,span in sorted(domains.items())}}
+    if 'reference_profile' in context:result['reference_profile']=context['reference_profile']
+    return result
+
+
+def _effective_domains(analysis,context):
+    """Combine declared premises with the prominence producer's conflict policy."""
+    scenario=getattr(analysis,'input_scenario',None) or {}
+    domains=dict(scenario.get('scalar_input_domains',{}))
+    for name,span in context.get('scalar_input_domains',{}).items():
+        if name in domains and list(domains[name])!=list(span):
+            raise ValueError('conflicting scenario/context scalar input domain: '+name)
+        domains[name]=list(span)
+    return domains
 
 
 def _row(kind, component_id, rate_kind, upper=None, reasons=()):
@@ -145,12 +165,13 @@ def _bounded_uniform_transport(analysis, description, context):
     controls = transport.get('controls', {})
     if not controls or not all(row['uniform_across_vertices'] for row in controls.values()): return None
     scenario = getattr(analysis, 'input_scenario', None)
+    input_domains=_effective_domains(analysis,context)
     domains = {}
     try:
         for name, row in controls.items():
             span = row['native_float32_endpoint_domain']
-            if span is None and scenario is not None:
-                report = scalar_value_envelope(analysis.mesh_controls[name], input_domains=scenario['scalar_input_domains'])
+            if input_domains:
+                report = scalar_value_envelope(analysis.mesh_controls[name], input_domains=input_domains)
                 raw = report['nominal_value_range']
                 span = None if raw is None else [_f32(v) for v in raw]
             if span is None: return None
@@ -289,7 +310,7 @@ def _geometry_motion(analysis, element, context):
     if controls is None:
         return [_row('geometry_trajectory', component, 'source_time_partial', reasons=['geometry formula is not qualified'])]
     scenario = getattr(analysis, 'input_scenario', None)
-    domains = scenario['scalar_input_domains'] if scenario is not None else None
+    domains = _effective_domains(analysis,context) or None
     reports = _response(controls, TIME_NAMES, domains)
     rates = {name: r['maximum_absolute_control_change_per_audio_unit'] for name, r in reports.items()}
     radius_span = scalar_value_envelope(controls['rad'], input_domains=domains)['nominal_value_range']
@@ -348,6 +369,7 @@ def _geometry_motion(analysis, element, context):
 def motion_evidence(analysis, description, context):
     """Join source geometry and native feedback movement with explicit context."""
     normalized = _context(context)
+    effective_domains=_effective_domains(analysis,normalized)
     rows = _native_motion(analysis, description, normalized)
     stages = analysis.stages
     composite_kind = stages['composite']['kind']
@@ -429,6 +451,8 @@ def motion_evidence(analysis, description, context):
     upper = None if any(v is None for v in maxima) else max(maxima, default=0.)
     result = {'policy': POLICY, 'unit': 'viewport units/second', 'coordinate_basis': 'normalized viewport UV',
               'context': normalized, 'context_sha256': _digest(normalized),
+              'effective_scalar_input_domains':effective_domains,
+              'effective_scalar_input_domains_sha256':_digest(effective_domains),
               'source_sha256': getattr(analysis, 'source', {}).get('preset_sha256'),
               'model_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'input_scenario_sha256': (getattr(analysis, 'input_scenario', None) or {}).get('record_sha256'),

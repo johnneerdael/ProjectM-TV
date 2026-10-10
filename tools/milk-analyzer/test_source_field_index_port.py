@@ -266,3 +266,36 @@ def test_unrelated_optional_programming_error_is_not_silently_swallowed(monkeypa
     monkeypatch.setattr(source_field_index,'outer_fold_evidence',fail)
     with pytest.raises(TypeError,match='unexpected programming error'):
         folded_coordinate_map(fold(variable()),analysis(),stage='composite')
+
+
+def test_optional_inspection_cannot_charge_or_reset_parent_work_budget(monkeypatch):
+    import effect_families as f
+    import source_field_index as m
+    field=fold(variable())
+    parent={'field_visits':f.MAX_FIELD_VISITS-1,'normalized_term_nodes':19,'traversal_budget_exhausted':False}
+    token=f._CACHE.set(parent)
+    try:
+        result=m.outer_fold_evidence(field,analysis(),stage='composite')
+        assert result['candidates']
+        assert parent['field_visits']==f.MAX_FIELD_VISITS-1
+        assert parent['normalized_term_nodes']==19
+        assert parent['traversal_budget_exhausted'] is False
+        # Ordinary analytical work still observes exactly its original remaining budget.
+        list(f._walk(variable('time')))
+        with pytest.raises(f._SemanticBudget):list(f._walk(variable('other')))
+    finally:f._CACHE.reset(token)
+
+
+def test_optional_inspection_failure_stays_in_private_budget_and_keeps_parent_flag(monkeypatch):
+    import effect_families as f
+    import source_field_index as m
+    field=fold(variable());parent={'field_visits':5,'normalized_term_nodes':11,'traversal_budget_exhausted':True}
+    token=f._CACHE.set(parent)
+    try:
+        monkeypatch.setattr(f,'MAX_FIELD_VISITS',1)
+        result=m.outer_fold_evidence(field,analysis(),stage='composite')
+        assert result['quantitative_bounds_eligible'] is False
+        assert parent['field_visits']==5 and parent['normalized_term_nodes']==11
+        assert parent['traversal_budget_exhausted'] is True
+        assert m.field_index(field,stage='composite') is m.field_index(field,stage='composite')
+    finally:f._CACHE.reset(token)

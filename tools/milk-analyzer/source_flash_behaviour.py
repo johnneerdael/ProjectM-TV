@@ -243,6 +243,85 @@ def _shader_record(analysis, description, stage, field, domains, rejected):
     return row
 
 
+def _fixed_unit_texture_material_partial(element):
+    """Bound vertex-material modulation with one fixed unit-RGBA sample.
+
+    Texture multiplication cannot increase the incoming rate/difference bound.
+    Over blending additionally needs the destination term: even RGB texture0
+    can make changing alpha alter destination1. It must not inherit an
+    untextured positive-colour lower bound as its contrast against destination.
+    """
+    from source_shape_activity import shape_activity, _sum_products
+    from source_shape_jump_bounds import shape_material_jump_bounds
+    from source_fill_envelopes import native_channel_envelope
+    from source_appearance import _digest
+    material=element['material'];texture=material['texture']
+    channels=element['material_temporal']['channels']
+    names=('r','g','b','a','r2','g2','b2','a2')
+    result={'policy':'source-fixed-unit-texture-material-modulation-v1',
+        'component_id':element['id'],'part':'fill','brightness_metric':'local_RGB_infinity_norm',
+        'maximum_brightness_change_per_second':None,'brightness_delta_range':None,
+        'nominal_continuity':'unknown','total_brightness_rate_known':False,
+        'texture_history_change_rate':None,'sampling_coordinate_response_included':False,
+        'declared_texture_rgba_domain':[[0.,1.] for _ in range(4)],
+        'texture_role':texture['role'],'requested_texture_name':texture.get('requested_name'),
+        'texture_binding_verified':texture.get('actual_binding_verified') is True,
+        'native_numeric_certified':False,'visible_flashing_verified':False,
+        'unknown_reasons':[], 'source_evidence':{},
+        'premises':['Sampled texture RGBA is fixed at the source site and each lane lies in[0,1]',
+            'Geometry, barycentric position, lookup coordinates, texture selection/style and destination RGB in[0,1] are fixed',
+            'Only vertex colour/alpha source-time modulation varies; other audio/state inputs hold fixed',
+            'All contributing vertex channels and native conversions remain finite; existing modulo/blend/domain guards apply',
+            'Texture motion/history, unknown asset contents, native quantization, later composition and display visibility are excluded',
+            'A positive partial ceiling is not an attained change, an observed flash or a whole-preset flash-absence certificate']}
+    invalid=[name for name in names if channels[name]['native_float32_endpoint_domain'] is None]
+    if invalid:
+        result['unknown_reasons'].append('native material endpoint domain unresolved: '+', '.join(invalid))
+        result['source_evidence']['unresolved_channel_domains']=invalid
+        result['record_sha256']=_digest(result)
+        return result
+    # Invoke the existing untextured supremum: fixed texture factors<=1 cannot
+    # amplify vertex material partials. Keep temporal channels unchanged.
+    proxy={**element,'material':{**material,'texture':{**texture,'role':'untextured_vertex_gradient'}}}
+    changes,_=shape_activity(proxy)
+    change=next((row for row in changes if row['part']=='fill'),None)
+    additive={**proxy,'material':{**proxy['material'],'blend_mode':'source_alpha_additive'}}
+    jumps=shape_material_jump_bounds(additive)
+    jump=next((row for row in jumps if row['part']=='fill'),None)
+    blend=material['blend_mode']
+    if blend not in {'source_alpha_additive','source_alpha_over'}:
+        result['unknown_reasons'].append('native blend mode is unresolved')
+    else:
+        if change is not None:
+            result['maximum_brightness_change_per_second']=_maximum(change['maximum_blended_rgb_rate_per_second'])
+            result['unknown_reasons'].extend(change['unknown_reasons'])
+            result['source_evidence']['maximum_incoming_rgb_rate_per_second']=change['maximum_incoming_rgb_rate_per_second']
+            result['source_evidence']['maximum_blended_rgb_rate_per_second']=change['maximum_blended_rgb_rate_per_second']
+            result['source_evidence']['rate_conditions']=[c for c in change['conditions'] if not c.startswith('Fill requires untextured')]
+        if jump is not None:
+            differences=jump['maximum_incoming_rgb_difference']
+            result['unknown_reasons'].extend(jump['unknown_reasons'])
+            alpha=[native_channel_envelope(channels[name]) for name in ('a','a2')]
+            alpha_difference=None if any(span is None for span in alpha) else min(1.,max(span[1]-span[0] for span in alpha))
+            if blend=='source_alpha_over':
+                differences=[None if delta is None or alpha_difference is None else _sum_products(1.,delta,1.,alpha_difference) for delta in differences]
+            maximum=_maximum(differences)
+            result['brightness_delta_range']=None if maximum is None else [0.,maximum]
+            result['source_evidence'].update(maximum_incoming_rgb_difference=jump['maximum_incoming_rgb_difference'],
+                maximum_blended_rgb_difference=differences,maximum_clamped_alpha_difference=alpha_difference,
+                difference_formula='incoming difference + alpha difference * fixed destination ceiling1' if blend=='source_alpha_over' else 'incoming alpha*RGB difference',
+                difference_conditions=[c for c in jump['conditions'] if not c.startswith('Untextured source RGB')],
+                incoming_supremum_reduction='Fixed texture RGBA factors in[0,1] cannot amplify the delegated untextured incoming partial')
+    if result['maximum_brightness_change_per_second'] is not None:
+        result['nominal_continuity']='piecewise_lipschitz' # Clamped textured alpha can introduce finite-rate kinks.
+    else:result['unknown_reasons'].append('material partial time rate lacks a finite supported stable-modulo bound')
+    if result['brightness_delta_range'] is None:result['unknown_reasons'].append('fixed-texture material difference remains unresolved')
+    result['unknown_reasons']=sorted(set(result['unknown_reasons']))
+    result['source_evidence']['delegated_calculus']=['source_shape_activity.shape_activity','source_shape_jump_bounds.shape_material_jump_bounds']
+    result['record_sha256']=_digest(result)
+    return result
+
+
 def _shape_records(analysis, element, domains, rejected):
     from source_shape_activity import shape_activity
     from source_shape_jump_bounds import shape_material_jump_bounds
@@ -278,6 +357,8 @@ def _shape_records(analysis, element, domains, rejected):
         row = _record(element['id'],element['stage'],part,'shape_material_brightness_change')
         row['contributing_code_paths']=element.get('evidence',[])
         row['source_evidence']['qualified_material_hazards']=hazards
+        if part=='fill' and element['material']['texture']['role']!='untextured_vertex_gradient':
+            row['fixed_unit_texture_material_partial']=_fixed_unit_texture_material_partial(local_element)
         channels = element['material_temporal']['channels']
         transparent = not any(channels[n]['may_be_consumed'] for n in names)
         change = next((r for r in changes if r['part']==part),None)

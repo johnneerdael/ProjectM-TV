@@ -10,7 +10,7 @@ import tempfile
 import pytest
 
 
-def evidence(body='', *, composite='ret=GetPixel(uv);', viewport=(1920,1080), config='', compiled=True, shader_version=2):
+def evidence(body='', *, composite='ret=GetPixel(uv);', viewport=(1920,1080), config='', compiled=True, shader_version=2, domains=None, scenario=None):
     import effect_families as ef
     from source_appearance import appearance_from_analysis
     import source_prominence
@@ -32,11 +32,13 @@ def evidence(body='', *, composite='ret=GetPixel(uv);', viewport=(1920,1080), co
         'offline_accepted':True}}
     token=ef._CACHE.set({})
     try:
-        analysis=ef._Analysis(source,'gles300',compatibility if compiled else None);analysis.input_scenario=None
+        analysis=ef._Analysis(source,'gles300',compatibility if compiled else None);analysis.input_scenario=scenario
         analysis.main_equations();analysis.primitives()
         analysis.shader('warp','warp_');analysis.shader('composite','comp_');analysis.contribution_gates()
         description=appearance_from_analysis(analysis)
-        result=source_prominence.prominence_evidence(analysis,description,{'viewport':list(viewport),'feedback_fps':30})
+        context={'viewport':list(viewport),'feedback_fps':30}
+        if domains is not None:context['scalar_input_domains']=domains
+        result=source_prominence.prominence_evidence(analysis,description,context)
     finally:ef._CACHE.reset(token)
     json.dumps(result,allow_nan=False)
     return result['by_component']['shape_0'],result
@@ -121,6 +123,34 @@ def test_resampling_tiny_source_can_cover_display_and_history_stays_unknown():
     assert row['displayed_contribution_interval'][1]==pytest.approx(1)
     assert row['feedback_contribution_interval']==[0,1]
     assert result['uses_rendered_images'] is False
+
+
+@pytest.mark.parametrize('instances',[2,20])
+@pytest.mark.parametrize('additive',[0,1])
+def test_resampling_overlapping_instances_bounds_aggregate_per_texel_influence(instances,additive):
+    row,_=evidence('a=.1;a2=.1;r=g=b=r2=g2=b2=1;',
+        config=f'shapecode_0_num_inst={instances}\nshapecode_0_additive={additive}\n',
+        composite='ret=GetPixel(float2(.5,.5));')
+    alpha=row['opacity']['interval'][1]
+    realized_ceiling=min(1,instances*alpha) if additive else 1-(1-alpha)**instances
+    assert row['displayed_contribution_interval'][1]>=realized_ceiling-1e-10
+    assert row['displayed_contribution_interval'][1]==pytest.approx(min(1,instances*alpha))
+    assert row['source_contribution_interval'][1]<=row['support']['area_fraction_interval'][1]
+
+
+def test_resampling_transparent_fill_with_possible_border_keeps_unknown_influence():
+    row,_=evidence('a=0;a2=0;border_a=1;',composite='ret=GetPixel(float2(.5,.5));')
+    assert row['opacity']['border_possible'] is True
+    assert row['displayed_contribution_interval']==[0,1]
+    assert any('border stroke' in reason for reason in row['unknown_reasons'])
+
+
+def test_pointwise_repeated_fill_keeps_source_integral_bound():
+    row,_=evidence('a=.1;a2=.1;r=g=b=r2=g2=b2=1;',
+        config='shapecode_0_num_inst=2\nshapecode_0_additive=1\n')
+    alpha=row['opacity']['interval'][1]
+    expected=row['source_contribution_interval'][1]+row['sampling_support_allowance_fraction']*min(1,2*alpha)
+    assert row['displayed_contribution_interval'][1]==pytest.approx(expected)
 
 
 def test_saturated_affine_composite_independent_output_is_zero():
@@ -240,3 +270,72 @@ def test_known_invalid_native_inputs_do_not_become_zero_by_transparency(body):
     assert row['displayed_contribution_interval'][1]>0
     assert row['feedback_contribution_interval'][1]>0
     assert row['unknown_reasons']
+
+
+def test_full_shader_domain_budget_keeps_unknown_transfer_and_component_bounds():
+    code='ret='+ '+'.join('GetPixel(uv+float2('+str(i/1000)+',.1))/48' for i in range(48))+';'
+    row,result=evidence(composite=code)
+    assert row['final_transfer']['difference_gain_interval']==[0,None]
+    assert row['final_transfer']['pointwise_support_preserved'] is False
+    assert any('domain guard unresolved' in reason for reason in row['unknown_reasons'])
+    assert row['support']['area_fraction_interval'][1]<.1
+    assert 'shader_composite' in result['by_component']
+
+
+@pytest.mark.parametrize('name,sha',[
+    ('amandio c - hat track - mrt sth.milk','31a14cb9bf98685f3c0b1e278da836e16d8a57e096fe58d22878d0386c71b1b2'),
+    ('Nivush - Crazy Diamonds.milk','31ec688577a888e65d6f63b945fe2d123da5a3971acd1eb9ca17f4cd58cf12f0'),
+    ('amandio c - new life.milk','7ab8c98263347a97bc79c5b2dcfb0530a134880d54907268296368a07434ae21'),
+])
+def test_original_literal_budget_cases_preserve_local_unknown_geometry(name,sha):
+    import effect_families as ef
+    import source_prominence
+    from source_appearance import appearance_from_analysis
+    root=Path(__file__).resolve().parents[2]
+    path=root/'core/src/main/assets/presets'/name;raw=path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==sha
+    source=json.loads(subprocess.check_output([str(root/'build/preset-corpus/source34/adapters/milk-native-reader'),str(path)]))
+    source['preset_sha256']=sha;source['parser_inputs']['setting_lookup_policy']='native-case-insensitive-v1'
+    token=ef._CACHE.set({})
+    try:
+        analysis=ef._Analysis(source,'gles300',None);analysis.input_scenario=None
+        analysis.main_equations();analysis.primitives();analysis.shader('warp','warp_')
+        analysis.shader('composite','comp_');analysis.contribution_gates()
+        description=appearance_from_analysis(analysis)
+        result=source_prominence.prominence_evidence(analysis,description,{'viewport':[1920,1080],'feedback_fps':30})
+    finally:ef._CACHE.reset(token)
+    json.dumps(result,allow_nan=False)
+    assert any('literal' in reason for reason in result['unknown_reasons'])
+    assert any(identity.startswith('shape_') for identity in result['by_component'])
+
+
+def test_transparency_with_known_invalid_texture_uv_stays_unknown_after_budget_fallback():
+    row,_=evidence('tex_zoom=0;a=0;a2=0;',config='shapecode_0_textured=1\n')
+    assert row['known_invalid_native_domain'] is True
+    assert row['displayed_contribution_interval'][1]>0
+
+
+def test_global_field_budget_still_propagates_and_sets_counter_flag(monkeypatch):
+    import effect_families as ef
+    from test_source_static_behaviour import analysis
+    from source_prominence import _final_transfer
+    code='ret='+ '+'.join('GetPixel(uv+float2('+str(i/1000)+',.1))/48' for i in range(48))+';'
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {'+code+'}\n')
+    token=ef._CACHE.set({})
+    monkeypatch.setattr(ef,'MAX_FIELD_VISITS',1000)
+    try:
+        with pytest.raises(ef._SemanticBudget):_final_transfer(a,{})
+        assert ef._CACHE.get()['traversal_budget_exhausted'] is True
+    finally:ef._CACHE.reset(token)
+
+
+def test_declared_context_audio_domain_bounds_radius_without_audio_execution():
+    row,_=evidence('rad=bass;',domains={'bass':[.1,.2]})
+    assert row['support']['area_fraction_interval'][1]==pytest.approx(.2**2*.5*9/16)
+
+
+def test_conflicting_scenario_and_context_domains_are_rejected_explicitly():
+    from source_input_scenario import validate_scenario
+    scenario=validate_scenario({'schema_version':1,'name':'prior-audio-domain','audio_band_ranges':{'bass':[.1,.2]}})
+    with pytest.raises(ValueError,match='conflicting'):
+        evidence('rad=bass;',domains={'bass':[.3,.4]},scenario=scenario)

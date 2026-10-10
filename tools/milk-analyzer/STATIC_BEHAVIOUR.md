@@ -66,3 +66,59 @@ component calculations.
 The new builder is still being qualified. See the task plan and saved cohort
 results for current checkpoints; a synthetic constant-colour control passing does
 not certify general feedback presets.
+
+## Material changes when a texture sample holds fixed
+
+A textured shape fill can now export
+`flashing.records[].fixed_unit_texture_material_partial`. This bounds changes in
+vertex colour and alpha when the sampled RGBA, geometry, barycentric location and
+destination remain fixed. Each texture channel is a declared unit-interval input.
+The calculation reuses the existing native-channel, stable-modulo and blend
+calculus; over blending includes the destination term from changing alpha.
+
+This is a partial response, not the total displayed change.
+`sampling_coordinate_response_included` stays false,
+`texture_history_change_rate` stays null and `total_brightness_rate_known` stays
+false. Missing texture bindings remain unverified. A positive ceiling does not
+prove that a flash occurs. These fields do not alter automatic mood eligibility.
+
+The frozen809-preset descriptor recheck recovers finite partial rates for592 and
+finite two-state contrast bounds for643;28 and97 have positive ceilings. Inputs
+and exact source hashes are retained in the task evidence. This does not certify
+809 full native visuals or replace the unknown texture/history contribution.
+
+Motion evidence retains caller `scalar_input_domains` and reference-profile
+identity. Geometry time/audio partials and uniform native transport envelopes
+use the union of declared context domains and validated input-scenario domains;
+a conflicting interval for the same scalar name is rejected with the same policy
+as prominence. Declared amplitude intervals still supply no audio change rate.
+The effective domain map and its hash are exported separately from caller context
+and scenario identity.
+
+## Final-output storage and finite shader domains
+
+The default declared home-TV reference uses `output_storage: normalized-unorm`,
+matching the app's RGB888 surface choice. Set `output_storage: unknown` for a
+consumer whose output storage is not established; that context cannot qualify
+automatic activity bands. The storage policy participates in cache identity.
+
+`displayed_output` preserves raw channel intervals and separately applies the
+normalized output clamp. Temporal RGB entirely above1 can become constant white;
+RGB entirely below0 can become constant black. Raw modulation records remain
+unchanged. Partially clipped RGB retains its remaining contrast. A nominal clamp
+result alone is insufficient to qualify calm behaviour.
+
+The bounded `native_finite_guard` checks a restricted declared binary32 model:
+constants, declared scalar inputs, basic arithmetic, constant casts and finite
+sin/cos. It propagates outward enclosures and includes possible subnormal flushing.
+Unknown inputs, unsupported operations, overflowing intermediates or exhausted
+work remain unresolved. The shader clock domain must be declared with its actual
+source input name (for example `_c2.x`); no clock range is silently invented.
+Native-model output bounds must also remain consistent with the nominal bounds
+within the stated5%width+1e-6 allowance. This rejects tight nominal formulas whose
+loss of significance permits much wider native-model values.
+
+These guards retain source assumptions and do not certify driver transcendental
+precision or rendered pixels. Repeated overlapping shapes and possible borders
+also retain their aggregate local influence when a composite resamples them;
+source-area integrals cannot replace that per-texel bound.

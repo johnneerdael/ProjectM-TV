@@ -252,3 +252,46 @@ def test_unknown_native_composite_selection_cannot_assert_disconnected_zero_moti
     assert result['visible_motion_speed_vp_per_second'] is None
     assert result['maximum_potential_speed_interval_vp_per_second'][1] is None
     assert contribution(result, 'native_stage_selection')['component_id'] == 'shader_composite'
+
+
+def test_declared_context_audio_domain_bounds_shape_time_partial_and_identity():
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=x=.5;y=.5;rad=bass;ang=time;sides=4;\n')
+    context={'viewport':[1920,1080],'feedback_fps':30,'reference_profile':'domain control','scalar_input_domains':{'bass':[.1,.1]}}
+    result=evidence(source,context)
+    row=contribution(result,'geometry_trajectory','shape_0')
+    assert row['radius_value_range']==pytest.approx([.1,.1])
+    assert row['maximum_speed_vp_per_second']==pytest.approx(.05)
+    assert result['context']['scalar_input_domains']=={'bass':[.1,.1]}
+    assert result['context']['reference_profile']=='domain control'
+    changed=evidence(source,{**context,'scalar_input_domains':{'bass':[.2,.2]}})
+    assert result['context_sha256']!=changed['context_sha256']
+    assert result['record_sha256']!=changed['record_sha256']
+    assert contribution(result,'geometry_audio_partial')['speed_interval_vp_per_second'][1] is None
+
+
+def test_context_domains_bound_uniform_per_feedback_transport_without_scenario():
+    context={'viewport':[1000,1000],'feedback_fps':30,'scalar_input_domains':{'bass':[0,2]}}
+    result=native('zoom=1+.01*bass;zoomexp=1;warp=0;sx=1;sy=1;rot=0;dx=0;dy=0;',context)
+    row=contribution(result,'forward_content_transport')
+    assert row['maximum_speed_vp_per_second']>0
+    assert row['native_float32_control_domains']['zoom']==pytest.approx([1,1.02],abs=1e-7)
+    assert row['rate_kind']=='per_feedback_step'
+
+
+def test_conflicting_scenario_and_context_domain_is_rejected_consistently():
+    from source_input_scenario import validate_scenario
+    scenario=validate_scenario({'schema_version':1,'name':'domain conflict','audio_band_ranges':{'bass':[0,2]}})
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=rad=bass;ang=time;sides=4;\n')
+    with pytest.raises(ValueError,match='conflicting scenario/context scalar input domain: bass'):
+        evidence(source,{'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'bass':[.1,.1]}},scenario=scenario)
+
+
+def test_compatible_context_and_scenario_domains_merge_without_losing_either():
+    from source_input_scenario import validate_scenario
+    scenario=validate_scenario({'schema_version':1,'name':'combined domains','audio_band_ranges':{'bass':[.1,.1]}})
+    source=read('fWaveAlpha=0\nshapecode_0_enabled=1\nshape_0_per_frame1=rad=bass+mid;ang=time;sides=4;\n')
+    result=evidence(source,{'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'mid':[.2,.2]}},scenario=scenario)
+    assert contribution(result,'geometry_trajectory','shape_0')['radius_value_range']==pytest.approx([.3,.3])
+    assert result['effective_scalar_input_domains']['bass']==[.1,.1]
+    assert result['effective_scalar_input_domains']['mid']==[.2,.2]
+    assert result['input_scenario_sha256']==scenario['record_sha256']

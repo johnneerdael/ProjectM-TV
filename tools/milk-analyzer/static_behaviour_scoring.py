@@ -63,11 +63,22 @@ def score_static_behaviour(evidence):
 
     for record in evidence.get('flashing', {}).get('records', []):
         identity=record['component_id']; extent=support(identity, brightness=True)
+        output=evidence.get('displayed_output',{}) if identity=='shader_composite' else {}
+        if output.get('constant_rgb') is not None and not output.get('constant_rgb_qualified'):
+            unknown.append({'component_id':identity,'dimension':'flashing',
+                            'reason':'nominal output saturation has no qualified finite native constant envelope'})
+            continue
+        if output.get('constant_rgb_qualified'):
+            rows.append({'component_id':identity,'dimension':'flashing','strength_interval':[0.,0.],
+                         'reason':'declared normalized output clamp makes all final RGB channels constant'})
+            continue
         if extent[1] == 0:
             rows.append({'component_id':identity,'dimension':'flashing','strength_interval':[0.,0.],
                          'reason':'source transfer proves no displayed contribution'})
             continue
         contrast=record.get('periodic_contrast_range') or record.get('brightness_delta_range')
+        if contrast is not None and output.get('raw_ranges_changed') and output.get('maximum_rgb_difference') is not None:
+            contrast=[0.,min(_span(contrast)[1],output['maximum_rgb_difference'])] if _span(contrast)[1] is not None else [0.,output['maximum_rgb_difference']]
         frequency=record.get('cycle_rate_hz'); events=record.get('event_rate_hz')
         continuous=record.get('nominal_continuity') == 'smooth_nominal'
         rate=record.get('maximum_brightness_change_per_second')
@@ -84,6 +95,12 @@ def score_static_behaviour(evidence):
                 not continuous or frequency>=RULES['smooth_flash_candidate_minimum_hz'])
         elif rate is not None and continuous and record.get('total_brightness_rate_known'):
             strength=_scale([0.,rate], extent,RULES['brightness_reference_rgb_s'])
+            if contrast is not None:
+                # Fast but barely changing colour cannot acquire a high
+                # contrast-based activity index from the rate ceiling alone.
+                contrast_strength=_scale(_span(contrast),extent,RULES['flash_contrast_reference'])
+                if contrast_strength[1] is not None:
+                    strength[1]=contrast_strength[1] if strength[1] is None else min(strength[1],contrast_strength[1])
             size=None if contrast is None else _product(_span(contrast)[1],extent[1])
             flash_possible |= strength[1] is None or strength[1]>.3 and (
                 size is None or size>RULES['negligible_integrated_rgb_difference'])

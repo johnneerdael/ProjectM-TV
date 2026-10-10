@@ -1,0 +1,791 @@
+{
+  "input_sha256": "1e92ca3ebded773c5f57a29983e0a61460a18e2da0de5b1f0341487a194cb867",
+  "reports": 1876,
+  "flash_rows": 8418,
+  "stage_counts": {
+    "composite": 1491,
+    "warp": 1501,
+    "drawing": 5426
+  },
+  "causes_by_unique_presets": [
+    [
+      "texture_history_and_sampling",
+      1575
+    ],
+    [
+      "unsupported_continuity_numeric_conversion_or_domain",
+      1142
+    ],
+    [
+      "brightness_value_range_missing",
+      1069
+    ],
+    [
+      "texture RGB/alpha and coordinate changes are unresolved",
+      750
+    ],
+    [
+      "texture_material_binding",
+      750
+    ],
+    [
+      "audio_state_or_non_time_input_trajectory",
+      647
+    ],
+    [
+      "shape_alpha_conversion_or_rate",
+      476
+    ],
+    [
+      "native alpha endpoint domain is unresolved",
+      351
+    ],
+    [
+      "shape_rgb_conversion_or_rate",
+      230
+    ],
+    [
+      "native RGB endpoint domain 0 is unresolved",
+      205
+    ],
+    [
+      "native_modulo_or_draw_gate_events",
+      193
+    ],
+    [
+      "native RGB endpoint domain 1 is unresolved",
+      173
+    ],
+    [
+      "native RGB endpoint domain 2 is unresolved",
+      165
+    ],
+    [
+      "border draw gating may add a discontinuity; bounds apply only while drawn",
+      61
+    ],
+    [
+      "native blend mode is unresolved",
+      27
+    ],
+    [
+      "traversal_budget",
+      23
+    ],
+    [
+      "multiple_event_schedule_join",
+      5
+    ]
+  ],
+  "nested_unknowns_by_unique_presets": [
+    [
+      "unsupported input, discontinuous operation or unproved denominator domain",
+      1575
+    ],
+    [
+      "qualified operation requires numeric adapter",
+      1463
+    ],
+    [
+      "typed or native numeric conversion excluded",
+      1443
+    ],
+    [
+      "texture colour, alpha and coordinate variation remain unresolved",
+      750
+    ],
+    [
+      "texture RGB/alpha and coordinate changes are unresolved",
+      750
+    ],
+    [
+      "alpha rate/domain is unresolved or may wrap",
+      476
+    ],
+    [
+      "unsupported original symbolic operation: unknown",
+      416
+    ],
+    [
+      "native alpha endpoint domain is unresolved",
+      351
+    ],
+    [
+      "unsupported original symbolic operation: lerp",
+      253
+    ],
+    [
+      "unsupported original proof operation: lerp",
+      253
+    ],
+    [
+      "RGB channel 0 rate/domain is unresolved or may wrap",
+      226
+    ],
+    [
+      "RGB channel 1 rate/domain is unresolved or may wrap",
+      209
+    ],
+    [
+      "unsupported original symbolic operation: select",
+      208
+    ],
+    [
+      "native RGB endpoint domain 0 is unresolved",
+      205
+    ],
+    [
+      "RGB channel 2 rate/domain is unresolved or may wrap",
+      183
+    ],
+    [
+      "native RGB endpoint domain 1 is unresolved",
+      173
+    ],
+    [
+      "native RGB endpoint domain 2 is unresolved",
+      165
+    ],
+    [
+      "no supported nonconstant continuous time oscillator",
+      158
+    ],
+    [
+      "unsupported original proof operation: member",
+      131
+    ],
+    [
+      "unsupported original symbolic operation: member",
+      110
+    ],
+    [
+      "unsupported original proof operation: and",
+      83
+    ],
+    [
+      "unsupported original proof operation: cast",
+      62
+    ],
+    [
+      "border draw gating may add a discontinuity; bounds apply only while drawn",
+      61
+    ],
+    [
+      "unsupported original symbolic operation: max",
+      48
+    ],
+    [
+      "unsupported original symbolic operation: domain_checked",
+      41
+    ],
+    [
+      "unsupported original proof operation: remainder",
+      29
+    ],
+    [
+      "unsupported original symbolic operation: min",
+      28
+    ],
+    [
+      "native blend mode is unresolved",
+      27
+    ],
+    [
+      "time-dependent native float32 upload prevents a continuous direct-colour bound",
+      21
+    ],
+    [
+      "unsupported original symbolic operation: abs",
+      21
+    ],
+    [
+      "unsupported original proof operation: length",
+      20
+    ],
+    [
+      "unsupported original symbolic operation: frac",
+      16
+    ],
+    [
+      "unsupported original proof operation: frac",
+      16
+    ],
+    [
+      "unsupported original symbolic operation: saturate",
+      13
+    ],
+    [
+      "unsupported original proof operation: saturate",
+      13
+    ]
+  ],
+  "facts_by_unique_presets": {
+    "preset_total_brightness_unresolved": 1717,
+    "direct_audio_response_present": 606,
+    "existing_shader_change_bounds": 1575,
+    "finite_partial_rate": 1539,
+    "finite_contrast_difference": 1568,
+    "some_total_rate_known": 1097,
+    "existing_shape_two_state_bounds": 1131,
+    "qualified_fixed_sample_partial_rate": 1026,
+    "finite_sample_lane_response": 1086,
+    "finite_direct_audio_response": 53,
+    "cycle_known": 284,
+    "event_rate_known": 191,
+    "positive_partial_rate": 80,
+    "positive_fixed_sample_partial_rate": 49
+  },
+  "hazards_by_unique_presets": {
+    "builtin_wave_normalization_gate": 64,
+    "shape_channel_modulo_crossing": 185,
+    "shape_border_draw_gate": 27,
+    "nearest_native_feedback_displacement": 17
+  },
+  "examples": {
+    "texture_history_and_sampling": [
+      {
+        "path": "Goody + Suksma - Goodbye my enemy ['not really, just want to hack you off' mix].milk",
+        "sha256": "d3e037306cca766a088ede469df11a33382e42e028d786d01319f6671fa80ab8",
+        "component": "shader_composite",
+        "reason": "sampled texture/history changes and lookup transport are separate from direct colour response"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_warp",
+        "reason": "sampled texture/history changes and lookup transport are separate from direct colour response"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_composite",
+        "reason": "sampled texture/history changes and lookup transport are separate from direct colour response"
+      },
+      {
+        "path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "component": "shader_warp",
+        "reason": "sampled texture/history changes and lookup transport are separate from direct colour response"
+      },
+      {
+        "path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "component": "shader_composite",
+        "reason": "sampled texture/history changes and lookup transport are separate from direct colour response"
+      }
+    ],
+    "unsupported_continuity_numeric_conversion_or_domain": [
+      {
+        "path": "Goody + Suksma - Goodbye my enemy ['not really, just want to hack you off' mix].milk",
+        "sha256": "d3e037306cca766a088ede469df11a33382e42e028d786d01319f6671fa80ab8",
+        "component": "shader_composite",
+        "reason": "no finite supported continuous brightness rate; discontinuity/domain/native conversion remains unresolved"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_warp",
+        "reason": "no finite supported continuous brightness rate; discontinuity/domain/native conversion remains unresolved"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_composite",
+        "reason": "no finite supported continuous brightness rate; discontinuity/domain/native conversion remains unresolved"
+      },
+      {
+        "path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "component": "shader_warp",
+        "reason": "no finite supported continuous brightness rate; discontinuity/domain/native conversion remains unresolved"
+      },
+      {
+        "path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "component": "shader_composite",
+        "reason": "no finite supported continuous brightness rate; discontinuity/domain/native conversion remains unresolved"
+      }
+    ],
+    "brightness_value_range_missing": [
+      {
+        "path": "Goody + Suksma - Goodbye my enemy ['not really, just want to hack you off' mix].milk",
+        "sha256": "d3e037306cca766a088ede469df11a33382e42e028d786d01319f6671fa80ab8",
+        "component": "shader_composite",
+        "reason": "local brightness two-state range unresolved"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_warp",
+        "reason": "local brightness two-state range unresolved"
+      },
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shader_composite",
+        "reason": "local brightness two-state range unresolved"
+      },
+      {
+        "path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "component": "shader_warp",
+        "reason": "local brightness two-state range unresolved"
+      },
+      {
+        "path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "component": "shader_composite",
+        "reason": "local brightness two-state range unresolved"
+      }
+    ],
+    "texture RGB/alpha and coordinate changes are unresolved": [
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shape_0",
+        "reason": "texture RGB/alpha and coordinate changes are unresolved"
+      },
+      {
+        "path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "component": "shape_0",
+        "reason": "texture RGB/alpha and coordinate changes are unresolved"
+      },
+      {
+        "path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "component": "shape_1",
+        "reason": "texture RGB/alpha and coordinate changes are unresolved"
+      },
+      {
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "component": "shape_0",
+        "reason": "texture RGB/alpha and coordinate changes are unresolved"
+      },
+      {
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "component": "shape_1",
+        "reason": "texture RGB/alpha and coordinate changes are unresolved"
+      }
+    ],
+    "texture_material_binding": [
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shape_0",
+        "reason": "texture colour, alpha and coordinate variation remain unresolved"
+      },
+      {
+        "path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "component": "shape_0",
+        "reason": "texture colour, alpha and coordinate variation remain unresolved"
+      },
+      {
+        "path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "component": "shape_1",
+        "reason": "texture colour, alpha and coordinate variation remain unresolved"
+      },
+      {
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "component": "shape_0",
+        "reason": "texture colour, alpha and coordinate variation remain unresolved"
+      },
+      {
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "component": "shape_1",
+        "reason": "texture colour, alpha and coordinate variation remain unresolved"
+      }
+    ],
+    "shape_alpha_conversion_or_rate": [
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shape_1",
+        "reason": "alpha rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "component": "shape_0",
+        "reason": "alpha rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "skipper skipper kiss me hard - if it weren't for you wonderful role playing 'people' parts of my solipsistic overmind.milk",
+        "sha256": "b3477c4b7f0d9e4cea124a272b8476b4a796ca939714b3825d4c82466401cf8f",
+        "component": "shape_0",
+        "reason": "alpha rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - skekseas.milk",
+        "sha256": "f7db9f207d24cb092dc2d0ca12f04f51713899c7ab1ee05736b0bf0b6c9f82fb",
+        "component": "shape_0",
+        "reason": "alpha rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - skekseas.milk",
+        "sha256": "f7db9f207d24cb092dc2d0ca12f04f51713899c7ab1ee05736b0bf0b6c9f82fb",
+        "component": "shape_1",
+        "reason": "alpha rate/domain is unresolved or may wrap"
+      }
+    ],
+    "audio_state_or_non_time_input_trajectory": [
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shape_1",
+        "reason": "audio/state/input time trajectories unresolved: avg, bass, fps, index, instance, mid, peak, t0, treb"
+      },
+      {
+        "path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "component": "shape_0",
+        "reason": "audio/state/input time trajectories unresolved: bass, bass_att, instance, treb, treb_att"
+      },
+      {
+        "path": "skipper skipper kiss me hard - if it weren't for you wonderful role playing 'people' parts of my solipsistic overmind.milk",
+        "sha256": "b3477c4b7f0d9e4cea124a272b8476b4a796ca939714b3825d4c82466401cf8f",
+        "component": "shape_0",
+        "reason": "audio/state/input time trajectories unresolved: instance"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "audio/state/input time trajectories unresolved: bass, bit2, difftime, mid, sample1, sample2, treb, volavg, volavg2"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "audio/state/input time trajectories unresolved: bass, bit2, difftime, mid, sample1, sample2, treb, volavg, volavg2"
+      }
+    ],
+    "native alpha endpoint domain is unresolved": [
+      {
+        "path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "component": "shape_1",
+        "reason": "native alpha endpoint domain is unresolved"
+      },
+      {
+        "path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "component": "shape_0",
+        "reason": "native alpha endpoint domain is unresolved"
+      },
+      {
+        "path": "skipper skipper kiss me hard - if it weren't for you wonderful role playing 'people' parts of my solipsistic overmind.milk",
+        "sha256": "b3477c4b7f0d9e4cea124a272b8476b4a796ca939714b3825d4c82466401cf8f",
+        "component": "shape_0",
+        "reason": "native alpha endpoint domain is unresolved"
+      },
+      {
+        "path": "cleave and cleave to thine w yep, i always dream of epic shit, and more so on the hydrogen stick.milk",
+        "sha256": "f1f887a8d0db1e3bbea98fec7ffb1c2880e9589393def19eb59654ea4f07e87f",
+        "component": "shape_0",
+        "reason": "native alpha endpoint domain is unresolved"
+      },
+      {
+        "path": "placebo heal drift backfire depersonified outfro mockternael qolourth qordially yoresth.milk",
+        "sha256": "fbabc577801ac4b14f09eb04546a6d4693f246cb29aedea582939c9850ec36f4",
+        "component": "shape_0",
+        "reason": "native alpha endpoint domain is unresolved"
+      }
+    ],
+    "shape_rgb_conversion_or_rate": [
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "RGB channel 0 rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "RGB channel 1 rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "RGB channel 2 rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "RGB channel 0 rate/domain is unresolved or may wrap"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "RGB channel 1 rate/domain is unresolved or may wrap"
+      }
+    ],
+    "native RGB endpoint domain 0 is unresolved": [
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 0 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 0 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 0 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 0 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_2",
+        "reason": "native RGB endpoint domain 0 is unresolved"
+      }
+    ],
+    "native RGB endpoint domain 1 is unresolved": [
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 1 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 1 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 1 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 1 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_2",
+        "reason": "native RGB endpoint domain 1 is unresolved"
+      }
+    ],
+    "native RGB endpoint domain 2 is unresolved": [
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 2 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_0",
+        "reason": "native RGB endpoint domain 2 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 2 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_1",
+        "reason": "native RGB endpoint domain 2 is unresolved"
+      },
+      {
+        "path": "ORB - Windmill.milk",
+        "sha256": "756c85c16c7a9d55b1478eb0c5849c54190a45835297558bd87c00114be3fd49",
+        "component": "shape_2",
+        "reason": "native RGB endpoint domain 2 is unresolved"
+      }
+    ],
+    "native_modulo_or_draw_gate_events": [
+      {
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "component": "shape_2",
+        "reason": "possible native modulo/draw gate event; reached transition timing remains unresolved"
+      },
+      {
+        "path": "Mig_068.milk",
+        "sha256": "8c5a67ececc2e3ceefa316b93c8a7ea17886e694eb3e366b623162f8ef9346f1",
+        "component": "shape_3",
+        "reason": "possible native modulo/draw gate event; reached transition timing remains unresolved"
+      },
+      {
+        "path": "ORB - Nova Sunrise.milk",
+        "sha256": "828ab10aec8ae27705a11154a4ae9d02fbdb4d3631cd070f2701c0349f7207d0",
+        "component": "shape_0",
+        "reason": "possible native modulo/draw gate event; reached transition timing remains unresolved"
+      },
+      {
+        "path": "ORB - Nova Sunrise.milk",
+        "sha256": "828ab10aec8ae27705a11154a4ae9d02fbdb4d3631cd070f2701c0349f7207d0",
+        "component": "shape_2",
+        "reason": "possible native modulo/draw gate event; reached transition timing remains unresolved"
+      },
+      {
+        "path": "blood red raw holy - gildead milk chocolate diamond treats.milk",
+        "sha256": "71bb0020936917a24a8ebf81bf31a6e9d27e735fe1dbeb56b0a1bbb4271884ea",
+        "component": "shape_0",
+        "reason": "possible native modulo/draw gate event; reached transition timing remains unresolved"
+      }
+    ],
+    "border draw gating may add a discontinuity; bounds apply only while drawn": [
+      {
+        "path": "suksma - dotes hostile undertake - flashlight to the portal [flexi's rod vomit maex].milk",
+        "sha256": "08deab891448f0d3f00aa107c6fa59fdd1190ee57de6df7062bcc6646736aef1",
+        "component": "shape_0",
+        "reason": "border draw gating may add a discontinuity; bounds apply only while drawn"
+      },
+      {
+        "path": "suksma - dotes hostile undertake - flashlight to the portal [flexi's rod vomit maex].milk",
+        "sha256": "08deab891448f0d3f00aa107c6fa59fdd1190ee57de6df7062bcc6646736aef1",
+        "component": "shape_1",
+        "reason": "border draw gating may add a discontinuity; bounds apply only while drawn"
+      },
+      {
+        "path": "suksma - dotes hostile undertake - flashlight to the portal [flexi's rod vomit maex].milk",
+        "sha256": "08deab891448f0d3f00aa107c6fa59fdd1190ee57de6df7062bcc6646736aef1",
+        "component": "shape_2",
+        "reason": "border draw gating may add a discontinuity; bounds apply only while drawn"
+      },
+      {
+        "path": "Unchained vs Rovastar vs Zylot - Tripmaker (Trip machine).milk",
+        "sha256": "3e63ef4a1bda07eb6ba5f97a59af1a06423a74e4721518b7bbba077089ef4cf7",
+        "component": "shape_2",
+        "reason": "border draw gating may add a discontinuity; bounds apply only while drawn"
+      },
+      {
+        "path": "LuxXx - FlameFace  (Look Me In the Eye, Motherfucker Mix) (flameinhale).milk",
+        "sha256": "9e983b0de4168c2e90da5981e1fc5850cde0d5df09995b566bd07e2a92f84e03",
+        "component": "shape_1",
+        "reason": "border draw gating may add a discontinuity; bounds apply only while drawn"
+      }
+    ],
+    "native blend mode is unresolved": [
+      {
+        "path": "Unchained vs Rovastar vs Zylot - Tripmaker (Trip machine).milk",
+        "sha256": "3e63ef4a1bda07eb6ba5f97a59af1a06423a74e4721518b7bbba077089ef4cf7",
+        "component": "shape_0",
+        "reason": "native blend mode is unresolved"
+      },
+      {
+        "path": "Unchained vs Rovastar vs Zylot - Tripmaker (Trip machine).milk",
+        "sha256": "3e63ef4a1bda07eb6ba5f97a59af1a06423a74e4721518b7bbba077089ef4cf7",
+        "component": "shape_1",
+        "reason": "native blend mode is unresolved"
+      },
+      {
+        "path": "Tripgnosis - Kaleidestrobe.milk",
+        "sha256": "85dc1dcaed62f3b1b04dcaee7ee871eae51da3a9701d93106b32147136ba9995",
+        "component": "shape_0",
+        "reason": "native blend mode is unresolved"
+      },
+      {
+        "path": "Tripgnosis - Kaleidestrobe.milk",
+        "sha256": "85dc1dcaed62f3b1b04dcaee7ee871eae51da3a9701d93106b32147136ba9995",
+        "component": "shape_0",
+        "reason": "native blend mode is unresolved"
+      },
+      {
+        "path": "Tripgnosis - Chaotica Strobes 2.milk",
+        "sha256": "6b3cda0f9b57f03972276937898b2441aa6be072bea0b27d48552e9e18371501",
+        "component": "shape_0",
+        "reason": "native blend mode is unresolved"
+      }
+    ],
+    "traversal_budget": [
+      {
+        "path": "EoS + Phat - chasers 13 sentinel 189 nz+ shifting through manyanas.milk",
+        "sha256": "d3002617846de26631032cd3e4bb75327e1f50125723a59df7af54d4ca6dde58",
+        "component": "shader_warp",
+        "reason": "activity scalar projection budget exceeded"
+      },
+      {
+        "path": "Phat_shifter - Angel2 fingre.milk",
+        "sha256": "b0d810bcfa1d4fef68ef3c81b1d9598f31544c14c9a4a86e8d2c6f16f62a323f",
+        "component": "shader_warp",
+        "reason": "activity scalar projection budget exceeded"
+      },
+      {
+        "path": "xtramartin (578).milk",
+        "sha256": "4c247d0ebc996a97ed6d090d32e5d059da881ef92c798fd51e7f0d71825c3c5b",
+        "component": "shader_warp",
+        "reason": "activity scalar projection budget exceeded"
+      },
+      {
+        "path": "suksma - satanic teleprompter - sth shd fingre.milk",
+        "sha256": "e68c86e32ff09fe47e21e7e7e6bca995f489448e7c7da90a1338c69c29cb9e56",
+        "component": "shader_warp",
+        "reason": "activity scalar projection budget exceeded"
+      },
+      {
+        "path": "Fumbling_Foo + En D & Martin - Mandelverse.milk",
+        "sha256": "e67d288f3c6bd0957a2dc9ce10ae5c4639e15db29827e761331e2abd46319eb6",
+        "component": "shader_warp",
+        "reason": "activity scalar projection budget exceeded"
+      }
+    ],
+    "multiple_event_schedule_join": [
+      {
+        "path": "xtramartin (270).milk",
+        "sha256": "1d1d5c5e72e0fa07dabb6f4f573b2886d370571bed3d0ebb5b939314b4ceecd3",
+        "component": "shape_1",
+        "reason": "simultaneous material events unresolved; no sum of channel rates"
+      },
+      {
+        "path": "blastofftek - Aether generator.milk",
+        "sha256": "ccfa8adaab63b78edfd49b83ea894e7eecd66005dc0340bf048b028339960e20",
+        "component": "shape_1",
+        "reason": "simultaneous material events unresolved; no sum of channel rates"
+      },
+      {
+        "path": "xtramartin (272).milk",
+        "sha256": "447bef377df9a0a3a62583de3cc17c89af83874e81c082a483922824e0925f0a",
+        "component": "shape_1",
+        "reason": "simultaneous material events unresolved; no sum of channel rates"
+      },
+      {
+        "path": "va ultramix2 - 460 nz+ thee parchmeant.milk",
+        "sha256": "989ee6899f8d9855f08e68af792c0442fcfa1778c85bb78fa8b2c8206d54bac1",
+        "component": "shape_0",
+        "reason": "simultaneous material events unresolved; no sum of channel rates"
+      },
+      {
+        "path": "martin - elusive impressions mix2 - flacc mess mirror.milk",
+        "sha256": "9f5b5ca6c9c8e8b246fa1e435405bedf020230231933d54643bc42c5aa77d6f5",
+        "component": "shape_1",
+        "reason": "simultaneous material events unresolved; no sum of channel rates"
+      }
+    ]
+  },
+  "overlap_notice": "categories overlap; unique exact preset identity within each category; no partition or accuracy inference"
+}

@@ -135,3 +135,70 @@ def test_flash_failure_does_not_certify_chill_from_retained_calm_motion(monkeypa
     assert report['producer_failures']['flashing']
     assert report['classification']['eligible_bands']==[]
     assert 'Chill' not in report['classification']['predicted_bands']
+
+
+@pytest.mark.parametrize('offset,expected',[(2.,[1.,1.,1.]),(-2.,[0.,0.,0.])])
+def test_fully_saturated_output_retains_raw_response_without_false_intense(offset,expected):
+    from source_appearance import appearance_from_analysis
+    expression=f'{offset}+.5*sin(time*100)'
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3('+','.join([expression]*3)+');}\n')
+    a.behaviour_context={'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'_c2.x':[0,4]}}
+    report=appearance_from_analysis(a)['static_behaviour']
+    assert report['flashing']['records'][0]['maximum_brightness_change_per_second']>0
+    assert report['displayed_output']['constant_rgb']==expected
+    assert 'Intense' not in report['classification']['predicted_bands']
+    assert report['classification']['flash_possible'] is False
+
+
+def test_unknown_output_storage_does_not_gain_a_clamp_certificate():
+    from source_static_behaviour import static_behaviour
+    from source_appearance import appearance_from_analysis
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(2+.5*sin(time*100),2,2);}\n')
+    report=static_behaviour(a,appearance_from_analysis(a),
+        {'viewport':[1920,1080],'feedback_fps':30,'output_storage':'unknown'})
+    assert report['displayed_output']['constant_rgb'] is None
+    assert report['output_model_complete'] is False
+    assert report['classification']['eligible_bands']==[]
+
+
+def test_partially_saturated_rgb_keeps_remaining_channel_contrast():
+    from source_appearance import appearance_from_analysis
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(2+.5*sin(time*100),2,.5+.1*sin(time*100));}\n')
+    a.behaviour_context={'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'_c2.x':[0,4]}}
+    report=appearance_from_analysis(a)['static_behaviour']
+    assert report['displayed_output']['constant_rgb'] is None
+    assert report['displayed_output']['maximum_rgb_difference']==pytest.approx(.2)
+    assert report['flashing']['records'][0]['periodic_contrast_range'][1]==pytest.approx(1.)
+    assert 'Intense' not in report['classification']['predicted_bands']
+
+
+def test_output_storage_policy_participates_in_export_cache_identity(tmp_path):
+    from effect_family_export import export_preset
+    from test_core2331_warp import BINARIES
+    path=tmp_path/'storage.milk';path.write_text('[preset00]\nfWaveAlpha=0\n')
+    base={'reader':BINARIES/'milk-native-reader','cache':tmp_path/'cache'}
+    a,_=export_preset(path,behaviour_context={'viewport':[1920,1080],'feedback_fps':30},**base)
+    b,hit=export_preset(path,behaviour_context={'viewport':[1920,1080],'feedback_fps':30,'output_storage':'unknown'},**base)
+    assert not hit
+    assert a['cache_key']!=b['cache_key']
+
+
+def test_nominal_saturation_does_not_hide_unbounded_native_phase_domain():
+    from source_appearance import appearance_from_analysis
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(2+.5*sin(time*1e38),2,2);}\n')
+    report=appearance_from_analysis(a)['static_behaviour']
+    assert report['displayed_output']['constant_rgb']==[1.,1.,1.]
+    assert report['displayed_output']['native_finite_guard']['status']!='bounded'
+    assert report['classification']['eligible_bands']==[]
+    assert 'Chill' not in report['classification']['predicted_bands']
+
+
+@pytest.mark.parametrize('factor,qualified',[(100,True),(1e38,False)])
+def test_declared_shader_clock_domain_can_qualify_finite_basic_intermediates(factor,qualified):
+    from source_static_behaviour import static_behaviour
+    from source_appearance import appearance_from_analysis
+    a=analysis(f'PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {{ret=float3(2+.5*sin(time*{factor}),2,2);}}\n')
+    report=static_behaviour(a,appearance_from_analysis(a),{'viewport':[1920,1080],'feedback_fps':30,
+                          'scalar_input_domains':{'_c2.x':[0,4]}})
+    assert (report['displayed_output']['native_finite_guard']['status']=='bounded') is qualified
+    if not qualified:assert report['classification']['eligible_bands']==[]

@@ -74,7 +74,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "2e717423b147e3372a8f92457e16b17f01b00e05270d2bf44b6ebd69862d7fd9",
           "target_profile": "gles300"
@@ -196,7 +196,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "4ff0a380c42e38b7fd15b7a8ff3ecb4ee813316d43e339a938a0299a18945a77",
           "target_profile": "gles300"
@@ -331,7 +331,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "d755ee770e780525a34711fad4ef1c06a8b98cd8067044049e6bb9c791e1f0f9",
           "target_profile": "gles300"
@@ -466,7 +466,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "1128c7796a12eae5bfb3c406943c936c54f49504389a75f60995dfab50808aa7",
           "target_profile": "gles300"
@@ -603,7 +603,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "6a9127da254f0113e5da95047956bc77906715ba9846644294f5ff1c3d4f56ff",
           "target_profile": "gles300"
@@ -726,7 +726,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "2b92061175e27bdd1157938d963f3ee6d60c46d79643db27ea5f8d6e5d58fd47",
           "target_profile": "gles300"
@@ -863,7 +863,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "29d195858d2ec154236b9b052f3d173588aa14c3cf2fd2702f981f5fa95e896c",
           "target_profile": "gles300"
@@ -1306,7 +1306,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "df629ebcbc3c83ec954aa1612fcb594c4b82f536b0619b6d64c926654c8d9e34",
           "target_profile": "gles300"
@@ -1447,7 +1447,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "23e31cc92f8631b007752087c96d3dba6e816bd360170924b459fc52d43f1149",
           "target_profile": "gles300"
@@ -1571,7 +1571,7 @@
         "provenance": {
           "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
           "input_scenario_sha256": null,
-          "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
           "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
           "preset_sha256": "f2da01aad4d4144d9ab7963ecd15cf8b1c04ca954f4339922bd43f833385f750",
           "target_profile": "gles300"
@@ -1641,9 +1641,1354 @@
       },
       "name": "native_rgb_overflow",
       "preset_sha256": "f2da01aad4d4144d9ab7963ecd15cf8b1c04ca954f4339922bd43f833385f750"
+    },
+    {
+      "arguments": {
+        "composite": "ret=GetPixel(float2(.5,.5));",
+        "config": "shapecode_0_num_inst=2\nshapecode_0_additive=0\n"
+      },
+      "body": "a=.1;a2=.1;r=g=b=r2=g2=b2=1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.20000004768371582
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "affine main/blur RGB difference norm",
+          "normalized_output_difference_ceiling": 1.0,
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "sampling/blur may expand any nonzero source footprint to the whole display"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.014062501676380235
+          ],
+          [
+            0.0,
+            0.014062501676380235
+          ],
+          [
+            0.0,
+            0.014062501676380235
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "36355893296a7d14d0782c8bba76b9e65eea872547faccea5700185c3e87b1ff",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.014062503352761269
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "3c4446fc85451f0503533ec3865cab578c4c89414551fc87a06d5b34f3de3b63"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 2,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 1,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.140625,
+          "summed_nominal_area_fraction": 0.140625
+        },
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.20000004768371582
+        ]
+      },
+      "name": "resampled_overlap_2_over"
+    },
+    {
+      "arguments": {
+        "composite": "ret=GetPixel(float2(.5,.5));",
+        "config": "shapecode_0_num_inst=20\nshapecode_0_additive=0\n"
+      },
+      "body": "a=.1;a2=.1;r=g=b=r2=g2=b2=1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "affine main/blur RGB difference norm",
+          "normalized_output_difference_ceiling": 1.0,
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "sampling/blur may expand any nonzero source footprint to the whole display"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.14062501676380235
+          ],
+          [
+            0.0,
+            0.14062501676380235
+          ],
+          [
+            0.0,
+            0.14062501676380235
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "e8ed544eb444f4d6ef4402eb4f579e015fbd551f2a0fd8a26db492fa8a3969a0",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.0703125
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "3c4446fc85451f0503533ec3865cab578c4c89414551fc87a06d5b34f3de3b63"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 20,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 1,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 2,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 3,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 4,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 5,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 6,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 7,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 8,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 9,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 10,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 11,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 12,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 13,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 14,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 15,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 16,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 17,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 18,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 19,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 1.40625,
+          "summed_nominal_area_fraction": 1.40625
+        },
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "resampled_overlap_20_over"
+    },
+    {
+      "arguments": {
+        "composite": "ret=GetPixel(float2(.5,.5));",
+        "config": "shapecode_0_num_inst=2\nshapecode_0_additive=1\n"
+      },
+      "body": "a=.1;a2=.1;r=g=b=r2=g2=b2=1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          0.20000004768371582
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "affine main/blur RGB difference norm",
+          "normalized_output_difference_ceiling": 1.0,
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "sampling/blur may expand any nonzero source footprint to the whole display"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.014062501676380235
+          ],
+          [
+            0.0,
+            0.014062501676380235
+          ],
+          [
+            0.0,
+            0.014062501676380235
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "5178eb9c815400d899a24a038622c9aee2749243fb6f8d299674282698c37d08",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.014062503352761269
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "3c4446fc85451f0503533ec3865cab578c4c89414551fc87a06d5b34f3de3b63"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 2,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 1,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.140625,
+          "summed_nominal_area_fraction": 0.140625
+        },
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          0.20000004768371582
+        ]
+      },
+      "name": "resampled_overlap_2_additive"
+    },
+    {
+      "arguments": {
+        "composite": "ret=GetPixel(float2(.5,.5));",
+        "config": "shapecode_0_num_inst=20\nshapecode_0_additive=1\n"
+      },
+      "body": "a=.1;a2=.1;r=g=b=r2=g2=b2=1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "affine main/blur RGB difference norm",
+          "normalized_output_difference_ceiling": 1.0,
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "sampling/blur may expand any nonzero source footprint to the whole display"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.14062501676380235
+          ],
+          [
+            0.0,
+            0.14062501676380235
+          ],
+          [
+            0.0,
+            0.14062501676380235
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": false,
+          "interval": [
+            0.10000002384185791,
+            0.10000002384185791
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.10000002384185791,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "2661eb31915e70e488d46ffdc38218c28ef22ff723faf5ded477aab14fcbde74",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.001672294893185494,
+        "source_contribution_interval": [
+          0.0,
+          0.0703125
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "3c4446fc85451f0503533ec3865cab578c4c89414551fc87a06d5b34f3de3b63"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 20,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 1,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 2,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 3,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 4,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 5,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 6,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 7,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 8,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 9,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 10,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 11,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 12,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 13,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 14,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 15,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 16,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 17,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 18,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            },
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 19,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 1.40625,
+          "summed_nominal_area_fraction": 1.40625
+        },
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "resampled_overlap_20_additive"
+    },
+    {
+      "arguments": {
+        "composite": "ret=GetPixel(float2(.5,.5));"
+      },
+      "body": "a=0;a2=0;border_a=1;",
+      "component": {
+        "component_id": "shape_0",
+        "displayed_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "displayed_support_fraction_interval": [
+          0.0,
+          1.0
+        ],
+        "feedback_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "final_transfer": {
+          "difference_gain_interval": [
+            0.0,
+            1.0
+          ],
+          "method": "affine main/blur RGB difference norm",
+          "normalized_output_difference_ceiling": 1.0,
+          "pointwise_support_preserved": false,
+          "unknown_reasons": [
+            "sampling/blur may expand any nonzero source footprint to the whole display"
+          ]
+        },
+        "incoming_source_rgb_integral_intervals": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "known_invalid_native_domain": false,
+        "opacity": {
+          "border_possible": true,
+          "interval": [
+            0.0,
+            0.0
+          ],
+          "known_invalid_native_domain": false,
+          "mean_fill_alpha": 0.0,
+          "method": "native vertex alpha endpoint envelope",
+          "source_rgb_difference_ceiling": 1.0,
+          "texture_role": "untextured_vertex_gradient"
+        },
+        "premises": [
+          "Continuous ideal-trigonometric polygon clipping after finite float32 parameter conversion; native raster edges/rounding are excluded",
+          "Target aspectY=min(1,height/width); shape centre=(2*x-1,1-2*y), NDC radius, corner angle=ang+pi/4",
+          "Patched custom-shape projection translates by (+1/targetWidth,+1/targetHeight) before native Y inversion; nominal area remains unshifted",
+          "Pointwise main lookups assume the declared Native target dimensions and nonnegative unit-mass bilinear filtering; one target-texel support dilation is included",
+          "Samples and destination RGBA are finite encoded unit-interval inputs; texture bindings and GPU precision are source contracts",
+          "Contribution is possible integrated RGB influence, not measured contrast; destination, overlap order and other draws can erase it",
+          "Optional solver refinements concern guarded nominal source domains, not certified native rounding; their complete evidence is retained in parameter_ranges",
+          "Instantaneous contribution excludes unknown accumulated feedback/history; a tiny injection need not remain tiny"
+        ],
+        "provenance": {
+          "context_sha256": "9956d7f16223fe5be439a9019e5e9df1e1cdc21d8d42931acacc0806c77e8787",
+          "input_scenario_sha256": null,
+          "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
+          "parser_inputs_sha256": "a0660c9ca4ca0d96cdc0376142dc4fd62c3adc66438453b2ae63ba9cbea50284",
+          "preset_sha256": "965990b7f3d5d79a13fd6344d28b49bc9d52dd9166d3f9d4b11c7e261063c8e4",
+          "target_profile": "gles300"
+        },
+        "sampling_support_allowance_fraction": 0.0,
+        "source_contribution_interval": [
+          0.0,
+          1.0
+        ],
+        "source_paths": [
+          {
+            "causal_pattern": "enabled shape with possible fill/border and nonzero radius",
+            "location_scope": "section; locations are not inferred token-level pattern spans",
+            "output_path": "output",
+            "section": "shape_0_per_frame",
+            "source_keys": [],
+            "source_locations": [],
+            "source_sha256": "07acb77182881bfbdb2ba6da7e0c5dd6cbd2ef69af570cef2141fd17f3a88087"
+          }
+        ],
+        "stage": "drawing",
+        "support": {
+          "area_fraction_interval": [
+            0.0703125,
+            0.0703125
+          ],
+          "aspect_y": 0.5625,
+          "configured_instances": 1,
+          "distinct_support_count": 1,
+          "known_invalid_native_domain": false,
+          "method": "coincident clipped polygon union",
+          "nominal_area_fraction": 0.0703125,
+          "parameter_ranges": [
+            {
+              "center_x": [
+                0.5,
+                0.5
+              ],
+              "center_y": [
+                0.5,
+                0.5
+              ],
+              "instance": 0,
+              "radius": [
+                0.5,
+                0.5
+              ],
+              "range_evidence": {}
+            }
+          ],
+          "perimeter_fraction_upper": 1.5707963267948966,
+          "projection_translation_ndc": [
+            0.0005208333333333333,
+            0.000925925925925926
+          ],
+          "summed_clipped_area_fraction_upper": 0.0703125,
+          "summed_nominal_area_fraction": 0.0703125
+        },
+        "unknown_reasons": [
+          "border stroke width/authored-native replay support is unresolved",
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ],
+        "visible_contrast_interval": [
+          0.0,
+          1.0
+        ]
+      },
+      "name": "resampled_transparent_fill_possible_border"
     }
   ],
-  "model_sha256": "784bb1cdfd750043ad9eccf1b9e2f7742e7cc1904d48f90299e58ab685c772a2",
+  "model_sha256": "0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c",
   "policy": "source-effect-prominence-v1",
   "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
   "schema_version": 1,

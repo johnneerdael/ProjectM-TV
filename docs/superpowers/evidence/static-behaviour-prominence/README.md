@@ -33,6 +33,10 @@ does not multiply an already summed area twice. Constant fan alpha integrals
 also bound clipped subsets. Unknown sampled RGBA retains possible influence.
 Borders retain an explicit unresolved stroke/replay contribution instead of
 disappearing when the fill is transparent.
+Arbitrary resampling uses the capped sum of configured instance alpha ceilings
+per texel, rather than a single-instance alpha or the source-area integral.
+This bounds repeated additive and over blending; unresolved possible borders
+retain a unit per-texel ceiling.
 
 Selected custom affine/nonlinear colour paths can attenuate or amplify the
 incoming term. Saturation/range proofs can establish output independence under
@@ -46,15 +50,25 @@ darken and solarize use their bounded pointwise polynomial difference ceilings.
 Unknown custom compilation/fallback selection, discard, unsupported gamma/masks,
 invalid native material/geometry inputs and zero texture zoom retain uncertainty.
 In particular, zero alpha does not certify transparency for known nonfinite
-native RGB or radius conversion. Accumulated feedback is exported separately;
+native RGB or radius conversion. A local composite-domain traversal budget keeps
+the gain interval unbounded and disables support preservation while retaining
+independent component support and opacity. Literal-folding exhaustion keeps
+component-local unknowns and uses the existing generic scalar envelope where
+available. Neither fallback establishes a finite-domain certificate; the global
+semantic traversal budget still propagates with its exhaustion flag.
+
+Scenario scalar input domains and explicit context scalar input domains share
+the support/material envelope. Conflicting ranges for the same input name are
+rejected explicitly. These are declared mathematical domains, not measured audio.
+Accumulated feedback is exported separately;
 a tiny current injection is not a proof of permanently tiny feedback influence.
 
 The frozen fixture is
 `tools/milk-analyzer/fixtures/static-prominence-controls-2026-10-10.json`.
-It records ten source controls, exact source/reader/model identities, and hashes
+It records fifteen source controls, exact source/reader/model identities, and hashes
 of both original and patched projection/filter source references. Custom-stage
 acceptance in these controls is an explicit mathematical selection premise,
-not an actual compiler acceptance result. The broader test file contains 35
+not an actual compiler acceptance result. The broader test file contains 49
 controls, including guarded Z3 range refinement that rejects an impossible
 on-screen centre without sampling time. The proof retains its nominal numeric
 model and `native_numeric_certified=false`.
@@ -65,7 +79,34 @@ Validation on 2026-10-10:
 MILK_PROOF_PYTHON=/Users/jneerdael/Scripts/source-analysis-evaluation/python-env/bin/python build/preset-lab-venv/bin/python -m pytest tools/milk-analyzer/test_source_prominence.py tools/milk-analyzer/test_source_shape_contribution.py tools/milk-analyzer/test_source_fill_envelopes.py tools/milk-analyzer/test_source_texture_envelopes.py -q
 ```
 
-Result: 65 passed. The initial missing-producer controls failed before
+Initial result: 65 passed. The initial missing-producer controls failed before
 implementation; additional coordinate-domain, finite-conversion and proof-range
 controls also failed before their corresponding fixes. Prepared full-suite and
 source-only paired-export qualification belong to the integration task.
+
+The budget-repair prepared prominence, colour-character, static-behaviour and scoring
+controls passed together: 92 tests in 9.77 seconds. This includes the 964-node,
+48-sample composite budget regression, the three hash-bound original literal
+budget failures, invalid UV/material transparency controls, global traversal
+exhaustion, declared context ranges and conflicting-domain rejection. The initial ten
+fixture controls were regenerated under that producer hash with all preset,
+reader and source-reference hashes unchanged.
+
+The exact 124 failed members of the fixed2000 study were re-extracted through
+one copied pinned native reader and the frozen compatibility joins. All 124 now
+retain prominence components, with zero prominence or support exceptions.
+`budget-recovery-124.json` records their preset identities, component identities,
+guarded transfer evidence and producer/reader/result hashes. The 121 composite
+domain-budget cases retain unbounded transfer and no pointwise support claim;
+the three literal-budget cases retain component-local geometry unknowns. This
+recovery does not establish complete-model mood eligibility.
+
+The subsequent aggregate-alpha repair passed 98 prepared prominence,
+colour-character, static-behaviour and scoring tests in 9.72 seconds. Four new
+controls first reproduced the unsafe single-instance ceiling with two/twenty
+coincident instances under additive/over blending. A fifth first reproduced
+the resampled possible-border zero; a pointwise control verifies the original
+source integral remains the bound. The fixture now includes these five controls
+under producer hash `0eae7e2fb03d6abd67292af9e39f1599f7d3f3be0fa441e32bf1774e5684ce0c`.
+The 124-case census above retains its original checkpoint hash; no cohort was
+rerun for this focused repair.

@@ -14,7 +14,7 @@ def _digest(value):
 
 def validate_context(request=None):
     request=dict(DEFAULT_CONTEXT if request is None else request)
-    if set(request)-{'viewport','feedback_fps','reference_profile','scalar_input_domains'}:
+    if set(request)-{'viewport','feedback_fps','reference_profile','scalar_input_domains','output_storage'}:
         raise ValueError('unsupported static behaviour context field')
     viewport=request.get('viewport');fps=request.get('feedback_fps')
     if not isinstance(viewport,(list,tuple)) or len(viewport)!=2 or any(type(v) is not int or not 0<v<2**31 for v in viewport):
@@ -27,7 +27,10 @@ def validate_context(request=None):
         if not isinstance(name,str) or not name or not isinstance(span,(list,tuple)) or len(span)!=2 or any(
                 type(v) not in {int,float} or not math.isfinite(v) for v in span) or span[0]>span[1]:
             raise ValueError('finite ordered static input domain required')
-    result={'viewport':list(viewport),'feedback_fps':float(fps),
+    storage=request.get('output_storage','normalized-unorm')
+    if storage not in {'normalized-unorm','unknown'}:
+        raise ValueError('supported declared output storage required')
+    result={'output_storage':storage,'viewport':list(viewport),'feedback_fps':float(fps),
             'reference_profile':request.get('reference_profile','caller-declared-reference'),
             'scalar_input_domains':{name:list(span) for name,span in sorted(domains.items())}}
     if not isinstance(result['reference_profile'],str) or not result['reference_profile']:
@@ -48,6 +51,114 @@ def _complete(analysis,flashing,motion):
     if not final or any(not r['total_brightness_rate_known'] for r in final):return False
     if flashing['source_hazards']:return False
     return not motion['unresolved_contributors']
+
+
+def _finite_composite_guard(field,domains):
+    """Bound simple scalar shader intermediates without assuming finite phases.
+
+    This restricted binary32 envelope is a declared source-operation model,
+    not a target-driver or transcendental precision certificate.
+    """
+    import numpy as np
+    from effect_families import _CACHE
+    from source_activity import blackout_colour_channels
+    from source_flash_behaviour import _project_uniform_lanes
+    token=_CACHE.set({});memo={};active=set();inputs=set()
+    def round32(span):
+        with np.errstate(over='ignore',invalid='ignore',under='ignore'):
+            lo=float(np.nextafter(np.float32(span[0]),np.float32(-math.inf)))
+            hi=float(np.nextafter(np.float32(span[1]),np.float32(math.inf)))
+        if not math.isfinite(lo) or not math.isfinite(hi):raise ValueError('intermediate may exceed finite binary32 domain')
+        # Include possible subnormal flushing without claiming a driver policy.
+        if lo<np.finfo(np.float32).tiny and hi>-np.finfo(np.float32).tiny:
+            lo=min(lo,0.);hi=max(hi,0.)
+        return [lo,hi]
+    def visit(node,depth=0):
+        key=id(node)
+        if key in memo:return memo[key]
+        if key in active or depth>64 or len(memo)+len(active)>=256:raise ValueError('finite shader guard traversal unresolved')
+        active.add(key)
+        try:
+            if node.op=='constant':
+                value=node.detail.get('native_value',node.detail.get('value'))
+                if type(value) not in {int,float} or not math.isfinite(value):raise ValueError('nonfinite shader literal')
+                span=[float(value),float(value)]
+                if node.dtype!='int':span=round32(span)
+            elif node.op=='input' and node.dtype=='float':
+                inputs.add(node.detail.get('name'))
+                span=domains.get(node.detail.get('name'))
+                if span is None:raise ValueError('native shader input domain unresolved: '+str(node.detail.get('name')))
+                span=round32(span)
+            elif node.dtype=='float' and node.op in {'add','subtract','multiply'} and len(node.args)==2:
+                a,b=(visit(arg,depth+1) for arg in node.args)
+                if node.op=='add':span=[a[0]+b[0],a[1]+b[1]]
+                elif node.op=='subtract':span=[a[0]-b[1],a[1]-b[0]]
+                else:
+                    products=[x*y for x in a for y in b];span=[min(products),max(products)]
+                span=round32(span)
+            elif node.dtype=='float' and node.op in {'sin','cos'} and len(node.args)==1:
+                visit(node.args[0],depth+1);span=round32([-1.,1.])
+            elif node.dtype=='float' and node.op=='cast' and len(node.args)==1 and node.args[0].op=='constant':
+                span=round32(visit(node.args[0],depth+1))
+            else:raise ValueError('finite shader guard unsupported operation: '+node.op)
+            memo[key]=span
+            return span
+        finally:active.remove(key)
+    result={'policy':'restricted-binary32-finite-source-guard-v1','status':'unresolved',
+            'native_numeric_certified':False,'declared_input_domains':domains,
+            'conditions':['Basic operations use outward binary32 enclosures and include subnormal flushing',
+                          'Finite sin/cos use their mathematical unit range; precision and target-driver behavior remain unverified'],
+            'unknown_reasons':[]}
+    try:
+        channels=[_project_uniform_lanes(c) for c in blackout_colour_channels(field)]
+        if len(channels)!=3:raise ValueError('three scalar RGB channels required')
+        result.update(status='bounded',channel_ranges=[visit(c) for c in channels])
+    except (ValueError,RecursionError,OverflowError,IndexError) as error:
+        result['unknown_reasons']=[str(error)]
+    finally:
+        result['visited_nodes']=len(memo);result['dynamic_input_names']=sorted(inputs);_CACHE.reset(token)
+    return result
+
+
+def _displayed_output(analysis,flashing,context):
+    """Preserve raw RGB evidence and qualify only declared normalized storage."""
+    result={'policy':'declared-normalized-output-clamp-v1',
+            'storage':context['output_storage'],'raw_channel_ranges':None,
+            'stored_channel_ranges':None,'constant_rgb':None,'constant_rgb_qualified':False,'maximum_rgb_difference':None,
+            'native_model_stored_channel_ranges':None,'native_enclosure_consistent_with_nominal':False,
+            'raw_ranges_changed':False,'native_numeric_certified':False,
+            'native_finite_guard':{'status':'unresolved','unknown_reasons':['No selected supported finite RGB program']},
+            'conditions':['Declared normalized fixed-point output clamps finite RGB to[0,1]',
+                          'Stored values are nominal before output quantization; this is not native-driver certification']}
+    if context['output_storage']!='normalized-unorm' or analysis.stages['composite']['kind']!='custom_composite':
+        return result
+    field=analysis.outputs.get('composite')
+    if field is None:return result
+    result['native_finite_guard']=_finite_composite_guard(field,context['scalar_input_domains'])
+    records=[r for r in flashing.get('records',[]) if r['component_id']=='shader_composite']
+    if len(records)!=1:return result
+    spans=[r.get('nominal_value_range') for r in records[0].get('source_evidence',{}).get('channel_value_envelopes',[])]
+    if len(spans)!=3 or any(not isinstance(span,(list,tuple)) or len(span)!=2 or
+            any(type(v) not in {int,float} or not math.isfinite(v) for v in span) or span[0]>span[1] for span in spans):
+        return result
+    stored=[[max(0.,min(1.,v)) for v in span] for span in spans]
+    result.update(raw_channel_ranges=[list(s) for s in spans],stored_channel_ranges=stored,
+                  raw_ranges_changed=stored!=[list(s) for s in spans],
+                  maximum_rgb_difference=max(high-low for low,high in stored))
+    if all(low==high for low,high in stored):result['constant_rgb']=[s[0] for s in stored]
+    guard=result['native_finite_guard']
+    if guard['status']=='bounded':
+        native_stored=[[max(0.,min(1.,v)) for v in span] for span in guard['channel_ranges']]
+        result['native_model_stored_channel_ranges']=native_stored
+        # An overly wide native enclosure cannot turn a tight nominal formula
+        # into an automatic calm result (for example, lost-significance terms).
+        result['native_enclosure_consistent_with_nominal']=all(
+            actual[0]>=nominal[0]-(1e-6+.05*(nominal[1]-nominal[0])) and
+            actual[1]<=nominal[1]+(1e-6+.05*(nominal[1]-nominal[0]))
+            for actual,nominal in zip(native_stored,stored))
+        if result['constant_rgb'] is not None:
+            result['constant_rgb_qualified']=not guard['dynamic_input_names'] or all(a==b for a,b in native_stored)
+    return result
 
 
 def static_behaviour(analysis,description,context=None):
@@ -89,7 +200,8 @@ def static_behaviour(analysis,description,context=None):
         result['colour']=produce('colour',colour_character,(analysis,description,result['prominence'],normalized),
             {'components':[],'by_component':{},'candidate_palette_hierarchy':[],'useful_hue_description':False})
         result['status']='partial' if result['producer_failures'] else 'computed'
-        result['output_model_complete']=not result['producer_failures'] and _complete(analysis,result['flashing'],result['motion'])
+        result['displayed_output']=_displayed_output(analysis,result['flashing'],normalized)
+        result['output_model_complete']=normalized['output_storage']!='unknown' and result['displayed_output']['native_enclosure_consistent_with_nominal'] and not result['producer_failures'] and _complete(analysis,result['flashing'],result['motion'])
         result['classification']=score_static_behaviour(result)
         result['limitations']=['Reference viewport/FPS/input domains are declared assumptions, not device observations',
             'Physical component bounds and source potential estimates are not rendered appearance or native certification',

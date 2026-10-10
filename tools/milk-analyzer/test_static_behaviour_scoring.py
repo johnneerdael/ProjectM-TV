@@ -89,3 +89,14 @@ def test_zero_known_components_with_missing_activity_do_not_supply_a_calm_index(
     result=score_static_behaviour(evidence(complete=False))
     assert result['intensity']['value'] is None
     assert result['predicted_bands']==[]
+
+
+def test_nonperiodic_low_contrast_does_not_become_intense_from_rate_alone():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence()
+    record=model['flashing']['records'][0]
+    record.update(periodic_contrast_range=None,cycle_rate_hz=None,
+                  brightness_delta_range=[0.,.01],maximum_brightness_change_per_second=100.)
+    result=score_static_behaviour(model)
+    assert 'Intense' not in result['predicted_bands']
+    assert result['intensity']['interval'][1]<30

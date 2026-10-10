@@ -20,8 +20,10 @@ semantic child selection. It preserves selected-branch, discarded-lane,
 zero-product and loop policies. Index node IDs are local labels; parent
 `semantic_child_slot` and `source_graph_path` refer to that semantic traversal,
 not original `Field.args` positions or authored source offsets. No graph-object
-identity is persisted between presets. Root/stage/budget-bound indexes, local
-rules and phase-domain probes reuse the existing analysis cache.
+identity is persisted between presets. Root/stage/budget-bound index results reuse the parent analysis cache. Each index
+keeps a private bounded work cache for child traversal, literals, matching and
+phase-domain probes. Optional work counters/exhaustion are reported separately;
+they cannot charge, raise, reset or clear the ordinary analysis budget.
 
 Each candidate captures a typed outer `abs`/`frac` construction and leaves the
 phase node opaque. `phase_scalar_projection_performed` stays false;

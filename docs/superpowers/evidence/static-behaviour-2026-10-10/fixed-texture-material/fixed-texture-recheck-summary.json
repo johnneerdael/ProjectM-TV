@@ -1,0 +1,19 @@
+{
+  "input_sha256": "1e92ca3ebded773c5f57a29983e0a61460a18e2da0de5b1f0341487a194cb867",
+  "producer_sha256": "3e555069eaac396adb472c1698c0e3aba27255a50f4878003b3aec53b2982e70",
+  "unique_preset_counts": {
+    "frozen_textured_presets": 809,
+    "finite_fixed_texture_rate": 592,
+    "finite_fixed_texture_difference": 643,
+    "positive_fixed_texture_rate": 28,
+    "positive_fixed_texture_difference": 97
+  },
+  "component_rows": 1309,
+  "elapsed_seconds": 10.623612416995456,
+  "source_identity_mismatches": [],
+  "failures": [],
+  "original_total_rate_known_presets": 0,
+  "new_partial_total_rate_known_count": 0,
+  "uses_frames_or_images": false,
+  "uses_equation_execution": false
+}

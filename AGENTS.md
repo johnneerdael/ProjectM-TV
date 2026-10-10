@@ -1195,7 +1195,9 @@ semantic children and analysis-local caches to attach `outer_fold_structure` whe
 numeric fold projection remains unknown. Preserve the old descriptor and its
 unknown/range fields; opaque captures cannot earn quantitative or mood credit.
 Index paths/`semantic_child_slot` are semantic traversal locations, not authored
-AST slots. Retain local budget/domain/native-selection failures. The implementation
+AST slots. Cache only root/stage-bound index results in the parent analysis; keep
+optional inspection work/memos in a private bounded cache so caught failures do
+not exhaust later ordinary queries. Retain local budget/domain/native-selection failures. The implementation
 is original Python inspired by the external indexed-query experiment, with no
 copied glsl-transformer AGPL source or Java dependency. See
 `tools/milk-analyzer/SOURCE_APPEARANCE.md` and the glsl-transformer validation report.
@@ -1483,3 +1485,17 @@ joins and optionally enters caller-selected SymPy/Z3 sessions. Its cohort counts
 are interpretation evidence, not appearance or human mood accuracy. Prepared
 qualification and completed coverage belong in task evidence; do not infer success
 from synthetic controls or constant final RGB with unresolved execution.
+
+
+Static behaviour qualification follow-up (2026-10-10):3472 prepared tests plus
+92subtests,100 paired source exports with schema/model checks, and the unchanged
+fixed2000 source cohort complete. All2000 retain behaviour reports;1552 have useful
+hue descriptions and367 conditional source-potential indices. Automatic activity
+eligibility remains empty; this is coverage, not visual/mood accuracy. See
+`docs/superpowers/evidence/static-behaviour-2026-10-10/final-v5/`. The reference
+`output_storage` defaults to declared normalized-unorm; unknown storage vetoes
+automatic eligibility. Preserve raw RGB modulation separately from stored clamp
+bounds and the restricted binary32 finite-source guard. No implicit shader clock
+domain, generic native precision or target-driver certificate follows from a
+nominal envelope. Arbitrary resampling must retain aggregate instance alpha and
+possible borders; input context domains must propagate into motion/prominence.

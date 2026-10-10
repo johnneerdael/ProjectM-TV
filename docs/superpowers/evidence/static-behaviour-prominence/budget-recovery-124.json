@@ -1,0 +1,3174 @@
+{
+  "cases": [
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [231].milk",
+        "sha256": "3a6e50e87b46df7ce4fd910c756be5f7520348b2d97fc1f67cc93ef1272c227a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "suksma - flexi coheres vacuum energy - squeakers.milk",
+        "sha256": "2eaa28c33778028fd9a747b85466d867131ff1243bf892d4e33214e0abb9c5c9"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "amandio c - hat track - mrt sth.milk",
+        "sha256": "31a14cb9bf98685f3c0b1e278da836e16d8a57e096fe58d22878d0386c71b1b2"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          0.8000000120000011
+        ],
+        "method": "qualified nonlinear sample difference ceiling",
+        "normalized_output_difference_ceiling": 1.0,
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "suksma - yin - 100 - Through the ether - Bitcore Tweak - mash0000 - dmt eye rub spher nz+.milk",
+        "sha256": "d1800763897f5d269d83712c505815ecd5b4af56d6cb5bd76c4eb2a10b173f6f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "suksma - phlegmployant.milk",
+        "sha256": "9abfbc43d1c334c21bc083ec0100f9a36ff02ac3b2a97529f9b5cee1b0f3ad3f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [031].milk",
+        "sha256": "14422fe338a93d976c75d9b6dcd5365bb968fac6215a5c3036340646f26a1142"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "Stahlregen & fishbrain + Geiss - Witchcraft (cents).milk",
+        "sha256": "9a62faeaffaff94db372d40568d084c9f950040576bfdac089a2c6a4a6d56fc5"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "Stahlregen - Treb Spectre PS2 nz+ gorgeous germinalth.milk",
+        "sha256": "b6ff79cecb128240e2ae1a797e2121f88776eaa5b2eb8f2e4d9812713bee801c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "amandio c - iterative - orbits 2 i am ingrate.milk",
+        "sha256": "c8129c6c414c1753f2004be6fbbe327966e55a8db5199aa74f83d44a6f606f31"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [112].milk",
+        "sha256": "74acbc4cf40c69b54f4a5e50502fef6814fc47aff6ba5b6c5326b41eaa05158a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "amandio c - the green machine 4 - radial nature sludge cpe.milk",
+        "sha256": "ad26453bf0ab4655b09f851d30184b3c1b444216b748f1edf1de611575366395"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "equidistant from vomit (out of totality).milk",
+        "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the neon grafitti hive nz+ agony lovesickle` slobbre' croxle'.milk",
+        "sha256": "ca560f5eac87cd68d192563524794215282fdb55b946ed99382f78e712f4903c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "sofbingro' nz+ complete psychological eagle offering.milk",
+        "sha256": "e54c98e2608de739b5dfffe23245dc35cee1fcffe5771b442261fa1759222f84"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_3",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "shifter - mosaic mitosis - will they find me roam2 nz+.milk",
+        "sha256": "eef713d8b9614a5805e8fc996edf8991ba2bd2a4d2fee2cf74887b178722bb93"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - automating transformation with b n s3 - claim form fsh shf flx obl roams nz+.milk",
+        "sha256": "105c92c88bc24e401e4ff1757309bf3b7e33a996b54317f1c77d91fbc52f542f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (247).milk",
+        "sha256": "7d34a065df8267d379c3bfba21fdf9c275750ce166d230671b6cb140fb0a7e73"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "loin bowel - cutting right through to the pointlessness nz+.milk",
+        "sha256": "2f67e442c1446e4766894dc123721d7253ce2d1efa7b77a185aae49be63dde28"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us2 nz+ qopulanth.milk",
+        "sha256": "6e3add2fb2a403eab8d5bc21febb030c00f5dafa5031636d4629bea9f295493f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us nz+.milk",
+        "sha256": "b11cac2fd652754fe6baeafd78978c12cb49c8dce170e78d00baf908a25e7478"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "martin - mandelbox explorer - wreck diver nz+ phranq.milk",
+        "sha256": "72e085e831c91f98185f33a82c674689fc1f7ed82bdac8661c298bd36faef0e7"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "Tripgnosis - Drowning nz+.milk",
+        "sha256": "b8bc2469eac998d58b1b7e14f3b5168ed27400422201b9a9f3fa361136028d41"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the hive i have ideas scattered disparate paradigms.milk",
+        "sha256": "f9f433eb0dde6e0a5c141b95810e6120745f80ae1511b14d99e0f3041073893c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the neon grafitti hive nz+ agony lovesickle` invalid swizzle ormus muffin correlate.milk",
+        "sha256": "1b4b771c17287fa4e5b031ffc9246b95167bdfd6a2f261a66ea641315c69f18a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "Flexi - explore space not drugs - like there's a fucking difference nz+2.milk",
+        "sha256": "d43642ebd57ecdf951a7529f0639d1ff9d3f00f8de8944d6f8be7e13bd0b7051"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "va ultramix2 - 267_1 nz+ listen to death metal asshole.milk",
+        "sha256": "fa0a3b06f32c6e3278eb74e305780a6a549cae1d8f6d7025d3895072a038b7f1"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "chris grease organiq stymied parchment phlossidite logos holographeme poach legsce.milk",
+        "sha256": "d84c6587e41a22e11ec176c7c7bc52280d1217e5330879f29d054a23775edbca"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the neon grafitti hive nz+ agony lovesickle`.milk",
+        "sha256": "073ae36c260a50d6ebb5ca0e24f6cea1d8a16334ff56699244bf30b55a60dd0f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "redi jedi - How could she(because she's sucking fractals for lunch) nz+ agony lovescickle`.milk",
+        "sha256": "373af74ed38c77a047543aab9bb879510107828ebb64796bca37ef44c91a1d77"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "lit claw (explorers grid) nz+.milk",
+        "sha256": "0e062b96ff69eab7ab0ff93086c13119a3156c5f00a2a42181183142de3b1036"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "flertiveneth ov model stain.milk",
+        "sha256": "5e467f8248bd0f41c048f24ca55ffc74890775fec16f6cdba3d25635f3c17202"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "LuxXx - Dancing (Or Mating) Blobs III nz+.milk",
+        "sha256": "9e7878e120d156d601703a84d7601241960a9ad748972960b06e268e4b262c61"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "fleekus flokus - violent and insane homicidal air molecules - beat code experiment nz+.milk",
+        "sha256": "f30ef6ebc02174821c571dd4354a457594365da8a3659416db59cf8a67c11e15"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "martin - autumn leaves.milk",
+        "sha256": "101f20603f8ab78a2ece9186b6d0e8567fae7cd63934062673a251b083e4761e"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - automating transformation with b n s3 - claim form fsh shf flx nz+.milk",
+        "sha256": "4c7c40e16acb92375e3c6a421bc92f8d65f2fab20c8d76832cbf9cf269afd0c5"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - automating transformation with b n s3 - claim form fsh shf flx obl roam3,2 nz+ bade.milk",
+        "sha256": "fcd42466f32fb52cb3c82eb14feff880531496712fb50a01559d3651fbf4b03c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - satanic teleprompter - geiss shade - squeakers.milk",
+        "sha256": "9d2d8dc58d13f6c8000b0b55f863ab97d3e6c9c71d568b166dea49ec2ad9c349"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "suksma - sun pod gambit couch nz+ infanduct aisle.milk",
+        "sha256": "a714852bf3ed69a8849cfcf554be9f5508887341fde13c9672bd7bf65e9a8930"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "shader_composite",
+        "shader_warp",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "Zylot - Paint Spill (Music Reactive Paint Mix) nz+ raid.milk",
+        "sha256": "6af6191840a2edc1c32b3367512a54e60280a7764f7f7213b7a49fc68dce7f19"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - flexi 27goats digital-art-org - scathing review2 slobbering hot vessel cadavar juicy fruit r.milk",
+        "sha256": "927c592b64231bf01de068f4fe772a6f8edf505f6a7733416122b743638fa8f7"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [237].milk",
+        "sha256": "aad448b59599157a7be4de44ae3a01fa16f902f1bc89eff2ac4815f7fab0c1be"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "fed - glowing 5 - fingers rmx nz+ round squarishness.milk",
+        "sha256": "52c9a95c7477e1fc1d10fdb849ee4da0504024a52018b6e742ab8ac063d0113f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "manifestation of a cult leader gonskin.milk",
+        "sha256": "2894ddfc9f8761f2c7e346253df256a159db973200d818755f20662bac51a105"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "amandio c - prime forms keylontiq pseudoskienke spatial segweight feel nonfancunt.milk",
+        "sha256": "e041aca12f5ae6e6be6b62d3ce4c4e9b09b5e2b2e5917e71fb6fbf5386019de4"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "fed - glowing 5 - fingers rmx nz+ half the stuff wanted jess alterna2.milk",
+        "sha256": "f7e959163bdf51763618e6b3767cae81313db0af186bbf57bf57fced4f6874f6"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [319].milk",
+        "sha256": "095d2bce4792f4965676bc0dd334bac6a76bb81d35e2cb4580064d8e92d0a4b8"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "more like wreckfull.milk",
+        "sha256": "60b320ea16563a93c6e03475da1e0050388e2ac73e3bdb011e6684c3c87af08e"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "shifter - mosaic mitosis - j4 nz+.milk",
+        "sha256": "dfb8cb5291637fe0b49a0fea55abe701225d8cfe5370f80b812ab3c55296e9c6"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "suksma - movement within the trout - correcting instinct through irractional logic.milk",
+        "sha256": "f36afe5bdf43b4d58461462160624d7e95a2d22091c3acbc8c285bbe41172b51"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [227].milk",
+        "sha256": "e8e4e5ac57ca7643137b293f34c5ede3f83d4bfa6a4a1c785a4b00daf2a76f2f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [317].milk",
+        "sha256": "b0821db0c09e0e9b9a92be106400482e9dfc90dc52eb665323aa99f2979daea5"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - dotes hostile undertake - painterly oil reflection - flacc spher nz+ qlip-phthonth.milk",
+        "sha256": "970d68bd2f4960f53b6f0558ab510d6d3dd64ecda43d7efceef55e81353e2a18"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - automating transformation with b n s3 - claim form fsh shf flx obl roam3 nz+ body bag iconix.milk",
+        "sha256": "4f46a17ced17641c37d49d8f25a4af6d38a36b67ac31430cadc5780e6aa2ed52"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "Isosceles mashup14.milk",
+        "sha256": "9e9dfbc27d5705eaa645e12f4ea1e4ab553a4a6f49f13913f0c02d64a8c99d76"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "to know the reason i am trapped is my own weakness and fear - the trap isn'th the tearing the ass out of me.milk",
+        "sha256": "4d8e53e6a758c65d2b3d743ab4f6b9406bb45ea705c0b1e773880d2a842a0e6a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ man behind curtain is actually the god behind the satan.milk",
+        "sha256": "0da1457e7f5346e9e431e4a0ca34c2ed826cfe02bbd8db694a2ef6f294afa6f1"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "yin - 100 - Through the ether qansre phevre nz+ phlegmtastiq.milk",
+        "sha256": "e36e81ae438ce2b4dacd7155b67627b72cfff60846eb42655350be9ba1a4fdf4"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the neon grafitti hive nz+ agony lovesickle` invalid swizzle zeta muffin correlate.milk",
+        "sha256": "641395eddd16d7e0210447e195a9c1815a2e9bef02af9d721d2115fded5b1c9c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [192].milk",
+        "sha256": "51f57813ed76e619643a9b6754401dc8bbf6ec2a162e5ff2005255082c958a84"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "sone' ovaembiasche' instantaneousle' cliche' novelte' nz+2.milk",
+        "sha256": "88674ebd5f2681dbed3d95525fcef3b83a8b127439f9eeea5aa2910b3dde37c7"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "martin - tunnel race (2).milk",
+        "sha256": "7731798cdf1c3b17ecb5cd8de819c9e2ad78f52f8cd036ba29bc14f37ad5fea6"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "Flexi - wave function collapse - majorly dickless nz+.milk",
+        "sha256": "ddad1d6ab3507fbf7b1ce0b3756cd2743e3095f9bd202eac8051137b64938884"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "suksma - n19 3 layer overlap opt 2 pine cone allel nz+.milk",
+        "sha256": "b2da9d8988474d56681162d107cc3066c79f1b303d01aeb12d6bc80ccaf19a27"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "Nivush - Crazy Diamonds.milk",
+        "sha256": "31ec688577a888e65d6f63b945fe2d123da5a3971acd1eb9ca17f4cd58cf12f0"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          9.000000000000012
+        ],
+        "method": "qualified nonlinear sample difference ceiling",
+        "normalized_output_difference_ceiling": 1.0,
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "sampling/blur may expand any nonzero source footprint to the whole display"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [230].milk",
+        "sha256": "d69f5cc4bbd1123ccbcf20bfedad9f91000807e828c95becf20651481fee5457"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "amandio c - new life.milk",
+        "sha256": "7ab8c98263347a97bc79c5b2dcfb0530a134880d54907268296368a07434ae21"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          10.720000267028809
+        ],
+        "method": "native legacy gamma/hue and pointwise filter gain ceiling",
+        "pointwise_support_preserved": true,
+        "unknown_reasons": []
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "cpe domains flacc - portable massation segway roam nz+.milk",
+        "sha256": "c3550aedd7a3dd73f3ea60334246f53632801e166ccee93bdf3ef384ae7ee8cb"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "shifter+fishbrain+malalol - spills betelguesiest blender on fire + krash beatdetect OMG billy bob.milk",
+        "sha256": "1ea26d4577f7fdd59ca2e0d031fc90203b5db2f80d4a5a78ea4b60acdc8afb0c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2"
+      ],
+      "preset": {
+        "relative_path": "suksma - crow bowalls2 nz+.milk",
+        "sha256": "60dbf4694f9ef562a7b50c58e315ff775e217097109cfde702cd57c0f72ffca3"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin - elephant mating - shf thanks2.milk",
+        "sha256": "15312f09d3078b4d78ef26ceaf6eaf81ce0c2e441ed227a5f7c3c43379764b03"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "martin - mandelbox explorer - wreck diver nz+ em tea fee qrib classic labial forms.milk",
+        "sha256": "6f6602aa59d52f2bef3b26933badedc4455a5e2659611cb61edaaa4ce9838883"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "pabstolutiasma saturate beyond comprehension.milk",
+        "sha256": "8faa8af547f1e2cdfcab2d71e2d0c29dd66bb562c878b21d87127ec760e25ce4"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene maim.milk",
+        "sha256": "222d94ce7d88e1e69c9b81ba6002d020bf3a47454d24fc5ba1576e0d55191a27"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - automating transformation with b n s3 - claim form fsh shf flx obl - 1-ret nz+.milk",
+        "sha256": "058da1a10813e4e43ab2227739e1a3cee8b04a1696f4f18c3ea6cd3a28a63fce"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "Stahlregen & fishbrain + Geiss - Witchcraft (Dense) - painterly oil reflections - forcing the stars rig4.milk",
+        "sha256": "a37d2d82f671ab48b9611e70679fd1099f99e1d9c98411ebe90f26e6a803b07c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [233].milk",
+        "sha256": "c614b239e3a2a69dd86592a72248d621e449f91f7c211e9af0ef01343e2190ab"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [065].milk",
+        "sha256": "c0ebb01e81b3fcdc415361c73787d0d71708b123292b227583094d35caa72775"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [245].milk",
+        "sha256": "7c64d9a9f107f584905e0273811265a5e8edf6ed4847bfa34e55fb63b57d5cf0"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "EoS + Phat - chasers 17 sentinels ghoul - nz+ ihavenothingtoffal camp hell.milk",
+        "sha256": "736b8268cf401f74dcde359ddcf6ba2931eb0a872617adc15a339aaa6bc66765"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "Martin - Pixies Party (Hakan mash-up) 9-1.milk",
+        "sha256": "e308bb77fdb8f1b42547c9fb041734a3819e325480598526620ae3f059c8d5da"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "ORB - Stahl - Tantalum Gran random tex not worthy to comment on your potential love life failth.milk",
+        "sha256": "7658991f83afc743775ca9a8ff0eb55473182a8cd185df5fc45caee15eaa4b04"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene qreemqron.milk",
+        "sha256": "c892db1e81122a2942baa82a7f25387d2ed1c73c0bb2de0fdc8df3b94036fc35"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2"
+      ],
+      "preset": {
+        "relative_path": "amandio c - prime forms keylontiq pseudoskienke qomplet svorthles.milk",
+        "sha256": "7ef872d4b36222915a95affe782c4740e8881b99994a46907f6f2a5ca7bbc19c"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - dotes hostile undertake - greener grass (secret, indoor, hydroponic) - flacc psychoanalyzing nothingness.milk",
+        "sha256": "8f24bf7fa353f0329bbe4d625e5ed1daad427d7cabe593d82ba617d7e2c717b3"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2"
+      ],
+      "preset": {
+        "relative_path": "total hackville flacc crap nz+.milk",
+        "sha256": "52589e5260d621c7eff11f5f06fa0324d58054ce459e856a7445779fd2edc709"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_2",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "shifter + flexi - liquid circuitry from the fractalism hive --- Isosceles edit4.milk",
+        "sha256": "10ccb21f5396b93dd2ca2b3fcbc4201ea1134cf79015d62a7f2d8836bd0a3c1d"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "Stahlregen & Geiss + ORB - Etheral Waves (3 layers of Rayleigh RMX)_1 - var nz+ qrohre.milk",
+        "sha256": "3f5d8407452c622f6f6ea4db079e17f43f8e9b1d26f3a9b565c7850976c08ace"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "martin - tunnel race.milk",
+        "sha256": "9a59ceaa8df7427a15ba812be26281f273d15e931888c1f548f8ab036c081ec4"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_2"
+      ],
+      "preset": {
+        "relative_path": "amandio c - embrace 07 z in the unlikely uneventuality a.milk",
+        "sha256": "4884c0187202e13b9a59b1a2319dcbc621341d9c5bff2a3c957d8fd4a99be499"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "shader_composite",
+        "shader_warp",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "Zylot - Paint Spill (Music Reactive Paint Mix) nz+ quescience flux hate.milk",
+        "sha256": "b201c28dcd5ff5832cecc05e6013d9123a0d1ea2c6fa0ee986e51324fd379de5"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2"
+      ],
+      "preset": {
+        "relative_path": "cope + martin - noysez award losing single wrap womb dynamics e8 a'sha.milk",
+        "sha256": "cad2f9fdb4a763d271f6c59d482fde75f487f1cf84de9cbca125bf31559aa0cb"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "va ultramix2 - 460 nz+ jXy rIg trux loavthe.milk",
+        "sha256": "b4770d5409cab3d3c40b247e6ddbfdf48aa85cc6254d7259259b1bd71b04b598"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "amandio c - prime forms 2 nz+ adam kreighble' youtube user-allseeingeye93#p-u-1-Ew6_tqnPYoU stub a dub sirplush.milk",
+        "sha256": "6e9b3bd02dc6e1167d1b093d9ac79cf687fc0bc627a19881c50f81d172a96a97"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "martin - neon space ps3 - what roam3.milk",
+        "sha256": "f257c80aa01a2a03518f966df12fbd686d6032735daadde732148a084cb054ce"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "EoS - sarc g - couldn't not squeakers.milk",
+        "sha256": "806eeb44394af664c6ed58134b6cc5c404e2bfb864a30c4fc2829fc5517b9af4"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "Tripgnosis - Drowning gss nz+.milk",
+        "sha256": "997142285a03c9540bf410aff3e683c644dbf637e5b7113816b5be86870d9604"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "303 nz+ believe or don't, but all the cosmos is corpse dust.milk",
+        "sha256": "c9219d9a2eb70f198ce7c86c65fc732730d039715b5581b8c585c15b2ecc8cc3"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [111].milk",
+        "sha256": "78207d3236bf6da119dcdad57426b7ef124b3ed6affffb0a8793ca55f183dbb0"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "signed 'nuph phoaqing death warrants i don't have time for time if anything, i'm mad at the developers, fnord.milk",
+        "sha256": "8137d2ce58bd608fcb2515080936206698483ac18e172f8e6a203d5b1bb1e72e"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp"
+      ],
+      "preset": {
+        "relative_path": "Flexi + geiss - the deep diver's cognitive dissonance 1's and 0's where they don't belong.milk",
+        "sha256": "7d0af310f0145d44fc33792e3f00cff86aef841bfb9f81e6eb4f76dfb9737a4f"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "Phat_EoS - our own personal demon - bdr_ Ireallydon'tknowwhatIwant - flx mgr turbine lurk nz+.milk",
+        "sha256": "53a6974c4566743bef4cba32e172c1e5fb2574300176129b63614237aa612c15"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ wrathchild america.milk",
+        "sha256": "c1b208e410934dbb7fefb231f2049adc261e238f97acda5d679ee086956d4f38"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "craving 'spinach man' action figures suppositoric nutrition - probing maternity burn mark fletcher nz+ more palettes turned ass ugly.milk",
+        "sha256": "e2d45decc586cb43cf3d4dc68d99b68e05044acf2a245c3f3f2b2b27ac9f4be9"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [342].milk",
+        "sha256": "95a9cf6b5feef8ca944785674019e01d17ac7ab3d203fbf1e959491fccf94385"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (409).milk",
+        "sha256": "26ba5788da613ce8ea44e070fc1578b382506303386df22036d78326d1e23e46"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "suksma - chemosynthetic nosferatu - claim form fsh shf flx obl roam3,2 nz+ take rydberg matter r.milk",
+        "sha256": "f05fbad39801b3dcbf9e5cda41df08127c3921d7627472c6946c66a51462ddb0"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "amandio c - green machinery 1a hell if i could nz+2 why not, right3 royal weddings are for satanists.milk",
+        "sha256": "7b0cc38ffea413338ba97871f8b37c462413c3169a48751be20fc15675edc842"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "sawtooth grin nz+.milk",
+        "sha256": "3c5a2f1af8bde3e140a8b19fa5d8bf1770c1d5de9b28aa4d32912fe8d6749831"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "suksma - Zylot - Digitize (Geiss Relief Mix) - mash0000 - coral rake patent pending nz+ i am decommission.milk",
+        "sha256": "93245be966a97b2f51cb453140b23d1d1c01795577947db3a74809e788965234"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1",
+        "wave_2",
+        "wave_3"
+      ],
+      "preset": {
+        "relative_path": "EoS + Phat - chasers 03 daemon spiral nz+4.milk",
+        "sha256": "5404036427784b288ad029cf9417648f102d077e0aec02e51041383a9f2ace6a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [138].milk",
+        "sha256": "e8b2088bc30eaa0ce9f0aefb312cefc8a9d7fc0d6ec5c480faaf91f5f984be2e"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "technothrob holotorics - mrt worth your wile equi.milk",
+        "sha256": "496bce1650a2c014156946530252b549e497429a6bc63b98733c7704fafb52d9"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "loin bowel - don't you understand baby, i don't want a big studio in the hills - how to impress dullards2 nz+.milk",
+        "sha256": "19b27b41a06143518f024b00aa50ca1e6b023839b994bb56655e9302b73e74ca"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "shader_composite",
+        "shader_warp",
+        "shape_2",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "shifter + flexi - liquid circuitry from the fractalism hive --- Isosceles edit3.milk",
+        "sha256": "2306598d9210ce1dd86de798c6a646dd5338ac707979a20434e9c282fea0b069"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "303 nz+.milk",
+        "sha256": "689da3ad1f267fea7770ba29ea0126efe13113aa72826ad65761803b0435a18d"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ souls at zero facing.milk",
+        "sha256": "17097f48974712710b873f561642a02cc32fb4adcb50812a8faf7af2c1f86256"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0",
+        "wave_1"
+      ],
+      "preset": {
+        "relative_path": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo.milk",
+        "sha256": "a613b3e35b5f681cfd4396c256a4348ade6b0b6c9cbe5710219d51ef87ae4873"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [026].milk",
+        "sha256": "bc2664934c8955191310bfeddc9a1700fc90f420a2e182f53156370ae5be9ab9"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "cammy told me about yeast infected loaves nz+.milk",
+        "sha256": "a66ad6e2d1c1543d80c60557b537536d16f67c0cb71fd81e4bd493974c4a8814"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "wave_0"
+      ],
+      "preset": {
+        "relative_path": "shifter + Flexi - liquid circuitry from the hive nz+ absolute module deqay holiday psychedell laptop subrandom vegetable deservatio.milk",
+        "sha256": "1945a3823d34b82a0ce7289bf895754c3e6a3833854b78041643ed677c506da0"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1",
+        "shape_2",
+        "shape_3"
+      ],
+      "preset": {
+        "relative_path": "Stahlregen & Boz - Machine Code (Reaction Diffusion) do you not like my cliche pretentious angst.milk",
+        "sha256": "3a3d3117807a36ea64e051d10fa868e0b9621a3821a42f6f26701fcf83980d2a"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0"
+      ],
+      "preset": {
+        "relative_path": "Benjam and Zylot - Tie-Dye Supernova (Sunspots Mix) flx mrt - flx rnz.milk",
+        "sha256": "82acb728a9915fa8955360086f9c5dcffc05165da51baf607d88858ed575f665"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    },
+    {
+      "component_ids": [
+        "builtin_wave",
+        "mesh_warp",
+        "shader_composite",
+        "shader_warp",
+        "shape_0",
+        "shape_1"
+      ],
+      "preset": {
+        "relative_path": "gunthry is out back bloodying up the pine trees nz+.milk",
+        "sha256": "2bac4b1b51ba44ce572e64ccacedba5eb26d8ad421b1d99d9aa092b8348ee3e8"
+      },
+      "transfer": {
+        "difference_gain_interval": [
+          0.0,
+          null
+        ],
+        "method": "unresolved composite domain guard",
+        "pointwise_support_preserved": false,
+        "unknown_reasons": [
+          "composite domain guard unresolved: spatial-band offset domain budget exceeded"
+        ]
+      }
+    }
+  ],
+  "producer_sha256": "3d928e81470bea04fa9fb571e7713a01b653693d3493fc89de809c7e6a4ef792",
+  "prominence_exceptions": 0,
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "schema_version": 1,
+  "scope": "Exact previously failed 124-case source-only prominence producer recovery; not eligibility or image qualification",
+  "source_results_sha256": "1ac8a2b15b744117523b5950d1dc825192eb3804e9880944e7ca407f37bcdc84",
+  "support_exceptions": 0,
+  "tested_cases": 124
+}

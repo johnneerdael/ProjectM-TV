@@ -13,38 +13,38 @@ facilities selectively, with no display simulation.
 optional compiler IR; unchanged Android/AAR.
 
 ## 1. Baseline and contract
-- [ ] Read current activity/mood/extraction paths and save fixed2000/100 identities.
-- [ ] Record current quantified fields and unassigned bands; freeze new thresholds
+- [x] Read current activity/mood/extraction paths and save fixed2000/100 identities.
+- [x] Record current quantified fields and unassigned bands; freeze new thresholds
   as preference assumptions independently of the cohort/human labels.
-- [ ] Define evidence groups (`flashing`, `motion`, `prominence`), physical units,
+- [x] Define evidence groups (`flashing`, `motion`, `prominence`), physical units,
   interval/premise/provenance fields and explicit consumer signatures.
 
 ## 2. Mathematical producers (independent files)
-- [ ] Flash evidence: first controls for high/low contrast, unreachable gates,
+- [x] Flash evidence: first controls for high/low contrast, unreachable gates,
   smooth high-frequency pulses, alpha/modulo crossings and shared event schedules;
   then use qualified source ranges/derivatives and predicate proofs.
-- [ ] Motion evidence: first translation/rotation/zoom combined cases, inverse
+- [x] Motion evidence: first translation/rotation/zoom combined cases, inverse
   map direction, zero-neutral, singular/spatial/unknown cases and explicit FPS;
   then reuse native transport and source derivative machinery.
-- [ ] Prominence evidence: first tiny/transparent/offscreen/viewport-covering/
+- [x] Prominence evidence: first tiny/transparent/offscreen/viewport-covering/
   attenuated/overlapping cases; then derive clipping/material/transfer intervals
   while preserving unresolved history and contrast.
-- [ ] Run focused tests after each producer and repair/retest exact failures.
+- [x] Run focused tests after each producer and repair/retest exact failures.
 
 ## 3. Consumer and preference mapping
-- [ ] Add `static_behaviour` to source description; preserve existing fields and
+- [x] Add `static_behaviour` to source description; preserve existing fields and
   include context/policy identities in export/cache identity.
 - [ ] Implement `score_static_behaviour(evidence, preferences=None)` with activity
   range, bands/reasons and missing contributions. Never fill p95 fields from
   deterministic upper bounds or promote estimates into native certification.
-- [ ] Test calm/mid/intense controls and transparency/disconnection/unknown
+- [x] Test calm/mid/intense controls and transparency/disconnection/unknown
   rejection, overlap25–30/70–75 and strict no-flash Chill eligibility.
-- [ ] Document schema/units/assumptions and update AGENTS in the same branch.
+- [x] Document schema/units/assumptions and update AGENTS in the same branch.
 
 ## 4. Real source qualification and continued gap reduction
-- [ ] Compare baseline/new facts and scores on unchanged fixed2000; report exact
+- [x] Compare baseline/new facts and scores on unchanged fixed2000; report exact
   affected filenames/hashes, unknown causes by prevalence and component visibility.
-- [ ] Recheck known human examples without fitting to their individual outcomes.
+- [x] Recheck known human examples without fitting to their individual outcomes.
 - [ ] Prioritize any missing frequent flash/motion/prominence calculation and
   implement/retest it before declaring completion.
 - [ ] Run prepared suite, schema checks,100-source paired export and independent
@@ -58,3 +58,28 @@ MILK_SYMBOLIC_PYTHON=/Users/jneerdael/Scripts/source-analysis-evaluation/python-
 ```
 All final adapter/environment inputs remain in the completed component
 qualification JSON under build/preset-corpus; revalidate before full-suite use.
+
+## Current ledger
+
+- `a7523167`: source producer integration, fixed2000 qualification, prepared
+  3406tests+92subtests and strict docs. Zero automatic eligible bands; goal not done.
+- `85786b63`: generic unknown-activity Chill guard and independent bounded producer
+  retention. Focused124 originals retain124reports and113usefulhues;152prepared
+  neighboring controls pass. Mathematical prominence gaps remain.
+- Candidate index/outer-fold port is being integrated separately after16new and
+  12existing controls; original grind231 recovers structural captures only.
+- Unfinished: editable preference argument, full final100 export, integration
+  qualification, broad flash/movement domain gains and useful validated grouping.
+- Ruling: do not turn known zero-valued partial components into calm suggestions
+  when remaining activity is unresolved. Historical results are preserved.
+- Ruling: producer-local bounded caches and partial failure records retain
+  independent colour/flash/motion facts; no missing range is invented.
+
+- `7a01c8f0`: original typed index/outer capture port,65focused controls, minimal
+  optional schema addition; no upstream Java/source dependency.
+- Final v5 fixed2000 run:2000 behaviour reports,1552 useful hue descriptions,
+  367conditional activity estimates;0automatic eligible bands.100 paired exports
+  pass schema/model identities and unknown-activity rejection. Goal remains active.
+- Fresh review findings repaired: instance resampling multiplicity, context-domain
+  propagation, optional traversal-budget isolation, output clamp and native finite
+  domain guards. Native finite ranges are modeled assumptions, not driver evidence.

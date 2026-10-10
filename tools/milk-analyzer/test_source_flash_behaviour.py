@@ -284,3 +284,88 @@ def test_pruned_shape_does_not_retain_an_unreachable_modulo_hazard():
     with ProofSession(python):
         result=flash_evidence(a,appearance_from_analysis(a),{'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'bass':[0,2]}})
     assert not any(h['kind']=='shape_channel_modulo_crossing' for h in result['source_hazards'])
+
+
+def textured_fill(body, config=''):
+    result=source_evidence('fWaveAlpha=0\nshapecode_0_enabled=1\nshapecode_0_textured=1\n'+config+
+        'shape_0_per_frame1='+body+'\n')
+    return next(r for r in result['records'] if r['component_id']=='shape_0' and r['part']=='fill')
+
+
+def test_fixed_unit_texture_material_partial_recovers_rate_without_total_flash_claim():
+    r=textured_fill('r=.5+.4*sin(60*time);r2=r;g=0;g2=0;b=0;b2=0;a=.5;a2=.5;border_a=0;additive=1;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second']==pytest.approx(12,abs=1e-6)
+    assert p['brightness_delta_range'][1]>=.4
+    assert p['total_brightness_rate_known'] is False
+    assert p['texture_history_change_rate'] is None
+    assert r['maximum_brightness_change_per_second'] is None
+    assert r['total_brightness_rate_known'] is False
+
+
+def test_moving_texture_keeps_total_unknown_when_material_partial_is_zero():
+    r=textured_fill('r=.5;r2=.5;a=.5;a2=.5;tex_ang=time;border_a=0;additive=1;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second']==0
+    assert p['sampling_coordinate_response_included'] is False
+    assert p['total_brightness_rate_known'] is False
+    assert r['maximum_brightness_change_per_second'] is None
+    assert r['unknown_reasons']
+
+
+def test_missing_texture_asset_binding_is_an_assumption_not_visible_flashing():
+    r=textured_fill('r=.5+.4*sin(60*time);r2=r;a=.5;a2=.5;border_a=0;additive=1;',
+                    'shapecode_0_image=absent-texture.png\n')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['texture_binding_verified'] is False
+    assert p['visible_flashing_verified'] is False
+    assert p['brightness_delta_range'][0]==0
+    assert p['declared_texture_rgba_domain']==[[0.,1.]]*4
+    assert any('fixed' in x and 'RGBA' in x for x in p['premises'])
+
+
+def test_texture_alpha_change_over_blend_accounts_for_destination_contrast():
+    r=textured_fill('r=.8;r2=.8;g=.8;g2=.8;b=.8;b2=.8;a=.5+.1*sin(2*time);a2=a;border_a=0;additive=0;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second']==pytest.approx(.36,abs=1e-6)
+    # Fixed texture RGB0/alpha1 and destination1 produce a .2 two-state
+    # brightness difference from alpha alone. Untextured colour contrast.8
+    # must not reduce that ceiling to.16.
+    assert p['brightness_delta_range'][1]>=.2
+    assert p['texture_history_change_rate'] is None
+
+
+def test_fixed_texture_partial_retains_known_invalid_native_rgb_domain():
+    r=textured_fill('r=1e100;r2=1e100;a=.5;a2=.5;border_a=0;additive=1;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second'] is None
+    assert p['brightness_delta_range'] is None
+    assert any('native' in x and 'domain' in x for x in p['unknown_reasons'])
+
+
+def test_fixed_texture_partial_does_not_make_modulo_crossing_continuous():
+    r=textured_fill('r=1+.1*sin(60*time);r2=r;a=.5;a2=.5;border_a=0;additive=1;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second'] is None
+    assert p['brightness_delta_range'] is not None
+    assert p['nominal_continuity']=='unknown'
+    assert r['source_evidence']['nominal_modulo_schedules']
+
+
+def test_unknown_blend_mode_has_no_fixed_texture_rate_or_difference_bound():
+    r=textured_fill('r=.5+.4*sin(60*time);r2=r;a=.5;a2=.5;border_a=0;additive=bass;')
+    p=r['fixed_unit_texture_material_partial']
+    assert p['maximum_brightness_change_per_second'] is None
+    assert p['brightness_delta_range'] is None
+    assert any('blend' in reason for reason in p['unknown_reasons'])
+
+
+def test_fixed_black_texture_over_rate_retains_full_destination_alpha_term():
+    r=textured_fill('r=.9;r2=.9;g=.9;g2=.9;b=.9;b2=.9;a=.5+.1*sin(time);a2=a;border_a=0;additive=0;')
+    p=r['fixed_unit_texture_material_partial']
+    # At fixed T_rgb0,T_a1,D1, output=1-alpha and its nominal rate ceiling is.1.
+    # The untextured positive-colour contrast ceiling.09 would be invalid.
+    assert p['maximum_brightness_change_per_second']==pytest.approx(.19,abs=1e-6)
+    assert p['maximum_brightness_change_per_second']>=.1
+    assert p['source_evidence']['maximum_incoming_rgb_rate_per_second'][0]==pytest.approx(.09,abs=1e-6)
+    assert p['source_evidence']['maximum_blended_rgb_rate_per_second'][0]>=.1
