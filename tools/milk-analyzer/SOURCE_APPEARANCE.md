@@ -38,6 +38,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `texture_colour_envelopes` | Independent affine texture-input RGB boxes and history/external input norms; not shared-history recurrence gain |
 | `nonlinear_texture_colour_bounds` | Per-channel nominal ranges through supported nonlinear scalar operations on declared texture inputs; no sensitivity or mood score |
 | `sampling_geometry.stages.*[].oscillatory_displacement` | Symbolic uniform-controlled wave amplitudes, spatial phase gradients and baseline lookup map; conditional nominal deformation bounds |
+| `sampling_geometry.stages.*[].sample_value_offset_envelope` | Conditional nonlinear local sample-value offset ranges; no image-gradient or whole-feedback sensitivity |
 | `elements[].audio_routes[].nominal_audio_response` | Sufficient nominal scalar control-change bound per audio input unit, with other inputs fixed; no time-rate or visible response score |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
@@ -1849,3 +1850,37 @@ API copies validated request data before reading a preset. Changing the file
 during a run aborts instead of mixing assumptions. A scenario record explicitly
 sets `observed_runtime_inputs:false` and `runtime_binding_verified:false`.
 Conditional test-domain bounds are not measured or calibrated mood/genre scores.
+
+## Nonlinear sampled-value coordinate offsets
+
+`sample_value_offset_envelope` reuses typed sample substitution and scalar
+value bounds to describe supported nonlinear local image/noise-driven offsets.
+Each directly sampled RGBA lane receives an explicit independent[0,1]input
+premise. The producer extracts a pointwise-affine spatial baseline and residual
+offset, requiring baseline coefficients to be independent of sampled values.
+It bounds the residual only; sampled values remain local parameters, not
+spatially uniform images or observed texture contents.
+
+For `.05*pow(GetBlur1(uv).r,2)`, a usable unit-input domain gives nominal
+offset range[0,.05]. `.03*sin(noise.r*6)` gives[-.03,.03]. These scalar rules
+retain blur decoding, domain checks, native upload endpoints and per-axis
+unknowns. A singular reciprocal can leave x unresolved while y stays zero.
+Image-dependent spatial scale withholds this offset-only model. Original
+known-invalid scalar/vector arithmetic is checked before a positive claim,
+including zero-product operands, without changing native rendering policy.
+
+`base_coefficient_programs` uses the same six declared spatial columns as the
+periodic lookup model; `offset_programs` and per-axis value envelopes preserve
+the algebra. `sample_sites` retains local input identity, original sample-site
+index, texture name, sampling policy and its coordinate program.
+`coordinate_sample_dependency` reports whether a sampled-value input itself
+uses image-dependent coordinates; false does not mean its colours are uniform
+over the screen. The output ranges include other uniform offsets where bounded.
+Native texture binding/decoding and the[0,1]premise remain conditional.
+
+Full coordinate sensitivity, image spatial gradients, feedback evolution,
+screen motion/intensity, actual structure/dominance and mood stay unresolved.
+An offset range is a magnitude ingredient, not a fluid simulation or a proof
+that a particular texture appears on screen. Declared input scenarios currently
+bind ripple envelopes only; these image-offset records retain their own source
+premises without an automatic scenario override.

@@ -451,3 +451,10 @@ description. These are caller assumptions, not measured music or genre ranges.
 See the [technical input-scenario contract](https://github.com/johnneerdael/ProjectM-TV/blob/feat/predictor-static-output-bounds/tools/milk-analyzer/SOURCE_APPEARANCE.md#opt-in-declared-input-scenarios)
 for the JSON format and identity rules. Canvas dimensions must describe what
 the shader sees; Native4K output can use an authored canvas of a different size.
+
+For supported image-driven distortions, `sample_value_offset_envelope` gives
+conditional offset ranges through nonlinear colour math. It can describe, for
+example, how squared brightness or a noise channel displaces a texture lookup.
+The assumed image-input range is explicit; actual texture contents, image
+gradients and evolving feedback remain unknown. This supplies deformation
+ingredients without inspecting a frame, rather than guaranteeing a fluid look.

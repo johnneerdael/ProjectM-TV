@@ -3670,6 +3670,9 @@
                       },
                       "oscillatory_displacement": {
                         "$ref": "#/$defs/oscillatoryDisplacement"
+                      },
+                      "sample_value_offset_envelope": {
+                        "$ref": "#/$defs/sampleValueOffsetEnvelope"
                       }
                     }
                   }
@@ -4340,6 +4343,9 @@
                       },
                       "oscillatory_displacement": {
                         "$ref": "#/$defs/oscillatoryDisplacement"
+                      },
+                      "sample_value_offset_envelope": {
+                        "$ref": "#/$defs/sampleValueOffsetEnvelope"
                       }
                     }
                   }
@@ -5586,6 +5592,66 @@
               "const": false
             }
           }
+        }
+      }
+    },
+    "sampleValueOffsetEnvelope": {
+      "type": "object",
+      "required": [
+        "policy",
+        "source_model",
+        "offset_range_uv",
+        "sample_sites",
+        "full_coordinate_sensitivity",
+        "actual_feedback_persistence"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-nonlinear-sample-offset-envelope-v1"
+        },
+        "source_model": {
+          "enum": [
+            "unknown",
+            "sample_value_offset_bounds",
+            "partial_sample_value_offset_bounds"
+          ]
+        },
+        "offset_range_uv": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "sample_sites": {
+          "type": "array"
+        },
+        "sample_textures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "full_coordinate_sensitivity": {
+          "type": "null"
+        },
+        "actual_feedback_persistence": {
+          "type": "null"
+        },
+        "visible_motion_intensity": {
+          "type": "null"
         }
       }
     }

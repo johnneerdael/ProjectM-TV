@@ -9,6 +9,7 @@ def coefficient_envelope(field,*,input_domains=None):
     from source_appearance import _canonical_lane
     from source_native_warp import _f32
     from field_math import SWIZZLE
+    from effect_families import _parts
     memo={};active=set();domains=dict(input_domains or {});assumptions=set();derived=set()
     def project(original,depth=0):
         key=id(original)
@@ -17,11 +18,27 @@ def coefficient_envelope(field,*,input_domains=None):
         active.add(key)
         try:
             node=_canonical_lane(original)
-            if node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1 and node.args[0].op=='input':
+            if node.op=='dot' and len(node.args)==2:
+                a,b=map(_parts,node.args)
+                if len(a)!=len(b) or not 1<=len(a)<=4:raise ValueError('coefficient dot dimensions unresolved')
+                result=Field('constant',detail={'value':0.})
+                for x,y in zip(a,b):result=Field('add',(result,Field('multiply',(project(x,depth+1),project(y,depth+1)),'float')),'float')
+            elif node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
+                if node.dtype!='float':raise ValueError('coefficient member result is not scalar float')
                 parent=node.args[0];lane=SWIZZLE[node.detail['field']];name=parent.detail.get('name')
-                if parent.dtype not in {'float2','float3','float4'} or lane>=int(parent.dtype[-1]) or not isinstance(name,str) or not name:
-                    raise ValueError('ripple coefficient scalar input identity/type unresolved')
-                result=Field('input',dtype='float',detail={'name':name+'.'+'xyzw'[lane]})
+                if parent.op=='input':
+                    if parent.dtype not in {'float2','float3','float4'} or lane>=int(parent.dtype[-1]) or not isinstance(name,str) or not name:
+                        raise ValueError('ripple coefficient scalar input identity/type unresolved')
+                    result=Field('input',dtype='float',detail={'name':name+'.'+'xyzw'[lane]})
+                elif parent.op=='domain_checked':
+                    parts=_parts(parent.args[0])
+                    if lane>=len(parts):raise ValueError('guarded coefficient lane unresolved')
+                    result=Field('domain_checked',(project(parts[lane],depth+1),),'float',parent.detail)
+                else:
+                    parts=_parts(parent)
+                    if lane>=len(parts) or parts[lane].op=='member' and parts[lane].args and parts[lane].args[0] is parent:
+                        raise ValueError('cross-lane coefficient member unresolved')
+                    result=project(parts[lane],depth+1)
             else:
                 args=tuple(project(v,depth+1) for v in node.args)
                 if node.op=='narrow' and node.detail.get('numeric_domain')=='shader-float32':

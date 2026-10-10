@@ -85,3 +85,11 @@ def test_positive_gradient_underflow_rounds_outward_not_to_stationary():
     e=deformation_envelope([{'amplitude':[number(1e-300),number(0)],
                             'gradient':[number(1e-300)]+[number(0)]*5}],basis='shader_uv',identity_baseline=True)
     assert e['jacobian_perturbation_infinity_norm_upper_bound']>0
+
+
+def test_malformed_vector_member_does_not_silently_change_scalar_type():
+    from shader_fields import Field
+    from source_ripple_envelopes import coefficient_envelope
+    parent=Field('input',dtype='float4',detail={'name':'_c4'})
+    r=coefficient_envelope(Field('member',(parent,),'int',{'field':'x','swizzle':True}),input_domains={'_c4.x':[0,2]})
+    assert r['nominal_value_range'] is None

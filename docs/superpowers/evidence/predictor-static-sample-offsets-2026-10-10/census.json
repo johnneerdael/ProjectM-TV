@@ -1,0 +1,2043 @@
+{
+  "basis": "conditional nonlinear local sample-value offsets; not global gradients, feedback or mood certificates",
+  "presets": 100,
+  "source_and_zip_joins_verified": true,
+  "changed_previous_descriptions": [],
+  "changed_source_gap_presets": [],
+  "counts": {
+    "unknown": 1069,
+    "presets_with_bounds": 23,
+    "image_driven_presets_with_bounds": 23,
+    "sample_value_offset_bounds": 61,
+    "bounded_sites_without_previous_affine_offset_range": 3,
+    "partial_sample_value_offset_bounds": 4
+  },
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "compile_manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "model_modules": {
+    "source_ripple_envelopes.py": "64571f4a4a4ae6a3c4fedd72fc3e2907c6507c089cf9e37f18afcac579a5d3bc",
+    "source_sample_offset_envelopes.py": "1b6ad739ee437f42f458939ea83bf671daad7281ed73fabffc302cb05bbba660",
+    "source_sampling.py": "ab3b38e61ddc12306a4b403a408a2ec1caa52db1d954077bd878f3596236391a"
+  },
+  "zip_sha256": "0800e8fa32cb5f26da0925b5d7dc9f4e9e966ebb38c1d152dbaca33d0b993571",
+  "sum_export_preset_seconds": 39.611812,
+  "maximum_export_preset_seconds": 2.501673,
+  "rows": [
+    {
+      "preset": "Flexi - alien web bouncer [39].milk",
+      "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.10000000100000013,
+              0.10000000100000013
+            ],
+            [
+              -0.10000000100000013,
+              0.10000000100000013
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.100000001,
+              0.100000001
+            ],
+            [
+              -0.100000001,
+              0.100000001
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.4000000060000004,
+              0.4000000060000004
+            ],
+            [
+              -0.4000000060000004,
+              0.4000000060000004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.400000006,
+              0.400000006
+            ],
+            [
+              -0.400000006,
+              0.400000006
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ],
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.550000012,
+              0.550000012
+            ],
+            [
+              -0.550000012,
+              0.550000012
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.8125000150000008,
+              0.5625000150000008
+            ],
+            [
+              -0.8125000150000008,
+              0.5625000150000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.687500015,
+              0.687500015
+            ],
+            [
+              -0.687500015,
+              0.687500015
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 6,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ],
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.550000012,
+              0.550000012
+            ],
+            [
+              -0.550000012,
+              0.550000012
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ],
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.550000012,
+              0.550000012
+            ],
+            [
+              -0.550000012,
+              0.550000012
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ],
+            [
+              -0.5500000120000005,
+              0.5500000120000005
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.550000012,
+              0.550000012
+            ],
+            [
+              -0.550000012,
+              0.550000012
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ],
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.27499999875,
+              0.27499999875
+            ],
+            [
+              -0.27499999875,
+              0.27499999875
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ],
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.27499999875,
+              0.27499999875
+            ],
+            [
+              -0.27499999875,
+              0.27499999875
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 12,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ],
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.27499999875,
+              0.27499999875
+            ],
+            [
+              -0.27499999875,
+              0.27499999875
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ],
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.27499999875,
+              0.27499999875
+            ],
+            [
+              -0.27499999875,
+              0.27499999875
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 10,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ],
+            [
+              -0.2749999987500004,
+              0.2749999987500004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.27499999875,
+              0.27499999875
+            ],
+            [
+              -0.27499999875,
+              0.27499999875
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ],
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.1599999997,
+              0.1599999997
+            ],
+            [
+              -0.1599999997,
+              0.1599999997
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 6,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ],
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.1599999997,
+              0.1599999997
+            ],
+            [
+              -0.1599999997,
+              0.1599999997
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ],
+            [
+              -0.15999999970000017,
+              0.15999999970000017
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.1599999997,
+              0.1599999997
+            ],
+            [
+              -0.1599999997,
+              0.1599999997
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 18,
+          "canonical_texture": "main",
+          "source_model": "partial_sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            null
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 17,
+          "canonical_texture": "main",
+          "source_model": "partial_sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ],
+            null
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 16,
+          "canonical_texture": "main",
+          "source_model": "partial_sample_value_offset_bounds",
+          "offset_range_uv": [
+            null,
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 15,
+          "canonical_texture": "main",
+          "source_model": "partial_sample_value_offset_bounds",
+          "offset_range_uv": [
+            null,
+            [
+              -0.034000008310000086,
+              0.053999989310000086
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 6,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 5,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "bowel trounce dumring.milk",
+      "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.02199999946000004,
+              0.02199999946000004
+            ],
+            [
+              -0.02199999946000004,
+              0.02199999946000004
+            ]
+          ],
+          "sample_textures": [
+            "blur1",
+            "main"
+          ],
+          "prior_affine_sample_offset_range": null
+        }
+      ]
+    },
+    {
+      "preset": "cortex meat - adm affect non.milk",
+      "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.12000000100000013,
+              0.12000000100000013
+            ],
+            [
+              -0.12000000100000013,
+              0.12000000100000013
+            ]
+          ],
+          "sample_textures": [
+            "blur2"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.120000001,
+              0.120000001
+            ],
+            [
+              -0.120000001,
+              0.120000001
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.12000000100000013,
+              0.12000000100000013
+            ],
+            [
+              -0.12000000100000013,
+              0.12000000100000013
+            ]
+          ],
+          "sample_textures": [
+            "blur2"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.120000001,
+              0.120000001
+            ],
+            [
+              -0.120000001,
+              0.120000001
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz+.milk",
+      "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ],
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ],
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.5375000253912782,
+              0.2875000253912781
+            ],
+            [
+              -0.5375000253912782,
+              0.2875000253912781
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.4125000253912777,
+              0.4125000253912777
+            ],
+            [
+              -0.4125000253912777,
+              0.4125000253912777
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 6,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ],
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ],
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ],
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ],
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ],
+            [
+              -0.3300000203130224,
+              0.3300000203130224
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ],
+            [
+              -0.33000002031302217,
+              0.33000002031302217
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 17,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 16,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 15,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 14,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 13,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 12,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 10,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+      "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -1.0000000000000009,
+              1.0000000000000009
+            ],
+            [
+              -1.0000000000000009,
+              1.0000000000000009
+            ]
+          ],
+          "sample_textures": [
+            "blur1",
+            "blur3",
+            "main"
+          ],
+          "prior_affine_sample_offset_range": null
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 9,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.650000006000001,
+              1.3499999940000011
+            ],
+            [
+              -0.650000006000001,
+              1.3499999940000011
+            ]
+          ],
+          "sample_textures": [
+            "blur1",
+            "blur3",
+            "main"
+          ],
+          "prior_affine_sample_offset_range": null
+        }
+      ]
+    },
+    {
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -5e-324,
+              2.0000000000000004
+            ],
+            [
+              -5e-324,
+              2.0000000000000004
+            ]
+          ],
+          "sample_textures": [
+            "noise_hq"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              2.0
+            ],
+            [
+              0.0,
+              2.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 17,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 16,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 15,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 14,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              0.9460000106899998,
+              1.0340000083100003
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 13,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 12,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 11,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 10,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+      "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.011099999891,
+              0.018899999409000008
+            ],
+            [
+              -0.011099999891,
+              0.018899999409000008
+            ]
+          ],
+          "sample_textures": [
+            "main"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              0.0299999993
+            ],
+            [
+              0.0,
+              0.0299999993
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2000000030000002,
+              0.2000000030000002
+            ],
+            [
+              -0.2000000030000002,
+              0.2000000030000002
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.200000003,
+              0.200000003
+            ],
+            [
+              -0.200000003,
+              0.200000003
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter - liquid circuitry - conjugoth.milk",
+      "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.003000000053999998,
+              0.006999999726000009
+            ],
+            [
+              -0.003000000053999998,
+              0.006999999726000009
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              0.00999999978
+            ],
+            [
+              0.0,
+              0.00999999978
+            ]
+          ]
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.036000003420000114,
+              0.08400000318000007
+            ],
+            [
+              -0.12000000660000011,
+              0.27999999940000025
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              0.12000000660000007
+            ],
+            [
+              0.0,
+              0.400000006
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - bonobo - absurd.milk",
+      "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 1,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.0036999999686,
+              0.006299999811400002
+            ],
+            [
+              -0.0036999999686,
+              0.006299999811400002
+            ]
+          ],
+          "sample_textures": [
+            "main"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              0.00999999978
+            ],
+            [
+              0.0,
+              0.00999999978
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.2000000030000002,
+              0.2000000030000002
+            ],
+            [
+              -0.2000000030000002,
+              0.2000000030000002
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.200000003,
+              0.200000003
+            ],
+            [
+              -0.200000003,
+              0.200000003
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -2.0000000000000018,
+              3e-323
+            ],
+            [
+              -2.0000000000000018,
+              3e-323
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -2.0,
+              0.0
+            ],
+            [
+              -2.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -1e-323,
+              1.0000000000000004
+            ],
+            [
+              -1e-323,
+              1.0000000000000004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 4,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.4000000060000004,
+              0.4000000060000004
+            ],
+            [
+              -0.4000000060000004,
+              0.4000000060000004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.400000006,
+              0.400000006
+            ],
+            [
+              -0.400000006,
+              0.400000006
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "composite",
+          "sample_site_index": 8,
+          "canonical_texture": "blur3",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 7,
+          "canonical_texture": "blur2",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 6,
+          "canonical_texture": "blur1",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 5,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ],
+            [
+              -0.03400000831000008,
+              0.05399998931000008
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.04399999881,
+              0.04399999881
+            ],
+            [
+              -0.04399999881,
+              0.04399999881
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - prigogine quantum foam self-organizer.milk",
+      "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -0.021999999460000023,
+              0.021999999460000023
+            ],
+            [
+              -0.021999999460000023,
+              0.021999999460000023
+            ]
+          ],
+          "sample_textures": [
+            "main"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              -0.02199999946,
+              0.02199999946
+            ],
+            [
+              -0.02199999946,
+              0.02199999946
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - tech ed lacquer sinus raw.milk",
+      "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078",
+      "image_driven_family": true,
+      "bounded_sites": [
+        {
+          "stage": "warp",
+          "sample_site_index": 2,
+          "canonical_texture": "main",
+          "source_model": "sample_value_offset_bounds",
+          "offset_range_uv": [
+            [
+              -5e-324,
+              5e-324
+            ],
+            [
+              -1e-323,
+              0.004000000190000004
+            ]
+          ],
+          "sample_textures": [
+            "blur1"
+          ],
+          "prior_affine_sample_offset_range": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.00400000019
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

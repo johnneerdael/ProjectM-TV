@@ -183,6 +183,8 @@ def sampling_geometry(analysis):
             result['copy_lattice']=copy_lattice(result)
             from source_periodic_sampling import oscillatory_displacement
             result['oscillatory_displacement']=oscillatory_displacement(node.args[0],analysis)
+            from source_sample_offset_envelopes import sample_value_offset_envelope
+            result['sample_value_offset_envelope']=sample_value_offset_envelope(node.args[0])
             maps.append(result)
         stages[stage]=maps;statuses[stage]='conditional custom source'
     return {'policy':'source-affine-sampling-geometry-v1','stages':stages,'stage_status':statuses,

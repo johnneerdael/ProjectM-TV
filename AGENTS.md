@@ -1164,3 +1164,11 @@ registers. Preserve unconstrained descriptors and add separate ripple scenario
 bounds. Bind cache/run records to semantic/raw-file hashes and reject changed
 files during runs. These declarations are assumptions, never observed runtime
 inputs, music/genre guarantees or native appearance certification.
+
+Nonlinear sampled-offset maintenance: lift direct RGBA samples as explicitly
+bounded local parameters, never spatially uniform images. Reuse typed scalar
+projection/domain guards; retain per-axis unknowns and original sampling sites.
+Only offset bounds with sample-independent spatial coefficients qualify; image
+dependent scale stays unknown. Check original zero-product/singular domains
+before certification. Ranges do not establish image gradients, full feedback,
+visible motion or moods; input scenarios do not implicitly override this model.
