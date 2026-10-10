@@ -566,3 +566,10 @@ coordinate motion can still select different texels abruptly. The export keeps
 actual flashes unverified: equal neighbours, constant images, clamping and later
 processing can suppress a jump. Only nominal constant drift with repeat addressing
 gets a grid-crossing formula; a UV-speed bound is not a general flash-frequency bound.
+
+`activity.motion_intensity.native_lookup_transport` carries native feedback
+displacement through supported shader lookups. This covers an important case:
+a constant authored lookup can still transport the previous image every frame.
+Its RMS quantities need the renderer's aspect values and remain separate from
+forward screen speed. Nearest main-image sampling can expose a possible feedback
+jump source, but positive displacement ceilings do not certify visible flashes.

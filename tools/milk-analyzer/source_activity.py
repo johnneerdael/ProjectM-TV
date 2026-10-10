@@ -44,6 +44,9 @@ def source_activity(analysis,description):
     motion['nested_texture_motion']=nested_texture_motion(description)
     from source_nearest_activity import nearest_sampling_hazards
     flashing['hazards'].extend(nearest_sampling_hazards(description))
+    from source_native_lookup_transport import native_lookup_transport,native_nearest_hazards
+    motion['native_lookup_transport']=native_lookup_transport(description)
+    flashing['hazards'].extend(native_nearest_hazards(description,motion['native_lookup_transport']))
     for stage,model in description['nonlinear_texture_colour_bounds']['stages'].items():
         for report,scenario in ((model,None),(model.get('scenario_colour_envelope'),True)):
             if report is None:continue

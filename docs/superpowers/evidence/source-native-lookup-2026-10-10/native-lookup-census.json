@@ -1,0 +1,100 @@
+{
+  "presets": 100,
+  "computed": 100,
+  "structured_descriptions": 100,
+  "bounded_lookup_presets": [
+    "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+    "ORB - Firelight.milk",
+    "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+    "martin + flexi - lock and release bipolar 02.milk",
+    "suksma - amental ruiner broach2.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "Geiss - Tadpole Hunter.milk",
+    "404.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "Waltra - Codex Machine 2.milk",
+    "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+    "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk"
+  ],
+  "positive_native_lookup_presets": [
+    "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+    "ORB - Firelight.milk",
+    "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+    "martin + flexi - lock and release bipolar 02.milk",
+    "suksma - amental ruiner broach2.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "Geiss - Tadpole Hunter.milk",
+    "404.milk",
+    "eye disease ngornggniq no business mashing.milk",
+    "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+    "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+    "Waltra - Codex Machine 2.milk",
+    "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk"
+  ],
+  "nearest_feedback_hazard_presets": [
+    "suksma - amental ruiner broach2.milk",
+    "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+    "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk"
+  ],
+  "nearest_hazard_records": [
+    {
+      "name": "suksma - amental ruiner broach2.milk",
+      "kind": "nearest_native_feedback_displacement",
+      "stage": "warp",
+      "sample_site_index": 2,
+      "sampler": "sampler_pw_main",
+      "canonical_texture": "main",
+      "visible_flashing_verified": false,
+      "visible_flash_frequency_hz": null,
+      "scope": "possible nearest-cell changes under repeated native feedback transport",
+      "conditions": [
+        "Positive nominal RMS ceiling does not prove displacement or a texel boundary crossing",
+        "The retained image must have differing texels and the lookup/colour path must preserve their change",
+        "Native controls act each feedback step; this does not assert a per-second coordinate derivative",
+        "RMS is not a pointwise jump-size bound; wrapping, storage, texel alignment and native precision remain separate",
+        "Shader selection, masks, primitive coverage, history and later composition determine visible flashes; no mood verdict"
+      ]
+    },
+    {
+      "name": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "kind": "nearest_native_feedback_displacement",
+      "stage": "warp",
+      "sample_site_index": 3,
+      "sampler": "sampler_pw_main",
+      "canonical_texture": "main",
+      "visible_flashing_verified": false,
+      "visible_flash_frequency_hz": null,
+      "scope": "possible nearest-cell changes under repeated native feedback transport",
+      "conditions": [
+        "Positive nominal RMS ceiling does not prove displacement or a texel boundary crossing",
+        "The retained image must have differing texels and the lookup/colour path must preserve their change",
+        "Native controls act each feedback step; this does not assert a per-second coordinate derivative",
+        "RMS is not a pointwise jump-size bound; wrapping, storage, texel alignment and native precision remain separate",
+        "Shader selection, masks, primitive coverage, history and later composition determine visible flashes; no mood verdict"
+      ]
+    },
+    {
+      "name": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "kind": "nearest_native_feedback_displacement",
+      "stage": "warp",
+      "sample_site_index": 2,
+      "sampler": "sampler_pw_main",
+      "canonical_texture": "main",
+      "visible_flashing_verified": false,
+      "visible_flash_frequency_hz": null,
+      "scope": "possible nearest-cell changes under repeated native feedback transport",
+      "conditions": [
+        "Positive nominal RMS ceiling does not prove displacement or a texel boundary crossing",
+        "The retained image must have differing texels and the lookup/colour path must preserve their change",
+        "Native controls act each feedback step; this does not assert a per-second coordinate derivative",
+        "RMS is not a pointwise jump-size bound; wrapping, storage, texel alignment and native precision remain separate",
+        "Shader selection, masks, primitive coverage, history and later composition determine visible flashes; no mood verdict"
+      ]
+    }
+  ],
+  "new_execution_gaps": []
+}

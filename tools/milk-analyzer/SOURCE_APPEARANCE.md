@@ -2397,3 +2397,41 @@ automatic Party verdict or a claim that an empty list proves Chill suitability.
 describes abrupt transitions at texel boundaries. Original MilkDrop2
 `milkdropfs.cpp` lines 3921–3927 selects point versus bilinear/anisotropic filtering;
 the analyzer retains the declared patched-core sampler policy.
+
+## Native feedback displacement through shader lookups
+
+`activity.motion_intensity.native_lookup_transport` propagates the existing
+uniform native mesh displacement envelope into constant-affine authored warp
+lookups. If the native displacement is `d` in aspect-corrected coordinates and
+the lookup's mesh-UV columns are `M_x,M_y`, then:
+
+```text
+RMS lookup displacement <= native_RMS_bound(aspectX,aspectY)
+    * (norm(M_x)/aspectX + norm(M_y)/aspectY)
+```
+
+Column norms use exact rational squares with outward finite square-root
+conversion. Renderer aspects remain explicit finite positive inputs. This
+triangle/operator bound may be loose, but remains usable with varying uniform
+control domains and procedural-warp envelopes. It integrates over uniform
+original UV area and excludes texel alignment and finite-precision interpolation.
+It is not a pointwise jump bound, per-second derivative or forward feature speed.
+
+The comparison holds native/control and uniform shader-offset values fixed:
+mesh-warped lookup versus the same lookup using original UV. Original-UV-only
+and composite lookups bypass this contribution; mixed warp/original mappings
+propagate only their mesh-UV columns. Unsupported maps, known-invalid authored
+coordinate domains and unresolved native control domains retain null bounds.
+
+`nearest_native_feedback_displacement` records a possible local nearest-main
+feedback jump source when the composed RMS ceiling is positive. A positive
+ceiling does not prove displacement, a texel crossing or visible flashing.
+The retained main image must have differing texels and the shader/coverage path
+must preserve their difference. External textures alone do not establish repeated
+feature transport. Texture history, offsets, masks, storage and later composition
+remain separate. These records do not automatically assign a mood.
+
+Geiss's authoring guide specifies zoom as a per-frame transform; original
+MilkDrop2 `milkdropfs.cpp` lines 1877–1924 applies zoom/stretch/warp/rotation and
+translation to previous-image sampling coordinates. The declared patched-core
+native displacement and shader-coordinate basis models remain the numeric target.

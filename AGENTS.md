@@ -1288,3 +1288,9 @@ nominal lookup ceiling and possible RGB route. Only repeat +constant drift gets
 grid-crossing W/H coefficients; speed alone cannot bound oscillatory recrossings.
 Direct RGBA gain row sums bound conditional jumps; nested magnitudes stay unknown.
 Keep possible local mechanism, texel contrast and verified screen flashing distinct.
+
+Native lookup transport composes aspect-corrected uniform RMS displacement with
+affine warp mesh-UV column norms and caller-supplied positive aspects. Composite
+and original-UV-only maps bypass it; shader offsets cancel at fixed inputs.
+Preserve coordinate-domain guards, exclude texel alignment and pointwise/temporal
+speed claims, and keep nearest-main feedback hazards possible rather than observed.

@@ -6219,7 +6219,8 @@
             "feedback_step_components",
             "geometry_speed_bounds",
             "texture_motion_bounds",
-            "nested_texture_motion"
+            "nested_texture_motion",
+            "native_lookup_transport"
           ],
           "properties": {
             "value": {
@@ -6303,6 +6304,47 @@
             },
             "nested_texture_motion": {
               "$ref": "#/$defs/nestedTextureMotion"
+            },
+            "native_lookup_transport": {
+              "type": "array",
+              "description": "Native feedback-step RMS displacement propagated through affine warp lookups; positive renderer aspects remain inputs. Not a temporal or pointwise speed.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "stage",
+                  "sample_site_index",
+                  "sampler",
+                  "native_mesh_contribution",
+                  "rms_lookup_displacement_uv_upper_bound_terms",
+                  "feedback_step_unit",
+                  "texel_alignment_included",
+                  "conditions"
+                ],
+                "properties": {
+                  "native_mesh_contribution": {
+                    "enum": [
+                      "unknown",
+                      "bypassed",
+                      "bounded"
+                    ]
+                  },
+                  "rms_lookup_displacement_uv_upper_bound_terms": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "feedback_step_unit": {
+                    "const": "source_texture_uv/feedback_step"
+                  },
+                  "texel_alignment_included": {
+                    "const": false
+                  },
+                  "visible_screen_speed": {
+                    "type": "null"
+                  }
+                }
+              }
             }
           }
         }
