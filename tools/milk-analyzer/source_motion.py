@@ -1,12 +1,14 @@
 """Nominal named control curves; these do not establish screen/image motion."""
 import math
 from source_temporal import affine_time_parameters
+from source_control_bounds import merge_continuity
 
 
 def motion_control(field,control,unit,*,application):
     from source_appearance import _phase_literal,_phase_terms,_expression
     result={'policy':'source-time-control-curves-v1','control':control,'control_unit':unit,
         'application':application,'curve_kind':'unknown','constant_value':None,
+        'rate_estimate_kind':'unknown','nominal_value_range_kind':'unknown','nominal_continuity':'unknown',
         'offset_value':None,'amplitude_value':None,'oscillator_function_code':None,
         'phase_expression':None,'phase_offset_rad':None,'angular_phase_rate_rad_per_second':None,
         'period_seconds':None,'frequency_hz':None,'nominal_value_range':None,
@@ -17,17 +19,17 @@ def motion_control(field,control,unit,*,application):
                       'Control variation does not establish visibility, geometry trajectories after projection, feedback motion or perceived intensity']}
     literal=_phase_literal(field)
     if literal is not None:
-        result.update(curve_kind='constant',constant_value=literal,
+        result.update(curve_kind='constant',rate_estimate_kind='exact_nominal',nominal_value_range_kind='exact_nominal',nominal_continuity='smooth_nominal',constant_value=literal,
                       nominal_value_range=[literal,literal],maximum_absolute_control_rate_per_second=0.)
         return result
     pair=affine_time_parameters(field)
     if pair is not None:
         rate,offset=pair
         if rate==0:
-            result.update(curve_kind='constant',constant_value=offset,
+            result.update(curve_kind='constant',rate_estimate_kind='exact_nominal',nominal_value_range_kind='exact_nominal',nominal_continuity='smooth_nominal',constant_value=offset,
                           nominal_value_range=[offset,offset],maximum_absolute_control_rate_per_second=0.)
         else:
-            result.update(curve_kind='linear_time',offset_value=offset,
+            result.update(curve_kind='linear_time',rate_estimate_kind='exact_nominal',nominal_continuity='smooth_nominal',offset_value=offset,
                 signed_linear_rate_per_second=rate,maximum_absolute_control_rate_per_second=abs(rate))
         return result
     try:terms=_phase_terms(field)
@@ -45,20 +47,28 @@ def motion_control(field,control,unit,*,application):
             if phase is not None and (amplitude==0 or phase[0]==0):
                 value=bias if amplitude==0 else bias+amplitude*(math.cos(phase[1]) if osc.op=='cos' else math.sin(phase[1]))
                 if math.isfinite(value):
-                    result.update(curve_kind='constant',constant_value=value,
+                    result.update(curve_kind='constant',rate_estimate_kind='exact_nominal',nominal_value_range_kind='exact_nominal',nominal_continuity='smooth_nominal',constant_value=value,
                         nominal_value_range=[value,value],maximum_absolute_control_rate_per_second=0.)
                     return result
             if phase is not None and phase[0]!=0:
                 rate=phase[0];speed=abs(rate*amplitude);frequency=abs(rate)/math.tau;period=math.tau/abs(rate)
                 low,high=bias-abs(amplitude),bias+abs(amplitude)
-                if all(math.isfinite(v) for v in (bias,amplitude,speed,frequency,period,low,high)):
-                    result.update(curve_kind='sinusoidal_time',offset_value=bias,amplitude_value=amplitude,
+                if (not (rate!=0 and amplitude!=0 and speed==0) and
+                        all(math.isfinite(v) for v in (bias,amplitude,speed,frequency,period,low,high))):
+                    result.update(curve_kind='sinusoidal_time',rate_estimate_kind='exact_nominal',nominal_value_range_kind='exact_nominal',nominal_continuity='smooth_nominal',offset_value=bias,amplitude_value=amplitude,
                         oscillator_function_code=1 if osc.op=='cos' else 2,
                         phase_expression=_expression(osc.args[0]),phase_offset_rad=phase[1],angular_phase_rate_rad_per_second=rate,
                         frequency_hz=frequency,period_seconds=period,nominal_value_range=[low,high],
                         maximum_absolute_control_rate_per_second=speed)
                     return result
-    result['unknown_reasons']=['control is not a supported constant, affine-time or single affine-time sinusoid']
+    from source_control_bounds import compound_time_bounds
+    bounds=compound_time_bounds(field)
+    result.update(nominal_value_range=bounds['nominal_value_range'],
+                  nominal_value_range_kind='upper_bound' if bounds['nominal_value_range'] is not None else 'unknown',
+                  nominal_continuity=bounds['nominal_continuity'],unknown_reasons=bounds['unknown_reasons'])
+    if bounds['maximum_absolute_control_rate_per_second'] is not None:
+        result.update(curve_kind='compound_time',rate_estimate_kind='upper_bound',
+                      maximum_absolute_control_rate_per_second=bounds['maximum_absolute_control_rate_per_second'])
     return result
 
 
@@ -72,6 +82,7 @@ def planar_trajectory(fields):
         'center_source_xy':None,'linear_velocity_source_xy':None,
         'harmonic_matrix_source_xy':None,'angular_rate_rad_per_second':None,
         'period_seconds':None,'semiaxis_lengths_source_units':None,
+        'nominal_continuity':merge_continuity([c['nominal_continuity'] for c in curves]),
         'maximum_source_speed_units_per_second':None,'speed_estimate_kind':'unknown',
         'axis_curves':curves,'visible_motion_speed':None,'unknown_reasons':[],
         'conditions':['Path and speed use authored x/y coordinates before native projection, clipping and feedback',
@@ -91,6 +102,8 @@ def planar_trajectory(fields):
         result.update(path_kind='stationary' if not any(velocity) else 'linear_drift',
             center_source_xy=centre,linear_velocity_source_xy=velocity,speed_estimate_kind='exact_nominal')
         return result
+    if any(c['curve_kind']=='compound_time' for c in curves):
+        result['path_kind']='independent_axis_curves';return result
     harmonic=[c for c in curves if c['curve_kind']=='sinusoidal_time']
     if any(c['curve_kind']=='linear_time' for c in curves) or len({abs(c['angular_phase_rate_rad_per_second']) for c in harmonic})!=1:
         result['path_kind']='independent_axis_curves';return result
@@ -134,6 +147,7 @@ def shape_vertex_motion(controls,geometry,trajectory):
     radius=motion_control(controls['rad'],'radius','NDC radius',application='shape perimeter')
     angle=motion_control(controls['ang'],'rotation','radian',application='shape perimeter')
     result={'policy':'source-custom-shape-vertex-motion-v1','estimate_kind':'unknown',
+        'nominal_continuity':merge_continuity([trajectory['nominal_continuity'],radius['nominal_continuity'],angle['nominal_continuity']]),
         'centre_speed_ndc_per_second_upper_bound':None,
         'maximum_absolute_radius_ndc':None,'maximum_radius_rate_ndc_per_second':None,
         'maximum_angle_rate_rad_per_second':None,
@@ -165,8 +179,12 @@ def shape_vertex_motion(controls,geometry,trajectory):
         if name=='x':value=2*value-1
         elif name=='y':value=1-2*value
         with np.errstate(over='ignore',invalid='ignore'):converted=float(np.float32(value))
-        if not math.isfinite(converted):reasons.append(name+' constant is outside its finite native float32 projection/conversion domain')
-    if geometry['effective_sides'] is None:reasons.append('effective side count is not a proved lifetime constant')
+        if not math.isfinite(converted):
+            reasons.append(name+' constant is outside its finite native float32 projection/conversion domain')
+            result['nominal_continuity']='unknown'
+    if geometry['effective_sides'] is None:
+        reasons.append('effective side count is not a proved lifetime constant')
+        result['nominal_continuity']='unknown'
     if result['centre_speed_ndc_per_second_upper_bound'] is None:reasons.append('centre speed has no finite nominal bound')
     if dr is None:reasons.append('radius derivative has no supported nominal bound')
     # A collapsed perimeter has no angular contribution, even with unknown angle.

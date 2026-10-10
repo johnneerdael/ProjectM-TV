@@ -719,6 +719,7 @@
                         "constant",
                         "linear_time",
                         "sinusoidal_time",
+                        "compound_time",
                         "unknown"
                       ]
                     },
@@ -822,6 +823,27 @@
                       "type": [
                         "number",
                         "null"
+                      ]
+                    },
+                    "rate_estimate_kind": {
+                      "enum": [
+                        "unknown",
+                        "exact_nominal",
+                        "upper_bound"
+                      ]
+                    },
+                    "nominal_value_range_kind": {
+                      "enum": [
+                        "unknown",
+                        "exact_nominal",
+                        "upper_bound"
+                      ]
+                    },
+                    "nominal_continuity": {
+                      "enum": [
+                        "unknown",
+                        "smooth_nominal",
+                        "piecewise_lipschitz"
                       ]
                     }
                   }
@@ -1668,6 +1690,13 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "nominal_continuity": {
+                    "enum": [
+                      "unknown",
+                      "smooth_nominal",
+                      "piecewise_lipschitz"
+                    ]
                   }
                 }
               },
@@ -1760,6 +1789,13 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "nominal_continuity": {
+                    "enum": [
+                      "unknown",
+                      "smooth_nominal",
+                      "piecewise_lipschitz"
+                    ]
                   }
                 }
               },
@@ -1968,6 +2004,13 @@
                               "items": {
                                 "type": "string"
                               }
+                            },
+                            "nominal_continuity": {
+                              "enum": [
+                                "unknown",
+                                "smooth_nominal",
+                                "piecewise_lipschitz"
+                              ]
                             }
                           }
                         },
@@ -1989,9 +2032,23 @@
                           "items": {
                             "type": "string"
                           }
+                        },
+                        "nominal_continuity": {
+                          "enum": [
+                            "unknown",
+                            "smooth_nominal",
+                            "piecewise_lipschitz"
+                          ]
                         }
                       }
                     }
+                  },
+                  "nominal_continuity": {
+                    "enum": [
+                      "unknown",
+                      "smooth_nominal",
+                      "piecewise_lipschitz"
+                    ]
                   }
                 }
               }

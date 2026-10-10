@@ -1093,3 +1093,55 @@ The target behavior is verified separately in patched `CustomShape::Draw` and
 T reloads the shape init snapshot, and configured shape values/index reload
 each iteration. Unmodeled custom state stays an explicit input. Native/MilkDrop
 projection, finite conversions, clipping and feedback conditions still apply.
+
+### Compound source-time control bounds
+
+`motion_controls[].curve_kind` adds `compound_time` for supported scalar
+compositions with a finite lifetime nominal rate bound. `rate_estimate_kind`
+and `nominal_value_range_kind` distinguish `exact_nominal`, `upper_bound` and
+`unknown`. Existing constant, affine-time and single-oscillator rules retain
+exact nominal estimates. Compound periods and harmonic path labels are not
+guessed; their original source expression DAG stays available.
+
+For envelopes M_f=max_abs(f), M_g=max_abs(g), and rate bounds D_f,D_g,
+addition uses D_f+D_g, product uses D_f*M_g+D_g*M_f, and sine/cosine use the
+phase-rate bound by the chain rule. Division with a denominator envelope
+strictly away from zero uses D_f/min_abs(g)+D_g*M_f/min_abs(g)^2. A missing
+needed magnitude or rate leaves the resulting rate unresolved. Unbounded
+affine values can still have finite rates; sin(time*time) can have bounded
+values while retaining an unknown lifetime rate. Bounds are conservative,
+not estimates of the true peak or a typical percentile.
+
+The trigonometric identities and derivatives are documented by
+[NIST DLMF4.20](https://dlmf.nist.gov/4.20) and
+[NIST DLMF4.21](https://dlmf.nist.gov/4.21). Actual target EEL scalar functions
+are checked in the prepared projectm-eval TreeFunctions.c and original
+MilkDrop2source; this layer implements the understood formulas without
+copying a native renderer or executing expression programs.
+
+`abs`, `min` and `max` can preserve a Lipschitz variation bound while allowing
+cusps. `nominal_continuity` is `smooth_nominal`, `piecewise_lipschitz` or
+`unknown`, and propagates to centre, vertex and per-instance joins. The weaker
+piecewise class allows cusps; it does not prove that a cusp actually occurs.
+These are regularity facts about nominal control formulas, not a visible
+smoothness score. Unknown side-count domains and known invalid native float32
+conversions prevent a smooth-vertex claim.
+
+EEL division's zero guard is kept separate from ordinary division. If an
+entire known denominator envelope lies strictly inside(-0.00001,0.00001),
+the qualified finite-input result is zero. Guard crossings remain unresolved;
+a denominator exactly on the boundary is outside the zero guard. Random,
+state/audio inputs, integer steps, branches and unsupported operations have
+no invented time derivative. No audio waveform or time/frame samples are used.
+
+Scalar calculations expand computed envelope endpoints and nonnegative rate
+operations outward with `nextafter`. Positive-to-zero rate underflow and
+nonfinite derived rates remain unknown. A rounded singleton envelope alone
+does not establish a constant trig function. These safeguards do not certify
+native float32/libm parity, frame quantization or complete interval execution
+of a shader; the source-math premise remains continuous nominal formulas
+between clock discontinuities and before native precision/clipping/feedback.
+
+Consumers must handle the additive curve category and estimate/regularity
+fields. Never substitute a rate bound for measured visible motion or a mood
+score. Existing47field simulation exports are unchanged.

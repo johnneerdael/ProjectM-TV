@@ -14,7 +14,7 @@ def shape_instance_motion(controls,count,*,max_instances=MAX_INSTANCES,max_node_
     result={'policy':'source-custom-shape-instance-motion-v1','configured_instances':count,
         'instance_expansion_limit':max_instances,'node_visit_budget':max_node_visits,
         'processed_instances':0,'known_path_instances':0,'known_speed_instances':0,
-        'expansion_complete':False,'instances':[],
+        'expansion_complete':False,'instances':[],'nominal_continuity':'unknown',
         'maximum_vertex_speed_ndc_per_second_upper_bound':None,
         'visible_motion_speed':None,'unknown_reasons':[],
         'uses_equation_execution':False,'uses_rendered_images':False,
@@ -54,7 +54,7 @@ def shape_instance_motion(controls,count,*,max_instances=MAX_INSTANCES,max_node_
             motion=shape_vertex_motion(specialized,geometry,trajectory)
             compact={k:v for k,v in trajectory.items() if k not in ['axis_curves','conditions','visible_motion_speed']}
             row={'instance':index,'center_trajectory':compact,
-                 'effective_sides':geometry['effective_sides'],
+                 'effective_sides':geometry['effective_sides'],'nominal_continuity':motion['nominal_continuity'],
                  'maximum_vertex_speed_ndc_per_second_upper_bound':motion['maximum_vertex_speed_ndc_per_second_upper_bound'],
                  'unknown_reasons':motion['unknown_reasons']}
             result['instances'].append(row)
@@ -65,6 +65,9 @@ def shape_instance_motion(controls,count,*,max_instances=MAX_INSTANCES,max_node_
             result['unknown_reasons'].append(str(error));break
         finally:_CACHE.reset(token)
     result['expansion_complete']=result['processed_instances']==count
+    if result['expansion_complete']:
+        from source_control_bounds import merge_continuity
+        result['nominal_continuity']=merge_continuity([r['nominal_continuity'] for r in result['instances']])
     if result['expansion_complete'] and result['known_speed_instances']==count:
         result['maximum_vertex_speed_ndc_per_second_upper_bound']=max(r['maximum_vertex_speed_ndc_per_second_upper_bound'] for r in result['instances'])
     elif not result['unknown_reasons']:result['unknown_reasons']=['one or more native instances have unresolved nominal speed']

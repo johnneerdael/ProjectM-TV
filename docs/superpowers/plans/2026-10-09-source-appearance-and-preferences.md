@@ -272,3 +272,12 @@ execution. Return compact per-instance descriptors with completeness counts.
 Unknown instances and expansion-budget stops keep the aggregate speed unknown;
 never clamp native count or silently extrapolate from a few instances.
 Verify native reset/order against original MilkDrop2 and the patched engine.
+
+## Compound control calculus
+
+Extend named movement controls with range/rate estimates for understood smooth
+compositions and Lipschitz abs/min/max formulas. Use chain/product/quotient
+rules, safe denominator domains and arithmetic safeguards. Distinguish exact
+old estimates from conservative new bounds, propagate possible-cusp regularity,
+and preserve unknown inputs/discontinuities/unbounded rates. Measure gains
+on the unchanged100source sample before drawing mood conclusions.

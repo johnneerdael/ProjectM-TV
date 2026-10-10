@@ -75,9 +75,13 @@ def affine_time_parameters(field):
         if op=='subtract':return (a[0]-b[0],a[1]-b[1])
         if op=='multiply':
             if a[0]!=0 and b[0]!=0:return None
-            return (a[0]*b[1]+b[0]*a[1],a[1]*b[1])
+            left=a[0]*b[1];right=b[0]*a[1]
+            if (a[0]!=0 and b[1]!=0 and left==0 or b[0]!=0 and a[1]!=0 and right==0):return None
+            return (left+right,a[1]*b[1])
         if b[0]!=0 or b[1]==0:return None
-        return (a[0]/b[1],a[1]/b[1])
+        rate=a[0]/b[1]
+        if a[0]!=0 and rate==0:return None
+        return (rate,a[1]/b[1])
 
     return visit(field)
 

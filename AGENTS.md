@@ -984,3 +984,9 @@ are nominal double formulas. Keep processed/known counts distinct and group
 speed null unless every authored instance is processed with a known bound.
 Expansion/node/depth budgets are source-tool limits, not native count clamps;
 retain partial evidence and isolate per-instance symbolic caches.
+
+Compound motion maintenance: `source_control_bounds` derives continuous
+nominal time envelopes/rate bounds; `compound_time` keeps periods unknown.
+Preserve exact-versus-bound metadata, cusp/unknown regularity in all joins,
+EEL denominator guards and rate-underflow abstention. These are not native
+precision, visible-motion or mood certificates. No input/frame sampling is used.

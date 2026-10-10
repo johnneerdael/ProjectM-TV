@@ -572,7 +572,7 @@ def test_constant_feedback_rotation_is_not_stationary_image_claim():
     assert result['activity']['motion_intensity']['value'] is None
 
 
-@pytest.mark.parametrize('formula',['.5+sin(time*time)','bass*.1','k','sin(time)*cos(time)'])
+@pytest.mark.parametrize('formula',['.5+sin(time*time)','bass*.1','k'])
 def test_unsupported_motion_curve_keeps_unknown_rate(formula):
     result=appearance(read('fWaveAlpha=0\nshapecode_0_enabled=1\n'
         'shape_0_per_frame1=x='+formula+';\n'))

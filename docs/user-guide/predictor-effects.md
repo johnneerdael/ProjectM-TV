@@ -285,3 +285,10 @@ paths and movement bounds without running frames. It distinguishes the number
 of processed instances from the number with known motion. If even one instance
 has unresolved movement, the whole-group speed remains unknown. Expansion
 budgets are reported and never presented as a native clamp or visual proof.
+
+Compound source-time formulas now provide conservative range and movement-rate
+estimates for sums/products of oscillators, phase modulation and supported
+safe divisions. The JSON distinguishes exact nominal estimates from upper
+bounds, and smooth formulas from a weaker class that allows cusps. A bounded
+value need not have bounded speed. These facts improve source descriptions;
+they still do not measure visible motion, flashing or mood suitability.
