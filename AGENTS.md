@@ -1177,3 +1177,9 @@ Sample-offset scenarios: export additional bounds in `scenario_offset_envelope`
 with the validated scenario hash. Preserve unconstrained offset results and
 independent local RGBA domains. Missing canvas/bands remain unknown; scenarios
 must not suppress singular image domains or image-dependent spatial coefficients.
+
+Coordinate interpolation maintenance: distribute scalar lerp only with uniform
+weights for ripple extraction. For affine spatial coefficients use A+t*(B-A)
+and preserve an explicit offset lerp. Sampled local weights qualify only after
+sample substitution and sample-independent baseline verification. Keep original
+zero-weight branch domain checks; nominal algebra does not certify GPU rounding.

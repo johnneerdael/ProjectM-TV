@@ -465,3 +465,8 @@ an image-driven lookup shifts under the chosen band intervals and shader-canvas
 size. The ordinary bounds remain alongside it, and neither record measures
 visible speed, image gradients or mood. For Native4K, declare the shader's
 authored canvas rather than assuming it equals the panel size.
+
+Supported coordinate-map blends also retain their source interpolation weights:
+the output can describe ripples blended together or a colour channel controlling
+an image-driven distortion blend. Spatially varying weights and image-dependent
+scale are kept separate from a uniform ripple or offset-only claim.

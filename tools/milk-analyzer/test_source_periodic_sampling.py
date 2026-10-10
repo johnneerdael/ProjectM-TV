@@ -188,3 +188,28 @@ def test_original_zylot_audio_ripples_are_described_without_capture():
     assert ('cos',-.012,0.,[0.,7.]) in entries
     assert ('sin',0.,.006,[9.,0.]) in entries
     assert ('cos',0.,-.006,[0.,9.]) in entries
+
+
+def test_uniform_blend_distributes_ripple_branches_without_spatial_products():
+    r=warp('float2 a=uv+float2(.02*sin(uv.y*8),0);float2 b=uv+float2(0,.04*cos(uv.x*6));ret=GetPixel(lerp(a,b,.25));')
+    assert r['source_model']=='uniform_affine_plus_oscillators'
+    assert r['base_matrix_uv4']==[[1,0,0,0],[0,1,0,0]]
+    amps=sorted(w['constant_amplitude_uv'] for w in r['waves'])
+    assert amps[0]==pytest.approx([0,.01],abs=2e-8)
+    assert amps[1]==pytest.approx([.015,0],abs=2e-8)
+
+
+def test_uniform_blend_in_phase_preserves_spatial_gradient():
+    r=warp('ret=GetPixel(uv+float2(.01*sin(lerp(uv.x*2,uv.y*6,.25)),0));')
+    assert r['source_model']=='uniform_affine_plus_oscillators'
+    assert r['waves'][0]['constant_phase_gradient']==pytest.approx([1.5,1.5,0,0,0,0])
+
+
+def test_spatial_blend_weight_is_not_uniform_affine():
+    r=warp('ret=GetPixel(uv+float2(.01*sin(lerp(uv.x*2,uv.y*6,uv.x)),0));')
+    assert r['source_model']=='unknown'
+
+
+def test_blend_zero_weight_does_not_hide_singular_original_branch():
+    r=warp('ret=GetPixel(lerp(uv+float2(.01*sin(uv.y*8),0),uv+float2(bass/0.,0),0.));')
+    assert r['source_model']=='unknown'

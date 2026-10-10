@@ -62,3 +62,17 @@ def test_zero_products_do_not_hide_invalid_original_image_offset_domain():
 def test_luminance_offset_retains_native_non_normalized_weights():
     e=offset('ret=GetPixel(uv+float2(.1*lum(GetPixel(uv)),0));')
     assert e['offset_range_uv'][0]==pytest.approx([0,.11],abs=2e-8)
+
+
+def test_uniform_coordinate_blend_preserves_image_offset_bounds():
+    e=offset('ret=GetPixel(lerp(uv,uv+.2*GetPixel(uv).rg,.25));')
+    assert e['source_model']=='sample_value_offset_bounds'
+    assert e['offset_range_uv'][0]==pytest.approx([0,.05],abs=2e-8)
+    assert e['offset_range_uv'][1]==pytest.approx([0,.05],abs=2e-8)
+
+
+def test_image_blend_weight_with_equal_baselines_has_no_image_spatial_scale():
+    e=offset('ret=GetPixel(lerp(uv,uv+.2*GetPixel(uv).rg,GetBlur1(uv).r));')
+    assert e['source_model']=='sample_value_offset_bounds'
+    assert e['offset_range_uv'][0]==pytest.approx([0,.2],abs=2e-8)
+    assert e['offset_range_uv'][1]==pytest.approx([0,.2],abs=2e-8)

@@ -1894,3 +1894,22 @@ the nominal offset intervals are approximately [-6/854,6/854] and
 [-6/480,6/480]. They describe source UV displacement, not display pixel speed.
 A Native4K panel does not determine these uniforms. Ordinary output stays
 unbounded when the caller does not declare canvas dimensions.
+
+## Coordinate-map interpolation
+
+Uniform scalar `lerp(a,b,t)` weights can be distributed across supported ripple
+branches. Their spatial phases also support uniform interpolation between
+uniform-affine maps. The nominal coefficient rule is `A+t*(B-A)`; offsets retain
+an explicit lerp node. Thus equal spatial baselines cancel exactly in symbolic
+real arithmetic, even when a local sampled colour drives the blend between two
+image offsets. Image-dependent spatial coefficients remain outside the
+sample-offset-only model; spatial blend weights are not promoted to uniform.
+
+The original graph is checked for invalid domains before certification, including
+branches with zero weights. No interpolation branch is discarded as proof of
+finite native behavior. Native HLSL/GLES rounding remains unqualified.
+
+Reference: [Microsoft HLSL lerp](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-lerp).
+Original MilkDrop 2.25c `vis_milk2/plugin.cpp` uses the D3DX shader compiler;
+the source34 patched GLSL generator maps lerp to mix. This predictor addition
+performs nominal source algebra and does not change either renderer.

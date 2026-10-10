@@ -48,6 +48,11 @@ def uniform_weighted_terms(field):
                 visit(node.args[1],weight if node.op=='add' else combine('multiply',weight,number(-1)),depth+1)
             elif node.dtype=='float' and (node.op=='negate' or node.op=='unary' and node.detail.get('operator')==0):
                 visit(node.args[0],combine('multiply',weight,number(-1)),depth+1)
+            elif node.dtype=='float' and node.op=='lerp' and len(node.args)==3 and uniform(node.args[2]):
+                t=node.args[2]
+                inverse=combine('add',number(1),combine('multiply',number(-1),t))
+                visit(node.args[0],combine('multiply',weight,inverse),depth+1)
+                visit(node.args[1],combine('multiply',weight,t),depth+1)
             elif node.dtype=='float' and node.op=='multiply' and any(uniform(v) for v in node.args):
                 i=0 if uniform(node.args[0]) else 1
                 visit(node.args[1-i],combine('multiply',weight,node.args[i]),depth+1)
@@ -96,6 +101,10 @@ def uniform_affine_scalar(field):
             a=visit(node.args[0],depth+1);b=visit(node.args[1],depth+1)
             if node.op=='subtract':b=scale(b,number(-1))
             return [combine('add',x,y) for x,y in zip(a[0],b[0])],combine('add',a[1],b[1])
+        if node.op=='lerp' and len(node.args)==3 and uniform(node.args[2]):
+            a=visit(node.args[0],depth+1);b=visit(node.args[1],depth+1);t=node.args[2]
+            coefficients=[combine('add',x,combine('multiply',t,combine('add',y,combine('multiply',number(-1),x)))) for x,y in zip(a[0],b[0])]
+            return coefficients,Field('lerp',(a[1],b[1],t),'float')
         if node.op=='multiply':
             for i in (0,1):
                 if uniform(node.args[i]):return scale(visit(node.args[1-i],depth+1),node.args[i])

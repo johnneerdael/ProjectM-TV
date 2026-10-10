@@ -1,0 +1,872 @@
+{
+  "basis": "Nominal coordinate lerp source algebra under explicitly declared input scenario; no visual/mood certificate",
+  "presets": 100,
+  "source_and_zip_joins_verified": true,
+  "changed_source_gap_presets": [],
+  "counts": {
+    "changed_sample_value_offset_envelope": 34,
+    "gained_sample_value_offset_envelope": 0,
+    "gained_scenario_complete_sites": 33,
+    "presets_with_changes": 7,
+    "presets_with_new_scenario_bounds": 6
+  },
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "model_modules": {
+    "source_periodic_sampling.py": "79fe47229f1ab03580446879fabb044d69cac58ae4fb293c1662838300b7e513",
+    "source_sample_offset_envelopes.py": "7df06d531454926f3151fe9eafec9d52c1759bb3cc7a3ca3f6fe57702b48ad31"
+  },
+  "zip_sha256": "2c25868b6bc51a8f4dcfe100d1cb33bb07181fe8a7fc05527162ccaa04c559fb",
+  "rows": [
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.00468384055420757,
+              0.00468384055420757
+            ],
+            [
+              -0.008333333767950547,
+              0.008333333767950547
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.004683840554207569,
+              0.004683840554207569
+            ],
+            [
+              -0.008333333767950543,
+              0.008333333767950543
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.004683840554207569,
+              0.004683840554207569
+            ],
+            [
+              -0.008333333767950543,
+              0.008333333767950543
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.004683840554207569,
+              0.004683840554207569
+            ],
+            [
+              -0.008333333767950543,
+              0.008333333767950543
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.01873536221683028,
+              0.01873536221683028
+            ],
+            [
+              -0.03333333507180219,
+              0.03333333507180219
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.01873536221683028,
+              0.01873536221683028
+            ],
+            [
+              -0.03333333507180219,
+              0.03333333507180219
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 3,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": null,
+          "scenario_offset_range_uv": null,
+          "scenario_source_model": "unknown",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 13,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 12,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.009367681108415139,
+              0.009367681108415139
+            ],
+            [
+              -0.01666666753590109,
+              0.01666666753590109
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 12,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    },
+    {
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "changed_records": [
+        {
+          "stage": "warp",
+          "sample_site_index": 6,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 5,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 4,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 12,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 11,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 10,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 9,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 8,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        },
+        {
+          "stage": "warp",
+          "sample_site_index": 7,
+          "kind": "sample_value_offset_envelope",
+          "previous_source_model": "unknown",
+          "source_model": "unknown",
+          "offset_range_uv": [
+            null,
+            null
+          ],
+          "scenario_offset_range_uv": [
+            [
+              -0.0046838405542075695,
+              0.0046838405542075695
+            ],
+            [
+              -0.008333333767950545,
+              0.008333333767950545
+            ]
+          ],
+          "scenario_source_model": "sample_value_offset_bounds",
+          "previous_scenario_source_model": "unknown",
+          "wave_count": 0
+        }
+      ]
+    }
+  ]
+}
