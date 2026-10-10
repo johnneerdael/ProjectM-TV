@@ -4,6 +4,7 @@ No pixels, equations or shaders are executed. Float32 control conversion is
 retained; subsequent coefficients use real arithmetic, not GPU rounding.
 """
 import math
+from fractions import Fraction
 
 import numpy as np
 
@@ -12,6 +13,18 @@ def _f32(value):
     with np.errstate(over='ignore',invalid='ignore',divide='ignore'):
         result=float(np.float32(value))
     if not math.isfinite(result):raise ValueError('outside finite float32 domain')
+    return result
+
+
+def affine_center_displacement(p,c,s):
+    """Nominal (R*S-I)*(.5-center)-distance without centre cancellation."""
+    f={name:Fraction(p[name]) for name in ('sx','sy','cx','cy','dx','dy')}
+    c=Fraction(c);s=Fraction(s);half=Fraction(1,2)
+    x=(c/f['sx']-1)*(half-f['cx'])-s/f['sy']*(half-f['cy'])-f['dx']
+    y=s/f['sx']*(half-f['cx'])+(c/f['sy']-1)*(half-f['cy'])-f['dy']
+    result=[float(x),float(y)]
+    if not all(math.isfinite(v) for v in result) or any(value!=0 and v==0 for value,v in zip((x,y),result)):
+        raise ValueError('nominal centre displacement overflow or underflow')
     return result
 
 
@@ -59,8 +72,7 @@ def native_warp_recipe(analysis,*,consumed):
         c=math.cos(p['rot']);s=math.sin(p['rot'])
         x=c/p['zoom']/p['sx'];y=c/p['zoom']/p['sy']
         xy=-s/p['zoom']/p['sy'];yx=s/p['zoom']/p['sx']
-        ex=c*(.5-p['cx'])/p['sx']-s*(.5-p['cy'])/p['sy']+p['cx']-p['dx']-.5
-        ey=s*(.5-p['cx'])/p['sx']+c*(.5-p['cy'])/p['sy']+p['cy']-p['dy']-.5
+        ex,ey=affine_center_displacement(p,c,s)
         matrix=[[[x,0,0],[0,xy,0]],[[0,0,yx],[y,0,0]]]
         offset=[[.5-.5*x,ex,0,-.5*xy,0],[.5-.5*y,0,ey,0,-.5*yx]]
         area=abs(p['zoom']**2*p['sx']*p['sy'])

@@ -1040,3 +1040,10 @@ Preserve native nested-power order and nominal aspect-corrected radius range.
 Guard inner/outer float32 power and reciprocal endpoint domains; negative zoom
 stays unresolved here. Nominal derivatives and sufficient no-fold results do
 not certify GPU rounding, visible tunnels or the complete transformed map.
+
+Source sampling-displacement maintenance: `source_warp_displacement` integrates
+nominal backward-map affine displacement over uniform original UV, keeping
+aspect-corrected units and texel alignment separate. Constant RMS coefficients
+and varying-control triangle bounds are not forward-feature/display speed.
+Keep procedural warp as a distinct envelope; validate warp-scale reciprocal
+even for zero warp. Preserve invalid/unknown uniform domains and finite bounds.

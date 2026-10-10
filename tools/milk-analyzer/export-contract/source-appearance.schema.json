@@ -4772,6 +4772,57 @@
               }
             }
           }
+        },
+        "native_warp_displacement": {
+          "type": "object",
+          "description": "Nominal per-step backward sampling RMS expression/bound in aspect-corrected source coordinates; not forward feature or displayed speed.",
+          "required": [
+            "status",
+            "coordinate_basis",
+            "unit",
+            "visible_motion_speed",
+            "texel_alignment_included",
+            "unknown_reasons"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "bounded_uniform_sampling_displacement",
+                "unknown",
+                "not_contributing"
+              ]
+            },
+            "coordinate_basis": {
+              "const": "aspect_corrected_source_uv"
+            },
+            "unit": {
+              "const": "source_coordinate/feedback_step"
+            },
+            "affine_rms_squared_aspect_coefficients": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "rms_upper_bound_terms": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "visible_motion_speed": {
+              "type": "null"
+            },
+            "texel_alignment_included": {
+              "const": false
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },

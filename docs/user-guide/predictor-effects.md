@@ -341,3 +341,11 @@ centre-to-edge zoom factor and its radial slope, and reports a sufficient
 condition for the radial sampling component to avoid folding. This can help
 reconstruct perspective-like feedback, but it does not prove a visible tunnel,
 ring pattern or whole-map geometry. Failed sufficient checks remain undecided.
+
+`native_warp_displacement` connects supported uniform affine controls to how
+far they sample away from the original location each feedback step. Constant
+controls have an analytic RMS expression; varying controls have an upper bound,
+including a separate procedural warp term. This distinguishes a fixed zoom
+from stationary sampling. Renderer aspect must be supplied and texel alignment
+added separately. Visible feature movement depends on contents and later
+processing, so this measure does not yet set a motion-intensity or mood score.

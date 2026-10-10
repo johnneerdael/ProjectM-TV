@@ -31,6 +31,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_warp_recipe` | Nominal uniform native feedback sampling map with runtime aspect/texel inputs; dynamic/radial controls remain unknown |
 | `native_warp_transport` | Uniform affine-component scale/area envelopes from supported varying controls; aspect-corrected geometry, not screen motion |
 | `native_radial_zoom` | Positive uniform-control radial zoom component, nominal factor/derivative envelopes; no tunnel or full-map label |
+| `native_warp_displacement` | Per-step backward-sampling RMS expression/bound in aspect-corrected source coordinates; not visible speed |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1389,3 +1390,46 @@ triangle interpolation and finite sampled frames remain separate.
 null. Curved radial feedback can contribute perspective-like layouts, but
 contents, wrapping, other transformations and shaders determine a tunnel or
 ring appearance. This source-math addition cannot confer a mood label.
+
+
+## Native sampling displacement
+
+`native_warp_displacement` measures nominal backward-sampling displacement
+per feedback step in aspect-corrected source coordinates. For the uniform
+affine component, let p=A*(u-.5), B=R*diag(1/(zoom*sx),1/(zoom*sy)), and
+h=(R*diag(1/sx,1/sy)-I)*(.5-center)-distance. Displacement is(B-I)*p+h.
+Uniform original UV in[0,1]^2 has centred coordinate covariance
+ diag(aspectX^2,aspectY^2)/12. Constant float32 control domains therefore supply:
+
+```
+RMS_affine^2 = dot(h,h)
+             + aspectX^2 * squared_norm(column0(B-I))/12
+             + aspectY^2 * squared_norm(column1(B-I))/12
+```
+
+`affine_rms_squared_aspect_coefficients` uses basis[1,aspectX^2,aspectY^2].
+The mean affine displacement is h. Its centre terms use the factored form
+with exact binary-rational products/sums of emitted controls and nominal
+sin/cos coefficients before finite serialization; expanded large-centre sums
+must not erase tiny translations. No source-coordinate/frame samples are
+needed to produce these coefficients. A fixed zoom can have nonzero RMS even
+though its temporal control rate is zero. Backward sampling direction does
+not equal forward movement of an arbitrary source feature.
+
+Varying control domains retain an upper bound using spectral-norm/triangle
+inequalities: norm(R*D-I)<=norm(R-I)*max_abs(D)+max_abs(D-I), with
+norm(R-I)=2*abs(sin(rot/2)); a conservative angle-range bound is used. Apply
+the same inequality to the centre/stretch contribution and add translation.
+The upper RMS is centre_bound + geometry_bound*sqrt(aspectX^2+aspectY^2)
++ procedural_warp_bound. The last term is sqrt(2)*2*abs(warp)*float32(.0035),
+using the pre-rotation four-wave envelope and invariance of norm under rotation.
+This term is independent of legacy/custom oscillator signs. It does not claim
+that all oscillator peaks occur together. Finite warp-scale reciprocal is
+required even for zero warp, preserving the native expression's domain.
+
+Texel alignment is excluded and must be added as A*texel_offset_uv by the
+consumer. Native precision, mesh interpolation, clipping/wrapping, feedback
+contents, composition and transitions remain separate. The measure integrates
+the sampling field, not image brightness or feature tracking. Multiplication
+by an assumed FPS cannot certify visible speed; motion intensity and moods
+remain unknown until the complete contributing path is understood/calibrated.

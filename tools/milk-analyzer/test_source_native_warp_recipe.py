@@ -141,3 +141,9 @@ def test_selected_native_shader_branch_controls_warp_signs(accepted,branch,first
         assert r['unknown_reasons']
     else:
         assert r['procedural_warp']['terms'][0]['phase_position_factor_coefficients'][1][3]==first_y
+
+
+@pytest.mark.parametrize('center,dx',[(1e20,.03),(.5,1e-20)])
+def test_neutral_recipe_center_offset_does_not_cancel_translation(center,dx):
+    r=recipe(f'zoom=1;zoomexp=1;warp=0;sx=1;sy=1;rot=0;cx={center};cy=.5;dx={dx};dy=0;')
+    assert r['offset_uv_aspect_coefficients'][0][1]==pytest.approx(-r['native_float32_controls']['dx'],rel=1e-12,abs=0)
