@@ -1189,3 +1189,14 @@ per-axis partials, kernel range/derivative versus output scale, and dynamic phas
 programs/audio routes. Constant inverse repeat lattices require one UV basis and
 finite invertible phase coefficients. Preserve original-domain checks; no tile
 count, native precision, final kaleidoscope or mood credit follows.
+
+Quantized colour: floor/frac provide value enclosures only, never continuous
+rate or flash certification. Preserve conservative integer-seam padding and
+known-invalid/native-upload guards. `scenario_colour_envelope` supplements the
+ordinary nonlinear stage record with a scenario hash; local texture premises
+remain independent and missing bands/nonfinite Q inputs stay unresolved.
+
+Retain caller-declared input premises through colour native-upload projection;
+exclude only local sample/derived placeholders. Convert floor integer endpoints
+outward before publishing float bounds; accepted large integer domains must stay
+enclosed in both signs.

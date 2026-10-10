@@ -476,3 +476,8 @@ For supported maps it reports repeat-cell geometry, seam behavior, phase and
 output formulas, and which audio bands change those controls. These can help a
 consumer reconstruct a repeated or mirrored layout. Actual displayed copies,
 colours and feedback still depend on the sampled content and later stages.
+
+Colour bounds also support quantized levels (`floor`) and wrapped channel values
+(`frac`). Declared audio inputs add separate `scenario_colour_envelope` records,
+so a consumer can inspect how a colour recipe is bounded under a chosen load.
+These are possible raw RGB ranges, not measured brightness, palette or flashes.

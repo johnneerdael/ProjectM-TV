@@ -2,7 +2,7 @@
 from shader_fields import Field
 
 
-def nonlinear_texture_colour_bounds(analysis,warp_vertex):
+def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
     from source_advection import substitute_sample_values
     from source_control_bounds import scalar_value_envelope
     from source_appearance import _data_return,_canonical_lane
@@ -20,9 +20,11 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex):
             r['unknown_reasons']=['no authored stage field'];stages[stage]=r;continue
         try:
             replaced,samples=substitute_sample_values(_data_return(field),known_vertex=warp_vertex if stage=='warp' else None)
-            domains={};memo={};active=set();assumptions=set()
+            domains=dict(input_domains or {});memo={};active=set();assumptions=set()
             for name,sample in samples:
                 for lane in 'xyzw':domains[name+'.'+lane]=[0.,1.]
+            local_sample_names=set(domains)-set(input_domains or {})
+            derived=set()
             def project(node,depth=0):
                 original=node;key=id(original)
                 if key in memo:return memo[key][1]
@@ -44,9 +46,9 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex):
                 if node.op=='narrow' and node.detail.get('numeric_domain')=='shader-float32':
                     child=project(node.args[0],depth+1);report=scalar_value_envelope(child,input_domains=domains)
                     span=report['nominal_value_range']
-                    assumptions.update(set(report['assumed_finite_input_names'])-domains.keys())
+                    assumptions.update(set(report['assumed_finite_input_names'])-local_sample_names-derived)
                     if span is None:raise ValueError('native colour-input upload domain unresolved')
-                    name=':nonlinear-colour-narrow-'+str(len(memo));domains[name]=[_f32(v) for v in span]
+                    name=':nonlinear-colour-narrow-'+str(len(memo));domains[name]=[_f32(v) for v in span];derived.add(name)
                     return Field('input',dtype='float',detail={'name':name})
                 if node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
                     parent=node.args[0];lane=SWIZZLE[node.detail['field']]
@@ -78,9 +80,16 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex):
             elif any(span is not None for span in spans):r['source_model']='partial_declared_texture_inputs'
             r['unknown_reasons']=[reason for c in channels for reason in c['unknown_reasons']]
             r['assumed_finite_nontexture_input_names']=sorted(assumptions|set().union(*(
-                set(c['assumed_finite_input_names'])-domains.keys() for c in channels)))
+                set(c['assumed_finite_input_names'])-local_sample_names-derived for c in channels)))
         except (ValueError,RecursionError,OverflowError,IndexError) as error:r['unknown_reasons']=[str(error)]
         stages[stage]=r
+    scenario=getattr(analysis,'input_scenario',None)
+    if scenario is not None and input_domains is None:
+        extra=nonlinear_texture_colour_bounds(analysis,warp_vertex,input_domains=scenario['scalar_input_domains'])
+        for stage,r in stages.items():
+            r['scenario_colour_envelope']={**extra['stages'][stage],
+                'input_scenario_sha256':scenario['record_sha256'],
+                'observed_runtime_inputs':False,'runtime_binding_verified':False}
     return {'policy':'source-nonlinear-declared-texture-colour-ranges-v1','stages':stages,
         'uses_shader_execution':False,'uses_equation_execution':False,'uses_rendered_images':False,
         'conditions':['Direct sampled RGBA components independently lie in [0,1]; this input premise is not certified by source',

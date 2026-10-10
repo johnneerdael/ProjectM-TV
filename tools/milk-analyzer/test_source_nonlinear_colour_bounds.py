@@ -118,3 +118,74 @@ def test_canonical_swizzles_keep_independent_lane_domains_across_calls():
     expected=run(0)
     with ThreadPoolExecutor(max_workers=2) as pool:
         assert all(r==expected for r in pool.map(run,range(12)))
+
+
+def test_fractional_colour_range_uses_floor_for_negative_inputs():
+    x=Field('input',detail={'name':'x'})
+    r=scalar_value_envelope(scalar('frac',x),input_domains={'x':[-.8,-.2]})
+    assert r['nominal_value_range']==pytest.approx([.2,.8],abs=2e-15)
+    assert r['native_numeric_certified'] is False
+
+
+def test_fractional_colour_crossing_seam_keeps_unit_enclosure_without_rate():
+    from source_control_bounds import compound_time_bounds
+    x=Field('input',detail={'name':'x'})
+    assert scalar_value_envelope(scalar('frac',x),input_domains={'x':[-.1,.1]})['nominal_value_range']==[0,1]
+    assert scalar_value_envelope(scalar('frac',x))['nominal_value_range']==[0,1]
+    r=compound_time_bounds(scalar('frac',Field('input',detail={'name':'time'})))
+    assert r['maximum_absolute_control_rate_per_second'] is None
+
+
+def test_floor_colour_levels_have_integer_enclosure_without_flash_claim():
+    x=Field('input',detail={'name':'x'})
+    r=domain(scalar('floor',scalar('multiply',x,constant(4))))
+    assert r['nominal_value_range'][0]<=0 and r['nominal_value_range'][1]>=4
+    assert scalar_value_envelope(scalar('floor',x),input_domains={'x':[-.8,2.2]})['nominal_value_range']==[-1,2]
+    r=colour('ret=floor(GetPixel(uv)*4)/4;')
+    assert r['source_model']=='bounded_declared_texture_inputs'
+    assert r['visible_flashing'] is None
+
+
+def test_frac_cannot_hide_known_singular_expression():
+    r=scalar_value_envelope(scalar('frac',scalar('divide',constant(1),constant(0))))
+    assert r['nominal_value_range'] is None
+
+
+def test_colour_scenario_adds_audio_bounds_without_changing_default():
+    from test_effect_families import analyze
+    s=shader('shader_body {ret=GetPixel(uv)*bass;}',stage='warp')
+    plain=analyze(s)['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']
+    a=analyze(s,input_scenario={'schema_version':1,'name':'colour-test','audio_band_ranges':{'bass':[0,2]}})
+    r=a['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']
+    assert {k:v for k,v in r.items() if k!='scenario_colour_envelope'}==plain
+    extra=r['scenario_colour_envelope']
+    assert extra['source_model']=='bounded_declared_texture_inputs'
+    assert np.array(extra['raw_rgb_bounds_if_samples_unit_interval'])==pytest.approx(np.array([[0,2]]*3),abs=2e-7)
+    assert extra['input_scenario_sha256']==a['input_scenario']['record_sha256']
+    assert extra['visible_flashing'] is None
+
+
+def test_colour_scenario_keeps_missing_audio_and_nonfinite_q_upload_unknown():
+    from test_effect_families import analyze,read
+    scenario={'schema_version':1,'name':'colour-test','audio_band_ranges':{'bass':[0,2]}}
+    for s in (shader('shader_body {ret=GetPixel(uv)*mid;}',stage='warp'),read('per_frame_1=q1=1e40;\nwarp_1=`shader_body {ret=saturate(q1+GetPixel(uv));}\n')):
+        r=analyze(s,input_scenario=scenario)['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']['scenario_colour_envelope']
+        assert r['source_model']=='unknown'
+        assert r['raw_rgb_bounds_if_samples_unit_interval'] is None
+
+
+def test_declared_audio_premise_survives_colour_q_upload_projection():
+    from test_effect_families import analyze,read
+    source=read('per_frame_1=q1=.5+.1*bass;\nwarp_1=`shader_body {ret=GetPixel(uv)*q1;}\n')
+    r=analyze(source,input_scenario={'schema_version':1,'name':'q-premise','audio_band_ranges':{'bass':[0,2]}})['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']['scenario_colour_envelope']
+    assert r['source_model']=='bounded_declared_texture_inputs'
+    assert 'bass' in r['assumed_finite_nontexture_input_names']
+    assert not any(name.startswith(':nonlinear-colour-') for name in r['assumed_finite_nontexture_input_names'])
+
+
+@pytest.mark.parametrize('value',[10**16+1,-10**16-1])
+def test_floor_integer_endpoint_conversion_preserves_nominal_enclosure(value):
+    x=Field('input',detail={'name':'x'})
+    r=scalar_value_envelope(scalar('floor',x),input_domains={'x':[value,value]})
+    lo,hi=r['nominal_value_range']
+    assert lo<=value<=hi

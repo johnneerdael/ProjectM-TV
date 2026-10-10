@@ -91,6 +91,23 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
         if _value_only and node.op=='domain_checked' and len(node.args)==1:
             if node.detail.get('function') not in {'sqrt','pow'}:return None
             return visit(node.args[0],depth+1)
+        if _value_only and node.op in {'frac','floor'} and len(node.args)==1:
+            child=visit(node.args[0],depth+1)
+            if child is None or child[0] is None:return None
+            lo,hi=child[0]
+            if node.op=='floor':
+                if not all(math.isfinite(v) for v in (lo,hi)):return None
+                low,high=math.floor(lo),math.floor(hi)
+                lower,upper=float(low),float(high)
+                if lower>low:lower=math.nextafter(lower,-math.inf)
+                if upper<high:upper=math.nextafter(upper,math.inf)
+                if not all(math.isfinite(v) for v in (lower,upper)):return None
+                return ([lower,upper],None,'unknown')
+            if not all(math.isfinite(v) for v in (lo,hi)) or math.floor(lo)!=math.floor(hi):
+                return ([0.,1.],None,'unknown')
+            span,_,_=checked([lo-math.floor(lo),hi-math.floor(hi)],None,'unknown')
+            if span is not None:span=[max(0.,span[0]),min(1.,span[1])]
+            return (span,None,'unknown')
         if _value_only and node.op in {'saturate','clamp'}:
             child=visit(node.args[0],depth+1)
             if child is None or child[0] is None:return None

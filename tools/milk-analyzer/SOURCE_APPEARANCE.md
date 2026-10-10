@@ -1951,3 +1951,37 @@ References: [HLSL frac semantics](https://learn.microsoft.com/en-us/windows/win3
 and [The Book of Shaders: Patterns](https://thebookofshaders.com/09/).
 Original MilkDrop2.25c delegates the intrinsic to D3DX; the pinned source34 GLSL
 generator maps frac to fract. Neither renderer changes in this increment.
+
+## Quantized colour and declared colour scenarios
+
+Scalar value envelopes support `floor` and `frac` separately from rate calculus.
+Floor uses the monotonic endpoint integer levels when the input enclosure is
+finite. Frac uses floor-based negative semantics: a range within one floor bin
+retains its local fractional interval; a crossing or arbitrary finite interval
+gets the conservative [0,1] enclosure. The upper endpoint is an enclosure, not
+an assertion that ideal frac reaches 1. Outward interval padding can cross an
+integer boundary and conservatively include an extra floor level.
+
+These are value rules only. A seam-crossing fractional or quantized expression
+does not acquire a continuous derivative, flash count or motion rate. Known
+invalid expressions and nonfinite native uploads remain unresolved. Independent
+texture lanes, relevant finite intermediates and native precision conditions stay
+explicit.
+
+With an opt-in input scenario, each nonlinear colour stage adds
+`scenario_colour_envelope`. It retains separate RGB/channel ranges, unknowns,
+the scenario hash and false observed/runtime-binding flags. The ordinary stage
+result remains alongside it. For declared bass [0,2] and independent sampled
+RGB [0,1], `GetPixel(uv)*bass` has a nominal [0,2] range per channel; this does not
+predict average brightness, a palette or flashing. Missing other bands and
+nonfinite Q uploads are not supplied by the scenario.
+
+References: [HLSL floor](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-floor),
+[HLSL frac](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-frac).
+MilkDrop2 delegates shader intrinsics to D3DX; the patched GLSL generator uses
+floor and fract. These bounds do not change native semantics.
+
+Floor integer endpoints convert outward when the exact level is not representable
+as a float. Caller-declared original finite input names survive native upload
+projection; local sampled and derived upload placeholders are excluded from that
+summary. The scenario identity retains the corresponding declared intervals.

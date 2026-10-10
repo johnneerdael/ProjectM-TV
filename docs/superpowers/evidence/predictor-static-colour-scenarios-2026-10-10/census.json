@@ -1,0 +1,217 @@
+{
+  "basis": "Nominal floor/frac and declared colour input ranges, not brightness/flash/mood certification",
+  "presets": 100,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "ordinary_bounded_declared_texture_inputs": 71,
+    "scenario_bounded_declared_texture_inputs": 74,
+    "new_complete_scenario_stages": 5,
+    "ordinary_stage_records_changed": 3,
+    "presets_with_complete_scenario_colour": 58,
+    "presets_with_new_complete_scenario_colour": 5,
+    "ordinary_unknown": 116,
+    "scenario_unknown": 113,
+    "ordinary_partial_declared_texture_inputs": 13,
+    "scenario_partial_declared_texture_inputs": 13
+  },
+  "changed_source_gap_presets": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "model_modules": {
+    "source_control_bounds.py": "ec08858a9291343786a7aea7c1f9706a8de3f69c4777668fddfba19e084905a2",
+    "source_input_scenario.py": "5b9023e98fde7353f9efcf603f2cc6b042a38bfa3319fc225e9746311d21079d",
+    "source_nonlinear_colour.py": "f4d86ed5deb228f8833110fa8cfdfc143a191f6c698edcc2e826124096895266"
+  },
+  "zip_sha256": "1b0e6002b94c3f225ea88eee0d37ea684713996908782d064cdc21d8a5f060c5",
+  "rows": [
+    {
+      "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "stages": [
+        {
+          "stage": "composite",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "unknown",
+          "scenario_source_model": "bounded_declared_texture_inputs",
+          "ordinary_rgb_bounds": null,
+          "scenario_rgb_bounds": [
+            [
+              -4.500000000000005,
+              3.000000000000002
+            ],
+            [
+              -4.500000000000005,
+              3.000000000000002
+            ],
+            [
+              -4.500000000000005,
+              3.000000000000002
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "stages": [
+        {
+          "stage": "warp",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "bounded_declared_texture_inputs",
+          "scenario_source_model": "bounded_declared_texture_inputs",
+          "ordinary_rgb_bounds": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "scenario_rgb_bounds": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "stages": [
+        {
+          "stage": "composite",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "unknown",
+          "scenario_source_model": "bounded_declared_texture_inputs",
+          "ordinary_rgb_bounds": null,
+          "scenario_rgb_bounds": [
+            [
+              -4.725000041880012,
+              39.375000223000086
+            ],
+            [
+              -4.347000128040011,
+              33.32700156124009
+            ],
+            [
+              -4.630499969865012,
+              37.8157490516051
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "stages": [
+        {
+          "stage": "composite",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "unknown",
+          "scenario_source_model": "unknown",
+          "ordinary_rgb_bounds": null,
+          "scenario_rgb_bounds": null,
+          "unknown_reasons": [
+            "no finite source value envelope from supported formula",
+            "no finite source value envelope from supported formula",
+            "no finite source value envelope from supported formula"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "stages": [
+        {
+          "stage": "warp",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "unknown",
+          "scenario_source_model": "bounded_declared_texture_inputs",
+          "ordinary_rgb_bounds": null,
+          "scenario_rgb_bounds": [
+            [
+              -3e-323,
+              1.004000000180001
+            ],
+            [
+              -3e-323,
+              1.004000000180001
+            ],
+            [
+              -3e-323,
+              1.004000000180001
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+      "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a",
+      "stages": [
+        {
+          "stage": "warp",
+          "previous_source_model": "unknown",
+          "ordinary_source_model": "bounded_declared_texture_inputs",
+          "scenario_source_model": "bounded_declared_texture_inputs",
+          "ordinary_rgb_bounds": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "scenario_rgb_bounds": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    }
+  ]
+}
