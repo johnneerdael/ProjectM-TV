@@ -334,3 +334,10 @@ aspect-corrected coordinates; procedural distortion and physical-screen
 geometry remain separate. Per-vertex spatial/state/random changes cannot be
 treated as one uniform transform and retain unknown results. Audio-driven
 value bounds do not establish timing or smoothness.
+
+`native_radial_zoom` describes the curved initial zoom component when supported
+positive zoom/exponent controls are uniform across vertices. It bounds the
+centre-to-edge zoom factor and its radial slope, and reports a sufficient
+condition for the radial sampling component to avoid folding. This can help
+reconstruct perspective-like feedback, but it does not prove a visible tunnel,
+ring pattern or whole-map geometry. Failed sufficient checks remain undecided.

@@ -30,6 +30,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `appearance_match_accuracy` | Null until separately validated; do not infer it from a successful parse/test |
 | `native_warp_recipe` | Nominal uniform native feedback sampling map with runtime aspect/texel inputs; dynamic/radial controls remain unknown |
 | `native_warp_transport` | Uniform affine-component scale/area envelopes from supported varying controls; aspect-corrected geometry, not screen motion |
+| `native_radial_zoom` | Positive uniform-control radial zoom component, nominal factor/derivative envelopes; no tunnel or full-map label |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1352,3 +1353,39 @@ The native/reference operation order is the same source cited by the uniform
 recipe; the creator's [authoring guide](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html)
 explains zoom/rotation/stretch as repeated image motion rather than control
 variation. Current patched-native semantics remain the target.
+
+
+## Initial radial zoom component
+
+`native_radial_zoom` uses independent uniform zoom/zoomexp source rows. Later
+spatial rotation/translation need not hide the understood initial radial
+component. Require positive finite native endpoint domains; retain negative,
+unbounded, spatial/state/random or float32 power/reciprocal overflow/underflow
+as unknown. Under current normalized aspect inputs, nominal source radius r
+is in [0,sqrt(2)]; the emitted mesh radius is not the authoring guide's claimed
+corner radius1. The current source34 PerPixelMesh.cpp uses hypot(pos.x*aspectX,
+pos.y*aspectY), while ProjectM.cpp normalizes each aspect to at most1.
+
+For z=zoom and e=zoomexp, the native nominal nested-power construction is:
+
+```
+P = e^(2*r-1)
+F = z^P
+sampling_radius = r/F
+log_factor_derivative = 2*ln(e)*ln(z)*P
+radial_sampling_derivative = (1-r*log_factor_derivative)/F
+```
+
+Monotone positive-power endpoint bounds supply F and 1/F, with independent
+control correlation conservatively ignored. Exact binary-rational products
+bound nominal derivative terms after the real log/power functions. Positive
+radial derivative is reported only when the upper bound on
+r*log_factor_derivative is strictly below1. Failure is undecided, not proof of
+a fold. Bounds are nominal calculus with outward endpoint arithmetic, not
+formal GPU/libm error intervals. Native radius/intermediate rounding, mesh
+triangle interpolation and finite sampled frames remain separate.
+
+`visible_effect_family`, `actual_fold_present` and complete-map area remain
+null. Curved radial feedback can contribute perspective-like layouts, but
+contents, wrapping, other transformations and shaders determine a tunnel or
+ring appearance. This source-math addition cannot confer a mood label.

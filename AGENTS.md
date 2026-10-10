@@ -1033,3 +1033,10 @@ operations; dependency-free random/memory operations are not uniform proofs.
 Keep independent control rows even when aggregate transport is unresolved.
 Principal scales are aspect-corrected, not display-space. No procedural-map
 Jacobian, visible motion or mood certificate follows from these bounds.
+
+Source radial-zoom maintenance: `source_radial_zoom` consumes the independent
+positive uniform zoom/zoomexp rows, even when later mesh controls are spatial.
+Preserve native nested-power order and nominal aspect-corrected radius range.
+Guard inner/outer float32 power and reciprocal endpoint domains; negative zoom
+stays unresolved here. Nominal derivatives and sufficient no-fold results do
+not certify GPU rounding, visible tunnels or the complete transformed map.

@@ -4717,6 +4717,61 @@
               }
             }
           }
+        },
+        "native_radial_zoom": {
+          "type": "object",
+          "description": "Conditional positive uniform-control initial radial zoom component; no visible family/whole-map or native precision certificate.",
+          "required": [
+            "status",
+            "formulas",
+            "unknown_reasons",
+            "visible_effect_family"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "bounded_radial_zoom_component",
+                "unknown",
+                "not_contributing"
+              ]
+            },
+            "formulas": {
+              "type": "object"
+            },
+            "zoom_factor_range": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "log_zoom_radial_derivative_range": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "radial_derivative_positive_sufficient": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "actual_fold_present": {
+              "type": "null"
+            },
+            "visible_effect_family": {
+              "type": "null"
+            },
+            "complete_sampling_map_area_ratio": {
+              "type": "null"
+            },
+            "unknown_reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
