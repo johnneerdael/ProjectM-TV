@@ -17,6 +17,8 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             'raw_rgb_bounds_if_samples_unit_interval':None,'sample_textures':[],
             'colour_difference_gain':None,'whole_feedback_contraction':None,
             'actual_feedback_persistence':None,'visible_flashing':None,'unknown_reasons':[],
+            'direct_sample_colour_response':{'policy':'source-direct-sample-colour-response-v1','samples':[],
+                'includes_sampling_coordinate_response':False,'visible_response_strength':None,'conditions':[]},
             'direct_colour_time_response':{'policy':'source-fixed-sample-colour-time-response-v1','status':'unknown',
                 'channels':[],'channel_order':['r','g','b'],'samples_are_held_fixed':True,
                 'includes_sampling_coordinate_response':False,'total_rgb_rate_per_second':None,
@@ -41,7 +43,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             for name,sample in samples:
                 for lane in 'xyzw':domains[name+'.'+lane]=[0.,1.]
             local_sample_names=set(domains)-set(input_domains or {})
-            derived=set();derived_audio={};derived_time=set()
+            derived=set();derived_audio={};derived_time=set();derived_samples={}
             def project(node,depth=0):
                 original=node;key=id(original)
                 if key in memo:return memo[key][1]
@@ -53,6 +55,11 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                 finally:active.remove(key)
                 memo[key]=(original,value);return value
             def calculate(node,depth):
+                if node.op=='cast' and node.dtype=='float' and len(node.args)==1 and node.detail.get('target_type')=='float':
+                    child=node.args[0]
+                    if child.dtype in {'float','float2','float3','float4'}:
+                        parts=_parts(child)
+                        if parts and parts[0].dtype=='float':return project(parts[0],depth+1)
                 if node.op in {'length','distance'}:
                     vectors=[]
                     for arg in node.args:
@@ -73,6 +80,9 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                     if span is None:raise ValueError('native colour-input upload domain unresolved')
                     name=':nonlinear-colour-narrow-'+str(len(memo));domains[name]=[_f32(v) for v in span];derived.add(name)
                     derived_audio[name]=set(_audio_codes(node,analysis))
+                    dependencies=_deps(child)
+                    derived_samples[name]=(dependencies&local_sample_names)|set().union(*(
+                        derived_samples.get(k,set()) for k in dependencies))
                     if _deps(node)&time_names or 0 in _packed_reads(node).get('_c2',set()):derived_time.add(name)
                     return Field('input',dtype='float',detail={'name':name})
                 if node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
@@ -127,6 +137,8 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                 if tainted:channel['unknown_reasons']=['time-dependent native float32 upload prevents a continuous direct-colour bound']
                 time_response['channels'].append(channel)
             time_response['status']='conditional source direct-colour time paths'
+            from source_sample_colour_response import sample_colour_response
+            r['direct_sample_colour_response']=sample_colour_response(projected,samples,domains,derived_samples)
             spans=[c['nominal_value_range'] for c in channels]
             r['channel_value_envelopes']=channels
             r['sample_textures']=sorted({s.detail.get('canonical_texture') for name,s in samples},key=str)

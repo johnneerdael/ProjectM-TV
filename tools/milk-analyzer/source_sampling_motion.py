@@ -70,25 +70,40 @@ def texture_motion_bounds(description):
         if maps is None:continue
         transfer=description['texture_colour_transfer']['stages'][stage]
         weights={(r['sample_site_index'],r['sampler']):r for r in transfer['sample_contributions']}
+        nonlinear=description['nonlinear_texture_colour_bounds']['stages'][stage]
         for record in maps:
             movement=record['sampling_motion'];weight=weights.get((record['sample_site_index'],record['sampler']))
             for part,scenario in ((movement,None),(movement.get('scenario_sampling_motion'),True)):
                 if part is None:continue
                 coefficients=[[None,None] for _ in range(3)]
+                response_model=None
                 policy=record['sampling_policy'] or {}
                 linear=policy.get('linear') is True and policy.get('mipmapped') is False and policy.get('base_level')==0
                 if weight is not None and linear:
+                    response_model='affine_sample_colour'
                     for i,row in enumerate(weight['matrix_rgb_rgba']):
                         gain=sum(abs(Fraction(v)) for v in row)
                         for axis,speed in enumerate(part['maximum_lookup_axis_speed_uv_per_second']):
                             if speed is not None:coefficients[i][axis]=_finite_round(gain*Fraction(speed),upper=True)
+                elif linear:
+                    report=nonlinear.get('scenario_colour_envelope',nonlinear) if scenario else nonlinear
+                    candidate=next((r for r in report['direct_sample_colour_response']['samples'] if
+                        (r['sample_site_index'],r['sampler'])==(record['sample_site_index'],record['sampler'])),None)
+                    if candidate is not None:
+                        response_model='nonlinear_sample_lipschitz'
+                        for i,row in enumerate(candidate['matrix_rgb_rgba_gain_upper_bounds']):
+                            if any(v is None for v in row):continue
+                            gain=sum(Fraction(v) for v in row)
+                            for axis,speed in enumerate(part['maximum_lookup_axis_speed_uv_per_second']):
+                                if speed is not None:coefficients[i][axis]=_finite_round(gain*Fraction(speed),upper=True)
                 rows.append({'stage':stage,'sample_site_index':record['sample_site_index'],
                     'sampler':record['sampler'],'canonical_texture':record['canonical_texture'],
                     'input_scenario_sha256':part['input_scenario_sha256'] if scenario else None,
                     'maximum_lookup_axis_speed_uv_per_second':part['maximum_lookup_axis_speed_uv_per_second'],
                     'linear_texture_rgb_rate_coefficients_per_dimension':coefficients,
+                    'colour_response_model':response_model,
                     'texture_dimensions_verified':False,'visible_rgb_rate_per_second':None,
-                    'scope':'sampling-motion contribution with fixed texture contents and affine RGB mixture',
+                    'scope':'sampling-motion contribution with fixed texture contents and supported RGB response',
                     'conditions':['Each sampled RGBA texel in [0,1], linear base-level filtering with standard repeat or clamp addressing',
                         'Supply actual uploaded width W and height H: each RGB rate <= coefficient_x*W + coefficient_y*H',
                         'Coefficients bound worst-case adjacent-texel contrast; constant images can have zero actual variation',

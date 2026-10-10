@@ -1269,3 +1269,9 @@ Use exact rational inverse coefficients for feature velocity in a single basis.
 Bilinear rate coefficients require fixed [0,1] texels and actual uploaded W/H;
 do not substitute canvas dimensions or give nearest/mipmapped sampling a smooth
 bound. Native mesh, texture history, direct RGB and later feedback remain separate.
+
+Nonlinear sample response varies one declared RGBA lane at a time, with all other
+inputs/coordinates fixed. Sum Lipschitz columns for simultaneous changes, not
+signed Jacobian cancellation. Ordinary float-width coercions follow typed parts;
+int/bool/native narrow and unresolved vector sample dependencies stay guarded.
+Direct sample colour matrices exclude nested lookup-coordinate chains explicitly.

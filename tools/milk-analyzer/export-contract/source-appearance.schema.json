@@ -5305,7 +5305,7 @@
         },
         "nonlinear_texture_colour_bounds": {
           "type": "object",
-          "description": "Nominal nonlinear scalar colour ranges with declared unit-RGBA and finite input/upload premises. No nonlinear sensitivity or display certificate.",
+          "description": "Conditional nonlinear scalar colour ranges and independent sampled-lane Lipschitz ceilings; no full-coordinate, feedback or display certificate.",
           "required": [
             "policy",
             "stages"
@@ -5396,11 +5396,17 @@
                       },
                       "direct_colour_audio_response": {
                         "$ref": "#/$defs/directColourAudioResponse"
+                      },
+                      "direct_sample_colour_response": {
+                        "$ref": "#/$defs/directSampleColourResponse"
                       }
                     }
                   },
                   "direct_colour_audio_response": {
                     "$ref": "#/$defs/directColourAudioResponse"
+                  },
+                  "direct_sample_colour_response": {
+                    "$ref": "#/$defs/directSampleColourResponse"
                   }
                 }
               }
@@ -6081,17 +6087,55 @@
               "description": "Raw shader RGB partial source-time rates with sampled colours and all other inputs held fixed; excludes texture motion/history and total displayed variation.",
               "items": {
                 "type": "object",
-                "required": ["stage", "channels", "samples_are_held_fixed", "includes_sampling_coordinate_response", "total_rgb_rate_per_second", "visible_flash_frequency_hz", "conditions"],
+                "required": [
+                  "stage",
+                  "channels",
+                  "samples_are_held_fixed",
+                  "includes_sampling_coordinate_response",
+                  "total_rgb_rate_per_second",
+                  "visible_flash_frequency_hz",
+                  "conditions"
+                ],
                 "properties": {
-                  "stage": {"enum": ["warp", "composite"]},
-                  "samples_are_held_fixed": {"const": true},
-                  "includes_sampling_coordinate_response": {"const": false},
-                  "total_rgb_rate_per_second": {"type": "null"},
-                  "visible_flash_frequency_hz": {"type": "null"},
-                  "channels": {"type": "array", "minItems": 3, "maxItems": 3, "items": {
-                    "type": "object", "required": ["maximum_absolute_rgb_rate_per_source_second", "unknown_reasons"],
-                    "properties": {"maximum_absolute_rgb_rate_per_source_second": {"type": ["number", "null"], "minimum": 0}}
-                  }}
+                  "stage": {
+                    "enum": [
+                      "warp",
+                      "composite"
+                    ]
+                  },
+                  "samples_are_held_fixed": {
+                    "const": true
+                  },
+                  "includes_sampling_coordinate_response": {
+                    "const": false
+                  },
+                  "total_rgb_rate_per_second": {
+                    "type": "null"
+                  },
+                  "visible_flash_frequency_hz": {
+                    "type": "null"
+                  },
+                  "channels": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "maximum_absolute_rgb_rate_per_source_second",
+                        "unknown_reasons"
+                      ],
+                      "properties": {
+                        "maximum_absolute_rgb_rate_per_source_second": {
+                          "type": [
+                            "number",
+                            "null"
+                          ],
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -6100,13 +6144,51 @@
               "description": "Conditional per-shape material partial time-rate ceilings at fixed geometry, barycentrics and destination; not visible flash rates.",
               "items": {
                 "type": "object",
-                "required": ["element_id", "part", "maximum_incoming_rgb_rate_per_second", "maximum_blended_rgb_rate_per_second", "scope", "conditions"],
+                "required": [
+                  "element_id",
+                  "part",
+                  "maximum_incoming_rgb_rate_per_second",
+                  "maximum_blended_rgb_rate_per_second",
+                  "scope",
+                  "conditions"
+                ],
                 "properties": {
-                  "element_id": {"type": "string"},
-                  "part": {"enum": ["fill", "border"]},
-                  "maximum_incoming_rgb_rate_per_second": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": ["number", "null"], "minimum": 0}},
-                  "maximum_blended_rgb_rate_per_second": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": ["number", "null"], "minimum": 0}},
-                  "visible_flashing_verified": {"const": false}
+                  "element_id": {
+                    "type": "string"
+                  },
+                  "part": {
+                    "enum": [
+                      "fill",
+                      "border"
+                    ]
+                  },
+                  "maximum_incoming_rgb_rate_per_second": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    }
+                  },
+                  "maximum_blended_rgb_rate_per_second": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    }
+                  },
+                  "visible_flashing_verified": {
+                    "const": false
+                  }
                 }
               }
             }
@@ -6136,16 +6218,128 @@
             },
             "texture_motion_bounds": {
               "type": "array",
-              "description": "Per-lookup partial time speeds and affine RGB-weighted bilinear worst-case coefficients; actual uploaded texture dimensions and fixed texel/content premises remain inputs.",
+              "description": "Per-lookup partial time speeds and supported RGB-response-weighted bilinear worst-case coefficients; actual uploaded texture dimensions and fixed texel/content premises remain inputs.",
               "items": {
                 "type": "object",
-                "required": ["stage", "sample_site_index", "maximum_lookup_axis_speed_uv_per_second", "linear_texture_rgb_rate_coefficients_per_dimension", "texture_dimensions_verified", "visible_rgb_rate_per_second", "scope", "conditions"],
+                "required": [
+                  "stage",
+                  "sample_site_index",
+                  "maximum_lookup_axis_speed_uv_per_second",
+                  "linear_texture_rgb_rate_coefficients_per_dimension",
+                  "texture_dimensions_verified",
+                  "visible_rgb_rate_per_second",
+                  "scope",
+                  "conditions"
+                ],
                 "properties": {
-                  "stage": {"enum": ["warp", "composite"]},
-                  "texture_dimensions_verified": {"const": false},
-                  "visible_rgb_rate_per_second": {"type": "null"},
-                  "maximum_lookup_axis_speed_uv_per_second": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": ["number", "null"], "minimum": 0}},
-                  "linear_texture_rgb_rate_coefficients_per_dimension": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": ["number", "null"], "minimum": 0}}}
+                  "stage": {
+                    "enum": [
+                      "warp",
+                      "composite"
+                    ]
+                  },
+                  "texture_dimensions_verified": {
+                    "const": false
+                  },
+                  "visible_rgb_rate_per_second": {
+                    "type": "null"
+                  },
+                  "colour_response_model": {
+                    "enum": [
+                      "affine_sample_colour",
+                      "nonlinear_sample_lipschitz",
+                      null
+                    ]
+                  },
+                  "maximum_lookup_axis_speed_uv_per_second": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    }
+                  },
+                  "linear_texture_rgb_rate_coefficients_per_dimension": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "directSampleColourResponse": {
+      "type": "object",
+      "required": [
+        "policy",
+        "samples",
+        "includes_sampling_coordinate_response",
+        "conditions"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-direct-sample-colour-response-v1"
+        },
+        "includes_sampling_coordinate_response": {
+          "const": false
+        },
+        "visible_response_strength": {
+          "type": "null"
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "sample_site_index",
+              "sampler",
+              "matrix_rgb_rgba_gain_upper_bounds",
+              "rgba_column_order",
+              "unknown_reasons"
+            ],
+            "properties": {
+              "rgba_column_order": {
+                "const": [
+                  "r",
+                  "g",
+                  "b",
+                  "a"
+                ]
+              },
+              "matrix_rgb_rgba_gain_upper_bounds": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  }
                 }
               }
             }

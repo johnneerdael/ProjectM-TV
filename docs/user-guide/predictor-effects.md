@@ -545,3 +545,10 @@ worst-case colour-change coefficients that require the actual uploaded texture
 dimensions. Constant images can change far less than that ceiling. Image history,
 native mesh movement and later feedback stay separate; nearest filtering does
 not receive a smooth bilinear rate bound.
+
+Nonlinear sampled-colour response now extends that propagation through supported
+powers, sample products and clipped image-blend masks. The JSON provides a separate
+RGBA-to-RGB gain matrix per direct sample, and identifies when those coefficients
+are used for texture-motion bounds. A sample used only to move another texture
+lookup still needs the nested gradient calculation; its absence from the direct
+RGB matrix does not mean it has no visible influence.

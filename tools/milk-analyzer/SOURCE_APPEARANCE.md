@@ -2284,3 +2284,40 @@ defines weighted interpolation of neighbouring texels. The dimension factors
 above follow from adjacent centres being separated by `1/W` and `1/H` UV units.
 Original MilkDrop2 and declared core sampler policies determine the applicable
 filter/address mode; native GPU rounding remains outside nominal derivatives.
+
+## Nonlinear sampled-colour response
+
+`nonlinear_texture_colour_bounds.stages.*.direct_sample_colour_response.samples`
+exports a 3-by-4 matrix of upper Lipschitz coefficients for each directly sampled
+RGBA input. Each column varies one sample lane while all other sampled lanes,
+audio/time/state and sampling coordinates remain fixed. Sum column ceilings for
+independent simultaneous changes within the declared `[0,1]` input box. This is
+not a signed Jacobian, minimum/typical reaction or a complete feedback gain.
+
+Supported powers, products, absolute values, clipping and mixture weights can
+therefore propagate sampled-image changes beyond the constant affine RGB model.
+For `sample.rgb^2`, the diagonal gain ceiling is 2 on `[0,1]`; a zero-touching
+square root has no finite active-lane ceiling. For a clipped mask controlling
+`lerp(a,b,mask)`, its influence is bounded by the mask rate times the maximum
+`abs(b-a)`, plus endpoint responses. Source finite-intermediate and valid-domain
+premises remain explicit. Thresholds, quantized sample-dependent uploads,
+singular arithmetic and unresolved vector paths retain null coefficients.
+
+Ordinary float-width casts use the existing typed scalar/broadcast/truncation
+policy; a float-vector-to-scalar conversion selects the first lane. Integer/bool
+casts and native Q narrowing remain distinct. An unresolved vector sample input
+cannot be mistaken for an absent scalar-lane dependency with zero gain.
+
+`texture_motion_bounds.colour_response_model` identifies either
+`affine_sample_colour` or `nonlinear_sample_lipschitz`. For the nonlinear path,
+column ceilings replace absolute affine row weights in the bilinear dimension
+formula. Unknown active column coefficients keep the affected output bound
+unknown. Default and scenario response models retain their separate input domains.
+
+Nested samples used only inside another lookup's coordinates are excluded from
+these direct colour matrices. Their image-gradient chain is still required:
+changing an inner sample can move an outer lookup even if it has no direct RGB
+term. No coefficient or null total-rate field claims that nested influence is zero.
+See [Microsoft's HLSL lerp definition](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-lerp)
+for the mixture formula. The native typed coercion rules and original MilkDrop2
+shader expressions determine which lanes reach that formula.
