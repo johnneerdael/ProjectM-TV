@@ -334,8 +334,22 @@ def _has(value, op):
     return any(node.op == op for node, _ in _walk(value))
 
 
+def _is_spatial_input(node):
+    return (node.op=='input' and node.detail.get('name') in SPATIAL and not
+            (node.detail.get('equation_phase') in {'per_frame_','per_frame_init_'} and
+             node.detail.get('value_binding')=='phase_scalar_snapshot'))
+
+
+def _spatial_inputs(value):
+    cache=_CACHE.get();key=('spatial_inputs',id(value))
+    if cache is not None and key in cache and cache[key][0] is value:return cache[key][1]
+    result={node.detail['name'] for node,path in _walk(value) if _is_spatial_input(node)}
+    if cache is not None:cache[key]=(value,result)
+    return result
+
+
 def _spatial(value):
-    return bool(_deps(value) & SPATIAL)
+    return bool(_spatial_inputs(value))
 
 
 def _key(value):
@@ -355,7 +369,8 @@ def _key(value):
     elif value.op == 'loop_slot':
         identity = ('slot', id(value.detail['plan']), value.detail['name'], value.detail.get('read_components'))
     elif value.op == 'input':
-        identity = ('input', value.detail['name'])
+        identity = ('input', value.detail['name'],value.detail.get('equation_phase'),
+                    value.detail.get('value_binding'),value.detail.get('state_scope'))
     elif value.op == 'constant':
         identity = ('constant', str(_number(value)))
     else:
@@ -379,7 +394,7 @@ def _angle(value):
     return any(node.op == 'atan2' and _spatial(node) or
                node.op == 'member' and node.detail.get('field') in {'y', 'g'} and
                node.args[0].op == 'input' and node.args[0].detail.get('name') == '_rad_ang' or
-               node.op == 'input' and node.detail.get('name') == 'ang'
+               _is_spatial_input(node) and node.detail.get('name') == 'ang'
                for node, _ in _walk(value))
 
 
@@ -387,7 +402,7 @@ def _radius(value):
     return any(node.op in {'length', 'distance'} and _spatial(node) or
                node.op == 'member' and node.detail.get('field') in {'x', 'r'} and
                node.args[0].op == 'input' and node.args[0].detail.get('name') == '_rad_ang' or
-               node.op == 'input' and node.detail.get('name') == 'rad'
+               _is_spatial_input(node) and node.detail.get('name') == 'rad'
                for node, _ in _walk(value))
 
 
@@ -622,8 +637,9 @@ class _EEL:
            '_below': 'less', '_above': 'greater', 'below': 'less', 'above': 'greater',
            'equal': 'equal', 'if': 'select'}
 
-    def __init__(self, environment=None):
+    def __init__(self, environment=None,*,equation_phase=None):
         self.environment = dict(environment or {})
+        self.equation_phase=equation_phase
         self.written = set()
         self.unknown = []
 
@@ -649,7 +665,12 @@ class _EEL:
             return _constant(tree['value'])
         if kind == 'variable':
             name = tree['name'].lower()
-            return self.environment.get(name, Field('input', detail={'name': name}))
+            if name in self.environment:return self.environment[name]
+            detail={'name':name}
+            if self.equation_phase is not None:
+                detail.update(equation_phase=self.equation_phase,
+                    value_binding='shared_register' if re.fullmatch(r'reg[0-9]{2}',name) else 'phase_scalar_snapshot')
+            return Field('input',detail=detail)
         if kind != 'call':
             self.unknown.append('unrecognized EEL tree node')
             return Field('unknown')
@@ -791,7 +812,7 @@ class _Analysis:
     def equation(self, prefix, environment):
         section = self.sections.get(prefix)
         selected = select_equation(section, prefix, policy=self.policy)
-        model = _EEL(environment)
+        model = _EEL(environment,equation_phase=prefix)
         if selected['compile_status'] == 'omitted':
             self.unknowns.append({'section': prefix, 'reason': 'native equation loader omits rejected block'})
             return model
@@ -810,7 +831,8 @@ class _Analysis:
         for name in inputs.keys()-resets.keys():
             if name in written or re.fullmatch(r'reg[0-9]{2}',name):
                 scope='shared:'+name if re.fullmatch(r'reg[0-9]{2}',name) else 'state:'+prefix+':'+name
-                inputs[name]=Field('input',detail={'name':scope,'state_scope':'previous persistent or shared register value'})
+                inputs[name]=Field('input',detail={'name':scope,'state_scope':'previous persistent or shared register value',
+                    'equation_phase':prefix,'value_binding':'shared_register' if scope.startswith('shared:') else 'phase_scalar_snapshot'})
         inputs.update(resets)
         return inputs
 
@@ -844,8 +866,8 @@ class _Analysis:
             if _has(value, 'unknown'):
                 self.unknowns.append({'section': 'per_pixel_', 'reason': name + ' output unresolved'})
                 continue
-            if name == 'rot' and _deps(value) & {'rad', 'x', 'y', 'ang'}:
-                self.add('radial_twist' if 'rad' in _deps(value) else 'spatial_rotation',
+            if name == 'rot' and _spatial_inputs(value) & {'rad', 'x', 'y', 'ang'}:
+                self.add('radial_twist' if 'rad' in _spatial_inputs(value) else 'spatial_rotation',
                          'per_pixel_', value, 'spatial dependence reaches native rotation output',
                          parameters={'native_output': name},
                          conditions=['native mesh sampling coordinates are consumed by the active warp shader'])

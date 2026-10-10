@@ -102,7 +102,13 @@ Static equations now honor target frame resets: config/audio fields reload,
 main Q reloads init snapshots, shape Q reloads main frame Q, and shape T reloads
 init snapshots each instance. Mutable initialized custom locals become previous
 state inputs; assignments before reads can reestablish constants. Shared registers
-remain inputs. Initial audio/time captures use `init:<section>:<variable>` input
+remain inputs. Bare/local state reads carry `equation_phase` and `value_binding`
+metadata, retaining unknown values. Main/init scalar snapshots are uniform
+across the mesh; pixel-local state, random/memory operations and shared-register
+reads do not gain that proof. Uniformity is independent of rates/continuity.
+A main local named `rad`/`ang` is not a geometric coordinate solely by name.
+Structural input identity includes phase/binding/scope so conditional branches
+cannot collapse a main scalar snapshot into a same-named pixel coordinate. Initial audio/time captures use `init:<section>:<variable>` input
 names and are not current-frame audio routes. Plain EEL `vol`/`vol_att` are local
 names, not registered aggregates; shader packed volume lanes remain codes7/8.
 Native EEL `_if` assignments merge branch environments before geometry inference.
@@ -1330,8 +1336,8 @@ source construction recipe, not a whole-preset image or mood certification.
 `native_warp_transport` retains ten independent source control rows and bounds
 an affine component when every control has a pure uniform expression, zoomexp
 converts to1, and zoom/sx/sy have finite sign-definite native endpoint domains
-with finite nonzero reciprocals. Only declared readonly frame/configuration
-inputs establish uniformity; spatial, persistent/shared state, random/memory
+with finite nonzero reciprocals. Declared readonly frame/configuration inputs and explicitly scoped main/init
+scalar snapshots establish uniformity; spatial, pixel-local/shared state, random/memory
 and opaque operations cannot establish it from a dependency list alone. Even
 per-frame random expressions abstain until execution-phase provenance is added.
 

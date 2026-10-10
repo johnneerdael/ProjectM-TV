@@ -349,3 +349,11 @@ including a separate procedural warp term. This distinguishes a fixed zoom
 from stationary sampling. Renderer aspect must be supplied and texel alignment
 added separately. Visible feature movement depends on contents and later
 processing, so this measure does not yet set a motion-intensity or mood score.
+
+
+The source graph also records where an unresolved scalar was read. Main/init
+scalar snapshots are fixed across a mesh pass, even if they evolve between
+frames. Pixel-local state and random/memory operations remain unresolved for
+uniform transport. This can retain more geometric bounds without inventing a
+state value, timing or smoothness. A local variable named like a coordinate
+is not classified as spatial unless its source scope supports that meaning.

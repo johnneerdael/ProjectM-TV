@@ -1047,3 +1047,12 @@ aspect-corrected units and texel alignment separate. Constant RMS coefficients
 and varying-control triangle bounds are not forward-feature/display speed.
 Keep procedural warp as a distinct envelope; validate warp-scale reciprocal
 even for zero warp. Preserve invalid/unknown uniform domains and finite bounds.
+
+
+Source phase-provenance maintenance: `_EEL` tags bare/persistent scalar inputs
+with equation_phase/value_binding, preserving unknown state values and named
+finite-input assumptions. Uniform transport may consume main/init snapshots,
+but not pixel-local/shared-register state or random/memory calls. Preserve Q
+copy/reset versus pixel mutation. Geometric dependency tests exclude scoped
+main locals named like coordinates; shader and actual pixel coordinates keep
+spatial meaning. Use the per-analysis spatial cache; no state execution occurs.

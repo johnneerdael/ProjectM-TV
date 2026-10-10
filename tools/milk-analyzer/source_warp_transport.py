@@ -13,6 +13,12 @@ PURE={'constant','input','add','subtract','multiply','divide','eel_divide',
       'not_equal','cast','narrow','construct','components','bnot','band','bor'}
 
 
+def uniform_scalar_input(node,readonly):
+    if node.detail.get('name') in readonly:return True
+    return (node.detail.get('equation_phase') in {'per_frame_','per_frame_init_'} and
+            node.detail.get('value_binding')=='phase_scalar_snapshot')
+
+
 def _product_span(*spans):
     """Exact products of binary endpoint values, rounded outwards once."""
     values=[Fraction(1)]
@@ -39,7 +45,7 @@ def native_warp_transport(analysis,*,consumed):
         'procedural_warp_present':None,'complete_sampling_map_area_ratio':None,
         'visible_screen_motion':None,'unknown_reasons':[],
         'uses_equation_execution':False,'uses_rendered_images':False,
-        'conditions':['All controls are uniform across mesh vertices at a frame; only declared readonly frame inputs may vary',
+        'conditions':['Controls are uniform across mesh vertices at a frame; readonly frame inputs and frozen main/init scalar snapshots may vary between frames',
                       'Nominal source envelopes exclude intermediate/libm rounding; float32 endpoint conversion is monotone',
                       'Aspect-corrected source-to-output singular scales are abs(zoom*sx),abs(zoom*sy), not physical-screen singular scales',
                       'Affine area/orientation exclude procedural warp, texel shifts, mesh interpolation, transition blending and later shaders',
@@ -59,12 +65,14 @@ def native_warp_transport(analysis,*,consumed):
                 try:native=[_f32(v) for v in span]
                 except ValueError:pass
             pure=all(n.op in PURE for n,p in _walk(field))
+            uniform_inputs=all(uniform_scalar_input(n,uniform) for n,p in _walk(field) if n.op=='input')
             row={'raw_time_curve':{k:v for k,v in curve.items() if k not in {'expression','phase_expression','value_envelope'}},
                  'native_float32_endpoint_domain':native,
                  'assumed_finite_input_names':sorted(deps),
-                 'uniform_across_vertices':deps<=uniform and pure}
+                 'uniform_across_vertices':uniform_inputs and pure,
+                 'uniformity_basis':'frozen main/init phase scalar snapshots and readonly frame inputs'}
             result['controls'][name]=row
-            if not deps<=uniform:blockers.append(name+' has spatial/state input without uniformity proof')
+            if not uniform_inputs:blockers.append(name+' has spatial/state input without uniformity proof')
             if not pure:
                 blockers.append(name+' lacks a pure uniform expression proof')
         if blockers:

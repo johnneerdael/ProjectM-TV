@@ -4683,7 +4683,8 @@
               ]
             },
             "controls": {
-              "type": "object"
+              "type": "object",
+              "description": "Independent control rows retain unknown values and timing. uniform_across_vertices requires pure expressions over readonly inputs or explicitly scoped main/init scalar snapshots. Pixel/shared state and random/memory calls remain guarded."
             },
             "source_to_output_axis_scales": {
               "type": [
