@@ -2617,3 +2617,26 @@ the unproved blur-to-previous-image transfer; image-driven coordinates and opaqu
 paths also keep the previous-image result null. Default and scenario records are
 distinct. Whole feedback contraction, actual persistence/stability and mood
 remain unverified, including when the raw operator has a contraction bound.
+
+## Typed dependency projection
+
+Source dependency traversal applies typed lane conversion before swizzling.
+Scalar-to-vector casts broadcast, shorter targets discard surplus lanes, and
+numeric integer/boolean conversions and native float32 upload markers remain
+in the graph. A valid `.g`/`.b` read of a broadcast scalar is not an out-of-range
+projection. Full-width swizzles also respect truncation: a float2 cast of a
+float3 cannot gain an effect from its discarded third lane. Cross-lane operations
+such as normalization retain all their consumed input lanes.
+
+Explicit scalar casts consume the first source lane while retaining the numeric
+conversion node. Scalar traversal does not rebuild that conversion recursively.
+Opaque matrix/cross-lane dependencies keep their prior source paths; genuinely
+invalid component selections remain unknown. These rules follow the
+[HLSL component and casting conventions](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-per-component-math)
+and the existing typed parts model under the pinned translator.
+
+Multiplier-presence conditions now use one budget-charged causal DAG inventory
+per output, with strong node references and complete-only caching. Shared nodes
+reachable through either masked or unmasked routes retain the existential mask
+condition. Calls outside an analysis cache keep the prior identity traversal.
+No numerical bounds or traversal limits are changed by this condition lookup.

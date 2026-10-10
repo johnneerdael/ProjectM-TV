@@ -181,7 +181,8 @@ _PARTS = _StaticParts(stage='composite', frame=0, warp_reads_blur=False)
 
 
 def _project(value, indices):
-    value = _strip(value)
+    # Casts can broadcast/truncate lanes or convert their numeric type. Apply
+    # typed parts before selecting components instead of erasing that meaning.
     cache = _CACHE.get(); key = ('projection', id(value), tuple(indices))
     if cache is not None and key in cache and cache[key][0] is value:
         return cache[key][1]
@@ -195,7 +196,7 @@ def _project_uncached(value, indices):
     shape = ShaderFields.shape(value.dtype)
     if shape is None:
         return Field('unknown', detail={'reason': 'component projection type unresolved'})
-    if tuple(indices) == tuple(range(shape[1])):
+    if tuple(indices) == tuple(range(shape[1])) and value.op not in {'cast','construct','aggregate'}:
         return value
     dtype = shape[0] if len(indices) == 1 else shape[0]+str(len(indices))
     if value.op in {'loop_result', 'loop_slot'}:
@@ -219,8 +220,17 @@ def _children(value, *, plans=True):
 
 def _children_uncached(value, *, plans=True):
     """Traverse data, including selected loop updates and their control reads."""
+    if value.op in {'cast','construct','aggregate'} and ShaderFields.shape(value.dtype) is not None:
+        if value.op == 'cast' and ShaderFields.shape(value.dtype)[1] == 1:
+            # The walk already yields this conversion node. Rebuilding it via
+            # parts/coerce would manufacture an endless chain of scalar casts.
+            return _parts(value.args[0])[:1] if value.args else ()
+        parts = _parts(value)
+        if any(p.op in {'member','flat_component'} and p.args and p.args[0] is value for p in parts):
+            return value.args # Opaque cross-lane types retain their source dependencies.
+        return parts
     if value.op == 'member' and value.detail.get('swizzle') and value.args:
-        source = _strip(value.args[0]); fields = value.detail.get('field', '')
+        source = value.args[0]; fields = value.detail.get('field', '')
         if source.op == 'member' and source.detail.get('swizzle'):
             inner = source.detail.get('field', '')
             indices = ['xyzw'.index(c) if c in 'xyzw' else 'rgba'.index(c) for c in fields]
@@ -334,6 +344,36 @@ def _deps(value):
     if cache is not None:
         cache[key] = (value, result)
     return result
+
+
+def _masked_by_output(root,target):
+    """One causal DAG pass identifies descendants of unknown multipliers."""
+    cache=_CACHE.get()
+    if cache is None:
+        # Preserve the original identity test for callers outside an audit:
+        # without shared parts/projection memoization, synthetic node identities
+        # need not agree between separately captured walks and child edges.
+        return any(n.op=='multiply' and any(k is target for k,path in _walk(n)) and _number(n) is None
+                   for n,path in _walk(root))
+    key=('output_multiplier_nodes',id(root))
+    saved=None if cache is None else cache.get(key)
+    if saved is not None and saved[0] is root:
+        nodes,masked=saved[1:]
+    else:
+        # _walk charges the existing traversal budget. Capture each causal edge
+        # as visited, retaining synthesized nodes and strong identity throughout.
+        nodes={};edges={};pending=[]
+        for node,path in _walk(root):
+            key_id=id(node);nodes[key_id]=node;edges[key_id]=tuple(_children(node))
+            if node.op=='multiply' and _number(node) is None:pending.append(node)
+        masked=set()
+        while pending:
+            node=pending.pop();key_id=id(node)
+            if key_id in masked:continue
+            masked.add(key_id);pending.extend(edges.get(key_id,()))
+        # Do not cache partial graph facts if a walk/domain/budget check failed.
+        if cache is not None:cache[key]=(root,nodes,masked)
+    return id(target) in masked and nodes.get(id(target)) is target
 
 
 def _has(value, op):
@@ -796,10 +836,8 @@ class _Analysis:
         dependencies = _deps(node)
         if output is not None:
             dependencies = dependencies | _deps(output)
-            for ancestor, _ in _walk(output):
-                if ancestor.op == 'multiply' and any(id(k) == id(node) for k, _ in _walk(ancestor)) and _number(ancestor) is None:
-                    extra.append('runtime output multiplier/mask retains this construction')
-                    break
+            if _masked_by_output(output,node):
+                extra.append('runtime output multiplier/mask retains this construction')
             if any(n.op == 'select' and _number(n.args[0]) is None for n, _ in _walk(output)):
                 extra.append('runtime branch/mask selects this construction')
         deps = sorted(dependencies)

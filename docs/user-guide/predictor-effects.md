@@ -622,3 +622,9 @@ and five explicit traversal-budget fallbacks. Specific gaps and conditional trai
 counts are tracked separately from export success. This larger pool prioritizes
 common missing calculations; it does not establish a visual or mood accuracy rate.
 The 100 original controls remain available for focused regression comparisons.
+
+Typed source conversion is retained when tracing an effect into its output.
+Copying a scalar into RGB keeps all three valid lanes, while shortening a vector
+excludes discarded lanes. Numeric casts remain explicit, so integer steps cannot
+silently become smooth colour or motion estimates. This improves both missing
+dependencies and false effect detections without claiming a visible flash rate.
