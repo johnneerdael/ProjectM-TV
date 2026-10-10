@@ -357,3 +357,11 @@ frames. Pixel-local state and random/memory operations remain unresolved for
 uniform transport. This can retain more geometric bounds without inventing a
 state value, timing or smoothness. A local variable named like a coordinate
 is not classified as spatial unless its source scope supports that meaning.
+
+Built-in waveform elements now include `wave_material`: supported vertex RGB,
+raw channel change information and the native clamp/brightening path. The
+brightening threshold can create a jump even from smoothly varying dim colours;
+the JSON flags that possibility separately from displayed flashing. Opacity
+retains mode-specific gain/reference size, mode 3's native treble-squared input,
+and optional volume modulation before final clamping. Audio history, coverage
+and later processing remain necessary to determine the visible response.

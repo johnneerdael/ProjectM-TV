@@ -32,6 +32,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_warp_transport` | Uniform affine-component scale/area envelopes from supported varying controls; aspect-corrected geometry, not screen motion |
 | `native_radial_zoom` | Positive uniform-control radial zoom component, nominal factor/derivative envelopes; no tunnel or full-map label |
 | `native_warp_displacement` | Per-step backward-sampling RMS expression/bound in aspect-corrected source coordinates; not visible speed |
+| `elements[].wave_material` | Built-in wave RGB clamp/normalization and mode/volume alpha recipe; threshold jump candidates are not visible flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1439,3 +1440,38 @@ contents, composition and transitions remain separate. The measure integrates
 the sampling field, not image brightness or feature tracking. Multiplication
 by an assumed FPS cannot certify visible speed; motion intensity and moods
 remain unknown until the complete contributing path is understood/calibrated.
+
+
+## Built-in waveform colour and opacity
+
+Contributing `builtin_wave` elements include `wave_material`. Raw channel
+source curves retain ranges, rates and continuity separately from native
+material processing. Wave RGB converts to float32, comparison-clamps to[0,1],
+then optional brightening divides by the clamped maximum only when max exceeds
+float32(.01). This is not the custom-shape modulo policy. Constant supported
+channels export `constant_vertex_rgb`; dynamic independent envelopes remain
+nominal before division/rounding and final storage/feedback. A maximum envelope
+crossing the hard threshold is a possible normalization jump, not a proven
+visible flash. Dynamic brighten flags retain unknown risk rather than a no-jump
+certificate. Constant/rate-zero controls do not acquire temporal gate changes.
+
+Opacity order is mode adjustment, optional unbounded volume-ramp multiplication,
+then final comparison-clamp[0,1]. Mode1boosts authored alpha by1.25; modes2/5
+attenuate it by the reference-size table. Mode3replaces authored alpha with
+reference_base*float32(1.3)*pow(native_audioData.treb,2). Its input is native
+engine audioData, not an authored EEL `treb` reassignment. Audio/history-free
+bounds stay unknown for mode3and enabled volume modulation. The ramp uses
+(native_audioData.vol-start)/(end-start), without clamping it first. Invalid
+active denominator domains stay unknown without losing RGB or disabled-ramp
+alpha data. Reference size follows MaximizeColorsTextureSize, preserving
+ProjectM-TV's authored line reference instead of assuming physical4K size.
+The alpha<.004 material skip applies to both quad-line and hardware line/point
+paths before scaled-dot alpha adjustment. Later coverage/drawing can still vary.
+
+Evidence: source34 Waveform.cpp227–352 supplies this order, and original
+MilkDrop2.25c milkdropfs.cpp2832–2840 / mode branches2930onward confirm intended
+normalization and opacity handling. Target float vertex colours remain distinct
+from MilkDrop2's packed display representation. Generated audio geometry,
+coverage, draw mode, alpha, blending, feedback and later shaders determine
+what reaches the screen. No mood, displayed-flash frequency, final palette or
+whole-preset no-flash promise follows from this material descriptor.

@@ -2410,6 +2410,58 @@
                     }
                   }
                 }
+              },
+              "wave_material": {
+                "type": "object",
+                "description": "Native built-in waveform channel controls, vertex RGB and conditional alpha/gate recipes; no displayed flashing/colour certificate.",
+                "required": [
+                  "channels",
+                  "alpha_recipe",
+                  "constant_vertex_rgb",
+                  "possible_normalization_gate_jump",
+                  "visible_flashing"
+                ],
+                "properties": {
+                  "channels": {
+                    "type": "object"
+                  },
+                  "alpha_recipe": {
+                    "type": "object"
+                  },
+                  "constant_vertex_rgb": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "rgb_component_envelopes": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "normalization_enabled": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "possible_normalization_gate_jump": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "visible_flashing": {
+                    "type": "null"
+                  },
+                  "visible_flash_frequency_hz": {
+                    "type": "null"
+                  },
+                  "final_palette_verified": {
+                    "const": false
+                  }
+                }
               }
             }
           }

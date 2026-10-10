@@ -496,6 +496,8 @@ def appearance_from_analysis(analysis):
                                  for prefix in ['per_frame_','per_pixel_']]
     if 'builtin_wave' in elements:
         elements['builtin_wave']['waveform_recipe']=waveform_recipe(analysis)
+        from source_wave_material import wave_material
+        elements['builtin_wave']['wave_material']=wave_material(analysis,elements['builtin_wave']['waveform_recipe'])
         for name,unit in [('wave_mode','native waveform mode'),('wave_x','native waveform position control'),
                           ('wave_y','native waveform position/separation control'),('wave_mystery','native mode-specific mystery control'),
                           ('wave_a','source opacity'),('wave_r','encoded RGB component'),('wave_g','encoded RGB component'),('wave_b','encoded RGB component')]:

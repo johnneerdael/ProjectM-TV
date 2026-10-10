@@ -1056,3 +1056,12 @@ but not pixel-local/shared-register state or random/memory calls. Preserve Q
 copy/reset versus pixel mutation. Geometric dependency tests exclude scoped
 main locals named like coordinates; shader and actual pixel coordinates keep
 spatial meaning. Use the per-analysis spatial cache; no state execution occurs.
+
+Source built-in wave-material maintenance: `source_wave_material` models
+float32 RGB clamps followed by optional max normalization above0.01; do not
+apply custom-shape modulo. Preserve mode1alpha boost, mode2/5reference-size
+attenuation, mode3authored-alpha replacement/native treble input, and unbounded
+volume multiplication before final clamp. Invalid volume config affects only
+its enabled domain. Gate candidates are not visible flashes; material draw threshold
+applies to quad and hardware wave paths before scaled-dot alpha adjustment. Keep missing audio/history and dynamic flags
+unresolved, independent from constant vertex colour or raw channel timing.
