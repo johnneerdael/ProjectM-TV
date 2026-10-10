@@ -1,0 +1,29 @@
+{
+  "preset_functions": [
+    {
+      "path": "core/src/main/assets/presets/flexi - target practice-5-liquid-2-twitch-2.milk",
+      "sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+      "functions": [
+        "sigmoid",
+        "vortex"
+      ],
+      "helper_sha256": "9ae468083f58f8311b1722a91c83157de2004e58c7c27547ab25afb3c5d1a36f",
+      "helper_text": "float sigmoid(float t, float c){\n   return 1 / ( 1 + exp(t*c));\n}\n\nfloat2 vortex(float2 domain, float2 position, float2 motionVector, float4 domainAspect, float radius, float sharpness, float spin, float zoom){\n   domain -= position;\n   domain *= domainAspect.xy;\n   float sigmoidFilter = sigmoid( length(domain) - radius , sharpness );\n   domain +=  + motionVector*sigmoidFilter;\n   spin *= sigmoidFilter;\n   float s = sin(spin);\n   float c = cos(spin);\n   float2 uv_rot;\n   uv_rot.x = c*domain.x - s*domain.y;\n   uv_rot.y = s*domain.x + c*domain.y;\n   uv_rot *= domainAspect.zw;\n   uv_rot += position;\n   return saturate(position + (uv_rot-position)*lerp(1,zoom,sigmoidFilter));\n}\n\n"
+    },
+    {
+      "path": "core/src/main/assets/presets/GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "functions": [
+        "complex_div"
+      ],
+      "helper_sha256": "91f8ea997d9b3135db5eb11d39f6e174d72beff985852c2a7b60f796e111d35b",
+      "helper_text": "float2 complex_div(float2 numerator, float2 denominator){\n   return float2( numerator.x*denominator.x + numerator.y*denominator.y,\n                  numerator.y*denominator.x - numerator.x*denominator.y)/\n          (denominator.x*denominator.x + denominator.y*denominator.y);\n}\n"
+    }
+  ],
+  "adapter_edits": [
+    "Extract numbered helper text only; no authored arithmetic edit",
+    "Append exported scalar wrappers with explicit held-fixed input constants",
+    "Append independent type/control-flow calculus controls"
+  ],
+  "compiler_input_sha256": "39230dd8d24b65518199ea67cd014d3c9ab1242ee52c4e5259e2a58c00f9f6a5"
+}

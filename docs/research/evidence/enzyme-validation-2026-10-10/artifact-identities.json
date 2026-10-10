@@ -1,0 +1,77 @@
+{
+  "helpers.slang": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/helpers.slang",
+    "sha256": "39230dd8d24b65518199ea67cd014d3c9ab1242ee52c4e5259e2a58c00f9f6a5",
+    "bytes": 2049
+  },
+  "slang_derivatives_bounded.slang": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/slang_derivatives_bounded.slang",
+    "sha256": "6317452409fcc3468f1a573bad92786743326bef3584c87cad1a021bc2d78867",
+    "bytes": 3544
+  },
+  "helpers.cpp": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/helpers.cpp",
+    "sha256": "753e6205e6af28e57c4a12d7d88c61c721c64b9fdd434bb6ba726291a5962412",
+    "bytes": 7389
+  },
+  "enzyme_helpers.cpp": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/enzyme_helpers.cpp",
+    "sha256": "f95eeef0067f84a600fcd2a774770ec63e71036431c9024e506cec85f0d8653c",
+    "bytes": 8674
+  },
+  "enzyme_helpers.ll": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/enzyme_helpers.ll",
+    "sha256": "76d41b33cdc383e3e1ee307201c2bfe747a296e1fc5a8be99f1c808365362fb2",
+    "bytes": 20722
+  },
+  "opt_derivatives.ll": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/opt_derivatives.ll",
+    "sha256": "08ade00b6ee2537ad24d9745b7d0df911a3cddedd05cb683b65dd49d90848246",
+    "bytes": 24183
+  },
+  "slang_derivatives_bounded.cpp": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/slang_derivatives_bounded.cpp",
+    "sha256": "0a84a202563a8a46cd620b0f643211949ca1bf03f1e1e9ca05aff1823161eb07",
+    "bytes": 32382
+  },
+  "scalar-evolution.log": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/scalar-evolution.log",
+    "sha256": "8887c49c900953bd8fe1e31ea8c507aabaad0528a68a6c8b5cf5ba21136a275b",
+    "bytes": 8356
+  },
+  "evaluate.py": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/evaluate.py",
+    "sha256": "6a5aafa615660eb2946fc7ebe9bf510cff33ba653c2a063ab8d292065a046ac8",
+    "bytes": 9935
+  },
+  "finalize.py": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/finalize.py",
+    "sha256": "47aab3e6146d6a2082c83d95bb280797ae6a49d154c3f01956e2f106b3324035",
+    "bytes": 3235
+  },
+  "typed_graphs.py": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/typed_graphs.py",
+    "sha256": "fc5c205d2b8fbe669a6fdaf56f6592e472fc1c1643fa04ebe2cbe303bc2acaa6",
+    "bytes": 2038
+  },
+  "worker.cpp": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/worker.cpp",
+    "sha256": "4c0b46217ac9c1aa11a2e52f0c1b52fa30f286e219d2a7f0cb3b9ef4baa11d47",
+    "bytes": 10206
+  },
+  "enzyme_worker": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/enzyme_worker",
+    "sha256": "4284be769d8aad35be7691173712e78bc8117e2e501d617e958ff060a15d85bc",
+    "bytes": 35136
+  },
+  "enzyme_helpers.dylib": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/enzyme_helpers.dylib",
+    "sha256": "65d2db76d30d957a422dfaeb305c3cf4f7990078afa44312246f39e5cd9ec815",
+    "bytes": 34744
+  },
+  "slang_derivatives.dylib": {
+    "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/evaluation/slang_derivatives.dylib",
+    "sha256": "8477e0dcc3a1c04367db72d27583364741e9e0d6f775e705daf6ccf40f4cab0c",
+    "bytes": 34872
+  }
+}

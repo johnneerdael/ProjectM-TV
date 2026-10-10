@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/bin/slangc",
+    "slang_derivatives.slang",
+    "-target",
+    "cpp",
+    "-o",
+    "slang_unbounded.cpp"
+  ],
+  "returncode": 255,
+  "seconds": 0.10944166698027402,
+  "stdout": "",
+  "stderr": "error[E30510]: loop in differentiable function needs attributes\n  --> slang_derivatives.slang:31:75\n   |\n31 | [Differentiable] export __extern_cpp float input_loop(float x){float y=x; for(int i=0;i<(int)x;i++){y=y*.9+.1;} return y;}\n   |                                                                           ^^^ loops inside a differentiable function need to provide either '[MaxIters(n)]' or '[ForceUnroll]' attribute.\n---'\n"
+}

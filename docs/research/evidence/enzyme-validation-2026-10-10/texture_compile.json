@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/opt/homebrew/opt/llvm@21/bin/clang++",
+    "negative_texture.cpp",
+    "-std=c++17",
+    "-O2",
+    "-ffp-contract=off",
+    "-fno-fast-math",
+    "-fplugin=/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/build/Enzyme/ClangEnzyme-21.dylib",
+    "-S",
+    "-emit-llvm",
+    "-o",
+    "negative_texture.ll"
+  ],
+  "returncode": 1,
+  "seconds": 0.036722709017340094,
+  "stdout": "",
+  "stderr": "error: Enzyme: No forward mode derivative found for external_texture\n at context:   %2 = tail call float @external_texture(float noundef %0) #4\n1 error generated.\n"
+}

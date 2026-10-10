@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/opt/homebrew/opt/llvm@21/bin/opt",
+    "requests.ll",
+    "-load-pass-plugin=/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/build/Enzyme/LLVMEnzyme-21.dylib",
+    "-passes=enzyme",
+    "-S",
+    "-o",
+    "opt_derivatives.ll"
+  ],
+  "returncode": 0,
+  "seconds": 0.025279708002926782,
+  "stdout": "",
+  "stderr": ""
+}

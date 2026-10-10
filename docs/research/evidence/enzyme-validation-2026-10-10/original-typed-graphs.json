@@ -1,0 +1,277 @@
+[
+  {
+    "path": "core/src/main/assets/presets/flexi - target practice-5-liquid-2-twitch-2.milk",
+    "preset_sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+    "parser_inputs": {
+      "engine": {
+        "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+      },
+      "engine_archive_sha256": "997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8",
+      "float_formatter_sha256": "d0ccd13d29d2c8080641234c92720d1888626ca83af507fdb471f453fc6d1c3b",
+      "float_literal_policy": "float32-roundtrip-v1",
+      "random_binding_contract": {
+        "body_sha256": {
+          "MilkdropPreset.Initialize": "e9b09519fa583dd0263f2657eab74a1cbc9701c043b1235064e2889153f16bad",
+          "MilkdropShader.GetReferencedSamplers": "e2cedb2940bf69834244f2b9a081c21a0c4f5666de887ad23b80b6bac24f9447",
+          "MilkdropShader.LoadTexturesAndCompile": "2f3ba7eada45e65821b6f2b942f0f37f4bd89c8765300c97a37520a3a333938f",
+          "MilkdropShader.LoadVariables": "fc5acc978feafffa6d65df74970d40d69209984d024fcc7cea4509393e5b52d3",
+          "PerPixelMesh.Draw": "8a92931649bade9d4dc02caafb36f91c38a5eb27f9c9caf01f883232cd259838",
+          "Sampler.Bind": "4126ec94f1a79ef506040870904f98c8fc3a5b05becd0856992aecba3675ae7d",
+          "Sampler.Constructor": "b467206c63fd6cb069c929a0054579efe46e0fc6c1b64e629e10cfd6877e8d8b",
+          "Sampler.WrapMode": "d54b5750d5777dbd3ce54d3e4bb4e9085579a2a01ff017053eedb068782f86a2",
+          "Texture.Bind": "04f9f9edf638507ba6333237bccdfdbe0789a55a69971908f8d9ca393388eb2a",
+          "TextureManager.ExtractTextureSettings": "9d67b7e31e6016b9ff54077168c2030491b64f0785529777a1419c2e24bf9872",
+          "TextureManager.GetRandomTexture": "427f40c9a0bf6c45bd74d6a433936a57b45a7999394e541a4859e9eb0f495025",
+          "TextureManager.GetSampler": "86808d805455bd5f269478ad8f64e0737b76a532e29d784f353e0af229c3cccf",
+          "TextureManager.GetTexture": "043fb7d85e676adb25ab606e0c656e23bcd26cf712d6c309f9952793304be0fe",
+          "TextureManager.LoadTexture": "f41c1a0bd50d17d784067bdba0700c2dea7aa4a09aa058ea71ee80ed9e36c20e",
+          "TextureManager.Preload": "99f526cb3a5aa80fa788687170ff3d053a6201be2fa9b8de1c26b626363b6e58",
+          "TextureSamplerDescriptor.Bind": "a878f6ed163204e1fba022e94ddbc58ceaf3ebe12291d075cfa738adda5798b2",
+          "TextureSamplerDescriptor.SamplerDeclaration": "d868913835dc9f6458b1a1bbe44fde4dffac38ed0ea72a637a3c727b43d22373",
+          "TextureSamplerDescriptor.ShortRandomAlias": "f9c04d1da77c09159ff1b7320e5b015a1c4f5f3c67c2526541f3d31f39330550",
+          "TextureSamplerDescriptor.TexSizeDeclaration": "34c90baf231753f012f69e21330bf0e2ca7361fd5398fd6c063ca6b26cea0bc0"
+        },
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+        },
+        "file_sha256": {
+          "MilkdropPreset/MilkdropShader.hpp": "c777e79ffc90368418c786f04a08613410ff1803b61d18a4f7f8bbdf6dbc10de",
+          "MilkdropPreset/PerPixelMesh.hpp": "61a06eef48c9ee96fc7451ff17596c816906d5ca6a160769d6c792c85b1fb0d6",
+          "MilkdropPreset/PresetState.hpp": "7c0bbf2c7baad0aa8f6d257820745bd376022bc57b602b45f1267a79ea86cf89",
+          "Renderer/Sampler.hpp": "7c3a547080e5677ee1584fa04ef0b6a5709402e75fb47cd29a5f24f99af78302",
+          "Renderer/Texture.hpp": "b8c1b2d2b188470522e39f4f0153637dc2c9460f079e12f7befed09c4e07efde",
+          "Renderer/TextureManager.hpp": "021e053984546581fa80ea085b5beca1d66f1a09e9294cd0de296f0fbae87a15",
+          "Renderer/TextureSamplerDescriptor.hpp": "adc68ba5b14f28e1d9829b719bb05fb959a41aed8105cfc615865c6baf9fc7cf"
+        },
+        "policy": "projectmtv-random-slot-inputs-v1"
+      },
+      "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+      "setting_lookup_policy": "native-case-insensitive-v1"
+    },
+    "stage_selection": {
+      "profile": "gles300",
+      "native_driver_verified": false,
+      "appearance_prediction_complete": false,
+      "warp": {
+        "shader_version": 3,
+        "source_sha256": "159e15431dc592aab8fd1c71e65d7f7fd6f8a8a14d85805275a942b6f4c0732c",
+        "conditional_on_native_profile": false,
+        "source_contains_clip": false,
+        "kind": "unknown",
+        "reason": "missing, stale or unresolved target compatibility evidence"
+      },
+      "composite": {
+        "shader_version": 2,
+        "source_sha256": "793a6cbd67bd16f13411ccc05ce523ab74d988554ca96080717b2b81521bbd8a",
+        "conditional_on_native_profile": false,
+        "source_contains_clip": false,
+        "kind": "unknown",
+        "reason": "missing, stale or unresolved target compatibility evidence"
+      }
+    },
+    "native_compile_or_binding_verified": false,
+    "stages": {
+      "warp": {
+        "nodes": 497,
+        "operations": {
+          "components": 20,
+          "add": 60,
+          "constant": 81,
+          "multiply": 88,
+          "divide": 4,
+          "length": 3,
+          "member": 82,
+          "input": 20,
+          "construct": 19,
+          "cast": 29,
+          "subtract": 37,
+          "sample": 19,
+          "unary": 4,
+          "lerp": 3,
+          "saturate": 2,
+          "exp": 1,
+          "narrow": 4,
+          "rand": 5,
+          "eel_divide": 3,
+          "select": 2,
+          "_beleq": 1,
+          "min": 1,
+          "sin": 2,
+          "bnot": 1,
+          "less": 3,
+          "greater": 1,
+          "eel_equal": 1,
+          "cos": 1
+        },
+        "numeric_domains": {
+          "unmarked": 354,
+          "shader-float32": 143
+        },
+        "conditions": "Original typed arithmetic tags retained; full shader contains textures/Q/random/native casts beyond helper scope"
+      },
+      "composite": {
+        "nodes": 198,
+        "operations": {
+          "components": 1,
+          "multiply": 40,
+          "saturate": 3,
+          "subtract": 8,
+          "member": 48,
+          "sample": 10,
+          "input": 3,
+          "cast": 26,
+          "constant": 30,
+          "lerp": 6,
+          "domain_checked": 3,
+          "pow": 3,
+          "abs": 3,
+          "add": 9,
+          "construct": 5
+        },
+        "numeric_domains": {
+          "unmarked": 141,
+          "shader-float32": 57
+        },
+        "conditions": "Original typed arithmetic tags retained; full shader contains textures/Q/random/native casts beyond helper scope"
+      }
+    },
+    "seconds": 0.20194354199338704
+  },
+  {
+    "path": "core/src/main/assets/presets/GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+    "preset_sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+    "parser_inputs": {
+      "engine": {
+        "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+      },
+      "engine_archive_sha256": "997c082aabf9d0702c58da57efdd4c05e6faa99b9abd46ba1041d1fbb4b9cca8",
+      "float_formatter_sha256": "d0ccd13d29d2c8080641234c92720d1888626ca83af507fdb471f453fc6d1c3b",
+      "float_literal_policy": "float32-roundtrip-v1",
+      "random_binding_contract": {
+        "body_sha256": {
+          "MilkdropPreset.Initialize": "e9b09519fa583dd0263f2657eab74a1cbc9701c043b1235064e2889153f16bad",
+          "MilkdropShader.GetReferencedSamplers": "e2cedb2940bf69834244f2b9a081c21a0c4f5666de887ad23b80b6bac24f9447",
+          "MilkdropShader.LoadTexturesAndCompile": "2f3ba7eada45e65821b6f2b942f0f37f4bd89c8765300c97a37520a3a333938f",
+          "MilkdropShader.LoadVariables": "fc5acc978feafffa6d65df74970d40d69209984d024fcc7cea4509393e5b52d3",
+          "PerPixelMesh.Draw": "8a92931649bade9d4dc02caafb36f91c38a5eb27f9c9caf01f883232cd259838",
+          "Sampler.Bind": "4126ec94f1a79ef506040870904f98c8fc3a5b05becd0856992aecba3675ae7d",
+          "Sampler.Constructor": "b467206c63fd6cb069c929a0054579efe46e0fc6c1b64e629e10cfd6877e8d8b",
+          "Sampler.WrapMode": "d54b5750d5777dbd3ce54d3e4bb4e9085579a2a01ff017053eedb068782f86a2",
+          "Texture.Bind": "04f9f9edf638507ba6333237bccdfdbe0789a55a69971908f8d9ca393388eb2a",
+          "TextureManager.ExtractTextureSettings": "9d67b7e31e6016b9ff54077168c2030491b64f0785529777a1419c2e24bf9872",
+          "TextureManager.GetRandomTexture": "427f40c9a0bf6c45bd74d6a433936a57b45a7999394e541a4859e9eb0f495025",
+          "TextureManager.GetSampler": "86808d805455bd5f269478ad8f64e0737b76a532e29d784f353e0af229c3cccf",
+          "TextureManager.GetTexture": "043fb7d85e676adb25ab606e0c656e23bcd26cf712d6c309f9952793304be0fe",
+          "TextureManager.LoadTexture": "f41c1a0bd50d17d784067bdba0700c2dea7aa4a09aa058ea71ee80ed9e36c20e",
+          "TextureManager.Preload": "99f526cb3a5aa80fa788687170ff3d053a6201be2fa9b8de1c26b626363b6e58",
+          "TextureSamplerDescriptor.Bind": "a878f6ed163204e1fba022e94ddbc58ceaf3ebe12291d075cfa738adda5798b2",
+          "TextureSamplerDescriptor.SamplerDeclaration": "d868913835dc9f6458b1a1bbe44fde4dffac38ed0ea72a637a3c727b43d22373",
+          "TextureSamplerDescriptor.ShortRandomAlias": "f9c04d1da77c09159ff1b7320e5b015a1c4f5f3c67c2526541f3d31f39330550",
+          "TextureSamplerDescriptor.TexSizeDeclaration": "34c90baf231753f012f69e21330bf0e2ca7361fd5398fd6c063ca6b26cea0bc0"
+        },
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "78a3d98ed16b8209edf4e0d5bf709ca2f5be11cfae796875745c5045bff69321"
+        },
+        "file_sha256": {
+          "MilkdropPreset/MilkdropShader.hpp": "c777e79ffc90368418c786f04a08613410ff1803b61d18a4f7f8bbdf6dbc10de",
+          "MilkdropPreset/PerPixelMesh.hpp": "61a06eef48c9ee96fc7451ff17596c816906d5ca6a160769d6c792c85b1fb0d6",
+          "MilkdropPreset/PresetState.hpp": "7c0bbf2c7baad0aa8f6d257820745bd376022bc57b602b45f1267a79ea86cf89",
+          "Renderer/Sampler.hpp": "7c3a547080e5677ee1584fa04ef0b6a5709402e75fb47cd29a5f24f99af78302",
+          "Renderer/Texture.hpp": "b8c1b2d2b188470522e39f4f0153637dc2c9460f079e12f7befed09c4e07efde",
+          "Renderer/TextureManager.hpp": "021e053984546581fa80ea085b5beca1d66f1a09e9294cd0de296f0fbae87a15",
+          "Renderer/TextureSamplerDescriptor.hpp": "adc68ba5b14f28e1d9829b719bb05fb959a41aed8105cfc615865c6baf9fc7cf"
+        },
+        "policy": "projectmtv-random-slot-inputs-v1"
+      },
+      "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+      "setting_lookup_policy": "native-case-insensitive-v1"
+    },
+    "stage_selection": {
+      "profile": "gles300",
+      "native_driver_verified": false,
+      "appearance_prediction_complete": false,
+      "warp": {
+        "shader_version": 2,
+        "source_sha256": "2d90e16cb5a2d594b3f694e919ce94fddc73f36a942d28295c10b2ecdac10959",
+        "conditional_on_native_profile": false,
+        "source_contains_clip": false,
+        "kind": "unknown",
+        "reason": "missing, stale or unresolved target compatibility evidence"
+      },
+      "composite": {
+        "shader_version": 3,
+        "source_sha256": "3e33b81a067aaed9f4012ca6f85460e12b99e4ed2fdee8a2315665d391993d50",
+        "conditional_on_native_profile": false,
+        "source_contains_clip": false,
+        "kind": "unknown",
+        "reason": "missing, stale or unresolved target compatibility evidence"
+      }
+    },
+    "native_compile_or_binding_verified": false,
+    "stages": {
+      "warp": {
+        "nodes": 81,
+        "operations": {
+          "components": 2,
+          "add": 4,
+          "multiply": 11,
+          "constant": 14,
+          "subtract": 10,
+          "member": 23,
+          "sample": 4,
+          "input": 4,
+          "cast": 4,
+          "saturate": 1,
+          "dot": 2,
+          "construct": 2
+        },
+        "numeric_domains": {
+          "unmarked": 56,
+          "shader-float32": 25
+        },
+        "conditions": "Original typed arithmetic tags retained; full shader contains textures/Q/random/native casts beyond helper scope"
+      },
+      "composite": {
+        "nodes": 427,
+        "operations": {
+          "components": 10,
+          "lerp": 9,
+          "member": 91,
+          "sample": 11,
+          "add": 35,
+          "subtract": 38,
+          "abs": 7,
+          "constant": 57,
+          "multiply": 76,
+          "frac": 2,
+          "narrow": 4,
+          "eel_divide": 4,
+          "input": 14,
+          "min": 2,
+          "max": 2,
+          "domain_checked": 5,
+          "log": 1,
+          "length": 1,
+          "cast": 37,
+          "divide": 3,
+          "cos": 1,
+          "sin": 1,
+          "construct": 8,
+          "atan2": 1,
+          "pow": 4,
+          "saturate": 3
+        },
+        "numeric_domains": {
+          "unmarked": 296,
+          "shader-float32": 131
+        },
+        "conditions": "Original typed arithmetic tags retained; full shader contains textures/Q/random/native casts beyond helper scope"
+      }
+    },
+    "seconds": 0.1258239169837907
+  }
+]

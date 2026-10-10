@@ -1,0 +1,2156 @@
+{
+  "schema_version": 1,
+  "kind": "isolated-source-helper-enzyme-runtime-validation",
+  "status": "mixed_finite_domain_limits",
+  "repository_commit": "3eb77c40fc8e40e0e6f5a2765f82fb4fafe1a86d",
+  "llvm_version": "21.1.8",
+  "slang_version": "2026.19",
+  "plugin_sha256": "cbed5456666ea13e9179b95fd35cef439c007499b52fe6c77a2cab4f4a7481b0",
+  "opt_plugin_sha256": "38ffb23b10868b820c0bbcffae070469521c8f8d14b8064929ce1891f14dde7a",
+  "slang_sha256": "d1d7dd986a765023b269efae76442107e521f2497f5145245dd87cd6e25e22cc",
+  "clang_sha256": "f21d65fdd6efd94beb7da7e5b445f6f06e2df2dccecc710d06c91611185c2d73",
+  "source_manifest": {
+    "preset_functions": [
+      {
+        "path": "core/src/main/assets/presets/flexi - target practice-5-liquid-2-twitch-2.milk",
+        "sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+        "functions": [
+          "sigmoid",
+          "vortex"
+        ],
+        "helper_sha256": "9ae468083f58f8311b1722a91c83157de2004e58c7c27547ab25afb3c5d1a36f",
+        "helper_text": "float sigmoid(float t, float c){\n   return 1 / ( 1 + exp(t*c));\n}\n\nfloat2 vortex(float2 domain, float2 position, float2 motionVector, float4 domainAspect, float radius, float sharpness, float spin, float zoom){\n   domain -= position;\n   domain *= domainAspect.xy;\n   float sigmoidFilter = sigmoid( length(domain) - radius , sharpness );\n   domain +=  + motionVector*sigmoidFilter;\n   spin *= sigmoidFilter;\n   float s = sin(spin);\n   float c = cos(spin);\n   float2 uv_rot;\n   uv_rot.x = c*domain.x - s*domain.y;\n   uv_rot.y = s*domain.x + c*domain.y;\n   uv_rot *= domainAspect.zw;\n   uv_rot += position;\n   return saturate(position + (uv_rot-position)*lerp(1,zoom,sigmoidFilter));\n}\n\n"
+      },
+      {
+        "path": "core/src/main/assets/presets/GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+        "functions": [
+          "complex_div"
+        ],
+        "helper_sha256": "91f8ea997d9b3135db5eb11d39f6e174d72beff985852c2a7b60f796e111d35b",
+        "helper_text": "float2 complex_div(float2 numerator, float2 denominator){\n   return float2( numerator.x*denominator.x + numerator.y*denominator.y,\n                  numerator.y*denominator.x - numerator.x*denominator.y)/\n          (denominator.x*denominator.x + denominator.y*denominator.y);\n}\n"
+      }
+    ],
+    "adapter_edits": [
+      "Extract numbered helper text only; no authored arithmetic edit",
+      "Append exported scalar wrappers with explicit held-fixed input constants",
+      "Append independent type/control-flow calculus controls"
+    ],
+    "compiler_input_sha256": "39230dd8d24b65518199ea67cd014d3c9ab1242ee52c4e5259e2a58c00f9f6a5"
+  },
+  "benchmarks": {
+    "slang_cpp": {
+      "seconds": [
+        0.10946962499292567,
+        0.10510333298589103,
+        0.11102549999486655
+      ],
+      "median_seconds": 0.10946962499292567
+    },
+    "llvm_baseline": {
+      "seconds": [
+        0.2016375419916585,
+        0.1667802500014659,
+        0.19608570900163613
+      ],
+      "median_seconds": 0.19608570900163613
+    },
+    "enzyme_compile": {
+      "seconds": [
+        0.2157956250011921,
+        0.18998341698898003,
+        0.20148116600466892
+      ],
+      "median_seconds": 0.20148116600466892
+    },
+    "slang_derivative_cpp": {
+      "seconds": [
+        0.1495649999997113,
+        0.15410441599669866,
+        0.15514458398683928
+      ],
+      "median_seconds": 0.15410441599669866
+    },
+    "slang_derivative_compile": {
+      "seconds": [
+        0.2155220830172766,
+        0.20277445801184513,
+        0.17560108299949206
+      ],
+      "median_seconds": 0.20277445801184513
+    },
+    "enzyme_ctypes_call": {
+      "calls": 20000,
+      "seconds": 0.011296374985249713
+    },
+    "slang_ctypes_call": {
+      "calls": 20000,
+      "seconds": 0.008486167003866285
+    },
+    "transient_worker": {
+      "calls": 10,
+      "seconds": [
+        0.007944584009237587,
+        0.007060374977299944,
+        0.007495041994843632,
+        0.008416083001066,
+        0.006063915992854163,
+        0.0074172090098727494,
+        0.007514500000979751,
+        0.006158000003779307,
+        0.00626458297483623,
+        0.0068850000097882
+      ],
+      "median_seconds": 0.0072387919935863465
+    },
+    "persistent_worker": {
+      "calls": 1000,
+      "seconds": 0.018331708008190617,
+      "seconds_per_call": 1.8331708008190617e-05,
+      "response": "0.60855341 1.18113101"
+    }
+  },
+  "loader_seconds": 0.19395712501136586,
+  "functions": [
+    {
+      "function": "polynomial",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 2.875,
+          "enzyme_derivative_float32": -4.25,
+          "slang_derivative_float32": -4.25,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -4.25,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005425,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": -3.0,
+          "slang_derivative_float32": -3.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -3.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00053,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.7209999561309814,
+          "enzyme_derivative_float32": -2.569999933242798,
+          "slang_derivative_float32": -2.569999933242798,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -2.569999993145466,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005256999999314547,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.15930700302124023,
+          "enzyme_derivative_float32": -0.7252999544143677,
+          "slang_derivative_float32": -0.7252998352050781,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.7252999529361723,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005072529995293618,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.12784898281097412,
+          "enzyme_derivative_float32": -0.31969982385635376,
+          "slang_derivative_float32": -0.3197000026702881,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.31969993381500217,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00050319699933815,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.12285095453262329,
+          "enzyme_derivative_float32": -0.17970019578933716,
+          "slang_derivative_float32": -0.17970013618469238,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.17970006732940647,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005017970006732941,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.1249929666519165,
+          "enzyme_derivative_float32": 0.2546999752521515,
+          "slang_derivative_float32": 0.2546999454498291,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.25469994692802445,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005025469994692802,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.2648169994354248,
+          "enzyme_derivative_float32": 1.518700122833252,
+          "slang_derivative_float32": 1.518700122833252,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.5187001598358165,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005151870015983582,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 4.0,
+          "slang_derivative_float32": 4.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 4.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00054,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 2.008000135421753,
+          "enzyme_derivative_float32": 6.120000839233398,
+          "slang_derivative_float32": 6.120000839233398,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 6.120000534057624,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005612000053405763,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 16.847000122070312,
+          "enzyme_derivative_float32": 22.069997787475586,
+          "slang_derivative_float32": 22.06999969482422,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 22.069999151229865,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007206999915122987,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 44.64800262451172,
+          "enzyme_derivative_float32": 40.52000045776367,
+          "slang_derivative_float32": 40.52000045776367,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 40.520001106262214,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0009052000110626222,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "oscillation",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.8952126502990723,
+          "enzyme_derivative_float32": 3.7020349502563477,
+          "slang_derivative_float32": 3.7020347118377686,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 3.702034797302017,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005370203479730202,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.5,
+          "enzyme_derivative_float32": 24.0,
+          "slang_derivative_float32": 24.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 24.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00074,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.38823381066322327,
+          "enzyme_derivative_float32": 23.044086456298828,
+          "slang_derivative_float32": 23.044086456298828,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 23.044087479169306,
+          "nominal_smooth_point": true,
+          "tolerance": 0.000730440874791693,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.7475343942642212,
+          "enzyme_derivative_float32": 18.85248565673828,
+          "slang_derivative_float32": 18.85248565673828,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 18.852497228343715,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0006885249722834372,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.13897788524627686,
+          "enzyme_derivative_float32": -10.333776473999023,
+          "slang_derivative_float32": -10.33377742767334,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -10.333797319936052,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0006033379731993605,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.20865526795387268,
+          "enzyme_derivative_float32": 16.444625854492188,
+          "slang_derivative_float32": 16.444623947143555,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 16.444642043819982,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0006644464204381998,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.6399802565574646,
+          "enzyme_derivative_float32": -22.48243522644043,
+          "slang_derivative_float32": -22.48243522644043,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -22.482425238473944,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007248242523847394,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.42748552560806274,
+          "enzyme_derivative_float32": 23.60232925415039,
+          "slang_derivative_float32": 23.60232925415039,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 23.602321127198188,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007360232112719819,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 0.3780757486820221,
+          "enzyme_derivative_float32": -22.85791015625,
+          "slang_derivative_float32": -22.857912063598633,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -22.85791152996375,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007285791152996375,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 0.6015293598175049,
+          "enzyme_derivative_float32": -23.214014053344727,
+          "slang_derivative_float32": -23.214014053344727,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -23.214031547145353,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007321403154714536,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 0.4087790846824646,
+          "enzyme_derivative_float32": 23.367572784423828,
+          "slang_derivative_float32": 23.36757469177246,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 23.367557773986842,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007336755777398685,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 0.3580246567726135,
+          "enzyme_derivative_float32": -22.43735122680664,
+          "slang_derivative_float32": -22.437353134155273,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -22.437328570718932,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0007243732857071894,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "branch",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.5,
+          "enzyme_derivative_float32": -1.0,
+          "slang_derivative_float32": -1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -1,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": -0.0,
+          "enzyme_derivative_float32": -1.0,
+          "slang_derivative_float32": -1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": null,
+          "nominal_smooth_point": false,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": "discrete/branch/clamp boundary derivative not certified"
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.010000000707805157,
+          "enzyme_derivative_float32": 0.20000000298023224,
+          "slang_derivative_float32": 0.20000000298023224,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.20000000298023224,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005020000000298023,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.18490000069141388,
+          "enzyme_derivative_float32": 0.8600000143051147,
+          "slang_derivative_float32": 0.8600000143051147,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.8600000143051147,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005086000001430512,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.24010001122951508,
+          "enzyme_derivative_float32": 0.9800000190734863,
+          "slang_derivative_float32": 0.9800000190734863,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.9800000190734863,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005098000001907348,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.26009997725486755,
+          "enzyme_derivative_float32": 1.0199999809265137,
+          "slang_derivative_float32": 1.0199999809265137,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0199999809265137,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005101999998092651,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.3249000012874603,
+          "enzyme_derivative_float32": 1.1399999856948853,
+          "slang_derivative_float32": 1.1399999856948853,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.1399999856948853,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005113999998569488,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.5329000353813171,
+          "enzyme_derivative_float32": 1.4600000381469727,
+          "slang_derivative_float32": 1.4600000381469727,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.4600000381469727,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005146000003814697,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 2.0,
+          "slang_derivative_float32": 2.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 2.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005200000000000001,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.440000057220459,
+          "enzyme_derivative_float32": 2.4000000953674316,
+          "slang_derivative_float32": 2.4000000953674316,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 2.4000000953674316,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005240000009536744,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 5.289999961853027,
+          "enzyme_derivative_float32": 4.599999904632568,
+          "slang_derivative_float32": 4.599999904632568,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 4.599999904632568,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005459999990463257,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 10.24000072479248,
+          "enzyme_derivative_float32": 6.400000095367432,
+          "slang_derivative_float32": 6.400000095367432,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 6.400000095367432,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005640000009536744,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "integer_cast",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": null,
+          "nominal_smooth_point": false,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": "discrete/branch/clamp boundary derivative not certified"
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 2.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 3.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "bounded_loop",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": -0.6347436904907227,
+          "enzyme_derivative_float32": 0.7661046981811523,
+          "slang_derivative_float32": 0.7661046385765076,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.7661046432914094,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005076610464329141,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 1.6105101108551025,
+          "slang_derivative_float32": 1.6105101108551025,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.6105100000000008,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005161051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.15922532975673676,
+          "enzyme_derivative_float32": 1.5562565326690674,
+          "slang_derivative_float32": 1.556256651878357,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.5562566381453882,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005155625663814539,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.5761112570762634,
+          "enzyme_derivative_float32": 0.9113109111785889,
+          "slang_derivative_float32": 0.9113108515739441,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.9113108905221021,
+          "nominal_smooth_point": true,
+          "tolerance": 0.000509113108905221,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.6269835233688354,
+          "enzyme_derivative_float32": 0.7860045433044434,
+          "slang_derivative_float32": 0.7860044836997986,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.7860045058685665,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005078600450586857,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.6423065662384033,
+          "enzyme_derivative_float32": 0.7465182542800903,
+          "slang_derivative_float32": 0.7465181350708008,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.7465181276885606,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005074651812768857,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.6837208867073059,
+          "enzyme_derivative_float32": 0.6360094547271729,
+          "slang_derivative_float32": 0.6360093951225281,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.6360093035283305,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005063600930352833,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.7656555771827698,
+          "enzyme_derivative_float32": 0.402957946062088,
+          "slang_derivative_float32": 0.4029579162597656,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.4029579153601302,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005040295791536013,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 0.8402047753334045,
+          "enzyme_derivative_float32": 0.1777234822511673,
+          "slang_derivative_float32": 0.1777234822511673,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.17772343958781428,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005017772343958782,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 0.8665315508842468,
+          "enzyme_derivative_float32": 0.09340935200452805,
+          "slang_derivative_float32": 0.09340935200452805,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.09340935389852055,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005009340935389852,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 0.8492629528045654,
+          "enzyme_derivative_float32": -0.14268675446510315,
+          "slang_derivative_float32": -0.14268673956394196,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.1426867530024988,
+          "nominal_smooth_point": true,
+          "tolerance": 0.000501426867530025,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 0.3627816140651703,
+          "enzyme_derivative_float32": -1.115265130996704,
+          "slang_derivative_float32": -1.1152650117874146,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -1.1152651448853954,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005111526514488539,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "input_loop",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": -0.5,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.10000000149011612,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.4300000071525574,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.49000000953674316,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.5099999904632568,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.5699999928474426,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.7300000190734863,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.8999999761581421,
+          "slang_derivative_float32": 0.8999999761581421,
+          "derivative_finite": true,
+          "manual_nominal_derivative": null,
+          "nominal_smooth_point": false,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": "discrete/branch/clamp boundary derivative not certified"
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.1800000667572021,
+          "enzyme_derivative_float32": 0.8999999761581421,
+          "slang_derivative_float32": 0.8999999761581421,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.9,
+          "nominal_smooth_point": true,
+          "tolerance": 0.000509,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 2.05299973487854,
+          "enzyme_derivative_float32": 0.809999942779541,
+          "slang_derivative_float32": 0.809999942779541,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.81,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005081,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 2.60379958152771,
+          "enzyme_derivative_float32": 0.7289999127388,
+          "slang_derivative_float32": 0.7289999127388,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.7290000000000001,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00050729,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "clamp_control",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": null,
+          "nominal_smooth_point": false,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": "discrete/branch/clamp boundary derivative not certified"
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.10000000149011612,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.4300000071525574,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.49000000953674316,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.5099999904632568,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.5699999928474426,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.7300000190734863,
+          "enzyme_derivative_float32": 1.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00051,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 1.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": null,
+          "nominal_smooth_point": false,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": "discrete/branch/clamp boundary derivative not certified"
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "vortex_x",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.0,
+          "enzyme_derivative_float32": 0.9999999403953552,
+          "slang_derivative_float32": 0.9999999403953552,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": false,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.09999993443489075,
+          "enzyme_derivative_float32": 0.999996542930603,
+          "slang_derivative_float32": 0.999996542930603,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.9999965813159565,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005099999658131596,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.35130375623703003,
+          "enzyme_derivative_float32": -0.26966387033462524,
+          "slang_derivative_float32": -0.26966381072998047,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.26966366257365415,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005026966366257366,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.41906070709228516,
+          "enzyme_derivative_float32": 2.198632001876831,
+          "slang_derivative_float32": 2.198632001876831,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 2.1986321750848035,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005219863217508481,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.4665788412094116,
+          "enzyme_derivative_float32": 2.546718120574951,
+          "slang_derivative_float32": 2.546717882156372,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 2.54671796948859,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005254671796948859,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.608553409576416,
+          "enzyme_derivative_float32": 1.1811310052871704,
+          "slang_derivative_float32": 1.1811307668685913,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.1811312656970245,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005118113126569702,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.7301666736602783,
+          "enzyme_derivative_float32": 0.9926304817199707,
+          "slang_derivative_float32": 0.9926303625106812,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.9926304718560779,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005099263047185608,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.9999999403953552,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": false,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 1.0,
+          "enzyme_derivative_float32": 0.0,
+          "slang_derivative_float32": 0.0,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 0.0,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "vortex_y",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": 6.000394012853805e-21,
+          "slang_derivative_float32": 6.000394012853805e-21,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -2.5469129619173063e-19,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": -7.067559870677087e-09,
+          "slang_derivative_float32": -7.067559870677087e-09,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -7.067575252601027e-09,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000000000706758,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": -7.241322919071536e-07,
+          "slang_derivative_float32": -7.241321782203158e-07,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -7.241335048325483e-07,
+          "nominal_smooth_point": true,
+          "tolerance": 0.000500000007241335,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.5411421656608582,
+          "enzyme_derivative_float32": -0.41742613911628723,
+          "slang_derivative_float32": -0.41742604970932007,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.4174269358056639,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005041742693580566,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.5787010192871094,
+          "enzyme_derivative_float32": 2.024001121520996,
+          "slang_derivative_float32": 2.024001121520996,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 2.0240016945197485,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005202400169451975,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.6204798817634583,
+          "enzyme_derivative_float32": 1.982085108757019,
+          "slang_derivative_float32": 1.982085108757019,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.9820852866571887,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005198208528665719,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.6234829425811768,
+          "enzyme_derivative_float32": -1.7580329179763794,
+          "slang_derivative_float32": -1.758033275604248,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -1.7580344192056128,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005175803441920562,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.550092339515686,
+          "enzyme_derivative_float32": -0.004255686420947313,
+          "slang_derivative_float32": -0.004255685955286026,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.004255686742895734,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000425568674289,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": -1.2319246955883045e-08,
+          "slang_derivative_float32": -1.2319246955883045e-08,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -1.2319270742371329e-08,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000000001231927,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": -7.714694226328145e-13,
+          "slang_derivative_float32": -7.714694226328145e-13,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -7.714689975262456e-13,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000000000000077,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": null,
+          "slang_derivative_float32": null,
+          "derivative_finite": false,
+          "manual_nominal_derivative": -2.501990797447801e-36,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": false,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 0.550000011920929,
+          "enzyme_derivative_float32": null,
+          "slang_derivative_float32": null,
+          "derivative_finite": false,
+          "manual_nominal_derivative": -1.0661632046372905e-55,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005,
+          "passes": false,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "complex_x",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": -0.5,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.103448286652565,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.22413793206214905,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.6224138140678406,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.6948276162147522,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.7189655303955078,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.7913793325424194,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.9844827651977539,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 1.3103448152542114,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 1.5517241954803467,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 2.879310131072998,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 3.965517282485962,
+          "enzyme_derivative_float32": 1.2068966627120972,
+          "slang_derivative_float32": 1.2068966627120972,
+          "derivative_finite": true,
+          "manual_nominal_derivative": 1.206896551724138,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005120689655172414,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "complex_y",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.5000000596046448,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.24137932062149048,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.18965516984462738,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.018965505063533783,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": -0.012068990617990494,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": -0.022413788363337517,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": -0.053448282182216644,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": -0.13620692491531372,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": -0.27586209774017334,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": -0.37931036949157715,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": -0.9482759237289429,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": -1.4137932062149048,
+          "enzyme_derivative_float32": -0.5172414183616638,
+          "slang_derivative_float32": -0.5172414183616638,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5172413793103449,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005051724137931034,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    },
+    {
+      "function": "sigmoid_value",
+      "cases": [
+        {
+          "input_float32": -0.5,
+          "value_float32": 0.8175744414329529,
+          "enzyme_derivative_float32": -0.4474393427371979,
+          "slang_derivative_float32": -0.4474393427371979,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.44743935621099856,
+          "nominal_smooth_point": true,
+          "tolerance": 0.00050447439356211,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.0,
+          "value_float32": 0.5,
+          "enzyme_derivative_float32": -0.75,
+          "slang_derivative_float32": -0.75,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.75,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005075,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.10000000149011612,
+          "value_float32": 0.4255574941635132,
+          "enzyme_derivative_float32": -0.7333750128746033,
+          "slang_derivative_float32": -0.7333750128746033,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.7333749345841267,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005073337493458412,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.4300000071525574,
+          "value_float32": 0.2158527970314026,
+          "enzyme_derivative_float32": -0.5077810883522034,
+          "slang_derivative_float32": -0.5077810883522034,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.5077811184555805,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005050778111845558,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.49000000953674316,
+          "value_float32": 0.18694262206554413,
+          "enzyme_derivative_float32": -0.4559852182865143,
+          "slang_derivative_float32": -0.4559852182865143,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.4559852109843269,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005045598521098433,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5099999904632568,
+          "value_float32": 0.17799369990825653,
+          "enzyme_derivative_float32": -0.4389358162879944,
+          "slang_derivative_float32": -0.4389358162879944,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.43893580890696576,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005043893580890696,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.5699999928474426,
+          "value_float32": 0.15316371619701385,
+          "enzyme_derivative_float32": -0.38911375403404236,
+          "slang_derivative_float32": -0.38911375403404236,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.3891137816061565,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005038911378160615,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 0.7300000190734863,
+          "value_float32": 0.10065208375453949,
+          "enzyme_derivative_float32": -0.27156370878219604,
+          "slang_derivative_float32": -0.27156370878219604,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.27156373646487153,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005027156373646487,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.0,
+          "value_float32": 0.04742587357759476,
+          "enzyme_derivative_float32": -0.13552998006343842,
+          "slang_derivative_float32": -0.13552998006343842,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.1355299791927364,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005013552997919274,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 1.2000000476837158,
+          "value_float32": 0.02659698948264122,
+          "enzyme_derivative_float32": -0.07766877114772797,
+          "slang_derivative_float32": -0.07766877114772797,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.07766877000902409,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005007766877000902,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 2.299999952316284,
+          "value_float32": 0.0010067712282761931,
+          "enzyme_derivative_float32": -0.003017272800207138,
+          "slang_derivative_float32": -0.003017272800207138,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.0030172721285594995,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000301727212856,
+          "passes": true,
+          "seam_guard": null
+        },
+        {
+          "input_float32": 3.200000047683716,
+          "value_float32": 6.772412598365918e-05,
+          "enzyme_derivative_float32": -0.00020315860456321388,
+          "slang_derivative_float32": -0.00020315860456321388,
+          "derivative_finite": true,
+          "manual_nominal_derivative": -0.00020315866011984035,
+          "nominal_smooth_point": true,
+          "tolerance": 0.0005000020315866012,
+          "passes": true,
+          "seam_guard": null
+        }
+      ],
+      "scope": "first scalar input varies; wrapper parameters held fixed"
+    }
+  ],
+  "derivative_programs": {
+    "polynomial": {
+      "sha256": "05a2b048cbed3fb5c801b2b7ead0915c2c85994a43c108731570ed7127d8b7ea",
+      "llvm_lines": 7,
+      "casts_preserved_in_primal": true
+    },
+    "oscillation": {
+      "sha256": "6d067b02e16e83fee6140afb4dc6514813ad2f9f4168fead92f2373163584a30",
+      "llvm_lines": 6,
+      "casts_preserved_in_primal": true
+    },
+    "branch": {
+      "sha256": "ae8e609ffe8c09d1cbc2db5949e64a783caaf07d90173034490deda9a7b68c4c",
+      "llvm_lines": 6,
+      "casts_preserved_in_primal": true
+    },
+    "integer_cast": {
+      "sha256": "25ed887636025849f94f3a30f77b9704dabf8282221c4b011c18f96e1536c2a3",
+      "llvm_lines": 3,
+      "casts_preserved_in_primal": true
+    },
+    "bounded_loop": {
+      "sha256": "6f0b13b7ff8aaefb64e249e9974abc0e9e6947f3561cc412eaf8a6ffbe548c25",
+      "llvm_lines": 29,
+      "casts_preserved_in_primal": true
+    },
+    "input_loop": {
+      "sha256": "ff7f0bb0bbc86179617689be255f6bb5474fd27dfe08a78c0a270403c4f15b63",
+      "llvm_lines": 72,
+      "casts_preserved_in_primal": true
+    },
+    "clamp_control": {
+      "sha256": "2d9ae6b24d6dd75c4b653d5f316d2a1e33bd8fef548bab3931e3c286eb254fff",
+      "llvm_lines": 8,
+      "casts_preserved_in_primal": true
+    },
+    "vortex_x": {
+      "sha256": "9fd3aa5a8ea857905286b69f78554b8e653ebb18300afa1c92067d505488096a",
+      "llvm_lines": 54,
+      "casts_preserved_in_primal": true
+    },
+    "vortex_y": {
+      "sha256": "ae7bec818a20db17f2350b8adcf5b0704c954a6a89437a721789e03a565d7d3b",
+      "llvm_lines": 54,
+      "casts_preserved_in_primal": true
+    },
+    "complex_x": {
+      "sha256": "5f198af674bfd76a5552d2f0a9db505286e05efc73781287a36f9041ccf70750",
+      "llvm_lines": 3,
+      "casts_preserved_in_primal": true
+    },
+    "complex_y": {
+      "sha256": "4c53135b8058a6d55fc8eac7a3f94a66391f2d242285cbcc7c8c6c66009c50d6",
+      "llvm_lines": 3,
+      "casts_preserved_in_primal": true
+    },
+    "sigmoid_value": {
+      "sha256": "94b648c0ee20df4a33c794826cc5b89de40d1eb9e01ea4d50ccfbbdcf43ecc40",
+      "llvm_lines": 9,
+      "casts_preserved_in_primal": true
+    }
+  },
+  "failed_manual_controls": [
+    [
+      "vortex_x",
+      0.0,
+      0.9999999403953552,
+      0.9999999403953552,
+      0.0
+    ],
+    [
+      "vortex_x",
+      1.0,
+      0.0,
+      0.9999999403953552,
+      0.0
+    ],
+    [
+      "vortex_y",
+      2.3,
+      null,
+      null,
+      -2.501990797447801e-36
+    ],
+    [
+      "vortex_y",
+      3.2,
+      null,
+      null,
+      -1.0661632046372905e-55
+    ]
+  ],
+  "control_count": 144,
+  "qualified_control_count": 139,
+  "opt_plugin_status": {
+    "command": [
+      "/opt/homebrew/opt/llvm@21/bin/opt",
+      "requests.ll",
+      "-load-pass-plugin=/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/build/Enzyme/LLVMEnzyme-21.dylib",
+      "-passes=enzyme",
+      "-S",
+      "-o",
+      "opt_derivatives.ll"
+    ],
+    "returncode": 0,
+    "seconds": 0.025279708002926782,
+    "stdout": "",
+    "stderr": ""
+  },
+  "negative_texture": {
+    "command": [
+      "/opt/homebrew/opt/llvm@21/bin/clang++",
+      "negative_texture.cpp",
+      "-std=c++17",
+      "-O2",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fplugin=/Users/jneerdael/Scripts/source-analysis-evaluation/enzyme/build/Enzyme/ClangEnzyme-21.dylib",
+      "-S",
+      "-emit-llvm",
+      "-o",
+      "negative_texture.ll"
+    ],
+    "returncode": 1,
+    "seconds": 0.036722709017340094,
+    "stdout": "",
+    "stderr": "error: Enzyme: No forward mode derivative found for external_texture\n at context:   %2 = tail call float @external_texture(float noundef %0) #4\n1 error generated.\n"
+  },
+  "stateful_negative": {
+    "status": "accepted",
+    "global_state_before": 0.0,
+    "global_state_after": 0.25,
+    "derivative": 1.0,
+    "consumer_guard": "a derivative invocation executes/mutates its primal; no persistent-state trajectory proof"
+  },
+  "rangeability": {
+    "sigmoid_t_c3_lipschitz_upper": 0.75,
+    "five_step_loop_lipschitz_upper": 1.6105100000000006,
+    "method": "independent nominal analytic factors, not a sampled range estimate",
+    "enzyme_computed_range_bounds": 0,
+    "new_predictor_range_bounds": 0,
+    "new_predictor_classifications": 0
+  },
+  "certifications": {
+    "native_GLES_equivalence": false,
+    "native_quantized_time_response": false,
+    "range_proof_from_numeric_points": false,
+    "visible_mood_accuracy": false
+  },
+  "uses_images": false,
+  "uses_renderer": false,
+  "uses_frame_or_audio_sequences": false,
+  "runs_full_authored_shader": false,
+  "runs_compiled_pure_helper_and_derivative_math": true,
+  "worker_sha256": "4284be769d8aad35be7691173712e78bc8117e2e501d617e958ff060a15d85bc",
+  "known_limits": [
+    {
+      "case": "vortex_x at0/1",
+      "cause": "clamp boundary moved by float32 arithmetic; Slang and Enzyme derivative tie policy differs at1",
+      "unchanged_source": true
+    },
+    {
+      "case": "vortex_y at2.3",
+      "cause": "original exp remains finite but derivative intermediate arithmetic overflows",
+      "unchanged_source": true
+    },
+    {
+      "case": "vortex_y at3.2",
+      "cause": "original float32 exp and derivative are outside finite domain",
+      "unchanged_source": true
+    }
+  ],
+  "new_derivative_programs_beyond_saved_slang_record": [
+    "complex_div scalar projections",
+    "dynamic input-trip-count loop without MaxIters annotation"
+  ],
+  "actual_source_bounds_improved_beyond_existing_slang": 0,
+  "nominal_vortex_x_partial_bound_example": {
+    "x_domain": [
+      0.43,
+      0.73
+    ],
+    "other_inputs": "unchanged explicit wrapper constants",
+    "radius_norm_upper": 0.2353720459187964,
+    "incoming_motion_norm": 0.022360679774997897,
+    "sigmoid_gradient_upper": 12.5,
+    "scalar_axis_derivative_norm_upper": 27.669647486956897,
+    "scope": "independent nominal chain-rule ceiling before nonexpansive saturate; not Enzyme-generated range proof or native derivative guarantee",
+    "gain_over_existing_slang": 0
+  },
+  "host": {
+    "cpu": "Apple M4 Pro",
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8\nBuildVersion:\t\t24H23"
+  },
+  "llvm_scalar_evolution": {
+    "input_loop_backedge_taken": "(-1 + %2)",
+    "constant_max_backedge_taken": 2147483646,
+    "log_sha256": "8887c49c900953bd8fe1e31ea8c507aabaad0528a68a6c8b5cf5ba21136a275b",
+    "meaning": "LLVM recovers symbolic trip count; no declared source-domain cap or flash/motion bound follows"
+  },
+  "reproduction": [
+    "python evaluate.py",
+    "clang++ worker.cpp -std=c++17 -O2 -ffp-contract=off -fno-fast-math -fplugin=../build/Enzyme/ClangEnzyme-21.dylib -o enzyme_worker",
+    "python finalize.py",
+    "python typed_graphs.py"
+  ],
+  "original_typed_graph_inspection_policy": "native-reader original DAG; no fabricated compiler acceptance; native shader selection remains unknown",
+  "original_graph_analyzer_sha256": {
+    "effect_families.py": "ccef14f050bc74c848d815c0cf3d8beb6bbec1075c81db8bcbffca89de79b8c2",
+    "shader_fields.py": "06114264bd86fd051899490217d336417cd989fa154af3fb793dbc93c2a00dcf",
+    "source_appearance.py": "22d0f09964c2a7ad5ed6be638ca3bccaa0dcd6b99660f80b0f7dd531726e98f3"
+  },
+  "reuse_decision": {
+    "framing": "evaluate functionality to port/adapt; Enzyme runtime is test oracle, not primary integration library",
+    "minimal_candidate": "seed-aware nominal forward JVP over existing Field/helper/LoopPlan DAG with qualified branch/finite-loop shadow propagation",
+    "upstream_sources": [
+      "enzyme/Enzyme/InstructionDerivatives.td",
+      "enzyme/Enzyme/AdjointGenerator.h",
+      "enzyme/Enzyme/GradientUtils.cpp",
+      "enzyme/Enzyme/ActivityAnalysis.h"
+    ],
+    "decision": "no production port yet: measured actual-source bounds/classification gain0; require frequent source gap and before/after qualified bound first",
+    "estimated_days": {
+      "pure_dag_adapter": [
+        1,
+        3
+      ],
+      "qualified_loop_branch": [
+        3,
+        5
+      ],
+      "range_export_validation": [
+        2,
+        4
+      ]
+    },
+    "license_for_copied_or_adapted_upstream_text": "Apache2.0 with LLVM exceptions; retain license/copyright/attribution/modification notices; no tracked upstream NOTICE at this pin",
+    "predictor_edits": false,
+    "new_corpus_run": false
+  }
+}
