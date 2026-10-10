@@ -35,6 +35,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `elements[].wave_material` | Built-in wave RGB clamp/normalization and mode/volume alpha recipe; threshold jump candidates are not visible flashes |
 | `native_input_bindings.main_frame_q` | Source main-frame q1..q32 snapshots packed into shader float32 banks, with unknown dynamic values retained |
 | `feedback_envelope` | Conditional varying affine-in-main RGB coefficient/gain envelopes; colour-only, not full feedback persistence |
+| `texture_colour_envelopes` | Independent affine texture-input RGB boxes and history/external input norms; not shared-history recurrence gain |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
@@ -1577,3 +1578,24 @@ negative values; it does not add a lower zero clamp.
 Actual persistence, visible flashing/motion and mood labels remain unresolved.
 The source/program/target contracts and sampling/drawing stages must be joined
 before a colour-only bound can establish a complete scene behaviour.
+
+
+## Independent texture colour-input envelopes
+
+`texture_colour_envelopes` consumes the existing per-stage affine texture-colour
+matrices. Under an explicit independently bounded[0,1]RGBA premise, coefficient
+signs and finite constant offsets give a raw RGB box. Nonzero coordinate-colour
+terms or unresolved offsets keep this box null while preserving valid sampled-
+input norms. Exact binary-rational coefficient sums are outward-rounded once.
+Each output row's sum of absolute weights bounds fixed-coordinate texture-input
+perturbations in the infinity norm; the maximum row supplies the reported norm.
+
+All-texture, main/blur-history and external-texture input norms remain separate.
+Source texture identities are not observed GPU bindings or fallback decisions.
+Random/external assets must remain fixed for a history-only comparison. Different
+blur levels may contain different history/normalization; summing their input
+weights does not solve the actual shared recurrence. Coordinates, kernels,
+clipping, native precision/storage, drawing/detail and final display remain
+separate. Full sensitivity, whole-feedback contraction and actual persistence
+stay null; these colour boxes cannot alone establish final brightness, palette
+or a mood. This is a supported mixture description, not a new image simulation.

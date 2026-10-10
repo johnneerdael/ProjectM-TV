@@ -5050,6 +5050,76 @@
               }
             }
           }
+        },
+        "texture_colour_envelopes": {
+          "type": "object",
+          "description": "Conditional independent affine texture-input colour boxes/norms; declared texture identities, not observed bindings or a shared recurrence.",
+          "required": [
+            "policy",
+            "stages",
+            "scope"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-independent-texture-colour-envelope-v1"
+            },
+            "stages": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "source_model",
+                  "all_texture_colour_difference_gain",
+                  "whole_feedback_contraction",
+                  "unknown_reasons"
+                ],
+                "properties": {
+                  "source_model": {
+                    "enum": [
+                      "unknown",
+                      "bounded_affine_texture_inputs"
+                    ]
+                  },
+                  "all_texture_colour_difference_gain": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "main_or_blur_input_difference_gain": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "external_texture_input_difference_gain": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "raw_rgb_bounds_if_samples_unit_interval": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "whole_feedback_contraction": {
+                    "type": "null"
+                  },
+                  "actual_feedback_persistence": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },

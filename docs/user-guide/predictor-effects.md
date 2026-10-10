@@ -394,3 +394,9 @@ explicit input assumptions, while keeping different sample locations separate.
 A contraction estimate needs image-independent sampling and excludes drawing,
 storage and later passes. Image-driven coordinates, nonlinear colour and missing
 domains remain unresolved; the bound does not establish visible trail duration.
+
+`texture_colour_envelopes` extends colour data to supported mixtures of main,
+blur and external textures. It keeps their source identities and input weights
+separate, with conditional RGB boxes where coordinate/offset domains permit.
+Blur textures can contain different histories, and runtime bindings may vary,
+so this is not a shared feedback-loop gain or a final brightness/palette score.

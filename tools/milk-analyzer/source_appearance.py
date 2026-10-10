@@ -531,6 +531,8 @@ def appearance_from_analysis(analysis):
     from source_radial_zoom import native_radial_zoom
     from source_warp_displacement import native_warp_displacement
     transport=native_warp_transport(analysis,consumed=consumes_mesh and consumes_feedback)
+    texture_transfer=texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba'])
+    from source_texture_envelopes import texture_colour_envelopes
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback,
@@ -542,7 +544,8 @@ def appearance_from_analysis(analysis):
         'native_input_bindings':getattr(analysis,'native_input_bindings',{}),
         'sampling_geometry':sampling_geometry(analysis),
         'colour_processing':colour_processing(analysis),
-        'texture_colour_transfer':texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba']),
+        'texture_colour_transfer':texture_transfer,
+        'texture_colour_envelopes':texture_colour_envelopes(texture_transfer),
         'execution_unknowns':list(analysis.unknowns),
         'uses_rendered_images':False,'uses_shader_execution':False,
         'uses_equation_execution':False,'appearance_match_accuracy':None,

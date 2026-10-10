@@ -1100,3 +1100,11 @@ declared domain premises and reject nonfinite upload/invalid domains. Nonlinear,
 unbounded, singular, blur/history and unresolved paths remain unknown. Keep
 colour-only contraction/half-life distinct from native rounding, sampling-map
 sensitivity, storage/drawing/detail and actual persistence or mood readiness.
+
+Source texture-envelope maintenance: `source_texture_envelopes` consumes the
+existing affine texture-colour transfer matrices, using exact binary-rational
+endpoint/norm sums. Keep independent RGBA sample premises and declared history/
+external source identities distinct from observed bindings/fallbacks. Coordinate
+terms or unknown constant offsets withhold RGB boxes without erasing valid
+input norms. Main/blur history norms never become shared-recurrence contraction
+or visible persistence, palette, brightness or mood claims.
