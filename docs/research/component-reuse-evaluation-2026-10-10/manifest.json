@@ -1,0 +1,31 @@
+{
+  "evidence_zip_sha256": "42bb7a735498b82c042be885be00ffd80ebb1199cb7424de761ce54946fcecb0",
+  "research_only": true,
+  "production_integration_completed": false,
+  "original_goal_status": "paused",
+  "local_clones": "/Users/jneerdael/Scripts/source-analysis-evaluation",
+  "tested_components": [
+    "Stims source/dataflow",
+    "glslang AST",
+    "SPIR-V Tools normalized inspection programs",
+    "SPIRV-Cross reflection",
+    "SymPy exported-graph adapter",
+    "Z3 bounded proof controls"
+  ],
+  "pure_center_census": {
+    "shape_elements": 2956,
+    "axis_expressions": 5912,
+    "complete_small_pure_axes": 2515,
+    "audio_dependent_pure_axes": 251,
+    "existing_unknown_band_response_axes": 170
+  },
+  "sympy_batch": {
+    "candidate_axes": 251,
+    "derived": 251,
+    "timeout": 0,
+    "seconds": 0.19604345996049233,
+    "new_constant_derivative_axes": 0,
+    "new_constant_derivative_presets": 0,
+    "note": "derivative generation is not interval bounding or native parity"
+  }
+}

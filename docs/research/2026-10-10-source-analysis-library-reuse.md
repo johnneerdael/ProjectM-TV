@@ -5,6 +5,11 @@ not rendering or replacing the patched ProjectM-TV engine. Findings below are
 from official project documentation; integration/coverage gains are proposals,
 not measured outcomes. Existing pending motion qualification stays frozen.
 
+Follow-up: [component evaluation](2026-10-10-component-reuse-evaluation.md)
+records pinned source inspections and actual bounded experiments. It prioritizes
+SymPy/Z3 adapters, selective compiler analysis and Stims fixture/pattern reuse;
+the exploratory recommendations below are superseded by that evaluated sequence.
+
 ## Main finding
 
 Useful components exist. There is no need to independently rebuild every parser,

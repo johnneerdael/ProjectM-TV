@@ -1419,3 +1419,12 @@ identities and source expressions. Per-band NDC norm uses centre mapping
 envelopes separately bound a two-state source-coordinate box diameter. Do not
 infer simultaneous reachability, audio time rate, future state trajectory,
 native float32 projection/overflow parity or visibility from those bounds.
+
+Source-analysis component research (2026-10-10): external shallow/sparse checkouts
+and an isolated SymPy/Z3 environment live under
+`/Users/jneerdael/Scripts/source-analysis-evaluation/`. They are evaluation inputs,
+not predictor/runtime dependencies. The component report pins identities and
+distinguishes exact GLES300 AST from ES310/auto-binding inspection SPIR-V. Pure
+nominal real simplification and explicit float32 proof results stay separate.
+Do not import other MilkDrop hosts' Q/init/random policies without target adapters.
+See `docs/research/2026-10-10-component-reuse-evaluation.md` and its evidence ZIP.
