@@ -407,7 +407,7 @@ def _colour(field,*,allow_shared_multiplier=True):
 
 def appearance_from_analysis(analysis):
     from effect_families import _parts,_number,_walk
-    from source_motion import motion_control
+    from source_motion import motion_control,planar_trajectory
     from source_composition import composition_from_analysis
     from source_sampling import sampling_geometry
     from source_feedback import feedback_transfer
@@ -451,6 +451,7 @@ def appearance_from_analysis(analysis):
         elements[identity]['material']=shape_material(controls,analysis.values.get('shapecode_'+identity.removeprefix('shape_')+'_image',''))
         elements[identity]['fill_contribution']=shape_fill_contribution(elements[identity]['geometry'],elements[identity]['material'])
         elements[identity]['audio_area_response']=shape_audio_area_response(controls,elements[identity]['geometry'],elements[identity]['fill_contribution'])
+        elements[identity]['center_trajectory']=planar_trajectory([controls['x'],controls['y']])
         elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
             application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():

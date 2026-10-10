@@ -121,6 +121,10 @@ previous-state inputs. Init captures use namespaced inputs; EELvol is local,
 packed shader volume remains aggregate. Branch assignments use native `_if`
 environment merging. None of these facts establishes image or mood accuracy.
 `source_motion.py` exports named constant/linear/sinusoidal source control curves.
+Its paired shape-centre trajectory joins known axes into drift or common-rate
+harmonic paths. Preserve phase offsets, signed rates and exact source degeneracy
+conditions; use independent-axis speed bounds for unmatched rates. Source circles
+are not physical-screen circle claims, and visible speed remains unresolved.
 Keep source-time units, ranges and signed coefficients separate from visible
 motion. Constant mesh controls apply each feedback step; zero derivative is not
 zero image speed. Audio/state/nonlinear curves remain unknown without support.

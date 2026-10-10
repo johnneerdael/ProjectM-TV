@@ -111,6 +111,12 @@ and nominal peak control speed.2 units/s. Audio/state/nonlinear formulas can sti
 abstain. A constant feedback rotation is applied each feedback step and may keep
 moving the picture; zero change in its control value is not a still-image claim.
 These source rates do not yet establish perceived screen movement or a mood score.
+Paired shape-centre curves now identify supported stationary positions, straight
+drift, circle/ellipse paths and line oscillations. Their JSON includes a
+reconstructable harmonic matrix, period, dimensions and nominal peak speed.
+Different axis rates retain an independent-curve description and a speed upper
+bound. These are authored-coordinate paths: aspect, clipping and feedback still
+affect what a viewer sees. Unknown axes remain unknown.
 
 The composition record explains normal feedback versus display paths, candidate
 drawing order and source texture reads. It preserves hidden feedback drawings

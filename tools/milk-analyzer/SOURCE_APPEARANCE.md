@@ -152,6 +152,31 @@ rotate sampled feedback every step despite a zero control derivative. FPS, nativ
 warp-time math, feedback composition and visibility are still needed for image
 speed; `visible_motion_speed` and activity/mood scores remain null.
 
+Shape elements add `center_trajectory`, policy
+`source-planar-control-trajectory-v1`, joining supported x/y curves. Known
+constant axes produce a stationary centre; affine-time axes produce a drift
+vector and its Euclidean speed. Stationary centres do not imply stationary
+radius, rotation or feedback.
+
+For supported common-absolute-frequency sin/cos axes, the descriptor writes
+`center_source_xy + harmonic_matrix_source_xy * [cos(w*time),sin(w*time)]`.
+The matrix retains signed amplitudes, phase offsets and negative-rate orientation;
+`motion_controls[].phase_offset_rad` supplies the nominal constant phase.
+The path can be a source-coordinate circle, ellipse or line oscillation.
+Common-phase identities and exact matrix rank/Gram checks avoid tolerance-based
+geometry labels; a nearly correlated ellipse is not silently turned into a line.
+`semiaxis_lengths_source_units` are the descending singular values, and
+`maximum_source_speed_units_per_second=w*largest_semiaxis` is an exact nominal
+peak, subject to the stated continuous-source model.
+
+Different rates or mixed drift/oscillation keep `independent_axis_curves`, no
+guessed global period, and the upper bound `hypot(peak_axis_rate_x,peak_axis_rate_y)`.
+`speed_estimate_kind` distinguishes `exact_nominal`, `upper_bound` and `unknown`.
+Unsupported axes or nonfinite joint estimates abstain. All positions, dimensions
+and speeds remain authored-coordinate quantities before projection, floating
+trig/rounding, clock discontinuities, clipping and feedback. Viewport aspect can
+make a source circle physically elliptical; `visible_motion_speed` remains null.
+
 Audio/state/nonlinear time and unsupported combined oscillators retain unknown
 rates and reasons. Do not infer stationary images from unknowns or constant
 controls. The previous per-element audio routes remain alongside these curves.

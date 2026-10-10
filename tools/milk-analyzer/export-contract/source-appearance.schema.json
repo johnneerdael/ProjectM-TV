@@ -817,6 +817,12 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "phase_offset_rad": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
                     }
                   }
                 }
@@ -1530,6 +1536,138 @@
                   },
                   "uses_shader_execution": {
                     "const": false
+                  }
+                }
+              },
+              "center_trajectory": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "path_kind",
+                  "center_source_xy",
+                  "linear_velocity_source_xy",
+                  "harmonic_matrix_source_xy",
+                  "angular_rate_rad_per_second",
+                  "period_seconds",
+                  "semiaxis_lengths_source_units",
+                  "maximum_source_speed_units_per_second",
+                  "speed_estimate_kind",
+                  "axis_curves",
+                  "visible_motion_speed",
+                  "unknown_reasons",
+                  "conditions"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-planar-control-trajectory-v1"
+                  },
+                  "path_kind": {
+                    "enum": [
+                      "unknown",
+                      "stationary",
+                      "linear_drift",
+                      "line_oscillation",
+                      "circle",
+                      "ellipse",
+                      "independent_axis_curves"
+                    ]
+                  },
+                  "center_source_xy": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "linear_velocity_source_xy": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "harmonic_matrix_source_xy": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "angular_rate_rad_per_second": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "period_seconds": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "semiaxis_lengths_source_units": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "maximum_source_speed_units_per_second": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "speed_estimate_kind": {
+                    "enum": [
+                      "unknown",
+                      "upper_bound",
+                      "exact_nominal"
+                    ]
+                  },
+                  "axis_curves": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "visible_motion_speed": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               }

@@ -243,3 +243,12 @@ Resolve source constant RGB through typed vector members without crossing input/
 sample uncertainty or discarding int conversions. Preserve nested swizzles,
 local shadows, deadlanes and bounded recursion. Measure raw-colour coverage and
 retention on the same100, keeping finalpalette/mood validation separate.
+
+## Paired shape trajectory extension
+
+Join supported authored x/y time curves before projection. Export a harmonic
+matrix, principal semiaxes and nominal peak speed when both axes share an
+absolute phase rate; retain exact signed-phase identities and thin ellipses.
+For independent rates keep the curves and a conservative joint-speed bound.
+Unknown/audio/state axes remain unresolved. These paths supply an ingredient
+for mood interpretation, not a claim about final visible motion.
