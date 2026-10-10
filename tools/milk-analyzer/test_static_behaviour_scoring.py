@@ -74,3 +74,18 @@ def test_exported_preferences_cannot_mutate_future_scores():
     first=score_static_behaviour(evidence())
     first['preference_rules']['motion_reference_vp_s']=999
     assert score_static_behaviour(evidence())['preference_rules']['motion_reference_vp_s']==.75
+
+
+def test_partial_calm_components_cannot_nominate_chill_when_activity_is_unknown():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence(speed=.01,complete=False)
+    result=score_static_behaviour(model)
+    assert 'Chill' not in result['predicted_bands']
+    assert result['eligible_bands']==[]
+
+
+def test_zero_known_components_with_missing_activity_do_not_supply_a_calm_index():
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(evidence(complete=False))
+    assert result['intensity']['value'] is None
+    assert result['predicted_bands']==[]

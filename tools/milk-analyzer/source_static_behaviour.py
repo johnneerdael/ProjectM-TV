@@ -68,11 +68,28 @@ def static_behaviour(analysis,description,context=None):
                                              'source_motion_behaviour.py','source_prominence.py','source_colour_character.py','static_behaviour_scoring.py']},
                 'uses_rendered_images':False,'uses_shader_execution':False,'uses_equation_execution':False,
                 'native_numeric_certified':False,'appearance_accuracy_verified':False}
-        result['flashing']=flash_evidence(analysis,description,normalized)
-        result['motion']=motion_evidence(analysis,description,normalized)
-        result['prominence']=prominence_evidence(analysis,description,normalized)
-        result['colour']=colour_character(analysis,description,result['prominence'],normalized)
-        result['output_model_complete']=_complete(analysis,result['flashing'],result['motion'])
+        result['producer_failures']={}
+        def produce(name,function,args,fallback):
+            # Separate bounded traversal caches prevent one exhausted producer
+            # from discarding or poisoning independent source facts.
+            producer_token=_CACHE.set({})
+            try:
+                return function(*args)
+            except (_SemanticBudget,RecursionError,OverflowError,ValueError,IndexError) as error:
+                result['producer_failures'][name]={'error_type':type(error).__name__,'reason':str(error)}
+                return {**fallback,'status':'unresolved','unknown_reasons':[str(error)]}
+            finally:
+                _CACHE.reset(producer_token)
+        arguments=(analysis,description,normalized)
+        result['flashing']=produce('flashing',flash_evidence,arguments,
+            {'records':[],'source_hazards':[{'stage':'composite','reason':'flashing producer incomplete'}]})
+        result['motion']=produce('motion',motion_evidence,arguments,
+            {'contributions':[],'unresolved_contributors':[{'reason':'motion producer incomplete'}]})
+        result['prominence']=produce('prominence',prominence_evidence,arguments,{'by_component':{},'components':[]})
+        result['colour']=produce('colour',colour_character,(analysis,description,result['prominence'],normalized),
+            {'components':[],'by_component':{},'candidate_palette_hierarchy':[],'useful_hue_description':False})
+        result['status']='partial' if result['producer_failures'] else 'computed'
+        result['output_model_complete']=not result['producer_failures'] and _complete(analysis,result['flashing'],result['motion'])
         result['classification']=score_static_behaviour(result)
         result['limitations']=['Reference viewport/FPS/input domains are declared assumptions, not device observations',
             'Physical component bounds and source potential estimates are not rendered appearance or native certification',

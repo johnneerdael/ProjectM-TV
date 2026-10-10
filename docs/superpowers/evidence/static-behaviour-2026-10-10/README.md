@@ -27,3 +27,20 @@ after review identified defects and is not credited as qualification.
 Goal remains active: general visual descriptions and useful activity grouping
 need further movement, feedback and input-trajectory work. The point estimate
 represents known-source potential rather than a typical observed intensity.
+
+## Focused partial-retention repair
+
+After the frozen checkpoint, every one of the124 joined-report failures was
+retested with independent bounded producer caches and failure-preserving results.
+All124 now retain a joined report;113 recover useful hue descriptions. The
+prominence calculations still fail explicitly, and none obtains an automatic
+band or a source activity estimate. This is recovered independent information,
+not124 solved mathematical domains. The focused124 run takes20.89s. Exact source
+selection/model/component identities and summary are saved separately.
+
+A generic scoring guard also suppresses provisional Chill when contributing
+activity remains unknown and suppresses a calm point from zero-valued partial
+components. The earlier cohort results stay unchanged as historical evidence.
+Three human references in that cohort exposed misleading low partial scores;
+those are diagnostic feedback under old engine/unspecified audio, not current
+visual validation or fitting targets.

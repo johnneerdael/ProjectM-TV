@@ -107,3 +107,31 @@ def test_discard_shader_retains_partial_report_without_crashing():
     result=appearance_from_analysis(a)['static_behaviour']
     assert result['output_model_complete'] is False
     assert result['classification']['eligible_bands']==[]
+
+
+def test_one_producer_budget_failure_preserves_other_useful_source_evidence(monkeypatch):
+    import source_prominence
+    from effect_families import _SemanticBudget
+    from source_appearance import appearance_from_analysis
+    def exhausted(*args):raise _SemanticBudget('synthetic independent prominence budget')
+    monkeypatch.setattr(source_prominence,'prominence_evidence',exhausted)
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(.1,.2,.3);}\n')
+    report=appearance_from_analysis(a)['static_behaviour']
+    assert report['flashing']['records']
+    assert report['colour']['components']
+    assert report['producer_failures']['prominence']['reason']=='synthetic independent prominence budget'
+    assert report['output_model_complete'] is False
+    assert report['classification']['eligible_bands']==[]
+
+
+def test_flash_failure_does_not_certify_chill_from_retained_calm_motion(monkeypatch):
+    import source_flash_behaviour
+    from source_appearance import appearance_from_analysis
+    def exhausted(*args):raise ValueError('synthetic incomplete flash model')
+    monkeypatch.setattr(source_flash_behaviour,'flash_evidence',exhausted)
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(.1,.2,.3);}\n')
+    report=appearance_from_analysis(a)['static_behaviour']
+    assert report['colour']['components']
+    assert report['producer_failures']['flashing']
+    assert report['classification']['eligible_bands']==[]
+    assert 'Chill' not in report['classification']['predicted_bands']

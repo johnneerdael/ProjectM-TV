@@ -120,8 +120,8 @@ def score_static_behaviour(evidence):
     low=max((r['strength_interval'][0] for r in rows), default=0.)
     high=1. if unknown else max(known,default=0.)
     interval=[1.+99.*low,1.+99.*high]
-    point=None if not known else 1.+99.*max(known)
-    predicted=[] if point is None else [n for n,a,b in BANDS if a<=point<=b and (n!='Chill' or not flash_possible)]
+    point=None if not known or unknown and max(known)==0. else 1.+99.*max(known)
+    predicted=[] if point is None else [n for n,a,b in BANDS if a<=point<=b and (n!='Chill' or not flash_possible and not unknown)]
     eligible=[n for n,a,b in BANDS if not unknown and a<=interval[0] and interval[1]<=b and
               interval[1]-interval[0]<=RULES['maximum_eligible_score_width'] and (n!='Chill' or not flash_possible)]
     result={'policy':POLICY,'model_status':'assumed source-potential preference mapping; uncalibrated',

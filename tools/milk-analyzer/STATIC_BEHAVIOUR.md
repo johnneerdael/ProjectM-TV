@@ -17,6 +17,8 @@ source reader parses the preset; compiler evidence may qualify stage selection.
 | `classification` | Known-source potential index, conservative interval, overlapping candidate and eligible preference bands | Calibrated human mood accuracy |
 
 `classification.predicted_bands` uses the known component potential estimate.
+Unknown contributing activity suppresses Chill suggestions even provisionally;
+zero-valued partial components do not supply a calm point estimate.
 `classification.eligible_bands` additionally requires complete bounded evidence;
 unknown contributing activity or execution/domain gaps veto eligibility. Consumers
 must not automatically classify a provisional Chill candidate as safe/calm. The
@@ -55,6 +57,11 @@ source-bound offline compiler records and one immutable reader per worker. Optio
 The manifest freezes model, source, reader, context, compiler-record and component
 identities. Compressed per-preset rows retain errors and partial evidence. Counts
 of useful descriptors or provisional bands are coverage, not appearance accuracy.
+
+Independent producers retain their own partial results when another producer
+exhausts its bounded traversal. Producer failures are exported and veto automatic
+eligibility. Separate bounded caches prevent one failure from poisoning other
+component calculations.
 
 The new builder is still being qualified. See the task plan and saved cohort
 results for current checkpoints; a synthetic constant-colour control passing does
