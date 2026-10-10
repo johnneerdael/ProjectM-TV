@@ -1411,3 +1411,11 @@ alpha/destination/geometry fixed. Retain native division/quantization, dynamic
 alpha, waveform footprint, draw gates and source reachability as unresolved.
 Existing possible normalization risk now appears as an activity hazard with
 null event rate/visible strength, not a whole-screen flashing certificate.
+
+Shape centre audio response: `audio_center_response` exports two source axes by
+six current EEL bands, retaining continuous-response nulls, init/private-state
+identities and source expressions. Per-band NDC norm uses centre mapping
+(2*x-1,1-2*y); it is neither pixel distance nor a temporal speed. Scenario value
+envelopes separately bound a two-state source-coordinate box diameter. Do not
+infer simultaneous reachability, audio time rate, future state trajectory,
+native float32 projection/overflow parity or visibility from those bounds.

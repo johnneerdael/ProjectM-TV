@@ -1684,6 +1684,37 @@
                   }
                 }
               },
+              "audio_center_response": {
+                "type": "object",
+                "description": "Per-current-band nominal shape centre response and declared-domain two-state displacement; not temporal or visible screen speed.",
+                "required": ["policy", "audio_input_codes", "axis_order", "matrix_center_xy_per_audio_unit_upper_bounds", "maximum_center_ndc_distance_per_audio_unit_upper_bounds", "maximum_center_speed_ndc_per_second", "visible_screen_movement"],
+                "properties": {
+                  "policy": {"const": "source-shape-center-audio-response-v1"},
+                  "audio_input_codes": {"const": [1,2,3,4,5,6]},
+                  "axis_order": {"const": ["x","y"]},
+                  "matrix_center_xy_per_audio_unit_upper_bounds": {
+                    "type": "array", "minItems": 2, "maxItems": 2,
+                    "items": {"type": "array", "minItems": 6, "maxItems": 6,
+                      "items": {"type": ["number","null"], "minimum": 0}}
+                  },
+                  "maximum_center_ndc_distance_per_audio_unit_upper_bounds": {
+                    "type": "array", "minItems": 6, "maxItems": 6,
+                    "items": {"type": ["number","null"], "minimum": 0}
+                  },
+                  "maximum_center_speed_ndc_per_second": {"type": "null"},
+                  "visible_screen_movement": {"type": "null"},
+                  "scenario_center_response": {
+                    "type": "object",
+                    "required": ["input_scenario_sha256", "observed_runtime_inputs", "runtime_binding_verified", "maximum_two_state_center_ndc_distance_upper_bound"],
+                    "properties": {
+                      "input_scenario_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                      "observed_runtime_inputs": {"const": false},
+                      "runtime_binding_verified": {"const": false},
+                      "maximum_two_state_center_ndc_distance_upper_bound": {"type": ["number","null"], "minimum": 0}
+                    }
+                  }
+                }
+              },
               "center_trajectory": {
                 "type": "object",
                 "required": [

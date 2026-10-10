@@ -475,6 +475,8 @@ def appearance_from_analysis(analysis):
         elements[identity]['fill_envelope']=shape_fill_envelope(controls,elements[identity]['geometry'],elements[identity]['material'],elements[identity]['material_temporal'])
         elements[identity]['audio_area_response']=shape_audio_area_response(controls,elements[identity]['geometry'],elements[identity]['fill_contribution'])
         elements[identity]['center_trajectory']=planar_trajectory([controls['x'],controls['y']])
+        from source_shape_audio_motion import shape_audio_center_response
+        elements[identity]['audio_center_response']=shape_audio_center_response(controls,input_scenario=getattr(analysis,'input_scenario',None))
         elements[identity]['vertex_motion']=shape_vertex_motion(controls,elements[identity]['geometry'],elements[identity]['center_trajectory'])
         from effect_families import _deps
         if any('instance' in _deps(controls[name]) for name in ('x','y','rad','ang','sides')):

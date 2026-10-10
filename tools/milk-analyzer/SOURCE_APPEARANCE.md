@@ -2737,3 +2737,19 @@ hazards. These use the existing channel-domain risk and preserve missing,
 disabled and above-threshold cases. They do not claim the simultaneous colour
 boundary is reached, measure native float32 division or quantify a changing
 alpha/draw gate, waveform screen coverage, feedback, visible flashes or mood.
+
+Shape `audio_center_response` adds a numeric two-axis/six-band gain matrix in
+source coordinates per engine audio unit. Its columns follow
+`bass,mid,treb,bass_att,mid_att,treb_att`; rows are `x,y`. The NDC distance ceiling
+per band is twice the Euclidean norm of the two axis ceilings, following centre
+projection `(2*x-1,1-2*y)`. Absolute ceilings do not convey direction; the saved
+source expressions retain signs and formulas. Other time/state/instance inputs
+are held fixed during each partial response, including distinct init snapshots.
+
+An optional `scenario_center_response` carries declared input-domain provenance
+and source value envelopes. Its two-state NDC distance bound is the diameter of
+the independent x/y enclosure. This is conservative and need not be reachable;
+it is not the path travelled, a seconds-based speed or physical-pixel distance.
+Unknown state gains, discontinuities, overflow and unsupported formulas abstain.
+Future state dynamics, simultaneous audio changes, native precision, clipping,
+material visibility and later feedback remain separate.
