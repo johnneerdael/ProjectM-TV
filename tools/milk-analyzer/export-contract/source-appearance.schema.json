@@ -1762,6 +1762,238 @@
                     }
                   }
                 }
+              },
+              "instance_motion": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "configured_instances",
+                  "instance_expansion_limit",
+                  "node_visit_budget",
+                  "processed_instances",
+                  "known_path_instances",
+                  "known_speed_instances",
+                  "expansion_complete",
+                  "instances",
+                  "maximum_vertex_speed_ndc_per_second_upper_bound",
+                  "visible_motion_speed",
+                  "unknown_reasons",
+                  "conditions",
+                  "uses_equation_execution",
+                  "uses_rendered_images"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-instance-motion-v1"
+                  },
+                  "configured_instances": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "instance_expansion_limit": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "node_visit_budget": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "processed_instances": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "known_path_instances": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "known_speed_instances": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "expansion_complete": {
+                    "type": "boolean"
+                  },
+                  "maximum_vertex_speed_ndc_per_second_upper_bound": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "visible_motion_speed": {
+                    "type": "null"
+                  },
+                  "uses_equation_execution": {
+                    "const": false
+                  },
+                  "uses_rendered_images": {
+                    "const": false
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "instances": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "instance",
+                        "center_trajectory",
+                        "effective_sides",
+                        "maximum_vertex_speed_ndc_per_second_upper_bound",
+                        "unknown_reasons"
+                      ],
+                      "properties": {
+                        "instance": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "center_trajectory": {
+                          "type": "object",
+                          "required": [
+                            "policy",
+                            "path_kind",
+                            "center_source_xy",
+                            "linear_velocity_source_xy",
+                            "harmonic_matrix_source_xy",
+                            "angular_rate_rad_per_second",
+                            "period_seconds",
+                            "semiaxis_lengths_source_units",
+                            "maximum_source_speed_units_per_second",
+                            "speed_estimate_kind",
+                            "unknown_reasons"
+                          ],
+                          "properties": {
+                            "policy": {
+                              "const": "source-planar-control-trajectory-v1"
+                            },
+                            "path_kind": {
+                              "enum": [
+                                "unknown",
+                                "stationary",
+                                "linear_drift",
+                                "line_oscillation",
+                                "circle",
+                                "ellipse",
+                                "independent_axis_curves"
+                              ]
+                            },
+                            "center_source_xy": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "linear_velocity_source_xy": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "harmonic_matrix_source_xy": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "angular_rate_rad_per_second": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            },
+                            "period_seconds": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            },
+                            "semiaxis_lengths_source_units": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "maximum_source_speed_units_per_second": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            },
+                            "speed_estimate_kind": {
+                              "enum": [
+                                "unknown",
+                                "upper_bound",
+                                "exact_nominal"
+                              ]
+                            },
+                            "unknown_reasons": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "effective_sides": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "maximum_vertex_speed_ndc_per_second_upper_bound": {
+                          "type": [
+                            "number",
+                            "null"
+                          ],
+                          "minimum": 0
+                        },
+                        "unknown_reasons": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

@@ -1058,3 +1058,38 @@ nor provides a calibrated mood or flash score. `visible_motion_speed` stays
 null. NDC speed can be converted to a resolution-dependent geometric estimate
 by a downstream consumer under explicit viewport conditions; it is not a
 measured physical-screen movement rate.
+
+### Static native-instance motion specialization
+
+Shapes whose position/radius/angle/sides depend on the original `instance`
+input add `instance_motion`. The native loop sets index0through count-1 before
+each source equation phase. Symbolic substitution replaces that original input;
+it does not change local writes, incoming audio or persistent custom state.
+Supported finite literals, literal sin/cos, EEL zero-guarded division and known
+conditional branches can simplify afterwards. No time/audio samples, native
+equation execution or image rendering are used. Trig-derived constants use
+nominal double formulas, not a claim of native libm bit identity.
+
+`instances[]` contains compact paths and vertex-speed bounds indexed by native
+iteration. `known_path_instances`, `known_speed_instances` and
+`processed_instances` count independently. `expansion_complete` means every
+configured instance was processed; it does not mean all paths are known. The
+aggregate vertex-speed bound is available only when every instance has one.
+One unknown member leaves the aggregate null; there is no renormalization or
+extrapolation. Existing aggregate source geometry is unchanged.
+
+The source expansion limit is1024instances with262144distinct-node visits
+across their substitutions and a depth limit64. These are processing budgets,
+not native language bounds or evidence that a larger native count is clamped.
+A larger count retains the authored configured value with incomplete expansion;
+a node/depth budget stop retains finished rows and withholds the group bound.
+Per-instance literal caches are isolated so they cannot exhaust the parent's
+source cache. Metadata documents conditions and budgets for consumers.
+
+Original authoring guidance describes repeated shapes controlled by `instance`:
+[MilkDrop authoring guide, custom shapes](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html).
+The target behavior is verified separately in patched `CustomShape::Draw` and
+`ShapePerFrameContext::LoadStateVariables`: Q reloads the main-frame snapshot,
+T reloads the shape init snapshot, and configured shape values/index reload
+each iteration. Unmodeled custom state stays an explicit input. Native/MilkDrop
+projection, finite conversions, clipping and feedback conditions still apply.

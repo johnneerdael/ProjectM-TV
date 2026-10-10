@@ -453,6 +453,10 @@ def appearance_from_analysis(analysis):
         elements[identity]['audio_area_response']=shape_audio_area_response(controls,elements[identity]['geometry'],elements[identity]['fill_contribution'])
         elements[identity]['center_trajectory']=planar_trajectory([controls['x'],controls['y']])
         elements[identity]['vertex_motion']=shape_vertex_motion(controls,elements[identity]['geometry'],elements[identity]['center_trajectory'])
+        from effect_families import _deps
+        if any('instance' in _deps(controls[name]) for name in ('x','y','rad','ang','sides')):
+            from source_instances import shape_instance_motion
+            elements[identity]['instance_motion']=shape_instance_motion(controls,elements[identity]['parameters']['instances'])
         elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
             application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():

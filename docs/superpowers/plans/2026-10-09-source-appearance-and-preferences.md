@@ -260,3 +260,15 @@ the exact native projection under fixed viewport/aspect. Keep constant sides,
 finite native conversion premises, unknown/audio/state controls and unbounded
 rotating radius explicit. Source vertex movement is not yet perceived motion;
 retain texture/material, clipping and feedback contributions separately.
+
+## Source instance specialization priority
+
+The fixed100 trajectory census contains 35 shape components across19presets
+whose source centre depends on `instance`. Specialize each native index in
+`0..configured_count-1` using bounded DAG substitution and supported literal
+math; reuse trajectory/geometry/vertex-motion rules. Preserve incoming state,
+audio and other runtime inputs; no time/audio samples or native equation
+execution. Return compact per-instance descriptors with completeness counts.
+Unknown instances and expansion-budget stops keep the aggregate speed unknown;
+never clamp native count or silently extrapolate from a few instances.
+Verify native reset/order against original MilkDrop2 and the patched engine.

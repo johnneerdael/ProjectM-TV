@@ -977,3 +977,10 @@ EEL static equality maintenance: `_EEL.operation` lowers EEL equal to
 `eel_equal`; `_number` uses finite-operand `abs(a-b)<0.00001`. Retain strict
 threshold boundary and exact shader `equal` separately. Do not route an EEL
 control DAG through shader-only numerical evaluators as an EEL execution proof.
+
+Source instance motion: `source_instances.shape_instance_motion` substitutes
+the original native index and preserves state/audio inputs. Literal sin/cos
+are nominal double formulas. Keep processed/known counts distinct and group
+speed null unless every authored instance is processed with a known bound.
+Expansion/node/depth budgets are source-tool limits, not native count clamps;
+retain partial evidence and isolate per-instance symbolic caches.

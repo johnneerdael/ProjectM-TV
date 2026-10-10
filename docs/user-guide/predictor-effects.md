@@ -279,3 +279,9 @@ EEL source comparisons also preserve the evaluator's equality tolerance:
 `equal()` considers finite values less than 0.00001 apart equal. Shader equality
 remains exact. The JSON uses `eel_equal` to distinguish these rules, preventing
 constant source branches from being interpreted with the wrong language.
+
+For repeated custom shapes, `instance_motion` can describe individual source
+paths and movement bounds without running frames. It distinguishes the number
+of processed instances from the number with known motion. If even one instance
+has unresolved movement, the whole-group speed remains unknown. Expansion
+budgets are reported and never presented as a native clamp or visual proof.
