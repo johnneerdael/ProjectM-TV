@@ -37,6 +37,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `feedback_envelope` | Conditional varying affine-in-main RGB coefficient/gain envelopes; colour-only, not full feedback persistence |
 | `texture_colour_envelopes` | Independent affine texture-input RGB boxes and history/external input norms; not shared-history recurrence gain |
 | `nonlinear_texture_colour_bounds` | Per-channel nominal ranges through supported nonlinear scalar operations on declared texture inputs; no sensitivity or mood score |
+| `elements[].audio_routes[].nominal_audio_response` | Sufficient nominal scalar control-change bound per audio input unit, with other inputs fixed; no time-rate or visible response score |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
@@ -1632,3 +1633,35 @@ Raw ranges retain correlation/native precision/history/coordinate uncertainty.
 They do not measure colour distribution, dominance, palette, brightness,
 continuity, flashing or mood. Full nonlinear sensitivity and shared recurrence
 remain separate work; complete channel bounds are not appearance certification.
+
+## Nominal audio control-response bounds
+
+Each causal route may additionally export `nominal_audio_response`. Its
+`maximum_absolute_control_change_per_audio_unit` is a sufficient upper bound
+for the nominal scalar formula. The example `.2*sin(3*bass)` has bound `.6`:
+the chain rule multiplies amplitude .2 by phase gain3 and maximum cosine1.
+For `.2*sin(3*bass+2*mid+time)`, bass has bound.6 and mids bound.4 while
+other inputs stay fixed. These are not average or minimum response estimates,
+nor proof of response direction, displayed flashes, beat timing or visibility.
+
+The existing bounded calculus supplies addition, product and quotient rules,
+trig, absolute value and min/max continuous clamps. Declared input domains,
+where supplied to the scalar helper, stay explicit; ordinary route exports
+invent no audio ranges. `sin(bass*mid)` has no global bass-response bound
+without a bound for mids. Threshold jumps, singular denominators, unknown
+effects, dynamic casts/narrowing, unsupported operators and calculation budget
+exhaustion keep the bound null. Raw value ranges cannot substitute for it.
+
+Packed shader bands keep scalar identities such as `_c3.x`; EEL bands retain
+their authored names. `varying_input_names` lists aliases varied together by
+the same delta; `held_fixed_input_names` lists visited external inputs held
+constant. Holding a previous-frame state variable fixed is an instantaneous
+partial response, not a derivative of its recurrent evolution. Quantized Q
+uploads therefore remain unresolved in this continuity-based model.
+
+`nominal_continuity` refers only to the supported scalar map with the listed
+premises. All native/storage rounding, shader sampling, drawing order, screen
+area, real audio trajectories and final composition remain outside the bound.
+The result includes `native_numeric_certified:false`, null visible response
+and null maximum time-rate. Existing signed `linear_gain` and switch-trigger
+records remain separate. No mood score follows from a Lipschitz upper bound.

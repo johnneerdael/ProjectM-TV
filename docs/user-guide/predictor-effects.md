@@ -407,3 +407,11 @@ texture sample remains an explicit unit-RGBA input premise. Singular or unknown
 domains stay unresolved, and partially understood channels remain separate.
 Range bounds do not establish nonlinear sensitivity, temporal continuity,
 visible flashing or how much of a frame has a particular colour.
+
+Audio routes now also carry `nominal_audio_response` where the source formula
+supports a bound. For `.2*sin(3*bass)`, the control can change by at most `.6`
+times a change in bass, under nominal arithmetic with other inputs fixed.
+This helps distinguish a control dependency from its possible strength.
+It is an upper bound, not a typical response or screen-intensity score.
+Thresholds, singularities and quantized uploads keep explicit unknowns;
+recurrent feedback and actual audio timing require separate understanding.

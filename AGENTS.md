@@ -1117,3 +1117,11 @@ endpoint conversion before downstream clamps; unknowns cannot become zero.
 Keep partial channels and source assumptions explicit. No gain/continuity,
 full feedback, displayed flashing/brightness/palette or mood certificate follows
 from raw colour ranges. Interpolation weights are not implicitly clamped.
+
+Source audio-response maintenance: `scalar_response_envelope` reuses nominal
+scalar calculus with selected named input rates1 and other finite inputs held
+fixed. Route aliases include EEL names and scalar packed shader-band members.
+Do not replace an unknown cross-band amplitude with an assumed audio range.
+Dynamic casts/narrowing, thresholds, singular domains and unsupported effects
+retain null bounds. Sufficient partial response is not a minimum/typical gain,
+audio time-rate, recurrent-state derivative or final screen/mood certificate.

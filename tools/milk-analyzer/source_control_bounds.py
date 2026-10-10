@@ -7,7 +7,7 @@ def merge_continuity(kinds):
     return 'piecewise_lipschitz' if 'piecewise_lipschitz' in kinds else 'smooth_nominal'
 
 
-def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
+def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response_input_names=None):
     from source_appearance import _phase_literal
     memo={};active=set();finite_inputs=set()
     def magnitude(span):return None if span is None else max(map(abs,span))
@@ -51,12 +51,36 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
         try:result=calculate(node,depth)
         finally:active.remove(key)
         memo[key]=result;return result
+    def input_result(name):
+        if not isinstance(name,str) or not name:return None
+        finite_inputs.add(name)
+        rate=None if _value_only else float(name in _response_input_names)
+        kind='unknown' if _value_only else 'smooth_nominal'
+        if _input_domains and name in _input_domains:
+            span=_input_domains[name]
+            if not isinstance(span,(list,tuple)) or len(span)!=2 or not all(type(v) in {int,float} and math.isfinite(v) for v in span) or span[0]>span[1]:
+                raise ValueError('declared scalar input domain invalid')
+            return (list(span),rate,kind)
+        return ([-math.inf,math.inf],rate,kind)
     def calculate(node,depth):
         literal=_phase_literal(node)
         if literal is not None:return ([literal,literal],0.,'smooth_nominal')
+        if _response_input_names is not None and node.op in {'narrow','cast','construct'}:
+            return None # Quantized/discrete inputs are not nominal continuous maps.
+        if _response_input_names is not None and node.op=='member' and node.dtype=='float':
+            from source_appearance import _canonical_lane
+            from field_math import SWIZZLE
+            projected=_canonical_lane(node);parent=projected.args[0]
+            lane=projected.detail.get('field','')
+            if projected.detail.get('swizzle') and len(lane)==1 and lane in SWIZZLE and parent.op=='input' and parent.dtype in {'float2','float3','float4'}:
+                index=SWIZZLE[lane]
+                name=parent.detail.get('name')
+                if index<int(parent.dtype[-1]) and isinstance(name,str) and name:
+                    return input_result(name+'.'+'xyzw'[index])
+            return None
         if node.dtype!='float' and not (_value_only and node.dtype=='bool' and node.op in
                 {'less','greater','less_equal','greater_equal','equal','eel_equal','not_equal'}):return None
-        if _value_only and node.op=='unary' and len(node.args)==1:
+        if (_value_only or _response_input_names is not None) and node.op=='unary' and len(node.args)==1:
             child=visit(node.args[0],depth+1)
             if child is None:return None
             if node.detail.get('operator')==1:return child
@@ -100,16 +124,8 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
                 span[0]=max(span[0],min(spans[0][0],spans[1][0]))
                 span[1]=min(span[1],max(spans[0][1],spans[1][1]))
             return (span,None,'unknown')
-        if node.op=='input' and _value_only:
-            name=node.detail.get('name')
-            if not isinstance(name,str) or not name:return None
-            finite_inputs.add(name)
-            if _input_domains and name in _input_domains:
-                span=_input_domains[name]
-                if not isinstance(span,(list,tuple)) or len(span)!=2 or not all(type(v) in {int,float} and math.isfinite(v) for v in span) or span[0]>span[1]:
-                    raise ValueError('declared scalar input domain invalid')
-                return (list(span),None,'unknown')
-            return ([-math.inf,math.inf],None,'unknown')
+        if node.op=='input' and (_value_only or _response_input_names is not None):
+            return input_result(node.detail.get('name'))
         if node.op=='input' and node.detail.get('name') in {'time',':native-render-time-f32'}:
             return (None,1.,'smooth_nominal')
         if _value_only and node.op in {'select','less','greater','less_equal','greater_equal','equal','eel_equal','not_equal'}:
@@ -195,6 +211,28 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
         if span is None:result['unknown_reasons']=['no finite source value envelope from supported formula']
     elif rate is None:result['unknown_reasons']=['no finite lifetime nominal rate bound from supported formula']
     return result
+
+
+def scalar_response_envelope(field,*,input_names,input_domains=None):
+    """Nominal Lipschitz bound while selected inputs vary together; others fixed."""
+    names=set(input_names)
+    if not names or any(not isinstance(name,str) or not name for name in names):
+        raise ValueError('response input names must be nonempty scalar names')
+    report=compound_time_bounds(field,_input_domains=input_domains,_response_input_names=names)
+    finite=report.get('assumed_finite_input_names',[])
+    return {'policy':'source-nominal-audio-control-response-v1',
+        'maximum_absolute_control_change_per_audio_unit':report['maximum_absolute_control_rate_per_second'],
+        'bound_kind':'upper_bound','nominal_continuity':report['nominal_continuity'],
+        'varying_input_names':sorted(names),'held_fixed_input_names':sorted(set(finite)-names),
+        'assumed_finite_input_names':finite,'declared_input_domains':report.get('declared_input_domains',{}),
+        'unknown_reasons':report['unknown_reasons'],
+        'visible_response_strength':None,'maximum_time_rate':None,
+        'native_numeric_certified':False,'uses_equation_execution':False,'uses_rendered_images':False,
+        'conditions':['Nominal real-valued source control response; all inputs and relevant intermediates finite',
+                      'Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed',
+                      'This is a sufficient upper bound, not a minimum or typical response, or a response direction',
+                      'Quantized uploads/casts, discontinuities and unsupported domains remain unresolved',
+                      'No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim']}
 
 
 def scalar_value_envelope(field,*,input_domains=None):

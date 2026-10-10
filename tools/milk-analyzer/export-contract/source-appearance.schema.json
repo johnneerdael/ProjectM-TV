@@ -573,6 +573,9 @@
                           }
                         }
                       }
+                    },
+                    "nominal_audio_response": {
+                      "$ref": "#/$defs/nominalAudioResponse"
                     }
                   }
                 }
@@ -1197,7 +1200,12 @@
                     "audio_routes": {
                       "type": "array",
                       "items": {
-                        "type": "object"
+                        "type": "object",
+                        "properties": {
+                          "nominal_audio_response": {
+                            "$ref": "#/$defs/nominalAudioResponse"
+                          }
+                        }
                       }
                     },
                     "actual_screen_coverage": {
@@ -3118,7 +3126,12 @@
                       "audio_routes": {
                         "type": "array",
                         "items": {
-                          "type": "object"
+                          "type": "object",
+                          "properties": {
+                            "nominal_audio_response": {
+                              "$ref": "#/$defs/nominalAudioResponse"
+                            }
+                          }
                         }
                       },
                       "unknown_reasons": {
@@ -3219,7 +3232,12 @@
                               "audio_routes": {
                                 "type": "array",
                                 "items": {
-                                  "type": "object"
+                                  "type": "object",
+                                  "properties": {
+                                    "nominal_audio_response": {
+                                      "$ref": "#/$defs/nominalAudioResponse"
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -3775,7 +3793,12 @@
                       "audio_routes": {
                         "type": "array",
                         "items": {
-                          "type": "object"
+                          "type": "object",
+                          "properties": {
+                            "nominal_audio_response": {
+                              "$ref": "#/$defs/nominalAudioResponse"
+                            }
+                          }
                         }
                       },
                       "unknown_reasons": {
@@ -3876,7 +3899,12 @@
                               "audio_routes": {
                                 "type": "array",
                                 "items": {
-                                  "type": "object"
+                                  "type": "object",
+                                  "properties": {
+                                    "nominal_audio_response": {
+                                      "$ref": "#/$defs/nominalAudioResponse"
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -5207,5 +5235,64 @@
         }
       }
     }
-  ]
+  ],
+  "$defs": {
+    "nominalAudioResponse": {
+      "type": "object",
+      "description": "Sufficient nominal scalar partial response; other inputs fixed. Not visible or time-rate certification.",
+      "required": [
+        "policy",
+        "maximum_absolute_control_change_per_audio_unit",
+        "varying_input_names",
+        "held_fixed_input_names",
+        "native_numeric_certified"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-nominal-audio-control-response-v1"
+        },
+        "maximum_absolute_control_change_per_audio_unit": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bound_kind": {
+          "const": "upper_bound"
+        },
+        "nominal_continuity": {
+          "enum": [
+            "unknown",
+            "smooth_nominal",
+            "piecewise_lipschitz"
+          ]
+        },
+        "varying_input_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "held_fixed_input_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_input_domains": {
+          "type": "object"
+        },
+        "visible_response_strength": {
+          "type": "null"
+        },
+        "maximum_time_rate": {
+          "type": "null"
+        },
+        "native_numeric_certified": {
+          "const": false
+        }
+      }
+    }
+  }
 }

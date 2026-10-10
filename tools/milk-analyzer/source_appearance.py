@@ -184,12 +184,17 @@ def _routes(control,unit,value,analysis):
             if _direct_audio(term)==code:gain+=coefficient
             else:exact=False
         if any(code in _audio_codes(node,analysis) for node in q_narrowings):exact=False
+        from source_control_bounds import scalar_response_envelope
+        response_names={name for name,c in EEL_AUDIO.items() if c==code}
+        response_names.update(name+'.'+'xyzw'[lane] for name,cs in PACKED.items() for lane,c in enumerate(cs) if c==code)
+        response=scalar_response_envelope(value,input_names=response_names)
         result.append({'input_code':code,'control':control,'control_unit':unit,
             'dependency_kind':'source causal control path','linear_gain':gain if exact else None,
             'gain_unit':unit+'/declared audio input unit' if exact else None,
             'expression':_expression(value),'q_bridge_expressions':bridges,
             'has_threshold_or_clamp':any(n.op in {'select','less','greater','less_equal','greater_equal','equal','eel_equal','clamp','saturate','min','max'} for n,p in _walk(value)),
             'switch_triggers':switch_triggers(value,code),
+            'nominal_audio_response':response,
             'visible_response_strength':None,
             'conditions':['input domains, source branch and later clipping/composition retain the control change'],
             'limitations':['Control dependency/gain does not establish affected screen area or perceived response magnitude']})

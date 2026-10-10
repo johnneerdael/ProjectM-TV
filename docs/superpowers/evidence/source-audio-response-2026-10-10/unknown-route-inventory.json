@@ -1,0 +1,4219 @@
+{
+  "basis": "operators present anywhere in exported unresolved-route graphs, not root-cause attribution; repeated controls count separately",
+  "unknown_routes": 1487,
+  "missing_exported_expressions": 330,
+  "routes_containing_operator": {
+    "input": 1157,
+    "constant": 1157,
+    "add": 1101,
+    "multiply": 1077,
+    "subtract": 998,
+    "rand": 537,
+    "int": 502,
+    "greater": 431,
+    "select": 392,
+    "sin": 377,
+    "divide": 317,
+    "pow": 273,
+    "abs": 226,
+    "member": 222,
+    "sample": 222,
+    "less": 217,
+    "cast": 213,
+    "cos": 202,
+    "construct": 176,
+    "max": 168,
+    "min": 162,
+    "eel_divide": 137,
+    "dot": 106,
+    "saturate": 96,
+    "narrow": 88,
+    "eel_equal": 87,
+    "domain_checked": 78,
+    "sqrt": 69,
+    "lerp": 65,
+    "tan": 64,
+    "components": 63,
+    "negate": 59,
+    "length": 54,
+    "unary": 43,
+    "sqr": 41,
+    "frac": 39,
+    "and": 39,
+    "less_equal": 39,
+    "remainder": 29,
+    "loop_result": 21,
+    "mul": 15,
+    "matrix_constructor": 15,
+    "floor": 13,
+    "index": 12,
+    "/*and*/": 10,
+    "sign": 9,
+    "normalize": 9,
+    "clamp": 9,
+    "_beleq": 8,
+    "equal": 7,
+    "atan": 6,
+    "uninitialized": 3,
+    "band": 3,
+    "log": 3,
+    "/*or*/": 2,
+    "exp": 1
+  },
+  "presets_containing_operator": {
+    "constant": 73,
+    "input": 73,
+    "multiply": 72,
+    "add": 69,
+    "subtract": 63,
+    "sin": 46,
+    "greater": 42,
+    "select": 37,
+    "divide": 34,
+    "cos": 30,
+    "member": 30,
+    "pow": 30,
+    "sample": 30,
+    "cast": 29,
+    "construct": 24,
+    "rand": 24,
+    "less": 23,
+    "eel_divide": 20,
+    "eel_equal": 19,
+    "abs": 18,
+    "int": 17,
+    "dot": 14,
+    "saturate": 14,
+    "narrow": 13,
+    "domain_checked": 11,
+    "max": 11,
+    "min": 11,
+    "sqrt": 11,
+    "tan": 10,
+    "lerp": 9,
+    "negate": 9,
+    "components": 8,
+    "sqr": 8,
+    "unary": 8,
+    "length": 7,
+    "frac": 6,
+    "remainder": 5,
+    "and": 4,
+    "less_equal": 4,
+    "atan": 3,
+    "equal": 3,
+    "floor": 3,
+    "matrix_constructor": 3,
+    "mul": 3,
+    "index": 2,
+    "loop_result": 2,
+    "sign": 2,
+    "/*and*/": 1,
+    "/*or*/": 1,
+    "_beleq": 1,
+    "band": 1,
+    "clamp": 1,
+    "exp": 1,
+    "log": 1,
+    "normalize": 1,
+    "uninitialized": 1
+  },
+  "affected_presets_by_operator": {
+    "/*and*/": [
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      }
+    ],
+    "/*or*/": [
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      }
+    ],
+    "_beleq": [
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      }
+    ],
+    "abs": [
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "add": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "19.milk",
+        "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      {
+        "preset": "EoS - heater core C_on route.milk",
+        "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "and": [
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      }
+    ],
+    "atan": [
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "band": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      }
+    ],
+    "cast": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "clamp": [
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      }
+    ],
+    "components": [
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "constant": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "19.milk",
+        "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "EVET - Circling Meta-freeze 1.milk",
+        "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0"
+      },
+      {
+        "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      {
+        "preset": "EoS - heater core C_on route.milk",
+        "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "greazed up humility.milk",
+        "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "suksma - to finally feel like a cyborg.milk",
+        "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "construct": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      }
+    ],
+    "cos": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "divide": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "suksma - to finally feel like a cyborg.milk",
+        "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "domain_checked": [
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      }
+    ],
+    "dot": [
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      }
+    ],
+    "eel_divide": [
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "eel_equal": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "equal": [
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      }
+    ],
+    "exp": [
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      }
+    ],
+    "floor": [
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      }
+    ],
+    "frac": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "greater": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "EVET - Circling Meta-freeze 1.milk",
+        "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "index": [
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      }
+    ],
+    "input": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "19.milk",
+        "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "EVET - Circling Meta-freeze 1.milk",
+        "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0"
+      },
+      {
+        "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      {
+        "preset": "EoS - heater core C_on route.milk",
+        "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "greazed up humility.milk",
+        "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "suksma - to finally feel like a cyborg.milk",
+        "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "int": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "length": [
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "lerp": [
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      }
+    ],
+    "less": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "less_equal": [
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      }
+    ],
+    "log": [
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      }
+    ],
+    "loop_result": [
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      }
+    ],
+    "matrix_constructor": [
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      }
+    ],
+    "max": [
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "member": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "min": [
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "mul": [
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      }
+    ],
+    "multiply": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "19.milk",
+        "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      {
+        "preset": "EoS - heater core C_on route.milk",
+        "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "greazed up humility.milk",
+        "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "suksma - to finally feel like a cyborg.milk",
+        "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "narrow": [
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      }
+    ],
+    "negate": [
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "normalize": [
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      }
+    ],
+    "pow": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (39).milk",
+        "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+        "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "rand": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      }
+    ],
+    "remainder": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      }
+    ],
+    "sample": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      }
+    ],
+    "saturate": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      }
+    ],
+    "select": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+        "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+        "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "sign": [
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "sin": [
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+        "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "sqr": [
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "sqrt": [
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "subtract": [
+      {
+        "preset": "$$$ Royal - Mashup (161).milk",
+        "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (253).milk",
+        "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (389).milk",
+        "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+        "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38"
+      },
+      {
+        "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+        "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273"
+      },
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+        "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e"
+      },
+      {
+        "preset": "Bmelgren - Tonic.milk",
+        "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280"
+      },
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Flexi - hue burst.milk",
+        "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1"
+      },
+      {
+        "preset": "Flexi - splatter effects 11 halucination #1.milk",
+        "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff"
+      },
+      {
+        "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+        "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827"
+      },
+      {
+        "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+        "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+        "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa"
+      },
+      {
+        "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+        "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e"
+      },
+      {
+        "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+        "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+        "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3"
+      },
+      {
+        "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+        "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "ORB - Firelight.milk",
+        "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192"
+      },
+      {
+        "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+        "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+        "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e"
+      },
+      {
+        "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+        "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6"
+      },
+      {
+        "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+        "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+        "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca"
+      },
+      {
+        "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+        "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+        "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a"
+      },
+      {
+        "preset": "bowel trounce dumring.milk",
+        "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247"
+      },
+      {
+        "preset": "cortex meat - adm affect non.milk",
+        "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f"
+      },
+      {
+        "preset": "cpe domains flacc - portable massation segway nz+.milk",
+        "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "eye disease ngornggniq no business mashing.milk",
+        "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2.milk",
+        "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991"
+      },
+      {
+        "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+        "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda"
+      },
+      {
+        "preset": "flexi - grind my glitch up [191].milk",
+        "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919"
+      },
+      {
+        "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+        "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+        "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - bonobo - absurd.milk",
+        "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+        "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7"
+      },
+      {
+        "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+        "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72"
+      },
+      {
+        "preset": "suksma - ku pilled - forgoing utility nz.milk",
+        "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c"
+      },
+      {
+        "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+        "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7"
+      },
+      {
+        "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+        "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a"
+      },
+      {
+        "preset": "suksma - never degweh - flx spr col.milk",
+        "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d"
+      },
+      {
+        "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+        "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6"
+      },
+      {
+        "preset": "suksma - prigogine quantum foam self-organizer.milk",
+        "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852"
+      },
+      {
+        "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+        "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d"
+      },
+      {
+        "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+        "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "suksma - tech ed lacquer sinus raw.milk",
+        "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "tan": [
+      {
+        "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+        "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+        "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b"
+      },
+      {
+        "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+        "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+        "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20"
+      },
+      {
+        "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+        "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333"
+      },
+      {
+        "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+        "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455"
+      },
+      {
+        "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+        "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081"
+      },
+      {
+        "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+        "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99"
+      },
+      {
+        "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+        "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9"
+      }
+    ],
+    "unary": [
+      {
+        "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+        "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad"
+      },
+      {
+        "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+        "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240"
+      },
+      {
+        "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+        "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3"
+      },
+      {
+        "preset": "Serge + martin - crystal palace003.milk",
+        "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522"
+      },
+      {
+        "preset": "Waltra - Codex Machine 2.milk",
+        "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb"
+      },
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+        "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8"
+      },
+      {
+        "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+        "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007"
+      }
+    ],
+    "uninitialized": [
+      {
+        "preset": "martin + flexi - lock and release bipolar 02.milk",
+        "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561"
+      }
+    ]
+  }
+}
