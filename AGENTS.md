@@ -1282,3 +1282,9 @@ remain inputs; native aspectXY [0,1] requires positive finite viewport context.
 Keep nonexhaustive/total-bound flags false, preserve quantized/singular/nearest
 guards and 64-site/4096-term budgets. No history, direct coefficient-time or
 complete feedback/mood claim follows from modeled path terms.
+
+Nearest-time hazards require a declared nearest base-level sampler, positive
+nominal lookup ceiling and possible RGB route. Only repeat +constant drift gets
+grid-crossing W/H coefficients; speed alone cannot bound oscillatory recrossings.
+Direct RGBA gain row sums bound conditional jumps; nested magnitudes stay unknown.
+Keep possible local mechanism, texel contrast and verified screen flashing distinct.

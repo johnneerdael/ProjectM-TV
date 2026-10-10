@@ -2363,3 +2363,37 @@ retain incomplete outcomes. This does not establish typical motion or a mood.
 References remain the shader and bilinear filtering guides above; chain products
 use exact rational coefficients followed by outward finite conversion. No frame
 is constructed and no sample value or image is observed.
+
+## Nearest lookup motion and possible jumps
+
+`activity.flashing.hazards` now includes `nearest_lookup_temporal_jumps` for
+declared base-level nearest lookups with a positive supported source-time motion
+ceiling and a possible direct RGB or nested-coordinate route. A proved zero gain
+does not count as a direct route; dead and stationary lookups do not get this
+time-motion claim. The record remains a possible local mechanism, not a verified
+flash or an assertion that its movement ceiling is reached.
+
+Nearest selection changes discontinuously at texel cell boundaries when adjacent
+texels differ. Constant textures, dimension-one axes, clamping outside the useful
+range, masks and sampling/rounding can preserve values. A direct sampled-colour
+gain matrix supplies a jump-size ceiling per RGB row by summing its independent
+RGBA column bounds over the `[0,1]` input box. Nested or unsupported jump sizes
+remain null; no bilinear derivative is assigned to the nearest filter.
+
+`grid_crossing_rate_coefficients_per_uploaded_dimension` is provided only for
+nominal constant drift with repeat addressing. For uploaded W/H and drift speeds
+`u,v`, the sum `W*abs(u)+H*abs(v)` describes long-run grid-boundary crossings per
+source second between clock resets/wraps; simultaneous axis events can coincide.
+This is not a count of distinct texel-value changes or visible flashes. Finite
+interval endpoint counts and native precision/cadence remain separate.
+Sine/compound motion and clamped addressing keep this formula null: a small, fast
+oscillation can repeatedly recross one boundary even with a small UV-speed ceiling.
+
+The possible RGB route follows direct sample responses and active/unknown nested
+coordinate edges. Actual jump contrast, final coverage, composition and texture
+history still determine visible intensity. These hazards must not become an
+automatic Party verdict or a claim that an empty list proves Chill suitability.
+[Microsoft's nearest-point sampling reference](https://learn.microsoft.com/en-us/windows/win32/direct3d9/nearest-point-sampling)
+describes abrupt transitions at texel boundaries. Original MilkDrop2
+`milkdropfs.cpp` lines 3921–3927 selects point versus bilinear/anisotropic filtering;
+the analyzer retains the declared patched-core sampler policy.

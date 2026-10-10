@@ -559,3 +559,10 @@ therefore change output colour. Callers supply each texture's uploaded width and
 height. The paths remain conditional and incomplete: direct colour changes,
 changing feedback images and unsupported filters need separate treatment before
 a whole-image rate or mood can be inferred.
+
+Moving nearest-filtered lookups now get a possible jump-source record when their
+sample values can influence RGB directly or through another lookup. Smooth
+coordinate motion can still select different texels abruptly. The export keeps
+actual flashes unverified: equal neighbours, constant images, clamping and later
+processing can suppress a jump. Only nominal constant drift with repeat addressing
+gets a grid-crossing formula; a UV-speed bound is not a general flash-frequency bound.

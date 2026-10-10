@@ -42,6 +42,8 @@ def source_activity(analysis,description):
     motion['texture_motion_bounds']=texture_motion_bounds(description)
     from source_nested_sampling import nested_texture_motion
     motion['nested_texture_motion']=nested_texture_motion(description)
+    from source_nearest_activity import nearest_sampling_hazards
+    flashing['hazards'].extend(nearest_sampling_hazards(description))
     for stage,model in description['nonlinear_texture_colour_bounds']['stages'].items():
         for report,scenario in ((model,None),(model.get('scenario_colour_envelope'),True)):
             if report is None:continue

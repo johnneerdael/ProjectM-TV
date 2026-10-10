@@ -6079,7 +6079,24 @@
             "hazards": {
               "type": "array",
               "items": {
-                "type": "object"
+                "type": "object",
+                "allOf": [
+                  {
+                    "if": {
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "const": "nearest_lookup_temporal_jumps"
+                        }
+                      }
+                    },
+                    "then": {
+                      "$ref": "#/$defs/nearestTemporalHazard"
+                    }
+                  }
+                ]
               }
             },
             "shader_change_bounds": {
@@ -6435,6 +6452,73 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "nearestTemporalHazard": {
+      "type": "object",
+      "required": [
+        "kind",
+        "stage",
+        "sample_site_index",
+        "sampler",
+        "rgb_influence_route",
+        "maximum_lookup_axis_speed_uv_per_second",
+        "grid_crossing_rate_coefficients_per_uploaded_dimension",
+        "rgb_jump_upper_bounds_from_direct_response",
+        "visible_flash_frequency_hz",
+        "visible_flashing_verified",
+        "scope",
+        "conditions"
+      ],
+      "properties": {
+        "kind": {
+          "const": "nearest_lookup_temporal_jumps"
+        },
+        "visible_flash_frequency_hz": {
+          "type": "null"
+        },
+        "visible_flashing_verified": {
+          "const": false
+        },
+        "maximum_lookup_axis_speed_uv_per_second": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        },
+        "grid_crossing_rate_coefficients_per_uploaded_dimension": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        },
+        "rgb_jump_upper_bounds_from_direct_response": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
           }
         }
       }
