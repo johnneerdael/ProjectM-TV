@@ -179,6 +179,8 @@ def sampling_geometry(analysis):
                 elif result['basis']=='mixed_uv':result['unknown_reasons'].append('mixed mesh/original coordinates have no single-basis inverse')
             except (ValueError,RecursionError,np.linalg.LinAlgError) as error:
                 result['unknown_reasons'].append(str(error))
+            from source_copy_lattice import copy_lattice
+            result['copy_lattice']=copy_lattice(result)
             maps.append(result)
         stages[stage]=maps;statuses[stage]='conditional custom source'
     return {'policy':'source-affine-sampling-geometry-v1','stages':stages,'stage_status':statuses,

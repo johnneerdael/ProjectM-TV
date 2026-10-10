@@ -3377,6 +3377,170 @@
                             }
                           }
                         }
+                      },
+                      "copy_lattice": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "status",
+                          "coordinate_basis",
+                          "native_mesh_transform_precedes_basis",
+                          "wrap_enabled",
+                          "wrap_condition",
+                          "lattice_basis_uv",
+                          "origin_for_source_feature_zero_uv",
+                          "origin_from_offset_matrix",
+                          "fundamental_cell_area_uv2",
+                          "nominal_lattice_points_per_unit_uv_area",
+                          "orientation_reversed",
+                          "origin_velocity_uv_per_source_second",
+                          "origin_speed_uv_per_source_second_upper_bound",
+                          "origin_speed_estimate_kind",
+                          "actual_visible_copy_count",
+                          "visible_screen_motion",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-affine-repeat-preimages-v1"
+                          },
+                          "status": {
+                            "enum": [
+                              "unknown",
+                              "not_periodic",
+                              "conditional_periodic_preimages",
+                              "conditional_on_repeat_wrap"
+                            ]
+                          },
+                          "coordinate_basis": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "native_mesh_transform_precedes_basis": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "wrap_enabled": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "wrap_condition": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "lattice_basis_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "origin_from_offset_matrix": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "origin_for_source_feature_zero_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "fundamental_cell_area_uv2": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "nominal_lattice_points_per_unit_uv_area": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "orientation_reversed": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "origin_velocity_uv_per_source_second": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "origin_speed_uv_per_source_second_upper_bound": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "origin_speed_estimate_kind": {
+                            "enum": [
+                              "unknown",
+                              "exact_nominal",
+                              "upper_bound"
+                            ]
+                          },
+                          "actual_visible_copy_count": {
+                            "type": "null"
+                          },
+                          "visible_screen_motion": {
+                            "type": "null"
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "conditions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -3864,6 +4028,170 @@
                             }
                           },
                           "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "copy_lattice": {
+                        "type": "object",
+                        "required": [
+                          "policy",
+                          "status",
+                          "coordinate_basis",
+                          "native_mesh_transform_precedes_basis",
+                          "wrap_enabled",
+                          "wrap_condition",
+                          "lattice_basis_uv",
+                          "origin_for_source_feature_zero_uv",
+                          "origin_from_offset_matrix",
+                          "fundamental_cell_area_uv2",
+                          "nominal_lattice_points_per_unit_uv_area",
+                          "orientation_reversed",
+                          "origin_velocity_uv_per_source_second",
+                          "origin_speed_uv_per_source_second_upper_bound",
+                          "origin_speed_estimate_kind",
+                          "actual_visible_copy_count",
+                          "visible_screen_motion",
+                          "unknown_reasons",
+                          "conditions"
+                        ],
+                        "properties": {
+                          "policy": {
+                            "const": "source-affine-repeat-preimages-v1"
+                          },
+                          "status": {
+                            "enum": [
+                              "unknown",
+                              "not_periodic",
+                              "conditional_periodic_preimages",
+                              "conditional_on_repeat_wrap"
+                            ]
+                          },
+                          "coordinate_basis": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "native_mesh_transform_precedes_basis": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "wrap_enabled": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "wrap_condition": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "lattice_basis_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "origin_from_offset_matrix": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "origin_for_source_feature_zero_uv": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "fundamental_cell_area_uv2": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "nominal_lattice_points_per_unit_uv_area": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "orientation_reversed": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "origin_velocity_uv_per_source_second": {
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "origin_speed_uv_per_source_second_upper_bound": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "origin_speed_estimate_kind": {
+                            "enum": [
+                              "unknown",
+                              "exact_nominal",
+                              "upper_bound"
+                            ]
+                          },
+                          "actual_visible_copy_count": {
+                            "type": "null"
+                          },
+                          "visible_screen_motion": {
+                            "type": "null"
+                          },
+                          "unknown_reasons": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "conditions": {
                             "type": "array",
                             "items": {
                               "type": "string"

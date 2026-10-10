@@ -306,3 +306,11 @@ constant; preserve independent channel gaps, texture uncertainty and repeated
 overlap. Keep incoming terms separate from destination/storage/feedback and
 measured visibility. Verify independent polynomial/clipping controls and fixed
 sample gains before audience interpretation.
+
+## Periodic affine sampling layouts
+
+Reuse sampling inverses to expose repeat-coordinate preimage lattices, source
+feature placement and fixed-matrix offset motion. Preserve wrap, coordinate
+basis and native mesh conditions; keep density separate from visible copy
+counts and full feedback evolution. Verify inverse/shift identities and frozen
+sample coverage before claiming appearance reconstruction usefulness.

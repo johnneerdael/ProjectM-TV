@@ -312,3 +312,9 @@ domains are supported. It accounts for fan interpolation and alpha clipping;
 repeated shapes are summed with overlap counted repeatedly. These bounds can
 help compare potential prominence, but final brightness and on-screen strength
 remain unknown after clipping, textures and feedback.
+
+Affine repeat sampling now exports a `copy_lattice`: the spacing, orientation
+and candidate positions where the same source texture feature could repeat.
+It also describes supported offset movement. This helps reconstruct potential
+repeated layouts from source, but it does not count visible copies or certify
+a grid, tunnel or fractal. Source content, masks and feedback remain separate.

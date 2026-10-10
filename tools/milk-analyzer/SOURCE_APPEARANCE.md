@@ -1252,3 +1252,32 @@ overlap repeatedly and are not union coverage or stored scene brightness.
 actual overlap, destination colour, storage, later shaders and feedback stay
 separate. Bounds can be loose; they are not point estimates, visible response
 strength or calibrated Chill/Normal/Intense scores.
+
+### Periodic sampling-coordinate preimages
+
+Each supported sampling map adds `copy_lattice`. If repeat sampling uses
+`M*u+b`, a fixed source feature at s has candidate coordinates
+`u=inv(M)*(s+n-b)` for integer pair n. Generator columns are `inv(M)`;
+`origin_from_offset_matrix=-inv(M)` maps the existing offset programs, and
+`origin_for_source_feature_zero_uv` is available for known constant offsets.
+Fundamental-cell area is `1/abs(det(M))` in the declared UV basis; its inverse
+is the nominal lattice-point density per unit UV area. Density is not a
+finite-window or visible copy count, and source content can be uniform/empty.
+
+Clamp sampling is `not_periodic`. Unknown wrap becomes
+`conditional_on_repeat_wrap`, preserving the required context rather than
+assuming it. Singular/mixed-basis/nonfinite inverse maps stay unknown.
+[OpenGL ES repeat wrapping](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/es3.0/glTexParameter.xml)
+uses periodic texture coordinates; this supplies a geometric preimage model,
+not an observed rendering. Filter/LOD, masks and colour weights can change
+which source features are recognizable. Warp shader UV already incorporates
+native mesh transformation, so that basis's inverse is not a physical-screen
+inverse. Existing native/original basis distinctions are preserved.
+
+With a fixed matrix and source feature/index, affine time offsets yield origin
+velocity `-inv(M)*db/dt`. Other supported offset-rate bounds yield a
+conservative Euclidean speed bound from `abs(inv(M))*[Dx,Dy]`. Product
+underflow and nonfinite derived estimates retain unknown speed. Units are
+declared basis UV per source-time second, not pixels or measured screen motion.
+`actual_visible_copy_count` and `visible_screen_motion` remain null. Full
+feedback evolution, overlaps, content/history and appearance remain open.

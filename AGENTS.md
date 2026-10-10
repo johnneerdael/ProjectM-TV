@@ -1010,3 +1010,9 @@ second moments and valid clipping inequalities. Native channel domains and
 nominal radius-area ranges remain conditional; textured input, missing channels,
 overlap union and final visibility stay unresolved. No point brightness/mood
 score follows from an upper bound.
+
+Source copy-lattice maintenance: preserve sampling-map bases and wrap policy.
+`source_copy_lattice` derives periodic coordinate preimages/density and fixed-
+matrix offset motion, not visible copies or screen trajectories. Unknown wrap
+is conditional, mixed/singular maps stay unknown, and positive origin-rate
+product underflow must not create a stationary certificate.
