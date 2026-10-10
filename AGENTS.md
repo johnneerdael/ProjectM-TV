@@ -972,3 +972,8 @@ The latest observed v2.3.35 full AAR is byte-identical to the verified v2.3.34
 artifact; `profiles/candidate-core-v2.3.35.json` retains runtime-unqualified
 status. Explicit source34 analysis is conditional; no old runtime certification
 is transferred to this artifact.
+
+EEL static equality maintenance: `_EEL.operation` lowers EEL equal to
+`eel_equal`; `_number` uses finite-operand `abs(a-b)<0.00001`. Retain strict
+threshold boundary and exact shader `equal` separately. Do not route an EEL
+control DAG through shader-only numerical evaluators as an EEL execution proof.

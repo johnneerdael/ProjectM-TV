@@ -177,7 +177,7 @@ def _routes(control,unit,value,analysis):
             'dependency_kind':'source causal control path','linear_gain':gain if exact else None,
             'gain_unit':unit+'/declared audio input unit' if exact else None,
             'expression':_expression(value),'q_bridge_expressions':bridges,
-            'has_threshold_or_clamp':any(n.op in {'select','less','greater','less_equal','greater_equal','equal','clamp','saturate','min','max'} for n,p in _walk(value)),
+            'has_threshold_or_clamp':any(n.op in {'select','less','greater','less_equal','greater_equal','equal','eel_equal','clamp','saturate','min','max'} for n,p in _walk(value)),
             'switch_triggers':switch_triggers(value,code),
             'visible_response_strength':None,
             'conditions':['input domains, source branch and later clipping/composition retain the control change'],

@@ -107,6 +107,10 @@ def _number_uncached(value):
             if value.detail.get('numeric_domain')=='shader-float32':
                 return _uniform_scalar_conversion(result,value.dtype)
             return result if math.isfinite(result) else None
+    if value.op=='eel_equal' and len(value.args)==2:
+        a,b=map(_number,value.args)
+        if a is not None and b is not None:return float(abs(a-b)<.00001)
+        return None
     if value.op in {'less', 'greater', 'less_equal', 'greater_equal', 'equal', 'not_equal'}:
         a, b = map(_number, value.args)
         if a is not None and b is not None:
@@ -708,6 +712,7 @@ class _EEL:
 
     @staticmethod
     def operation(op,args):
+        if op=='equal':return Field('eel_equal',args)
         if op=='eel_divide' and len(args)==2:
             denominator=_number(args[1])
             if denominator is not None:

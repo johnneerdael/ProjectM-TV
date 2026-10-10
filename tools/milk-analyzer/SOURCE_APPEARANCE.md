@@ -106,7 +106,15 @@ Compound assignments update their destinations and count as persistent writes.
 EEL division has its own node `eel_divide`: the qualified evaluator returns0
 when `abs(denominator)<0.00001`; a proved constant denominator outside that guard
 can use ordinary division. Unresolved denominators retain the native guarded
-operation. Nested assignment/reference-alias expressions remain explicit gaps
+operation. EEL `equal(a,b)` / `_equal` use the distinct exported node
+`eel_equal`, returning1 for `abs(a-b)<0.00001` and0 otherwise under finite
+operand conditions. The boundary is strict: exactly0.00001 is false. Shader
+`equal` remains exact typed equality. Consumers must preserve this distinction;
+the shader numerical evaluators do not provide an EEL interpreter. Known
+finite EEL operands can resolve a source branch without executing a frame;
+unbound operands retain the comparison and its causal routes. Nonfinite
+operands remain unresolved by constant folding.
+Nested assignment/reference-alias expressions remain explicit gaps
 rather than being folded as copied values. No native engine policy is changed.
 
 ### Named motion-control curves

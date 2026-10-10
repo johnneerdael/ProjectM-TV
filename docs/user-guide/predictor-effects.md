@@ -274,3 +274,8 @@ shape moves its vertices further at the same angular rate. This calculation
 helps characterize movement ingredients without rendering; it does not yet
 measure how much motion a viewer sees after clipping and feedback, or decide
 Chill/Normal/Intense eligibility. Unsupported controls retain unknown bounds.
+
+EEL source comparisons also preserve the evaluator's equality tolerance:
+`equal()` considers finite values less than 0.00001 apart equal. Shader equality
+remains exact. The JSON uses `eel_equal` to distinguish these rules, preventing
+constant source branches from being interpreted with the wrong language.
