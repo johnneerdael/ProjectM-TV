@@ -267,3 +267,10 @@ that narrow final-expression route. Its synthetic speedup therefore cannot be
 applied to the pack. General feedback and spatial shaders still require broader
 reasoning or execution. See the
 [controls and measurement scope](https://github.com/johnneerdael/ProjectM-TV/blob/6680a910e988b481f4a5fc56bfbd400d7d059b40/docs/superpowers/evidence/predictor-uniform-descriptors/README.md).
+
+The source export also combines custom-shape centre movement, breathing radius
+and rotation into a nominal vertex-speed upper bound. Rotation of a larger
+shape moves its vertices further at the same angular rate. This calculation
+helps characterize movement ingredients without rendering; it does not yet
+measure how much motion a viewer sees after clipping and feedback, or decide
+Chill/Normal/Intense eligibility. Unsupported controls retain unknown bounds.

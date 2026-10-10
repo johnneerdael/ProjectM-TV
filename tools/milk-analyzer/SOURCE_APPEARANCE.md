@@ -1019,3 +1019,34 @@ For example, a local float4(.2,.3,.4,.5).rgb can expose its declared RGB values
 even when shadowing a native uniform name. Lexical lowering already preserved
 that source value; the former opaque colour was a descriptor-folding gap. Source/
 target/context conditions and downstream shading/storage still apply.
+
+### Nominal custom-shape vertex motion
+
+`vertex_motion` joins the centre trajectory with radius and angular control
+curves. The native and original MilkDrop2 perimeter equation is
+`P=(2*x-1,1-2*y)+r*(aspectY*cos(theta),sin(theta))`, where
+`theta=ang+2*pi*i/sides+pi/4`. For constant effective side count, fixed viewport/aspectY and
+`0<aspectY<=1`, its continuous nominal vertex speed has the bound
+`2*centre_speed + hypot(max_abs_dr_dt, max_abs_r*max_abs_dang_dt)`
+in NDC units per source-time second. Radial and tangential derivatives are
+orthogonal before aspect scaling; the centre/local combination uses triangle
+inequality. Peak factors need not occur simultaneously, so this is an upper
+bound even when the separate control peaks are known exactly.
+
+Constant and single-sinusoid radii have a magnitude envelope. Linear radius
+with static angle can have finite speed despite unbounded lifetime size;
+rotating linear radius has no global speed bound without a time window.
+Unknown radius, centre, angle or effective sides withholds the combined bound.
+Known constants outside their native float32 domains also withhold it, including
+centre overflow after the `2*x-1` / `1-2*y` projection and zero radius with
+a nonfinite angle; multiplication by zero cannot repair `cos(inf)` / `sin(inf)`.
+A collapsed zero-radius perimeter has no angular contribution. Individual
+known factors remain available when the combined bound is unknown.
+
+This model excludes float32 conversion/trig error, clipping, rasterization,
+textures/material changes, composite and feedback, and requires finite source
+intermediates and native conversions. It neither certifies visual smoothness
+nor provides a calibrated mood or flash score. `visible_motion_speed` stays
+null. NDC speed can be converted to a resolution-dependent geometric estimate
+by a downstream consumer under explicit viewport conditions; it is not a
+measured physical-screen movement rate.

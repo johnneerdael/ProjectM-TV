@@ -125,3 +125,63 @@ def planar_trajectory(fields):
         period_seconds=math.tau/rate,semiaxis_lengths_source_units=axes.tolist(),
         maximum_source_speed_units_per_second=speed,speed_estimate_kind='exact_nominal')
     return result
+
+
+def shape_vertex_motion(controls,geometry,trajectory):
+    """Bound continuous nominal perimeter-vertex speed before clipping/feedback."""
+    import numpy as np
+    from source_appearance import _phase_literal
+    radius=motion_control(controls['rad'],'radius','NDC radius',application='shape perimeter')
+    angle=motion_control(controls['ang'],'rotation','radian',application='shape perimeter')
+    result={'policy':'source-custom-shape-vertex-motion-v1','estimate_kind':'unknown',
+        'centre_speed_ndc_per_second_upper_bound':None,
+        'maximum_absolute_radius_ndc':None,'maximum_radius_rate_ndc_per_second':None,
+        'maximum_angle_rate_rad_per_second':None,
+        'local_vertex_speed_ndc_per_second_upper_bound':None,
+        'maximum_vertex_speed_ndc_per_second_upper_bound':None,
+        'visible_motion_speed':None,'radius_curve':radius,'angle_curve':angle,
+        'unknown_reasons':[],
+        'conditions':['Continuous nominal polygon-vertex paths with constant effective side count and fixed viewport/aspectY',
+                      'Native projection is (2*x-1,1-2*y)+radius*(aspectY*cos(theta),sin(theta)); 0<aspectY<=1',
+                      'Radius and angular derivatives are orthogonal before aspect scaling; centre and local speeds use triangle inequality',
+                      'Bounds hold while source intermediates and native float32 conversions are finite; rounding, trig error and discrete frames excluded',
+                      'Before clipping, rasterization, texture/material changes, composite and feedback; vertex movement is not measured visible motion or flashing']}
+    centre=trajectory['maximum_source_speed_units_per_second']
+    if centre is not None and math.isfinite(2*centre):
+        result['centre_speed_ndc_per_second_upper_bound']=2*centre
+    span=radius['nominal_value_range']
+    maximum_radius=max(map(abs,span)) if span is not None else None
+    dr=radius['maximum_absolute_control_rate_per_second']
+    da=angle['maximum_absolute_control_rate_per_second']
+    result.update(maximum_absolute_radius_ndc=maximum_radius,
+        maximum_radius_rate_ndc_per_second=dr,maximum_angle_rate_rad_per_second=da)
+    reasons=result['unknown_reasons']
+    curves=dict(zip(('x','y'),trajectory['axis_curves']))
+    curves.update(rad=radius,ang=angle)
+    for name in ('x','y','rad','ang'):
+        curve=curves[name]
+        value=curve['constant_value'] if curve['curve_kind']=='constant' else _phase_literal(controls[name])
+        if value is None:continue
+        if name=='x':value=2*value-1
+        elif name=='y':value=1-2*value
+        with np.errstate(over='ignore',invalid='ignore'):converted=float(np.float32(value))
+        if not math.isfinite(converted):reasons.append(name+' constant is outside its finite native float32 projection/conversion domain')
+    if geometry['effective_sides'] is None:reasons.append('effective side count is not a proved lifetime constant')
+    if result['centre_speed_ndc_per_second_upper_bound'] is None:reasons.append('centre speed has no finite nominal bound')
+    if dr is None:reasons.append('radius derivative has no supported nominal bound')
+    # A collapsed perimeter has no angular contribution, even with unknown angle.
+    if maximum_radius==0 and dr==0:angular=0.
+    elif da==0:angular=0.
+    elif da is None:angular=None;reasons.append('angular derivative has no supported nominal bound')
+    elif maximum_radius is None:angular=None;reasons.append('rotating radius has no finite lifetime magnitude bound')
+    else:angular=maximum_radius*da
+    if dr is not None and angular is not None:
+        local=math.hypot(dr,angular)
+        if math.isfinite(local):result['local_vertex_speed_ndc_per_second_upper_bound']=local
+        else:reasons.append('derived local speed bound is nonfinite')
+    if not reasons:
+        total=result['centre_speed_ndc_per_second_upper_bound']+result['local_vertex_speed_ndc_per_second_upper_bound']
+        if math.isfinite(total):
+            result.update(estimate_kind='upper_bound',maximum_vertex_speed_ndc_per_second_upper_bound=total)
+        else:reasons.append('derived combined speed bound is nonfinite')
+    return result

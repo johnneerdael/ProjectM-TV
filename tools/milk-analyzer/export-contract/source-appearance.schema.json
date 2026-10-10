@@ -1670,6 +1670,98 @@
                     }
                   }
                 }
+              },
+              "vertex_motion": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "estimate_kind",
+                  "centre_speed_ndc_per_second_upper_bound",
+                  "maximum_absolute_radius_ndc",
+                  "maximum_radius_rate_ndc_per_second",
+                  "maximum_angle_rate_rad_per_second",
+                  "local_vertex_speed_ndc_per_second_upper_bound",
+                  "maximum_vertex_speed_ndc_per_second_upper_bound",
+                  "visible_motion_speed",
+                  "radius_curve",
+                  "angle_curve",
+                  "unknown_reasons",
+                  "conditions"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-vertex-motion-v1"
+                  },
+                  "estimate_kind": {
+                    "enum": [
+                      "unknown",
+                      "upper_bound"
+                    ]
+                  },
+                  "centre_speed_ndc_per_second_upper_bound": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "maximum_absolute_radius_ndc": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "maximum_radius_rate_ndc_per_second": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "maximum_angle_rate_rad_per_second": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "local_vertex_speed_ndc_per_second_upper_bound": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "maximum_vertex_speed_ndc_per_second_upper_bound": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "visible_motion_speed": {
+                    "type": "null"
+                  },
+                  "radius_curve": {
+                    "type": "object"
+                  },
+                  "angle_curve": {
+                    "type": "object"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }

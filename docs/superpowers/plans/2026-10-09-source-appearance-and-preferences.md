@@ -252,3 +252,11 @@ absolute phase rate; retain exact signed-phase identities and thin ellipses.
 For independent rates keep the curves and a conservative joint-speed bound.
 Unknown/audio/state axes remain unresolved. These paths supply an ingredient
 for mood interpretation, not a claim about final visible motion.
+
+## Shape vertex motion join
+
+Combine centre speed with orthogonal radial/tangential derivative bounds using
+the exact native projection under fixed viewport/aspect. Keep constant sides,
+finite native conversion premises, unknown/audio/state controls and unbounded
+rotating radius explicit. Source vertex movement is not yet perceived motion;
+retain texture/material, clipping and feedback contributions separately.

@@ -962,3 +962,13 @@ operations. Keep mutable callback/cache ownership and selected domains intact.
 The next metric-routing work must preserve47field meanings and nulls; geometry
 speed must never stand in for optical-flow speed. Read the static-metric-routes
 research and `docs/superpowers/evidence/predictor-uniform-reduction/README.md`.
+
+Source shape motion maintenance: `source_motion.shape_vertex_motion` combines
+continuous nominal centre/radius/angle derivatives under a constant side-count
+and finite-conversion premise. Exported NDC speeds are conservative geometry
+bounds, not visible motion or mood certification; keep audio/state/nonlinear
+controls unresolved and preserve original MD2/native projection references.
+The latest observed v2.3.35 full AAR is byte-identical to the verified v2.3.34
+artifact; `profiles/candidate-core-v2.3.35.json` retains runtime-unqualified
+status. Explicit source34 analysis is conditional; no old runtime certification
+is transferred to this artifact.
