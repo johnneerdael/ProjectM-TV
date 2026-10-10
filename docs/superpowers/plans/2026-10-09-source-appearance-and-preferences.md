@@ -297,3 +297,12 @@ trig, min/max clamps and understood branch unions. Reuse the existing walker,
 retain denominator/overflow/effect guards and explicit finite-input premises,
 and preserve unknown temporal regularity. Measure whether this lowers material
 unknowns without turning value support into a no-flash or audience certificate.
+
+## Dynamic fill prominence envelopes
+
+Join native channel envelopes with fan barycentric moments and alpha-clipping
+inequalities. Bound radius-dependent nominal area when effective sides are
+constant; preserve independent channel gaps, texture uncertainty and repeated
+overlap. Keep incoming terms separate from destination/storage/feedback and
+measured visibility. Verify independent polynomial/clipping controls and fixed
+sample gains before audience interpretation.

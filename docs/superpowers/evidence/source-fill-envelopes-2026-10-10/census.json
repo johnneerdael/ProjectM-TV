@@ -1,0 +1,3915 @@
+{
+  "basis": "conditional incoming contribution envelopes; not measured visibility/mood accuracy",
+  "sample_presets": 100,
+  "source_joins_verified": true,
+  "zip_sha256": "b6b57feaa49857f0f063238dfb03e837798461c80f64b5d478583494bc03e0c8",
+  "previous_zip_sha256": "daf7dc17c966a783f9b165440ae68c6e1cf6d7dbbdfd20c4d23779f947540fd0",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "model_modules": {
+    "source_appearance.py": "a86139a23e06c0867cb40fb3278f9aad915e7dffcc6e507f7ba397e6cbd4ef1d",
+    "source_fill_envelopes.py": "c8d2129babe6fac88782b516faf12ec9fe5e46ff6695915f8227f915de049661"
+  },
+  "counts": {
+    "shapes": 125,
+    "area_shapes": 57,
+    "new_dynamic_area_shapes": 3,
+    "mean_alpha_shapes": 48,
+    "alpha_integral_shapes": 23,
+    "rgb_mean_shapes": 35,
+    "rgb_integral_shapes": 20,
+    "new_alpha_material_shapes": 9,
+    "new_alpha_integral_shapes": 6
+  },
+  "preset_counts": {
+    "area": 35,
+    "new_dynamic_area": 2,
+    "mean_alpha": 30,
+    "alpha_integral": 15,
+    "rgb_mean": 21,
+    "rgb_integral": 12,
+    "new_alpha_material": 5,
+    "new_alpha_integral": 3
+  },
+  "sum_export_preset_seconds": 35.21289,
+  "maximum_export_preset_seconds": 1.764114,
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (161).milk",
+      "sha256": "0062cd43b2b1a88756e9114f9b05c249edb85946206a0e16ab574b3c1af74303",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5569247398057087,
+            3.5569247398057087
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (253).milk",
+      "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (389).milk",
+      "sha256": "02b0f645bc1adfbdaebd807300e0e03d0c3394af7cf033d863911b91376c65ef",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "$$$ Royal - Mashup (39).milk",
+      "sha256": "0039e235383f6e25c0cf092e86a5bab1436b5addd1a731a72200072e3310215b",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "19.milk",
+      "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "404.milk",
+      "sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "414 bowel rebranding pr skinned to the teeth loadus morons who don't think things are going to collapse.milk",
+      "sha256": "0140590e85588b887cae0a5c13ac6ae15e7e4e1bd803ca46ba68b00fdcb161b8",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.03125,
+            0.5512499499320995
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.03125,
+            0.5512499499320995
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.9999998807907104,
+            0.9999998807907104
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              1.0039213891122927
+            ],
+            [
+              0.0,
+              1.0039213891122927
+            ],
+            [
+              0.0,
+              1.0039213891122927
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.06645199973434757,
+            0.06645199973434757
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.06645199181265189,
+            0.06645199181265189
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.06671258388259592
+            ],
+            [
+              0.0,
+              0.06671258388259592
+            ],
+            [
+              0.0,
+              0.06671258388259592
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco5.milk",
+      "sha256": "0163fae6a029678f799af8e60ef2ed0a568486425aaacd79819f19397edd4273",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.3346404630374309
+            ],
+            [
+              0.0,
+              0.3346404630374309
+            ],
+            [
+              0.0,
+              0.3346404630374309
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.3346404630374309
+            ],
+            [
+              0.0,
+              0.3346404630374309
+            ],
+            [
+              0.0,
+              0.3346404630374309
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Bdrv Aderrasi - Divine Finery (Vishnu's Tophat) bdrv etAL3 - more death metal.milk",
+      "sha256": "00b1ac0beed70de947cd8222cded3596a67c0b7f08a9c4a1620ad94223fbf0ad",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.005000000149011613,
+            0.005000000149011613
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.005000000149011613,
+            0.005000000149011613
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.005000000149011613,
+            0.005000000149011613
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.001408276872899243,
+            0.001408276872899243
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.04674614965611519,
+            0.04674614965611519
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Bmelgren - Tonic.milk",
+      "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.30243479436587956,
+            0.30243479436587956
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.08857101281040544,
+            0.08857101281040544
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.04333329200744629,
+            0.04333329200744629
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.00303333271344286,
+              0.00303333271344286
+            ],
+            [
+              0.002166662534079933,
+              0.002166662534079933
+            ],
+            [
+              0.0025999950408959194,
+              0.0025999950408959194
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            2.1627426358719504,
+            2.1627426358719504
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0937187581771933,
+            0.0937187581771933
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0065603179881480265,
+              0.0065603179881480265
+            ],
+            [
+              0.004685933440001034,
+              0.004685933440001034
+            ],
+            [
+              0.00562312012800124,
+              0.00562312012800124
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.26666661898295274,
+              0.26666661898295274
+            ],
+            [
+              0.28333326776822787,
+              0.28333326776822787
+            ],
+            [
+              0.33333325386047835,
+              0.33333325386047835
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0032475953609775268,
+            0.0032475953609775268
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0010825316579446637,
+            0.0010825316579446637
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.000866025274736599,
+              0.000866025274736599
+            ],
+            [
+              0.0009201518060147002,
+              0.0009201518060147002
+            ],
+            [
+              0.0010825315288968337,
+              0.0010825315288968337
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.0333333412806193,
+            0.0333333412806193
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.028333336909611262,
+              0.028333336909611262
+            ],
+            [
+              0.008333335320154825,
+              0.008333335320154825
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.14156521662060761,
+            0.14156521662060761
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.004718841679079514,
+            0.004718841679079514
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.004011014977193776,
+              0.004011014977193776
+            ],
+            [
+              0.0011797104197698784,
+              0.0011797104197698784
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "EoS - heater core C_on route.milk",
+      "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.5698738302996307,
+            0.5698738302996307
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "EoS - more waveforms 7_phat_edit.milk",
+      "sha256": "026417e8c902bb6c5d0604c92f80b9996d891ebf498116dba657c922fbda4bbd",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.0333333412806193,
+            0.0333333412806193
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.009083497642039973,
+            0.009083497642039973
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0003027833269238191,
+            0.0003027833269238191
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "EoS - pointfield 07 insek altcolors.milk",
+      "sha256": "00aab1e58d025b2b4f9163a0a95c4de5a6024f9c1c9b9e6270ee02a347d5705e",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Flexi - alien web bouncer [39].milk",
+      "sha256": "01c261905b54396702c9894c3752c6016511b5be5f9ea86f2c04fd22dfa2f576",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+      "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0003622887186721084,
+            0.0003622887186721084
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.0,
+            0.33333341280619305
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.33333349227907166
+            ],
+            [
+              0.0,
+              0.33333349227907166
+            ],
+            [
+              0.0,
+              0.33333349227907166
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.00036380892745731236,
+            0.00036380892745731236
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0,
+            0.00012126967139870664
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.00012126970031164938
+            ],
+            [
+              0.0,
+              0.00012126970031164938
+            ],
+            [
+              0.0,
+              0.00012126970031164938
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - hue burst.milk",
+      "sha256": "017fc2c4bb01247279c1acdc8afbe97babba52e48c8cd3668a5f628315926bb1",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.007353719827953893,
+            0.007353719827953893
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0024512396504407256,
+            0.0024512396504407256
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.001225619679115094,
+              0.001225619679115094
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0066666595141100515,
+              0.0066666595141100515
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.5206044172032651,
+            0.5206044172032651
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.1735347850474608,
+            0.1735347850474608
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.003470692391035866,
+              0.003470692391035866
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - splatter effects 11 halucination #1.milk",
+      "sha256": "010c0604d5cfb336d2896558513bd4ec3b1f71381e54b2a1a676c247df0b9eff",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Geiss - Dynamic Swirls 2 - max invert (Jelly V3).milk",
+      "sha256": "01b7e926cd939afde95607eaab748a529d271cafec7218340507db53d2f929b7",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Geiss - Skin Dots Multi-layer 3 - pig - jembe acid wretch.milk",
+      "sha256": "0262c53934d2ebebbc680c7b20ba19a78f8467e455779b7056ab983ed7683aa8",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+      "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter.milk",
+      "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.7999999125798544,
+            0.7999999125798544
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            [
+              0.44433329288164697,
+              0.44433329288164697
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            2.598075811305022e-05,
+            2.598075811305022e-05
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            [
+              1.4430146331773329e-05,
+              1.4430146331773329e-05
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.7999999125798544,
+            0.7999999125798544
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            [
+              0.44433329288164697,
+              0.44433329288164697
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            2.598075811305022e-05,
+            2.598075811305022e-05
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            [
+              1.4430146331773329e-05,
+              1.4430146331773329e-05
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "InCUbuS - Our Destiny.milk",
+      "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            2.389013680192676,
+            2.389013680192676
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.05266798552461662,
+            0.05266798552461662
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "LuxXx - Boiling Phosphene Soup I.milk",
+      "sha256": "011e32d548e539df6f62f07c2879caa1a5a746a0455dd3da1bec91d4c599b4c3",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Mashup ADAMFX 2 Flexi + Geiss - Bipolar vs reaction diffusion + Another Flexi + Fishbrain  + Flexi And ADAMFX 12.milk",
+      "sha256": "00c5aa07862d3af8bbe631656fc249460b17e8d5b3f6e389023b9bf25dfc9c5b",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "MegalomaGreg - Ambitions [Flexi's mix 25 slip antithesis] [remix 07 feasting] --- Isosceles edit.milk",
+      "sha256": "00df4939b75676430073689c35c0f1d2db88747707b183a876e9ec3b008102dd",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "ORB - Acid Lamp (Jelly) --- Isosceles edit.milk",
+      "sha256": "00b500019104641f13b29d0885959f064c06750779a1625256b6815f620f3fa3",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5569247398057087,
+            3.5569247398057087
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.33333325386047835,
+              0.33333325386047835
+            ],
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.007848815175077087,
+            0.007848815175077087
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0026162714131418023,
+            0.0026162714131418023
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0026162711012579455,
+              0.0026162711012579455
+            ],
+            [
+              0.0013081355506289727,
+              0.0013081355506289727
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "ORB - Firelight.milk",
+      "sha256": "00bec5388027bad2ad15ef76b10df7ec1a4feb4d146019b5f9bfefdee8f3f192",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5567110788401806,
+            3.5567110788401806
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5567110788401806,
+            3.5567110788401806
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5569164730418663,
+            3.5569164730418663
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.1933192650433941,
+            0.1933192650433941
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.14245293358785857,
+            0.14245293358785857
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Rovastar - Blue Shining - mash0000 - directions written in the air.milk",
+      "sha256": "002f2f6d576c306d63a730ef88b49ae25f0d11d554f0e06cb9178cc0d37ca990",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Serge + martin - crystal palace003.milk",
+      "sha256": "00d7bcc6b025ab5acd7181e40f346537521d050936cbb35a8b9590fd1c5b2522",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.10174691781892488,
+            0.10174691781892488
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0339156352299157,
+            0.0339156352299157
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk",
+      "sha256": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.9999998807907104,
+            0.9999998807907104
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            [
+              0.6666665474573819,
+              0.6666665474573819
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.9999998807907104,
+            0.9999998807907104
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            [
+              0.0,
+              0.0
+            ],
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - help out] --- Isosceles edit1.milk",
+      "sha256": "0195488209a7d1313f4be9c322ef7be4dd5696dfc8a9dca1f5a4efefd2e064ca",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "TonyMilkdrop - Nuclear [Flexi - i don't want to be responsible + techstyle].milk",
+      "sha256": "023686b4fb5fa1ca07c99d4e201664d5677769b8ce559ddfd3a812b6082dbbcf",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+      "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "TonyMilkdrop - Tricolors [Flexi - feedback accomplishment + techstyle] --- Isosceles edit.milk",
+      "sha256": "01803be5f3f974981e9bd8dbb6b06d2a8c211f873497414ac2d5651bc908dea5",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Waltra - Codex Machine 2.milk",
+      "sha256": "028f1bfbf408588ced9755b1a444745d99c5a73fcc7039510099d8ae6fd361cb",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Zylot - Funnels (Jelly).milk",
+      "sha256": "0008a62faf508e742f0d3dcf8c73ca6f41e372880f2de9834b10f838edfb79b1",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ],
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ],
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "Zylot - Spiral.milk",
+      "sha256": "02481b33b1399e5a186bc12f5f4230bb00d368edfd802857e4a2dac4831f5923",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - living boxes 4.milk",
+      "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.9999998807907104,
+            0.9999998807907104
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0007557470681164789,
+            0.0020992974114346632
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0007557469780244078,
+            0.00209929716117891
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - prime forms 2 nz+ adam kreighble' yore phuctsth.milk",
+      "sha256": "00037b2870be7c72d072202d16b749eb97eb68aca9452e2c07294855666772ff",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.1366666555404663,
+            0.1366666555404663
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.27435758955489065,
+            0.27435758955489065
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "bowel trounce dumring.milk",
+      "sha256": "002825c9286ff0327e273a62038792043241ac796c16fcbf4c64890459aa1247",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "cortex meat - adm affect non.milk",
+      "sha256": "01b11fcd7cbf71bb001fe8612f658b181ce9a3ca3f75d76043bfc7b540d3c55f",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz+.milk",
+      "sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.1800000270207723,
+            0.1800000270207723
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.0333333412806193,
+            0.0333333412806193
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0034199493634685277,
+            0.0034199493634685277
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.00011399833929493317,
+            0.00011399833929493317
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            [
+              0.0,
+              0.16732023151871545
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333333333333333,
+            0.6666667461395264
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "fed - DSC-011 LSD Edit 2.milk",
+      "sha256": "029c2fa4107993b9c6dc2f14d8c1514441df86858cf32b483d2a6ec0efc34991",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.017309634070603812,
+            0.017309634070603812
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.023419566820728724,
+            0.023419566820728724
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "fleekus flokus - violent and insane homicidal air molecules2 roam3 nz+.milk",
+      "sha256": "0139976fb35e3b2dae6ff6bb6467f9274424c1e23d21dd5259470f2e9e8feeda",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "flexi - a julia fractal for hexcollie (reactive color mix by Stahlregen).milk",
+      "sha256": "014ddc38e758a5ebbfd2a950eaeda1956e0ec78b3ec048bd461452922b01dfe6",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "flexi - grind my glitch up [191].milk",
+      "sha256": "0011db311cc2a482c1b1c74165e9a3655954536281154e31517652fd8f87e919",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.2742987881151471,
+            0.2742987881151471
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.0666666825612386,
+            0.0666666825612386
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.13333332538604736,
+            0.13333332538604736
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "martin + flexi - lock and release bipolar 02.milk",
+      "sha256": "00fe9668b50d56d1cd38c9b91c14bcdd27a971697f14073db996eb98f2fe9561",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "never suggest things roam glance at sun for galactic upgrade nz+ 55 black hole merkabah upgrades only, sorry.milk",
+      "sha256": "019d416fb3c183dff26cfddc8778b2915c97ffef79e377712b332debc59efac9",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0006971025949841599,
+            0.0006971025949841599
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0004647350079220366,
+            0.0006971025949841599
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ],
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ],
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.000683366858561274,
+            0.000683366858561274
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0004555778513983975,
+            0.000683366858561274
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0004555777970892855,
+              0.0006833667770975963
+            ],
+            [
+              0.0004555777970892855,
+              0.0006833667770975963
+            ],
+            [
+              0.0004555777970892855,
+              0.0006833667770975963
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.000669767880758448,
+            0.000669767880758448
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0004465118672772632,
+            0.000669767880758448
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0004465118140489007,
+              0.0006697678009158947
+            ],
+            [
+              0.0004465118140489007,
+              0.0006697678009158947
+            ],
+            [
+              0.0004465118140489007,
+              0.0006697678009158947
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ],
+            [
+              0.6666665077209567,
+              0.9999998807907104
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0006971025949841599,
+            0.0006971025949841599
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0004647350079220366,
+            0.0006971025949841599
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ],
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ],
+            [
+              0.0004647349525213064,
+              0.0006971025118830548
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.20000000794728598,
+            0.20000000794728598
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.02000000556310037,
+              0.02000000556310037
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+      "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.20000000794728598,
+            0.20000000794728598
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.02000000556310037,
+              0.02000000556310037
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "shifter - liquid circuitry - conjugoth.milk",
+      "sha256": "00cd9e3c70b49cdd2b7fb08bc53e7a2bcddcf271afb3d2e0c47143c3260a6ca5",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.881459988197804,
+            0.881459988197804
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.06666667262713115,
+              0.06666667262713115
+            ],
+            [
+              0.06666667262713115,
+              0.06666667262713115
+            ],
+            [
+              0.12499999006589253,
+              0.12499999006589253
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0043201100550923415,
+            0.0043201100550923415
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.0007200183425153902,
+            0.0007200183425153902
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.00028800736275601865,
+              0.00028800736275601865
+            ],
+            [
+              0.00028800736275601865,
+              0.00028800736275601865
+            ],
+            [
+              0.0005400137139701051,
+              0.0005400137139701051
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "suksma - bonobo - absurd.milk",
+      "sha256": "01963e0cbf7e3bfdd1f1c118127ad9ee5ae82df8303e42917d23a03fabf06e58",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333333333333333,
+            0.6666667461395264
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - graphic novel fists.milk",
+      "sha256": "021310c8f6a4835a254b176bf8f965d800524d3571d84003aab0c7af3b8071a7",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            [
+              0.0,
+              0.16732023151871545
+            ],
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - ku pilled - forgoing utility nz.milk",
+      "sha256": "019b59c69ff13695ee2d0cec85d996cda32b2900f13d6edd71a1b4d914170a5c",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - liquid lumin limestone - winter in the belly of a snake2.milk",
+      "sha256": "023585f6b636b2375dd9f9a1c217b9165c5cd46cd881fac1d620b784666eb5a7",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.16666668653487685
+            ],
+            [
+              0.0,
+              0.16666668653487685
+            ],
+            [
+              0.0,
+              0.16666668653487685
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.0009025470810789942,
+            0.0009025470810789942
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.00030084899116233265,
+            0.00030084899116233265
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.0001504245314451608
+            ],
+            [
+              0.0,
+              0.0001504245314451608
+            ],
+            [
+              0.0,
+              0.0001504245314451608
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle.milk",
+      "sha256": "00defe8ba70f17fc81019f1c04ee2d7d740e04c6c52fea1bc14d15793cd3da4a",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - n19 3 layer overlap opt 3 flx nz+ loqo yes joe rogan, chimps are crazy, but what about bonobos.milk",
+      "sha256": "00a724c130a03c709bcd0d962ef07dbefc0c096a083a920840141a10fb1a6a4f",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - never degweh - flx spr col.milk",
+      "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.30000003178914386,
+            0.30000003178914386
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.031214452452843676,
+            0.031214452452843676
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.009364336728133823,
+            0.009364336728133823
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.00940105905691694
+            ],
+            [
+              0.0,
+              0.00940105905691694
+            ],
+            [
+              0.0,
+              0.00940105905691694
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.30000003178914386,
+            0.30000003178914386
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.031214452452843676,
+            0.031214452452843676
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.009364336728133823,
+            0.009364336728133823
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.00940105905691694
+            ],
+            [
+              0.0,
+              0.00940105905691694
+            ],
+            [
+              0.0,
+              0.00940105905691694
+            ]
+          ],
+          "unknown_reasons": []
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": [
+            0.30000003178914386,
+            0.30000003178914386
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ],
+            [
+              0.0,
+              0.30117648455052404
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.03139526070030835,
+            0.03139526070030835
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": [
+            0.009418579208120963,
+            0.009418579208120963
+          ],
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            [
+              0.0,
+              0.009455514249266092
+            ],
+            [
+              0.0,
+              0.009455514249266092
+            ],
+            [
+              0.0,
+              0.009455514249266092
+            ]
+          ],
+          "unknown_reasons": []
+        }
+      ]
+    },
+    {
+      "preset": "suksma - out of fuckus newband plays harry partch - shf.milk",
+      "sha256": "003a2b9f01721fe0ec80a9eda9e810771573a1fa66dfb20b04a5b3067ec274b6",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - prigogine quantum foam self-organizer.milk",
+      "sha256": "001af36fb6c8bca8b640fe8c39ece070dd5c42ecffada5cc0cb526aa2b647852",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - shape instance exp 3 - bulloxain - flacc.milk",
+      "sha256": "01e78a2339e0a472eaaf704dc9838f91dd86e3846aa271f5eed3111de83ab90d",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.03333333730697537,
+              0.03333333730697537
+            ],
+            [
+              0.03333333730697537,
+              0.03333333730697537
+            ],
+            [
+              0.03333333730697537,
+              0.03333333730697537
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - sick star bloat --- Isosceles edit08.milk",
+      "sha256": "024fc51c1952c9d20d2f7ee07f7de61245e190cdb3a75c90a2c27c4558ee5f9a",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - blur.milk",
+      "sha256": "018e0c956d661138bb97cf78d36f5e62cff34f3e11057519532cdca042bf4119",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+      "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "fan endpoint alpha envelope is unresolved"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.247595119012825e-05,
+            3.247595119012825e-05
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": [
+            0.666666587193807,
+            1.0
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "RGB channel 0 envelope is unresolved",
+            "RGB channel 1 envelope is unresolved",
+            "RGB channel 2 envelope is unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - tech ed lacquer sinus raw.milk",
+      "sha256": "026b1268c93a9bd9a9bddaad4516dc1a33ab08f3307fce854decfe6570e55078",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            3.5569247398057087,
+            3.5569247398057087
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            4.449470006900726,
+            4.449470006900726
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "shape_fill_envelopes": [
+        {
+          "element_id": "shape_0",
+          "mean_alpha_bounds": [
+            0.23333330949147543,
+            0.23333330949147543
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.2216666273276028,
+              0.2216666273276028
+            ],
+            [
+              0.08166664997736699,
+              0.08166664997736699
+            ],
+            [
+              0.10499998648961413,
+              0.10499998648961413
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        },
+        {
+          "element_id": "shape_1",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": [
+            0.5125984331721314,
+            0.5125984331721314
+          ],
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_2",
+          "mean_alpha_bounds": null,
+          "mean_rgb_times_alpha_bounds": [
+            null,
+            null,
+            null
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides",
+            "texture colour/alpha lacks a declared contract"
+          ]
+        },
+        {
+          "element_id": "shape_3",
+          "mean_alpha_bounds": [
+            0.3333332935969035,
+            0.3333332935969035
+          ],
+          "mean_rgb_times_alpha_bounds": [
+            [
+              0.16666662693023918,
+              0.16666662693023918
+            ],
+            [
+              0.03333333730697537,
+              0.03333333730697537
+            ],
+            [
+              0.06666667461395075,
+              0.06666667461395075
+            ]
+          ],
+          "nominal_area_fraction_per_aspect_y_bounds": null,
+          "nominal_alpha_area_fraction_per_aspect_y_bounds": null,
+          "nominal_source_rgb_integral_per_aspect_y_bounds": [
+            null,
+            null,
+            null
+          ],
+          "unknown_reasons": [
+            "nominal area needs a finite radius envelope and constant effective sides"
+          ]
+        }
+      ]
+    },
+    {
+      "preset": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "shape_fill_envelopes": []
+    },
+    {
+      "preset": "yin - 191 - Temporal singularities aaa --- Isosceles edit.milk",
+      "sha256": "009b768e5241359e2282b2df09471391d10411c8a7bf1e6fbe1cc2030f5ec9f9",
+      "shape_fill_envelopes": []
+    }
+  ]
+}

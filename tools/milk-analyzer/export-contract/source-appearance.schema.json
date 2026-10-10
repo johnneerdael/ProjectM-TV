@@ -2255,6 +2255,161 @@
                     }
                   }
                 }
+              },
+              "fill_envelope": {
+                "type": "object",
+                "required": [
+                  "policy",
+                  "mean_alpha_bounds",
+                  "mean_rgb_times_alpha_bounds",
+                  "nominal_area_fraction_per_aspect_y_bounds",
+                  "nominal_alpha_area_fraction_per_aspect_y_bounds",
+                  "nominal_source_rgb_integral_per_aspect_y_bounds",
+                  "summed_nominal_alpha_area_fraction_per_aspect_y_bounds",
+                  "summed_nominal_source_rgb_integral_per_aspect_y_bounds",
+                  "native_channel_envelopes",
+                  "overlap_aggregation",
+                  "visible_screen_contribution",
+                  "unknown_reasons",
+                  "uses_rendered_images",
+                  "uses_equation_execution",
+                  "conditions"
+                ],
+                "properties": {
+                  "policy": {
+                    "const": "source-custom-shape-fill-envelope-v1"
+                  },
+                  "mean_alpha_bounds": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "nominal_area_fraction_per_aspect_y_bounds": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "nominal_alpha_area_fraction_per_aspect_y_bounds": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "summed_nominal_alpha_area_fraction_per_aspect_y_bounds": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "mean_rgb_times_alpha_bounds": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "nominal_source_rgb_integral_per_aspect_y_bounds": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "summed_nominal_source_rgb_integral_per_aspect_y_bounds": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "native_channel_envelopes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "overlap_aggregation": {
+                    "const": "sum; repeated coverage counted multiple times"
+                  },
+                  "visible_screen_contribution": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "uses_rendered_images": {
+                    "const": false
+                  },
+                  "uses_equation_execution": {
+                    "const": false
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }

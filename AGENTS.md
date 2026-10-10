@@ -1003,3 +1003,10 @@ control walker in value-only mode. Named finite-input premises must be exposed;
 internal unbounded intervals are not infinity/defaultzero input values. Reject
 known overflow/singular/opaque/uninitialized cases and serialize finite bounds
 only. Value envelopes never infer unknown rates, continuity or mood readiness.
+
+Source fill-envelope maintenance: preserve existing exact point integrals.
+`source_fill_envelopes` bounds nonnegative fan RGB-times-clippedAlpha using
+second moments and valid clipping inequalities. Native channel domains and
+nominal radius-area ranges remain conditional; textured input, missing channels,
+overlap union and final visibility stay unresolved. No point brightness/mood
+score follows from an upper bound.

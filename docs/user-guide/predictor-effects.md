@@ -305,3 +305,10 @@ audio-driven sine colours and clamped controls have bounded values under
 explicit finite-input assumptions. The JSON names those assumptions and keeps
 rate/continuity unknown. A bounded colour can still switch sharply, so these
 envelopes do not certify calm movement, absence of flashing or a mood label.
+
+`fill_envelope` estimates a range for an untextured shape's incoming colour
+and opacity contribution, including varying material and radius when their
+domains are supported. It accounts for fan interpolation and alpha clipping;
+repeated shapes are summed with overlap counted repeatedly. These bounds can
+help compare potential prominence, but final brightness and on-screen strength
+remain unknown after clipping, textures and feedback.

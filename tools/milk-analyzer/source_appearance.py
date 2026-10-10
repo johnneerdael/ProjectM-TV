@@ -452,6 +452,8 @@ def appearance_from_analysis(analysis):
         from source_material_temporal import shape_material_temporal
         elements[identity]['material_temporal']=shape_material_temporal(controls)
         elements[identity]['fill_contribution']=shape_fill_contribution(elements[identity]['geometry'],elements[identity]['material'])
+        from source_fill_envelopes import shape_fill_envelope
+        elements[identity]['fill_envelope']=shape_fill_envelope(controls,elements[identity]['geometry'],elements[identity]['material'],elements[identity]['material_temporal'])
         elements[identity]['audio_area_response']=shape_audio_area_response(controls,elements[identity]['geometry'],elements[identity]['fill_contribution'])
         elements[identity]['center_trajectory']=planar_trajectory([controls['x'],controls['y']])
         elements[identity]['vertex_motion']=shape_vertex_motion(controls,elements[identity]['geometry'],elements[identity]['center_trajectory'])

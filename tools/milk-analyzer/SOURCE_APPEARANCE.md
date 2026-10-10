@@ -1214,3 +1214,41 @@ The shader-specific `shader_bounds` walker remains separate because its typed
 float32, declared sampler and stored-UNORM8 contract is different from these
 nominal EEL control envelopes. The implementation reuses source-control
 calculus rather than introducing another parser or generic execution engine.
+
+### Conditional incoming fill contribution envelopes
+
+`fill_envelope` complements the existing exact constant `fill_contribution`.
+It bounds mean source blend alpha and RGB-times-alpha for untextured polygon
+fans with supported native channel domains. Textured fills remain unresolved
+without a matching texture contract, and RGB channels retain independent gaps.
+
+Singleton native channels retain their exact established conversion. For a
+finite endpoint interval in one stable modulo cell, rational residual bounds
+are padded by the declared float32 margin; crossings use the full finite
+modulo colour range. Missing conversion domains remain unknown. These colour
+envelopes inherit all input/intermediate/source-calculus assumptions.
+
+For centre/edge alpha bounds A0,A1, mean clipped alpha is at least
+`(min(A0.lower,1)+2*min(A1.lower,1))/3` and at most
+`min((A0.upper+2*A1.upper)/3,1)`. The lower bound follows concavity of
+positive alpha clipping; the upper follows its mean bound. Neither clips
+vertex alpha and then incorrectly treats the actual interpolated result as
+linear. For RGB-times-alpha, the same nonnegative fan second-moment formula
+uses clipped lower vertex bounds and unclipped upper bounds; an independent
+`max(RGB.upper)*mean_alpha.upper` cap can tighten the upper side. This remains
+valid whether source RGB is clipped or retained, without assuming its stage.
+[OpenGL ES blend factors](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/es3.0/glBlendFunc.xml)
+describe source-alpha scaling and its0..1factor range.
+
+A finite radius range and constant effective sides give a nominal area range
+from squared float32 radius endpoints. A range crossing zero has area lower0;
+negative radius alone does not mean negative area. The regular-polygon
+coefficient stays per aspectY and excludes trig/projection/raster precision.
+Multiplying nonnegative area and material intervals gives incoming integral
+bounds without assuming their extrema coincide. Repeated-instance sums count
+overlap repeatedly and are not union coverage or stored scene brightness.
+
+`visible_screen_contribution` remains null. Clipping, borders, texture content,
+actual overlap, destination colour, storage, later shaders and feedback stay
+separate. Bounds can be loose; they are not point estimates, visible response
+strength or calibrated Chill/Normal/Intense scores.
