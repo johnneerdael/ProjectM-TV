@@ -2696,3 +2696,30 @@ lookup coordinates, before its off-state mechanism is exported. Missing gates
 or unresolved domains remain unknown, never evidence of non-flashing behaviour.
 `analysis_work.budget_exhausted` includes locally caught global traversal
 exhaustion; other helper-specific budgets still require nested reason inspection.
+
+When a declared input scenario is supplied, each shape additionally exports
+`scenario_material_envelope`: source RGBA value enclosures, their float32
+endpoint conversions, possible modulo crossings and conditional consumption
+gates. The scenario hash identifies the caller's input ranges. Ordinary
+`material_temporal` stays unchanged. These envelopes do not imply time
+continuity, beat rate, recurrent-state reachability or a guaranteed music range.
+
+`activity.flashing.scenario_material_jump_bounds` feeds those additional channel
+domains into the same two-state blend difference model. For example, a shape
+with `r=r2=.2*bass`, constant alpha `.5` and declared bass `[0,2]` has an incoming
+red difference ceiling about `.2` at a fixed barycentric point. This bounds two
+possible states, not necessarily consecutive frames. Source-alpha-over also
+accounts for contrast against the fixed destination `[0,1]`; alpha changes can
+therefore change the result even with constant source RGB. Declared zero alpha
+can exclude consumption only in the conditional model.
+
+Missing bands, unsupported persistent state, unknown textured materials and
+nonfinite native conversions keep null bounds. Every conditional jump record
+retains the scenario hash, `observed_runtime_inputs:false` and
+`runtime_binding_verified:false`. Nominal area weighting uses the ordinary
+lifetime geometry envelope and remains independent of the audio assumptions.
+The records establish no attained jump, screen prominence, visible flash or
+Chill/Normal/Intense score. The existing authoring guide distinguishes immediate
+bands from damped `*_att` inputs; neither supplies a universal maximum or a
+time derivative, so the exporter never invents one from a declared value range.
+[MilkDrop authoring reference](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html).

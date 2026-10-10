@@ -2175,6 +2175,20 @@
                   }
                 }
               },
+              "scenario_material_envelope": {
+                "type": "object",
+                "description": "Caller-declared shape RGBA value envelopes and conditional native modulo domains; ordinary lifetime records stay separate. No audio time-rate, reached flash or verified visibility.",
+                "required": ["policy", "channels", "input_scenario_sha256", "observed_runtime_inputs", "runtime_binding_verified", "visible_flashing", "visible_flash_frequency_hz"],
+                "properties": {
+                  "policy": {"const": "source-declared-shape-material-envelope-v1"},
+                  "input_scenario_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                  "observed_runtime_inputs": {"const": false},
+                  "runtime_binding_verified": {"const": false},
+                  "visible_flashing": {"type": "null"},
+                  "visible_flash_frequency_hz": {"type": "null"},
+                  "channels": {"type": "object"}
+                }
+              },
               "material_temporal": {
                 "type": "object",
                 "required": [
@@ -6247,6 +6261,22 @@
             "material_jump_bounds": {
               "type": "array",
               "items": {"$ref": "#/$defs/shapeMaterialDifference"}
+            },
+            "scenario_material_jump_bounds": {
+              "type": "array",
+              "description": "Additional two-state shape blend difference ceilings under declared audio domains; fixed geometry and destination, no attained adjacent-frame jump or visible flash claim.",
+              "items": {
+                "allOf": [
+                  {"$ref": "#/$defs/shapeMaterialDifference"},
+                  {"type": "object", "required": ["input_scenario_sha256", "observed_runtime_inputs", "runtime_binding_verified"],
+                    "properties": {
+                      "input_scenario_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                      "observed_runtime_inputs": {"const": false},
+                      "runtime_binding_verified": {"const": false}
+                    }
+                  }
+                ]
+              }
             },
             "material_change_bounds": {
               "type": "array",

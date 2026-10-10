@@ -138,6 +138,13 @@ def source_activity(analysis,description):
             flashing['hazards'].extend(hazards)
             from source_shape_jump_bounds import shape_material_jump_bounds
             flashing['material_jump_bounds'].extend(shape_material_jump_bounds(element))
+            if 'scenario_material_envelope' in element:
+                scenario=element['scenario_material_envelope']
+                conditional={**element,'material_temporal':scenario}
+                flashing.setdefault('scenario_material_jump_bounds',[]).extend(
+                    {**row,'input_scenario_sha256':scenario['input_scenario_sha256'],
+                        'observed_runtime_inputs':False,'runtime_binding_verified':False}
+                    for row in shape_material_jump_bounds(conditional))
         v=element.get('vertex_motion',{});speed=v.get('maximum_vertex_speed_ndc_per_second_upper_bound')
         if speed is not None:motion['geometry_speed_bounds'].append({'element_id':element['id'],
             'kind':'polygon_perimeter_vertex_speed','maximum_ndc_per_second':speed,

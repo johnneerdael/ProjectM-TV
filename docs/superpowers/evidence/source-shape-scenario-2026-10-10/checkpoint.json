@@ -1,0 +1,30 @@
+{
+  "sample_count": 2000,
+  "structured": 2000,
+  "wall_seconds": 267.565371040997,
+  "ordinary_semantic_changes": 0,
+  "conditional_material_presets": 1218,
+  "complete_conditional_bound_presets": 657,
+  "new_complete_local_bound_presets": 58,
+  "selection_sha256": "6ef58b92fa758019c4b041ce8e498dcda81999430d5295f3c972e5f0c4342d7c",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "scenario_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "uses_rendered_images": false,
+  "appearance_accuracy_verified": false,
+  "mood_accuracy_verified": false,
+  "evidence_hashes": {
+    "coverage.json.gz": "25867e746b7dc3ae19be544da87d253ed4761ca9faf3abd34ca50fc22a2f4d3b",
+    "comparison.jsonl.gz": "549b04b9b9707ee40829389ebc7a427f30753e5b41efac0afcb4fdc9ef6e30ce",
+    "summary.json.gz": "18d87a1f447d93506e1163ff31c4eb2fe5994703d10387313cda98b2fc398595"
+  },
+  "full_suite": {
+    "tests": 3135,
+    "subtests": 92,
+    "seconds": 204.52
+  },
+  "independent_focused_checks": 42,
+  "controls_structured_schema_valid": 100,
+  "controls_with_conditional_shape_records": 53,
+  "retained_partial_budget_presets": 56,
+  "changed_descriptions_schema_valid": 1261
+}

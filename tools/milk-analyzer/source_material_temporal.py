@@ -15,6 +15,10 @@ GROUPS={'centre':('r','g','b','a'),'perimeter':('r2','g2','b2','a2'),
 def _channel(field,name,group):
     curve=motion_control(field,name,'source colour/opacity component',application='shape colour channel')
     curve={k:v for k,v in curve.items() if k not in {'expression','phase_expression'}}
+    return _channel_from_curve(curve,group)
+
+
+def _channel_from_curve(curve,group):
     result={'group':group,'raw_time_curve':curve,'native_float32_endpoint_domain':None,
         'native_endpoint_domain_singleton':None,'native_value_if_singleton':None,
         'possible_native_wrap_jump':None,'may_be_consumed':True,'unknown_reasons':[]}
@@ -46,6 +50,10 @@ def _channel(field,name,group):
 
 def shape_material_temporal(controls):
     channels={name:_channel(controls[name],name,group) for group,names in GROUPS.items() for name in names}
+    return _material_from_channels(channels)
+
+
+def _material_from_channels(channels):
     threshold=float(np.float32(.0001));curve=channels['border_a']['raw_time_curve']
     span=curve['nominal_value_range'];always=None;change=None
     if span is not None:
@@ -72,3 +80,24 @@ def shape_material_temporal(controls):
                       'Border draw gating uses raw double alpha and the native float32 threshold, separately from modulo alpha',
                       'Fill channels are excluded only when both native fan endpoint alphas are proved zero under finite ordinary source-alpha blending; one transparent endpoint still participates through interpolation',
                       'Textures, opacity, primitive coverage, clipping, sampling, storage, feedback and later shaders determine visibility; no whole-preset Chill eligibility follows']}
+
+
+def shape_scenario_material_envelope(controls,scenario):
+    """Supplement lifetime records with caller-declared value domains only."""
+    from source_control_bounds import scalar_value_envelope
+    channels={}
+    for group,names in GROUPS.items():
+        for name in names:
+            envelope=scalar_value_envelope(controls[name],input_domains=scenario['scalar_input_domains'])
+            curve={'curve_kind':'unknown','nominal_value_range':envelope['nominal_value_range'],
+                'maximum_absolute_control_rate_per_second':None,'nominal_continuity':'unknown',
+                'unknown_reasons':envelope['unknown_reasons'],'value_envelope':envelope}
+            channels[name]=_channel_from_curve(curve,group)
+    result=_material_from_channels(channels)
+    result.update(policy='source-declared-shape-material-envelope-v1',input_scenario_sha256=scenario['record_sha256'],
+        observed_runtime_inputs=False,runtime_binding_verified=False,
+        conditions=['Channel source value envelopes use caller-declared scalar input domains',
+            *result['conditions'][1:],
+            'Caller-declared audio domains hold; unconstrained lifetime material records are preserved separately',
+            'Value enclosures establish neither temporal continuity nor a reached jump or audio change rate'])
+    return result

@@ -1394,3 +1394,12 @@ original contributing composite (including sample coordinates) before reporting
 a common periodic blackout gate. No candidate implies no absence/safety proof.
 The traversal-budget flag also records locally caught `_walk` exhaustion; it
 still does not summarize every separate helper's budget. Keep nested unknowns.
+
+Declared shape material inputs: `scenario_material_envelope` supplements ordinary
+`material_temporal` without replacing its lifetime domains or hazards. Reuse
+scalar value envelopes with validated scenario names and native modulo/conversion
+rules; value bounds infer no time continuity or audio change rate. Conditional
+`activity.flashing.scenario_material_jump_bounds` reuses fixed-barycentric blend
+ceilings with scenario hash and false runtime-observation/binding flags. Keep
+missing bands, persistent state, unknown texture colours and native overflow
+unresolved. Nominal area bounds remain the ordinary lifetime geometry envelope.

@@ -467,6 +467,9 @@ def appearance_from_analysis(analysis):
         elements[identity]['material']=shape_material(controls,analysis.values.get('shapecode_'+identity.removeprefix('shape_')+'_image',''))
         from source_material_temporal import shape_material_temporal
         elements[identity]['material_temporal']=shape_material_temporal(controls)
+        if getattr(analysis,'input_scenario',None) is not None:
+            from source_material_temporal import shape_scenario_material_envelope
+            elements[identity]['scenario_material_envelope']=shape_scenario_material_envelope(controls,analysis.input_scenario)
         elements[identity]['fill_contribution']=shape_fill_contribution(elements[identity]['geometry'],elements[identity]['material'])
         from source_fill_envelopes import shape_fill_envelope
         elements[identity]['fill_envelope']=shape_fill_envelope(controls,elements[identity]['geometry'],elements[identity]['material'],elements[identity]['material_temporal'])
