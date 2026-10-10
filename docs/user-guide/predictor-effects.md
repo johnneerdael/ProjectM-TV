@@ -481,3 +481,9 @@ Colour bounds also support quantized levels (`floor`) and wrapped channel values
 (`frac`). Declared audio inputs add separate `scenario_colour_envelope` records,
 so a consumer can inspect how a colour recipe is bounded under a chosen load.
 These are possible raw RGB ranges, not measured brightness, palette or flashes.
+
+`direct_colour_audio_response` quantifies supported raw RGB changes per bass,
+mid or high input unit, with sampled colours held fixed. It distinguishes those
+from audio-driven texture movement. Upper bounds can help describe colour
+reactivity; they do not measure visible response or flashing. Quantized uploads
+and unsupported formulas stay unresolved even when their colour range is known.

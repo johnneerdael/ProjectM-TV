@@ -2900,8 +2900,14 @@
                     },
                     "actual_feedback_persistence": {
                       "type": "null"
+                    },
+                    "direct_colour_audio_response": {
+                      "$ref": "#/$defs/directColourAudioResponse"
                     }
                   }
+                },
+                "direct_colour_audio_response": {
+                  "$ref": "#/$defs/directColourAudioResponse"
                 }
               }
             }
@@ -5171,8 +5177,14 @@
                 },
                 "actual_feedback_persistence": {
                   "type": "null"
+                },
+                "direct_colour_audio_response": {
+                  "$ref": "#/$defs/directColourAudioResponse"
                 }
               }
+            },
+            "direct_colour_audio_response": {
+              "$ref": "#/$defs/directColourAudioResponse"
             }
           }
         },
@@ -5274,8 +5286,14 @@
                       },
                       "actual_feedback_persistence": {
                         "type": "null"
+                      },
+                      "direct_colour_audio_response": {
+                        "$ref": "#/$defs/directColourAudioResponse"
                       }
                     }
+                  },
+                  "direct_colour_audio_response": {
+                    "$ref": "#/$defs/directColourAudioResponse"
                   }
                 }
               }
@@ -5372,8 +5390,14 @@
                       },
                       "actual_feedback_persistence": {
                         "type": "null"
+                      },
+                      "direct_colour_audio_response": {
+                        "$ref": "#/$defs/directColourAudioResponse"
                       }
                     }
+                  },
+                  "direct_colour_audio_response": {
+                    "$ref": "#/$defs/directColourAudioResponse"
                   }
                 }
               }
@@ -5917,6 +5941,63 @@
           "type": "null"
         },
         "visible_motion_speed": {
+          "type": "null"
+        }
+      }
+    },
+    "directColourAudioResponse": {
+      "type": "object",
+      "required": [
+        "policy",
+        "status",
+        "bands",
+        "includes_sampling_coordinate_response",
+        "visible_response_strength"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-fixed-sample-colour-audio-response-v1"
+        },
+        "status": {
+          "type": "string"
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "input_code",
+              "channel_order",
+              "channel_response_envelopes"
+            ],
+            "properties": {
+              "input_code": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8
+              },
+              "channel_order": {
+                "const": [
+                  "r",
+                  "g",
+                  "b"
+                ]
+              },
+              "channel_response_envelopes": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "includes_sampling_coordinate_response": {
+          "const": false
+        },
+        "visible_response_strength": {
           "type": "null"
         }
       }

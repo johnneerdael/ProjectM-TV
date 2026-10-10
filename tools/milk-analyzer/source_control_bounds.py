@@ -88,6 +88,43 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
                 span,rate,kind=child
                 return checked(None if span is None else [-span[1],-span[0]],rate,kind)
             return None
+        if _response_input_names is not None and node.op=='domain_checked' and len(node.args)==1:
+            if node.detail.get('function') not in {'sqrt','pow'}:return None
+            return visit(node.args[0],depth+1)
+        if _response_input_names is not None and node.op in {'saturate','clamp'}:
+            child=visit(node.args[0],depth+1)
+            if child is None:return None
+            low,high=(0.,1.) if node.op=='saturate' else (_phase_literal(node.args[1]),_phase_literal(node.args[2]))
+            if low is None or high is None or low>high:return None
+            return ([low,high] if child[0] is None else [min(high,max(low,v)) for v in child[0]],child[1],'piecewise_lipschitz')
+        if _response_input_names is not None and node.op in {'sqrt','pow'}:
+            child=visit(node.args[0],depth+1)
+            exponent=.5 if node.op=='sqrt' else _phase_literal(node.args[1])
+            if child is None or child[0] is None or exponent is None:return None
+            lo,hi=child[0]
+            if not all(math.isfinite(v) for v in (lo,hi,exponent)):return None
+            if exponent==1:return child
+            if exponent<=0 or lo<0 or lo==0 and exponent<1:return None
+            values=[math.pow(v,exponent) for v in (lo,hi)]
+            gradients=[0. if v==0 else math.pow(v,exponent-1) for v in (lo,hi)]
+            if any(not math.isfinite(v) or base>0 and v==0 for base,v in zip((lo,hi),values)) or any(not math.isfinite(v) or base>0 and v==0 for base,v in zip((lo,hi),gradients)):
+                raise ValueError('nonlinear response power overflow/underflow')
+            rate=None if child[1] is None else positive_multiply(child[1],positive_multiply(exponent,max(gradients)))
+            span,rate,kind=checked([min(values),max(values)],rate,child[2])
+            if span is not None:span[0]=max(0.,span[0])
+            return span,rate,kind
+        if _response_input_names is not None and node.op=='lerp' and len(node.args)==3:
+            args=[visit(arg,depth+1) for arg in node.args]
+            if any(a is None or a[0] is None for a in args):return None
+            a,b,t=args;spans=[v[0] for v in args]
+            inverse=[1-t[0][1],1-t[0][0]];difference=[b[0][0]-a[0][1],b[0][1]-a[0][0]]
+            rate=add_rates(add_rates(product_term(a[1],inverse),product_term(b[1],t[0])),product_term(t[1],difference))
+            span=None
+            if all(math.isfinite(v) for s in spans for v in s):
+                from fractions import Fraction
+                values=[float((1-Fraction(z))*Fraction(x)+Fraction(z)*Fraction(y)) for x in spans[0] for y in spans[1] for z in spans[2]]
+                span=[min(values),max(values)]
+            return checked(span,rate,continuity(*args))
         if _value_only and node.op=='domain_checked' and len(node.args)==1:
             if node.detail.get('function') not in {'sqrt','pow'}:return None
             return visit(node.args[0],depth+1)

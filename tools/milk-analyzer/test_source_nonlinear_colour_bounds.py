@@ -189,3 +189,75 @@ def test_floor_integer_endpoint_conversion_preserves_nominal_enclosure(value):
     r=scalar_value_envelope(scalar('floor',x),input_domains={'x':[value,value]})
     lo,hi=r['nominal_value_range']
     assert lo<=value<=hi
+
+
+def test_direct_bass_colour_response_has_channel_bounds_on_fixed_samples():
+    r=colour('ret=GetPixel(uv)*bass*.2;')
+    rows=r['direct_colour_audio_response']['bands']
+    b=next(x for x in rows if x['input_code']==1)
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([.2,.2,.2],abs=2e-8)
+    assert r['direct_colour_audio_response']['visible_response_strength'] is None
+
+
+def test_audio_driven_coordinates_are_not_direct_colour_response():
+    r=colour('ret=GetPixel(uv+.1*bass);')
+    assert r['direct_colour_audio_response']['bands']==[]
+    assert r['direct_colour_audio_response']['includes_sampling_coordinate_response'] is False
+
+
+def test_direct_colour_band_crossproduct_requires_declared_other_band_bounds():
+    from test_effect_families import analyze
+    s=shader('shader_body {ret=GetPixel(uv)*bass*mid;}',stage='warp')
+    plain=analyze(s)['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']
+    p=next(x for x in plain['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert p['channel_response_envelopes'][0]['maximum_absolute_control_change_per_audio_unit'] is None
+    a=analyze(s,input_scenario={'schema_version':1,'name':'colour-response','audio_band_ranges':{'bass':[0,2],'mid':[0,3]}})
+    r=a['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']['scenario_colour_envelope']
+    b=next(x for x in r['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([3,3,3],abs=2e-7)
+
+
+def test_native_audio_q_upload_does_not_become_zero_colour_response():
+    from test_effect_families import analyze,read
+    s=read('per_frame_1=q1=.5+.1*bass;\nwarp_1=`shader_body {ret=GetPixel(uv)*q1;}\n')
+    r=analyze(s,input_scenario={'schema_version':1,'name':'quantized-q','audio_band_ranges':{'bass':[0,2]}})['visual_description']['nonlinear_texture_colour_bounds']['stages']['warp']['scenario_colour_envelope']
+    b=next(x for x in r['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in b['channel_response_envelopes'])
+
+
+def test_quantized_audio_colour_has_dependency_without_continuous_gain():
+    r=colour('ret=floor(bass*GetPixel(uv));')
+    b=next(x for x in r['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in b['channel_response_envelopes'])
+
+
+def test_distinct_channel_band_routes_keep_unaffected_channel_zero_bounds():
+    r=colour('ret=float3(bass*.2,mid*.4,treb*.8);')
+    rows=r['direct_colour_audio_response']['bands']
+    assert [x['input_code'] for x in rows]==[1,2,3]
+    for row,expected in zip(rows,([.2,0,0],[0,.4,0],[0,0,.8])):
+        assert [x['maximum_absolute_control_change_per_audio_unit'] for x in row['channel_response_envelopes']]==pytest.approx(expected,abs=2e-8)
+
+
+def test_saturated_direct_colour_response_retains_unit_lipschitz_bound():
+    r=colour('ret=saturate(bass*GetPixel(uv));')
+    b=r['direct_colour_audio_response']['bands'][0]
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([1,1,1],abs=2e-14)
+    assert all(x['nominal_continuity']=='piecewise_lipschitz' for x in b['channel_response_envelopes'])
+
+
+def test_blended_texture_colour_response_has_difference_bound():
+    r=colour('ret=lerp(GetPixel(uv),GetBlur1(uv),bass);')
+    b=r['direct_colour_audio_response']['bands'][0]
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([1,1,1],abs=2e-14)
+
+
+def test_positive_power_colour_response_bounds_derivative_over_declared_domain():
+    r=colour('ret=pow(saturate(bass),2)*GetPixel(uv);')
+    b=r['direct_colour_audio_response']['bands'][0]
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([2,2,2],abs=2e-14)
+
+
+def test_root_colour_response_retains_zero_domain_singularity_guard():
+    r=colour('ret=sqrt(saturate(bass))*GetPixel(uv);')
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])

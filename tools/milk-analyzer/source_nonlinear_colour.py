@@ -4,17 +4,24 @@ from shader_fields import Field
 
 def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
     from source_advection import substitute_sample_values
-    from source_control_bounds import scalar_value_envelope
-    from source_appearance import _data_return,_canonical_lane
+    from source_control_bounds import scalar_value_envelope,scalar_response_envelope
+    from source_appearance import _data_return,_canonical_lane,_audio_codes,EEL_AUDIO,PACKED
     from effect_families import _parts
     from field_math import SWIZZLE
     from source_native_warp import _f32
+    from source_polar import _nodes
     stages={}
     for stage in ('warp','composite'):
         r={'source_model':'unknown','channel_value_envelopes':None,
             'raw_rgb_bounds_if_samples_unit_interval':None,'sample_textures':[],
             'colour_difference_gain':None,'whole_feedback_contraction':None,
-            'actual_feedback_persistence':None,'visible_flashing':None,'unknown_reasons':[]}
+            'actual_feedback_persistence':None,'visible_flashing':None,'unknown_reasons':[],
+            'direct_colour_audio_response':{'policy':'source-fixed-sample-colour-audio-response-v1','status':'unknown',
+                'bands':[],'includes_sampling_coordinate_response':False,'visible_response_strength':None,
+                'conditions':['Sampled RGBA colours are independent declared local inputs held fixed during each band variation',
+                              'Selected band aliases vary by the same delta; other audio/time/state/coordinates are fixed',
+                              'Bounds concern raw stage RGB, not displayed brightness, feedback evolution, sample movement, screen area or mood',
+                              'Audio-dependent native float32 uploads/casts and discontinuities remain unresolved']}}
         field=analysis.outputs.get(stage)
         if field is None:
             r['unknown_reasons']=['no authored stage field'];stages[stage]=r;continue
@@ -24,7 +31,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             for name,sample in samples:
                 for lane in 'xyzw':domains[name+'.'+lane]=[0.,1.]
             local_sample_names=set(domains)-set(input_domains or {})
-            derived=set()
+            derived=set();derived_audio={}
             def project(node,depth=0):
                 original=node;key=id(original)
                 if key in memo:return memo[key][1]
@@ -49,6 +56,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                     assumptions.update(set(report['assumed_finite_input_names'])-local_sample_names-derived)
                     if span is None:raise ValueError('native colour-input upload domain unresolved')
                     name=':nonlinear-colour-narrow-'+str(len(memo));domains[name]=[_f32(v) for v in span];derived.add(name)
+                    derived_audio[name]=set(_audio_codes(node,analysis))
                     return Field('input',dtype='float',detail={'name':name})
                 if node.op=='member' and node.detail.get('swizzle') and len(node.detail.get('field',''))==1:
                     parent=node.args[0];lane=SWIZZLE[node.detail['field']]
@@ -63,15 +71,30 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
                             p=parts[lane]
                             if not (p.op=='member' and p.args and p.args[0] is parent):return project(p,depth+1)
                 return Field(node.op,tuple(project(arg,depth+1) for arg in node.args),node.dtype,node.detail)
-            channels=[]
+            channels=[];projected=[]
             for lane in _parts(replaced)[:3]:
                 try:
-                    channel=scalar_value_envelope(project(lane),input_domains=domains)
+                    selected=project(lane)
+                    channel=scalar_value_envelope(selected,input_domains=domains)
                 except (ValueError,RecursionError,OverflowError,IndexError) as error:
                     channel=scalar_value_envelope(Field('unresolved',dtype='float'))
                     channel['unknown_reasons']=[str(error)]
-                channels.append(channel)
+                    selected=Field('unknown',detail={'reason':str(error)})
+                channels.append(channel);projected.append(selected)
             if len(channels)!=3:raise ValueError('nonlinear RGB scalar lanes unresolved')
+            response=r['direct_colour_audio_response']
+            for code in _audio_codes(replaced,analysis):
+                names={name for name,c in EEL_AUDIO.items() if c==code}
+                names.update(name+'.'+'xyzw'[lane] for name,cs in PACKED.items() for lane,c in enumerate(cs) if c==code)
+                reports=[]
+                for selected in projected:
+                    tainted=any(n.op=='input' and code in derived_audio.get(n.detail.get('name'),set()) for n,path in _nodes(selected))
+                    report=scalar_response_envelope(Field('unknown') if tainted else selected,input_names=names,input_domains=domains)
+                    if tainted:report['unknown_reasons']=['audio-dependent native float32 upload prevents a continuous direct-colour bound']
+                    reports.append(report)
+                response['bands'].append({'input_code':code,'channel_order':['r','g','b'],
+                    'control_unit':'raw stage RGB component/declared audio input unit','channel_response_envelopes':reports})
+            response['status']='conditional source direct-colour paths'
             spans=[c['nominal_value_range'] for c in channels]
             r['channel_value_envelopes']=channels
             r['sample_textures']=sorted({s.detail.get('canonical_texture') for name,s in samples},key=str)

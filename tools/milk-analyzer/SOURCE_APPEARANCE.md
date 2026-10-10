@@ -1985,3 +1985,43 @@ Floor integer endpoints convert outward when the exact level is not representabl
 as a float. Caller-declared original finite input names survive native upload
 projection; local sampled and derived upload placeholders are excluded from that
 summary. The scenario identity retains the corresponding declared intervals.
+
+## Direct raw RGB response to audio bands
+
+Each nonlinear colour stage exports `direct_colour_audio_response`, also inside
+its optional scenario record. Each resolved direct band path lists the existing
+input code, RGB channel order and three nominal scalar response envelopes.
+These reuse the continuous control-response calculus: selected band aliases vary
+by the same delta while sampled RGBA values and all other inputs stay fixed.
+Independent sampled channels retain the declared [0,1] premise.
+
+`GetPixel(uv)*bass*.2` yields a sufficient raw component-change ceiling of
+approximately .2 per bass unit. A product with another band may remain unbounded
+until that band's range is explicitly supplied. The result is an upper bound,
+not a minimum, typical strength, response direction or time-rate. Reports and
+caller scenarios retain their original finite input/domain identities.
+
+Samples are substituted before direct band discovery, so an audio band used
+only in sampling coordinates does not become a direct colour route. Such paths
+belong to sampling/motion descriptors. Coordinate effects on sampled colours,
+image gradients, evolving feedback and native storage are excluded here.
+
+Native upload placeholders keep their original band dependencies. If an
+uploaded value depends on the selected band, its per-channel continuous bound
+is withheld; it must not masquerade as a held-fixed input with zero gain.
+Quantized casts, floor/frac, unsupported/discontinuous operations and unresolved
+native domains likewise receive no continuous response credit. A colour range
+can remain available while its continuous audio gain is unresolved.
+
+A parsed stage with no discovered direct band paths does not prove the absence
+of audio reaction in its coordinates, drawing, feedback or later stages. Unknown
+stages retain unknown status. Visible response strength, affected screen area,
+brightness, flashes and mood remain uncertified.
+
+Supported nominal continuous response operations include constant-limit
+clamp/saturate (nonexpansive), interpolation with product-rule triangle bounds,
+and positive constant powers over finite nonnegative base domains. A root or
+power below one needs a strictly positive lower base bound; otherwise its
+unbounded derivative at zero remains unresolved. Powers retain guarded source
+lowering, exact exponent-one identity, and overflow/underflow safeguards.
+These rules do not make quantized native uploads continuous.

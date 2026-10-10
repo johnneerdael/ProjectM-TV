@@ -1200,3 +1200,15 @@ Retain caller-declared input premises through colour native-upload projection;
 exclude only local sample/derived placeholders. Convert floor integer endpoints
 outward before publishing float bounds; accepted large integer domains must stay
 enclosed in both signs.
+
+Direct colour/audio response: discover bands after sample substitution and hold
+independent local samples fixed. Reuse nominal per-channel response bounds and
+scenario premises. Track band dependencies of derived native upload placeholders;
+withhold affected gains rather than treating those values as constants. Empty
+colour routes do not prove absent coordinate/feedback/audio behavior.
+
+Continuous response calculus: clamp/saturate are nonexpansive under constant
+limits; lerp uses product-rule triangle bounds. Positive constant powers require
+finite nonnegative base bounds; exponents below one require a positive minimum.
+Retain exact exponent-one identity and numeric/domain guards. Keep value-only
+quantized ranges separate from response rates and native-upload taint.
