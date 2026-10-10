@@ -4,7 +4,7 @@ from source_temporal import affine_time_parameters
 from source_control_bounds import merge_continuity
 
 
-def motion_control(field,control,unit,*,application):
+def motion_control(field,control,unit,*,application,_include_switch_events=True):
     from source_appearance import _phase_literal,_phase_terms,_expression
     result={'policy':'source-time-control-curves-v1','control':control,'control_unit':unit,
         'application':application,'curve_kind':'unknown','constant_value':None,
@@ -17,6 +17,10 @@ def motion_control(field,control,unit,*,application):
         'visible_motion_speed':None,'unknown_reasons':[],
         'conditions':['Continuous nominal source-time formula; clock jumps, finite precision and sampled frames excluded',
                       'Control variation does not establish visibility, geometry trajectories after projection, feedback motion or perceived intensity']}
+    if _include_switch_events:
+        from source_time_switches import time_switch_events
+        result['time_switch_events']=time_switch_events(field)
+        result['time_switch_events_are_exhaustive']=False
     literal=_phase_literal(field)
     if literal is not None:
         result.update(curve_kind='constant',rate_estimate_kind='exact_nominal',nominal_value_range_kind='exact_nominal',nominal_continuity='smooth_nominal',constant_value=literal,

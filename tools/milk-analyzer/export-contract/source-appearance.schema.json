@@ -901,6 +901,55 @@
                           }
                         }
                       }
+                    },
+                    "time_switch_events": {
+                      "type": "array",
+                      "description": "Supported nominal source-time event sites, nonexhaustive; empty does not certify smoothness. Clock/native rounding, reachability and visible consequences remain separate.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "event_kind",
+                          "period_seconds",
+                          "nominal_event_rate_hz",
+                          "visible_flash_frequency_hz",
+                          "events_are_exhaustive"
+                        ],
+                        "properties": {
+                          "event_kind": {
+                            "enum": [
+                              "periodic_threshold_crossing",
+                              "affine_time_floor_steps"
+                            ]
+                          },
+                          "period_seconds": {
+                            "type": "number"
+                          },
+                          "nominal_event_rate_hz": {
+                            "type": "number"
+                          },
+                          "absolute_control_jump": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "predicate_true_fraction": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "visible_flash_frequency_hz": {
+                            "type": "null"
+                          },
+                          "events_are_exhaustive": {
+                            "const": false
+                          }
+                        }
+                      }
+                    },
+                    "time_switch_events_are_exhaustive": {
+                      "const": false
                     }
                   }
                 }

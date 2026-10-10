@@ -1065,3 +1065,11 @@ volume multiplication before final clamp. Invalid volume config affects only
 its enabled domain. Gate candidates are not visible flashes; material draw threshold
 applies to quad and hardware wave paths before scaled-dot alpha adjustment. Keep missing audio/history and dynamic flags
 unresolved, independent from constant vertex colour or raw channel timing.
+
+Source time-switch maintenance: `source_time_switches` derives nominal schedules
+from supported sinusoidal threshold and affine real-floor sites. Preserve
+signed phase and amplitude, strict/tangent domain guards, cast/outer-transfer
+uncertainty and event-site versus whole-control scope. Current EEL int/floor
+share native floor; shader int casts remain distinct. Keep clock resets and
+sampled/native precision separate. Bounded nonexhaustive scans and per-analysis
+cache avoid recursion via the internal motion-control switch-scan opt-out.

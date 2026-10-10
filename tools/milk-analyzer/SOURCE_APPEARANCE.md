@@ -33,6 +33,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_radial_zoom` | Positive uniform-control radial zoom component, nominal factor/derivative envelopes; no tunnel or full-map label |
 | `native_warp_displacement` | Per-step backward-sampling RMS expression/bound in aspect-corrected source coordinates; not visible speed |
 | `elements[].wave_material` | Built-in wave RGB clamp/normalization and mode/volume alpha recipe; threshold jump candidates are not visible flashes |
+| `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
 | `mood_matches.psychedelic.candidate` | True when contributing fractal and generated phase-palette constructions coexist through the recognized final colour path; otherwise null |
@@ -1475,3 +1476,40 @@ from MilkDrop2's packed display representation. Generated audio geometry,
 coverage, draw mode, alpha, blending, feedback and later shaders determine
 what reaches the screen. No mood, displayed-flash frequency, final palette or
 whole-preset no-flash promise follows from this material descriptor.
+
+
+## Nominal time-switch events
+
+Raw source control curves include `time_switch_events` and explicitly mark the
+list nonexhaustive. The producer checks at most2048source nodes and32events per
+curve, with per-analysis caching. Supported sinusoidal comparisons use an affine
+source-time phase, known offset/amplitude and an interior normalized threshold.
+Negative amplitude reverses the comparison; signed phase rates retain event
+phase. Duty cycle is acos(threshold)/pi for the normalized greater predicate,
+complemented for less. Two roots per period supply event cadence2/period and
+supported offsets modulo the period. The inverse-trig basis is documented in
+[NIST DLMF4.23](https://dlmf.nist.gov/4.23); the duty/contact formulas are our
+source-math derivation, checked with independent controls.
+
+Only complete comparison/constant-branch controls supply a whole-control jump.
+Nested sites preserve their own nominal predicate cadence but not an inferred
+outer jump. Equal branches are omitted. Tangent thresholds at±1, unreachable
+thresholds, audio/state/nonlinear phases and unproved domains get no crossing
+schedule. An empty list does not certify continuity or absence of flashing.
+
+Affine real-floor sites have a step interval1/abs(phase slope). A supported
+scalar linear transfer can supply scaled jump magnitude, while absolute levels
+remain unbounded/unknown. The step train is periodic in event cadence, not
+periodic control values. Current source34 projectm-eval TreeFunctions.c87–88
+binds EEL int and floor to the same real floor function, and its negative-value
+control expects floor(-1.5)=-2. The source reader emits int for that shared
+function. Shader integer casts retain conversion semantics and cannot borrow
+a floor site's whole-control jump. A cadence at an inner site can be hidden by
+clamps, material conversion or other outer operations.
+
+The schedules use nominal continuous source time. Shader-wrapped versus
+native/equation clocks are identified; resets/wrap, native rounding and finite
+frame cadence remain outside these event counts. Event offsets can remain null
+when arithmetic cannot resolve distinct contacts. Visible-flash frequency is
+always null. Later execution gates, projection, opacity, blend/feedback and
+composition determine visible consequences; this is not a mood certificate.

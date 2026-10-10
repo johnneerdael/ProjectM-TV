@@ -365,3 +365,11 @@ the JSON flags that possibility separately from displayed flashing. Opacity
 retains mode-specific gain/reference size, mode 3's native treble-squared input,
 and optional volume modulation before final clamping. Audio history, coverage
 and later processing remain necessary to determine the visible response.
+
+Raw control curves now include `time_switch_events` for supported periodic
+time-driven thresholds and affine-time floor steps. These records describe
+nominal cadence, duty cycle and source jump size where the complete transfer is
+known. Inner sites keep their own cadence without claiming the whole control
+has that jump. The list is nonexhaustive; an empty list does not prove smooth
+behaviour. Frame sampling, clock resets, native precision, opacity and later
+processing determine whether a source event becomes a visible pulse or flash.
