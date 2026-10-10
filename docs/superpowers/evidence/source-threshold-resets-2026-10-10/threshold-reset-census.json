@@ -1,0 +1,196 @@
+{
+  "presets": 100,
+  "structured_descriptions": 100,
+  "schema_valid": 100,
+  "unchanged_source_hashes": 100,
+  "new_execution_gaps": [],
+  "affected_presets": [
+    {
+      "preset": {
+        "relative_path": "Zylot - The Sound plays the Sights.milk",
+        "name": "Zylot - The Sound plays the Sights.milk",
+        "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac"
+      },
+      "stage_hashes": {
+        "warp": "61939c7904bcb1a2e6fa12d05a0f4f43fe9d5d2f1fa386ada7df7f1080cc851f",
+        "composite": "ffa73d9b50368b8064070e2b59f31e32194d4a0183c98013d3a3a1b777668f33"
+      },
+      "hazards": [
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "r",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": null,
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": false,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": null
+        },
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "g",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": null,
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": false,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": null
+        },
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "b",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": null,
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": false,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": null
+        },
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "r",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": [
+            -1.5e-323,
+            1.0040000001800002
+          ],
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": true,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": "2565547f96168db58f5932c6a60a53dddd31756296c410b0e81bfbfc3b52f59d"
+        },
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "g",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": [
+            -1.5e-323,
+            1.0040000001800002
+          ],
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": true,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": "2565547f96168db58f5932c6a60a53dddd31756296c410b0e81bfbfc3b52f59d"
+        },
+        {
+          "kind": "shader_channel_threshold_reset",
+          "channel": "b",
+          "comparison": "greater",
+          "threshold": 0.699999988,
+          "reset_value": 0.0,
+          "reset_branch": "true",
+          "absolute_nominal_boundary_jump": 0.699999988,
+          "signal_value_range": [
+            -1.5e-323,
+            1.0040000001800002
+          ],
+          "signal_nominal_continuity": "smooth_nominal",
+          "threshold_inside_proved_range": true,
+          "trigger_source_kind": "sampled_image",
+          "nominal_crossing_event_rate_hz": null,
+          "source_crossing_events": [],
+          "visible_flashing_verified": false,
+          "whole_frame_blackout_verified": false,
+          "scope": "complete scalar raw-stage channel at a threshold boundary; temporal crossing/reachability unverified",
+          "conditions": [
+            "Selected authored stage and finite supported signal/reset arithmetic under declared sample/input premises",
+            "A boundary jump requires the signal to cross the threshold; an enclosing interval does not prove reachability",
+            "Jump is a nominal limiting difference, not a discrete-frame sample difference or native-rounding guarantee",
+            "Sample-driven event timing depends on image/history/coordinate changes; no frequency is invented",
+            "One channel reset does not prove whole-frame blackout, visible flashing, screen prominence or a mood"
+          ],
+          "stage": "warp",
+          "input_scenario_sha256": "2565547f96168db58f5932c6a60a53dddd31756296c410b0e81bfbfc3b52f59d"
+        }
+      ]
+    }
+  ],
+  "source_only": true,
+  "uses_rendered_images": false,
+  "visible_flashing_verified": false
+}

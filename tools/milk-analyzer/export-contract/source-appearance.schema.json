@@ -6162,6 +6162,21 @@
                     "then": {
                       "$ref": "#/$defs/nearestTemporalHazard"
                     }
+                  },
+                  {
+                    "if": {
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "const": "shader_channel_threshold_reset"
+                        }
+                      }
+                    },
+                    "then": {
+                      "$ref": "#/$defs/shaderThresholdReset"
+                    }
                   }
                 ]
               }
@@ -6670,6 +6685,55 @@
             ],
             "minimum": 0
           }
+        }
+      }
+    },
+    "shaderThresholdReset": {
+      "type": "object",
+      "required": [
+        "kind",
+        "stage",
+        "channel",
+        "comparison",
+        "threshold",
+        "reset_value",
+        "absolute_nominal_boundary_jump",
+        "signal_nominal_continuity",
+        "nominal_crossing_event_rate_hz",
+        "visible_flashing_verified",
+        "whole_frame_blackout_verified",
+        "conditions"
+      ],
+      "properties": {
+        "kind": {
+          "const": "shader_channel_threshold_reset"
+        },
+        "channel": {
+          "enum": [
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        "absolute_nominal_boundary_jump": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "signal_nominal_continuity": {
+          "enum": ["smooth_nominal", "piecewise_lipschitz"]
+        },
+        "nominal_crossing_event_rate_hz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "visible_flashing_verified": {
+          "const": false
+        },
+        "whole_frame_blackout_verified": {
+          "const": false
         }
       }
     }

@@ -1319,3 +1319,11 @@ Native float32 endpoint padding must cover reset radius/angle values. Pointwise
 control/operator bounds precede nominal RMS integration; do not label them uniform
 affine transforms or certify interpolated mesh area/folds/visible speed. Spatial
 lookup composition is separate from the existing uniform result.
+
+Channel reset hazards require a complete scalar select between its signal and
+constant reset at a literal threshold. Fold only identical nonnull typed branches,
+preserve original-domain checks, and exclude continuous/unreachable boundaries.
+Require supported nominal continuity with every contributing signal input varied;
+value intervals alone cannot justify jumps for floor/integer/boolean signals.
+Source jump magnitude is a limiting gap, not a discrete-frame or whole-screen
+flash. Sample-driven timing remains unknown; packed shader-clock schedules retain wrap semantics.

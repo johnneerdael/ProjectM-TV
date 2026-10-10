@@ -2530,3 +2530,38 @@ through supported authored UV response, with uniformity false and aspect inputs
 explicit. Default uniform transport remains unchanged. Native mesh interpolation,
 rounding, texel alignment, history and image prominence remain separate; these
 source envelopes are not automatic mood assignments.
+
+## Shader channel threshold resets
+
+`activity.flashing.hazards` includes `shader_channel_threshold_reset` when a
+complete scalar raw-stage channel chooses between its signal and a constant reset
+at a literal threshold. The limiting boundary gap is `abs(threshold-reset_value)`.
+The contributing signal must pass nominal continuous calculus with all its input
+lanes varied. Value envelopes alone are insufficient: integer casts, `floor`,
+raw `frac`, boolean signals and unsupported transfers receive no limiting-jump
+claim. Their authored discrete transitions require separate proofs.
+For `if(ret.r>.7) ret.r=0`, the nominal red-channel gap is approximately .7 after
+authored literal conversion. A reset to the threshold itself is continuous and
+does not receive this jump claim. Strictly unreachable/tangent thresholds under
+a known signal range do not receive a crossing mechanism.
+
+Signal ranges can be declared-image or scenario bounds; an enclosing interval
+does not prove the threshold is actually reached. Sample-driven frequency stays
+null. Only an existing supported source-time oscillator schedule supplies a
+nominal crossing rate; packed shader-time wrapping is preserved and native clock
+resets/cadence remain separate. An image-driven reset can act spatially, temporally
+or both, and never proves a whole-frame blackout or actual displayed flash.
+
+Sequential unrelated channel writes may add equivalent select wrappers. A
+descriptor-local normalization folds only equal nonnull typed branch identities,
+then checks the original graph for known invalid arithmetic before credit. Later
+nonlinear colour transfer keeps its whole-output jump unresolved. Native storage,
+masks, texture content/history, affected area and later passes determine visibility.
+These records are potential local discontinuity facts, not Party labels.
+
+[Microsoft's HLSL if reference](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-if)
+defines conditional and implicit-else execution. Original authored shader code
+and the declared patched translator/typed graph determine the reset branches;
+no screenshot is used to infer their source behaviour.
+[Microsoft's HLSL floor reference](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-floor)
+specifies integer-valued results even though the return type is floating point.

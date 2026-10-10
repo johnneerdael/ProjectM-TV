@@ -51,6 +51,8 @@ def source_activity(analysis,description):
         for report,scenario in ((model,None),(model.get('scenario_colour_envelope'),True)):
             if report is None:continue
             response=report['direct_colour_time_response']
+            flashing['hazards'].extend({**h,'stage':stage,'input_scenario_sha256':report['input_scenario_sha256'] if scenario else None}
+                for h in report['channel_threshold_resets'])
             if response['channels']:
                 flashing['shader_change_bounds'].append({**response,'stage':stage,
                     'input_scenario_sha256':report['input_scenario_sha256'] if scenario else None})

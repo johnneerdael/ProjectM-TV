@@ -17,6 +17,7 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             'raw_rgb_bounds_if_samples_unit_interval':None,'sample_textures':[],
             'colour_difference_gain':None,'whole_feedback_contraction':None,
             'actual_feedback_persistence':None,'visible_flashing':None,'unknown_reasons':[],
+            'channel_threshold_resets':[],
             'direct_sample_colour_response':{'policy':'source-direct-sample-colour-response-v1','samples':[],
                 'includes_sampling_coordinate_response':False,'visible_response_strength':None,'conditions':[]},
             'direct_colour_time_response':{'policy':'source-fixed-sample-colour-time-response-v1','status':'unknown',
@@ -139,6 +140,8 @@ def nonlinear_texture_colour_bounds(analysis,warp_vertex,*,input_domains=None):
             time_response['status']='conditional source direct-colour time paths'
             from source_sample_colour_response import sample_colour_response
             r['direct_sample_colour_response']=sample_colour_response(projected,samples,domains,derived_samples)
+            from source_threshold_resets import channel_threshold_resets
+            r['channel_threshold_resets']=channel_threshold_resets(projected,domains)
             spans=[c['nominal_value_range'] for c in channels]
             r['channel_value_envelopes']=channels
             r['sample_textures']=sorted({s.detail.get('canonical_texture') for name,s in samples},key=str)

@@ -591,3 +591,11 @@ vary across the mesh. It distinguishes native coordinate inputs from persistent
 state and keeps uniform transform results unchanged. A separate spatial lookup
 record can carry the bound into shader sampling. These are conservative source
 movement quantities; they do not establish folds, typical speed or a mood.
+
+Shader channel resets now expose a possible discontinuity and its nominal boundary
+size. A channel reset from a .7 threshold to zero differs from a continuous clamp
+at .7. The JSON keeps image-driven event frequency and visible flashing unknown;
+threshold reachability, affected area and feedback history still matter.
+The signal must have supported continuous nominal math. Integer casts, floor,
+boolean signals and other unproved discontinuities receive no boundary-size
+estimate until their actual discrete transitions are modeled.
