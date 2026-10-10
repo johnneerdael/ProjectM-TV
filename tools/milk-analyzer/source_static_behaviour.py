@@ -14,7 +14,7 @@ def _digest(value):
 
 def validate_context(request=None):
     request=dict(DEFAULT_CONTEXT if request is None else request)
-    if set(request)-{'viewport','feedback_fps','reference_profile','scalar_input_domains','output_storage'}:
+    if set(request)-{'viewport','feedback_fps','reference_profile','scalar_input_domains','output_storage','activity_preferences'}:
         raise ValueError('unsupported static behaviour context field')
     viewport=request.get('viewport');fps=request.get('feedback_fps')
     if not isinstance(viewport,(list,tuple)) or len(viewport)!=2 or any(type(v) is not int or not 0<v<2**31 for v in viewport):
@@ -30,7 +30,9 @@ def validate_context(request=None):
     storage=request.get('output_storage','normalized-unorm')
     if storage not in {'normalized-unorm','unknown'}:
         raise ValueError('supported declared output storage required')
-    result={'output_storage':storage,'viewport':list(viewport),'feedback_fps':float(fps),
+    from static_behaviour_scoring import validate_preferences
+    preferences=validate_preferences(request.get('activity_preferences'))
+    result={'activity_preferences':preferences,'output_storage':storage,'viewport':list(viewport),'feedback_fps':float(fps),
             'reference_profile':request.get('reference_profile','caller-declared-reference'),
             'scalar_input_domains':{name:list(span) for name,span in sorted(domains.items())}}
     if not isinstance(result['reference_profile'],str) or not result['reference_profile']:
@@ -202,7 +204,7 @@ def static_behaviour(analysis,description,context=None):
         result['status']='partial' if result['producer_failures'] else 'computed'
         result['displayed_output']=_displayed_output(analysis,result['flashing'],normalized)
         result['output_model_complete']=normalized['output_storage']!='unknown' and result['displayed_output']['native_enclosure_consistent_with_nominal'] and not result['producer_failures'] and _complete(analysis,result['flashing'],result['motion'])
-        result['classification']=score_static_behaviour(result)
+        result['classification']=score_static_behaviour(result,preferences=normalized['activity_preferences'])
         result['limitations']=['Reference viewport/FPS/input domains are declared assumptions, not device observations',
             'Physical component bounds and source potential estimates are not rendered appearance or native certification',
             'Remaining feedback/audio/state/composition gaps remain explicit and can prevent automatic mood eligibility']

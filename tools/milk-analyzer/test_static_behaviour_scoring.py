@@ -100,3 +100,59 @@ def test_nonperiodic_low_contrast_does_not_become_intense_from_rate_alone():
     result=score_static_behaviour(model)
     assert 'Intense' not in result['predicted_bands']
     assert result['intensity']['interval'][1]<30
+
+
+def textured_partial_model(extent=1.):
+    model=evidence(complete=False,extent=extent)
+    record=model['flashing']['records'][0]
+    record.update(periodic_contrast_range=None,brightness_delta_range=None,
+                  maximum_brightness_change_per_second=None,cycle_rate_hz=None,total_brightness_rate_known=False)
+    record['fixed_unit_texture_material_partial']={
+        'policy':'source-fixed-unit-texture-material-modulation-v1',
+        'maximum_brightness_change_per_second':3.,'brightness_delta_range':[0.,1.],
+        'nominal_continuity':'smooth_nominal','total_brightness_rate_known':False,
+        'sampling_coordinate_response_included':False,'texture_history_change_rate':None,
+        'premises':['Sample RGBA and destination fixed in[0,1]']}
+    return model
+
+
+def test_quantified_texture_material_can_inform_potential_without_certifying_total():
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(textured_partial_model())
+    assert result['intensity']['value']==100
+    assert 'Intense' in result['predicted_bands']
+    assert result['eligible_bands']==[]
+    assert result['unknown_contributors']
+    assert result['partial_contributions'][0]['scope']=='fixed_texture_material_partial'
+
+
+@pytest.mark.parametrize('extent',[0.,.0001])
+def test_tiny_or_disconnected_texture_partial_does_not_become_intense(extent):
+    from static_behaviour_scoring import score_static_behaviour
+    result=score_static_behaviour(textured_partial_model(extent))
+    assert 'Intense' not in result['predicted_bands']
+    assert 'Chill' not in result['predicted_bands']
+
+
+def test_unknown_texture_partial_transfer_does_not_invent_strength():
+    from static_behaviour_scoring import score_static_behaviour
+    model=textured_partial_model();model['prominence']['by_component']['shader_composite']['final_transfer']['difference_gain_interval']=[0.,None]
+    result=score_static_behaviour(model)
+    assert result['intensity']['value'] is None
+    assert result['partial_contributions'][0]['strength_interval'][1] is None
+
+
+def test_editable_preference_reference_changes_mapping_not_mathematical_evidence():
+    from static_behaviour_scoring import score_static_behaviour
+    model=evidence(speed=.6);before=repr(model)
+    default=score_static_behaviour(model)
+    adjusted=score_static_behaviour(model,preferences={'motion_reference_vp_s':1.5})
+    assert default['intensity']['value']>adjusted['intensity']['value']
+    assert adjusted['intensity']['value']==pytest.approx(40.6)
+    assert repr(model)==before
+
+
+@pytest.mark.parametrize('preferences',[{'motion_reference_vp_s':0},{'unknown':1},{'flash_cycle_reference_hz':float('nan')}])
+def test_invalid_preferences_are_rejected(preferences):
+    from static_behaviour_scoring import score_static_behaviour
+    with pytest.raises(ValueError):score_static_behaviour(evidence(),preferences=preferences)

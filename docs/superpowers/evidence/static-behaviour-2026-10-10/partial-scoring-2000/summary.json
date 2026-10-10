@@ -1,0 +1,13 @@
+{
+  "counts": {
+    "presets": 2000,
+    "indices_before": 367,
+    "indices_after": 367,
+    "partial_records": 1305
+  },
+  "changed_presets": [],
+  "wall_seconds": 10.249128333001863,
+  "parent_rows_sha256": "c87f4446bc50d17427f5b53ff78541832a6ef6f54e8f8a63c2652227423de671",
+  "scoring_source_sha256": "970e0bcd66d07a741b23b2be0c66301a0ab169cbf5392d9ea8a9975ac2e53984",
+  "uses_rendered_images": false
+}

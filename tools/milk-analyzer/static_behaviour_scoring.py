@@ -40,10 +40,24 @@ def _scale(span, extent, reference):
             None if _product(span[1], extent[1]) is None else min(1., _product(span[1], extent[1])/reference)]
 
 
-def score_static_behaviour(evidence):
+def validate_preferences(preferences=None):
+    if preferences is not None and not isinstance(preferences,dict):
+        raise ValueError('preference overrides must be an object')
+    overrides={} if preferences is None else dict(preferences)
+    if set(overrides)-set(RULES):raise ValueError('unknown activity preference')
+    for key,value in overrides.items():
+        if type(value) not in {int,float} or not math.isfinite(value):raise ValueError('finite activity preference required')
+        if key in {'negligible_integrated_rgb_difference','maximum_eligible_score_width'}:
+            if value<0 or value>(1 if key=='negligible_integrated_rgb_difference' else 99):raise ValueError('activity preference outside allowed range')
+        elif value<=0:raise ValueError('positive activity reference required')
+    return {**RULES,**overrides}
+
+
+def score_static_behaviour(evidence,*,preferences=None):
     """Return conditional bands, reasons and a separately named potential index."""
+    rules=validate_preferences(preferences)
     prominence=evidence.get('prominence', {}).get('by_component', {})
-    rows=[]; unknown=[]; flash_possible=False
+    rows=[]; partial_rows=[]; unknown=[]; flash_possible=False
 
     def support(identity, brightness=False):
         item=prominence.get(identity)
@@ -85,25 +99,44 @@ def score_static_behaviour(evidence):
         strength=None
         if contrast is not None and frequency is not None:
             delta=_span(contrast)
-            multiplier=min(1., frequency/RULES['flash_cycle_reference_hz'])
-            if continuous and frequency<RULES['smooth_flash_candidate_minimum_hz']:
-                multiplier*=frequency/RULES['smooth_flash_candidate_minimum_hz']
+            multiplier=min(1., frequency/rules['flash_cycle_reference_hz'])
+            if continuous and frequency<rules['smooth_flash_candidate_minimum_hz']:
+                multiplier*=frequency/rules['smooth_flash_candidate_minimum_hz']
             strength=_scale([v*multiplier if v is not None else None for v in delta], extent,
-                            RULES['flash_contrast_reference'])
+                            rules['flash_contrast_reference'])
             size=_product(delta[1],extent[1])
-            flash_possible |= (size is None or size>RULES['negligible_integrated_rgb_difference']) and (
-                not continuous or frequency>=RULES['smooth_flash_candidate_minimum_hz'])
+            flash_possible |= (size is None or size>rules['negligible_integrated_rgb_difference']) and (
+                not continuous or frequency>=rules['smooth_flash_candidate_minimum_hz'])
         elif rate is not None and continuous and record.get('total_brightness_rate_known'):
-            strength=_scale([0.,rate], extent,RULES['brightness_reference_rgb_s'])
+            strength=_scale([0.,rate], extent,rules['brightness_reference_rgb_s'])
             if contrast is not None:
                 # Fast but barely changing colour cannot acquire a high
                 # contrast-based activity index from the rate ceiling alone.
-                contrast_strength=_scale(_span(contrast),extent,RULES['flash_contrast_reference'])
+                contrast_strength=_scale(_span(contrast),extent,rules['flash_contrast_reference'])
                 if contrast_strength[1] is not None:
                     strength[1]=contrast_strength[1] if strength[1] is None else min(strength[1],contrast_strength[1])
             size=None if contrast is None else _product(_span(contrast)[1],extent[1])
             flash_possible |= strength[1] is None or strength[1]>.3 and (
-                size is None or size>RULES['negligible_integrated_rgb_difference'])
+                size is None or size>rules['negligible_integrated_rgb_difference'])
+        partial=record.get('fixed_unit_texture_material_partial')
+        if partial is not None:
+            partial_rate=partial.get('maximum_brightness_change_per_second')
+            partial_delta=partial.get('brightness_delta_range')
+            partial_strength=[0.,None]
+            if partial_rate is not None and partial_delta is not None and partial.get('nominal_continuity')=='smooth_nominal':
+                partial_strength=_scale([0.,partial_rate],extent,rules['brightness_reference_rgb_s'])
+                contrast_cap=_scale(_span(partial_delta),extent,rules['flash_contrast_reference'])
+                if partial_strength[1] is not None and contrast_cap[1] is not None:
+                    partial_strength[1]=min(partial_strength[1],contrast_cap[1])
+            partial_rows.append({'component_id':identity,'dimension':'flashing',
+                'scope':'fixed_texture_material_partial','strength_interval':partial_strength,
+                'included_in_total_activity_bound':False,
+                'premises':list(partial.get('premises',[])),
+                'reason':'conditional vertex material modulation with texture samples and destination held fixed'})
+            # This estimate supplies a potential signal but never closes the
+            # texture/history or input trajectory gaps in the parent record.
+            unknown.append({'component_id':identity,'dimension':'flashing',
+                            'reason':'fixed-texture material response excludes texture/history trajectories'})
         if strength is None or not record.get('total_brightness_rate_known'):
             unknown.append({'component_id':identity,'dimension':'flashing',
                             'reason':'total brightness trajectory or transition extent unresolved'})
@@ -118,7 +151,7 @@ def score_static_behaviour(evidence):
             continue
         identity=record['component_id']; extent=support(identity)
         speed=_span(record['speed_interval_vp_per_second'])
-        strength=_scale(speed,extent,RULES['motion_reference_vp_s'])
+        strength=_scale(speed,extent,rules['motion_reference_vp_s'])
         rows.append({'component_id':identity,'dimension':'motion','strength_interval':strength,
                      'reason':'source movement ceiling joined to displayed contribution; no observed flow percentile'})
         if strength[1] is None:
@@ -137,15 +170,16 @@ def score_static_behaviour(evidence):
     low=max((r['strength_interval'][0] for r in rows), default=0.)
     high=1. if unknown else max(known,default=0.)
     interval=[1.+99.*low,1.+99.*high]
-    point=None if not known or unknown and max(known)==0. else 1.+99.*max(known)
+    potential=known+[r['strength_interval'][1] for r in partial_rows if r['strength_interval'][1] is not None]
+    point=None if not potential or unknown and max(potential)==0. else 1.+99.*max(potential)
     predicted=[] if point is None else [n for n,a,b in BANDS if a<=point<=b and (n!='Chill' or not flash_possible and not unknown)]
     eligible=[n for n,a,b in BANDS if not unknown and a<=interval[0] and interval[1]<=b and
-              interval[1]-interval[0]<=RULES['maximum_eligible_score_width'] and (n!='Chill' or not flash_possible)]
+              interval[1]-interval[0]<=rules['maximum_eligible_score_width'] and (n!='Chill' or not flash_possible)]
     result={'policy':POLICY,'model_status':'assumed source-potential preference mapping; uncalibrated',
             'intensity':{'value':point,'value_kind':'known-source potential index', 'interval':interval,
                          'interval_kind':'source bounds and unresolved contribution ranges'},
             'predicted_bands':predicted,'eligible_bands':eligible,'flash_possible':flash_possible,
-            'contributions':rows,'unknown_contributors':unknown,'preference_rules':dict(RULES),
+            'contributions':rows,'partial_contributions':partial_rows,'unknown_contributors':unknown,'preference_rules':dict(rules),
             'uses_rendered_images':False,'appearance_accuracy_verified':False,
             'limitations':['Upper source bounds are not a typical visible response or native whole-domain certificate',
                            'Area/contrast/history, native arithmetic and unresolved paths remain explicit',

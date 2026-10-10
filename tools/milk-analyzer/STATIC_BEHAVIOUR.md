@@ -122,3 +122,26 @@ These guards retain source assumptions and do not certify driver transcendental
 precision or rendered pixels. Repeated overlapping shapes and possible borders
 also retain their aggregate local influence when a composite resamples them;
 source-area integrals cannot replace that per-texel bound.
+
+## Conditional potential and editable preferences
+
+The scorer now consumes the separate fixed-texture material partial in
+`classification.partial_contributions`. It can inform the known-source potential
+index after spatial support and final transfer are accounted for. Its lower bound
+never becomes total activity, and excluded texture/history trajectories keep
+automatic eligibility unresolved. Tiny, invisible and unknown-transfer controls
+remain guarded. A source response ceiling can be canceled by other effects; it is
+not a guaranteed visible reaction.
+
+A declared behaviour context may include `activity_preferences`, an object of
+finite validated overrides for the references in `classification.preference_rules`.
+For example `{"motion_reference_vp_s":1.5}` changes the preference mapping while
+leaving the underlying physical evidence unchanged. The resolved rules participate
+in export/cache identity; unknown names, nonfinite values and invalid thresholds
+reject. Bands stay Chill1–30,Normal25–75,Intense70–100.
+
+The first derived scoring-only check on the frozen2000 v5 records retains367
+indices and changes0. Its1305 fixed-texture partial records are exported but their
+final transfers remain too uncertain to provide additional whole-display values.
+This is a bottleneck result, not a classification improvement claim. Original
+rows remain unchanged and the derived results have a distinct scorer/source hash.

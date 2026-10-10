@@ -202,3 +202,26 @@ def test_declared_shader_clock_domain_can_qualify_finite_basic_intermediates(fac
                           'scalar_input_domains':{'_c2.x':[0,4]}})
     assert (report['displayed_output']['native_finite_guard']['status']=='bounded') is qualified
     if not qualified:assert report['classification']['eligible_bands']==[]
+
+
+def test_context_preferences_are_exported_and_change_source_mapping():
+    from source_static_behaviour import static_behaviour
+    from source_appearance import appearance_from_analysis
+    a=analysis('PSVERSION_COMP=2\nfWaveAlpha=0\ncomp_1=`shader_body {ret=float3(.5+.4*sin(time*12),.5,.5);}\n')
+    base={'viewport':[1920,1080],'feedback_fps':30,'scalar_input_domains':{'_c2.x':[0,4]}}
+    before=static_behaviour(a,appearance_from_analysis(a),base)
+    after=static_behaviour(a,appearance_from_analysis(a),{**base,'activity_preferences':{'flash_contrast_reference':2.}})
+    assert before['context_sha256']!=after['context_sha256']
+    assert before['classification']['intensity']['value']>after['classification']['intensity']['value']
+    assert after['classification']['preference_rules']['flash_contrast_reference']==2.
+
+
+def test_activity_preferences_separate_export_cache_identity(tmp_path):
+    from effect_family_export import export_preset
+    from test_core2331_warp import BINARIES
+    path=tmp_path/'preference.milk';path.write_text('[preset00]\nfWaveAlpha=0\n')
+    base={'reader':BINARIES/'milk-native-reader','cache':tmp_path/'cache'}
+    ctx={'viewport':[1920,1080],'feedback_fps':30}
+    a,_=export_preset(path,behaviour_context=ctx,**base)
+    b,hit=export_preset(path,behaviour_context={**ctx,'activity_preferences':{'motion_reference_vp_s':1.5}},**base)
+    assert not hit and a['cache_key']!=b['cache_key']

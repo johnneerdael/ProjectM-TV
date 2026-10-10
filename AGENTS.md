@@ -1499,3 +1499,14 @@ bounds and the restricted binary32 finite-source guard. No implicit shader clock
 domain, generic native precision or target-driver certificate follows from a
 nominal envelope. Arbitrary resampling must retain aggregate instance alpha and
 possible borders; input context domains must propagate into motion/prominence.
+
+
+Static preference mapping follow-up (2026-10-10): `activity_preferences` in the
+declared behaviour context supplies validated overrides to `score_static_behaviour`.
+Resolved rules enter export/cache identity; physical evidence remains unchanged.
+`partial_contributions` may inform the source-potential index but never closes
+texture/history uncertainty or supplies a total-activity lower bound.49 focused
+scorer/builder/export tests pass. Derived scoring on unchanged final-v5 evidence
+adds0indices (367remain), exposing unresolved final transfers as the next priority.
+See `tools/milk-analyzer/STATIC_BEHAVIOUR.md`; do not report this as improved
+whole-preset grouping or rewrite the preserved producer rows.
