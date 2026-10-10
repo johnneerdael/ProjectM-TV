@@ -470,3 +470,9 @@ Supported coordinate-map blends also retain their source interpolation weights:
 the output can describe ripples blended together or a colour channel controlling
 an image-driven distortion blend. Spatially varying weights and image-dependent
 scale are kept separate from a uniform ripple or offset-only claim.
+
+`folded_coordinate_map` adds explicit tiling and triangular mirror-fold recipes.
+For supported maps it reports repeat-cell geometry, seam behavior, phase and
+output formulas, and which audio bands change those controls. These can help a
+consumer reconstruct a repeated or mirrored layout. Actual displayed copies,
+colours and feedback still depend on the sampled content and later stages.

@@ -1913,3 +1913,41 @@ Reference: [Microsoft HLSL lerp](https://learn.microsoft.com/en-us/windows/win32
 Original MilkDrop 2.25c `vis_milk2/plugin.cpp` uses the D3DX shader compiler;
 the source34 patched GLSL generator maps lerp to mix. This predictor addition
 performs nominal source algebra and does not change either renderer.
+
+## Explicit planar periodic folds
+
+`sampling_geometry.stages.*[].folded_coordinate_map` describes supported explicit
+coordinate wrapping and mirror-fold kernels. Each axis retains either `frac`
+or `triangular_frac` (`abs(2*frac(phase)-1)` or its reversed sign form), an affine
+output scale/offset, four planar phase coefficients and a uniform phase offset.
+Partial axes remain separate; a supported x axis does not prove the y map.
+
+The phase programs can retain audio/time controls and named audio routes.
+A constant, finite, invertible phase matrix in a single shader/original UV basis
+provides `repeat_lattice_basis_uv = inverse(M)` and nominal fundamental cell area
+`1/abs(det(M))`. Columns translate the source coordinate by complete phase cycles.
+Mixed mesh/original bases, dynamic matrices and singular matrices provide no
+constant inverse lattice. Dynamic scale can collapse, even when a formula exists.
+
+`fold_output_range` is the unscaled kernel's [0,1] enclosure; frac excludes its
+upper endpoint, the triangular kernel includes it. Their derivatives away from
+seams are respectively 1 and +/-2. These describe the kernel before exported
+output scale and downstream operations. Frac has jumps at integer phases;
+triangular folds are continuous nominally with derivative corners. Uniform
+inputs are held fixed for these spatial claims. Time/audio changes can still
+introduce discontinuities. Negative frac phases use floor, not truncation.
+
+The producer projects supported scalar lanes with a strong memo and bounded
+traversal. Original singular arithmetic, including zero-product operands, is
+checked before positive results. Image-driven phases, nonlinear spatial phase
+products and radial/angular coordinates do not acquire a planar lattice.
+Sampler repeat alone does not imply an explicit authored frac operation.
+
+No visible tile count, source coverage, final kaleidoscopic appearance, screen
+velocity, feedback stability or mood is certified. Texture content, filtering,
+clipping, colour weights, warp mesh and later stages remain separate.
+
+References: [HLSL frac semantics](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-frac)
+and [The Book of Shaders: Patterns](https://thebookofshaders.com/09/).
+Original MilkDrop2.25c delegates the intrinsic to D3DX; the pinned source34 GLSL
+generator maps frac to fract. Neither renderer changes in this increment.

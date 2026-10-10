@@ -3673,6 +3673,9 @@
                       },
                       "sample_value_offset_envelope": {
                         "$ref": "#/$defs/sampleValueOffsetEnvelope"
+                      },
+                      "folded_coordinate_map": {
+                        "$ref": "#/$defs/foldedCoordinateMap"
                       }
                     }
                   }
@@ -4346,6 +4349,9 @@
                       },
                       "sample_value_offset_envelope": {
                         "$ref": "#/$defs/sampleValueOffsetEnvelope"
+                      },
+                      "folded_coordinate_map": {
+                        "$ref": "#/$defs/foldedCoordinateMap"
                       }
                     }
                   }
@@ -5705,6 +5711,69 @@
               "const": false
             }
           }
+        }
+      }
+    },
+    "foldedCoordinateMap": {
+      "type": "object",
+      "required": [
+        "policy",
+        "source_model",
+        "axes",
+        "actual_visible_copy_count",
+        "visible_motion_speed"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-planar-periodic-folds-v1"
+        },
+        "source_model": {
+          "enum": [
+            "unknown",
+            "planar_periodic_folds",
+            "partial_planar_periodic_folds"
+          ]
+        },
+        "axes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "phase_matrix_uv4": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "phase_coefficient_programs": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "repeat_lattice_basis_uv": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "fundamental_cell_area_uv2": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "actual_visible_copy_count": {
+          "type": "null"
+        },
+        "visible_motion_speed": {
+          "type": "null"
         }
       }
     }

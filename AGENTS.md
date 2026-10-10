@@ -1183,3 +1183,9 @@ weights for ripple extraction. For affine spatial coefficients use A+t*(B-A)
 and preserve an explicit offset lerp. Sampled local weights qualify only after
 sample substitution and sample-independent baseline verification. Keep original
 zero-weight branch domain checks; nominal algebra does not certify GPU rounding.
+
+Explicit planar folds: distinguish frac from triangular mirror kernels; retain
+per-axis partials, kernel range/derivative versus output scale, and dynamic phase
+programs/audio routes. Constant inverse repeat lattices require one UV basis and
+finite invertible phase coefficients. Preserve original-domain checks; no tile
+count, native precision, final kaleidoscope or mood credit follows.
