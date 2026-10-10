@@ -400,3 +400,10 @@ blur and external textures. It keeps their source identities and input weights
 separate, with conditional RGB boxes where coordinate/offset domains permit.
 Blur textures can contain different histories, and runtime bindings may vary,
 so this is not a shared feedback-loop gain or a final brightness/palette score.
+
+`nonlinear_texture_colour_bounds` carries supported raw colour ranges through
+clamps, positive-domain powers, roots, interpolation and dot products. Each
+texture sample remains an explicit unit-RGBA input premise. Singular or unknown
+domains stay unresolved, and partially understood channels remain separate.
+Range bounds do not establish nonlinear sensitivity, temporal continuity,
+visible flashing or how much of a frame has a particular colour.

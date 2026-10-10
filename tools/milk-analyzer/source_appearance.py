@@ -533,6 +533,7 @@ def appearance_from_analysis(analysis):
     transport=native_warp_transport(analysis,consumed=consumes_mesh and consumes_feedback)
     texture_transfer=texture_colour_transfer(analysis,feedback['vertex_colour_binding']['rgba'])
     from source_texture_envelopes import texture_colour_envelopes
+    from source_nonlinear_colour import nonlinear_texture_colour_bounds
     result={'schema_version':1,'policy':POLICY,'status':'conditional source description',
         'elements':list(elements.values()),'composition':composition_from_analysis(analysis,elements),
         'feedback_transfer':feedback,
@@ -546,6 +547,7 @@ def appearance_from_analysis(analysis):
         'colour_processing':colour_processing(analysis),
         'texture_colour_transfer':texture_transfer,
         'texture_colour_envelopes':texture_colour_envelopes(texture_transfer),
+        'nonlinear_texture_colour_bounds':nonlinear_texture_colour_bounds(analysis,feedback['vertex_colour_binding']['rgba']),
         'execution_unknowns':list(analysis.unknowns),
         'uses_rendered_images':False,'uses_shader_execution':False,
         'uses_equation_execution':False,'appearance_match_accuracy':None,

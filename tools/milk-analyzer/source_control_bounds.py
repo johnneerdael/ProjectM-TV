@@ -54,7 +54,52 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None):
     def calculate(node,depth):
         literal=_phase_literal(node)
         if literal is not None:return ([literal,literal],0.,'smooth_nominal')
-        if node.dtype!='float':return None
+        if node.dtype!='float' and not (_value_only and node.dtype=='bool' and node.op in
+                {'less','greater','less_equal','greater_equal','equal','eel_equal','not_equal'}):return None
+        if _value_only and node.op=='unary' and len(node.args)==1:
+            child=visit(node.args[0],depth+1)
+            if child is None:return None
+            if node.detail.get('operator')==1:return child
+            if node.detail.get('operator')==0:
+                span,rate,kind=child
+                return checked(None if span is None else [-span[1],-span[0]],rate,kind)
+            return None
+        if _value_only and node.op=='domain_checked' and len(node.args)==1:
+            if node.detail.get('function') not in {'sqrt','pow'}:return None
+            return visit(node.args[0],depth+1)
+        if _value_only and node.op in {'saturate','clamp'}:
+            child=visit(node.args[0],depth+1)
+            if child is None or child[0] is None:return None
+            low,high=(0.,1.) if node.op=='saturate' else (
+                _phase_literal(node.args[1]),_phase_literal(node.args[2]))
+            if low is None or high is None or low>high:return None
+            return ([min(high,max(low,v)) for v in child[0]],None,'unknown')
+        if _value_only and node.op in {'sqrt','pow'}:
+            child=visit(node.args[0],depth+1)
+            if child is None or child[0] is None:return None
+            lo,hi=child[0]
+            exponent=.5 if node.op=='sqrt' else _phase_literal(node.args[1])
+            if exponent is None or lo<0 or lo==0 and exponent<=0:return None
+            if not all(math.isfinite(v) for v in (lo,hi,exponent)):return None
+            values=[math.pow(v,exponent) for v in (lo,hi)]
+            if any(not math.isfinite(v) or base>0 and v==0 for base,v in zip((lo,hi),values)):
+                raise ValueError('nonlinear scalar power overflow/underflow')
+            span,_,_=checked([min(values),max(values)],None,'unknown')
+            if span is not None:span[0]=max(0.,span[0])
+            return (span,None,'unknown')
+        if _value_only and node.op=='lerp' and len(node.args)==3:
+            args=[visit(arg,depth+1) for arg in node.args]
+            if any(a is None or a[0] is None for a in args):return None
+            spans=[a[0] for a in args]
+            if any(not math.isfinite(v) for s in spans for v in s):return None
+            from fractions import Fraction
+            values=[float((1-Fraction(t))*Fraction(a)+Fraction(t)*Fraction(b))
+                    for a in spans[0] for b in spans[1] for t in spans[2]]
+            span,_,_=checked([min(values),max(values)],None,'unknown')
+            if span is not None and spans[2][0]>=0 and spans[2][1]<=1:
+                span[0]=max(span[0],min(spans[0][0],spans[1][0]))
+                span[1]=min(span[1],max(spans[0][1],spans[1][1]))
+            return (span,None,'unknown')
         if node.op=='input' and _value_only:
             name=node.detail.get('name')
             if not isinstance(name,str) or not name:return None

@@ -36,6 +36,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_input_bindings.main_frame_q` | Source main-frame q1..q32 snapshots packed into shader float32 banks, with unknown dynamic values retained |
 | `feedback_envelope` | Conditional varying affine-in-main RGB coefficient/gain envelopes; colour-only, not full feedback persistence |
 | `texture_colour_envelopes` | Independent affine texture-input RGB boxes and history/external input norms; not shared-history recurrence gain |
+| `nonlinear_texture_colour_bounds` | Per-channel nominal ranges through supported nonlinear scalar operations on declared texture inputs; no sensitivity or mood score |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
@@ -1599,3 +1600,35 @@ clipping, native precision/storage, drawing/detail and final display remain
 separate. Full sensitivity, whole-feedback contraction and actual persistence
 stay null; these colour boxes cannot alone establish final brightness, palette
 or a mood. This is a supported mixture description, not a new image simulation.
+
+
+## Nonlinear declared-texture colour ranges
+
+`nonlinear_texture_colour_bounds` reuses sample-value substitution and the
+bounded scalar walker. Each sample RGBA lane receives a declared[0,1]domain;
+texture identity and input domains remain source contracts, not observed uploads.
+The producer computes per-channel nominal ranges through supported nonlinear
+operations and retains partial channels without a complete RGB box. It never
+samples time, audio or pixels and does not assign a nonlinear sensitivity gain.
+
+Value-only rules cover saturate/clamp, positive-domain constant-exponent powers,
+sqrt, interpolation and dot products, alongside supported scalar arithmetic,
+trig and comparison ranges. Interpolation checks all endpoint combinations,
+including extrapolation; weights are not implicitly clamped. Constant clamp
+limits and nonnegative power ranges survive outward rounding. Domain guards
+remain active for singular powers, negative roots and invalid/nonfinite uploads.
+Native Q narrow nodes prove finite conversion before later clamps; a clamp
+cannot hide an unproved upload domain. Unsupported guarded operations stay
+unknown rather than dropping their checks.
+
+The shader graph already includes projectM's compatibility abs lowering for
+powers/roots and its literal pow(x,1)sign exception. These semantics remain
+intact. Native lum() uses dot weights(.32,.49,.29), summing1.1, not a generic
+normalized luminance transform. The [Khronos power reference](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/gl4/pow.xml)
+defines the underlying positive/zero-base domain; the pinned translator's
+lowering is the target-specific step before that operation.
+
+Raw ranges retain correlation/native precision/history/coordinate uncertainty.
+They do not measure colour distribution, dominance, palette, brightness,
+continuity, flashing or mood. Full nonlinear sensitivity and shared recurrence
+remain separate work; complete channel bounds are not appearance certification.

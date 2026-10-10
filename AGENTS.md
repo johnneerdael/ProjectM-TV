@@ -1108,3 +1108,12 @@ external source identities distinct from observed bindings/fallbacks. Coordinate
 terms or unknown constant offsets withhold RGB boxes without erasing valid
 input norms. Main/blur history norms never become shared-recurrence contraction
 or visible persistence, palette, brightness or mood claims.
+
+Source nonlinear-colour maintenance: `source_nonlinear_colour` reuses sample
+substitution and scalar_value_envelope for declared unit-RGBA inputs. Value-only
+clamp/power/root/lerp/dot support must preserve finite/domain guards, patched
+shader abs lowering and pow1 sign exception. Native Q uploads require finite
+endpoint conversion before downstream clamps; unknowns cannot become zero.
+Keep partial channels and source assumptions explicit. No gain/continuity,
+full feedback, displayed flashing/brightness/palette or mood certificate follows
+from raw colour ranges. Interpolation weights are not implicitly clamped.

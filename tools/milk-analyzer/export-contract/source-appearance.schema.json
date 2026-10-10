@@ -5120,6 +5120,68 @@
               }
             }
           }
+        },
+        "nonlinear_texture_colour_bounds": {
+          "type": "object",
+          "description": "Nominal nonlinear scalar colour ranges with declared unit-RGBA and finite input/upload premises. No nonlinear sensitivity or display certificate.",
+          "required": [
+            "policy",
+            "stages"
+          ],
+          "properties": {
+            "policy": {
+              "const": "source-nonlinear-declared-texture-colour-ranges-v1"
+            },
+            "stages": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "source_model",
+                  "raw_rgb_bounds_if_samples_unit_interval",
+                  "colour_difference_gain",
+                  "visible_flashing",
+                  "unknown_reasons"
+                ],
+                "properties": {
+                  "source_model": {
+                    "enum": [
+                      "unknown",
+                      "partial_declared_texture_inputs",
+                      "bounded_declared_texture_inputs"
+                    ]
+                  },
+                  "channel_value_envelopes": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "raw_rgb_bounds_if_samples_unit_interval": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "colour_difference_gain": {
+                    "type": "null"
+                  },
+                  "whole_feedback_contraction": {
+                    "type": "null"
+                  },
+                  "visible_flashing": {
+                    "type": "null"
+                  },
+                  "unknown_reasons": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
