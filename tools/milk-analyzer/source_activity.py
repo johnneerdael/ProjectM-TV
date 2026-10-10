@@ -131,6 +131,12 @@ def source_activity(analysis,description):
                 'log_scale_per_second_per_feedback_fps':math.log(p['zoom']),
                 'parameter_time_rate_is_motion_speed':False,'net_screen_speed_verified':False})
     for element in description['elements']:
+        wave=element.get('wave_material')
+        if wave is not None and wave['possible_normalization_gate_jump'] is True:
+            boundary=wave['normalization_boundary_difference']
+            flashing['hazards'].append({**boundary,'kind':'builtin_wave_normalization_gate',
+                'element_id':element['id'],'visible_flashing_verified':False,
+                'scope':'possible waveform normalization boundary; source reachability and visible contribution unresolved'})
         if 'material_temporal' in element and 'material' in element:
             from source_shape_activity import shape_activity
             records,hazards=shape_activity(element)

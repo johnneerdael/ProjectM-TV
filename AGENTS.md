@@ -1403,3 +1403,11 @@ rules; value bounds infer no time continuity or audio change rate. Conditional
 ceilings with scenario hash and false runtime-observation/binding flags. Keep
 missing bands, persistent state, unknown texture colours and native overflow
 unresolved. Nominal area bounds remain the ordinary lifetime geometry envelope.
+
+Wave normalization: clamp RGB first and normalize only when max(RGB)>float32(.01),
+matching current Waveform.cpp and original MilkDrop2. The nominal boundary
+difference c*(1/T-1) uses c≤T at the seam; optional alpha weighting holds the same
+alpha/destination/geometry fixed. Retain native division/quantization, dynamic
+alpha, waveform footprint, draw gates and source reachability as unresolved.
+Existing possible normalization risk now appears as an activity hazard with
+null event rate/visible strength, not a whole-screen flashing certificate.

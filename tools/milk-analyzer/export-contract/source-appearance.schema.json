@@ -2506,6 +2506,7 @@
                   "visible_flashing"
                 ],
                 "properties": {
+                  "normalization_boundary_difference": {"$ref": "#/$defs/waveNormalizationDifference"},
                   "channels": {
                     "type": "object"
                   },
@@ -6169,6 +6170,10 @@
                 "type": "object",
                 "allOf": [
                   {
+                    "if": {"required": ["kind"], "properties": {"kind": {"const": "builtin_wave_normalization_gate"}}},
+                    "then": {"$ref": "#/$defs/waveNormalizationDifference"}
+                  },
+                  {
                     "if": {
                       "required": [
                         "kind"
@@ -6741,6 +6746,20 @@
         "visible_flash_frequency_hz": {"type": "null"},
         "unknown_reasons": {"type": "array", "items": {"type": "string"}},
         "conditions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "waveNormalizationDifference": {
+      "type": "object",
+      "required": ["policy", "possible_source_boundary_crossing", "normalization_threshold", "maximum_nominal_rgb_boundary_difference", "maximum_fixed_alpha_blended_rgb_boundary_difference", "nominal_crossing_event_rate_hz", "visible_flash_strength", "native_event_difference_verified", "conditions"],
+      "properties": {
+        "policy": {"const": "source-wave-normalization-boundary-difference-v1"},
+        "possible_source_boundary_crossing": {"type": ["boolean", "null"]},
+        "normalization_threshold": {"type": "number", "exclusiveMinimum": 0},
+        "maximum_nominal_rgb_boundary_difference": {"$ref": "#/$defs/threeDifferenceBounds"},
+        "maximum_fixed_alpha_blended_rgb_boundary_difference": {"$ref": "#/$defs/threeDifferenceBounds"},
+        "nominal_crossing_event_rate_hz": {"type": "null"},
+        "visible_flash_strength": {"type": "null"},
+        "native_event_difference_verified": {"const": false}
       }
     },
     "shapeMaterialDifference": {

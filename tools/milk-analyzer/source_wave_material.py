@@ -13,6 +13,32 @@ REFERENCE_TABLE=[(256,.07,.075),(512,.09,.15),(1024,.11,.22),(2048,.13,.33),(Non
 def _clamp(v):return min(1.,max(0.,v))
 
 
+def normalization_boundary_difference(enabled,risk,clipped,alpha):
+    """Limiting nominal RGB seam at max(clamped RGB)=threshold."""
+    from fractions import Fraction
+    from source_sampling_motion import _finite_round
+    raw=[None]*3;blended=[None]*3;reasons=[]
+    if risk is False:reasons.append('no possible normalization threshold crossing in supplied envelopes')
+    elif enabled is not True or clipped is None:reasons.append('normalization enable or clipped RGB domains unresolved')
+    elif risk is True:
+        threshold=Fraction(THRESHOLD);factor=1/threshold-1
+        raw=[_finite_round(min(Fraction(span[1]),threshold)*factor,upper=True) for span in clipped]
+        span=alpha['final_alpha_envelope']
+        if span is None:reasons.append('final waveform alpha domain unresolved')
+        else:blended=[_finite_round(Fraction(span[1])*Fraction(value),upper=True) for value in raw]
+    return {'policy':'source-wave-normalization-boundary-difference-v1',
+        'possible_source_boundary_crossing':risk,'normalization_threshold':THRESHOLD,
+        'maximum_nominal_rgb_boundary_difference':raw,
+        'maximum_fixed_alpha_blended_rgb_boundary_difference':blended,
+        'nominal_crossing_event_rate_hz':None,'visible_flash_strength':None,
+        'native_event_difference_verified':False,'unknown_reasons':reasons,
+        'conditions':['Nominal limiting difference between unnormalized C and normalized C/max(C) at max(C)=threshold',
+            'Clamped RGB domain and normalization-enabled policy hold; enclosing ranges do not prove a simultaneous reached boundary',
+            'Alpha weighting compares the same fixed alpha, geometry, sample coverage and destination in both states',
+            'Native float32 division/quantization, varying alpha, draw gating, waveform footprint, storage, feedback and later passes remain separate',
+            'This is neither an adjacent-frame difference nor a visible flash/beat frequency or mood certificate']}
+
+
 def _channel(field,name):
     curve=motion_control(field,name,'wave colour/alpha component',application='built-in waveform material')
     span=curve['nominal_value_range'];native=None
@@ -85,6 +111,7 @@ def wave_material(analysis,recipe):
         'colour_conversion':'float32 clamp0..1 then optional maximum normalization',
         'normalization_enabled':enabled,'normalization_flag_expression':_expression(main['wave_brighten']),
         'normalization_gate':{'comparison':'max(clamped RGB)>threshold','threshold':THRESHOLD,'maximum_domain':maximum},
+        'normalization_boundary_difference':normalization_boundary_difference(enabled,risk,clipped,alpha),
         'possible_normalization_gate_jump':risk,'rgb_component_envelopes':rgb,'constant_vertex_rgb':constant,
         'alpha_recipe':alpha,'native_draw_gate':{'comparison':'final_alpha < threshold skips draw','threshold':_f32(.004),
             'paths':['quad_lines','hardware_lines_or_points'],'before_scaled_dot_alpha':True},

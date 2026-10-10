@@ -2723,3 +2723,17 @@ Chill/Normal/Intense score. The existing authoring guide distinguishes immediate
 bands from damped `*_att` inputs; neither supplies a universal maximum or a
 time derivative, so the exporter never invents one from a declared value range.
 [MilkDrop authoring reference](https://www.geisswerks.com/milkdrop/milkdrop_preset_authoring.html).
+
+Built-in waveform `wave_material.normalization_boundary_difference` describes
+the nominal seam where maximum clamped RGB crosses threshold `T=float32(.01)`.
+The code changes from `C` to `C/max(C)`; at that boundary the limiting difference
+is `C*(1/T-1)`. Each channel uses the conservative ceiling `min(channel_high,T)`.
+Known final alpha additionally bounds the difference with the same alpha,
+geometry and destination held fixed. Unknown volume modulation/alpha keeps that
+weighted bound null.
+
+Possible crossings also appear as `builtin_wave_normalization_gate` activity
+hazards. These use the existing channel-domain risk and preserve missing,
+disabled and above-threshold cases. They do not claim the simultaneous colour
+boundary is reached, measure native float32 division or quantify a changing
+alpha/draw gate, waveform screen coverage, feedback, visible flashes or mood.

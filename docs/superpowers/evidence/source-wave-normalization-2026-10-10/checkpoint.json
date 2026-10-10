@@ -1,0 +1,27 @@
+{
+  "affected_source_cases": 65,
+  "structured_schema_valid_cases": 65,
+  "raw_nominal_boundary_size_bounds": 65,
+  "fixed_alpha_weighted_bounds": 44,
+  "focused_wall_seconds": 9.36678604199551,
+  "new_hazard_presets_without_prior_activity_hazard": 63,
+  "derived_hazard_preset_count_in_fixed2000": 284,
+  "derived_census_not_full_pool_replay": true,
+  "control_reports_structured_schema_valid": 100,
+  "control_reports_with_new_hazard": 3,
+  "full_suite": {
+    "tests": 3142,
+    "subtests": 92,
+    "seconds": 183.51
+  },
+  "independent_focused_checks": 34,
+  "uses_rendered_images": false,
+  "native_event_difference_verified": false,
+  "visible_flash_strength_verified": false,
+  "mood_accuracy_verified": false,
+  "evidence_hashes": {
+    "coverage.json.gz": "e3c3aeb58af986f905c3d870b9ce47049f09bd55c79f873c6accb601e43c2a7c",
+    "comparison.jsonl.gz": "0957359270b853f92ec1fbaf26eb8f59cf9ec65ea2e343a6b3473fd8139dde72",
+    "summary.json.gz": "055d6df07659b3794396faa5ab9165c31b1856f6ec8711635eabdab50b48412f"
+  }
+}
