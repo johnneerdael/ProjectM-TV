@@ -158,3 +158,55 @@ def test_sample_offset_scenario_without_required_canvas_stays_unresolved():
     r=analyze(s,input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))['visual_description']['sampling_geometry']['stages']['composite'][0]['sample_value_offset_envelope']
     assert r['scenario_offset_envelope']['source_model']=='unknown'
     assert r['scenario_offset_envelope']['offset_range_uv']==[None,None]
+
+
+def test_declared_audio_bounds_time_component_of_texture_translation():
+    s=shader('shader_body {ret=GetPixel(uv+float2(.01*sin(time*bass),0));}')
+    plain=analyze(s)['visual_description']['sampling_geometry']['stages']['composite'][0]['offset_controls'][0]
+    a=analyze(s,input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))
+    r=a['visual_description']['sampling_geometry']['stages']['composite'][0]['offset_controls'][0]
+    assert r['maximum_absolute_control_rate_per_second']==plain['maximum_absolute_control_rate_per_second'] is None
+    extra=r['scenario_time_component']
+    assert extra['maximum_absolute_control_rate_per_source_second']==pytest.approx(.02,abs=2e-8)
+    assert extra['input_scenario_sha256']==a['input_scenario']['record_sha256']
+    assert extra['visible_motion_speed'] is None
+
+
+def test_time_component_without_required_audio_range_stays_unbounded():
+    s=shader('shader_body {ret=GetPixel(uv+float2(.01*sin(time*bass),0));}')
+    r=analyze(s,input_scenario=scenario(audio_band_ranges={'mid':[0,2]}))['visual_description']['sampling_geometry']['stages']['composite'][0]['offset_controls'][0]
+    assert r['scenario_time_component']['maximum_absolute_control_rate_per_source_second'] is None
+
+
+def test_time_switched_texture_translation_has_no_continuous_time_bound():
+    s=shader('shader_body {ret=GetPixel(uv+float2(time>1 ? .01 : .05,0));}')
+    r=analyze(s,input_scenario=scenario())['visual_description']['sampling_geometry']['stages']['composite'][0]['offset_controls'][0]
+    assert r['scenario_time_component']['maximum_absolute_control_rate_per_source_second'] is None
+
+
+def test_nominal_time_component_does_not_claim_total_native_clock_or_motion():
+    from shader_fields import Field
+    from source_motion import motion_control
+    from source_input_scenario import validate_scenario
+    f=Field('add',(Field('input',detail={'name':'time'}),Field('input',detail={'name':'frame'})),'float')
+    r=motion_control(f,'x','UV',application='test',input_scenario=validate_scenario(scenario()))
+    extra=r['scenario_time_component']
+    assert extra['maximum_absolute_control_rate_per_source_second']==pytest.approx(1)
+    assert 'frame' in extra['held_fixed_input_names']
+    assert extra['total_control_rate_per_second'] is None
+
+
+def test_shape_geometry_control_receives_declared_time_component():
+    from test_effect_families import read
+    s=read('shapecode_0_enabled=1\nshape_0_per_frame1=x=.5+.1*sin(time*bass);\n')
+    a=analyze(s,input_scenario=scenario(audio_band_ranges={'bass':[0,2]}))
+    controls=[c for e in a['visual_description']['elements'] for c in e.get('motion_controls',[]) if c['control']=='position_x']
+    assert controls
+    assert controls[0]['scenario_time_component']['maximum_absolute_control_rate_per_source_second']==pytest.approx(.2,abs=2e-8)
+
+
+def test_quantized_q_time_upload_retains_unknown_time_component():
+    from test_effect_families import read
+    s=read('per_frame_1=q1=.1*time;\ncomp_1=`shader_body {ret=GetPixel(uv+float2(sin(q1),0));}\n')
+    r=analyze(s,input_scenario=scenario())['visual_description']['sampling_geometry']['stages']['composite'][0]['offset_controls'][0]
+    assert r['scenario_time_component']['maximum_absolute_control_rate_per_source_second'] is None

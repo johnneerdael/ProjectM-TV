@@ -4,7 +4,7 @@ from source_temporal import affine_time_parameters
 from source_control_bounds import merge_continuity
 
 
-def motion_control(field,control,unit,*,application,_include_switch_events=True):
+def motion_control(field,control,unit,*,application,_include_switch_events=True,input_scenario=None):
     from source_appearance import _phase_literal,_phase_terms,_expression
     result={'policy':'source-time-control-curves-v1','control':control,'control_unit':unit,
         'application':application,'curve_kind':'unknown','constant_value':None,
@@ -17,6 +17,22 @@ def motion_control(field,control,unit,*,application,_include_switch_events=True)
         'visible_motion_speed':None,'unknown_reasons':[],
         'conditions':['Continuous nominal source-time formula; clock jumps, finite precision and sampled frames excluded',
                       'Control variation does not establish visibility, geometry trajectories after projection, feedback motion or perceived intensity']}
+    if input_scenario is not None:
+        from source_control_bounds import scalar_response_envelope
+        time_names={'time',':native-render-time-f32','_c2.x'}
+        report=scalar_response_envelope(field,input_names=time_names,input_domains=input_scenario['scalar_input_domains'])
+        result['scenario_time_component']={k:v for k,v in report.items() if k not in {
+            'policy','maximum_absolute_control_change_per_audio_unit','visible_response_strength','maximum_time_rate','conditions'}}
+        result['scenario_time_component'].update(policy='source-declared-time-component-response-v1',
+            maximum_absolute_control_rate_per_source_second=report['maximum_absolute_control_change_per_audio_unit'],
+            control_unit=unit,rate_unit=unit+'/source-time second',input_scenario_sha256=input_scenario['record_sha256'],
+            visible_motion_speed=None,total_control_rate_per_second=None,
+            observed_runtime_inputs=False,runtime_binding_verified=False,uses_shader_execution=False,
+            conditions=['Nominal partial response to source-time aliases advancing together; caller-declared domains hold',
+                        'Audio, frame counters, FPS, progress, state, coordinates and all other inputs held fixed',
+                        'This is a partial component, not total clock/audio/state movement, geometry speed, feedback evolution or flashing',
+                        'Quantized native uploads/casts and discontinuous or unsupported formulas remain unresolved',
+                        'Native clock jumps, float32/storage/interpolation, viewport projection and visibility stay unqualified'])
     if _include_switch_events:
         from source_time_switches import time_switch_events
         result['time_switch_events']=time_switch_events(field)

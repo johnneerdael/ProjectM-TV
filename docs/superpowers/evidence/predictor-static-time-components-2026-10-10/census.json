@@ -1,0 +1,1629 @@
+{
+  "basis": "Nominal partial source-time response under caller-declared audio/canvas, other clocks/state fixed; no total movement or mood certificate",
+  "presets": 100,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "control_records": 2618,
+    "bounded_control_records": 2325,
+    "unique_positive_control_curves": 113,
+    "unique_positive_curves_without_ordinary_rate": 23,
+    "presets_with_positive_time_components": 42,
+    "presets_with_new_positive_components": 15
+  },
+  "changed_previous_descriptions": [],
+  "changed_source_gap_presets": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "model_modules": {
+    "source_appearance.py": "2a0b382f672a14f0886b9f4cab7bf3e2e80ad4b0a5995164194b1fe6e5ece50a",
+    "source_input_scenario.py": "1d82c9b703d9af8baa1703a05931339d6c04f55300a6dfa089dabda1c82c68fa",
+    "source_motion.py": "c0e6fccfc060311f4b90e950bfc1ee669dc8421ba954d2f34392e5f6dd694a02",
+    "source_periodic_sampling.py": "2b94c286f7ed5befef9f6b81f49bee5ecb27a703d34572a2472ba84fcc28c2da",
+    "source_polar.py": "eda6cb09aa58d378380505f3f88d2b2171d7dec9c26284599fa30f2b6892def6",
+    "source_sampling.py": "3c7155e7cfc2877dd54d36a876ec7b2775866c6968ed26c55bbb2288100aed43"
+  },
+  "zip_sha256": "bc9408a56a82ac57e5ecc1e490ad8b38cd385796175884ac82db7bfe661b7038",
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (253).milk",
+      "sha256": "00fc3746e45f77ae13af41cd00d68cc9626947f8e30cb74e4259750f82b797c2",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0,
+          "partial_time_rate_upper_bound": 1.0000000000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "1575cc89861b86e066c97c054edf330f22437d46fef3142a186a9631286490e6"
+        }
+      ]
+    },
+    {
+      "preset": "19.milk",
+      "sha256": "0236113a9ed840ed9dc8892fb1b0f7894af2c0ff45585a8ba29c93973b206c1d",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/5",
+          "control": "scale_x",
+          "control_unit": "source UV scale",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.20000000000000026,
+          "held_fixed_input_names": [
+            "treb_att",
+            "x",
+            "y"
+          ],
+          "declared_input_domains": {
+            "treb_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "86ecc307a61661d4e371d5244328340bb983f398380d2c741e0bfea997220d48"
+        },
+        {
+          "path": "/elements/0/motion_controls/6",
+          "control": "scale_y",
+          "control_unit": "source UV scale",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.20000000000000026,
+          "held_fixed_input_names": [
+            "treb_att",
+            "x",
+            "y"
+          ],
+          "declared_input_domains": {
+            "treb_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "6366467d6956e2c6a84bb470d0ecb02d722736ffb5ad8b1175901cd23c893e2d"
+        }
+      ]
+    },
+    {
+      "preset": "A Ultimate AdamFX 2 Martin - disco mix 6 (UFO RMX)Inside the ship (thereShooting)Flexi,Fishbrain,Hexoco2.milk",
+      "sha256": "0252251613e3b143a2ed8261eaa39acd24f86e297d11a04cf6bb96a9b57bfd38",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.0625,
+          "partial_time_rate_upper_bound": 0.06250000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "183e6882e13ce5bf537bd6c67d1d24ed225b9ba81560b1f0b9d8b60496c06c4c"
+        },
+        {
+          "path": "/elements/1/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.1125,
+          "partial_time_rate_upper_bound": 0.11250000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "be1795016baec2a2c1e185ecca1bc54cbcb886d9d43b1aff9e5fbaad099eb8c0"
+        },
+        {
+          "path": "/elements/1/motion_controls/2",
+          "control": "radius",
+          "control_unit": "milkdrop shape radius",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.12,
+          "partial_time_rate_upper_bound": 0.12000000000000009,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "5cd7971d75ac90fbb3e7f38b27c3729af6879ab20fdd508382825b0992186912"
+        },
+        {
+          "path": "/elements/1/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.5,
+          "partial_time_rate_upper_bound": 0.5000000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "4e481b8081bd3125318bda647e965e5d5a2e25f6228e9f8e25d6b6d670940d19"
+        },
+        {
+          "path": "/elements/2/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.0625,
+          "partial_time_rate_upper_bound": 0.06250000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "56a40e8864c1193f72595fea9fbaf3f3299ac874c1e5d9ed468f808174d4f2a0"
+        },
+        {
+          "path": "/elements/2/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.1125,
+          "partial_time_rate_upper_bound": 0.11250000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "c0f625ee5f35e697fa89b61ae977cd84e6233d77c36c3110459af79539352ab2"
+        },
+        {
+          "path": "/elements/2/motion_controls/2",
+          "control": "radius",
+          "control_unit": "milkdrop shape radius",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.12,
+          "partial_time_rate_upper_bound": 0.12000000000000009,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "ec8107c3023990be0de1df9ec0a99eb03ef95cf35d96f0419552ca5e4f69fd85"
+        },
+        {
+          "path": "/elements/2/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.15,
+          "partial_time_rate_upper_bound": 0.15000000000000013,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "fc8d467025af30a225b76117e297dd40809f5059465204f1a00cafd800b37198"
+        }
+      ]
+    },
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.11108000000000012,
+          "partial_time_rate_upper_bound": 0.11108000000000012,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f05adba4c056ad6aad60ec013bb99d13e54d5fb5cce5c22245ed68d9962ec3eb"
+        },
+        {
+          "path": "/sampling_geometry/stages/warp/0/offset_controls/0",
+          "control": "sample_offset_x",
+          "control_unit": "source texture UV",
+          "application": "texture sampling offset",
+          "ordinary_rate_upper_bound": 0.00999999978,
+          "partial_time_rate_upper_bound": 0.009999999780000005,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "ab7dc88c8b86d7b3132617ee24ae16774566c10dfdafd6c866f5a7b1bd72f9cc"
+        },
+        {
+          "path": "/sampling_geometry/stages/warp/0/offset_controls/1",
+          "control": "sample_offset_y",
+          "control_unit": "source texture UV",
+          "application": "texture sampling offset",
+          "ordinary_rate_upper_bound": 0.00999999978,
+          "partial_time_rate_upper_bound": 0.009999999780000005,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d26a7c831d225dfb1b6e854172b24c0f4bab6c4d5a58bcacfdb2e61a5407f4b4"
+        }
+      ]
+    },
+    {
+      "preset": "Bdrv yin - 315 - Ocean of Light (yo im peakin yo EoS-Phat) BDRV et  AL  rmxmix3 - 1k pt lighter.milk",
+      "sha256": "00308b89fae78f20417516923fe63b3c64cda460652c809dfff0fcaeefcf264e",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.4130000000000014,
+          "partial_time_rate_upper_bound": 1.4130000000000014,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "9381a93b3e5d8af10d51126e5d28bab36920618139a55b0632d73bb3988ed2cd"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/2/polar_projection/sample_offset_controls/0",
+          "control": "polar_sample_offset_x",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.010937499813735485,
+          "partial_time_rate_upper_bound": 0.0109374998137355,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0cce1a09037f21a871fb9b0cdf58a3f9d4d2e2372c2b87f6f6653028499bab38"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/2/polar_projection/sample_offset_controls/1",
+          "control": "polar_sample_offset_y",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.010937499813735485,
+          "partial_time_rate_upper_bound": 0.0109374998137355,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "5ae9b0c66f12aaae727b98d7f17bfbd1c8a80faa969ecbb21d107a65de7f5325"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/3/polar_projection/sample_offset_controls/0",
+          "control": "polar_sample_offset_x",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.02187499962747097,
+          "partial_time_rate_upper_bound": 0.02187499962747099,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d14ffddda3a738f65addd1c1f2943624b2faa6217e4213b31b443c89bfa23aeb"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/3/polar_projection/sample_offset_controls/1",
+          "control": "polar_sample_offset_y",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.02187499962747097,
+          "partial_time_rate_upper_bound": 0.02187499962747099,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "5b755c663eae8174c4ef191d85f8bc1b83fa40b2df3d1b63041630b02f2ffcd0"
+        }
+      ]
+    },
+    {
+      "preset": "Bmelgren - Tonic.milk",
+      "sha256": "003e6c8d5387ee1db6940e3def75453c2e4d486c49bdcdbf3419119a5b8aa280",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 1.1200000000000014,
+          "held_fixed_input_names": [
+            "bass",
+            "rad"
+          ],
+          "declared_input_domains": {
+            "bass": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "b3ad30425d49e71c7a31af881a944f52a679f91033591e3e16fce042c61863bd"
+        },
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 2.000000000000002,
+          "held_fixed_input_names": [
+            "mid",
+            "mid_att"
+          ],
+          "declared_input_domains": {
+            "mid": [
+              0.0,
+              2.0
+            ],
+            "mid_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "247204a80bd149fa289da164a6b00a38b04838d172f7a195e145b19379594dae"
+        }
+      ]
+    },
+    {
+      "preset": "EVET - Circling Meta-freeze 1.milk",
+      "sha256": "0245d0ba34f8a5059873afc741053863ebacd58fdda56f20e3ec1b3fb93b54d0",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.01000000000000001,
+          "held_fixed_input_names": [
+            "treb_att"
+          ],
+          "declared_input_domains": {
+            "treb_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "098ad1e3987db2f042babb5bb3b5612d77ba6eae3be41bf09efa0dfbb42e2c96"
+        },
+        {
+          "path": "/elements/7/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.1,
+          "partial_time_rate_upper_bound": 0.10000000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "33a452e00c87d682d5d37a82a9fe46d71f0b181c5255d078c07ea14752563c5d"
+        }
+      ]
+    },
+    {
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "positive_controls": [
+        {
+          "path": "/elements/5/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.5,
+          "partial_time_rate_upper_bound": 0.5000000000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "6420b34682a36a81c59b0d90da385bd042226b1db1f2dffe05e146fc13869071"
+        },
+        {
+          "path": "/elements/6/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.25,
+          "partial_time_rate_upper_bound": 0.25000000000000017,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "1f1f66bd010ec7931ec72ce6f047f90c2b732712d9f16793b4fd517607d7ad2c"
+        }
+      ]
+    },
+    {
+      "preset": "EoS - heater core C_on route.milk",
+      "sha256": "01a7ebbc115aca9915b8057003e79a42578a81c324df6d7498974b1fb1127fc9",
+      "positive_controls": [
+        {
+          "path": "/elements/4/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.030000000000000037,
+          "partial_time_rate_upper_bound": 0.030000000000000037,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "c7a17cf3e67222428da61b15174244dc08e8d8a0166de90f7a47739e68e4a1ea"
+        }
+      ]
+    },
+    {
+      "preset": "Flexi - disruptor [vision of eggs] nz+.milk",
+      "sha256": "01cb519248e5973751c51fc3758b688a6d9eef47054b38f910f738ac8fc3797a",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        },
+        {
+          "path": "/elements/5/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.9899999999999999,
+          "partial_time_rate_upper_bound": 0.9900000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "16058f238e028702ed391df8a167b2f04d5dae6b15f759ded650353c688f9847"
+        }
+      ]
+    },
+    {
+      "preset": "Geiss - Brain Zoom 4 (Jelly).milk",
+      "sha256": "013442ddb87878d33859967cafab5a224fed07cd54116eba9ff3248073260827",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004602000000000006,
+          "partial_time_rate_upper_bound": 0.004602000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f0e3d3a9871b9a3c84cd621083328f8d49e9bb0973b0258685178a3054e91f4f"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0007536000000000012,
+          "held_fixed_input_names": [
+            "dx_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "108fcfda5ab4ed60c497d3b4dd46322cd46252e1420e1162db6550861af8d49b"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0008076000000000011,
+          "held_fixed_input_names": [
+            "dy_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "84c7d6d4a57e2589faad38302c3858b9606a45175f51cf93485f17ecd1956566"
+        }
+      ]
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter - mash0000 - humiliate the god with spencer.milk",
+      "sha256": "0125d94beeb4fb655dd976a9318623f2907b3e0470da7326968f741928c63dbf",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004079400000000006,
+          "partial_time_rate_upper_bound": 0.004079400000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "5f5a76c33450472d9cefeff6f3e187413848ffba1b862e82dfeec66c82f8e351"
+        },
+        {
+          "path": "/elements/3/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.1520360000000002,
+          "partial_time_rate_upper_bound": 0.1520360000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "333d6214aa2776b4dacdc59d19bea6faad31d90bcd98d02c941b0baa124ae7c6"
+        },
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.042567600000000046,
+          "partial_time_rate_upper_bound": 0.042567600000000046,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0a46b66f9a060ab32934c7f071e7f953f2546ed704716dbf7cf422095edca56c"
+        },
+        {
+          "path": "/elements/3/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.04231800000000004,
+          "partial_time_rate_upper_bound": 0.04231800000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f021c06348716ccb88b4816f77edc5feff6485a0df86f8ef15e1103a99a99dcf"
+        }
+      ]
+    },
+    {
+      "preset": "Geiss - Tadpole Hunter.milk",
+      "sha256": "02124dff2848df573c993fcb3c97fa23472fad6fc91080587a7c2cd3a151378c",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004079400000000006,
+          "partial_time_rate_upper_bound": 0.004079400000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "5f5a76c33450472d9cefeff6f3e187413848ffba1b862e82dfeec66c82f8e351"
+        },
+        {
+          "path": "/elements/3/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.1520360000000002,
+          "partial_time_rate_upper_bound": 0.1520360000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "333d6214aa2776b4dacdc59d19bea6faad31d90bcd98d02c941b0baa124ae7c6"
+        },
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.042567600000000046,
+          "partial_time_rate_upper_bound": 0.042567600000000046,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0a46b66f9a060ab32934c7f071e7f953f2546ed704716dbf7cf422095edca56c"
+        },
+        {
+          "path": "/elements/3/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.04231800000000004,
+          "partial_time_rate_upper_bound": 0.04231800000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f021c06348716ccb88b4816f77edc5feff6485a0df86f8ef15e1103a99a99dcf"
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.025000000000000022,
+          "held_fixed_input_names": [
+            "bass"
+          ],
+          "declared_input_domains": {
+            "bass": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "6363115fe43b8056ee2a67b36cb92acb8c9ca058b4c41f685c50228efe1b497f"
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.025000000000000022,
+          "held_fixed_input_names": [
+            "bass"
+          ],
+          "declared_input_domains": {
+            "bass": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "6363115fe43b8056ee2a67b36cb92acb8c9ca058b4c41f685c50228efe1b497f"
+        }
+      ]
+    },
+    {
+      "preset": "Hexcollie - Melodic pulsing leds - mash0000 - vegas doesn't make life less pointless.milk",
+      "sha256": "01441976437b273b2648d9cf754e6214134b0fe471d849248e278bb497bfdb30",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004602000000000006,
+          "partial_time_rate_upper_bound": 0.004602000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f0e3d3a9871b9a3c84cd621083328f8d49e9bb0973b0258685178a3054e91f4f"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0025120000000000042,
+          "held_fixed_input_names": [
+            "dx_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f5ffc95acda79aa07d2543c9447c7f7372a062fb9f44745303a3204e58095312"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.002692000000000004,
+          "held_fixed_input_names": [
+            "dy_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "4bcce738280af6ab96598f02a13a82fe7a3c9ff9042104d479525d4451022697"
+        }
+      ]
+    },
+    {
+      "preset": "Illusion & Rovastar - Decitrip - j4+.milk",
+      "sha256": "015095a9ec6b56f7808183608120a5547ea584be0fe726f6c73d5ea09a117240",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.15997270000000025,
+          "held_fixed_input_names": [
+            "ang",
+            "rad"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "2e24db3b8c5cf4c43ccc02c9925f433303640011ba9c77cb69cc0fa41a199375"
+        },
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.17761200000000027,
+          "held_fixed_input_names": [
+            "rad"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "4f98942de5829744d77b08da94eda1c0077eac904e154431f352a552c17966b3"
+        }
+      ]
+    },
+    {
+      "preset": "InCUbuS - Our Destiny.milk",
+      "sha256": "00ec99f55468d8d2504fe5d8ef77d027b2bfbaf8ff09dc5765fe9b120daa6807",
+      "positive_controls": [
+        {
+          "path": "/elements/5/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.5000000000000003,
+          "held_fixed_input_names": [
+            "bass_att"
+          ],
+          "declared_input_domains": {
+            "bass_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "bd87f42dc8b2d5c5389e514a9d1b17979491d523d7e3348413ec902b8c1e4d1f"
+        }
+      ]
+    },
+    {
+      "preset": "PieturP - HSL-tunnelvisions_morphing - mash0000 - solidity in discontinuity vs quantum instability.milk",
+      "sha256": "0244f31a9edb04fa8f38527a995be08620c498ff6b7d9cfef7bda513c657c47b",
+      "positive_controls": [
+        {
+          "path": "/elements/2/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.09000000000000001,
+          "partial_time_rate_upper_bound": 0.09000000000000007,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "52fd36fcd944c60cea74e48f20354ce79043cbd65d381e436d54fe713975ffa4"
+        },
+        {
+          "path": "/elements/2/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.2,
+          "partial_time_rate_upper_bound": 0.2000000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "05a3ff92307d13360b0e8a14c51f6a5ae8466d0de2f37645a291ac6c74ff4e33"
+        },
+        {
+          "path": "/elements/2/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.2560000000000002,
+          "partial_time_rate_upper_bound": 1.2560000000000011,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "236fc689bc49a59c91f098197fe78fb66c78e99ff542d53252285379a6ef2c92"
+        },
+        {
+          "path": "/elements/4/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.09000000000000001,
+          "partial_time_rate_upper_bound": 0.09000000000000008,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "fcfbfc4fab47d987b79e419c9a9f47b4d3614472724af971cb4b5d970fa8fc0f"
+        },
+        {
+          "path": "/elements/4/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.2,
+          "partial_time_rate_upper_bound": 0.20000000000000012,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "9b9232f454c3b5bd40cd24474a48983157a333f4c8cd9203c950ee965c34b8a1"
+        }
+      ]
+    },
+    {
+      "preset": "RLP + Geiss - Bass Zoom Redux (3 Layers Minefield - Light that up).milk",
+      "sha256": "013ae2b2f6c2a469d512d6366d8c6b6b3c48f53ce352061c283a71e01f4ccdc0",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004602000000000006,
+          "partial_time_rate_upper_bound": 0.004602000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f0e3d3a9871b9a3c84cd621083328f8d49e9bb0973b0258685178a3054e91f4f"
+        },
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0007536000000000012,
+          "held_fixed_input_names": [
+            "dx_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "108fcfda5ab4ed60c497d3b4dd46322cd46252e1420e1162db6550861af8d49b"
+        },
+        {
+          "path": "/elements/3/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0008076000000000011,
+          "held_fixed_input_names": [
+            "dy_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "84c7d6d4a57e2589faad38302c3858b9606a45175f51cf93485f17ecd1956566"
+        }
+      ]
+    },
+    {
+      "preset": "ShadowHarlequin - Tunneling (glitch mix) - [Geiss - 3 layers].milk",
+      "sha256": "006af969535713fbc7714bfa75503de063076e057a18c2db4c459178e9ae102e",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004602000000000006,
+          "partial_time_rate_upper_bound": 0.004602000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f0e3d3a9871b9a3c84cd621083328f8d49e9bb0973b0258685178a3054e91f4f"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0007536000000000012,
+          "held_fixed_input_names": [
+            "dx_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "108fcfda5ab4ed60c497d3b4dd46322cd46252e1420e1162db6550861af8d49b"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0008076000000000011,
+          "held_fixed_input_names": [
+            "dy_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "84c7d6d4a57e2589faad38302c3858b9606a45175f51cf93485f17ecd1956566"
+        }
+      ]
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.005162400000000008,
+          "partial_time_rate_upper_bound": 0.005162400000000008,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a5d9de77bdcea1fe03039515d64472e802a0fe83e1e9695b01f21d92ebdb673b"
+        },
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.21000000000000016,
+          "held_fixed_input_names": [
+            "rad"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a074379d046d09d4edb667eb07fa65bf434f8b461d515b04cfb709b3298a190a"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.03916000000000004,
+          "partial_time_rate_upper_bound": 0.03916000000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "2049001955d4885f4ad846e57d819ee1a8acf4f823bd903ff1bab503d079ce25"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.02903000000000003,
+          "partial_time_rate_upper_bound": 0.02903000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "3820b2a1889070b6c8aa42cbb744a4b650c1c794d32e719a4c1817973f541898"
+        }
+      ]
+    },
+    {
+      "preset": "Zylot - The Sound plays the Sights.milk",
+      "sha256": "0249bbafb6c102809c90bfd82a92f9df620040a19b7c08360fd09d881cbfeeac",
+      "positive_controls": [
+        {
+          "path": "/sampling_geometry/stages/warp/0/oscillatory_displacement/waves/0/phase_motion_control",
+          "control": "wave_phase",
+          "control_unit": "radian",
+          "application": "texture-displacement phase",
+          "ordinary_rate_upper_bound": 1.22000003,
+          "partial_time_rate_upper_bound": 1.2200000300000005,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "9249de2095ac277ecf0afcd07b599f32ba500c64e5e2df9d91b98ceef26b7718"
+        },
+        {
+          "path": "/sampling_geometry/stages/warp/0/oscillatory_displacement/waves/1/phase_motion_control",
+          "control": "wave_phase",
+          "control_unit": "radian",
+          "application": "texture-displacement phase",
+          "ordinary_rate_upper_bound": 1.0,
+          "partial_time_rate_upper_bound": 1.0,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "2bb6392c94cc63f947273992fa42ab59dfee61f37ca0664f46a87ca52de50726"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - green machinery 1a isn't that the job of the mbassiv egaqulath.milk",
+      "sha256": "0263952c08eb306ee63ca1342150393305eb8c7a5321ca7ef960e5571aa9de3b",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - living boxes 4.milk",
+      "sha256": "020ab9f7eabc53ee13001e18fff74b01c7e2e08f12e94bc8b3867ddc92c99356",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/2",
+          "control": "radius",
+          "control_unit": "milkdrop shape radius",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.003216,
+          "partial_time_rate_upper_bound": 0.003216000000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "fdcf57eec41c1042e7682575806346322f4aaa6e9be0f89fb11bb887f77efbb1"
+        }
+      ]
+    },
+    {
+      "preset": "beta106i - Airhandler (Last Breath - Crab Hand).milk",
+      "sha256": "0062f1c22d4fd9bc8c0fecf0d21041ac2f76323e951f24238e00385ca3c2b20a",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.052500000000000005,
+          "partial_time_rate_upper_bound": 0.05250000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "fe7373527f402e66c63e3f741f5fce633fc2ce540fa5b588734002331ddcab12"
+        },
+        {
+          "path": "/elements/3/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.0387,
+          "partial_time_rate_upper_bound": 0.03870000000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "6aa898be584045cbea1b357fe59e7b31be7e56005fd685c36105803a4b951452"
+        },
+        {
+          "path": "/elements/4/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.0085,
+          "partial_time_rate_upper_bound": 0.00850000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "6d6c1dfabbb96cce49a58dd34da1b5c67278ee2fdf79e4c21030a514184c5278"
+        },
+        {
+          "path": "/elements/4/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.0249,
+          "partial_time_rate_upper_bound": 0.024900000000000016,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "95b6e8a08a6c6c07474b1304824d4c10b01df54cb3115396c47b013a97c16761"
+        },
+        {
+          "path": "/elements/5/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.05,
+          "partial_time_rate_upper_bound": 0.050000000000000044,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "ed3c74bc0055aea6a4730a5fe424d438de4165468ea6254c458fde6f10816c2c"
+        },
+        {
+          "path": "/elements/5/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.05,
+          "partial_time_rate_upper_bound": 0.05000000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "ca3d43e194d7e6f13f2c30db444ef42d70d0d30dd671523858022f6a6c9441f7"
+        }
+      ]
+    },
+    {
+      "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "positive_controls": [
+        {
+          "path": "/elements/8/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "equidistant from vomit (out of totality).milk",
+      "sha256": "00eb40c016311b66500d05d5c01557cb4bb30be03dbe235a4b5a8a2953d607bc",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.18867924528301888,
+          "partial_time_rate_upper_bound": 0.18867924528301894,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "4c5a27fc12b876d85350a2897e23e67307210fc602371c60eb60c5b332d8e4c0"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.045454545454545456,
+          "partial_time_rate_upper_bound": 0.04545454545454548,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "ebbcfe0f29d284aa047b6affcf0e5e0f8d11d888ed08a1fcb3e8f4286fbebc9b"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.05555555555555556,
+          "partial_time_rate_upper_bound": 0.055555555555555594,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d955cb7dc21645b310993df00d514fe4ecf80f0143e368047d6758158ace8e4f"
+        },
+        {
+          "path": "/elements/4/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.225,
+          "partial_time_rate_upper_bound": 0.22500000000000014,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "7a8184e1b7d396fc157b67344df5bc336b3e7ad64d3d37d4fb61c203cd7f2995"
+        },
+        {
+          "path": "/elements/4/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3,
+          "partial_time_rate_upper_bound": 0.3000000000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a754af14f79b4346f5bdf5def3239d90aff96b007bf4422f3d000de6cdeea2c5"
+        }
+      ]
+    },
+    {
+      "preset": "goody(4), hexcollie(3), fed(2), flexi(3), stahlregen (1) - #13.milk",
+      "sha256": "00dd635be82183d2a9099252ff4f4a86e1a445b13aad0802be13c8a294116a60",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 8.0,
+          "partial_time_rate_upper_bound": 8.000000000000009,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "b51ada6d5559de996ef678a3c5534fae0331e64ccc8272dfb2f45342bf4b405e"
+        }
+      ]
+    },
+    {
+      "preset": "greazed up humility.milk",
+      "sha256": "01295c4ac3a4756bc659944014421056493bcb5fd96b4cd0a233aadf7bbd8821",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.04000000000000003,
+          "held_fixed_input_names": [
+            "ang"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "28c838ed02d1256bc23d2e6dcedae7470428e323d424d84cf4167d354e49bb95"
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the lesser evil hive.milk",
+      "sha256": "023ed592916e1d0765ce604c2cc022731e8ec025ef4d026c18cbcf4b208249c8",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3320000000000003,
+          "partial_time_rate_upper_bound": 0.3320000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "863a58787f56f8d06be42a4ab977f117be8609922dbd41fcc6ce0468193ec76e"
+        },
+        {
+          "path": "/elements/1/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3320000000000003,
+          "partial_time_rate_upper_bound": 0.3320000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "2029cc17347fcebe05b2f43635ef34de19d306e70fcc408e2cd68dbf1a455ade"
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the oblivion hive nz+ the only art in the omniverse is turing machine translation2 postmortem.milk",
+      "sha256": "00e2efaf4d122be0974338a1c6fd6e7fd65dda44ae1e191b0eac95b80c18ca20",
+      "positive_controls": [
+        {
+          "path": "/elements/4/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3320000000000003,
+          "partial_time_rate_upper_bound": 0.3320000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "863a58787f56f8d06be42a4ab977f117be8609922dbd41fcc6ce0468193ec76e"
+        },
+        {
+          "path": "/elements/1/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3320000000000003,
+          "partial_time_rate_upper_bound": 0.3320000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "2029cc17347fcebe05b2f43635ef34de19d306e70fcc408e2cd68dbf1a455ade"
+        }
+      ]
+    },
+    {
+      "preset": "signed 'nuph phoaqing death warrants love me as i hate you.milk",
+      "sha256": "018f6ce07624e66f7ae5a244ff39b2df480d3164dedc649ac27edafb71c3e333",
+      "positive_controls": [
+        {
+          "path": "/elements/5/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "stahlregen & flexi + geiss - tiger no5 (mashup 16 - random texture flow) - inf fin bnd roam3.milk",
+      "sha256": "01ad74e7799c7a6a9a6ceb0a8c9a96ca358c41052d47ec63f6e1529cd0f6d455",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004602000000000006,
+          "partial_time_rate_upper_bound": 0.004602000000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f0e3d3a9871b9a3c84cd621083328f8d49e9bb0973b0258685178a3054e91f4f"
+        },
+        {
+          "path": "/elements/0/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.0025120000000000042,
+          "held_fixed_input_names": [
+            "dx_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "f5ffc95acda79aa07d2543c9447c7f7372a062fb9f44745303a3204e58095312"
+        },
+        {
+          "path": "/elements/0/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.002692000000000004,
+          "held_fixed_input_names": [
+            "dy_residual"
+          ],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "4bcce738280af6ab96598f02a13a82fe7a3c9ff9042104d479525d4451022697"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "positive_controls": [
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.004079400000000006,
+          "partial_time_rate_upper_bound": 0.004079400000000006,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "1ac3b13ca0da1e74a183c02e037eef7c4c52b1f11866ba49bfadb8344706c41f"
+        },
+        {
+          "path": "/elements/3/motion_controls/2",
+          "control": "rotation",
+          "control_unit": "rad/feedback step",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.1520360000000002,
+          "partial_time_rate_upper_bound": 0.1520360000000002,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "333d6214aa2776b4dacdc59d19bea6faad31d90bcd98d02c941b0baa124ae7c6"
+        },
+        {
+          "path": "/elements/3/motion_controls/3",
+          "control": "translation_x",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.011207100000000013,
+          "partial_time_rate_upper_bound": 0.011207100000000013,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a175338e1ee81d106189e50f4afbd188d640dd503bb7a1b6510807e243659003"
+        },
+        {
+          "path": "/elements/3/motion_controls/4",
+          "control": "translation_y",
+          "control_unit": "source UV displacement",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.01057950000000001,
+          "partial_time_rate_upper_bound": 0.01057950000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "8a82e404fd8c39c3299c945a8a784e009189f8d70362996ca59acf3c76abb912"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - coal drapes - mrt fsh behooval roam3- nz+ gene blanded qualquloiy.milk",
+      "sha256": "028572fd6c00d6c7d962b6e0278d2f39674842ec0f906c37f4ec9e9b0460f081",
+      "positive_controls": [
+        {
+          "path": "/elements/5/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - god might as well2 - rst filled to the brim with atheistic hate nz.milk",
+      "sha256": "02140203c7cc0d31e68f55b7d16cbf599061d6da7a9d7083f2d393ae35427c72",
+      "positive_controls": [
+        {
+          "path": "/elements/2/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.67,
+          "partial_time_rate_upper_bound": 0.6700000000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0db216db1b85fca7fe4041981005f38f4afc873ce7cfcf49ba55c8c8961ce222"
+        },
+        {
+          "path": "/elements/4/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.5,
+          "partial_time_rate_upper_bound": 0.5000000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "63a7ac7467ac57042d3f40185224eea5cc080d2f77318dcd724218fea902cf0b"
+        },
+        {
+          "path": "/elements/4/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.2,
+          "partial_time_rate_upper_bound": 0.2000000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "8e93dd8a1634febaf041c22eb62fa618795b351c3c527b73ca663f0a25a8ef85"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - never degweh - flx spr col.milk",
+      "sha256": "019ccc789bc56303be2cb2278571631768d6ea90d158685e97722fd52412975d",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.39000000000000035,
+          "partial_time_rate_upper_bound": 0.39000000000000035,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a079776a85c440a6c000633c6c938dcd658b2975159e3ac95e2f199017f8a4c2"
+        },
+        {
+          "path": "/elements/1/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.45000000000000034,
+          "partial_time_rate_upper_bound": 0.45000000000000034,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "b4fa01060e04d356499f613f2f89ef3c508fba67f0df293feca721ffa0dc9185"
+        },
+        {
+          "path": "/elements/1/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.4,
+          "partial_time_rate_upper_bound": 0.40000000000000013,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a4d3f5fd687b5c9891e8db2536649b3d9594b119ec859e1004299e642eed22b0"
+        },
+        {
+          "path": "/elements/2/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.3522000000000004,
+          "partial_time_rate_upper_bound": 0.3522000000000004,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a001f334bd3113e751a2a8cebe8d782dd92a995610355b2d62bb3ede8bf8fcd0"
+        },
+        {
+          "path": "/elements/2/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.40200000000000036,
+          "partial_time_rate_upper_bound": 0.40200000000000036,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a41d7d2a42cfb7f5096caed9b95f9e4f122efbdec54e60c983a4df9de13132b8"
+        },
+        {
+          "path": "/elements/3/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.39600000000000035,
+          "partial_time_rate_upper_bound": 0.39600000000000035,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0017f5aa29bcfeb007c9e7c266aefaa438b57d506b5a38115ddc7ed9e12ed588"
+        },
+        {
+          "path": "/elements/3/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.38100000000000034,
+          "partial_time_rate_upper_bound": 0.38100000000000034,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "3d6721b32d3189c369035df1211ed7ef88fcfb04a51f5fc4f7fc33337a874e89"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - spectro exp 777 - sevens - 1-ret bi-scooth.milk",
+      "sha256": "001f7d709512b8cecaab0bee7c2dbc34d74d8e7b275c6039bc948fe8ea909e99",
+      "positive_controls": [
+        {
+          "path": "/elements/7/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0499999999999998,
+          "partial_time_rate_upper_bound": 1.050000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "d4f419b152bf53004a4f34c356246e350e43b433da57dfcb022a74fb89160c5d"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - wait for it - 1-ret.milk",
+      "sha256": "01955deaa577573593fbabee4edd0b27920c6143af862c05e6ed5b255f2715e6",
+      "positive_controls": [
+        {
+          "path": "/elements/1/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.5,
+          "partial_time_rate_upper_bound": 0.5000000000000003,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "26cf0efb204c606eb2ac6a6dd1e9aaaeb725e71d31d90fb90d1055899f818a26"
+        },
+        {
+          "path": "/elements/1/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": null,
+          "partial_time_rate_upper_bound": 0.10000000000000009,
+          "held_fixed_input_names": [
+            "bass_att"
+          ],
+          "declared_input_domains": {
+            "bass_att": [
+              0.0,
+              2.0
+            ]
+          },
+          "curve_identity_sha256": "6bc37aba8aae5516900c92cfa6887cda984203c82a22eb2297f36c8c90d70564"
+        },
+        {
+          "path": "/elements/1/motion_controls/3",
+          "control": "rotation",
+          "control_unit": "rad",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 1.0,
+          "partial_time_rate_upper_bound": 1.0,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "6d58adeccebc8322e9ae7ac681828e4b4383b3a150eacd6cd86e4a97b65cfb8a"
+        },
+        {
+          "path": "/elements/4/motion_controls/0",
+          "control": "position_x",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.1,
+          "partial_time_rate_upper_bound": 0.1000000000000001,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "63903919f320d184a3f4e24a83f40655e9f117b1994e68265b82df61baa23554"
+        },
+        {
+          "path": "/elements/4/motion_controls/1",
+          "control": "position_y",
+          "control_unit": "milkdrop shape coordinate",
+          "application": "shape geometry parameter",
+          "ordinary_rate_upper_bound": 0.11500000000000012,
+          "partial_time_rate_upper_bound": 0.11500000000000012,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "a228285d79f463eae7c23cbdc7ffdfafe1f51a1a272be8115def83f829f69a58"
+        }
+      ]
+    },
+    {
+      "preset": "xtramartin (454).milk",
+      "sha256": "026d65255b6606357abd78d9582878198367ff4458fbced9799d341442c6b8d6",
+      "positive_controls": [
+        {
+          "path": "/elements/0/motion_controls/0",
+          "control": "zoom",
+          "control_unit": "source zoom ratio",
+          "application": "feedback sampling transform each step",
+          "ordinary_rate_upper_bound": 0.06666666666666667,
+          "partial_time_rate_upper_bound": 0.06666666666666674,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "1be4087ae434018c6890af3ff99a4b0997eb543b9f894ee5d14a417721791cb8"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/0/polar_projection/sample_offset_controls/0",
+          "control": "polar_sample_offset_x",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.0054687499068677425,
+          "partial_time_rate_upper_bound": 0.00546874990686775,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "0eb8ef4f230905dedee700fb3424cd1ed4b5c39cf384f18c27e1bf8db265b894"
+        },
+        {
+          "path": "/sampling_geometry/stages/composite/0/polar_projection/sample_offset_controls/1",
+          "control": "polar_sample_offset_y",
+          "control_unit": "source texture UV",
+          "application": "mixed polar texture sampling offset",
+          "ordinary_rate_upper_bound": 0.0054687499068677425,
+          "partial_time_rate_upper_bound": 0.00546874990686775,
+          "held_fixed_input_names": [],
+          "declared_input_domains": {},
+          "curve_identity_sha256": "8f60699212c1855b07e867a05523252976c3dab94273f1992f67cab23c28953d"
+        }
+      ]
+    }
+  ]
+}

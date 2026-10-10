@@ -158,7 +158,7 @@ def sampling_geometry(analysis):
                 result['offset_uv']=[_phase_literal(v) for v in offsets]
                 result['offset_expressions']=[_expression(v) for v in offsets]
                 for axis,v in zip('xy',offsets):
-                    result['offset_controls'].append(motion_control(v,'sample_offset_'+axis,'source texture UV',application='texture sampling offset'))
+                    result['offset_controls'].append(motion_control(v,'sample_offset_'+axis,'source texture UV',application='texture sampling offset',input_scenario=getattr(analysis,'input_scenario',None)))
                     result['audio_routes']+=_routes('sample_offset_'+axis,'source texture UV',v,analysis)
                 xy=bool(np.any(matrix[:,:2]!=0));zw=bool(np.any(matrix[:,2:]!=0))
                 result['basis']='mixed_uv' if xy and zw else 'shader_uv' if xy else 'original_uv' if zw else 'uniform_lookup'

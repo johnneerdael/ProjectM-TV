@@ -134,7 +134,7 @@ def _offset(field,name,analysis,unit):
     from source_appearance import _phase_literal,_expression,_routes
     from source_motion import motion_control
     return {'offset_value':_phase_literal(field),'offset_expression':_expression(field),
-            'offset_control':motion_control(field,name,unit,application='polar texture lookup control'),
+            'offset_control':motion_control(field,name,unit,application='polar texture lookup control',input_scenario=getattr(analysis,'input_scenario',None)),
             'audio_routes':_routes(name,unit,field,analysis)}
 
 
@@ -239,7 +239,7 @@ def _mixed_projection(field,angle,radius,analysis):
                 'polar_to_sample_matrix':matrix.tolist(),'sample_offset_uv':[_phase_literal(o) for o in offsets],
                 'sample_offset_expressions':[_expression(o) for o in offsets],
                 'sample_offset_controls':[motion_control(o,'polar_sample_offset_'+axis,'source texture UV',
-                    application='mixed polar texture sampling offset') for axis,o in zip('xy',offsets)],
+                    application='mixed polar texture sampling offset',input_scenario=getattr(analysis,'input_scenario',None)) for axis,o in zip('xy',offsets)],
                 'sample_offset_audio_routes':routes}
     return None
 

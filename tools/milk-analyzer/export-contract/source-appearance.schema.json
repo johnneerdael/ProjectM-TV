@@ -953,6 +953,9 @@
                     },
                     "time_switch_events_are_exhaustive": {
                       "const": false
+                    },
+                    "scenario_time_component": {
+                      "$ref": "#/$defs/scenarioTimeComponent"
                     }
                   }
                 }
@@ -5999,6 +6002,48 @@
         },
         "visible_response_strength": {
           "type": "null"
+        }
+      }
+    },
+    "scenarioTimeComponent": {
+      "type": "object",
+      "required": [
+        "policy",
+        "maximum_absolute_control_rate_per_source_second",
+        "total_control_rate_per_second",
+        "visible_motion_speed",
+        "input_scenario_sha256"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-declared-time-component-response-v1"
+        },
+        "maximum_absolute_control_rate_per_source_second": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "total_control_rate_per_second": {
+          "type": "null"
+        },
+        "visible_motion_speed": {
+          "type": "null"
+        },
+        "input_scenario_sha256": {
+          "type": "string"
+        },
+        "observed_runtime_inputs": {
+          "const": false
+        },
+        "runtime_binding_verified": {
+          "const": false
+        },
+        "held_fixed_input_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

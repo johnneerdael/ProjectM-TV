@@ -1218,3 +1218,10 @@ finite, domain-checked predicate. Bound both branches; retain predicate finite
 premises and use maximum branch rate. This is per fixed coordinate/state, not a
 spatial-uniformity proof. Reject selected-band switches, quantized/unsupported
 predicates and any unresolved branch; keep native-upload band taint separate.
+
+Scenario source-time components: reuse nominal partial-response calculus for
+source-time aliases and declare audio/frame/FPS/progress/state held fixed.
+Preserve ordinary motion records and remap units explicitly. Keep total rate and
+visible speed null; zero partial rate is not stationarity or mood proof. Native
+quantized Q uploads/time switches remain guarded; scenarios cannot imply actual
+clock, native precision, geometry or feedback qualification.

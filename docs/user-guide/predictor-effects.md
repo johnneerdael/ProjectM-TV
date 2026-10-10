@@ -492,3 +492,9 @@ Supported spatial masks can retain a colour-response bound for an audio band:
 changing that band holds the mask's coordinates fixed and considers both
 branches. A mask switched by the same band remains unresolved for continuous
 response. A fixed mask during this comparison can still change over time.
+
+Declared input scenarios also add `scenario_time_component` to supported motion
+controls. This estimates the source-time part of a control's rate while audio,
+frame counters and state stay fixed. It can describe a steady-band movement
+recipe; it does not measure total movement or establish calmness. Ordinary
+motion/trajectory records remain alongside it.

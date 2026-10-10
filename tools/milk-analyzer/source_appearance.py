@@ -478,7 +478,7 @@ def appearance_from_analysis(analysis):
             from source_instances import shape_instance_motion
             elements[identity]['instance_motion']=shape_instance_motion(controls,elements[identity]['parameters']['instances'])
         elements[identity]['motion_controls']=[motion_control(controls[name],*SHAPE_CONTROLS[name],
-            application='shape geometry parameter') for name in ('x','y','rad','ang') if name in controls]
+            application='shape geometry parameter',input_scenario=getattr(analysis,'input_scenario',None)) for name in ('x','y','rad','ang') if name in controls]
         for name,(control,unit) in SHAPE_CONTROLS.items():
             if name in controls:
                 material=elements[identity]['material']
@@ -497,7 +497,7 @@ def appearance_from_analysis(analysis):
             value=getattr(analysis,'mesh_controls',{}).get(name)
             if value is not None:
                 routes+=_routes(control,unit,value,analysis);parameters[name]=_number(value)
-                motion.append(motion_control(value,control,unit,application='feedback sampling transform each step'))
+                motion.append(motion_control(value,control,unit,application='feedback sampling transform each step',input_scenario=getattr(analysis,'input_scenario',None)))
         neutral={'zoom':1,'radial_zoom':1,'scale_x':1,'scale_y':1,'rotation':0,'translation_x':0,'translation_y':0,'deformation':0}
         if routes or any(r['curve_kind']!='constant' or r['constant_value']!=neutral[r['control']] for r in motion):
             element=elements.setdefault('mesh_warp',{'id':'mesh_warp','stage':'mesh_warp','family_codes':[8],

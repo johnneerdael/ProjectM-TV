@@ -2047,3 +2047,31 @@ the colour projector's scalar identities permit distinct band lanes.
 Audio-dependent native upload placeholders are still checked before this rule.
 Fixed band response does not establish fixed masks over time, flash timing,
 whole-screen continuity, visibility, feedback stability or a mood score.
+
+## Declared partial source-time response
+
+Eligible shape geometry controls, native mesh controls, texture-sampling offsets,
+polar offsets and periodic phase controls add `scenario_time_component` when a
+caller supplies an input scenario. The ordinary motion curve is unchanged.
+The new record reuses nominal response calculus for source-time aliases advancing
+together (`time`, `:native-render-time-f32`, `_c2.x`) and explicitly renames the
+upper-bound unit to the control unit per source-time second.
+
+For `.01*sin(time*bass)` and declared bass [0,2], the partial translation-rate
+ceiling is approximately .02 source UV per second. Missing band bounds can leave
+this rate unbounded. Time-dependent switches, quantized native Q uploads,
+unsupported operations and singular domains retain unknown results.
+
+Audio levels, other clocks (frame counters, FPS/progress), state and coordinates
+are held fixed. Consequently this is a partial time component, not a total
+clock/state/audio motion estimate. For `time+frame`, its time component is1
+while `frame` is held fixed; this says nothing about the frame counter's actual
+movement. `total_control_rate_per_second` and `visible_motion_speed` stay null.
+Geometry trajectories, source-area prominence and feedback are not inferred
+from a single control derivative. Existing trajectory/vertex-speed records do
+not automatically inherit these bounds.
+
+Finite/input-domain records, caller scenario identity and false observed/native
+binding flags accompany each result. Clock jumps, source-to-native rounding,
+discrete frames, viewport projection and visibility remain unqualified. A zero
+partial time derivative does not mean stationary visuals or a calm preset.

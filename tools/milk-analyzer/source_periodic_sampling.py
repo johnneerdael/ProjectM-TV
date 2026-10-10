@@ -191,7 +191,7 @@ def oscillatory_displacement(field,analysis):
             rows.append({'id':key,'oscillator':w['node'].op,'constant_amplitude_uv':amp if all(v is not None for v in amp) else None,
                 'amplitude_uv_programs':amp_programs,'constant_phase_gradient':gradient if all(v is not None for v in gradient) else None,
                 'phase_gradient_programs':programs,'phase_offset_program':_expression(w['offset']),
-                'phase_motion_control':motion_control(w['offset'],'wave_phase','radian',application='texture-displacement phase'),
+                'phase_motion_control':motion_control(w['offset'],'wave_phase','radian',application='texture-displacement phase',input_scenario=getattr(analysis,'input_scenario',None)),
                 'audio_routes':routes})
             if any(v is None for v in amp+gradient):constant_waves=False
             else:
