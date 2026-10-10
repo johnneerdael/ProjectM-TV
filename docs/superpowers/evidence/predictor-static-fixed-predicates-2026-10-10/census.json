@@ -1,0 +1,645 @@
+{
+  "basis": "Fixed-predicate nominal selected-band continuity and branch-rate rule; no gain coverage increase",
+  "presets": 100,
+  "source_zip_joins_verified": true,
+  "counts": {
+    "presets_with_positive_bounds": 5,
+    "ordinary_band_routes": 142,
+    "ordinary_fully_bounded_band_routes": 2,
+    "ordinary_positive_bounded_channels": 10,
+    "scenario_band_routes": 142,
+    "scenario_fully_bounded_band_routes": 6,
+    "scenario_positive_bounded_channels": 22,
+    "presets_with_direct_routes": 37
+  },
+  "changed_previous_descriptions": [
+    "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+    "GreatWho + Flexi - Lasershow [bipolar slickery party].milk"
+  ],
+  "changed_source_gap_presets": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "model_modules": {
+    "source_control_bounds.py": "820af7770e732f56a61a9126714a0b880f9975c17f112d6b763aae0b862854c1",
+    "source_nonlinear_colour.py": "8c4fc079d5c689812eab328f47fb30566e9e6c9a9ac2ae4f6eb2eb2b490ad782"
+  },
+  "zip_sha256": "de9c99a4e1cdfd146846ff518b0276836218553ddc3374cc7915dfc02cd0af43",
+  "rows": [
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar gapminder party].milk",
+      "sha256": "027f38e4703be5723d59c6b285fba1cc89ddc637e79c3048830913dd60474efa",
+      "changed_routes": [
+        {
+          "element_index": 2,
+          "route_index": 1,
+          "input_code": 2,
+          "control": "position_x",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 2,
+          "input_code": 3,
+          "control": "position_x",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 4,
+          "input_code": 2,
+          "control": "position_y",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 5,
+          "input_code": 3,
+          "control": "position_y",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "preset": "GreatWho + Flexi - Lasershow [bipolar slickery party].milk",
+      "sha256": "00596b146a4975cdd28523ae7dfad218da90283f08f89e6a0ed2da233495be2e",
+      "changed_routes": [
+        {
+          "element_index": 2,
+          "route_index": 1,
+          "input_code": 2,
+          "control": "position_x",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 2,
+          "input_code": 3,
+          "control": "position_x",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 4,
+          "input_code": 2,
+          "control": "position_y",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.y",
+              "mid"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        },
+        {
+          "element_index": 2,
+          "route_index": 5,
+          "input_code": 3,
+          "control": "position_y",
+          "before": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "unknown",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [],
+            "assumed_finite_input_names": [],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "unsupported input, discontinuous operation or unproved denominator domain"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          },
+          "after": {
+            "policy": "source-nominal-audio-control-response-v1",
+            "maximum_absolute_control_change_per_audio_unit": null,
+            "bound_kind": "upper_bound",
+            "nominal_continuity": "smooth_nominal",
+            "varying_input_names": [
+              "_c3.z",
+              "treb"
+            ],
+            "held_fixed_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time"
+            ],
+            "assumed_finite_input_names": [
+              "bass",
+              "instance",
+              "mid",
+              "state:shape_0_per_frame:dir",
+              "time",
+              "treb"
+            ],
+            "declared_input_domains": {},
+            "unknown_reasons": [
+              "no finite lifetime nominal rate bound from supported formula"
+            ],
+            "visible_response_strength": null,
+            "maximum_time_rate": null,
+            "native_numeric_certified": false,
+            "uses_equation_execution": false,
+            "uses_rendered_images": false,
+            "conditions": [
+              "Nominal real-valued source control response; all inputs and relevant intermediates finite",
+              "Selected scalar inputs vary together by the same delta; all other state/audio/time/coordinates remain fixed",
+              "This is a sufficient upper bound, not a minimum or typical response, or a response direction",
+              "Quantized uploads/casts, discontinuities and unsupported domains remain unresolved",
+              "No recurrent-state derivative, audio time-rate, native/storage rounding, affected screen area or mood claim"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "input_scenario_file_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8"
+}

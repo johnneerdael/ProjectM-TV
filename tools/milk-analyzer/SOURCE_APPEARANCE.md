@@ -2025,3 +2025,25 @@ power below one needs a strictly positive lower base bound; otherwise its
 unbounded derivative at zero remains unresolved. Powers retain guarded source
 lowering, exact exponent-one identity, and overflow/underflow safeguards.
 These rules do not make quantized native uploads continuous.
+
+## Fixed predicates in nominal audio response
+
+A supported conditional can have a continuous response bound for a selected
+band when its predicate inputs stay fixed during that variation. This does not
+mean the mask is spatially uniform: different fixed coordinates may choose
+different branches. For each allowed coordinate/state, the response bound is
+the maximum of the two branch bounds. Finite predicate premises are retained.
+Both branches must have usable bounds; no inactive branch is discarded to hide
+a singular or unsupported domain.
+
+For `uv.x>.5 ? sample*bass : .25*sample*bass`, unit sampled colours held fixed
+give a nominal component response ceiling of1. A predicate on mids can stay
+fixed for bass variation but remains a discontinuity for mid variation. A
+predicate that uses the selected band, unsupported/quantized predicate storage,
+or known invalid arithmetic does not receive this continuous-response rule.
+Generic unsplit vector input identities conservatively reject any selected lane;
+the colour projector's scalar identities permit distinct band lanes.
+
+Audio-dependent native upload placeholders are still checked before this rule.
+Fixed band response does not establish fixed masks over time, flash timing,
+whole-screen continuity, visibility, feedback stability or a mood score.

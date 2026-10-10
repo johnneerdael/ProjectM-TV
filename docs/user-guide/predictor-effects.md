@@ -487,3 +487,8 @@ mid or high input unit, with sampled colours held fixed. It distinguishes those
 from audio-driven texture movement. Upper bounds can help describe colour
 reactivity; they do not measure visible response or flashing. Quantized uploads
 and unsupported formulas stay unresolved even when their colour range is known.
+
+Supported spatial masks can retain a colour-response bound for an audio band:
+changing that band holds the mask's coordinates fixed and considers both
+branches. A mask switched by the same band remains unresolved for continuous
+response. A fixed mask during this comparison can still change over time.

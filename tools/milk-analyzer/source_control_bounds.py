@@ -88,6 +88,24 @@ def compound_time_bounds(field,*,_value_only=False,_input_domains=None,_response
                 span,rate,kind=child
                 return checked(None if span is None else [-span[1],-span[0]],rate,kind)
             return None
+        if _response_input_names is not None and node.op=='select' and len(node.args)==3:
+            from source_polar import _nodes
+            from source_forms import known_invalid_phase_offset
+            predicate=node.args[0]
+            for child,path in _nodes(predicate):
+                if child.op in {'unknown','uninitialized','sequence','cast','narrow','construct'} or child.op.startswith('loop_'):return None
+                if child.op=='input':
+                    name=child.detail.get('name')
+                    if not isinstance(name,str) or name in _response_input_names or any(n.startswith(name+'.') for n in _response_input_names):return None
+            if known_invalid_phase_offset(predicate,preserve_zero_products=True):return None
+            condition=scalar_value_envelope(predicate,input_domains=_input_domains)
+            if condition['nominal_value_range'] is None:return None
+            finite_inputs.update(condition['assumed_finite_input_names'])
+            a=visit(node.args[1],depth+1);b=visit(node.args[2],depth+1)
+            if a is None or b is None:return None
+            span=None if a[0] is None or b[0] is None else [min(a[0][0],b[0][0]),max(a[0][1],b[0][1])]
+            rate=None if a[1] is None or b[1] is None else max(a[1],b[1])
+            return checked(span,rate,continuity(a,b))
         if _response_input_names is not None and node.op=='domain_checked' and len(node.args)==1:
             if node.detail.get('function') not in {'sqrt','pow'}:return None
             return visit(node.args[0],depth+1)

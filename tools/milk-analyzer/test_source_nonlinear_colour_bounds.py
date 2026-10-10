@@ -261,3 +261,27 @@ def test_positive_power_colour_response_bounds_derivative_over_declared_domain()
 def test_root_colour_response_retains_zero_domain_singularity_guard():
     r=colour('ret=sqrt(saturate(bass))*GetPixel(uv);')
     assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])
+
+
+def test_fixed_spatial_colour_mask_can_bound_audio_response_in_both_branches():
+    r=colour('ret=uv.x>.5 ? GetPixel(uv)*bass : GetPixel(uv)*bass*.25;')
+    b=next(x for x in r['direct_colour_audio_response']['bands'] if x['input_code']==1)
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in b['channel_response_envelopes']]==pytest.approx([1,1,1],abs=2e-14)
+    assert all('_uv.x' in x['held_fixed_input_names'] for x in b['channel_response_envelopes'])
+
+
+def test_other_band_colour_mask_is_fixed_only_for_selected_band_response():
+    r=colour('ret=mid>.5 ? GetPixel(uv)*bass : GetPixel(uv)*bass*.25;')
+    rows={x['input_code']:x for x in r['direct_colour_audio_response']['bands']}
+    assert [x['maximum_absolute_control_change_per_audio_unit'] for x in rows[1]['channel_response_envelopes']]==pytest.approx([1,1,1],abs=2e-14)
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in rows[2]['channel_response_envelopes'])
+
+
+def test_audio_switched_colour_branches_do_not_acquire_continuous_gain():
+    r=colour('ret=bass>.5 ? GetPixel(uv) : GetPixel(uv)*.25;')
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])
+
+
+def test_fixed_mask_does_not_discard_a_branch_with_singular_audio_domain():
+    r=colour('ret=uv.x>.5 ? GetPixel(uv)/bass : GetPixel(uv)*bass;')
+    assert all(x['maximum_absolute_control_change_per_audio_unit'] is None for x in r['direct_colour_audio_response']['bands'][0]['channel_response_envelopes'])

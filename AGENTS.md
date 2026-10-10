@@ -1212,3 +1212,9 @@ limits; lerp uses product-rule triangle bounds. Positive constant powers require
 finite nonnegative base bounds; exponents below one require a positive minimum.
 Retain exact exponent-one identity and numeric/domain guards. Keep value-only
 quantized ranges separate from response rates and native-upload taint.
+
+Fixed-predicate response: selected input identities must be absent from a pure,
+finite, domain-checked predicate. Bound both branches; retain predicate finite
+premises and use maximum branch rate. This is per fixed coordinate/state, not a
+spatial-uniformity proof. Reject selected-band switches, quantized/unsupported
+predicates and any unresolved branch; keep native-upload band taint separate.
