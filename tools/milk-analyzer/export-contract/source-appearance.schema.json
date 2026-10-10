@@ -4429,6 +4429,76 @@
                   }
                 }
               }
+            },
+            "main_frame_q": {
+              "type": "object",
+              "description": "Source q1..q32 main-frame snapshots before pixel writes; explicit float32 upload, dynamic programs symbolic and GPU binding unobserved.",
+              "required": [
+                "policy",
+                "lanes",
+                "observed_runtime_binding",
+                "snapshot_phase"
+              ],
+              "properties": {
+                "policy": {
+                  "const": "source-main-frame-q-uniform-snapshot-v1"
+                },
+                "lanes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "required": [
+                      "packed_uniform",
+                      "component",
+                      "binding_status",
+                      "native_float32_constant",
+                      "source_expression",
+                      "input_dependencies"
+                    ],
+                    "properties": {
+                      "packed_uniform": {
+                        "type": "string"
+                      },
+                      "component": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 3
+                      },
+                      "binding_status": {
+                        "enum": [
+                          "source_constant",
+                          "symbolic_source_snapshot",
+                          "unknown"
+                        ]
+                      },
+                      "native_float32_constant": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "source_expression": {
+                        "type": [
+                          "object",
+                          "null"
+                        ]
+                      },
+                      "input_dependencies": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "observed_runtime_binding": {
+                  "const": false
+                },
+                "snapshot_phase": {
+                  "const": "after main-frame code; before per-pixel Q writes"
+                }
+              }
             }
           }
         },

@@ -58,8 +58,10 @@ def _data_return(value):
 
 def _packed_reads(field):
     """Affirmative component reads, using the existing live LoopPlan slice."""
-    from effect_families import _walk,_children,_strip
+    from effect_families import _walk,_children,_strip,_CACHE
     from field_math import SWIZZLE
+    cache=_CACHE.get();key=('appearance_packed_reads',id(field))
+    if cache is not None and key in cache and cache[key][0] is field:return cache[key][1]
     result={}
     for node,path in _walk(_data_return(field)):
         projected=_canonical_lane(node)
@@ -72,6 +74,7 @@ def _packed_reads(field):
         for child in _children(node):
             if child.op=='input' and child.dtype=='float4' and node.op!='member':
                 result.setdefault(child.detail['name'],set()).update(range(4))
+    if cache is not None:cache[key]=(field,result)
     return result
 
 
@@ -98,7 +101,7 @@ def _expression(field):
         index=len(nodes);ids[id(node)]=index;nodes.append(None)
         detail={key:value for key,value in node.detail.items() if key in {'value','name','field','operator','target_type','reason','index',
             'sampler','canonical_texture','surface','frame','site_index','sampling_policy','coordinate_convention','intrinsic','lod_effect',
-            'numeric_domain','explicit_source_cast','equation_phase','value_binding'}}
+            'numeric_domain','explicit_source_cast','equation_phase','value_binding','native_uniform_role'}}
         nodes[index]={'op':node.op,'dtype':node.dtype,'args':[visit(arg) for arg in node.args],'detail':detail}
         if node.op.startswith('loop_'):nodes[index]['unresolved_loop_plan']=True
         return index
@@ -166,6 +169,13 @@ def _routes(control,unit,value,analysis):
         if name.startswith('q') and name[1:].isdigit() and 1<=int(name[1:])<=32:
             main=getattr(analysis,'main',{}).get(name)
             if main is not None:bridges[name]=_expression(main)
+    q_narrowings=[]
+    for node,path in _walk(value):
+        name=node.detail.get('native_uniform_role')
+        if isinstance(name,str) and name.startswith('q') and name[1:].isdigit() and 1<=int(name[1:])<=32:
+            main=getattr(analysis,'main',{}).get(name)
+            if main is not None:bridges[name]=_expression(main)
+            q_narrowings.append(node)
     for code in codes:
         gain=0.;exact=True
         for coefficient,term in _terms(value):
@@ -173,6 +183,7 @@ def _routes(control,unit,value,analysis):
             if not dependent:continue
             if _direct_audio(term)==code:gain+=coefficient
             else:exact=False
+        if any(code in _audio_codes(node,analysis) for node in q_narrowings):exact=False
         result.append({'input_code':code,'control':control,'control_unit':unit,
             'dependency_kind':'source causal control path','linear_gain':gain if exact else None,
             'gain_unit':unit+'/declared audio input unit' if exact else None,

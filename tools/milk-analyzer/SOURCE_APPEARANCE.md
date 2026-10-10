@@ -33,6 +33,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `native_radial_zoom` | Positive uniform-control radial zoom component, nominal factor/derivative envelopes; no tunnel or full-map label |
 | `native_warp_displacement` | Per-step backward-sampling RMS expression/bound in aspect-corrected source coordinates; not visible speed |
 | `elements[].wave_material` | Built-in wave RGB clamp/normalization and mode/volume alpha recipe; threshold jump candidates are not visible flashes |
+| `native_input_bindings.main_frame_q` | Source main-frame q1..q32 snapshots packed into shader float32 banks, with unknown dynamic values retained |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
 | `mood_matches.chill.eligible` | Null until sufficient activity evidence exists |
@@ -1513,3 +1514,31 @@ frame cadence remain outside these event counts. Event offsets can remain null
 when arithmetic cannot resolve distinct contacts. Visible-flash frequency is
 always null. Later execution gates, projection, opacity, blend/feedback and
 composition determine visible consequences; this is not a mood certificate.
+
+
+## Main-frame Q shader bindings
+
+`native_input_bindings.main_frame_q` records q1..q32 as _qa.._qh scalar lanes.
+The source model reuses the already interpreted main equations, with preset-init
+Q reloaded before each frame. Source34 PerPixelContext.cpp98–106 copies the
+main Q values to both frameQVariables and the pixel context before vertex code.
+MilkdropShader.cpp336–344 uploads frameQVariables, an array of doubles, through
+float4 uniforms. Pixel/custom-context Q writes do not replace that shader snapshot.
+Original MilkDrop2.25c milkdropfs.cpp493/675/4004–4007 confirms this pool/copy intent.
+
+Supported constants convert to float32 after main expression evaluation. Dynamic
+Q programs are inserted as explicit `narrow` fields with `native_uniform_role`
+metadata, preserving the precision boundary and source/input dependencies.
+Known nonfinite uploads remain unknown; no zero default replaces overflow.
+Shader-local shadows retain their own values. Each lane's contract includes
+its source expression, binding status, packed location and known converted value,
+with runtime binding unobserved. Unsupported dynamic EEL operations remain
+symbolic gaps; imported source expressions are not executed as GPU or equation
+code by the static exporter.
+
+Audio routes retain `q_bridge_expressions` after replacing the packed bank read,
+and the expression DAG preserves the native Q role. Q-mediated scalar gain stays
+unqualified across float32 upload; direct raw-source band coefficients and the
+final shader transfer are different facts. This can clarify constant feedback
+weights and colour recipes, but does not certify dynamic values, native temporal/
+rounding parity, whole feedback or appearance/mood accuracy.

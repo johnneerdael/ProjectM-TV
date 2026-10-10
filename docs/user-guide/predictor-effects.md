@@ -380,3 +380,10 @@ the evidence tied to its source. Accepted shaders select a conditional custom
 branch; rejected shaders select a conditional fallback candidate. Missing or
 stale evidence remains unresolved. Texture assumptions and native driver
 acceptance stay explicit, so compilation alone does not certify appearance.
+
+Shader Q inputs now link to the main-frame equations that supply them. The JSON
+records all 32 packed lanes and the float32 upload boundary. Supported constants
+can clarify shader colours and feedback weights; dynamic values retain their
+source expressions and audio dependencies. Per-pixel Q mutations are separate
+from the shader snapshot. A source binding does not establish runtime values,
+native rounding parity or final appearance.

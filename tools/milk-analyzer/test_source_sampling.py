@@ -117,6 +117,15 @@ def test_constant_matrix_lookup_respects_vector_matrix_argument_order():
 
 
 def test_dynamic_matrix_lookup_cannot_be_folded_from_unbound_input_defaults():
-    m=maps('ret=GetPixel(mul(uv,float2x2(_qa)));')[0]
+    from test_effect_families import read
+    d=appearance(read('per_frame_1=q1=sin(bass);q2=cos(mid);q3=sin(treb);q4=cos(bass);\n'
+        'comp_1=`shader_body {ret=GetPixel(mul(uv,float2x2(_qa)));}\n'))
+    m=d['sampling_geometry']['stages']['composite'][0]
     assert m['matrix_uv4'] is None
     assert m['unknown_reasons']
+
+
+def test_zero_initialized_q_bank_has_constant_singular_lookup():
+    m=maps('ret=GetPixel(mul(uv,float2x2(_qa)));')[0]
+    assert m['matrix_uv4']==[[0,0,0,0],[0,0,0,0]]
+    assert m['basis']=='uniform_lookup'

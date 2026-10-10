@@ -1082,3 +1082,12 @@ or GPU/texture binding certification. Missing cases remain unknown; native
 driver and runtime texture flags must stay false. Freeze manifest bytes across
 each preset and before result commitment, including the final case. The source
 exporter itself still only invokes the native reader, never compile/render/eval.
+
+Source Q-uniform maintenance: `main_q_component_fields` binds shader _qa.._qh
+to q1..q32 after main-frame evaluation, before per-pixel Q writes, preserving
+double-to-float32 upload. Constants convert only at this boundary; dynamic
+programs remain narrow symbolic fields and known nonfinite uploads unknown.
+Keep Q init reload/reset and shader-local shadows separate. Preserve native
+uniform-role provenance in expressions/audio bridges; Q-mediated scalar gain
+does not become certified across the upload boundary. No equation execution
+or observed GPU binding follows from this source contract.

@@ -57,3 +57,43 @@ def native_time_contract():
             for name,(function,rates,offsets) in NATIVE_OSCILLATORS.items()},
         'conditions':['Nominal source curves omit CPU float32 rounding, transcendental approximation and frame sampling',
                       'Clock origin/resets/jumps must follow declared render context; no visible flash rate is certified']}
+
+
+def main_q_component_fields(main):
+    """Bind shader Q to the main-frame snapshot, preserving float32 upload."""
+    from shader_fields import Field
+    from source_appearance import _phase_literal,_expression
+    from effect_families import _deps
+    import math
+    fields={};lanes={}
+    for index in range(32):
+        name='q'+str(index+1);bank='_q'+'abcdefgh'[index//4];component=index%4
+        value=main.get(name);literal=None if value is None else _phase_literal(value)
+        converted=None;status='symbolic_source_snapshot';reason=None
+        if value is None:
+            status='unknown';reason='main-frame Q source value missing'
+            bound=Field('unknown',detail={'reason':reason})
+        elif literal is not None:
+            with np.errstate(over='ignore',invalid='ignore'):converted=float(np.float32(literal))
+            if not math.isfinite(converted):
+                converted=None;status='unknown';reason='main-frame Q float32 upload is nonfinite'
+                bound=Field('unknown',(value,),'float',{'reason':reason})
+            else:
+                status='source_constant';bound=Field('constant',dtype='float',detail={'value':converted,
+                    'basis':'source main-frame Q snapshot converted to native float32 uniform'})
+        else:
+            bound=Field('narrow',(value,),'float',{'numeric_domain':'shader-float32',
+                'native_uniform_role':name,'basis':'source main-frame Q snapshot; float32 uniform upload'})
+        fields.setdefault(bank,{})[component]=bound
+        lanes[name]={'packed_uniform':bank,'component':component,'binding_status':status,
+            'native_float32_constant':converted,'source_expression':None if value is None else _expression(value),
+            'input_dependencies':[] if value is None else sorted(_deps(value)),
+            'unknown_reasons':[] if reason is None else [reason]}
+    return fields,{'policy':'source-main-frame-q-uniform-snapshot-v1','lanes':lanes,
+        'observed_runtime_binding':False,'uses_equation_execution':False,
+        'snapshot_phase':'after main-frame code; before per-pixel Q writes',
+        'conditions':['Main Q reloads the preset-init snapshot before each frame and uses the declared source equation loading policy',
+                      'Shader banks pack q1..q32 after main frame code, with native double-to-float32 conversion',
+                      'Pixel and custom drawing Q mutations are separate contexts and do not replace this snapshot',
+                      'Dynamic source programs remain symbolic; finite inputs/intermediates/uploads and native shader selection are required',
+                      'Native temporal/rounding/context parity and visible effects are not certified by this source binding']}

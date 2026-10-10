@@ -61,8 +61,16 @@ def test_pure_uv_map_has_zero_direct_sample_gain_without_visible_stillness_claim
     assert r['visible_motion_speed'] is None
 
 
-def test_xtramartin_warp_gradient_has_source_numeric_response():
+def test_xtramartin_original_gradient_is_disconnected_by_unassigned_q32():
     d=appearance(read((PRESETS/'xtramartin (454).milk').read_bytes()))
+    assert d['native_input_bindings']['main_frame_q']['lanes']['q32']['native_float32_constant']==0
+    assert d['sampling_geometry']['stages']['warp']==[]
+
+
+def test_xtramartin_explicit_q32_control_preserves_gradient_math():
+    original=(PRESETS/'xtramartin (454).milk').read_bytes()
+    # Deliberate test-only control; never modify or credit the original preset.
+    d=appearance(read(original+b'\nper_frame_init_2=q32=1;\n'))
     maps=d['sampling_geometry']['stages']['warp']
     known=[m['sampled_coordinate_response'] for m in maps
            if m['sampled_coordinate_response']['source_model']=='affine_uv_and_sample_values'
