@@ -1,0 +1,1 @@
+(FPCore (x) :name "cancellation-adaptation-control" :precision binary32 :pre (<= 1 x 16777216) (- (+ 1 x) x))

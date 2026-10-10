@@ -1,0 +1,36 @@
+{
+  "direct_gles300": {
+    "sections": 50,
+    "accepted": 0,
+    "reason": "InvalidVersion(300)"
+  },
+  "direct_opengl_spirv": {
+    "sections": 50,
+    "accepted": 0,
+    "reason": "UnsupportedExecutionMode(8): OriginLowerLeft"
+  },
+  "glsl450_relaxed_vulkan_combined_sampler_probe": {
+    "case": "18-warp",
+    "reason": "InvalidId: combined sampled image lookup"
+  },
+  "hlsl50_unadapted_bridge_full_validation": {
+    "sections": 50,
+    "accepted": 0,
+    "reasons": {
+      "resource_binding_collision": 25,
+      "output_array_location_collision": 25
+    }
+  },
+  "hlsl50_unadapted_functions_without_binding_validation": {
+    "sections": 50,
+    "accepted": 50,
+    "qualified_full_ir": false
+  },
+  "final_bridge": {
+    "sections": 50,
+    "all_validation_flags": true,
+    "accepted": 50,
+    "changed_native_math_verified": false
+  },
+  "limits": "Earlier unsupported requests and interface failures are retained. Partial validation was exploratory only; shipped worker requires all flags."
+}

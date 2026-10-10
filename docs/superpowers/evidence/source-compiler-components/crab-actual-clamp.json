@@ -1,0 +1,85 @@
+{
+  "original": {
+    "schema_version": 1,
+    "kind": "source-state-crab-candidate",
+    "status": "candidate_inferred",
+    "preset_sha256": "4a7d897b60e5b9379a5a6d48496e15ea86cc1251906dd49dc0fb3f354e178d4a",
+    "engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+    },
+    "engine_archive_sha256": "9dbe2f4d472eeea9809706104bea64133a07dda4be4f5da4531b0a7d899fb197",
+    "frame_fragment_sha256": "63d72d3c3726f1ee6e427cc2571d4200d0346a3db059360c4057d64de1225010",
+    "init_fragment_sha256": "a460533f3af9762dceb9a90dafaa7438a681570330fa3059dcc7f12e963bd0c3",
+    "declared_model": {
+      "kind": "nominal-real-clamp-arbitrary-delta-recurrence",
+      "initial_interval": [
+        "-3/20",
+        "3/25"
+      ],
+      "clamp_bounds": [
+        "-1/2",
+        "1/2"
+      ],
+      "delta_domain": "all finite real values",
+      "mutate_clamp": false
+    },
+    "worker_sha256": "cc7614736ca055319c869cef0c3ad5239ea301318506ba04a184e879ca65bd14",
+    "worker_version": "source-state-crab-worker/1 crabb1eeb1a9402ab0664e962f26f89d923f8514284c",
+    "inference": {
+      "header_interval": "[-1/2, 1/2]",
+      "postframe_interval": "[-1/2, 1/2]"
+    },
+    "reason": null,
+    "seconds": 0.018340541020734236,
+    "source_model_mapping_verified": false,
+    "initialization_and_phase_obligations_verified": false,
+    "native_numeric_equivalence_verified": false,
+    "candidate_only": true,
+    "limits": "Use inferred intervals as candidates for separate ordered-phase/init/reset proofs. No native-FP, source-wide state or prediction claim.",
+    "record_sha256": "ccf4395a3cac597f5661b4f15497c0d56caae20a5f38a9e24dd41a586a918573"
+  },
+  "clamp_removal": {
+    "schema_version": 1,
+    "kind": "source-state-crab-candidate",
+    "status": "candidate_inferred",
+    "preset_sha256": "4a7d897b60e5b9379a5a6d48496e15ea86cc1251906dd49dc0fb3f354e178d4a",
+    "engine": {
+      "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+      "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+    },
+    "engine_archive_sha256": "9dbe2f4d472eeea9809706104bea64133a07dda4be4f5da4531b0a7d899fb197",
+    "frame_fragment_sha256": "63d72d3c3726f1ee6e427cc2571d4200d0346a3db059360c4057d64de1225010",
+    "init_fragment_sha256": "a460533f3af9762dceb9a90dafaa7438a681570330fa3059dcc7f12e963bd0c3",
+    "declared_model": {
+      "kind": "nominal-real-clamp-arbitrary-delta-recurrence",
+      "initial_interval": [
+        "-3/20",
+        "3/25"
+      ],
+      "clamp_bounds": [
+        "-1/2",
+        "1/2"
+      ],
+      "delta_domain": "all finite real values",
+      "mutate_clamp": true
+    },
+    "worker_sha256": "cc7614736ca055319c869cef0c3ad5239ea301318506ba04a184e879ca65bd14",
+    "worker_version": "source-state-crab-worker/1 crabb1eeb1a9402ab0664e962f26f89d923f8514284c",
+    "inference": {
+      "header_interval": "[-oo, +oo]",
+      "postframe_interval": "[-oo, +oo]"
+    },
+    "reason": null,
+    "seconds": 0.015765083982842043,
+    "source_model_mapping_verified": false,
+    "initialization_and_phase_obligations_verified": false,
+    "native_numeric_equivalence_verified": false,
+    "candidate_only": true,
+    "limits": "Use inferred intervals as candidates for separate ordered-phase/init/reset proofs. No native-FP, source-wide state or prediction claim.",
+    "record_sha256": "5413fca549bf487d165172aa178c6243de3e1a4436c69857df470b853a3f125c"
+  },
+  "preset_name": "Martin - Pixies Party (Hakan mash-up) 6-10.milk",
+  "initialization_premise": "rand(10) integer0..9; nominal .03 -> init[-.15,.12]",
+  "transition_premise": "delta=vy0*dt overapproximated as an arbitrary finite real each frame; branch min/max nominal rational semantics; init/remainder-of-phase/reset require separate proof"
+}

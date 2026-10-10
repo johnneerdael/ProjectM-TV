@@ -1,0 +1,372 @@
+{
+  "fixed_sources": 32,
+  "consumed_audio_control_fields_examined": 115,
+  "supported_nontrivial_queries": 2,
+  "query_budget": 8,
+  "selected_supported_queries": 2,
+  "rejections": {
+    "qualified phase/storage input requires a binding adapter": 59,
+    "unsupported original symbolic operation: min": 1,
+    "unsupported original symbolic operation: less": 1,
+    "unsupported original symbolic operation: divide": 11,
+    "unsupported original symbolic operation: abs": 2,
+    "unsupported original symbolic operation: select": 24,
+    "unsupported original symbolic operation: greater": 10,
+    "unsupported original symbolic operation: pow": 1,
+    "unsupported original symbolic operation: max": 2,
+    "unsupported original symbolic operation: eel_divide": 2
+  },
+  "results": [
+    {
+      "preset": {
+        "relative_path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081"
+      },
+      "element": "mesh",
+      "control": "warp",
+      "scope": "declared common binary32 expression model, not actual mixed-format/native pipeline",
+      "query": {
+        "policy": "source-pure-precision-query-v1",
+        "precision": "binary32",
+        "input_domains": {
+          "bass": [
+            0,
+            2
+          ],
+          "mid": [
+            0,
+            2
+          ],
+          "treb": [
+            0,
+            2
+          ]
+        },
+        "symbols": {
+          "bass": "x0",
+          "mid": "x1",
+          "treb": "x2"
+        },
+        "source_program": {
+          "root": 0,
+          "nodes": [
+            {
+              "op": "multiply",
+              "dtype": "float",
+              "args": [
+                1,
+                9
+              ],
+              "detail": {}
+            },
+            {
+              "op": "add",
+              "dtype": "float",
+              "args": [
+                2,
+                7
+              ],
+              "detail": {}
+            },
+            {
+              "op": "add",
+              "dtype": "float",
+              "args": [
+                3,
+                5
+              ],
+              "detail": {}
+            },
+            {
+              "op": "multiply",
+              "dtype": "float",
+              "args": [
+                4,
+                4
+              ],
+              "detail": {}
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "bass"
+              }
+            },
+            {
+              "op": "multiply",
+              "dtype": "float",
+              "args": [
+                6,
+                6
+              ],
+              "detail": {}
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "mid"
+              }
+            },
+            {
+              "op": "multiply",
+              "dtype": "float",
+              "args": [
+                8,
+                8
+              ],
+              "detail": {}
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "treb"
+              }
+            },
+            {
+              "op": "constant",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "value": 0.0175
+              }
+            }
+          ]
+        },
+        "fpcore": "(FPCore (x0 x1 x2) :precision binary32\n  :pre (and (<= 0 x0 2) (<= 0 x1 2) (<= 0 x2 2))\n  (let* ([n0 (* x0 x0)] [n1 (* x1 x1)] [n2 (+ n0 n1)] [n3 (* x2 x2)] [n4 (+ n2 n3)] [n5 (* n4 0.01750000000000000166533453693773481063544750213623046875)]) n5))\n",
+        "fptaylor": "Variables\n  float32 x0 in [0, 2];\n  float32 x1 in [0, 2];\n  float32 x2 in [0, 2];\nDefinitions\n  n0 rnd32= (x0 * x0);\n  n1 rnd32= (x1 * x1);\n  n2 rnd32= (n0 + n1);\n  n3 rnd32= (x2 * x2);\n  n4 rnd32= (n2 + n3);\n  n5 rnd32= (n4 * 0.01750000000000000166533453693773481063544750213623046875);\nExpressions\n  result rnd32= n5;\n",
+        "transcendental_functions": [],
+        "authored_program_changed": false,
+        "native_numeric_certified": false,
+        "conditions": [
+          "Declared common arithmetic format and round-to-nearest-even policy",
+          "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+          "Transcendental error assumptions require a separately qualified tool/backend policy",
+          "Herbie suggestions apply only to separately labelled new/adapted effects"
+        ],
+        "record_sha256": "cca7ee8b9e6b350fd5d4c9b5b6730cc9b4e294d05e875cb9c4bf098fa0135053"
+      },
+      "fptaylor": {
+        "status": "computed_under_tool_model",
+        "query_sha256": "cca7ee8b9e6b350fd5d4c9b5b6730cc9b4e294d05e875cb9c4bf098fa0135053",
+        "backend": {
+          "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+          "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523",
+          "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6"
+        },
+        "native_numeric_certified": false,
+        "proof_certificate_available": false,
+        "uses_rendered_images": false,
+        "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Optimization lower bounds for error models:\\n\"},{\"ty\":1,\"str\":\"The absolute error (exact) model: 2.712011e-8 (0x1.d1eb85351eb83p-26) (suboptimality = 13.3%)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [0.0, 2.100001e-1]\\n\"},{\"ty\":1,\"str\":\"Bounds (floating-point): [-3.129244e-8, 2.100001e-1]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Absolute error (exact): 3.129244e-8 (0x1.0cccccd800001p-25)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.04\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.04499983787536621,\"realBounds\":[0,0.21000000000000002],\"realBoundsStr\":[\"0.0\",\"2.100001e-1\"],\"errors\":[{\"errorName\":\"absolute error (exact)\",\"error\":[2.712011345051834e-8,3.1292438584795696e-8],\"errorStr\":\"3.129244e-8\",\"total2\":[9.7699623983257e-17,9.7699623983257e-17],\"total2Str\":\"9.769963e-17\",\"errorModel\":null}]}]]\n",
+        "upper_absolute_roundoff_error": 3.1292438584795696e-08,
+        "tool_result": {
+          "name": "result",
+          "elapsedTime": 0.04499983787536621,
+          "realBounds": [
+            0,
+            0.21000000000000002
+          ],
+          "realBoundsStr": [
+            "0.0",
+            "2.100001e-1"
+          ],
+          "errors": [
+            {
+              "errorName": "absolute error (exact)",
+              "error": [
+                2.712011345051834e-08,
+                3.1292438584795696e-08
+              ],
+              "errorStr": "3.129244e-8",
+              "total2": [
+                9.7699623983257e-17,
+                9.7699623983257e-17
+              ],
+              "total2Str": "9.769963e-17",
+              "errorModel": null
+            }
+          ]
+        },
+        "model_seconds": 0.04499983787536621
+      },
+      "daisy": {
+        "returncode": 0,
+        "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 7.286668187056483e-08\n[\u001b[34m  Info  \u001b[0m]   Real range:     [-0.052500000000000005, 0.21000000000000002]\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      9 ms, Dataflow error:     17 ms, functions:      2 ms, Specs processing:      7 ms, Treesitter Extraction:     79 ms, total:    114 ms\n",
+        "stderr": "",
+        "wall_seconds": 0.7627266669878736,
+        "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;7.286668187056483e-08;;[-0.052500000000000005, 0.21000000000000002];114\n"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "placebo heal drift backfire depersonified outfro mockternael qolourth qordially yoresth.milk",
+        "sha256": "fbabc577801ac4b14f09eb04546a6d4693f246cb29aedea582939c9850ec36f4"
+      },
+      "element": "shape_3",
+      "control": "rad",
+      "scope": "declared common binary32 expression model, not actual mixed-format/native pipeline",
+      "query": {
+        "policy": "source-pure-precision-query-v1",
+        "precision": "binary32",
+        "input_domains": {
+          "bass": [
+            0,
+            2
+          ],
+          "mid": [
+            0,
+            2
+          ],
+          "treb": [
+            0,
+            2
+          ]
+        },
+        "symbols": {
+          "bass": "x0",
+          "mid": "x1",
+          "treb": "x2"
+        },
+        "source_program": {
+          "root": 0,
+          "nodes": [
+            {
+              "op": "multiply",
+              "dtype": "float",
+              "args": [
+                1,
+                6
+              ],
+              "detail": {}
+            },
+            {
+              "op": "add",
+              "dtype": "float",
+              "args": [
+                2,
+                5
+              ],
+              "detail": {}
+            },
+            {
+              "op": "add",
+              "dtype": "float",
+              "args": [
+                3,
+                4
+              ],
+              "detail": {}
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "bass"
+              }
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "mid"
+              }
+            },
+            {
+              "op": "input",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "name": "treb"
+              }
+            },
+            {
+              "op": "constant",
+              "dtype": "float",
+              "args": [],
+              "detail": {
+                "value": 0.1
+              }
+            }
+          ]
+        },
+        "fpcore": "(FPCore (x0 x1 x2) :precision binary32\n  :pre (and (<= 0 x0 2) (<= 0 x1 2) (<= 0 x2 2))\n  (let* ([n0 (+ x0 x1)] [n1 (+ n0 x2)] [n2 (* n1 0.1000000000000000055511151231257827021181583404541015625)]) n2))\n",
+        "fptaylor": "Variables\n  float32 x0 in [0, 2];\n  float32 x1 in [0, 2];\n  float32 x2 in [0, 2];\nDefinitions\n  n0 rnd32= (x0 + x1);\n  n1 rnd32= (n0 + x2);\n  n2 rnd32= (n1 * 0.1000000000000000055511151231257827021181583404541015625);\nExpressions\n  result rnd32= n2;\n",
+        "transcendental_functions": [],
+        "authored_program_changed": false,
+        "native_numeric_certified": false,
+        "conditions": [
+          "Declared common arithmetic format and round-to-nearest-even policy",
+          "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+          "Transcendental error assumptions require a separately qualified tool/backend policy",
+          "Herbie suggestions apply only to separately labelled new/adapted effects"
+        ],
+        "record_sha256": "d72e77cf2bc0e5d664234c88ac01c55e3fa6dfe155e3184e3140587d122eeb74"
+      },
+      "fptaylor": {
+        "status": "computed_under_tool_model",
+        "query_sha256": "d72e77cf2bc0e5d664234c88ac01c55e3fa6dfe155e3184e3140587d122eeb74",
+        "backend": {
+          "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+          "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523",
+          "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6"
+        },
+        "native_numeric_certified": false,
+        "proof_certificate_available": false,
+        "uses_rendered_images": false,
+        "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Optimization lower bounds for error models:\\n\"},{\"ty\":1,\"str\":\"The absolute error (exact) model: 7.450580e-8 (0x1.40000023fffffp-24) (suboptimality = 0.0%)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [0.0, 6.000001e-1]\\n\"},{\"ty\":1,\"str\":\"Bounds (floating-point): [-7.450581e-8, 6.000001e-1]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Absolute error (exact): 7.450581e-8 (0x1.4000002400002p-24)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.01\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.010999917984008789,\"realBounds\":[0,0.6000000000000001],\"realBoundsStr\":[\"0.0\",\"6.000001e-1\"],\"errors\":[{\"errorName\":\"absolute error (exact)\",\"error\":[7.450580646883863e-8,7.450580646883867e-8],\"errorStr\":\"7.450581e-8\",\"total2\":[5.329070498348418e-16,5.329070498348418e-16],\"total2Str\":\"5.329071e-16\",\"errorModel\":null}]}]]\n",
+        "upper_absolute_roundoff_error": 7.450580646883867e-08,
+        "tool_result": {
+          "name": "result",
+          "elapsedTime": 0.010999917984008789,
+          "realBounds": [
+            0,
+            0.6000000000000001
+          ],
+          "realBoundsStr": [
+            "0.0",
+            "6.000001e-1"
+          ],
+          "errors": [
+            {
+              "errorName": "absolute error (exact)",
+              "error": [
+                7.450580646883863e-08,
+                7.450580646883867e-08
+              ],
+              "errorStr": "7.450581e-8",
+              "total2": [
+                5.329070498348418e-16,
+                5.329070498348418e-16
+              ],
+              "total2Str": "5.329071e-16",
+              "errorModel": null
+            }
+          ]
+        },
+        "model_seconds": 0.010999917984008789
+      },
+      "daisy": {
+        "returncode": 0,
+        "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 1.3560056997263814e-07\n[\u001b[34m  Info  \u001b[0m]   Real range:     [0.0, 0.6000000000000001]\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      8 ms, Dataflow error:     12 ms, functions:      3 ms, Specs processing:      4 ms, Treesitter Extraction:     76 ms, total:    104 ms\n",
+        "stderr": "",
+        "wall_seconds": 0.7208758339984342,
+        "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;1.3560056997263814e-07;;[0.0, 0.6000000000000001];103\n"
+      }
+    }
+  ],
+  "native_numeric_certified": false,
+  "appearances_changed": 0
+}

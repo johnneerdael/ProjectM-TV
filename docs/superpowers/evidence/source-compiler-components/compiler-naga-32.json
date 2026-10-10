@@ -1,0 +1,1836 @@
+{
+  "fixed_presets": 32,
+  "authored_sections": 50,
+  "selection_sha256": "6ef58b92fa758019c4b041ce8e498dcda81999430d5295f3c972e5f0c4342d7c",
+  "statuses": {
+    "analyzed": 50
+  },
+  "wall_seconds": 12.607981540990295,
+  "sum_stage_seconds": 12.347271421080222,
+  "median_seconds": 0.24795652099419385,
+  "worst_seconds": 0.2913900000276044,
+  "tools": {
+    "glslang": {
+      "path": "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+      "sha256": "7c7039f1d0c322652a6f8a9a78451898c73d9d2652f3a070b849b5f8af9c066c",
+      "version": [
+        "Glslang Version: 11:16.6.0",
+        "ESSL Version: OpenGL ES GLSL 3.20 glslang Khronos. 16.6.0",
+        "GLSL Version: 4.60 glslang Khronos. 16.6.0",
+        "SPIR-V Version 0x00010600, Revision 1",
+        "GLSL.std.450 Version 100, Revision 1",
+        "Khronos Tool ID 8"
+      ]
+    },
+    "opt": {
+      "path": "/opt/homebrew/Cellar/spirv-tools/1.4.357.0/bin/spirv-opt",
+      "sha256": "4eebec53874636d22fa7ad69b2c8a0e3e57611a1145e2fbbc0986d082004acb7",
+      "version": [
+        "SPIRV-Tools v2026.3 unknown hash, 2026-07-22T20:34:54+00:00"
+      ]
+    },
+    "dis": {
+      "path": "/opt/homebrew/Cellar/spirv-tools/1.4.357.0/bin/spirv-dis",
+      "sha256": "5eb551063996609c140910c07e63420a71f55df50ef8180579c7509ef53e2e28",
+      "version": [
+        "SPIRV-Tools v2026.3 unknown hash, 2026-07-22T20:34:54+00:00",
+        "Target: SPIR-V 1.5"
+      ]
+    },
+    "val": {
+      "path": "/opt/homebrew/Cellar/spirv-tools/1.4.357.0/bin/spirv-val",
+      "sha256": "88247eddaac79df193b44978ec9c71706ace239c60749dc2a6f1c568c6ae7871",
+      "version": [
+        "SPIRV-Tools v2026.3 unknown hash, 2026-07-22T20:34:54+00:00",
+        "Targets:",
+        "  SPIR-V 1.0",
+        "  SPIR-V 1.1",
+        "  SPIR-V 1.2",
+        "  SPIR-V 1.3"
+      ]
+    },
+    "cross": {
+      "path": "/opt/homebrew/Cellar/spirv-cross/1.4.363.0/bin/spirv-cross",
+      "sha256": "8caa75a31452ae23207e73a013631b109220daef33406539a5ab0d24718141b5",
+      "version": [
+        "Git commit:  Timestamp: 2026-09-16T11:27:19"
+      ]
+    },
+    "naga": {
+      "path": "/Users/jneerdael/Scripts/source-analysis-evaluation/naga-canonical-build/release/source-shader-naga-worker",
+      "sha256": "0f551da4a9eae485640d551b0da032e0fe7f2387241d870fe844d8f8caff9c88",
+      "version": [
+        "source-shader-naga-worker/1 naga30.0.0 wgpu14dd4e8f717cd8c4381908895495ea19ef924c35"
+      ]
+    }
+  },
+  "reader_sha256": null,
+  "paired_lowering_policy": "frame0; warp_reads_blur=true; native implicit globals; grouped array elements",
+  "new_numeric_calculations": 0,
+  "tighter_numeric_estimates": 0,
+  "predictions_changed": 0,
+  "rows": [
+    {
+      "preset": {
+        "relative_path": "Goody + Suksma - Goodbye my enemy ['not really, just want to hack you off' mix].milk",
+        "sha256": "d3e037306cca766a088ede469df11a33382e42e028d786d01319f6671fa80ab8",
+        "rank": "00127dbb21c112658d66eda412dc49b319d7b4e9fc3d50a3ac451e524ac35c97"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2472274589817971,
+      "source_join": {
+        "authored_source_sha256": "907248c6047120596757a4b1461b0ec80589cb82761fd251fda8c9728a41d663",
+        "request_sha256": "9f78e31cbf296d739d46620de2cb0d2d4935fa3132714f64e51473e01a348670",
+        "translation_sha256": "b6601e14e8ad05a1e21f42ced125dea830e75b12862d9c4c616535ad62b1e0c5",
+        "translated_glsl_sha256": "cc26a540a398779fdc2498ed44df15e7706ba33b910aacf92b0cf09632125ca3"
+      },
+      "functions": 5,
+      "calls": 44,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 18,
+      "resources": 8,
+      "original_instructions": 1139,
+      "normalized_instructions": 1139,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "rank": "00157b84849acff27c0117c9c2e3b1f521dfea5ff70f0f2474cefa413c1e96e7"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2784440840187017,
+      "source_join": {
+        "authored_source_sha256": "fbb321540afffeb0fb66cea1b8f6b1b2e82b627d9e4ca71cc9ea9b0526103018",
+        "request_sha256": "ab6d6875546302e69a4143d99904c46f72987aa31311a9889951fc5fc5246a20",
+        "translation_sha256": "516107755c539cb7862392a8ccf28590cf072b5f47123a8ccb94307ea7f7ce33",
+        "translated_glsl_sha256": "49f5d18ee499e0f35f32db877e024e1c87ce599f1e6e2fa19d3283ceeeffbfa3"
+      },
+      "functions": 6,
+      "calls": 47,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 9,
+      "resources": 11,
+      "original_instructions": 1393,
+      "normalized_instructions": 1393,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "xtramartin (54).milk",
+        "sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+        "rank": "00157b84849acff27c0117c9c2e3b1f521dfea5ff70f0f2474cefa413c1e96e7"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.26468875000136904,
+      "source_join": {
+        "authored_source_sha256": "7d521bf7114e142b8fe7cd5d96460ec53a78322ad739cc7d4b61ddaee2ae045b",
+        "request_sha256": "de9023e314e3795962394a70a40cda9cc083e4c662309d8032656792b2bacf93",
+        "translation_sha256": "2b6f9c8a3c6cff37610e3ef1ccd18130ef26957bed9f15eb20fb6e0a973e09fd",
+        "translated_glsl_sha256": "4d500c65b5a4957db5c5f29241127332909d4e7258759b6eac882397d0bda626"
+      },
+      "functions": 9,
+      "calls": 44,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 8,
+      "resources": 6,
+      "original_instructions": 1228,
+      "normalized_instructions": 1228,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "rank": "00259b4dd752f8d1c0ee503faaf31bca561ef40cf10255b88057dd696e07e9cd"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.21825395899941213,
+      "source_join": {
+        "authored_source_sha256": "55eb0fd17d2b6a08a72ecd9b95e2a72e7cc4c360c0d424fe2cc409d64fdf7645",
+        "request_sha256": "f036844574bd123f38b2c15f3646089a6cfdab3d647ff8fb27a77d4c8e20152c",
+        "translation_sha256": "c6643c23578cb61e0590aaccfa3b46c46a74bf20b1969ee1d9432d3e166800b6",
+        "translated_glsl_sha256": "48d0b38dc5511e72f75a790e10c33683738a701306678d1a92c7ace8ba19df65"
+      },
+      "functions": 4,
+      "calls": 6,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 6,
+      "original_instructions": 483,
+      "normalized_instructions": 483,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "27_super_goats-orbus_maximus poown.milk",
+        "sha256": "eff4fa6abaccd2e2245e5bfc96bacc122091eabe003dd68d179371221630c166",
+        "rank": "00259b4dd752f8d1c0ee503faaf31bca561ef40cf10255b88057dd696e07e9cd"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.18681429099524394,
+      "source_join": {
+        "authored_source_sha256": "12e20aea729739df79315f99038792e0d0b30e7fe32c282f8fe27d472ef2096a",
+        "request_sha256": "cb8a9ee34199b8e20360306a596ea608a544949b0abd261633d6a97f22d8bead",
+        "translation_sha256": "4f32729ab288b249f6dd66d5236060c201a7f62576416d91cc108c290baf26fb",
+        "translated_glsl_sha256": "271dd525b2d8754c57a7b2cf825056be889e3634e96deb848f9794f338a6774e"
+      },
+      "functions": 4,
+      "calls": 5,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 6,
+      "original_instructions": 450,
+      "normalized_instructions": 450,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "rank": "0029a44009df3307973bee692b0cee626a51111b27973c52600300e02f1b37fe"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.22114987499662675,
+      "source_join": {
+        "authored_source_sha256": "2e32e4578b93aef5e5cddcc401cf8e415c52f361fe69ed1e3dfa674a8856ed71",
+        "request_sha256": "51c2092a2beae3653bd6c14dcadeb960817d94f36f6149afa2f7b588b37e4429",
+        "translation_sha256": "5b1948083e88510f699dd12e4e51bcb1aa954407cae616a59800b67138a85a67",
+        "translated_glsl_sha256": "c412ba0b694e66a00dc4017230e21fbf1d76bd9abd52bac3c0c724b98d54622c"
+      },
+      "functions": 5,
+      "calls": 25,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 16,
+      "resources": 10,
+      "original_instructions": 1024,
+      "normalized_instructions": 1024,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Jc - Orbital System.milk",
+        "sha256": "ae5bbfa5914f2703c8c827b7356ce3174a6f9a23218293f26ad846eb46b9c96e",
+        "rank": "0029a44009df3307973bee692b0cee626a51111b27973c52600300e02f1b37fe"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2000056660035625,
+      "source_join": {
+        "authored_source_sha256": "c8e6134631154e10defab9370b414144768bcadadcb2eafb2b5e599a97a27f47",
+        "request_sha256": "dcff4812eb25b8aa1c5521847ce58238cc8da82a9c5fbc5178ccce3250326258",
+        "translation_sha256": "34b76e2cceccc7b37f3aed8c59596c238a4de3168542418f77b978d8094c601f",
+        "translated_glsl_sha256": "a5956b96ef4c07207706fd057dcd4f38b9dc78f0caabb0e61df9970045855697"
+      },
+      "functions": 5,
+      "calls": 13,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 6,
+      "resources": 6,
+      "original_instructions": 596,
+      "normalized_instructions": 596,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "LuxXx - Geiss - Game of Life 4.milk",
+        "sha256": "f2e2f0ec64092124090821144535625577381e19495ab5f2b92f03f74aedffaf",
+        "rank": "002ec2ebeceabf007982bf238f3318b69c1e414e30650af4ca0d815b4a1645dd"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.21894204200361855,
+      "source_join": {
+        "authored_source_sha256": "deb53db9ac7734f692aec46e3af05444fa46017a565cb54f2b8f222eec5ba98d",
+        "request_sha256": "34665f633d6c3bda13c9eb0566bf0ab39d31b5c0c12d8b0c976d4e4c5d661d10",
+        "translation_sha256": "45e9648027313ee2b0d8543677b9d1a5f153915b54022bf8203ca96f843da984",
+        "translated_glsl_sha256": "d9e6eb62f189aa43027501f23831ea48f3897041ce7f1b74705452dce533a0b6"
+      },
+      "functions": 5,
+      "calls": 13,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 8,
+      "original_instructions": 630,
+      "normalized_instructions": 630,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "LuxXx - Geiss - Game of Life 4.milk",
+        "sha256": "f2e2f0ec64092124090821144535625577381e19495ab5f2b92f03f74aedffaf",
+        "rank": "002ec2ebeceabf007982bf238f3318b69c1e414e30650af4ca0d815b4a1645dd"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.21685858399723656,
+      "source_join": {
+        "authored_source_sha256": "46fc4f98e98414f71d037b00817d2b18cd37051ca58d98c7755b029c4775d8b0",
+        "request_sha256": "7f39c531e55388649b996dbb90fe70699e490f1b9767c7768c02f87eca0a9d03",
+        "translation_sha256": "0a1afe09d1177ded14c1398490b3306d165d2ce8d78a4046bf159bc5c4235b02",
+        "translated_glsl_sha256": "b57ceeb7c7f30adbe953b3253949e8723e27580de09aeba7bfd71f8dc40cb572"
+      },
+      "functions": 4,
+      "calls": 7,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 7,
+      "original_instructions": 481,
+      "normalized_instructions": 481,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "rank": "00343ea4a11f7a3c887f1c26f6fca52efa586619b9c3255ec4011af40874e7dd"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2913900000276044,
+      "source_join": {
+        "authored_source_sha256": "583a6bb53a986174c975f453127fe21a5bcf29fb4e4a0c36fc2ea0734a6adb76",
+        "request_sha256": "13819887213ab18570ed2db81314c2eaff6e3622aa6a4e9bc611d9a978e726ef",
+        "translation_sha256": "e4f0e133d3c638c59afc4d0c4c5963e33b7ef12d4fc3a08d2f4001f3a4b51f04",
+        "translated_glsl_sha256": "e72520e791bc77f13fcd717c61a43c98fa3fbf378e4b07575dcf5319ae140a88"
+      },
+      "functions": 6,
+      "calls": 70,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 25,
+      "resources": 10,
+      "original_instructions": 1491,
+      "normalized_instructions": 1491,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+        "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081",
+        "rank": "00343ea4a11f7a3c887f1c26f6fca52efa586619b9c3255ec4011af40874e7dd"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.28873308398760855,
+      "source_join": {
+        "authored_source_sha256": "c7c2a74e1957f7c9ded6a753a715450866021b886a4e887e15bd81ba850014e6",
+        "request_sha256": "f1ecbc300c20dc7b84e711f100f931f586716dbed08b9fd0431cc28cfd787f79",
+        "translation_sha256": "a9efde4d56d4a6f0f2ddbb5c1297a5f975e83e373d2af380f4e2271b9d509541",
+        "translated_glsl_sha256": "b72d2f8d5da180f392719c8ba4b1f130bdea1db26e27c3f2e2078da8173c7358"
+      },
+      "functions": 6,
+      "calls": 39,
+      "loops": 1,
+      "selections": 1,
+      "conversions": 2,
+      "samples": 11,
+      "resources": 8,
+      "original_instructions": 1200,
+      "normalized_instructions": 1200,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "skipper skipper kiss me hard - if it weren't for you wonderful role playing 'people' parts of my solipsistic overmind.milk",
+        "sha256": "b3477c4b7f0d9e4cea124a272b8476b4a796ca939714b3825d4c82466401cf8f",
+        "rank": "0037bc988e9d31e144521979f4584995aeb1783aca27bbe1e6fd67290920117c"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2697307080088649,
+      "source_join": {
+        "authored_source_sha256": "9477b05b2442c92708e3bf1f46f29253f7340c2d2f3ad2dfee4aa27b4f3e7d14",
+        "request_sha256": "f1afa3b516708a35af87a9fe4bd0eb5ad2a25575e45a08c6f36daaf45c3ba64e",
+        "translation_sha256": "7645f7d629bff7b76aba5f4abc4d0e94170642d8150f7a1ca095ea727a4e18c3",
+        "translated_glsl_sha256": "f5e08b4fdfb0465253d313752de60d893b21c4c16b6ce7e9754b99466f6d154e"
+      },
+      "functions": 5,
+      "calls": 39,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 14,
+      "resources": 10,
+      "original_instructions": 1116,
+      "normalized_instructions": 1116,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "skipper skipper kiss me hard - if it weren't for you wonderful role playing 'people' parts of my solipsistic overmind.milk",
+        "sha256": "b3477c4b7f0d9e4cea124a272b8476b4a796ca939714b3825d4c82466401cf8f",
+        "rank": "0037bc988e9d31e144521979f4584995aeb1783aca27bbe1e6fd67290920117c"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.24243199999909848,
+      "source_join": {
+        "authored_source_sha256": "3c224221c9f07ccafd66b66715485a08bba0dfa1c71ba348b5d0ca3caebf1b80",
+        "request_sha256": "bcf9ae750de037ed6be87171b34cc1ced5b7397c4335dd52a515fced36d950d7",
+        "translation_sha256": "6e54b866537f4a7ac286c4a2093cd92e2b4ac7f80c6dd62021ed10dddd3a199f",
+        "translated_glsl_sha256": "6c2cfcbd4893f7197655f5ae5341fc5d8fd4a30faf4c495ee2fa0d2bf558dd0d"
+      },
+      "functions": 4,
+      "calls": 12,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 4,
+      "resources": 6,
+      "original_instructions": 647,
+      "normalized_instructions": 647,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [231].milk",
+        "sha256": "3a6e50e87b46df7ce4fd910c756be5f7520348b2d97fc1f67cc93ef1272c227a",
+        "rank": "0045dc42e5e3aec3d789fbc5f1bc058ea1e0341dac427424712a52fbeb591723"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.27228433298296295,
+      "source_join": {
+        "authored_source_sha256": "18430b26cd7cf11173d885f6a693be5b60f347cd93db4fc5234faa044db807f4",
+        "request_sha256": "7676e4a67124b8fb1e2a836e51b880bb61935fa574e0b026a5871093147b30fd",
+        "translation_sha256": "77f99482915e7a660e543639a8b00673139cccb4df6c3256a8317cf5f5bae1b2",
+        "translated_glsl_sha256": "ff743fa4849e93487ccddc8262501affb4e602749a2978101e4977b310622f10"
+      },
+      "functions": 5,
+      "calls": 49,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 14,
+      "resources": 8,
+      "original_instructions": 1111,
+      "normalized_instructions": 1111,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - grind my glitch up [231].milk",
+        "sha256": "3a6e50e87b46df7ce4fd910c756be5f7520348b2d97fc1f67cc93ef1272c227a",
+        "rank": "0045dc42e5e3aec3d789fbc5f1bc058ea1e0341dac427424712a52fbeb591723"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.28585333400405943,
+      "source_join": {
+        "authored_source_sha256": "efe24e3d0e1b52d0b54edd9d7c447d30ea5bb91dfc55766e5f0375d78b0e6375",
+        "request_sha256": "8866277dcdd6244dd86a30bd6b2e9a64be598c0b6cf077071c199568dc6ea470",
+        "translation_sha256": "ea346542156e2b314d37501951c6c7c6e679ab5795c04d006073f3c5448739b1",
+        "translated_glsl_sha256": "d036606f9b1b31cb783b6b5909a2134dd8d3c65db5b3096c391fe7f7ae17da51"
+      },
+      "functions": 11,
+      "calls": 59,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 1,
+      "samples": 5,
+      "resources": 6,
+      "original_instructions": 1376,
+      "normalized_instructions": 1376,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+        "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+        "rank": "00605020ffb0f447f98cfd082105bc001594fe782d3a4747d25f561fbc5f1786"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2806660830101464,
+      "source_join": {
+        "authored_source_sha256": "8a4cf7eb9a01cf7d28d21df02f1b387e3ea2c6c691d9a57f6a3f724580fed026",
+        "request_sha256": "b4f875cf124da3e98456c54b8bb1c0c87bd18e4b7a9a4bfe21133e47b51a5dad",
+        "translation_sha256": "101b54fc145c2e57b72d87608cfe11ef36092a84ebb8bf69f4ee32b3a22e58fe",
+        "translated_glsl_sha256": "634814c77fd5ff63b39ab8c1ba679e16e7bfd670360378dd36762c7a618c06af"
+      },
+      "functions": 5,
+      "calls": 31,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 13,
+      "resources": 10,
+      "original_instructions": 989,
+      "normalized_instructions": 989,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "TonyMilkdrop - This Is A Painting [Flexi - let go + alien complex] --- Isosceles edit.milk",
+        "sha256": "00c23ac4e1717f39b46d3430121148b128a0039a1ffcca8e2a57b8a1f9eb7bad",
+        "rank": "00605020ffb0f447f98cfd082105bc001594fe782d3a4747d25f561fbc5f1786"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2744104159937706,
+      "source_join": {
+        "authored_source_sha256": "7bbc5270dee4dfe9345420c57deefaa911efda564f0a8c227845056698a23624",
+        "request_sha256": "bff2fcaad17592cc2a7603bfca012f582883a347ebe6c631e7022269d9988df2",
+        "translation_sha256": "cfffed6349f96cdee6b3eb05b38c1be1ecec41a152ae8e7bd25a9b5fa1e5babe",
+        "translated_glsl_sha256": "b0df98831b5414b95dffa9a790aa1b0880ca7dcd9863a0b53fa61adee03a3a0a"
+      },
+      "functions": 5,
+      "calls": 50,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 10,
+      "resources": 7,
+      "original_instructions": 1152,
+      "normalized_instructions": 1152,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - a script kiddies flash ['the shader geek' mix 2].milk",
+        "sha256": "b1f6385e5c1859424ddf43c83fd393c32d7d1214a00d101faee85b1f3d7ea1e1",
+        "rank": "00697f999fb00ad4ca2c66238e6975b6f00d84f3a382653c893ef1942be8cb07"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2454619170166552,
+      "source_join": {
+        "authored_source_sha256": "b5d905067203b7f5b158935595eb42009893405571bd02c333797923895c83b1",
+        "request_sha256": "75d7fa9f68d8c07129447485a3075f57272b623763abb6cc381a2529a74e5572",
+        "translation_sha256": "0f0f85695fe855eb35433ea7c3e3b0b3d43eca38c90d9227b936ae5d829137d5",
+        "translated_glsl_sha256": "064b0323e963654bd0eb979c82561b1c789c5733261bafa2e39a3883ef134977"
+      },
+      "functions": 4,
+      "calls": 5,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 1,
+      "resources": 5,
+      "original_instructions": 444,
+      "normalized_instructions": 444,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Flexi - a script kiddies flash ['the shader geek' mix 2].milk",
+        "sha256": "b1f6385e5c1859424ddf43c83fd393c32d7d1214a00d101faee85b1f3d7ea1e1",
+        "rank": "00697f999fb00ad4ca2c66238e6975b6f00d84f3a382653c893ef1942be8cb07"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.23613566701533273,
+      "source_join": {
+        "authored_source_sha256": "01ec605084a128e98f08b597e74b9c293f2b58ac4c77d68bfb396e642aae068b",
+        "request_sha256": "c24643a94bdcd79b7a1ef80bd75803920eab673474bde07a9274c8db6895d288",
+        "translation_sha256": "848cb3f9af71ce948c3eed942b6e2d758a7eb770d4f11160943824d9313d8957",
+        "translated_glsl_sha256": "ba2418daa16e6c4c4a8091d64db953d0c51ad6fb3a88f77666f6f23c85773200"
+      },
+      "functions": 5,
+      "calls": 35,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 11,
+      "resources": 6,
+      "original_instructions": 941,
+      "normalized_instructions": 941,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - target practice-5-liquid-2-twitch-2.milk",
+        "sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+        "rank": "007c6188b9a85f4152bc019368e5afbcb42fa54b5459de27085a8fbc6f9ea73d"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.24782012499053963,
+      "source_join": {
+        "authored_source_sha256": "159e15431dc592aab8fd1c71e65d7f7fd6f8a8a14d85805275a942b6f4c0732c",
+        "request_sha256": "536f8a365777a07d67c211c766f5b94b1bfa5ee8cbd3cbc2b24238527f422d2a",
+        "translation_sha256": "808b540319ea588aac621fcf6ea58c976f14f0ffa1ba66d61278c9c78c21f961",
+        "translated_glsl_sha256": "aadfca063c1bfff30ca6c04f811296269218da4a88c7bb959c741cf12549b0e5"
+      },
+      "functions": 7,
+      "calls": 57,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 19,
+      "resources": 9,
+      "original_instructions": 1605,
+      "normalized_instructions": 1605,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "flexi - target practice-5-liquid-2-twitch-2.milk",
+        "sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+        "rank": "007c6188b9a85f4152bc019368e5afbcb42fa54b5459de27085a8fbc6f9ea73d"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.25614641699939966,
+      "source_join": {
+        "authored_source_sha256": "793a6cbd67bd16f13411ccc05ce523ab74d988554ca96080717b2b81521bbd8a",
+        "request_sha256": "ca892ecdf98e35973b8949aef60a114e6c814d59ac735881d7c12cfd5fe6a8e5",
+        "translation_sha256": "280000f51ffc3cae613aa71260a4a87d7617ffcc94299d4f5ac73d680f405837",
+        "translated_glsl_sha256": "a5033fe79f3079cf3ac10d7b8c6335a00ddce2095d5e2550bda4140abb8d8d5d"
+      },
+      "functions": 5,
+      "calls": 34,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 10,
+      "resources": 7,
+      "original_instructions": 878,
+      "normalized_instructions": 878,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Motion Blur 2 (Jelly V3).milk",
+        "sha256": "0a5e350e01c3a1e844a8d42ecfa9b669a88c90c34c3b7e4c9a3fe16b1663c229",
+        "rank": "0081315281f9a8f2fa93780d05b3180dfb4b0184dc48862603126f7152ca3710"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2462100420088973,
+      "source_join": {
+        "authored_source_sha256": "cf6af2e7fe4795ca891f3a7f81763cec80662717e5c7a002e126a738d191f050",
+        "request_sha256": "0736b28d5259578643c7b7944afa9ffcd11048a5db6b7e202e0cc0b32b1e1c33",
+        "translation_sha256": "4a38fb5755dc165aff7b8b09687012d37cb67e07f31768b366443a6eea8cfbb7",
+        "translated_glsl_sha256": "6fdfbc245f559c8010a8f14b3d8077741ccdcf844114b0604e5ee18127e89e6d"
+      },
+      "functions": 4,
+      "calls": 6,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 6,
+      "original_instructions": 511,
+      "normalized_instructions": 511,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss - Motion Blur 2 (Jelly V3).milk",
+        "sha256": "0a5e350e01c3a1e844a8d42ecfa9b669a88c90c34c3b7e4c9a3fe16b1663c229",
+        "rank": "0081315281f9a8f2fa93780d05b3180dfb4b0184dc48862603126f7152ca3710"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.24869800001033582,
+      "source_join": {
+        "authored_source_sha256": "3dc8453d7b7588e584b0a25e2aafa1d55d8b77d9e0963aaab485ab407a9218d8",
+        "request_sha256": "e84344b5b4b4f969cc6e4dbbf6719760f6d92f6035548ee92cf791e1bfa22524",
+        "translation_sha256": "a4ad86ed5d0c48379f18c571c9cb81ffcc283a930ce1a73d68045896335fb8d2",
+        "translated_glsl_sha256": "e0643e1d58b6b0a6952be26293a00f7681662e59a7e6dd740efee83989600504"
+      },
+      "functions": 5,
+      "calls": 35,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 12,
+      "resources": 8,
+      "original_instructions": 986,
+      "normalized_instructions": 986,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Ludicrous speed + Baked Ft another AdamFX Mashup 15.milk",
+        "sha256": "f236e38a2e55a034cb08fba5b6a5c118619639d3a353baf8465373e49fac8f7d",
+        "rank": "008204a95e75e1652deae44a00a92632ad6e24e321b2adc52cfca0075548f4bf"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2505343329976313,
+      "source_join": {
+        "authored_source_sha256": "00c8a6425f6c408784534d4e8eb1e3586ca0968af9cf7241d988bd51686c27fa",
+        "request_sha256": "e2c1fff33c601d262932627465a4896fb62333de95caa10a26988da492a34c06",
+        "translation_sha256": "94eed6a883b9ee3588a1fd58eb709feeccf6d4b944a1fd9e1fc93733e779791a",
+        "translated_glsl_sha256": "b53039a624721087c81cefa45438036a4ad0357e2112a329c5ecae709a03bd50"
+      },
+      "functions": 6,
+      "calls": 27,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 4,
+      "resources": 8,
+      "original_instructions": 884,
+      "normalized_instructions": 884,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume love discipline chastity nz+.milk",
+        "sha256": "f6e00e8b1a0b3df6b3249f626a5bed94434be1056da7c908e65278e5f575126b",
+        "rank": "009707c875f12a1d99866701a51a9c7b400f1856f9f8b7cb7f157b60ee555013"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2564070840016939,
+      "source_join": {
+        "authored_source_sha256": "bd3a0a4d70d83501faeaa64e3a6d31f61c69e6465888ff38167dad16c965fc8b",
+        "request_sha256": "1b581439122b182a0fc7e1e385d8d76ee7312fd83a2fd26660e342b5749c664e",
+        "translation_sha256": "9f37c23beb4a3f2d967394baef924b4cddb091ca28d29638686592dfcbc0099d",
+        "translated_glsl_sha256": "b6c4402fb791d88014f9e0d0f7269ce5b3faa008e236178f4b606da973b30e40"
+      },
+      "functions": 5,
+      "calls": 32,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 5,
+      "resources": 9,
+      "original_instructions": 946,
+      "normalized_instructions": 946,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume love discipline chastity nz+.milk",
+        "sha256": "f6e00e8b1a0b3df6b3249f626a5bed94434be1056da7c908e65278e5f575126b",
+        "rank": "009707c875f12a1d99866701a51a9c7b400f1856f9f8b7cb7f157b60ee555013"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.26438883400987834,
+      "source_join": {
+        "authored_source_sha256": "67e6e26a1467c0de6ba757ea16edad43f64dfb9de19b8e2dbc89a7f9234417da",
+        "request_sha256": "374f236253bd3bd647ba5e3fc2cb2835bc0ffebf29355ad573aebd7ff0939246",
+        "translation_sha256": "9fb74e6dd6ba80e6235188221189e077e3f4cd8588b6968c21082fddf4951df4",
+        "translated_glsl_sha256": "9c19bd5ee84aec52585df710983ea79aaca8cf19fe04593a7c965161541f9911"
+      },
+      "functions": 5,
+      "calls": 33,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 12,
+      "resources": 9,
+      "original_instructions": 1035,
+      "normalized_instructions": 1035,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Waltra - Monocromania.milk",
+        "sha256": "59c9c17c432b1c3a489724e8694f01ec0ce0fddc7546694d7acf05ea475ba94d",
+        "rank": "00a1306c3fa43fe9d7b17638ba5915e011dcbff335017b338e2979adc6f23eaf"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.24809291699784808,
+      "source_join": {
+        "authored_source_sha256": "c2eac14986dbb4c12244f1c76c6b923392b62069c1f9d03fa01e55be8dade55b",
+        "request_sha256": "fb0b881d25ec07b24313a4f5bdf38277dac59d734e9c2ac7c4a70c22e384bfc6",
+        "translation_sha256": "3aed712625796dcf7d7198bd897a2241f630c9c537960e3ee260141bac53e045",
+        "translated_glsl_sha256": "72f227f89dcf44a2e5349dbef8d3bf13da3b5decb6be0fc10a2b8db4948d5985"
+      },
+      "functions": 5,
+      "calls": 14,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 6,
+      "resources": 10,
+      "original_instructions": 743,
+      "normalized_instructions": 743,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Waltra - Monocromania.milk",
+        "sha256": "59c9c17c432b1c3a489724e8694f01ec0ce0fddc7546694d7acf05ea475ba94d",
+        "rank": "00a1306c3fa43fe9d7b17638ba5915e011dcbff335017b338e2979adc6f23eaf"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.23164862499106675,
+      "source_join": {
+        "authored_source_sha256": "b146954f56a8ee4c6155a541e09009fea4e2ec759e44a8d1f39e2bbfe30267fb",
+        "request_sha256": "089f97faa7c7a7c7c868bfaffd90b0f14e224fbf59a01a2505b0bd731d403580",
+        "translation_sha256": "df8dd0320287826e54112224ed62edf6a80cde9ae147b0b75e4a40c27d40b191",
+        "translated_glsl_sha256": "c57d9d17b505aa4c5f5e5540d7754f4a58cb9685548153a931d992f534d62ead"
+      },
+      "functions": 5,
+      "calls": 23,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 5,
+      "original_instructions": 666,
+      "normalized_instructions": 666,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - skekseas.milk",
+        "sha256": "f7db9f207d24cb092dc2d0ca12f04f51713899c7ab1ee05736b0bf0b6c9f82fb",
+        "rank": "00a2a067958fb8ba0c91c36f84ca0d350b0a8ef5d1fc0f26ab038d7596de17cb"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.22170045899110846,
+      "source_join": {
+        "authored_source_sha256": "f75c0d628f341df2b2f4c2762d612ed8338b1dff2d4a4e114f3cd48a5a751785",
+        "request_sha256": "2f8953b750cf9d55266e81146a781f241fec5e89238441374aa066edb0480c38",
+        "translation_sha256": "0b50a926c2f2b65b263503c848344f47496c6102b31e8e63f614a5c70ab55214",
+        "translated_glsl_sha256": "896e74a3d42f79e560943b5df95484f71dbee629ccb05322985e533e700dd1b0"
+      },
+      "functions": 4,
+      "calls": 7,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 5,
+      "original_instructions": 495,
+      "normalized_instructions": 495,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - skekseas.milk",
+        "sha256": "f7db9f207d24cb092dc2d0ca12f04f51713899c7ab1ee05736b0bf0b6c9f82fb",
+        "rank": "00a2a067958fb8ba0c91c36f84ca0d350b0a8ef5d1fc0f26ab038d7596de17cb"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.24856945799547248,
+      "source_join": {
+        "authored_source_sha256": "bdcaba77d639c54c274779d57c33aba7762c2bcb40147a87634273d627b61e83",
+        "request_sha256": "81143628a27f5f5e5223acd0b3ea73979417b8d2e74aef79d41508da80fce932",
+        "translation_sha256": "d329f16a5f67dad370a91b95e0681d63c7bc283cb7b15fd456db13ed6fdacdee",
+        "translated_glsl_sha256": "930e7e90598a07bf6a021504d839eb300eeadc90040db0f04b7534c3cab99167"
+      },
+      "functions": 5,
+      "calls": 44,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 18,
+      "resources": 8,
+      "original_instructions": 1146,
+      "normalized_instructions": 1146,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "cleave and cleave to thine w yep, i always dream of epic shit, and more so on the hydrogen stick.milk",
+        "sha256": "f1f887a8d0db1e3bbea98fec7ffb1c2880e9589393def19eb59654ea4f07e87f",
+        "rank": "00aea8cd11c2fe384a75277907207907c7c292a32f7705ab08dba32b3d743dca"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.25359258300159127,
+      "source_join": {
+        "authored_source_sha256": "492b422b8101ead150e3f9a87469fc01f8d2d8bc7878212faf7fe9fdd708da14",
+        "request_sha256": "af721a5a4372fe15b7346a47be2214f55ab020dec525f3f786f6873e7de55767",
+        "translation_sha256": "e0d28695bdb875c172d744c8c8d2a30323414dfdb943a92cd11c50d0f67aff40",
+        "translated_glsl_sha256": "1ad640f6613232da33fc03e5d1d274c1962b8d9ff1a9d262c341d192ee1aaa26"
+      },
+      "functions": 5,
+      "calls": 30,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 5,
+      "resources": 8,
+      "original_instructions": 883,
+      "normalized_instructions": 883,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "cleave and cleave to thine w yep, i always dream of epic shit, and more so on the hydrogen stick.milk",
+        "sha256": "f1f887a8d0db1e3bbea98fec7ffb1c2880e9589393def19eb59654ea4f07e87f",
+        "rank": "00aea8cd11c2fe384a75277907207907c7c292a32f7705ab08dba32b3d743dca"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2570687500119675,
+      "source_join": {
+        "authored_source_sha256": "75cc3445597c17d584ceb9af760df0aa02898f116c701689b3f7f50c287220cb",
+        "request_sha256": "81776c2cb6342cf2643c7f0a806ec4684c0b4d927f2205a7cdc279d8f6e4145e",
+        "translation_sha256": "9aa3abd5fa60ae7b436bf23ca715917054e1dc531bed6135a11f35691551c624",
+        "translated_glsl_sha256": "ab3e6567221faf34723d8b34c65ae0bc9012bfae674b35ec7229ebf62f40cff1"
+      },
+      "functions": 5,
+      "calls": 32,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 6,
+      "original_instructions": 886,
+      "normalized_instructions": 886,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - m-martin w-geiss wp-m c-m - the frost has wings, flies into my mild gas.milk",
+        "sha256": "dbefd67309bd0dc54d3b33f99528bfda503e19a2f9c177753f70e2ce885c9e9f",
+        "rank": "00b6ce1df576ecb872a7dfb03bf4b7fd0978df63e95cb2fb8b14096acbcf716a"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.23627058300189674,
+      "source_join": {
+        "authored_source_sha256": "b60f8705286b1ff9064dea3d7066eaddf476d4c58decd897ec7c13bc4b070abc",
+        "request_sha256": "1f21e94698cf0f76a542677212a53972eeffb1e224e4fde3314412daac06766b",
+        "translation_sha256": "e2447018420294ca75e4aee52ab0d136c195a29fab92b6de31f229cb7d89f888",
+        "translated_glsl_sha256": "3746eacb26acc32bbbdca3b0c7bbbef17060bcca8cfc1e9e71ff4ffc4324aabf"
+      },
+      "functions": 6,
+      "calls": 23,
+      "loops": 0,
+      "selections": 3,
+      "conversions": 0,
+      "samples": 4,
+      "resources": 8,
+      "original_instructions": 847,
+      "normalized_instructions": 847,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "suksma - m-martin w-geiss wp-m c-m - the frost has wings, flies into my mild gas.milk",
+        "sha256": "dbefd67309bd0dc54d3b33f99528bfda503e19a2f9c177753f70e2ce885c9e9f",
+        "rank": "00b6ce1df576ecb872a7dfb03bf4b7fd0978df63e95cb2fb8b14096acbcf716a"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2531113750010263,
+      "source_join": {
+        "authored_source_sha256": "722b3b0ca2b30c71022926a7087b9f9e0ddf216f6ad4dc5e9e4e71775c2acc26",
+        "request_sha256": "efff57eee484a1f976aeaaa66838e559ec82634f5bf97b1bab2df48e79deddda",
+        "translation_sha256": "2c9e81dff272b914fee0ee90650b7e828fe16055f98ef7a5fc985ae21f4bd9fd",
+        "translated_glsl_sha256": "184de78642a91db79d7f7d1aa31e07ee3a94c1b9a7b6b8a8003e6d958f22fe81"
+      },
+      "functions": 5,
+      "calls": 33,
+      "loops": 1,
+      "selections": 1,
+      "conversions": 2,
+      "samples": 2,
+      "resources": 6,
+      "original_instructions": 919,
+      "normalized_instructions": 919,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss + Stahlregen - Reaction Diffusion 3 [Rippling Islands] - rage crotch roams.milk",
+        "sha256": "b9eeb12bfcea8bd0b480fd8412d610d81e13a5ed9282ab757fc7d608c0927ed0",
+        "rank": "00bae3bb0622c52d61939964e05ed9409a5afd640e8f9816a322c1a95c4d4c08"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.24916325000231154,
+      "source_join": {
+        "authored_source_sha256": "50acdfb703da07b0a2b0479581b03018f54601d69cc5fd9de46b2f6de00acae6",
+        "request_sha256": "987d22078bbfac755cbdcf685b1c478c2e254029244902e3ba723ccffafb25f2",
+        "translation_sha256": "431fd6dd54082566c439eda2da9af7991c1b9bce70645e9777705de04c75e2d2",
+        "translated_glsl_sha256": "e5e28c3307d579a96c67fbdbcbd465c61f7b8e3b5af297d2ffa497913bb4b83a"
+      },
+      "functions": 5,
+      "calls": 23,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 4,
+      "resources": 7,
+      "original_instructions": 783,
+      "normalized_instructions": 783,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Geiss + Stahlregen - Reaction Diffusion 3 [Rippling Islands] - rage crotch roams.milk",
+        "sha256": "b9eeb12bfcea8bd0b480fd8412d610d81e13a5ed9282ab757fc7d608c0927ed0",
+        "rank": "00bae3bb0622c52d61939964e05ed9409a5afd640e8f9816a322c1a95c4d4c08"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2522203339904081,
+      "source_join": {
+        "authored_source_sha256": "af1ebda9498063a77a46a98cf5d35beacbbd6a531ca80ec503a9fd63719eec56",
+        "request_sha256": "ba3eb614ddc69f30f3b44e7379f6c0b5bbef2554b58bc86af0939e0a20b1f9bf",
+        "translation_sha256": "1cef8556e614600c079246e5da4b1f82463d71ec719e0a7869e6dac9823506b4",
+        "translated_glsl_sha256": "daffc4c5b929c310b8631d8141819f04a847e33539caed45c25217e687022262"
+      },
+      "functions": 5,
+      "calls": 26,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 11,
+      "resources": 8,
+      "original_instructions": 846,
+      "normalized_instructions": 846,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss a100 --- Isosceles edit.milk",
+        "sha256": "b2efc5b3670e6624240b0a037062a56a1c9ae99e565284491b78e91f6d3db9dc",
+        "rank": "00c1da98296f5f11a982d024c1df0478c55baf6d07bb9d53e31b541d3dc41573"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.23874675002298318,
+      "source_join": {
+        "authored_source_sha256": "3e70ee8cbd8d9422fa83b2adb92d0268e25fcb7b99c7fa6fbb7ad0bd85ff688e",
+        "request_sha256": "be3ffb2b7d0a5a900055c14ff8b9dd56ad6875e93009d68d0dd33f43337bd4b6",
+        "translation_sha256": "15492b9d9d46221234f238acd5b079cfc0b646009d1bef459fa4ebda0d65ab6a",
+        "translated_glsl_sha256": "cc0a4577948d08d82ec88ec37344bffc9e3046631495834612f15bb0d642b7c3"
+      },
+      "functions": 5,
+      "calls": 16,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 6,
+      "original_instructions": 649,
+      "normalized_instructions": 649,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "NeW Adam Master Mashup FX 2 Geiss - Reaction Diffusion 34 + Swelling Spiral  + Liquid Fire  + Geiss a100 --- Isosceles edit.milk",
+        "sha256": "b2efc5b3670e6624240b0a037062a56a1c9ae99e565284491b78e91f6d3db9dc",
+        "rank": "00c1da98296f5f11a982d024c1df0478c55baf6d07bb9d53e31b541d3dc41573"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.22554516699165106,
+      "source_join": {
+        "authored_source_sha256": "aab54a2a2a6052ad15357c7c4ad8163048d21740735b6a244d37e76efa15e7ff",
+        "request_sha256": "04b98f89caf7af97938f9300bd611440e70d53f39741cdea6a79c3402000f219",
+        "translation_sha256": "d0b2fd9147f60b50974452a74bf53bb000c798095f4c3591b1b16de81e5a1664",
+        "translated_glsl_sha256": "7adf61166cb99083bc38b77b109fda7529a5edcd596f3f4fef5418a84ffd2f1b"
+      },
+      "functions": 2,
+      "calls": 1,
+      "loops": 0,
+      "selections": 0,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 7,
+      "original_instructions": 374,
+      "normalized_instructions": 374,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - Spiral (Hypnotic)_Phat_Double_Spiral_Mix_1 i am no good.milk",
+        "sha256": "f7164700092b06546771aa53424e4872e71a7f6e6623dcf313abaf060f59aa76",
+        "rank": "00d33500caea3ce07cb0b28a8378094196151c1dba490d5190af22984cac19e5"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2610596670128871,
+      "source_join": {
+        "authored_source_sha256": "ad56ab270d73719056438cf32e5664ea571ae3ac4c3ceab6eb8facde322ebfdd",
+        "request_sha256": "201ba54f56f8df03d237056066316c0d2034dd1861bdec0b0843d394a210d848",
+        "translation_sha256": "e0f880e256c35dfecd3bd3610d1bd93594051047f6dcafe8cf8ed0904429ed7e",
+        "translated_glsl_sha256": "e21dc072744e8545b241b8538bba1cbe8f38fbb6ab07d6786d431d4990fe8190"
+      },
+      "functions": 6,
+      "calls": 36,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 4,
+      "resources": 7,
+      "original_instructions": 982,
+      "normalized_instructions": 982,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Zylot - Spiral (Hypnotic)_Phat_Double_Spiral_Mix_1 i am no good.milk",
+        "sha256": "f7164700092b06546771aa53424e4872e71a7f6e6623dcf313abaf060f59aa76",
+        "rank": "00d33500caea3ce07cb0b28a8378094196151c1dba490d5190af22984cac19e5"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.24115595800685696,
+      "source_join": {
+        "authored_source_sha256": "a09ac46205bd606122d1d2bdc0cb1d2c615f1fc81436df85ef419b460f0e2997",
+        "request_sha256": "495a3785509c0c039609b0589e92fde49d483ecc182387378dac84ef1f292dbd",
+        "translation_sha256": "3bc2fbd1d439537034b5fc823b19102b58fac022486864656b9b59f6b91f1fe0",
+        "translated_glsl_sha256": "d2b2f0572309b4b690ce0aab6d0f05d03cf8565a29299a68058962feb22aa570"
+      },
+      "functions": 4,
+      "calls": 25,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 6,
+      "resources": 6,
+      "original_instructions": 801,
+      "normalized_instructions": 801,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (526).milk",
+        "sha256": "48e22babca28d2fc3cde9fee55f7e7a9a812468ee5a6d6ac51028e8a125a1adc",
+        "rank": "00d98d157708ef0004c696921e9baa81366d42e0429bbf736e7288aaec533376"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.24329308400047012,
+      "source_join": {
+        "authored_source_sha256": "265d30f3012438e038447a9f3f77b89fbdc4f1697e7e287ba2174af6ec1697e4",
+        "request_sha256": "bdd4438d7d2f50f18f9223063f1681c207a37acac3b1a28efe79567c49704339",
+        "translation_sha256": "9de1f3a8d6e115c88045bff4f3a5722e8b332b339edcca3f308d02adf984b5e7",
+        "translated_glsl_sha256": "d372bcebafe2d1c3eaeaaedb4f61069a70230099aa3f1bf706574190204aa4a0"
+      },
+      "functions": 5,
+      "calls": 20,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 7,
+      "resources": 8,
+      "original_instructions": 751,
+      "normalized_instructions": 751,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "$$$ Royal - Mashup (526).milk",
+        "sha256": "48e22babca28d2fc3cde9fee55f7e7a9a812468ee5a6d6ac51028e8a125a1adc",
+        "rank": "00d98d157708ef0004c696921e9baa81366d42e0429bbf736e7288aaec533376"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.26098254101816565,
+      "source_join": {
+        "authored_source_sha256": "61fabb87496868d96a11c64e988c5bb0e694082dc5bcc8efd897437f021bdc47",
+        "request_sha256": "7abf5f82060e87a036d93875784dd6ad12ba6537423d4e2047ed756693442705",
+        "translation_sha256": "b0623d237c659067d668b58c8d7d31d83c012dd8a80dc77b9225bfc169a3e362",
+        "translated_glsl_sha256": "2429589df81be7ce86a8c446b6bbd64a84ff7b0dfd4465f157bd1881131edd4a"
+      },
+      "functions": 5,
+      "calls": 36,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 13,
+      "resources": 8,
+      "original_instructions": 1009,
+      "normalized_instructions": 1009,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Martin - Pixies Party (Hakan mash-up) 6-10.milk",
+        "sha256": "4a7d897b60e5b9379a5a6d48496e15ea86cc1251906dd49dc0fb3f354e178d4a",
+        "rank": "00dfe29b1338ce2c98fb26f92437f1ea466ccaa8d120d10f0b97b3dd90441c01"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.23865379201015458,
+      "source_join": {
+        "authored_source_sha256": "2627e3c8832aaab5c69cb3b6acbfbfbfbe8ef6cb324af19c43379b28cd41c510",
+        "request_sha256": "66279e5800d04be53a6014e2b3b574c16cf89a81f1ff323bca206d36944d0568",
+        "translation_sha256": "8adefdc1024ea50891eecb237578d516fca14bdf2833e2e3ac58a25ad04a9215",
+        "translated_glsl_sha256": "918eaf69d1d9a8c5bc90a2d2d691f78b3c0cef0e36f96097354ee99cf0dee8b8"
+      },
+      "functions": 5,
+      "calls": 13,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 6,
+      "resources": 8,
+      "original_instructions": 635,
+      "normalized_instructions": 635,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "Martin - Pixies Party (Hakan mash-up) 6-10.milk",
+        "sha256": "4a7d897b60e5b9379a5a6d48496e15ea86cc1251906dd49dc0fb3f354e178d4a",
+        "rank": "00dfe29b1338ce2c98fb26f92437f1ea466ccaa8d120d10f0b97b3dd90441c01"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.21932199998991564,
+      "source_join": {
+        "authored_source_sha256": "8e27dad815303629ed8bf845bb7eec309044c9ddd560e85733c42e313323796b",
+        "request_sha256": "4890f00799c466c8f28617dd9c73bcca0e850eaf51a1e9de175b2c50062ead19",
+        "translation_sha256": "df5919257e58ce8763123f55658b2ae00320874cc0f85a19816b5c8d2d848dee",
+        "translated_glsl_sha256": "36c0c4c9faa4e87385aa3cf83d7078718e47c5f5bd8fdd0c1a87b9bcc80e677d"
+      },
+      "functions": 5,
+      "calls": 22,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 5,
+      "resources": 7,
+      "original_instructions": 753,
+      "normalized_instructions": 753,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "ORB - Nova Sunrise.milk",
+        "sha256": "828ab10aec8ae27705a11154a4ae9d02fbdb4d3631cd070f2701c0349f7207d0",
+        "rank": "00ec148f1fa1018149d015b2b24c16b3bbeadb41a9a9457fe80e80c00d9a792f"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.23813745798543096,
+      "source_join": {
+        "authored_source_sha256": "923869c935e67dc86468b29ef691bbfd0c8e23cf08b389e271844bfb4b72f5e2",
+        "request_sha256": "bf3d4187a082b2a6daca7e784a81ff42985aea496df39f55e45ac5aab713ccfc",
+        "translation_sha256": "724bdea3c340b31f091388def39f2029ddbc2757663b3b1a8606850137cff932",
+        "translated_glsl_sha256": "0b10b0038aa3ff8e75dc044c6dc340a6902941293e693047bbda3592ff97123d"
+      },
+      "functions": 5,
+      "calls": 12,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 6,
+      "original_instructions": 573,
+      "normalized_instructions": 573,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "ORB - Nova Sunrise.milk",
+        "sha256": "828ab10aec8ae27705a11154a4ae9d02fbdb4d3631cd070f2701c0349f7207d0",
+        "rank": "00ec148f1fa1018149d015b2b24c16b3bbeadb41a9a9457fe80e80c00d9a792f"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.23890825000125915,
+      "source_join": {
+        "authored_source_sha256": "143095ee21748b03ae9726679d07f41c9b7f1741932e427d733bf2243b1013dd",
+        "request_sha256": "0c0eb794433a3e6d4174022db7cfb5a985b7a7b3b8c13cb88d678306b55eade3",
+        "translation_sha256": "0f7992ab4a101b2d0e87c182c2127b1f3165c1377b9c09010cea6a4854e1a2e8",
+        "translated_glsl_sha256": "fa18eaac1fdb6bb576ba0d6927dd50120660c094ba88de599734738b0cad8eb5"
+      },
+      "functions": 5,
+      "calls": 10,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 1,
+      "resources": 5,
+      "original_instructions": 504,
+      "normalized_instructions": 504,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "placebo heal drift backfire depersonified outfro mockternael qolourth qordially yoresth.milk",
+        "sha256": "fbabc577801ac4b14f09eb04546a6d4693f246cb29aedea582939c9850ec36f4",
+        "rank": "00f507819a637c2d859e6deef3d49118e752a918f6b9d9d1c3d5003a40e30783"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.2430715000082273,
+      "source_join": {
+        "authored_source_sha256": "1efe77d9f84cdd104c73d5e8800e31d9b289dd7383e033f9d1f68d65f9ce4d63",
+        "request_sha256": "d48eb43c5499116e7a83811bc5c02078f3f315dadda5dd3de63ab0c9a4d61c0f",
+        "translation_sha256": "74e36b7c74d4e6e0efd8a6f7bbac72f44fe7f3b591def9f3de15c5a121b334c2",
+        "translated_glsl_sha256": "e51eb650a60a5b90338ec94e90aac36b726d63d54148b72f7d490bb36c6243f1"
+      },
+      "functions": 6,
+      "calls": 21,
+      "loops": 0,
+      "selections": 4,
+      "conversions": 0,
+      "samples": 5,
+      "resources": 8,
+      "original_instructions": 825,
+      "normalized_instructions": 825,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "placebo heal drift backfire depersonified outfro mockternael qolourth qordially yoresth.milk",
+        "sha256": "fbabc577801ac4b14f09eb04546a6d4693f246cb29aedea582939c9850ec36f4",
+        "rank": "00f507819a637c2d859e6deef3d49118e752a918f6b9d9d1c3d5003a40e30783"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.23323366598924622,
+      "source_join": {
+        "authored_source_sha256": "5776b2e228dd5b148ab7f51d3a9f176be2c3c249be5e9485aa2d9de8232a30ac",
+        "request_sha256": "124fcd281107108f70dc4f5254402fcba58ee82472b90d2e3f7808156054c01a",
+        "translation_sha256": "d86ee43f6f0f19147931dc0d44a77e1d41b2103c10a2007a91631a9bb4c4df40",
+        "translated_glsl_sha256": "fb364d734caa750e8d317eba202aef1ac9e62675a2dc24318e9b35b6b6339a78"
+      },
+      "functions": 4,
+      "calls": 11,
+      "loops": 0,
+      "selections": 4,
+      "conversions": 0,
+      "samples": 2,
+      "resources": 5,
+      "original_instructions": 557,
+      "normalized_instructions": 557,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "away dog roof everything is here to serve me and hate me too.milk",
+        "sha256": "f1df9d9e0a0501933c1ffb87ef73c5c04dbda286ad693396dabbf510448a82f0",
+        "rank": "01016cea520cdb11d9d428fc805c2fcb654e561906e158ada68a4aaacc9cd533"
+      },
+      "stage": "warp",
+      "status": "analyzed",
+      "seconds": 0.25130624999292195,
+      "source_join": {
+        "authored_source_sha256": "ac1f677507328a3bdd79bc4a11dadffe54192af0650dd700ef0a8233a5567e77",
+        "request_sha256": "62493da9dbc84280941be0947d6d3a9c2304f204da260e5658ddbff2a28302b0",
+        "translation_sha256": "c7752b9074a474a3a2d2012e7c3ee6b589414e708dfb8fa3c8615802679450b6",
+        "translated_glsl_sha256": "da04f6fd9fddee03decc87639146657a69656e71fc274430945bc48fbd6f0973"
+      },
+      "functions": 5,
+      "calls": 24,
+      "loops": 0,
+      "selections": 7,
+      "conversions": 0,
+      "samples": 3,
+      "resources": 6,
+      "original_instructions": 805,
+      "normalized_instructions": 805,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    },
+    {
+      "preset": {
+        "relative_path": "away dog roof everything is here to serve me and hate me too.milk",
+        "sha256": "f1df9d9e0a0501933c1ffb87ef73c5c04dbda286ad693396dabbf510448a82f0",
+        "rank": "01016cea520cdb11d9d428fc805c2fcb654e561906e158ada68a4aaacc9cd533"
+      },
+      "stage": "composite",
+      "status": "analyzed",
+      "seconds": 0.2527299170033075,
+      "source_join": {
+        "authored_source_sha256": "a254bb5efb11721beeb2df3eca2244743157a00e191189434f4c17bbaeace4df",
+        "request_sha256": "8cd6a36cbf0f7cefd5df239af4b9b719dbadf6a79043ad9d84df4b0be7f474b2",
+        "translation_sha256": "d1d7afb8387d56b131709d1b6f5faf713dfd19d4282a5940aac189336e8fe5fb",
+        "translated_glsl_sha256": "2df9e167744e5f13065ebfd1aaa18e16d0f0c604aa968c1890c4e46b3a4a00ef"
+      },
+      "functions": 5,
+      "calls": 24,
+      "loops": 0,
+      "selections": 1,
+      "conversions": 0,
+      "samples": 7,
+      "resources": 10,
+      "original_instructions": 793,
+      "normalized_instructions": 793,
+      "all_sample_joins": true,
+      "all_conversion_joins": true,
+      "conversion_count_preserved": true,
+      "sample_count_preserved": true,
+      "naga": {
+        "profile": "vulkan-hlsl50-naga-inspection",
+        "sample_count_preserved": true,
+        "conversion_count_preserved": true,
+        "status": "validated_inspection_ir"
+      }
+    }
+  ],
+  "totals": {
+    "functions": 257,
+    "calls": 1343,
+    "loops": 2,
+    "selections": 99,
+    "conversions": 5,
+    "samples": 363,
+    "resources": 368,
+    "original_instructions": 42961,
+    "normalized_instructions": 42961
+  },
+  "summary_file_sha256": "fe157c9f2148f44719e5040c076c496951d74b9694adc9e79811f4f2fff8fffa"
+}

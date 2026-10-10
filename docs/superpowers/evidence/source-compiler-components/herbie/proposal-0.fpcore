@@ -1,0 +1,19 @@
+;; seed: 12345
+
+(FPCore (x0 x1 x2)
+  :name "(let* ((n0 (* x0 x0)) (n1 (* x1 x1)) (n2 (+ n0 n1)) (n3 (* x2 x2)) (n4 (+ n2 n3)) (n5 (* n4 1261007895663739/72057594037927936))) n5)"
+  :precision binary32
+  :pre (and (and (and (<= 0 x0) (<= x0 2)) (and (<= 0 x1) (<= x1 2)))
+     (and (<= 0 x2) (<= x2 2)))
+  :spec (*
+ (+ (+ (* x0 x0) (* x1 x1)) (* x2 x2))
+ 1261007895663739/72057594037927936)
+  (*
+ (fma
+  (fmin x0 x2)
+  (fmin x0 x2)
+  (fma
+   (fmax x1 (fmax x0 x2))
+   (fmax x1 (fmax x0 x2))
+   (* (fmin x1 (fmax x0 x2)) (fmin x1 (fmax x0 x2)))))
+ 0.0175))

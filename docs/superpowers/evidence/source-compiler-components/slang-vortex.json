@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "source-shader-slang-derivative-program",
+  "status": "generated",
+  "retained_derivative_function": true,
+  "preset_sha256": "4b2ac79def5fff13a4dc86ce42ca68b6463a9ac919759fef01bb845ea3dc17ef",
+  "stage": "warp",
+  "source_sha256": "159e15431dc592aab8fd1c71e65d7f7fd6f8a8a14d85805275a942b6f4c0732c",
+  "inspection_record_sha256": "b55f11786738e5013f029ff6db8a2411c7a37607bc47ff18ecb4de3089f2aa03",
+  "helper_text_sha256": "9ae468083f58f8311b1722a91c83157de2004e58c7c27547ab25afb3c5d1a36f",
+  "functions": [
+    "sigmoid",
+    "vortex"
+  ],
+  "derivative_function": "vortex",
+  "entry_sha256": "769bd4934e90498473cdf9d06f517ac11e4465e65775494754d338afd3cd911b",
+  "compiler_input_sha256": "08e4e1d55c3737c66aa46a612ce379b9ab681d3c192fb866df9fb15da9f3d683",
+  "compiler_sha256": "d1d7dd986a765023b269efae76442107e521f2497f5145245dd87cd6e25e22cc",
+  "compiler_version": "",
+  "edits": [
+    "Differentiable attributes before selected helper declarations",
+    "separate explicit differential compute entry"
+  ],
+  "profile": "slang-hlsl-derivative-inspection",
+  "generated_program_sha256": "7ef5f7e60b68070536e7b985f31dbdfd0c0bd1bc57f2b465833bc9207a572c52",
+  "diagnostics": "",
+  "seconds": 0.14680604200111702,
+  "reason": null,
+  "native_numeric_equivalence_verified": false,
+  "range_bounds_verified": false,
+  "limits": "Derivative program only. Input domains, native arithmetic, clamp/discontinuity boundaries and texture derivatives remain separate obligations.",
+  "record_sha256": "5a4a6fe2f88fb60311a83e3088a4b9db97b0f6fc52a3330e93e6a83c74e875df"
+}

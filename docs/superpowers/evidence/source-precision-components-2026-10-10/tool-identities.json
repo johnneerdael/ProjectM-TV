@@ -1,0 +1,18 @@
+{
+  "fptaylor": {
+    "commit": "b5a77cae348400f21f83512210d9f43c4bffb381"
+  },
+  "fptaylor-js": {
+    "commit": "b0be0fa804a273177685113842b0356a8a345a1f",
+    "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+    "bundle_url": "https://monadius.github.io/FPTaylorJS/fptaylor.js"
+  },
+  "daisy": {
+    "commit": "6a6f47abdd231d3009444e9e1b8ce9febc28c27e",
+    "jdk25_archive_sha256": "61979887f7506a24a57439ff99adb8b3a7fc89977d9cfe3b8984f58a981b7b9d",
+    "build": "unchanged source; Java25, SBT1.9.9, exact dependency cache; JDK26 compilation failure retained"
+  },
+  "herbie": {
+    "commit": "b1cc14c9ff243cc154131512a8c9ee42ccf3eccc"
+  }
+}

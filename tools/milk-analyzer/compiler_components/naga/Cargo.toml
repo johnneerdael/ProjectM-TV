@@ -1,0 +1,9 @@
+[package]
+name = "source-shader-naga-worker"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+naga = { git = "https://github.com/gfx-rs/wgpu", rev = "14dd4e8f717cd8c4381908895495ea19ef924c35", features = ["spv-in", "serialize"] }
+serde_json = "=1.0.151"

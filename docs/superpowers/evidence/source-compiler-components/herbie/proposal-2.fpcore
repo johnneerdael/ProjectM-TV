@@ -1,0 +1,8 @@
+;; seed: 12345
+
+(FPCore (x)
+  :name "cancellation-adaptation-control"
+  :precision binary32
+  :pre (and (<= 1 x) (<= x 16777216))
+  :spec (- (+ 1 x) x)
+  1.0)

@@ -1,0 +1,515 @@
+[
+  {
+    "name": "cancellation32",
+    "query": {
+      "policy": "source-pure-precision-query-v1",
+      "precision": "binary32",
+      "input_domains": {
+        "bass": [
+          0,
+          16777216
+        ]
+      },
+      "symbols": {
+        "bass": "x0"
+      },
+      "source_program": {
+        "root": 0,
+        "nodes": [
+          {
+            "op": "subtract",
+            "dtype": "float",
+            "args": [
+              1,
+              3
+            ],
+            "detail": {}
+          },
+          {
+            "op": "add",
+            "dtype": "float",
+            "args": [
+              2,
+              3
+            ],
+            "detail": {}
+          },
+          {
+            "op": "constant",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "value": 1
+            }
+          },
+          {
+            "op": "input",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "name": "bass"
+            }
+          }
+        ]
+      },
+      "fpcore": "(FPCore (x0) :precision binary32\n  :pre (and (<= 0 x0 16777216))\n  (let* ([n0 (+ 1 x0)] [n1 (- n0 x0)]) n1))\n",
+      "fptaylor": "Variables\n  float32 x0 in [0, 16777216];\nDefinitions\n  n0 rnd32= (1 + x0);\n  n1 rnd32= (n0 - x0);\nExpressions\n  result rnd32= n1;\n",
+      "transcendental_functions": [],
+      "authored_program_changed": false,
+      "native_numeric_certified": false,
+      "conditions": [
+        "Declared common arithmetic format and round-to-nearest-even policy",
+        "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+        "Transcendental error assumptions require a separately qualified tool/backend policy",
+        "Herbie suggestions apply only to separately labelled new/adapted effects"
+      ],
+      "record_sha256": "f8a0cc30d99afd1a3bf87485db99cc8fb13bc18d63317a742408c39135b0e56d"
+    },
+    "fptaylor": {
+      "status": "computed_under_tool_model",
+      "query_sha256": "f8a0cc30d99afd1a3bf87485db99cc8fb13bc18d63317a742408c39135b0e56d",
+      "backend": {
+        "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+        "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6",
+        "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523"
+      },
+      "native_numeric_certified": false,
+      "proof_certificate_available": false,
+      "uses_rendered_images": false,
+      "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Optimization lower bounds for error models:\\n\"},{\"ty\":1,\"str\":\"The absolute error (exact) model: 1.000000 (0x1p+0) (suboptimality = 0.8%)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [-3.276700e+4, 3.276900e+4]\\n\"},{\"ty\":1,\"str\":\"Bounds (floating-point): [-3.276801e+4, 3.277001e+4]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Absolute error (exact): 1.007813 (0x1.02p+0)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.02\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.01699995994567871,\"realBounds\":[-32767,32769],\"realBoundsStr\":[\"-3.276700e+4\",\"3.276900e+4\"],\"errors\":[{\"errorName\":\"absolute error (exact)\",\"error\":[1,1.0078125],\"errorStr\":\"1.007813\",\"total2\":[0,0],\"total2Str\":\"0.0\",\"errorModel\":{\"expr\":\"function(var_x0) {\\nvar ref_0 = ((1.00000000000000000000e+00) + var_x0);\\nreturn (((5.96046447753906250000e-08) * (Math.abs(M.floor_power2((ref_0 + (0.00000000000000000000e+00)))) + Math.abs(M.floor_power2(((ref_0 - var_x0) + (0.00000000000000000000e+00)))))) + (0.00000000000000000000e+00));\\n}\",\"dom\":[0,16777216]}}]}]]\n",
+      "upper_absolute_roundoff_error": 1.0078125,
+      "tool_result": {
+        "name": "result",
+        "elapsedTime": 0.01699995994567871,
+        "realBounds": [
+          -32767,
+          32769
+        ],
+        "realBoundsStr": [
+          "-3.276700e+4",
+          "3.276900e+4"
+        ],
+        "errors": [
+          {
+            "errorName": "absolute error (exact)",
+            "error": [
+              1,
+              1.0078125
+            ],
+            "errorStr": "1.007813",
+            "total2": [
+              0,
+              0
+            ],
+            "total2Str": "0.0",
+            "errorModel": {
+              "expr": "function(var_x0) {\nvar ref_0 = ((1.00000000000000000000e+00) + var_x0);\nreturn (((5.96046447753906250000e-08) * (Math.abs(M.floor_power2((ref_0 + (0.00000000000000000000e+00)))) + Math.abs(M.floor_power2(((ref_0 - var_x0) + (0.00000000000000000000e+00)))))) + (0.00000000000000000000e+00));\n}",
+              "dom": [
+                0,
+                16777216
+              ]
+            }
+          }
+        ]
+      },
+      "model_seconds": 0.01699995994567871
+    },
+    "daisy": {
+      "returncode": 0,
+      "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 1.0000001192092896\n[\u001b[34m  Info  \u001b[0m]   Real range:     [1.0, 1.0]\n[\u001b[34m  Info  \u001b[0m]   Relative error: 1.0000001192092896\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      9 ms, Dataflow error:      9 ms, functions:      2 ms, Specs processing:      6 ms, Treesitter Extraction:     73 ms, total:    100 ms\n",
+      "stderr": "",
+      "wall_seconds": 0.7255475000129081,
+      "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;1.0000001192092896;1.0000001192092896;[1.0, 1.0];99\n"
+    }
+  },
+  {
+    "name": "gain32",
+    "query": {
+      "policy": "source-pure-precision-query-v1",
+      "precision": "binary32",
+      "input_domains": {
+        "bass": [
+          0,
+          2
+        ]
+      },
+      "symbols": {
+        "bass": "x0"
+      },
+      "source_program": {
+        "root": 0,
+        "nodes": [
+          {
+            "op": "multiply",
+            "dtype": "float",
+            "args": [
+              1,
+              2
+            ],
+            "detail": {}
+          },
+          {
+            "op": "constant",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "value": 0.2
+            }
+          },
+          {
+            "op": "input",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "name": "bass"
+            }
+          }
+        ]
+      },
+      "fpcore": "(FPCore (x0) :precision binary32\n  :pre (and (<= 0 x0 2))\n  (let* ([n0 (* 0.200000000000000011102230246251565404236316680908203125 x0)]) n0))\n",
+      "fptaylor": "Variables\n  float32 x0 in [0, 2];\nDefinitions\n  n0 rnd32= (0.200000000000000011102230246251565404236316680908203125 * x0);\nExpressions\n  result rnd32= n0;\n",
+      "transcendental_functions": [],
+      "authored_program_changed": false,
+      "native_numeric_certified": false,
+      "conditions": [
+        "Declared common arithmetic format and round-to-nearest-even policy",
+        "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+        "Transcendental error assumptions require a separately qualified tool/backend policy",
+        "Herbie suggestions apply only to separately labelled new/adapted effects"
+      ],
+      "record_sha256": "18a8a1ae619fc239680c31db955fd462c57432472158ae9f7a384d8e044d5240"
+    },
+    "fptaylor": {
+      "status": "computed_under_tool_model",
+      "query_sha256": "18a8a1ae619fc239680c31db955fd462c57432472158ae9f7a384d8e044d5240",
+      "backend": {
+        "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+        "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6",
+        "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523"
+      },
+      "native_numeric_certified": false,
+      "proof_certificate_available": false,
+      "uses_rendered_images": false,
+      "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Optimization lower bounds for error models:\\n\"},{\"ty\":1,\"str\":\"The absolute error (exact) model: 2.086162e-8 (0x1.6666666p-26) (suboptimality = 0.0%)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [0.0, 4.000001e-1]\\n\"},{\"ty\":1,\"str\":\"Bounds (floating-point): [-2.086163e-8, 4.000001e-1]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Absolute error (exact): 2.086163e-8 (0x1.6666666000001p-26)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.01\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.008999824523925781,\"realBounds\":[0,0.4],\"realBoundsStr\":[\"0.0\",\"4.000001e-1\"],\"errors\":[{\"errorName\":\"absolute error (exact)\",\"error\":[2.0861625649182258e-8,2.086162564918226e-8],\"errorStr\":\"2.086163e-8\",\"total2\":[1.1754943508222875e-38,1.1754943508222875e-38],\"total2Str\":\"1.175495e-38\",\"errorModel\":{\"expr\":\"function(var_x0) {\\nreturn (((5.96046447753906250000e-08) * (Math.abs((var_x0 * (-4.99999998137354850769e-02))) + Math.abs(M.floor_power2((((2.00000000000000011102e-01) * var_x0) + (0.00000000000000000000e+00)))))) + (1.17549435082228750797e-38));\\n}\",\"dom\":[0,2]}}]}]]\n",
+      "upper_absolute_roundoff_error": 2.086162564918226e-08,
+      "tool_result": {
+        "name": "result",
+        "elapsedTime": 0.008999824523925781,
+        "realBounds": [
+          0,
+          0.4
+        ],
+        "realBoundsStr": [
+          "0.0",
+          "4.000001e-1"
+        ],
+        "errors": [
+          {
+            "errorName": "absolute error (exact)",
+            "error": [
+              2.0861625649182258e-08,
+              2.086162564918226e-08
+            ],
+            "errorStr": "2.086163e-8",
+            "total2": [
+              1.1754943508222875e-38,
+              1.1754943508222875e-38
+            ],
+            "total2Str": "1.175495e-38",
+            "errorModel": {
+              "expr": "function(var_x0) {\nreturn (((5.96046447753906250000e-08) * (Math.abs((var_x0 * (-4.99999998137354850769e-02))) + Math.abs(M.floor_power2((((2.00000000000000011102e-01) * var_x0) + (0.00000000000000000000e+00)))))) + (1.17549435082228750797e-38));\n}",
+              "dom": [
+                0,
+                2
+              ]
+            }
+          }
+        ]
+      },
+      "model_seconds": 0.008999824523925781
+    },
+    "daisy": {
+      "returncode": 0,
+      "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 5.3644181186029984e-08\n[\u001b[34m  Info  \u001b[0m]   Real range:     [0.0, 0.4]\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      8 ms, Dataflow error:     11 ms, functions:      2 ms, Specs processing:      6 ms, Treesitter Extraction:     70 ms, total:     98 ms\n",
+      "stderr": "",
+      "wall_seconds": 0.7170646250015125,
+      "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;5.3644181186029984e-08;;[0.0, 0.4];98\n"
+    }
+  },
+  {
+    "name": "quadratic32",
+    "query": {
+      "policy": "source-pure-precision-query-v1",
+      "precision": "binary32",
+      "input_domains": {
+        "bass": [
+          0,
+          2
+        ]
+      },
+      "symbols": {
+        "bass": "x0"
+      },
+      "source_program": {
+        "root": 0,
+        "nodes": [
+          {
+            "op": "multiply",
+            "dtype": "float",
+            "args": [
+              1,
+              2
+            ],
+            "detail": {}
+          },
+          {
+            "op": "input",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "name": "bass"
+            }
+          },
+          {
+            "op": "subtract",
+            "dtype": "float",
+            "args": [
+              3,
+              1
+            ],
+            "detail": {}
+          },
+          {
+            "op": "constant",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "value": 2
+            }
+          }
+        ]
+      },
+      "fpcore": "(FPCore (x0) :precision binary32\n  :pre (and (<= 0 x0 2))\n  (let* ([n0 (- 2 x0)] [n1 (* x0 n0)]) n1))\n",
+      "fptaylor": "Variables\n  float32 x0 in [0, 2];\nDefinitions\n  n0 rnd32= (2 - x0);\n  n1 rnd32= (x0 * n0);\nExpressions\n  result rnd32= n1;\n",
+      "transcendental_functions": [],
+      "authored_program_changed": false,
+      "native_numeric_certified": false,
+      "conditions": [
+        "Declared common arithmetic format and round-to-nearest-even policy",
+        "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+        "Transcendental error assumptions require a separately qualified tool/backend policy",
+        "Herbie suggestions apply only to separately labelled new/adapted effects"
+      ],
+      "record_sha256": "69403ec7ed93f152747310a41a8647c1324d049e03f209736b6bbad55c269c4b"
+    },
+    "fptaylor": {
+      "status": "computed_under_tool_model",
+      "query_sha256": "69403ec7ed93f152747310a41a8647c1324d049e03f209736b6bbad55c269c4b",
+      "backend": {
+        "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+        "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6",
+        "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523"
+      },
+      "native_numeric_certified": false,
+      "proof_certificate_available": false,
+      "uses_rendered_images": false,
+      "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Optimization lower bounds for error models:\\n\"},{\"ty\":1,\"str\":\"The absolute error (exact) model: 8.917413e-8 (0x1.7fp-24) (suboptimality = 25.2%)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [0.0, 1.015625]\\n\"},{\"ty\":1,\"str\":\"Bounds (floating-point): [-1.192093e-7, 1.015626]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Absolute error (exact): 1.192093e-7 (0x1.0000000000001p-23)\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.01\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.01100015640258789,\"realBounds\":[0,1.015625],\"realBoundsStr\":[\"0.0\",\"1.015625\"],\"errors\":[{\"errorName\":\"absolute error (exact)\",\"error\":[8.917413651943207e-8,1.1920928955078128e-7],\"errorStr\":\"1.192093e-7\",\"total2\":[1.1754943508222875e-38,1.1754943508222875e-38],\"total2Str\":\"1.175495e-38\",\"errorModel\":{\"expr\":\"function(var_x0) {\\nvar ref_0 = ((2.00000000000000000000e+00) - var_x0);\\nreturn (((5.96046447753906250000e-08) * (Math.abs((var_x0 * M.floor_power2((ref_0 + (0.00000000000000000000e+00))))) + Math.abs(M.floor_power2(((var_x0 * ref_0) + (0.00000000000000000000e+00)))))) + (1.17549435082228750797e-38));\\n}\",\"dom\":[0,2]}}]}]]\n",
+      "upper_absolute_roundoff_error": 1.1920928955078128e-07,
+      "tool_result": {
+        "name": "result",
+        "elapsedTime": 0.01100015640258789,
+        "realBounds": [
+          0,
+          1.015625
+        ],
+        "realBoundsStr": [
+          "0.0",
+          "1.015625"
+        ],
+        "errors": [
+          {
+            "errorName": "absolute error (exact)",
+            "error": [
+              8.917413651943207e-08,
+              1.1920928955078128e-07
+            ],
+            "errorStr": "1.192093e-7",
+            "total2": [
+              1.1754943508222875e-38,
+              1.1754943508222875e-38
+            ],
+            "total2Str": "1.175495e-38",
+            "errorModel": {
+              "expr": "function(var_x0) {\nvar ref_0 = ((2.00000000000000000000e+00) - var_x0);\nreturn (((5.96046447753906250000e-08) * (Math.abs((var_x0 * M.floor_power2((ref_0 + (0.00000000000000000000e+00))))) + Math.abs(M.floor_power2(((var_x0 * ref_0) + (0.00000000000000000000e+00)))))) + (1.17549435082228750797e-38));\n}",
+              "dom": [
+                0,
+                2
+              ]
+            }
+          }
+        ]
+      },
+      "model_seconds": 0.01100015640258789
+    },
+    "daisy": {
+      "returncode": 0,
+      "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 5.364418314002251e-07\n[\u001b[34m  Info  \u001b[0m]   Real range:     [0.0, 1.0]\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      8 ms, Dataflow error:     12 ms, functions:      2 ms, Specs processing:      5 ms, Treesitter Extraction:     75 ms, total:    103 ms\n",
+      "stderr": "",
+      "wall_seconds": 0.683885292004561,
+      "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;5.364418314002251e-07;;[0.0, 1.0];103\n"
+    }
+  },
+  {
+    "name": "overflow32",
+    "query": {
+      "policy": "source-pure-precision-query-v1",
+      "precision": "binary32",
+      "input_domains": {
+        "bass": [
+          0,
+          20
+        ]
+      },
+      "symbols": {
+        "bass": "x0"
+      },
+      "source_program": {
+        "root": 0,
+        "nodes": [
+          {
+            "op": "multiply",
+            "dtype": "float",
+            "args": [
+              1,
+              2
+            ],
+            "detail": {}
+          },
+          {
+            "op": "constant",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "value": 1e+38
+            }
+          },
+          {
+            "op": "input",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "name": "bass"
+            }
+          }
+        ]
+      },
+      "fpcore": "(FPCore (x0) :precision binary32\n  :pre (and (<= 0 x0 20))\n  (let* ([n0 (* 99999999999999997748809823456034029568 x0)]) n0))\n",
+      "fptaylor": "Variables\n  float32 x0 in [0, 20];\nDefinitions\n  n0 rnd32= (99999999999999997748809823456034029568 * x0);\nExpressions\n  result rnd32= n0;\n",
+      "transcendental_functions": [],
+      "authored_program_changed": false,
+      "native_numeric_certified": false,
+      "conditions": [
+        "Declared common arithmetic format and round-to-nearest-even policy",
+        "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+        "Transcendental error assumptions require a separately qualified tool/backend policy",
+        "Herbie suggestions apply only to separately labelled new/adapted effects"
+      ],
+      "record_sha256": "e7a2edebee6bcceeeda28d19f167e30ec13803a8c332621766933327a1daf582"
+    },
+    "fptaylor": {
+      "status": "unresolved",
+      "query_sha256": "e7a2edebee6bcceeeda28d19f167e30ec13803a8c332621766933327a1daf582",
+      "backend": {
+        "bundle_sha256": "c3f38c49c8c3407def2c19a8e0bc740fb0c1271cbcd5dee2c99ac2071d98b23b",
+        "runtime_sha256": "1d77af7bfd811aebb7d37bec496a5eed14fe227ded3ab7866d2f39786e8107b6",
+        "default_config_sha256": "ecd2c36d5c9ac84ab064ef5eb25b83c9adf6df99c2c170d1334ae247b64ad523"
+      },
+      "native_numeric_certified": false,
+      "proof_certificate_available": false,
+      "uses_rendered_images": false,
+      "scope": "FPTaylor portable interval and common IEEE arithmetic query model",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[{\"ty\":1,\"str\":\"FPTaylor, version 0.9.4+dev\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: ./default.cfg\\n\"},{\"ty\":1,\"str\":\"Loading configuration file: user.cfg\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Loading: input.txt\\n\"},{\"ty\":1,\"str\":\"Processing: result\\n\"},{\"ty\":2,\"str\":\"**ERROR**: \\nPotential exception detected: Overflow at:\\n\"},{\"ty\":2,\"str\":\"rnd32((rnd32(99999999999999997748809823456034029568) * rnd32(x0)))\\n\"},{\"ty\":1,\"str\":\"-------------------------------------------------------------------------------\\n\"},{\"ty\":1,\"str\":\"Problem: result\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Bounds (without rounding): [-inf, +inf]\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"Elapsed time: 0.00\\n\"},{\"ty\":1,\"str\":\"\\n\"},{\"ty\":1,\"str\":\"\\n\"},[{\"name\":\"result\",\"elapsedTime\":0.0009999275207519531,\"realBounds\":[null,null],\"realBoundsStr\":[\"-inf\",\"+inf\"],\"errors\":[]}]]\n",
+      "reason": "absolute error result missing"
+    },
+    "daisy": {
+      "returncode": 1,
+      "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\ndaisy.tools.OverflowException\n\tat daisy.tools.FinitePrecision$Precision.absRoundoff(FinitePrecision.scala:20)\n\tat daisy.tools.FinitePrecision$Float32$.daisy$tools$FinitePrecision$DenormalCheck$$super$absRoundoff(FinitePrecision.scala:128)\n\tat daisy.tools.FinitePrecision$DenormalCheck.absRoundoff(FinitePrecision.scala:96)\n\tat daisy.tools.FinitePrecision$DenormalCheck.absRoundoff$(FinitePrecision.scala:90)\n\tat daisy.tools.FinitePrecision$Float32$.absRoundoff(FinitePrecision.scala:128)\n\tat daisy.tools.RoundoffEvaluators.$anonfun$evalRoundoff$3(RoundoffEvaluators.scala:163)\n\tat daisy.tools.RoundoffEvaluators._computeNewError$1(RoundoffEvaluators.scala:171)\n\tat daisy.tools.RoundoffEvaluators.computeNewError$1(RoundoffEvaluators.scala:163)\n\tat daisy.tools.RoundoffEvaluators.$anonfun$evalRoundoff$5(RoundoffEvaluators.scala:249)\n\tat daisy.utils.CachingMap.$anonfun$getOrAdd$1(CachingMap.scala:19)\n\tat scala.collection.mutable.HashMap.getOrElseUpdate(HashMap.scala:469)\n\tat daisy.utils.CachingMap.getOrAdd(CachingMap.scala:19)\n\tat daisy.tools.RoundoffEvaluators.eval$1(RoundoffEvaluators.scala:180)\n\tat daisy.tools.RoundoffEvaluators.$anonfun$evalRoundoff$5(RoundoffEvaluators.scala:483)\n\tat daisy.utils.CachingMap.$anonfun$getOrAdd$1(CachingMap.scala:19)\n\tat scala.collection.mutable.HashMap.getOrElseUpdate(HashMap.scala:469)\n\tat daisy.utils.CachingMap.getOrAdd(CachingMap.scala:19)\n\tat daisy.tools.RoundoffEvaluators.eval$1(RoundoffEvaluators.scala:180)\n\tat daisy.tools.RoundoffEvaluators.evalRoundoff(RoundoffEvaluators.scala:559)\n\tat daisy.tools.RoundoffEvaluators.evalRoundoff$(RoundoffEvaluators.scala:140)\n\tat daisy.analysis.DataflowPhase$.evalRoundoff(DataflowPhase.scala:19)\n\tat daisy.analysis.DataflowPhase$.computeErrors(DataflowPhase.scala:206)\n\tat daisy.analysis.DataflowPhase$.computeRoundoff(DataflowPhase.scala:252)\n\tat daisy.analysis.DataflowPhase$.$anonfun$runPhase$2(DataflowPhase.scala:139)\n\tat scala.collection.immutable.List.map(List.scala:236)\n\tat scala.collection.immutable.List.map(List.scala:79)\n\tat daisy.analysis.DataflowPhase$.runPhase(DataflowPhase.scala:61)\n\tat daisy.DaisyPhase.run(DaisyPhase.scala:28)\n\tat daisy.DaisyPhase.run$(DaisyPhase.scala:24)\n\tat daisy.analysis.DataflowPhase$.run(DataflowPhase.scala:19)\n\tat daisy.analysis.DataflowPhase$.run(DataflowPhase.scala:19)\n\tat daisy.Pipeline$$anon$1.run(Pipeline.scala:13)\n\tat daisy.Pipeline$$anon$1.run(Pipeline.scala:11)\n\tat daisy.Main$.interfaceMain(Main.scala:201)\n\tat daisy.Main$.main(Main.scala:241)\n\tat daisy.Main.main(Main.scala)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1(ScalaClassLoader.scala:112)\n\tat scala.reflect.internal.util.RichClassLoader$.run$extension(ScalaClassLoader.scala:36)\n\tat scala.tools.nsc.CommonRunner.run(ObjectRunner.scala:30)\n\tat scala.tools.nsc.CommonRunner.run$(ObjectRunner.scala:28)\n\tat scala.tools.nsc.ObjectRunner$.run(ObjectRunner.scala:45)\n\tat scala.tools.nsc.CommonRunner.runAndCatch(ObjectRunner.scala:37)\n\tat scala.tools.nsc.CommonRunner.runAndCatch$(ObjectRunner.scala:36)\n\tat scala.tools.nsc.MainGenericRunner.runTarget$1(MainGenericRunner.scala:71)\n\tat scala.tools.nsc.MainGenericRunner.run$1(MainGenericRunner.scala:92)\n\tat scala.tools.nsc.MainGenericRunner.process(MainGenericRunner.scala:105)\n\tat scala.tools.nsc.MainGenericRunner$.main(MainGenericRunner.scala:113)\n\tat scala.tools.nsc.MainGenericRunner.main(MainGenericRunner.scala)\n",
+      "stderr": "",
+      "wall_seconds": 0.6848219159874134,
+      "csv": null
+    }
+  },
+  {
+    "name": "trig32",
+    "query": {
+      "policy": "source-pure-precision-query-v1",
+      "precision": "binary32",
+      "input_domains": {
+        "bass": [
+          0,
+          2
+        ]
+      },
+      "symbols": {
+        "bass": "x0"
+      },
+      "source_program": {
+        "root": 0,
+        "nodes": [
+          {
+            "op": "sin",
+            "dtype": "float",
+            "args": [
+              1
+            ],
+            "detail": {}
+          },
+          {
+            "op": "input",
+            "dtype": "float",
+            "args": [],
+            "detail": {
+              "name": "bass"
+            }
+          }
+        ]
+      },
+      "fpcore": "(FPCore (x0) :precision binary32\n  :pre (and (<= 0 x0 2))\n  (let* ([n0 (sin x0)]) n0))\n",
+      "fptaylor": "Variables\n  float32 x0 in [0, 2];\nDefinitions\n  n0 rnd32= sin(x0);\nExpressions\n  result rnd32= n0;\n",
+      "transcendental_functions": [
+        "sin"
+      ],
+      "authored_program_changed": false,
+      "native_numeric_certified": false,
+      "conditions": [
+        "Declared common arithmetic format and round-to-nearest-even policy",
+        "Tool acceptance/results do not certify engine storage, EEL phase or GPU arithmetic",
+        "Transcendental error assumptions require a separately qualified tool/backend policy",
+        "Herbie suggestions apply only to separately labelled new/adapted effects"
+      ],
+      "record_sha256": "0970ddd8298b6e922d40fb001685403be576e9d5a07e582119a50e0e97431843"
+    },
+    "fptaylor": {
+      "status": "unsupported",
+      "reason": "portable FPTaylor JS interval backend excludes trig"
+    },
+    "daisy": {
+      "returncode": 0,
+      "stdout": "WARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/Users/jneerdael/Scripts/source-analysis-evaluation/daisy/.coursier/https/repo.maven.apache.org/maven2/org/fusesource/hawtjni/hawtjni-runtime/1.9/hawtjni-runtime-1.9.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future release unless native access is enabled\n\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] ************ Starting Daisy ************\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Treesitter Extraction phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Specs processing phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting functions phase\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Dataflow error phase\n[\u001b[34m  Info  \u001b[0m] using affine for ranges, affine for errors\n[\u001b[34m  Info  \u001b[0m] analyzing fnc: fpcore_1\n[\u001b[34m  Info  \u001b[0m] error analysis for uniform Float32 precision\n[\u001b[34m  Info  \u001b[0m] \n[\u001b[34m  Info  \u001b[0m] Starting Info phase\n[\u001b[34m  Info  \u001b[0m] fpcore_1\n[\u001b[34m  Info  \u001b[0m]   Absolute error: 2.384185791015625e-07\n[\u001b[34m  Info  \u001b[0m]   Real range:     [-4.9E-324, 1.0]\n[\u001b[34m  Info  \u001b[0m] time: \n[\u001b[34m  Info  \u001b[0m] Info:      8 ms, Dataflow error:      9 ms, functions:      3 ms, Specs processing:      5 ms, Treesitter Extraction:     72 ms, total:     98 ms\n",
+      "stderr": "",
+      "wall_seconds": 0.7380184170033317,
+      "csv": "Function name; Absolute error; Relative error; Real range; Time\nfpcore_1;2.384185791015625e-07;;[-4.9E-324, 1.0];98\n"
+    }
+  }
+]

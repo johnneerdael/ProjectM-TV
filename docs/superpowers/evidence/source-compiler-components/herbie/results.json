@@ -1,0 +1,172 @@
+{
+  "mode": "separate-adaptation-generation-proposals",
+  "applied_to_authored_prediction": false,
+  "seed": 12345,
+  "official_timeout_seconds": 20,
+  "outer_wall_timeout_seconds": 60,
+  "iteration_budget": 1,
+  "sampling": "128train/256test",
+  "enode_budget": 20000,
+  "rows": [
+    {
+      "input": "precision-consumed-0.fpcore",
+      "input_sha256": "53ca8bf5c59e90a1f6f80cc27be84b3200376a0cb5eed978b26f7e30f48d3742",
+      "command": [
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/racket/bin/racket",
+        "-l",
+        "herbie",
+        "--",
+        "improve",
+        "--seed",
+        "12345",
+        "--timeout",
+        "20",
+        "--num-iters",
+        "1",
+        "--num-points",
+        "128/256",
+        "--num-enodes",
+        "20000",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/precision-consumed-0.fpcore",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/herbie/proposal-0.fpcore"
+      ],
+      "seconds": 1.4656295420136303,
+      "exit_code": 0,
+      "stdout": "\n",
+      "stderr": "Starting Herbie 2.3 with seed 12345...\n",
+      "outer_timeout": false,
+      "proposal": ";; seed: 12345\n\n(FPCore (x0 x1 x2)\n  :name \"(let* ((n0 (* x0 x0)) (n1 (* x1 x1)) (n2 (+ n0 n1)) (n3 (* x2 x2)) (n4 (+ n2 n3)) (n5 (* n4 1261007895663739/72057594037927936))) n5)\"\n  :precision binary32\n  :pre (and (and (and (<= 0 x0) (<= x0 2)) (and (<= 0 x1) (<= x1 2)))\n     (and (<= 0 x2) (<= x2 2)))\n  :spec (*\n (+ (+ (* x0 x0) (* x1 x1)) (* x2 x2))\n 1261007895663739/72057594037927936)\n  (*\n (fma\n  (fmin x0 x2)\n  (fmin x0 x2)\n  (fma\n   (fmax x1 (fmax x0 x2))\n   (fmax x1 (fmax x0 x2))\n   (* (fmin x1 (fmax x0 x2)) (fmin x1 (fmax x0 x2)))))\n 0.0175))\n",
+      "proposal_sha256": "69ca706dc772af086a23e640581cd5294be9ff75078f59abc36df232fcad82c4",
+      "proposal_program_changed": true,
+      "source_join": {
+        "preset": {
+          "relative_path": "Fumbling_Foo & Flexi, Martin, Orb, Unchained - Acid Mandala v4d.milk",
+          "sha256": "1e9f8826a646f760460d5cc5a2d74aee55fb1a0e861f9225ba2bf3cb36002081"
+        },
+        "element": "mesh",
+        "control": "warp",
+        "scope": "declared common binary32 expression model, not actual mixed-format/native pipeline",
+        "typed_source_graph_sha256": "d4ac3468c7911c0154b659a4f8b459ed76c7af7aa2c42c9c2994e5a42db280cd",
+        "domains": {
+          "bass": [
+            0,
+            2
+          ],
+          "mid": [
+            0,
+            2
+          ],
+          "treb": [
+            0,
+            2
+          ]
+        },
+        "common_precision": "binary32",
+        "exported_fpcore_matches": true
+      },
+      "warning_unsound_egraph": false
+    },
+    {
+      "input": "precision-consumed-1.fpcore",
+      "input_sha256": "51f28ba8e2728c686cb118da5eb1f5fe388d8db6174f07c016be16301f213669",
+      "command": [
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/racket/bin/racket",
+        "-l",
+        "herbie",
+        "--",
+        "improve",
+        "--seed",
+        "12345",
+        "--timeout",
+        "20",
+        "--num-iters",
+        "1",
+        "--num-points",
+        "128/256",
+        "--num-enodes",
+        "20000",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/precision-consumed-1.fpcore",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/herbie/proposal-1.fpcore"
+      ],
+      "seconds": 1.6079858339799102,
+      "exit_code": 0,
+      "stdout": "\n",
+      "stderr": "Starting Herbie 2.3 with seed 12345...\nWarning: unsoundness detected in the egraph\nSee <https://herbie.uwplse.org/doc/2.3/faq.html#unsound-egraph> for more.\n",
+      "outer_timeout": false,
+      "proposal": ";; seed: 12345\n\n(FPCore (x0 x1 x2)\n  :name \"(let* ((n0 (+ x0 x1)) (n1 (+ n0 x2)) (n2 (* n1 3602879701896397/36028797018963968))) n2)\"\n  :precision binary32\n  :pre (and (and (and (<= 0 x0) (<= x0 2)) (and (<= 0 x1) (<= x1 2)))\n     (and (<= 0 x2) (<= x2 2)))\n  :spec (* (+ (+ x0 x1) x2) 3602879701896397/36028797018963968)\n  (fma\n 0.1\n (+ (fmin x0 x1) (fmax (fmax x0 x1) x2))\n (* 0.1 (fmin (fmax x0 x1) x2))))\n",
+      "proposal_sha256": "30841db9ce89e948833b68f24cefb040ce0b821dbb7cec4a8b281204656e7dd7",
+      "proposal_program_changed": true,
+      "source_join": {
+        "preset": {
+          "relative_path": "placebo heal drift backfire depersonified outfro mockternael qolourth qordially yoresth.milk",
+          "sha256": "fbabc577801ac4b14f09eb04546a6d4693f246cb29aedea582939c9850ec36f4"
+        },
+        "element": "shape_3",
+        "control": "rad",
+        "scope": "declared common binary32 expression model, not actual mixed-format/native pipeline",
+        "typed_source_graph_sha256": "62ba08c6c727b68c2432a1e646f79e493a03a9e9cc6e91edf50be0e77dc9ca60",
+        "domains": {
+          "bass": [
+            0,
+            2
+          ],
+          "mid": [
+            0,
+            2
+          ],
+          "treb": [
+            0,
+            2
+          ]
+        },
+        "common_precision": "binary32",
+        "exported_fpcore_matches": true
+      },
+      "warning_unsound_egraph": true
+    },
+    {
+      "input": "cancellation.fpcore",
+      "input_sha256": "1d1d5ce6175a693d9f8eaf47a2aaa02809940888cad7d540a38bfb0273f3f053",
+      "command": [
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/racket/bin/racket",
+        "-l",
+        "herbie",
+        "--",
+        "improve",
+        "--seed",
+        "12345",
+        "--timeout",
+        "20",
+        "--num-iters",
+        "1",
+        "--num-points",
+        "128/256",
+        "--num-enodes",
+        "20000",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/herbie/cancellation.fpcore",
+        "/Users/jneerdael/Scripts/source-analysis-evaluation/evidence/herbie/proposal-2.fpcore"
+      ],
+      "seconds": 1.3516308340185788,
+      "exit_code": 0,
+      "stdout": "\n",
+      "stderr": "Starting Herbie 2.3 with seed 12345...\n",
+      "outer_timeout": false,
+      "proposal": ";; seed: 12345\n\n(FPCore (x)\n  :name \"cancellation-adaptation-control\"\n  :precision binary32\n  :pre (and (<= 1 x) (<= x 16777216))\n  :spec (- (+ 1 x) x)\n  1.0)\n",
+      "proposal_sha256": "8214683de725dfba7d31c42a4052381be77911d4a68ed609f49b5a9aafde12d9",
+      "proposal_program_changed": true,
+      "warning_unsound_egraph": false
+    }
+  ],
+  "herbie_commit": "b1cc14c9ff243cc154131512a8c9ee42ccf3eccc",
+  "herbie_version": "2.3",
+  "racket_version": "9.3-cs-aarch64-macosx",
+  "runtime_tarball_sha256": "93c498c54804945c53412395e9ec7b33c56834f541710c2b3e161182be0c2670",
+  "racket_executable_sha256": "88378b0d32338bf33ac1b90fdfbe2e7dbb8951e315ae2a3cf38be51da821459a",
+  "egg_library_sha256": "1495a04a4feebf92e5aefdca43b1d40add1092e810139b2905c828ca4b4c283e",
+  "egg_cargo_lock_sha256": "937b0ab930b7d914eca880a7d8a3212057c2aa6d3fca906dd4001f28661334bc",
+  "packages_sha256": "693d27f8f7f9b9df8cb19b85fb67acdc694dd406a9f9ccc3883478f6c9b3c825",
+  "proposals_verified": false,
+  "new_predictor_bounds": 0,
+  "new_predictions": 0,
+  "seconds_total": 4.425246210012119
+}
