@@ -430,3 +430,9 @@ horizontal bend while mids change its spacing. Known constants provide a
 conditional bound on coordinate deformation; dynamic inputs remain explicit.
 These describe how an image is sampled, not independent moving stripes or a
 measured screen speed. Feedback and final mood still require further modeling.
+
+Shared audio weights on sums of ripple waves are preserved. Zylot’s “The Sound
+plays the Sights,” for example, uses treble to scale horizontal bending, bass
+to scale vertical bending, and bass/mids to alter the spacing. The descriptor
+can express those source relationships without rendering a frame; how strongly
+they appear on screen remains separate from the coordinate formula.

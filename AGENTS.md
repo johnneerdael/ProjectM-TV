@@ -1142,3 +1142,9 @@ Guard known invalid domains, spatial integer casts, types and export budgets.
 Exact constant Jacobian row sums support a nominal unwrapped no-fold condition
 only for identity baseline and one UV basis with bound below1. Dynamic/mixed
 cases remain uncertain; no actual fold, screen speed or mood claim follows.
+
+Uniform-wave distribution uses512visits/depth64 and64result terms to expand
+shared uniform multipliers/divisors over add/subtract branches. Preserve signed
+weights and original-graph domain checks; never linearize spatial-wave products
+or discard terms when budgets fail. Zylot's original warp is a source control
+for amplitude and spatial-frequency audio routes; no captured appearance credit.

@@ -33,6 +33,31 @@ def combine(op,a,b):
     return Field(op,(a,b),'float')
 
 
+def uniform_weighted_terms(field):
+    """Distribute uniform weights only; never expand products of spatial fields."""
+    result=[];active=set();visits=0
+    def visit(node,weight,depth=0):
+        nonlocal visits
+        visits+=1
+        if visits>512 or depth>64 or id(node) in active:raise ValueError('uniform-wave distribution node/depth budget exceeded')
+        if len(result)>=64:raise ValueError('uniform-wave distribution exceeds64terms')
+        active.add(id(node))
+        try:
+            if node.dtype=='float' and node.op in {'add','subtract'}:
+                visit(node.args[0],weight,depth+1)
+                visit(node.args[1],weight if node.op=='add' else combine('multiply',weight,number(-1)),depth+1)
+            elif node.dtype=='float' and (node.op=='negate' or node.op=='unary' and node.detail.get('operator')==0):
+                visit(node.args[0],combine('multiply',weight,number(-1)),depth+1)
+            elif node.dtype=='float' and node.op=='multiply' and any(uniform(v) for v in node.args):
+                i=0 if uniform(node.args[0]) else 1
+                visit(node.args[1-i],combine('multiply',weight,node.args[i]),depth+1)
+            elif node.dtype=='float' and node.op=='divide' and uniform(node.args[1]):
+                visit(node.args[0],combine('multiply',weight,Field('divide',(number(1),node.args[1]),'float')),depth+1)
+            else:result.append((weight,node))
+        finally:active.remove(id(node))
+    visit(field,number(1));return result
+
+
 def uniform_affine_scalar(field):
     """Six declared spatial coefficients plus a uniform offset, all symbolic."""
     from source_appearance import _canonical_lane,_phase_literal
@@ -90,7 +115,7 @@ def uniform_affine_scalar(field):
 
 def oscillatory_displacement(field,analysis):
     from effect_families import _parts,_deps
-    from source_appearance import _phase_terms,_phase_literal,_expression,_digest,_routes
+    from source_appearance import _phase_literal,_expression,_digest,_routes
     from source_forms import known_invalid_phase_offset
     from source_motion import motion_control
     result={'policy':'source-uniform-periodic-sampling-v1','source_model':'unknown','basis':None,
@@ -109,7 +134,7 @@ def oscillatory_displacement(field,analysis):
         if len(parts)!=2:raise ValueError('sampling displacement is not two-dimensional')
         base=[number(0),number(0)];waves={}
         for axis,lane in enumerate(parts):
-            for coefficient,term in _phase_terms(lane):
+            for coefficient,term in uniform_weighted_terms(lane):
                 pending=[term];factors=[];osc=[]
                 while pending:
                     n=pending.pop()
@@ -121,7 +146,7 @@ def oscillatory_displacement(field,analysis):
                     node=osc[0];gradient,offset=uniform_affine_scalar(node.args[0])
                     if all(_phase_literal(v)==0 for v in gradient):raise ValueError('oscillator has no proved spatial phase')
                     if known_invalid_phase_offset(node.args[0]):raise ValueError('oscillator phase has a known invalid domain')
-                    amplitude=number(coefficient)
+                    amplitude=coefficient
                     for n in factors:amplitude=combine('multiply',amplitude,n)
                     if known_invalid_phase_offset(amplitude):raise ValueError('wave amplitude has a known invalid domain')
                     program=_expression(node)
@@ -131,7 +156,7 @@ def oscillatory_displacement(field,analysis):
                         if len(waves)>=32:raise ValueError('oscillatory wave count exceeds32')
                         waves[key]={'node':node,'gradient':gradient,'offset':offset,'amplitude':[number(0),number(0)]}
                     waves[key]['amplitude'][axis]=combine('add',waves[key]['amplitude'][axis],amplitude)
-                else:base[axis]=combine('add',base[axis],Field('multiply',(number(coefficient),term),'float'))
+                else:base[axis]=combine('add',base[axis],combine('multiply',coefficient,term))
         if not waves:raise ValueError('no supported spatial oscillators')
         baselines=[uniform_affine_scalar(v) for v in base]
         # Check the untouched original graph only for a candidate map. Maps

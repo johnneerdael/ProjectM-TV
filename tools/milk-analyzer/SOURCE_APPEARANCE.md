@@ -618,6 +618,10 @@ cast, member/swizzle, comparisons/select, clamp/saturate, sin/cos and other
 recognized source operations. `dtype` preserves source IR type information;
 native EEL versus shader arithmetic/profile comes from the control's source
 stage/evidence. It must not be inferred as one universal floating-point policy.
+Numeric-vector `member` nodes retain `detail.field` and the parent `dtype`;
+xyzw/rgba selectors on a numeric vector describe swizzling. The export does not
+carry the internal evaluator's separate boolean swizzle flag. Struct/matrix
+members must not be treated as vector swizzles merely because their names match.
 
 Unexpanded loops carry `unresolved_loop_plan:true` and `complete:false`.
 Direct sample nodes retain sampler/canonical texture, surface/frame, sampling
@@ -1731,6 +1735,12 @@ time as phase shift. The producer invents no audio range or constant wavelength
 for this formula. Shared scalar phases combine their signed contributions into
 one vector wave; canonical wave records are not visible-object or layer counts.
 `audio_routes` links named amplitude/frequency/phase controls to band inputs.
+Uniform multipliers and divisors distribute through supported sums/subtractions
+before extraction. For example, `bass*(sin(p)+cos(q))` preserves a shared bass
+weight on both wave records. Products of two spatial oscillators are not
+linearized. This algebra describes nominal real formulas; native reordered
+floating-point arithmetic is not certified. Original-domain checks still run
+on the untouched graph before a complete-map claim.
 `phase_motion_control` describes the uniform phase offset with native-clock and
 precision qualifications retained from the existing source-time model.
 
@@ -1756,3 +1766,7 @@ Extraction uses512distinct-node/depth64 phase budgets,64product factors,
 rounding, wrap/filter, mesh transforms, texture/history contents and later stages
 are outside these nominal formula bounds. No visible speed, feedback stability,
 dominant screen structure, flash permission or mood score follows from them.
+
+Uniform distribution separately limits traversal to512visits/depth64 and64
+result terms. A budget rejection stays unknown; it does not increase the
+shared source-analysis budget or silently discard unexpanded terms.
