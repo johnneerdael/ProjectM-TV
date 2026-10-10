@@ -1133,3 +1133,12 @@ normal and uniform phase controls, not visible stripes/ring count or dominance.
 Keep coordinate-only sampling oscillations separate: colour-data traversal
 stops at sample nodes, retaining shared expressions that also reach RGB/masks.
 Do not infer exact analytic circles from the interpolated native radial varying.
+
+Source periodic-sampling maintenance: `source_periodic_sampling` models a
+uniform-affine lookup baseline plus scalar sine/cosine waves with uniform
+symbolic amplitude/frequency/phase controls. Retain allsix native spatial
+columns, memo source-node references and complete coefficient/offset programs.
+Guard known invalid domains, spatial integer casts, types and export budgets.
+Exact constant Jacobian row sums support a nominal unwrapped no-fold condition
+only for identity baseline and one UV basis with bound below1. Dynamic/mixed
+cases remain uncertain; no actual fold, screen speed or mood claim follows.

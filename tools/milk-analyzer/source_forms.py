@@ -36,22 +36,25 @@ def constant_colour_clip_children(node):
     return None
 
 
-def known_invalid_phase_offset(field):
+def known_invalid_phase_offset(field,*,preserve_zero_products=False):
     """Reject known singular/overflow domains; unknown finite inputs stay conditional."""
-    from effect_families import _walk
+    from effect_families import _walk,_parts
     from source_appearance import _phase_literal
     from source_control_bounds import scalar_value_envelope
     from source_native_warp import _f32
-    for count,(node,path) in enumerate(_walk(field)):
+    for count,(node,path) in enumerate(_walk(field,preserve_zero_products=preserve_zero_products)):
         if count>=512:raise ValueError('spatial-band offset domain budget exceeded')
-        if node.op=='divide' and len(node.args)==2 and _phase_literal(node.args[1])==0:return True
+        if node.op=='divide' and len(node.args)==2 and any(_phase_literal(v)==0 for v in _parts(node.args[1])):return True
         if node.op in {'pow','sqrt','log','log2','log10','rsqrt'} and node.args:
-            span=scalar_value_envelope(node.args[0])['nominal_value_range']
-            if span is None:continue
-            if node.op in {'log','log2','log10','rsqrt'} and span[1]<=0:return True
-            if node.op=='sqrt' and span[1]<0:return True
-            exponent=_phase_literal(node.args[1]) if node.op=='pow' and len(node.args)==2 else None
-            if exponent is not None and span==[0.,0.] and exponent<=0:return True
+            bases=_parts(node.args[0]);exponents=_parts(node.args[1]) if node.op=='pow' and len(node.args)==2 else ()
+            if len(exponents)==1:exponents=exponents*len(bases)
+            for lane,base in enumerate(bases):
+                span=scalar_value_envelope(base)['nominal_value_range']
+                if span is None:continue
+                if node.op in {'log','log2','log10','rsqrt'} and span[1]<=0:return True
+                if node.op=='sqrt' and span[1]<0:return True
+                exponent=_phase_literal(exponents[lane]) if lane<len(exponents) else None
+                if exponent is not None and span==[0.,0.] and exponent<=0:return True
         if node.op=='narrow' and node.detail.get('numeric_domain')=='shader-float32':
             span=scalar_value_envelope(node.args[0])['nominal_value_range']
             if span is not None:

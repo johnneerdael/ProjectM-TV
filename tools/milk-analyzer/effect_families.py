@@ -301,7 +301,7 @@ def _children_uncached(value, *, plans=True):
     return value.args
 
 
-def _walk(value,*,sample_coordinates=True,constant_clipping=False):
+def _walk(value,*,sample_coordinates=True,constant_clipping=False,preserve_zero_products=False):
     pending = [(value, 'output')]
     seen = set()
     while pending:
@@ -316,6 +316,7 @@ def _walk(value,*,sample_coordinates=True,constant_clipping=False):
                 raise _SemanticBudget('static field traversal budget exceeded')
         yield node, path
         children=() if node.op=='sample' and not sample_coordinates else _children(node)
+        if preserve_zero_products and node.op=='multiply':children=node.args
         if constant_clipping:
             from source_forms import constant_colour_clip_children
             clipped=constant_colour_clip_children(node)

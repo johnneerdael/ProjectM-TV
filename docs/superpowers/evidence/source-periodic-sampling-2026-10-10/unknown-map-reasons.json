@@ -1,0 +1,8 @@
+{
+  "scope": "sampling-site counts, not distinct preset counts or causal impact estimates",
+  "counts": {
+    "no supported spatial oscillators": 1077,
+    "sampling displacement is not two-dimensional": 47,
+    "phase is not uniform-affine in declared spatial inputs": 5
+  }
+}

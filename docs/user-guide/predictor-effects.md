@@ -422,3 +422,11 @@ spacing, signed orientation, the coordinate basis and phase controls. A sine
 used only to distort image coordinates is kept separate from a colour-band
 generator. Masks, clipping and feedback can change the appearance, so these
 are contributing source constructions with unknown final prominence.
+
+Texture lookup records also expose supported `oscillatory_displacement` models.
+They describe ripple direction, amplitude and spatial frequency as formulas,
+including audio/state controls. For example, bass can change the amount of a
+horizontal bend while mids change its spacing. Known constants provide a
+conditional bound on coordinate deformation; dynamic inputs remain explicit.
+These describe how an image is sampled, not independent moving stripes or a
+measured screen speed. Feedback and final mood still require further modeling.

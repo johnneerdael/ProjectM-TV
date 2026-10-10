@@ -37,6 +37,7 @@ identity, not a signature or calibrated confidence. `schema_version` and
 | `feedback_envelope` | Conditional varying affine-in-main RGB coefficient/gain envelopes; colour-only, not full feedback persistence |
 | `texture_colour_envelopes` | Independent affine texture-input RGB boxes and history/external input norms; not shared-history recurrence gain |
 | `nonlinear_texture_colour_bounds` | Per-channel nominal ranges through supported nonlinear scalar operations on declared texture inputs; no sensitivity or mood score |
+| `sampling_geometry.stages.*[].oscillatory_displacement` | Symbolic uniform-controlled wave amplitudes, spatial phase gradients and baseline lookup map; conditional nominal deformation bounds |
 | `elements[].audio_routes[].nominal_audio_response` | Sufficient nominal scalar control-change bound per audio input unit, with other inputs fixed; no time-rate or visible response score |
 | `motion_controls[].time_switch_events` and material raw curves | Supported nominal threshold/floor event schedules; nonexhaustive and independent of displayed flashes |
 | `activity.flashing`, `activity.motion_intensity` | Currently unknown; structural evidence is not a speed/flash measurement |
@@ -1707,3 +1708,51 @@ precision, sampling or feedback can suppress/change them. Screen coverage,
 visible speed, ring count, calibrated mood and appearance remain unverified.
 Code10 is an additive vocabulary item; consumers must handle unfamiliar codes
 explicitly rather than treating an unsupported code as absence of an effect.
+
+## Oscillatory texture displacement
+
+Each sampling-site record may contain `oscillatory_displacement`, with model
+`uniform_affine_plus_oscillators` when the complete supported lookup decomposes
+into a uniform-affine baseline plus sine/cosine displacement waves. This is
+texture deformation, separate from the colour-band form10. A supported map is
+nominally `lookup = base + sum(amplitude_uv * oscillator(phase))`.
+
+`base_coefficient_programs` contains two rows in the six-column order listed by
+`phase_gradient_column_order`: mesh UV x/y, original UV x/y, and native radial/
+angular varyings. `base_offset_programs` supplies the two uniform offsets.
+`base_matrix_uv4` is available only when the baseline has constant UV coefficients
+and no radial/angular contribution. Dynamic baseline coefficients remain programs.
+
+Each `waves[]` record contains two `amplitude_uv_programs`, six
+`phase_gradient_programs`, a `phase_offset_program`, and corresponding constant
+values when established. Thus `.01*bass*sin(uv.y*(3+2*mid)+time)` records bass
+as horizontal displacement amplitude, mids as vertical spatial frequency, and
+time as phase shift. The producer invents no audio range or constant wavelength
+for this formula. Shared scalar phases combine their signed contributions into
+one vector wave; canonical wave records are not visible-object or layer counts.
+`audio_routes` links named amplitude/frequency/phase controls to band inputs.
+`phase_motion_control` describes the uniform phase offset with native-clock and
+precision qualifications retained from the existing source-time model.
+
+For constant waves in a single UV basis, the producer bounds the Jacobian of
+the displacement with the row sums `sum_w(abs(a_w[i])*sum_j(abs(k_w[j])))`.
+The largest row gives `jacobian_perturbation_infinity_norm_upper_bound`; exact
+binary-rational sums are rounded outward. If the baseline is identity in that
+same UV basis and this bound is below1, the unwrapped nominal map has a
+sufficient no-fold/injectivity condition. Failing that condition does not prove
+a fold. Dynamic coefficients, mixed/radial bases and nonidentity baselines
+retain null certificates; `actual_fold_present` remains null.
+
+Unsupported nonlinear products, image-driven phases, spatial integer casts,
+known singular/upload domains and missing required export programs keep the
+model unknown. Unknown denominators/inputs retain the declared usable-finite
+source-domain premise; they are not certified by absence of a known failure.
+Candidate maps check the untouched original scalar/vector arithmetic before
+certification, retaining zero-product operands so simplification cannot hide
+a singular intermediate. Structurally unsupported maps require no such extra
+preflight; this preserves the shared traversal budget for existing descriptors.
+Extraction uses512distinct-node/depth64 phase budgets,64product factors,
+32waves and the existing256-node expression-export bound. Native interpolation,
+rounding, wrap/filter, mesh transforms, texture/history contents and later stages
+are outside these nominal formula bounds. No visible speed, feedback stability,
+dominant screen structure, flash permission or mood score follows from them.

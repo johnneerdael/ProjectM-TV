@@ -181,6 +181,8 @@ def sampling_geometry(analysis):
                 result['unknown_reasons'].append(str(error))
             from source_copy_lattice import copy_lattice
             result['copy_lattice']=copy_lattice(result)
+            from source_periodic_sampling import oscillatory_displacement
+            result['oscillatory_displacement']=oscillatory_displacement(node.args[0],analysis)
             maps.append(result)
         stages[stage]=maps;statuses[stage]='conditional custom source'
     return {'policy':'source-affine-sampling-geometry-v1','stages':stages,'stage_status':statuses,

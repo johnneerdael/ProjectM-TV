@@ -3667,6 +3667,9 @@
                             }
                           }
                         }
+                      },
+                      "oscillatory_displacement": {
+                        "$ref": "#/$defs/oscillatoryDisplacement"
                       }
                     }
                   }
@@ -4334,6 +4337,9 @@
                             }
                           }
                         }
+                      },
+                      "oscillatory_displacement": {
+                        "$ref": "#/$defs/oscillatoryDisplacement"
                       }
                     }
                   }
@@ -5381,6 +5387,121 @@
           "type": "null"
         },
         "appearance_guaranteed": {
+          "const": false
+        }
+      }
+    },
+    "oscillatoryDisplacement": {
+      "type": "object",
+      "required": [
+        "policy",
+        "source_model",
+        "waves",
+        "phase_gradient_column_order",
+        "sufficient_no_fold_of_unwrapped_nominal_map",
+        "actual_fold_present"
+      ],
+      "properties": {
+        "policy": {
+          "const": "source-uniform-periodic-sampling-v1"
+        },
+        "source_model": {
+          "enum": [
+            "unknown",
+            "uniform_affine_plus_oscillators"
+          ]
+        },
+        "base_matrix_uv4": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "base_coefficient_programs": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "base_offset_programs": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "waves": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "oscillator",
+              "amplitude_uv_programs",
+              "phase_gradient_programs",
+              "phase_offset_program",
+              "audio_routes"
+            ],
+            "properties": {
+              "oscillator": {
+                "enum": [
+                  "sin",
+                  "cos"
+                ]
+              },
+              "amplitude_uv_programs": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "object"
+                }
+              },
+              "phase_gradient_programs": {
+                "type": "array",
+                "minItems": 6,
+                "maxItems": 6,
+                "items": {
+                  "type": "object"
+                }
+              },
+              "phase_offset_program": {
+                "type": "object"
+              },
+              "audio_routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nominal_audio_response": {
+                      "$ref": "#/$defs/nominalAudioResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "jacobian_perturbation_infinity_norm_upper_bound": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sufficient_no_fold_of_unwrapped_nominal_map": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "actual_fold_present": {
+          "type": "null"
+        },
+        "visible_motion_speed": {
+          "type": "null"
+        },
+        "uses_rendered_images": {
           "const": false
         }
       }

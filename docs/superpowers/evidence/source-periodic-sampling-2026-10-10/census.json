@@ -1,0 +1,163 @@
+{
+  "basis": "source-only uniform-controlled oscillatory texture lookup maps, not visible trajectories or mood accuracy",
+  "presets": 100,
+  "counts": {
+    "new_budget_exhaustion": 0,
+    "warp:unknown": 576,
+    "composite:unknown": 553,
+    "presets_with_supported_map": 2,
+    "composite:uniform_affine_plus_oscillators": 5,
+    "supported_maps": 5,
+    "waves": 10,
+    "maps_with_symbolic_amplitudes": 2,
+    "maps_with_symbolic_frequencies": 2,
+    "maps_with_audio_routes": 0,
+    "maps_with_jacobian_bound": 3
+  },
+  "changed_gap_records": [],
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "a6e0298331988d9777607f2cb75ade4bb362f69787e865aaaf6578479267d0df"
+  },
+  "compile_manifest_file_sha256": "01e97e69283242d039ad2925e1845b41aa81a96418c758e12a086ca3a899e32f",
+  "model_modules": {
+    "effect_families.py": "0c56aad7bb74ebd4d7bce861d05397b52e050783b7b62a206f841e23133b7bcd",
+    "source_forms.py": "45f112547c2c7680e42fac9d515139e918dc272878d2c41564c09d004522b2ce",
+    "source_periodic_sampling.py": "cb3a733034f5b3b2ab1e729d490927d7968acbdca942e8ce8bf53d46a214633e",
+    "source_sampling.py": "4e8c2f3295f0e73f6b82ce9b90ffbf6f8ec9662dead116ec94725874028d7889"
+  },
+  "zip_sha256": "9354807befab7b36bbd2fd3123ad9b076b52c377661dfe261a7786184834d851",
+  "source_and_zip_joins_verified": true,
+  "sum_export_preset_seconds": 39.312833,
+  "maximum_export_preset_seconds": 2.430167,
+  "rows": [
+    {
+      "preset": "Stahlregen & Flexi + Geiss + Rovastar + Zylot - Evil Eyeball (MashUp 21 - Chaos Bass Layered MicroCheckers RMX).milk",
+      "sha256": "013463cdea2220a6f5a70e6db1c5739deef270a9d8069e10248c27d5860a65b6",
+      "maps": [
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "canonical_texture": "blur3",
+          "basis": "shader_uv",
+          "wave_count": 2,
+          "base_matrix_uv4": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "jacobian_bound": 3.8999999142,
+          "no_fold_sufficient": false
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 1,
+          "canonical_texture": "main",
+          "basis": "shader_uv",
+          "wave_count": 2,
+          "base_matrix_uv4": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "jacobian_bound": 3.8999999142,
+          "no_fold_sufficient": false
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 0,
+          "canonical_texture": "blur1",
+          "basis": "shader_uv",
+          "wave_count": 2,
+          "base_matrix_uv4": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "jacobian_bound": 3.8999999142,
+          "no_fold_sufficient": false
+        }
+      ]
+    },
+    {
+      "preset": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive.milk",
+      "sha256": "0242ddfeff09afd236c0125681b070a5a75a3025b5e2d6547b860a232622f007",
+      "maps": [
+        {
+          "stage": "composite",
+          "sample_site_index": 3,
+          "canonical_texture": "main",
+          "basis": "shader_uv",
+          "wave_count": 2,
+          "base_matrix_uv4": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "jacobian_bound": null,
+          "no_fold_sufficient": null
+        },
+        {
+          "stage": "composite",
+          "sample_site_index": 2,
+          "canonical_texture": "blur1",
+          "basis": "shader_uv",
+          "wave_count": 2,
+          "base_matrix_uv4": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "jacobian_bound": null,
+          "no_fold_sufficient": null
+        }
+      ]
+    }
+  ]
+}
