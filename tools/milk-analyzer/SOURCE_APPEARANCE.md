@@ -2687,3 +2687,12 @@ nodes, preventing recycled Python object IDs from changing a later answer.
 These caches improve computation coverage, not mathematical confidence or
 appearance accuracy. Structured JSON can retain unresolved per-field budget
 calculations; inspect those reasons separately from whole-description status.
+
+Blackout-gate colour projection keeps texture samples intact as source leaves;
+their lookup coordinate programs are not rebuilt just to collect RGB factors.
+Typed conversions remain in projected colour lanes. A candidate shared periodic
+gate must pass the original contributing composite's domain checks, including
+lookup coordinates, before its off-state mechanism is exported. Missing gates
+or unresolved domains remain unknown, never evidence of non-flashing behaviour.
+`analysis_work.budget_exhausted` includes locally caught global traversal
+exhaustion; other helper-specific budgets still require nested reason inspection.

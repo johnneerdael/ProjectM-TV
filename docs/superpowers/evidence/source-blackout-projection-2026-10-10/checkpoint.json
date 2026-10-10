@@ -1,0 +1,33 @@
+{
+  "sample_count": 2000,
+  "structured": 2000,
+  "lost_structured": [],
+  "wall_seconds": 263.65842929200153,
+  "changed_flashing_unknown_records": 69,
+  "unchanged_hazard_records": 2000,
+  "projection_budget_before": 84,
+  "projection_budget_after": 32,
+  "partial_budget_cases_before": 109,
+  "partial_budget_cases_after": 56,
+  "global_traversal_budget_flag_cases": 1,
+  "selection_sha256": "6ef58b92fa758019c4b041ce8e498dcda81999430d5295f3c972e5f0c4342d7c",
+  "reader_sha256": "754e4f4129db585cb4f7d5bee915d6bb24ac10ab25901ee7ef0832ce50744afc",
+  "scenario_sha256": "1d3ec8d466e2cd9ef10c496d789ab3ee34a30becb202287b755352d50f0eefe8",
+  "uses_rendered_images": false,
+  "appearance_accuracy_verified": false,
+  "mood_accuracy_verified": false,
+  "evidence_hashes": {
+    "changes-from-b2f3f066.json.gz": "8412d5654e47e43d890ad83991fdbf0afe0689c5751733db5ed6781e62974ebd",
+    "comparison.jsonl.gz": "9ace5caca9bed24e86cf4c05458724d017c7cd2f5a44cf90f146d8c28dcfe6e5",
+    "summary.json.gz": "4c7482e2e3f75f1f1274e88e93b992bbed5a92f3a7cbc699e4f843e646baa31c",
+    "focused.json.gz": "61478dc1cd639cf5b88e48fee8b312740441b108766dea10fab97f2b47970005"
+  },
+  "changed_schema_valid": 106,
+  "full_suite": {
+    "tests": 3127,
+    "subtests": 92,
+    "seconds": 203.69
+  },
+  "controls_structured_schema_valid": 100,
+  "independent_focused_checks": 50
+}

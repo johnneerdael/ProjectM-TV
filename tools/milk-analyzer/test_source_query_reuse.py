@@ -61,6 +61,20 @@ def test_failed_presence_query_cannot_cache_an_incomplete_negative(monkeypatch):
         finally:f._CACHE.reset(token)
 
 
+def test_locally_caught_traversal_failure_still_marks_analysis_budget(monkeypatch):
+    import effect_families as f
+    import source_appearance
+    from test_effect_families import read
+    def caught(analysis):
+        monkeypatch.setattr(f,'MAX_FIELD_VISITS',f._CACHE.get().get('field_visits',0))
+        try:list(f._walk(Field('input',detail={'name':'time'})))
+        except ValueError:return {'schema_version':1,'status':'unknown','unknown_reasons':['local calculation unavailable']}
+        raise AssertionError('control did not exhaust traversal')
+    monkeypatch.setattr(source_appearance,'appearance_from_analysis',caught)
+    record=f.analyze_families(read('fWaveAlpha=0\n'))
+    assert record['analysis_work']['budget_exhausted'] is True
+
+
 @pytest.mark.parametrize('name',[
     'flexi - grind my glitch up [230].milk',
     "Flexi + geiss - the deep diver's cognitive dissonance 1's and 0's where they don't belong.milk",

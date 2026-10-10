@@ -1386,3 +1386,11 @@ unchanged first-query traversal charging. A structured description can still
 contain per-field budget unknowns; do not equate it with complete interpretation.
 Local feedback-envelope identity caches likewise retain original canonical and
 projected nodes until return, including manufactured nested-swizzle nodes.
+
+Blackout colour projection retains original sample objects as leaves; do not
+rebuild their coordinate programs to find multiplicative RGB gates. Preserve
+typed scalar int/bool conversions and original sample identity. Validate the
+original contributing composite (including sample coordinates) before reporting
+a common periodic blackout gate. No candidate implies no absence/safety proof.
+The traversal-budget flag also records locally caught `_walk` exhaustion; it
+still does not summarize every separate helper's budget. Keep nested unknowns.

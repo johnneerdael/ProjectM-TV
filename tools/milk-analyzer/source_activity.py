@@ -2,6 +2,36 @@
 import math
 
 
+def blackout_colour_channels(field):
+    """Project colour factors without rebuilding sample-coordinate programs.
+
+    Sample objects remain intact: callers validate original lookup domains
+    separately. Numeric conversions remain typed source operations.
+    """
+    from effect_families import _parts
+    from shader_fields import Field
+    from source_appearance import _canonical_lane,_data_return
+    from field_math import SWIZZLE
+    memo={}
+    def scalar(node,depth=0):
+        key=id(node)
+        if key in memo and memo[key][0] is node:return memo[key][1]
+        if depth>64 or len(memo)>=512:raise ValueError('activity scalar projection budget exceeded')
+        n=_canonical_lane(node)
+        if n.op in {'sample','input'}:result=n
+        elif n.op=='member' and n.dtype in {'float','int','bool'} and n.detail.get('swizzle') and len(n.detail.get('field',''))==1:
+            parent=n.args[0];i=SWIZZLE[n.detail['field']]
+            if parent.op in {'input','sample'}:result=n
+            else:
+                parts=_parts(parent)
+                if i<len(parts) and not (parts[i].op=='member' and parts[i].args and parts[i].args[0] is parent):
+                    result=scalar(parts[i],depth+1)
+                else:result=Field(n.op,tuple(scalar(a,depth+1) for a in n.args),n.dtype,n.detail)
+        else:result=Field(n.op,tuple(scalar(a,depth+1) for a in n.args),n.dtype,n.detail)
+        memo[key]=(node,result);return result
+    return [scalar(p) for p in _parts(_data_return(field))[:3]]
+
+
 def _known_invalid_feedback_domain(analysis):
     """Check every known control, even when recipe loading stopped earlier."""
     from source_appearance import _phase_literal
@@ -22,9 +52,8 @@ def _known_invalid_feedback_domain(analysis):
 
 
 def source_activity(analysis,description):
-    from effect_families import _parts,SPATIAL
-    from shader_fields import Field
-    from source_appearance import _canonical_lane,_colour_product,_typed_control_identity,_data_return
+    from effect_families import SPATIAL
+    from source_appearance import _colour_product,_typed_control_identity,_data_return
     from source_polar import _nodes
     from source_time_switches import time_switch_events
     from source_forms import known_invalid_phase_offset
@@ -56,24 +85,10 @@ def source_activity(analysis,description):
             if response['channels']:
                 flashing['shader_change_bounds'].append({**response,'stage':stage,
                     'input_scenario_sha256':report['input_scenario_sha256'] if scenario else None})
-    memo={}
-    def scalar(node,depth=0):
-        if depth>64 or len(memo)>=512:raise ValueError('activity scalar projection budget exceeded')
-        if id(node) in memo:return memo[id(node)][1]
-        n=_canonical_lane(node)
-        if n.op=='member' and n.dtype=='float' and n.detail.get('swizzle') and len(n.detail.get('field',''))==1 and n.args[0].op!='input':
-            from field_math import SWIZZLE
-            parent=n.args[0];i=SWIZZLE[n.detail['field']];parts=_parts(parent)
-            if i<len(parts) and not (parts[i].op=='member' and parts[i].args and parts[i].args[0] is parent):
-                result=scalar(parts[i],depth+1);memo[id(node)]=(node,result);return result
-        result=Field(n.op,tuple(scalar(a,depth+1) for a in n.args),n.dtype,n.detail)
-        memo[id(node)]=(node,result);return result
     composite=analysis.outputs.get('composite')
     if composite is not None:
         try:
-            channels=[scalar(p) for p in _parts(_data_return(composite))[:3]]
-            if any(known_invalid_phase_offset(c,preserve_zero_products=True) for c in channels):
-                raise ValueError('Known invalid contributing RGB domain prevents blackout certification')
+            channels=blackout_colour_channels(composite)
             candidates={};active=[]
             for c in channels:
                 coefficient,factors=_colour_product(c)
@@ -92,6 +107,8 @@ def source_activity(analysis,description):
                     ids.add(identity);candidates[identity]=(gate,events)
                 active.append(ids)
             common=set.intersection(*active) if active and len(channels)==3 else set()
+            if common and known_invalid_phase_offset(_data_return(composite),preserve_zero_products=True):
+                raise ValueError('Known invalid contributing RGB domain prevents blackout certification')
             for identity in sorted(common):
                 gate,events=candidates[identity]
                 for e in events:

@@ -323,6 +323,7 @@ def _walk(value,*,sample_coordinates=True,constant_clipping=False,preserve_zero_
         if cache is not None:
             cache['field_visits'] = cache.get('field_visits', 0)+1
             if cache['field_visits'] > MAX_FIELD_VISITS:
+                cache['traversal_budget_exhausted'] = True
                 raise _SemanticBudget('static field traversal budget exceeded')
         yield node, path
         children=() if node.op=='sample' and not sample_coordinates else _children(node)
@@ -1402,7 +1403,7 @@ def analyze_families(source, *, profile='gles300', compatibility=None,input_scen
         work = {'field_visits': work_cache.get('field_visits', 0),
                 'normalized_term_nodes': work_cache.get('normalized_term_nodes', 0),
                 'max_field_visits': MAX_FIELD_VISITS, 'max_normalized_terms': MAX_NORMALIZED_TERMS,
-                'budget_exhausted': budget_exhausted}
+                'budget_exhausted': budget_exhausted or work_cache.get('traversal_budget_exhausted',False)}
     finally:
         _CACHE.reset(token)
     record = {'schema_version': SCHEMA_VERSION, 'analysis_policy': POLICY,
